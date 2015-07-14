@@ -2,10 +2,10 @@ Categories
 
 <ul>
   {{#each parentCategories as |category|}}
-    <li>{{category.name}}</li>
+    <li>{{category.name}} ({{category.allItems.length}})</li>
     <ul>
       {{#each category.childCategories as |childCategory|}}
-        <li>{{childCategory.name}}</li>
+        <li>{{childCategory.name}} ({{childCategory.items.length}})</li>
       {{/each}}
     </ul>
     <br>

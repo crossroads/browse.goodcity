@@ -29,7 +29,8 @@ module.exports = function(environment) {
       // RESTAdapter Settings
       NAMESPACE: 'api/v1',
 
-      PRELOAD_TYPES: [],
+      PRELOAD_TYPES: ["package_type", "package_category"],
+
       SHA: process.env.APP_SHA || "00000000",
       VERSION: "1.0.0"
     }
