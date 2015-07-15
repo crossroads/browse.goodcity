@@ -46,4 +46,30 @@ export default DS.Model.extend({
     }
     return items;
   }.property('childCategories', 'items'),
+
+  imageUrl: function(){
+    if(this.get('isParent')) {
+      var images = {
+        "Furniture": "1436965082/browse/browse_image_2.jpg",
+        "Electrical": "1436965083/browse/browse_image_3.jpg",
+        "Household": "1436965082/browse/browse_image_4.jpg",
+        "Small goods & bulk items": "1436965083/browse/browse_image_5.jpg",
+        "Recreation": "1436965083/browse/browse_image_6.jpg"
+      };
+      var id = images[this.get("name")];
+      var version = id.split("/")[0];
+      var filename = id.substring(id.indexOf("/") + 1);
+      return Ember.$.cloudinary.url(filename, {
+        version: version,
+        height: 100,
+        width: 100,
+        crop: 'fill',
+        flags: "progressive",
+        id: id,
+        secure: true,
+        protocol: 'https:',
+        radius: 'max'
+      });
+    }
+  }.property()
 });

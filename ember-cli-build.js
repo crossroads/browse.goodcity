@@ -29,5 +29,7 @@ module.exports = function(defaults) {
   // please specify an object with the list of modules as keys
   // along with the exports of each module as its value.
 
+  app.import('bower_components/blueimp-file-upload/js/vendor/jquery.ui.widget.js');
+
   return app.toTree();
 };

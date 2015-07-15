@@ -2,6 +2,7 @@ Categories
 
 <ul>
   {{#each parentCategories as |category|}}
+    <img src="{{category.imageUrl}}" />
     <li>{{category.name}} ({{category.allItems.length}})</li>
     <ul>
       {{#each category.childCategories as |childCategory|}}

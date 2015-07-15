@@ -14,7 +14,7 @@ export default Ember.Mixin.create({
       new AjaxPromise("/items/browse", "GET")
         .then(data => { this.store.pushPayload(data); })
         .catch(error => alert(error))
-    )
+    );
 
     return Ember.RSVP.all(promises);
   }
