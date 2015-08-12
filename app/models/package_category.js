@@ -82,19 +82,21 @@ export default DS.Model.extend({
         "36": "1436965083/browse/browse_image_6.png"
       };
       var id = images[this.get("id")];
-      var version = id.split("/")[0];
-      var filename = id.substring(id.indexOf("/") + 1);
-      return Ember.$.cloudinary.url(filename, {
-        version: version,
-        height: 100,
-        width: 100,
-        crop: 'fill',
-        flags: "progressive",
-        id: id,
-        secure: true,
-        protocol: 'https:',
-        radius: 'max'
-      });
+      if(id) {
+        var version = id.split("/")[0];
+        var filename = id.substring(id.indexOf("/") + 1);
+        return Ember.$.cloudinary.url(filename, {
+          version: version,
+          height: 100,
+          width: 100,
+          crop: 'fill',
+          flags: "progressive",
+          id: id,
+          secure: true,
+          protocol: 'https:',
+          radius: 'max'
+        });
+      }
     }
   }.property()
 });

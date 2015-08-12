@@ -1,27 +1,23 @@
 import FactoryGuy from 'ember-data-factory-guy';
-import './item';
 
-FactoryGuy.define('package_type', {
+FactoryGuy.define('package_category', {
   sequences: {
     id: function(num) {
       return num + 100;
     },
     name: function(num) {
       return 'Category' + num;
-    },
-    code: function(num) {
-      return "code" + num;
     }
   },
   default: {
     id:   FactoryGuy.generate('id'),
     name: FactoryGuy.generate("name"),
-    code: FactoryGuy.generate("code")
+    parentId: FactoryGuy.generate('id'),
+    packageTypeCodes: FactoryGuy.generate("name")
   },
-
-  package_type_with_items: {
-    items: function(){ return FactoryGuy.buildList('item', 2, { state: "accepted" }); }
-  }
+  parent_package_category: {
+    parentId: null
+  },
 });
 
 export default {};
