@@ -280,7 +280,7 @@
       margin-right: 42% !important;
     }
     @media #{$small-only} {
-      margin-right: 39% !important;
+      margin-right: 35% !important;
     }
   }
 
@@ -290,7 +290,6 @@
   }
 
   @media #{$small-only} {
-    top: 5% !important;
     padding: 1rem;
     width: 100% !important;
   }
@@ -306,7 +305,7 @@
     margin-bottom: 0.7rem;
 
     @media #{$small-only} {
-      font-size: 0.9rem;
+      font-size: 0.8rem;
     }
   }
 }
