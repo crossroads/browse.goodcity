@@ -4,13 +4,15 @@ var webRelease = ['production', 'staging'].indexOf(process.env.EMBER_ENV) !== -1
 
 module.exports = function(defaults) {
   var app = new EmberApp(defaults, {
-    sourcemaps: ['js', 'css'],
     'esw-cache-fallback': {
       patterns: [
         'https://api-staging.goodcity.hk/api/v1/(.+)',
         '/api/v1/(.+)'
       ],
+      // changing this version number will bust the cache
+      version: '1'
     },
+    sourcemaps: ['js', 'css'],
     fingerprint: {
       extensions: ['js', 'css', 'png', 'jpg', 'gif', 'map'],
       enabled: webRelease
