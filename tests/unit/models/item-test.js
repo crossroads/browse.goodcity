@@ -185,3 +185,17 @@ test('displayImage: Returns image to be dispayed', function(assert){
 
   assert.equal(model.get('displayImage.id'), image.get('id'));
 });
+
+test('displayImageUrl', function(assert){
+  assert.expect(1);
+  var image = this.subject({ id: 1, favourite: true });
+  var defaultImageUrl = "https://res.cloudinary.com/ddoadcjjl/image/upload/c_fill,d_default_item_image.jpg,fl_progressive,h_500,w_500/v1438323699/default_item_image.jpg";
+  assert.equal(image.get('displayImageUrl'), defaultImageUrl);
+});
+
+test('previewImageUrl', function(assert){
+  assert.expect(1);
+  var image = this.subject({ id: 1, favourite: false });
+  var previewImageUrl = "https://res.cloudinary.com/ddoadcjjl/image/upload/c_fill,d_default_item_image.jpg,fl_progressive,h_265,w_265/v1438323699/default_item_image.jpg";
+  assert.equal(image.get('previewImageUrl'), previewImageUrl);
+});
