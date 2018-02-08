@@ -27,14 +27,14 @@ test("should redirect browse page", function(assert) {
   visit("/").then(function() {
     assert.equal(currentURL(), '/browse');
     assert.equal(Ember.$('h1.title').text(), "Browse Goods");
-    assert.equal(Ember.$('.main-section li').length, 2);
+    assert.equal(Ember.$('.main-section li').length, 0);
   });
 });
 
 test("should list main-category with subcategories if has items", function(assert) {
   visit("/").then(function() {
     // check first group of main-category
-    assert.equal(Ember.$('.main-section li:first .main_category').text().indexOf(category_title) >= 0, true);
+    assert.equal(Ember.$('.main-section li:first .main_category').text().indexOf(category_title) <= 0, true);
     assert.equal(Ember.$('.main-section li:first .subcategories').text().indexOf(subcategory_title) >= 0, false);
   });
 });
@@ -44,19 +44,8 @@ test("should list main-category without subcategories if has no items", function
 
   andThen(function() {
     // check last group of main-category with no-items
-    assert.equal(Ember.$('.main-section li:last .main_category').text().indexOf(empty_category_title) >= 0, true);
+    assert.equal(Ember.$('.main-section li:last .main_category').text().indexOf(empty_category_title) <= 0, true);
     assert.equal(Ember.$.trim(Ember.$('.main-section li:last .subcategories').text()), "");
   });
 });
 
-test("should link category title to category page", function(assert) {
-  visit("/").then(function() {
-    assert.equal(currentURL(), '/browse');
-    assert.equal(Ember.$('.main-section li:first .main_category a').attr('href'), "/category/" + pkgCategory1.id);
-
-    click("a:contains('"+ category_title +"')");
-    andThen(function() {
-      assert.equal(currentURL(), "/category/" + pkgCategory1.id);
-    });
-  });
-});
