@@ -134,7 +134,8 @@ export default {
     "unavailable": "Sorry! This item is no longer available.",
     "notice" : "Delivery will be made one or two Crossroads operating days after you submit your order.",
     "empty_cart" : "Your cart is empty.",
-    "find_items" : "Find some items to request."
+    "find_items" : "Find some items to request.",
+    "unavailable_and_add_item_to_proceed": "The items in your cart are no longer available. Please add more items in your cart before placing an order. Thank you!"
   },
 
   "order": {
