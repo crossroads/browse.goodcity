@@ -115,78 +115,78 @@ export default {
   },
 
   "my_orders": {
-    "my_orders": "My Orders",
-    "order_no": "Order No",
-    "order_state": "Order State",
-    "item_count": "Item Count"
+    "my_orders": "我的訂單",
+    "order_no": "訂單編號",
+    "order_state": "訂單狀態",
+    "item_count": "物資數量"
   },
 
   "item": {
-    "request_item": "Request Item",
-    "remove_item": "Remove Item"
+    "request_item": "申請項目",
+    "remove_item": "刪除項目"
   },
 
   "cart_content": {
-    "your_request": "Your Request",
-    "continue_browsing": "Continue Browsing",
-    "submit_request": "Submit Order",
-    "remove": "Remove",
-    "unavailable": "Sorry! This item is no longer available.",
-    "notice" : "Delivery will be made one or two Crossroads operating days after you submit your order.",
-    "empty_cart" : "Your cart is empty.",
-    "find_items" : "Find some items to request."
+    "your_request": "您的申請",
+    "continue_browsing": "繼續瀏覽",
+    "submit_request": "提交申請",
+    "remove": "刪除",
+    "unavailable": "對不起！這件物資已不存在。",
+    "notice" : "成功申請的物資將於一至兩個十字路會工作天内送達。",
+    "empty_cart" : "您的購物車是空的。",
+    "find_items" : "尋找合適的物資。"
   },
 
   "order": {
-    "flash_submit_message": "Order submitted successfully",
-    "flash_cancelled_message": "Order was cancelled",
-    "organisation": "Organisation",
-    "order_delete_confirmation": "This will delete all order information and cannot be undone.",
-    "representative": "Representative",
-    "cancel_order": "Cancel Order",
-    "purpose": "Purpose(s)",
-    "login": "Log in",
-    "goodcity_order": "GoodCity Order",
-    "cart": "Cart",
-    "order_details": "Order details",
-    "transport_detail": "Transport details",
-    "confirm": "Confirm",
-    "tick_any": "Tick any that apply",
-    "select_purpose": "Please select purpose from list.",
-    "for_our_charity": "For our charity (facilities / programs etc.)",
-    "for_client": "For client / beneficiary (personal use)",
-    "for_charity_sale": "For charity sale, bartering (any form of trade)",
-    "return_to_cart": "Return to cart",
-    "submit_this_order": "Submit this order",
-    "limited_crossroads_opening_days_and_time": "Limited to Crossroad's opening days/times.",
-    "continue_to_confirm_details": "Continue to confirm details",
-    "continue_to_transport_details": "Continue to transport details",
-    "hired_van": "Hired van delivery(GoGoVan)",
-    "self_vehicle": "Self vehicle",
-    "order_detail_pop_up": "Add items to your cart before submitting Order details.",
-    "transport_order_detail_pop_up": "You need to fill up Order details first",
-    "transport_details_pop_up": "Add items to your cart before submitting transport details.",
+    "flash_submit_message": "已成功提交訂單",
+    "flash_cancelled_message": "已取消訂單",
+    "organisation": "機構",
+    "order_delete_confirmation": "這動作會刪除所有訂單資料，並不能復原。",
+    "representative": "代表人員",
+    "cancel_order": "取消訂單",
+    "purpose": "申請目的",
+    "login": "登入",
+    "goodcity_order": "好人好市訂單",
+    "cart": "購物車",
+    "order_details": "訂單詳情",
+    "transport_detail": "運輸詳情",
+    "confirm": "確認資料",
+    "tick_any": "選擇任何適用的選項",
+    "select_purpose": "請選擇申請目的",
+    "for_our_charity": "為機構申請（設施/活動等）",
+    "for_client": "為服務對象申請（私人用途）",
+    "for_charity_sale": "為慈善義賣申請（任何形式的交易）",
+    "return_to_cart": "返回購物車",
+    "submit_this_order": "確認訂單",
+    "limited_crossroads_opening_days_and_time": "僅限十字路會的辦公時間。",
+    "continue_to_confirm_details": "繼續",
+    "continue_to_transport_details": "繼續",
+    "hired_van": "已預約貨車（GoGoVan）",
+    "self_vehicle": "自行安排運輸",
+    "order_detail_pop_up": "請在購物車中新增物資以提交訂單詳情。",
+    "transport_order_detail_pop_up": "請先填寫訂單詳情",
+    "transport_details_pop_up": "請在購物車中新增物資以提交運輸詳情。",
     "transport_details": {
-      "transport_method": "Transport method",
-      "collect_with_own_vehicle": "We will collect with our own vehicle(s)",
-      "send_item_with_driver": "We would like the items sent (recipient pays the driver)"
+      "transport_method": "運輸方式",
+      "collect_with_own_vehicle": "我會自行安排運輸接收",
+      "send_item_with_driver": "我會安排GoGoVan代為接收（服務使用者付費）"
     },
     "vehicle": {
-      "collection_date_time": "Collection date / time",
-      "delivery_date_time": "Delivery date / time"
+      "collection_date_time": "接收日期及時間",
+      "delivery_date_time": "運送日期及時間"
     },
     "gogovan": {
       "requirements": {
-        "speak_english": "Speak English",
-        "borrow": "Borrow trolley",
-        "carry": "Need Carry"
+        "speak_english": "英語溝通",
+        "borrow": "需借用手推車",
+        "carry": "需搬運"
       }
     },
     "cart_details": {
-      "cart_summary": "Show order summary"
+      "cart_summary": "顯示訂單詳情"
     },
     "purpose_section": {
-      "title": "Purpose(s)*"
+      "title": "申請目的*"
     }
   }
 
