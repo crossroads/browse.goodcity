@@ -134,7 +134,8 @@ export default {
     "unavailable": "對不起！這件物資已不存在。",
     "notice" : "成功申請的物資將於一至兩個十字路會工作天内送達。",
     "empty_cart" : "您的購物車是空的。",
-    "find_items" : "尋找合適的物資。"
+    "find_items" : "尋找合適的物資。",
+    "unavailable_and_add_item_to_proceed": "The items in your cart are no longer available. Please add more items in your cart before placing an order. Thank you!"
   },
 
   "order": {
