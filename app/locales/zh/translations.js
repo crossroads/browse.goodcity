@@ -3,7 +3,7 @@ export default {
   "language.en": "English",
   "language.zh": "中文",
   "company.name": "國際十字路會",
-  "by": "呈獻",
+  "by": "了解",
   "ok": "確定",
   "must_login": "請登入！",
   "unexpected_error": "出錯了",
@@ -34,7 +34,7 @@ export default {
   },
 
   "browse": {
-    "title": "瀏覽產品"
+    "title": "瀏覽物資"
   },
 
   "category": {
@@ -43,7 +43,7 @@ export default {
     "sort": {
       "title": "排序方式",
       "newfirst": "新的排前",
-      "oldfirst": "最舊的"
+      "oldfirst": "舊的排前"
     }
   },
 
@@ -55,7 +55,7 @@ export default {
     "quantity": "數量",
     "size": "尺寸",
     "categories": "分類",
-    "image_unavailable": "沒有照片提供。"
+    "image_unavailable": "沒有照片提供"
   },
 
   "page": {
@@ -106,7 +106,7 @@ export default {
       "pm": "下午",
       "vehicle": "車輛種類",
       "delivery_district": "接收地點",
-      "learn_about_prices": "請到GoGoVan網站查閲更多費用詳情。",
+      "learn_about_prices": "請到GoGoVan網站查閲更多收費詳情。",
       "best_price_estimate": "預計",
       "delivery_contact_person": "聯絡人姓名",
       "booking_with_name": "閣下的名字及聯絡電話會用作預約GoGoVan之用。",
