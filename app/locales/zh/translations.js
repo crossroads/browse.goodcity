@@ -168,7 +168,7 @@ export default {
     "transport_order_detail_pop_up": "請先填寫訂單詳情",
     "transport_details_pop_up": "請在購物車中新增物資以提交運輸詳情。",
     "transport_details": {
-      "transport_method": "運輸方式",
+      "transport_method": "運輸方式: ",
       "collect_with_own_vehicle": "我會自行安排運輸接收",
       "send_item_with_driver": "我會安排GoGoVan代為接收（服務使用者付費）"
     },
