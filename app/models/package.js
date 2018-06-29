@@ -25,20 +25,10 @@ export default Model.extend(cloudinaryImage, {
   orderId:         attr('number'),
   allowWebPublish: attr('boolean'),
 
-
-  //This is fix for live update for ticket GCW-1632(only implemented on singleton packages, nee to change for qty packages)
-  updateAllowwebpublishQtyIfDesignated: Ember.observer('allowWebPublish', 'quantity', 'orderId', function() {
-    Ember.run.once(this, function() {
-      if(this.get("orderId")) {
-        this.set("allowWebPublish", false);
-      }
-    });
-  }),
-
   isDispatched: Ember.computed.bool("stockitSentOn"),
 
-  isAvailable: Ember.computed('isDispatched', 'allowWebPublish', function() {
-    return !this.get("isDispatched") && (this.get("allowWebPublish") || this._internalModel._data.allowWebPublish) && this.get("quantity");
+  isAvailable: Ember.computed('isDispatched', 'allowWebPublish', 'orderId', 'quantity', function() {
+    return this.get("allowWebPublish");
   }),
 
   isUnavailableAndDesignated: Ember.computed('isDispatched', 'allowWebPublish', function() {

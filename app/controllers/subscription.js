@@ -124,9 +124,7 @@ export default Ember.Controller.extend({
 
     var type = Object.keys(data.item)[0];
     var item = Ember.$.extend({}, data.item[type]);
-    if(type === "package" || type === "Package") {
-      this.get("browse").toggleProperty("packageCategoryReloaded");
-    }
+
     this.store.normalize(type, item);
 
     if(type.toLowerCase() === "order") {
@@ -159,6 +157,18 @@ export default Ember.Controller.extend({
         return false;
       }
       this.store.pushPayload(data.item);
+
+      //Fix for GCW:1888
+      if(type === "package" || type === "Package") {
+      var pkg = this.store.peekRecord('package', item.id);
+      if(item.order_id && pkg) {
+        pkg.set('allowWebPublish', false);
+      } else if(item.allow_web_publish && pkg) {
+        pkg.set('allowWebPublish', true);
+      }
+        this.get("browse").toggleProperty("packageCategoryReloaded");
+      }
+
       var unDispatchedPkg = [];
       if(cartContent) {
         var pkge = this.store.peekRecord('package', data.item.package.id);
