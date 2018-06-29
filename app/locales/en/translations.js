@@ -168,7 +168,7 @@ export default {
     "transport_order_detail_pop_up": "You need to fill up Order details first",
     "transport_details_pop_up": "Add items to your cart before submitting transport details.",
     "transport_details": {
-      "transport_method": "Transport method",
+      "transport_method": "Transport method: ",
       "collect_with_own_vehicle": "We will collect with our own vehicle(s)",
       "send_item_with_driver": "We would like the items sent (recipient pays the driver)"
     },
