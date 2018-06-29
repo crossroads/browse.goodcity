@@ -134,7 +134,8 @@ export default {
     "unavailable": "Sorry! This item is no longer available.",
     "notice" : "Delivery will be made one or two Crossroads operating days after you submit your order.",
     "empty_cart" : "Your cart is empty.",
-    "find_items" : "Find some items to request."
+    "find_items" : "Find some items to request.",
+    "unavailable_and_add_item_to_proceed": "The items in your cart are no longer available. Please add more items in your cart before placing an order. Thank you!"
   },
 
   "order": {
@@ -167,7 +168,7 @@ export default {
     "transport_order_detail_pop_up": "You need to fill up Order details first",
     "transport_details_pop_up": "Add items to your cart before submitting transport details.",
     "transport_details": {
-      "transport_method": "Transport method",
+      "transport_method": "Transport method: ",
       "collect_with_own_vehicle": "We will collect with our own vehicle(s)",
       "send_item_with_driver": "We would like the items sent (recipient pays the driver)"
     },

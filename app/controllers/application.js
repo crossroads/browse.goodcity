@@ -114,9 +114,7 @@ export default Ember.Controller.extend({
         this.get('cart').set('checkout', true);
         this.transitionToRoute('order_details');
       } else {
-        this.get('messageBox').alert(
-          "The items in your cart are no longer available. Please add more items in your cart before placing an order. Thank you!",
-          () => {
+        this.get('messageBox').alert(this.get('i18n').t('cart_content.unavailable_and_add_item_to_proceed'), () => {
             this.get("cart").clearItems();
             this.set('displayCart', false);
           });
