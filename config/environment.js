@@ -79,11 +79,11 @@ module.exports = function(environment) {
 
     // RESTAdapter Settings
     ENV.APP.SOCKETIO_WEBSERVICE_URL = 'http://localhost:1337/goodcity';
-    ENV.APP.API_HOST_URL = 'http://localhost:4000';
+    ENV.APP.API_HOST_URL = 'http://localhost:3000';
 
     ENV.contentSecurityPolicy["connect-src"] = [
       'http://localhost:4202',
-      'http://localhost:4000',
+      'http://localhost:3000',
       'http://localhost:1337',
       'https://api.cloudinary.com',
       'ws://localhost:1337',
@@ -103,7 +103,7 @@ module.exports = function(environment) {
     ENV.APP.rootElement = '#ember-testing';
 
     // RESTAdapter Settings
-    ENV.APP.API_HOST_URL = 'http://localhost:4000';
+    ENV.APP.API_HOST_URL = 'http://localhost:4202';
 
     ENV.APP.PRELOAD_TYPES = [];
   }
