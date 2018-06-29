@@ -135,6 +135,7 @@ export default {
     "notice" : "Delivery will be made one or two Crossroads operating days after you submit your order.",
     "empty_cart" : "Your cart is empty.",
     "find_items" : "Find some items to request."
+    "unavailable_and_add_item_to_proceed": "這件物資已不存在。下訂單前請在購物車中添加新的物資。"
   },
 
   "order": {
