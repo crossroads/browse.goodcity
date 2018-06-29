@@ -93,9 +93,9 @@ export default Ember.Controller.extend({
       var ordersPackages = this.store.peekAll('orders_package');
       var orderPackageId;
       if(this.get('draftOrder')){
-        ordersPackages.forEach(order => {
-          if(order.get('package.id') === itemId){
-            orderPackageId = order.id;
+        ordersPackages.forEach(ordersPackage => {
+          if(ordersPackage.get('package.id') === itemId){
+            orderPackageId = ordersPackage.id;
           }
         });
         var loadingView = getOwner(this).lookup('component:loading').append();
