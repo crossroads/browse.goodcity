@@ -24,6 +24,26 @@ export default applicationController.extend({
   longGoodSelection: "half",
   messageBox: Ember.inject.service(),
   i18n: Ember.inject.service(),
+  changeTime: null,
+  changeDate: null,
+
+  changeDateValue: Ember.observer("changeDate", function() {
+    Ember.run.later(() => {
+      this.set("selectedDate", this.get("changeDate"));
+    }, 750);
+  }),
+
+  updateTimeValue: Ember.observer("changeTime", function() {
+    Ember.run.later(() => {
+      var time = this.get("changeTime");
+      if(time === "1") {
+        this.set("selectedTime", { id: "1", name: "10:30AM-1PM" });
+      } else if(time === "2") {
+        this.set("selectedTime", { id: "2", name: "2PM-4PM" });
+      }
+      Ember.$('select:eq(0)').val(time);
+    }, 750);
+  }),
 
   timeValidationTrigger: Ember.observer('selectedTime', function() {
     if(!this.get("selectedTime.name")) {
@@ -123,8 +143,11 @@ export default applicationController.extend({
     }
     return secondDate;
   }),
+
   triggerSelectedDate: Ember.observer('selectedDate', function() {
-    this.set('scheduledDate', moment(this.get('selectedDate')).format('DD MMMM YYYY'));
+    if(!this.get("selectedDate")) {
+      this.set('scheduledDate', moment(this.get('selectedDate')).format('DD MMMM YYYY'));
+    }
   }),
 
   triggerDateOnSwitch: Ember.observer('isSelfSelected', function() {

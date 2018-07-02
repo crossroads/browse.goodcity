@@ -18,6 +18,56 @@
   }
 }
 
+.visible {
+  display: block !important;
+}
+
 .liquid-animating .images-section {
   opacity: 0;
+}
+
+.flash_message_block {
+  position: fixed;
+  z-index: 1000;
+  right: 59%;
+  top: 1.5rem;
+
+  @media #{$small-only} {
+    right: 73%;
+  }
+
+  @media #{$medium-only} {
+    right: 58%;
+  }
+
+  .flash_message {
+    display: block;
+    width: 11rem;
+    text-align: center;
+  }
+}
+
+.flash_message {
+  background-color: $light-grey;
+  color: black;
+  height: initial;
+  padding-bottom: inherit;
+  min-height: 0rem;
+  position: fixed;
+  display: none;
+  opacity: 1;
+  z-index: 100;
+  padding: 0.25rem;
+  font-size: 1rem;
+  background-color: #f46769;
+  color: white;
+  border-radius: 0.2rem;
+
+  @media #{$small-only} {
+    top: 1rem !important;
+  }
+
+  @media #{$medium-only} {
+    width: 25rem;
+  }
 }

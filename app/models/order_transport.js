@@ -19,6 +19,8 @@ export default Model.extend({
   needEnglish: attr("boolean"),
   needCart: attr("boolean"),
   needCarry: attr("boolean"),
+  needOverSixFt: attr("boolean"),
+  removeNet: attr("string"),
 
   scheduledDate: Ember.computed('scheduledAt', function() {
     return moment(this.get('scheduledAt')).format("ddd LL");

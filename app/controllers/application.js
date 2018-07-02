@@ -28,6 +28,11 @@ export default Ember.Controller.extend({
     return authToken ? true : false;
   }),
 
+  unloadModels() {
+    var UNLOAD_MODELS = ['order', 'orders_package', 'user', 'user_role', 'organisation', 'organisations_user', 'role'];
+    UNLOAD_MODELS.forEach((model) => this.store.unloadAll(model));
+  },
+
   actions: {
     cancelOrderPopUp(orderId) {
       this.get("messageBox").custom(this.get("i18n").t("order.order_delete_confirmation"),
@@ -41,32 +46,29 @@ export default Ember.Controller.extend({
 
     cancelOrder(orderId) {
       var _this = this;
-      var order = _this.store.peekAll("order").filterBy("state", "draft").get("firstObject");
-      if(order) {
-        var loadingView = getOwner(this).lookup('component:loading').append();
-        new AjaxPromise("/orders/" + orderId, "DELETE", _this.get('session.authToken'))
-        .then(data => {
-          _this.get("cart").clearItems();
-          if(order) {
-            _this.store.unloadRecord(order);
+      var order = _this.store.peekRecord("order", parseInt(orderId));
+      var loadingView = getOwner(this).lookup('component:loading').append();
+      new AjaxPromise("/orders/" + orderId, "DELETE", _this.get('session.authToken'))
+      .then(data => {
+        _this.get("cart").clearItems();
+        if(order) {
+          _this.store.unloadRecord(order);
+        }
+        _this.store.pushPayload(data);
+        loadingView.destroy();
+        _this.transitionToRoute("index", { queryParams:
+          {
+            orderCancelled: true
           }
-          _this.store.pushPayload(data);
-          loadingView.destroy();
-          _this.transitionToRoute("index", { queryParams:
-            {
-              orderCancelled: true
-            }
-          });
         });
-      }
+      });
     },
 
     logMeOut() {
       this.session.clear(); // this should be first since it updates isLoggedIn status
+      this.unloadModels();
       this.set('loggedInUser', "");
       this.get("cart").clearItems();
-      this.store.unloadAll('order');
-      this.store.unloadAll('orders_package');
       this.transitionToRoute('browse');
     },
 
@@ -112,9 +114,7 @@ export default Ember.Controller.extend({
         this.get('cart').set('checkout', true);
         this.transitionToRoute('order_details');
       } else {
-        this.get('messageBox').alert(
-          "The items in your cart are no longer available. Please add more items in your cart before placing an order. Thank you!",
-          () => {
+        this.get('messageBox').alert(this.get('i18n').t('cart_content.unavailable_and_add_item_to_proceed'), () => {
             this.get("cart").clearItems();
             this.set('displayCart', false);
           });

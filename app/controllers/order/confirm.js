@@ -26,7 +26,11 @@ export default applicationController.extend({
           this.get("store").pushPayload(data);
           loadingView.destroy();
           this.get('cart').clearItems();
-          this.transitionToRoute("/my_orders", data.order.id);
+          this.transitionToRoute("my_orders", { queryParams:
+            {
+              submitted: true
+            }
+          });
         });
     }
   }

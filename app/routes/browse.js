@@ -2,6 +2,7 @@ import PublicRoute from './browse_pages';
 
 export default PublicRoute.extend({
   previousRoute: false,
+  previousRouteName: null,
 
   beforeModel() {
     this._super(...arguments);
@@ -10,6 +11,7 @@ export default PublicRoute.extend({
 
     if(previousRoute)
     {
+      this.set("previousRouteName", previousRoute.name);
       if(previousRoute.name === "cart") {
         this.set('previousRoute', true);
       }
@@ -25,6 +27,8 @@ export default PublicRoute.extend({
       controller.set('showCartDetailSidebar', false);
     }
     controller.set('model', model);
+    controller.set("previousRouteName", this.get("previousRouteName"));
+    controller.toggleProperty("triggerFlashMessage");
     this.controllerFor('application').set('pageTitle', this.get('i18n').t("browse.title"));
   }
 });
