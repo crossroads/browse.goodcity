@@ -2,7 +2,6 @@ import Ember from 'ember';
 import itemController from './item';
 
 export default itemController.extend({
-
   messageBox:           Ember.inject.service(),
   package:              Ember.computed.alias('model'),
   pkgNotAvailableShown: false,
@@ -23,7 +22,7 @@ export default itemController.extend({
       if(this.get('cart').hasCartItem(pkg)) {
         this.get('cart').removeItem(pkg);
       }
-      this.get('messageBox').alert('Sorry! This item is no longer available.',
+      this.get('messageBox').alert(this.get('i18n').t('cart_content.unavailable'),
       () => {
         this.set('pkgNotAvailableShown', false);
         this.transitionToRoute('/browse');

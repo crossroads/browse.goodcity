@@ -58,7 +58,7 @@ export default Ember.Controller.extend({
         })
         .catch(error => {
           if([401].includes(error.status)) {
-             _this.get("messageBox").alert("You are not authorized.", () => {
+             _this.get("messageBox").alert(this.get('i18n').t('unauthorized'), () => {
               _this.transitionToRoute("/");
              });
           } else if ([422, 403].includes(error.status)) {
