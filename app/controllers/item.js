@@ -26,7 +26,7 @@ export default Ember.Controller.extend({
       if(this.get('cart').hasCartItem(item)) {
         this.get('cart').removeItem(item);
       }
-      this.get('messageBox').alert('Sorry! This item is no longer available.',
+      this.get('messageBox').alert(this.get('i18n').t('cart_content.unavailable'),
       () => {
         this.set("itemNotAvailableShown", false);
         this.transitionToRoute('/browse');
