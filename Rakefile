@@ -103,7 +103,7 @@ end
 namespace :cordova do
   desc "Install cordova package globally"
   task :install do
-    sh %{ npm list --depth 1 --global cordova; if [ $? -ne 0 ]; then npm install -g cordova@6.5.0; fi }
+    sh %{ npm list --depth 1 --global cordova; if [ $? -ne 0 ]; then npm install -g cordova; fi }
     sh %{ npm list --depth 1 --global cordova-update-config; if [ $? -ne 0 ]; then npm install -g cordova-update-config; fi }
   end
   desc "Cordova prepare {platform}"
@@ -131,8 +131,11 @@ namespace :cordova do
   desc "Cordova build {platform}"
   task build: :prepare do
     Dir.chdir(CORDOVA_PATH) do
+      team_id = ENV['IOS_DEVELOPMENT_TEAM_ID']
+      provisioning_profile = ENV['PROVISIONING_PROFILE_STAGING']
+      provisioning_profile = ENV['PROVISIONING_PROFILE_PROD'] if(environment === "production")
       build = (environment == "staging" && platform == 'android') ? "debug" : "release"
-      system({"ENVIRONMENT" => environment}, "cordova compile #{platform} --#{build} --device")
+      system({"ENVIRONMENT" => environment}, "cordova compile #{platform} --#{build} --device --codeSignIdentity='iPhone Developer' --developmentTeam=#{team_id} --provisioningProfile=#{provisioning_profile}")
     end
     # Copy build artifacts
     if ENV["CI"]
