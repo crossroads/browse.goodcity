@@ -1,5 +1,6 @@
 import FactoryGuy from 'ember-data-factory-guy';
 import './item';
+import './package';
 
 FactoryGuy.define('package_type', {
   sequences: {
@@ -14,7 +15,7 @@ FactoryGuy.define('package_type', {
   },
 
   package_type_with_packages: {
-    items: FactoryGuy.hasMany('package', 2)
+    packages: FactoryGuy.hasMany('package', 2)
   }
 });
 

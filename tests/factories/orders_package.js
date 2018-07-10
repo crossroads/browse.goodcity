@@ -10,7 +10,9 @@ FactoryGuy.define('orders_package',{
     id:              FactoryGuy.generate('id'),
     quantity:        1,
     sentOn:          '',
-    state:           ''
+    state:           'requested',
+    order:     FactoryGuy.belongsTo('order'),
+    package:     FactoryGuy.belongsTo('package')
   }
 });
 export default {};

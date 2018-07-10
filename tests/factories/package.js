@@ -1,6 +1,7 @@
 import FactoryGuy from 'ember-data-factory-guy';
 import './item';
 import './package_type';
+import './orders_package';
 
 FactoryGuy.define('package', {
   sequences: {
@@ -16,7 +17,8 @@ FactoryGuy.define('package', {
     packageType:  FactoryGuy.belongsTo('package_type'),
     notes:    "example",
     state:    "expected",
-    allowWebPublish: true
+    allowWebPublish: true,
+    ordersPackages:     FactoryGuy.hasMany('orders_package'),
   }
 });
 
