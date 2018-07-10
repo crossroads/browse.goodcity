@@ -104,8 +104,10 @@ export default Ember.Controller.extend({
         new AjaxPromise(`/orders_packages/${orderPackageId}`, "DELETE", this.get('session.authToken'))
         .then(() => {
           this.get('cart').removeItem(item);
-          var ordersPackage = this.get('store').peekRecord('orders_package', orderPackageId);
-          this.get('store').unloadRecord(ordersPackage);
+          var ordersPackage = this.store.peekRecord("orders_package", orderPackageId);
+          if(ordersPackage){
+            this.store.unloadRecord(ordersPackage);
+          }
           loadingView.destroy();
         });
       }else{
