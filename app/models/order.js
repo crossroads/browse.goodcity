@@ -34,7 +34,7 @@ export default Model.extend({
     this.get('ordersPackages').forEach(function(record) {
       if(record) {
         var pkg = record.get('package');
-        if (pkg.get('hasSiblingPackages')) {
+        if (pkg && pkg.get('hasSiblingPackages')) {
           items.push(pkg.get('item'));
         } else {
           items.push(pkg);

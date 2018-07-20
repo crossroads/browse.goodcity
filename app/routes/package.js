@@ -38,7 +38,7 @@ export default PublicRoute.extend({
   afterModel() {
     if(this.get('isPublished') !== null && !this.get('isPublished')) {
       this.get('transition').abort();
-      this.get('messageBox').alert('Sorry! This item is no longer available.',
+      this.get('messageBox').alert(this.get('i18n').t('cart_content.unavailable'),
         () => {
           this.transitionTo('/browse');
         });

@@ -24,6 +24,7 @@ export default {
   "awaiting_dispatch": "awaiting dispatch",
   "dispatching": "dispatching",
   "items_not_available": "One or many items in your cart are no longer available. Please remove those items from cart and then proceed.",
+  "unauthorized": "You are not authorized.",
 
   "application": {
     "loading": "Loading",
@@ -110,7 +111,7 @@ export default {
       "best_price_estimate": "Best Price estimate",
       "delivery_contact_person": "Delivery contact person",
       "booking_with_name": "GoGoVan booking will be placed with this name and number.",
-      "driver_call_to_confirm": "Driver will call this contcat to confirm details and liaise at drop-off time."
+      "driver_call_to_confirm": "Driver will call this contact to confirm details and liaise at drop-off time."
     }
   },
 

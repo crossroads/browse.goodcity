@@ -23,6 +23,7 @@ export default {
   "awaiting_dispatch": "等待派送",
   "dispatching": "派送中",
   "items_not_available": "您的購物車内有已不存在的物資，請刪除該物資以繼續。",
+  "unauthorized": "您沒有此權限。",
 
   "application": {
     "loading": "正在加載...",
