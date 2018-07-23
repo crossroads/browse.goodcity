@@ -124,6 +124,14 @@ export default Ember.Controller.extend({
 
     var type = Object.keys(data.item)[0];
     var item = Ember.$.extend({}, data.item[type]);
+
+    //Returning false if order is not created by current logged-in user
+    if(type.toLowerCase() === "order") {
+      if(item.created_by_id !== parseInt(this.session.get("currentUser.id"))) {
+        return false;
+      }
+    }
+
     if(type === "package" || type === "Package") {
       this.get("browse").toggleProperty("packageCategoryReloaded");
     }
