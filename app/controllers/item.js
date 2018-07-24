@@ -110,7 +110,7 @@ export default Ember.Controller.extend({
       this.get('cart').pushItem(item);
       Ember.run.later(this, function() {
         this.get('application').send('displayCart');
-      }, 0);
+      }, 50);
     },
 
     removeItem(item) {
