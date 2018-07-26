@@ -67,6 +67,11 @@ export default Ember.Controller.extend({
     this.get("cart").pushItem(cartItem);
   },
 
+  updateCartAvailability(isAvailalbe, cartItem) {
+    Ember.set(cartItem, "available", isAvailalbe);
+    this.get("cart").pushItem(cartItem);
+  },
+
   actions: {
     wire() {
       var updateStatus = Ember.run.bind(this, this.updateStatus);
@@ -161,6 +166,7 @@ export default Ember.Controller.extend({
     var cartContent = this.get('cart.content');
     var packageId = data.item.package.id;
     var cartItem = cartContent.filterBy("modelType", "package").filterBy("id", packageId.toString()).get("firstObject");
+    var itemInCart = this.store.peekRecord('package', data.item.package.id);
 
     if (["create","update"].includes(data.operation)) {
       if(data.item.package.allow_web_publish === null) {
@@ -182,6 +188,15 @@ export default Ember.Controller.extend({
       this.store.unloadRecord(existingItem);
       if(cartItem) {
         this.addItemToCart(cartItem);
+      }
+    }
+    //checking if package is available in store and in cart
+    if(itemInCart && cartItem) {
+      //updating cart pkg availability accordingly
+      if((itemInCart.get("orderId") === null) && (itemInCart.get("allowWebPublish") || itemInCart._internalModel._data.allowWebPublish)) {
+        this.updateCartAvailability(1, cartItem);
+      } else {
+        this.updateCartAvailability(0, cartItem);
       }
     }
     run(success);
