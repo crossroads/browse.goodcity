@@ -11,7 +11,7 @@ export default applicationController.extend({
     confirmOrder() {
       var order = this.get('order');
       var orderItems = order.get('orderItems');
-      if(orderItems.length && orderItems.getEach("allowWebPublish").includes(false)) {
+      if(orderItems.length && (orderItems.getEach("allowWebPublish").indexOf(false) >= 0)) {
         this.get("messageBox").alert(this.get('i18n').t('items_not_available'), () => {
           this.transitionToRoute("cart");
         });

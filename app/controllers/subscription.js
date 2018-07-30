@@ -168,7 +168,7 @@ export default Ember.Controller.extend({
     var cartItem = cartContent.filterBy("modelType", "package").filterBy("id", packageId.toString()).get("firstObject");
     var itemInCart = this.store.peekRecord('package', data.item.package.id);
 
-    if (["create","update"].includes(data.operation)) {
+    if (["create","update"].indexOf(data.operation) >= 0) {
       if(data.item.package.allow_web_publish === null) {
         return false;
       }

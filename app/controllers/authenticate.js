@@ -57,11 +57,11 @@ export default Ember.Controller.extend({
           this.transitionToRoute('/authenticate');
         })
         .catch(error => {
-          if([401].includes(error.status)) {
+          if([401].indexOf(error.status) >= 0) {
              _this.get("messageBox").alert(this.get('i18n').t('unauthorized'), () => {
               _this.transitionToRoute("/");
              });
-          } else if ([422, 403].includes(error.status)) {
+          } else if ([422, 403].indexOf(error.status) >= 0) {
             Ember.$('#mobile').closest('.mobile').addClass('error');
             return;
           }
