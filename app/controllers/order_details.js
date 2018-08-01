@@ -73,7 +73,7 @@ export default applicationController.extend({
         cart_package_ids: package_ids
       };
 
-      if(order && order.get("isDraft")) {
+      if(order && order.get("isGoodCityOrder") && order.get("isDraft")) {
         url = "/orders/" + order.get("id");
         method = "PUT";
       } else {
