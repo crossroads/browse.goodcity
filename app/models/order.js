@@ -14,6 +14,7 @@ export default Model.extend({
   createdById:      belongsTo('user', { async: false }),
   createdAt:        attr('date'),
   updatedAt:        attr('date'),
+  detailType:       attr('string'),
   ordersPurposes:     hasMany('ordersPurpose', { async: false }),
 
   isGoodCityOrder: Ember.computed.equal('detailType', 'GoodCity'),

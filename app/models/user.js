@@ -16,7 +16,7 @@ export default Addressable.extend({
 
   mobileWithoutCountryCode: Ember.computed('mobile', function(){
     var mobile = this.get('mobile');
-    return mobile ? ((mobile.includes("+852")) ? mobile.substring('4') : mobile) : '';
+    return mobile ? ((mobile.indexOf("+852") >= 0) ? mobile.substring('4') : mobile) : '';
   }),
 
   fullName: Ember.computed('firstName', 'lastName', function(){
