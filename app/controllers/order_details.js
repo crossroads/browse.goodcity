@@ -38,7 +38,7 @@ export default applicationController.extend({
       }
       var _this = this;
       var url, method;
-      var order = this.get("store").peekAll("order").filterBy("state", "draft").get("firstObject");
+      var order = this.get("store").peekAll("order").filterBy("detailType", "GoodCity").filterBy("state", "draft").get("firstObject");
       var description = this.get("description");
       var purpose_ids = [];
       var package_ids = [];
@@ -73,7 +73,7 @@ export default applicationController.extend({
         cart_package_ids: package_ids
       };
 
-      if(order && order.get("isGoodCityOrder") && order.get("isDraft")) {
+      if(order && order.get("isDraft")) {
         url = "/orders/" + order.get("id");
         method = "PUT";
       } else {
