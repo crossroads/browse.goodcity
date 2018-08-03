@@ -49,7 +49,7 @@ test:
 
 deployment:
   staging:
-    branch: master
+    branch: GCW-1999-xcode-upgrade
     commands:
       - bundle exec cap staging deploy
       - bundle exec rake staging ios app:build
