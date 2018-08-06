@@ -238,11 +238,10 @@ export default applicationController.extend({
     },
 
     bookGGVSchedule() {
-      if(this.get('userName') === ""){
+      if(this.get('userName').trim() === ""){
         Ember.$('#name').focus();
         return;
-      }
-      if(this.get('mobilePhone').length < 8 ){
+      } else if (this.get('mobilePhone').length < 8 ) {
         Ember.$('#mobile').focus();
         return;
       }
