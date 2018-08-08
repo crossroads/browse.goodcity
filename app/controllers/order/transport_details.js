@@ -238,6 +238,13 @@ export default applicationController.extend({
     },
 
     bookGGVSchedule() {
+      if(this.get('userName').trim() === ""){
+        Ember.$('#name').focus();
+        return;
+      } else if (this.get('mobilePhone').length < 8 ) {
+        Ember.$('#mobile').focus();
+        return;
+      }
       var cartEmpty = this.isCartEmpty("order.transport_details_pop_up");
       if(cartEmpty) { return false; }
       var order = this.get("store").peekAll("order").filterBy("state", "draft").get("firstObject");
