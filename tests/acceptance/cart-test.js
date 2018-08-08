@@ -79,7 +79,7 @@ test("delete orders_packages from orders in draft", function(assert){
   });
 });
 
-test("gogovan details without userName and mobile details", function(assert){
+test("restricting transport details page to confirm page without userName and mobile", function(assert){
   mockFindAll('order').returns({ json: {orders: [order.toJSON({includeId: true})], packages: [pkg.toJSON({includeId: true})], user: [user.toJSON({includeId: true})], orders_packages: [ordersPackage.toJSON({includeId: true}), ordersPackage1.toJSON({includeId: true})]}});
   assert.expect(4);
   visit('/order/'+ order.id + '/transport_details');
@@ -92,7 +92,7 @@ test("gogovan details without userName and mobile details", function(assert){
       click('#submit_pin');
       andThen(function(){
         assert.equal(currentURL(), '/order/'+ order.id +'/transport_details');
-      })
+      });
     });
   });
 });
