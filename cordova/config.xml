@@ -66,6 +66,9 @@
         <preference name="StatusBarStyle" value="lightcontent" />
         <preference name="Orientation" value="portrait" />
         <preference name="Fullscreen" value="true" />
+        <edit-config file="*-Info.plist" mode="merge" target="ITSAppUsesNonExemptEncryption">
+            <false />
+        </edit-config>
     </platform>
     <engine name="ios" spec="https://github.com/apache/cordova-ios.git#4.5.5" />
     <engine name="android" spec="~5.1.1" />
