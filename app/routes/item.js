@@ -1,5 +1,4 @@
 import PublicRoute from './browse_pages';
-import Ember from 'ember';
 
 export default PublicRoute.extend({
 
