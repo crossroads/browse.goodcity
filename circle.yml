@@ -52,10 +52,10 @@ deployment:
     branch: master
     commands:
       - bundle exec cap staging deploy
-      - bundle exec rake staging ios app:build
-      - bundle exec fastlane ios staging
       - bundle exec rake staging android app:build
       - bundle exec fastlane android staging
+      - bundle exec rake staging ios app:build
+      - bundle exec fastlane ios staging
       - curl https://api.rollbar.com/api/1/sourcemap/download -F access_token=$ROLLBAR_KEY -F version=$APP_VERSION -F minified_url=https://browse-staging.goodcity.hk/assets/browse.js
   production:
     branch: live
