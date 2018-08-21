@@ -13,10 +13,19 @@
     <link rel="stylesheet" href="assets/browse.css">
 
     {{content-for "head-footer"}}
+    <script type="text/javascript">
+      document.addEventListener("deviceready", onDeviceReady, false);
+
+      function onDeviceReady(){
+        StatusBar.overlaysWebView(false);
+        StatusBar.backgroundColorByName("black");
+        StatusBar.styleLightContent();
+      }
+    </script>
   </head>
   <body>
     {{content-for "body"}}
-
+    <script src="cordova.js"></script>
     <script src="assets/vendor.js" integrity=""></script>
     <script src="assets/browse.js" integrity=""></script>
 
