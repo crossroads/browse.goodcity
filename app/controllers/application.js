@@ -94,7 +94,7 @@ export default Ember.Controller.extend({
       var item = this.get('store').peekRecord(type, itemId);
       var ordersPackages = this.store.peekAll('orders_package');
       var orderPackageId;
-      if(this.get('draftOrder') && ordersPackages.getEach('packageId').includes(itemId)){
+      if(this.get('draftOrder') && ordersPackages.getEach('package.id').includes(itemId)){
         ordersPackages.forEach(ordersPackage => {
           if(ordersPackage.get('package.id') === itemId){
             orderPackageId = ordersPackage.id;
