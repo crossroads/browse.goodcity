@@ -92,14 +92,10 @@ export default Ember.Controller.extend({
 
     removeItem(itemId, type) {
       var item = this.get('store').peekRecord(type, itemId);
-      var ordersPackages = this.store.peekAll('orders_package');
+      var ordersPackages = this.store.peekAll('orders_package').filterBy("package.id", itemId);
       var orderPackageId;
-      if(this.get('draftOrder') && ordersPackages.getEach('package.id').includes(itemId)){
-        ordersPackages.forEach(ordersPackage => {
-          if(ordersPackage.get('package.id') === itemId){
-            orderPackageId = ordersPackage.id;
-          }
-        });
+      if(this.get('draftOrder') && ordersPackages.length){
+        orderPackageId = ordersPackages.get("firstObject.id");
         var loadingView = getOwner(this).lookup('component:loading').append();
         new AjaxPromise(`/orders_packages/${orderPackageId}`, "DELETE", this.get('session.authToken'))
         .then(() => {
@@ -110,7 +106,7 @@ export default Ember.Controller.extend({
           }
           loadingView.destroy();
         });
-      }else{
+      } else {
         this.get('cart').removeItem(item);
       }
     },
