@@ -6,7 +6,7 @@ export default Ember.Route.extend(preloadDataMixin, {
 
   cart: Ember.inject.service(),
 
-  beforeModel() {
+  model() {
     return this.preloadData();
   },
 
