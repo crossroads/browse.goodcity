@@ -10,6 +10,7 @@ FactoryGuy.define('orders_package',{
     id:              FactoryGuy.generate('id'),
     quantity:        1,
     sentOn:          '',
+    packageId:       '',
     state:           'requested',
     order:     FactoryGuy.belongsTo('order'),
     package:     FactoryGuy.belongsTo('package')
