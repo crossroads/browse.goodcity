@@ -20,6 +20,7 @@
     font-size: 0.9rem;
     width: 95%!important;
     @media #{$small-only} {
+      margin-left: 0.4rem !important;
       font-size: 0.8rem;
       padding: 1.5rem 0.5rem 1.5rem 1.5rem;
       width: 93.5%!important;

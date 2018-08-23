@@ -1,11 +1,11 @@
 .transport-detail {
-  margin: 3rem .5rem;
+  margin: 1rem .5rem;
   font-size: 1rem;
 
   @media #{$small-only} {
     font-size: 0.7rem;
     padding: 0 0.1% 0rem 0rem;
-    margin: 3rem 0rem;
+    margin: 1rem 0rem;
   }
 
   .mobile {
@@ -13,7 +13,7 @@
   }
 
   .cancel_order {
-    margin-top: -1rem;
+    margin-top: -1.25rem !important;
   }
 
   .row {
@@ -67,6 +67,8 @@
     @media #{$small-only} {
       max-width: none !important;
       width: 100% !important;
+      height: 2.1rem !important;
+      padding: 0.25rem 0 0.25rem 0.75rem !important;
     }
 
   }
@@ -83,7 +85,7 @@
   }
 
   .collection {
-    margin-top: 1rem;
+    margin-top: 0.5rem;
   }
 
   .time_inputs {
@@ -130,7 +132,7 @@
   }
 
   .order_button {
-    margin-top: 1rem !important;
+    margin-top: 0.5rem !important;
     button {
       font-size: 0.9rem;
     }
