@@ -59,9 +59,6 @@
     <feature name="StatusBar">
      <param name="ios-package" onload="true" value="CDVStatusBar"/>
     </feature>
-    <preference name="StatusBarOverlaysWebView" value="false"/>
-    <preference name="StatusBarBackgroundColor" value="#000000"/>
-    <preference name="StatusBarStyle" value="lightcontent"/>
     <preference name="Orientation" value="portrait"/>
     <preference name="Fullscreen" value="true"/>
   </platform>
