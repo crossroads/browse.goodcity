@@ -1,73 +1,80 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="hk.goodcity.browsestaging" version="1.0.0" android-versionCode="0" ios-CFBundleVersion="0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-  <name>S. Browse GoodCity</name>
-  <description>
+<widget android-versionCode="0" id="hk.goodcity.browsestaging" ios-CFBundleVersion="0" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>S. Browse</name>
+    <description>
       The GoodCity initiative is a new way to donate quality goods in Hong Kong. See www.goodcity.hk for more details.
   </description>
-  <author href="https://www.crossroads.org.hk">Crossroads</author>
-  <content src="index.html" />
-  <hook src="scripts/update_build_number.py" type="before_prepare" />
-  <access origin="*" />
-  <preference name="DisallowOverscroll" value="true" />
-
-  <platform name="android">
-    <preference name="LoadUrlTimeoutValue" value="120000"/>
-    <preference name="SplashScreen" value="screen"/>
-    <preference name="SplashScreenDelay" value="5000"/>
-    <preference name="Orientation" value="portrait"/>
-
-    <icon src="res/android/drawable-ldpi/icon.png" density="ldpi"/>
-    <icon src="res/android/drawable-mdpi/icon.png" density="mdpi"/>
-    <icon src="res/android/drawable-hdpi/icon.png" density="hdpi"/>
-    <icon src="res/android/drawable-xhdpi/icon.png" density="xhdpi"/>
-    <icon src="res/android/drawable-xxhdpi/icon.png" density="xxhdpi"/>
-    <icon src="res/android/drawable-xxxhdpi/icon.png" density="xxxhdpi"/>
-
-    <splash src="res/android/drawable-ldpi/screen.png" density="port-ldpi"/>
-    <splash src="res/android/drawable-mdpi/screen.png" density="port-mdpi"/>
-    <splash src="res/android/drawable-hdpi/screen.png" density="port-hdpi"/>
-    <splash src="res/android/drawable-xhdpi/screen.png" density="port-xhdpi"/>
-    <splash src="res/android/drawable-xxhdpi/screen.png" density="port-xxhdpi"/>
-    <splash src="res/android/drawable-xxxhdpi/screen.png" density="port-xxxhdpi"/>
-  </platform>
-
-  <platform name="ios">
-    <icon src="res/ios/Icon-App-60x60@3x.png" width="180" height="180"/>
-    <icon src="res/ios/Icon-App-60x60@1x.png" width="60" height="60"/>
-    <icon src="res/ios/Icon-App-60x60@2x.png" width="120" height="120"/>
-    <icon src="res/ios/Icon-App-76x76@1x.png" width="76" height="76"/>
-    <icon src="res/ios/Icon-App-76x76@2x.png" width="152" height="152"/>
-    <icon src="res/ios/Icon-App-40x40@1x.png" width="40" height="40"/>
-    <icon src="res/ios/Icon-App-40x40@2x.png" width="80" height="80"/>
-    <icon src="res/ios/Icon-App-57x57@1x.png" width="57" height="57"/>
-    <icon src="res/ios/Icon-App-57x57@2x.png" width="114" height="114"/>
-    <icon src="res/ios/Icon-App-72x72@1x.png" width="72" height="72"/>
-    <icon src="res/ios/Icon-App-72x72@2x.png" width="144" height="144"/>
-    <icon src="res/ios/Icon-App-29x29@1x.png" width="29" height="29"/>
-    <icon src="res/ios/Icon-App-29x29@2x.png" width="58" height="58"/>
-    <icon src="res/ios/Icon-App-50x50@1x.png" width="50" height="50"/>
-    <icon src="res/ios/Icon-App-50x50@2x.png" width="100" height="100"/>
-
-    <splash src="res/ios/Default-320x480.png" width="320" height="480"/>
-    <splash src="res/ios/Default-640x960.png" width="640" height="960"/>
-    <splash src="res/ios/Default-640x1136.png" width="640" height="1136"/>
-    <splash src="res/ios/Default-750x1334.png" width="750" height="1334"/>
-    <splash src="res/ios/Default-1242x2208.png" width="1242" height="2208"/>
-    <splash src="res/ios/Default-768x1024.png" width="768" height="1024"/>
-    <splash src="res/ios/Default-1536x2048.png" width="1536" height="2048"/>
-
-    <feature name="StatusBar">
-     <param name="ios-package" onload="true" value="CDVStatusBar"/>
-    </feature>
-    <preference name="Orientation" value="portrait"/>
-    <preference name="Fullscreen" value="true"/>
-  </platform>
-
-  <engine name="ios" spec="4.5.4"/>
-  <engine name="android" spec="~5.1.1"/>
-  <engine name="windows" spec="~4.3.1"/>
-  <plugin name="cordova-plugin-whitelist" spec="~1.2.1"/>
-  <plugin name="cordova-plugin-statusbar" spec="~2.1.1"/>
-  <plugin name="cordova-plugin-splashscreen" spec="~3.1.0"/>
-
+    <author href="https://www.crossroads.org.hk">Crossroads</author>
+    <content src="index.html" />
+    <hook src="scripts/update_build_number.py" type="before_prepare" />
+    <access origin="*" />
+    <preference name="DisallowOverscroll" value="true" />
+    <platform name="android">
+        <preference name="LoadUrlTimeoutValue" value="120000" />
+        <preference name="SplashScreen" value="screen" />
+        <preference name="SplashScreenDelay" value="5000" />
+        <preference name="Orientation" value="portrait" />
+        <icon density="ldpi" src="res/android/drawable-ldpi/icon.png" />
+        <icon density="mdpi" src="res/android/drawable-mdpi/icon.png" />
+        <icon density="hdpi" src="res/android/drawable-hdpi/icon.png" />
+        <icon density="xhdpi" src="res/android/drawable-xhdpi/icon.png" />
+        <icon density="xxhdpi" src="res/android/drawable-xxhdpi/icon.png" />
+        <icon density="xxxhdpi" src="res/android/drawable-xxxhdpi/icon.png" />
+        <splash density="port-ldpi" src="res/android/drawable-ldpi/screen.png" />
+        <splash density="port-mdpi" src="res/android/drawable-mdpi/screen.png" />
+        <splash density="port-hdpi" src="res/android/drawable-hdpi/screen.png" />
+        <splash density="port-xhdpi" src="res/android/drawable-xhdpi/screen.png" />
+        <splash density="port-xxhdpi" src="res/android/drawable-xxhdpi/screen.png" />
+        <splash density="port-xxxhdpi" src="res/android/drawable-xxxhdpi/screen.png" />
+    </platform>
+    <platform name="ios">
+        <icon height="16" src="res/ios/Icon-App-16x16@1x.png" width="16" />
+        <icon height="32" src="res/ios/Icon-App-16x16@2x.png" width="32" />
+        <icon height="48" src="res/ios/Icon-App-16x16@3x.png" width="48" />
+        <icon height="20" src="res/ios/Icon-App-20x20@1x.png" width="20" />
+        <icon height="40" src="res/ios/Icon-App-20x20@2x.png" width="40" />
+        <icon height="60" src="res/ios/Icon-App-20x20@3x.png" width="60" />
+        <icon height="55" src="res/ios/Icon-App-27.5x27.5@2x.png" width="55" />
+        <icon height="29" src="res/ios/Icon-App-29x29@1x.png" width="29" />
+        <icon height="58" src="res/ios/Icon-App-29x29@2x.png" width="58" />
+        <icon height="87" src="res/ios/Icon-App-29x29@3x.png" width="87" />
+        <icon height="64" src="res/ios/Icon-App-32x32@2x.png" width="64" />
+        <icon height="80" src="res/ios/Icon-App-40x40@2x.png" width="80" />
+        <icon height="50" src="res/ios/Icon-App-50x50@1x.png" width="50" />
+        <icon height="100" src="res/ios/Icon-App-50x50@2x.png" width="100" />
+        <icon height="57" src="res/ios/Icon-App-57x57@1x.png" width="57" />
+        <icon height="114" src="res/ios/Icon-App-57x57@2x.png" width="114" />
+        <icon height="60" src="res/ios/Icon-App-60x60@1x.png" width="60" />
+        <icon height="120" src="res/ios/Icon-App-60x60@2x.png" width="120" />
+        <icon height="180" src="res/ios/Icon-App-60x60@3x.png" width="180" />
+        <icon height="72" src="res/ios/Icon-App-72x72@1x.png" width="72" />
+        <icon height="144" src="res/ios/Icon-App-72x72@2x.png" width="144" />
+        <icon height="76" src="res/ios/Icon-App-76x76@1x.png" width="76" />
+        <icon height="152" src="res/ios/Icon-App-76x76@2x.png" width="152" />
+        <icon height="167" src="res/ios/Icon-App-83.5x83.5@2x.png" width="167" />
+        <icon height="256" src="res/ios/Icon-App-83.5x83.5@3x.png" width="256" />
+        <icon height="172" src="res/ios/Icon-App-86x86@2x.png" width="172" />
+        <icon height="88" src="res/ios/Icon-App-44x44@2x.png" width="88" />
+        <icon height="196" src="res/ios/Icon-App-98x98@2x.png" width="196" />
+        <icon height="1024" src="res/ios/Icon-App-1024.png" width="1024" />
+        <splash src="res/screen/ios/Default@2x~universal~anyany.png" />
+        <feature name="StatusBar">
+            <param name="ios-package" onload="true" value="CDVStatusBar" />
+        </feature>
+        <preference name="StatusBarOverlaysWebView" value="false" />
+        <preference name="StatusBarBackgroundColor" value="#000000" />
+        <preference name="StatusBarStyle" value="lightcontent" />
+        <preference name="Orientation" value="portrait" />
+        <preference name="Fullscreen" value="true" />
+        <edit-config file="*-Info.plist" mode="merge" target="ITSAppUsesNonExemptEncryption">
+            <false />
+        </edit-config>
+    </platform>
+    <engine name="ios" spec="https://github.com/apache/cordova-ios.git#4.5.5" />
+    <engine name="android" spec="~5.1.1" />
+    <engine name="windows" spec="~4.3.1" />
+    <plugin name="cordova-plugin-whitelist" spec="~1.2.1" />
+    <plugin name="cordova-plugin-statusbar" spec="~2.1.1" />
+    <plugin name="cordova-plugin-splashscreen" spec="^4.1.0" />
+    <plugin name="com.testfairy.cordova-plugin" spec="https://github.com/testfairy/testfairy-cordova-plugin" />
 </widget>
