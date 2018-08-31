@@ -25,6 +25,13 @@ save-bower-cache: &save-bower-cache
     paths:
       - bower_components
 
+restore-bundle-cache: &restore-bundle-cache
+    key: v1-bundle-{{ checksum "Gemfile.lock" }}
+save-bundle-cache: &save-bundle-cache
+    key: v1-bundle-{{ checksum "Gemfile.lock" }}
+    paths:
+        - vendor/bundle
+
 jobs:
   checkout_code:
     <<: *defaults
@@ -38,6 +45,7 @@ jobs:
 
   package_dependencies:
     <<: *defaults
+
     steps:
       - restore-cache: *restore-repo-cache
       - restore-cache: *restore-yarn-cache
@@ -47,6 +55,28 @@ jobs:
       - run: yarn run bower install
       - save-cache: *save-bower-cache
 
+  test_cases:
+    <<: *defaults
+
+    steps:
+      - restore-cache: *restore-repo-cache
+      - restore-cache: *restore-yarn-cache
+      - restore-cache: *restore-bower-cache
+      - run:
+          name: Start Ember test server
+          command: yarn run ember server --port 4202
+          background: true
+      - run:
+          name: Wait for Ember test server to start
+          command: dockerize -wait tcp://localhost:4202 -timeout 1m
+      - run:
+          name: Run Ember tests
+          command: COVERAGE=true yarn run ember test
+      - persist_to_workspace:
+          root: .
+          paths:
+            - coverage*/lcov.info
+
 workflows:
     version: 2
     build_and_bundle:
@@ -55,3 +85,7 @@ workflows:
         - package_dependencies:
             requires:
               - checkout_code
+        - test_cases:
+            requires:
+              - package_dependencies
+
