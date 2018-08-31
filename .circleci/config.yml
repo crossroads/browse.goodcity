@@ -5,6 +5,25 @@ defaults: &defaults
     docker:
       - image: circleci/node:boron
     working_directory: ~/browse.goodcity
+restore-repo-cache: &restore-repo-cache
+    key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+restore-yarn-cache: &restore-yarn-cache
+    key: v1-yarn-packages-{{ checksum "yarn.lock" }}
+save-yarn-cache: &save-yarn-cache
+    key: v1-yarn-packages-{{ checksum "yarn.lock" }}
+    paths:
+      - ~/.cache/yarn
+      - node_modules
+yarn: &yarn
+    |
+      yarn install --non-interactive --cache-folder ~/.cache/yarn
+
+restore-bower-cache: &restore-bower-cache
+    key: v1-bower-components-{{ checksum "bower.json" }}
+save-bower-cache: &save-bower-cache
+    key: v1-bower-components-{{ checksum "bower.json" }}
+    paths:
+      - bower_components
 
 jobs:
   checkout_code:
@@ -17,8 +36,22 @@ jobs:
           paths:
             - ~/browse.goodcity
 
+  package_dependencies:
+    <<: *defaults
+    steps:
+      - restore-cache: *restore-repo-cache
+      - restore-cache: *restore-yarn-cache
+      - run: *yarn
+      - save-cache: *save-yarn-cache
+      - restore-cache: *restore-bower-cache
+      - run: yarn run bower install
+      - save-cache: *save-bower-cache
+
 workflows:
     version: 2
     build_and_bundle:
       jobs:
         - checkout_code
+        - package_dependencies:
+            requires:
+              - checkout_code
