@@ -3,7 +3,7 @@ version: 2
 aliases:
 defaults: &defaults
     docker:
-      - image: circleci/node:boron
+      - image: circleci/node:8
     working_directory: ~/crossroads/browse.goodcity
 restore-repo-cache: &restore-repo-cache
     key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
