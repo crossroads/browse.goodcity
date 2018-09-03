@@ -77,6 +77,19 @@ jobs:
           paths:
             - coverage*/lcov.info
 
+  upload-coverage:
+    <<: *defaults
+    steps:
+      - restore-cache: *restore-repo-cache
+      - restore-cache: *restore-yarn-cache
+      - restore-cache: *restore-bower-cache
+      - attach_workspace:
+          at: ~/stock.goodcity
+      - run:
+          name: Upload coverage results to Code Climate
+          command: |
+            yarn run codeclimate-test-reporter < coverage*/lcov.info
+
 workflows:
     version: 2
     build_and_bundle:
@@ -88,4 +101,7 @@ workflows:
         - test_cases:
             requires:
               - package_dependencies
-
+        - upload-coverage:
+            requires:
+              - package_dependencies
+              - test_cases
