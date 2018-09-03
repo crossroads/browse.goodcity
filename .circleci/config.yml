@@ -16,7 +16,7 @@ save-yarn-cache: &save-yarn-cache
       - node_modules
 yarn: &yarn
     |
-      yarn install --non-interactive --cache-folder ~/.cache/yarn/v1
+      yarn install --non-interactive --cache-folder ~/.cache/yarn
 
 restore-bower-cache: &restore-bower-cache
     key: v1-bower-components-{{ checksum "bower.json" }}
