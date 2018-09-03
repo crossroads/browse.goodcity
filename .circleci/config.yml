@@ -4,7 +4,7 @@ aliases:
 defaults: &defaults
     docker:
       - image: circleci/node:boron
-    working_directory: ~/browse.goodcity
+    working_directory: ~/crossroads/browse.goodcity
 restore-repo-cache: &restore-repo-cache
     key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
 restore-yarn-cache: &restore-yarn-cache
@@ -16,7 +16,7 @@ save-yarn-cache: &save-yarn-cache
       - node_modules
 yarn: &yarn
     |
-      yarn install --non-interactive --cache-folder ~/.cache/yarn
+      yarn install --non-interactive --cache-folder ~/.cache/yarn/v1
 
 restore-bower-cache: &restore-bower-cache
     key: v1-bower-components-{{ checksum "bower.json" }}
@@ -41,7 +41,7 @@ jobs:
       - save_cache:
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
           paths:
-            - ~/browse.goodcity
+            - ~/crossroads/browse.goodcity
 
   package_dependencies:
     <<: *defaults
@@ -88,7 +88,7 @@ jobs:
       - restore-cache: *restore-yarn-cache
       - restore-cache: *restore-bower-cache
       - attach_workspace:
-          at: ~/browse.goodcity
+          at: ~/crossroads/browse.goodcity
       - run:
           name: Upload coverage results to Code Climate
           command: |
