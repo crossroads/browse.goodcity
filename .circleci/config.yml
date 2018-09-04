@@ -135,12 +135,16 @@ jobs:
       - run: mv dist-www/ dist
       - run:
           name: Setup Environment
-          command: echo 'export STAGE=$(if [ "$CIRCLE_BRANCH" == "live" ]; then echo production; else echo staging; fi)' >> $BASH_ENV
+          command: |
+            echo 'export STAGE=$(if [ "$CIRCLE_BRANCH" == "live" ]; then echo production; else echo staging; fi)' >> $BASH_ENV
+            echo 'export APP_VERSION=$(jq -r ".version" package.json)' >> $BASH_ENV
+      - run: $STAGE
       - run:
           name: Print Environment Variables
-          command: echo STAGE=$STAGE
+          command: |
+            echo STAGE=$STAGE
+            echo APP_VERSION=$APP_VERSION
       - run: bundle exec cap $STAGE deploy:upload
-
 
 workflows:
     version: 2
