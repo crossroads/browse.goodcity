@@ -190,9 +190,6 @@ workflows:
         - www_build:
             requires:
               - upload-coverage
-        # - www-deploy:
-        #     requires:
-        #       - www_build
-        - ember_cordova_build:
-          requires:
-            - package_dependencies
+        - www-deploy:
+            requires:
+              - www_build
