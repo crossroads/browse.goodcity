@@ -138,13 +138,39 @@ jobs:
           command: |
             echo 'export STAGE=$(if [ "$CIRCLE_BRANCH" == "live" ]; then echo production; else echo staging; fi)' >> $BASH_ENV
             echo 'export APP_VERSION=$(jq -r ".version" package.json)' >> $BASH_ENV
-      - run: $STAGE
       - run:
           name: Print Environment Variables
           command: |
             echo STAGE=$STAGE
             echo APP_VERSION=$APP_VERSION
       - run: bundle exec cap $STAGE deploy:upload
+
+  ember_cordova_build:
+    <<: *defaults
+    environment:
+        EMBER_CLI_CORDOVA: "1"
+    steps:
+      - restore-cache: *restore-repo-cache
+      - restore-cache: *restore-yarn-cache
+      - restore-cache: *restore-bower-cache
+      - run:
+          name: Setup Environment variables
+          command: |
+            echo 'export APP_SHA=$(echo $CIRCLE_SHA1 | cut -c1-7)' >> $BASH_ENV
+            echo 'export APP_VERSION=$(jq -r ".version" package.json)' >> $BASH_ENV
+      - run:
+          name: Print Environment variables
+          command: |
+              echo EMBER_CLI_CORDOVA=$EMBER_CLI_CORDOVA
+              echo APP_SHA=$APP_SHA
+              echo staging=$staging
+              echo APP_VERSION=$APP_VERSION
+      - run: yarn run ember build --environment=production
+      - run: mv dist/ cordova/www
+      - persist_to_workspace:
+          root: .
+          paths:
+            - cordova/www
 
 workflows:
     version: 2
@@ -164,6 +190,9 @@ workflows:
         - www_build:
             requires:
               - upload-coverage
-        - www-deploy:
-            requires:
-              - www_build
+        # - www-deploy:
+        #     requires:
+        #       - www_build
+        - ember_cordova_build:
+          requires:
+            - package_dependencies
