@@ -3,7 +3,7 @@ version: 2
 aliases:
 defaults: &defaults
     docker:
-      - image: circleci/node:8
+      - image: circleci/node:8.11.4
     working_directory: ~/crossroads/browse.goodcity
 restore-repo-cache: &restore-repo-cache
     key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
@@ -182,7 +182,6 @@ jobs:
     steps:
       - restore-cache: *restore-repo-cache
       - restore-cache: *restore-yarn-cache
-      - restore-cache: *restore-bower-cache
       - attach_workspace:
           at: ~/crossroads/browse.goodcity
       - run:
@@ -212,10 +211,10 @@ jobs:
             wget -O /tmp/gradle.zip https://downloads.gradle.org/distributions/gradle-3.3-bin.zip
             unzip -d $ANDROID_HOME/tools /tmp/gradle.zip
             mv $ANDROID_HOME/tools/gradle-3.3 $ANDROID_HOME/tools/gradle
+
       - run:
           name: Apply App settings
           command: cordova-update-config --appname ${APP_NAME} --appid ${APP_ID} --appversion ${APP_VERSION}
-          working_directory: cordova
 
       - run:
           name: Cordova Prepare
