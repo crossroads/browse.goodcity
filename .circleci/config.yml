@@ -120,6 +120,28 @@ jobs:
           paths:
             - dist-www/
 
+  www-deploy:
+    <<: *defaults
+
+    docker:
+      - image: circleci/ruby:2.5.1-node
+    steps:
+      - restore-cache: *restore-repo-cache
+      - restore-cache: *restore-bundle-cache
+      - run: bundle check --path=vendor/bundle || bundle install --deployment --jobs=4 --retry=3
+      - save-cache: *save-bundle-cache
+      - attach_workspace:
+          at: ~/crossroads/browse.goodcity
+      - run: mv dist-www/ dist
+      - run:
+          name: Setup Environment
+          command: echo 'export STAGE=$(if [ "$CIRCLE_BRANCH" == "live" ]; then echo production; else echo staging; fi)' >> $BASH_ENV
+      - run:
+          name: Print Environment Variables
+          command: echo STAGE=$STAGE
+      - run: bundle exec cap $STAGE deploy:upload
+
+
 workflows:
     version: 2
     build_and_bundle:
@@ -138,3 +160,6 @@ workflows:
         - www_build:
             requires:
               - upload-coverage
+        - www-deploy:
+            requires:
+              - www_build
