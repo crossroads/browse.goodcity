@@ -51,6 +51,7 @@ jobs:
     steps:
       - restore-cache: *restore-repo-cache
       - restore-cache: *restore-yarn-cache
+      - run: yarn global add cordova-update-config@^1.0.2
       - run: *yarn
       - save-cache: *save-yarn-cache
       - restore-cache: *restore-bower-cache
