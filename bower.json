@@ -1,29 +1,28 @@
 {
   "name": "browse",
   "dependencies": {
-    "ember": "~2.13.0",
-    "ember-cli-shims": "0.1.1",
     "cloudinary": "~1.0.24",
-    "foundation": "~5.5.0",
+    "ember": "~2.14.0",
+    "ember-cli-shims": "0.1.1",
     "fastclick": "^1.0.3",
+    "font-awesome": "~4.7.0",
+    "foundation": "~5.5.0",
     "jquery-placeholder": "^2.3.1",
     "jquery.cookie": "^1.4.1",
-    "modernizr": "^2.8.3",
-    "photoswipe": "4.1.0",
-    "font-awesome": "~4.7.0",
     "lightgallery": "1.2.20",
-    "socket.io-client": "~1.4.5",
+    "modernizr": "^2.8.3",
     "moment": "~2.20.1",
+    "offline": "^0.7.19",
+    "photoswipe": "4.1.0",
     "pickadate": "3.5.6",
     "slick-carousel": "1.5.8",
-    "offline": "^0.7.19"
+    "socket.io-client": "~1.4.5"
   },
   "devDependencies": {
     "ember-qunit-notifications": "0.1.0",
     "jquery-mockjax": "~2.0.1"
   },
   "resolutions": {
-    "ember": "2.11.0",
     "jquery-placeholder": "^2.1.0"
   }
 }
