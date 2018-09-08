@@ -1,0 +1,10 @@
+{
+  "groups": {
+    "default": {
+      "packages": [
+        "cordova/package.json",
+        "package.json"
+      ]
+    }
+  }
+}
