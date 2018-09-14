@@ -12,6 +12,9 @@
               <a class="exit-off-canvas"></a>
             </div>
             {{liquid-outlet}}
+            {{#if (is-equal currentRouteName "home") }}
+              {{ logo-banner device="mobile" }}
+            {{/if}}
           </div>
         </div>
       </div>

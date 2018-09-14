@@ -35,7 +35,7 @@ export default {
   },
 
   "browse": {
-    "title": "瀏覽物資"
+    "title": "GoodCity for Charity"
   },
 
   "category": {
