@@ -36,7 +36,9 @@ export default {
   },
 
   "browse": {
-    "title": "GoodCity for Charity"
+    "title": "GoodCity for Charity",
+    "presented_by": "Presented by",
+    "funded_by": "Funded by"
   },
 
   "home": {
