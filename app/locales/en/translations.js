@@ -5,7 +5,7 @@ export default {
   "language.zh": "中文",
   "company.name": "Crossroads Foundation",
   "by": "By",
-  "ok": "Ok",
+  "ok": "OK",
   "must_login": "You must login!",
   "okay": "Okay",
   "unexpected_error": "Something went wrong",
@@ -25,6 +25,7 @@ export default {
   "dispatching": "dispatching",
   "items_not_available": "One or many items in your cart are no longer available. Please remove those items from cart and then proceed.",
   "unauthorized": "You are not authorized.",
+  "back": "back",
 
   "application": {
     "loading": "Loading",
@@ -66,6 +67,7 @@ export default {
 
   "login": {
     "hk_only" : "Mobile phone (Hong Kong only)",
+    "sms_pincode": "We SMS you pin code for secure access <br/> Been here before? Please use the same phone number",
     "login" : "Login",
     "smscode": "Get 4-digit SMS code"
   },
@@ -75,14 +77,14 @@ export default {
   },
 
   "_resend": {
-    "no_sms" : "Haven't received SMS code?",
-    "please_wait" : "Please wait a few minutes",
+    "no_sms" : "Haven't received SMS code? Please wait a few minutes",
     "resend" : "Resend Code",
     "back_to_phone_number": "Back to phone number input"
   },
 
   "_verification_pin": {
     "input_code" : "Input 4-digit SMS code",
+    "send_code" : "We just send a code to",
     "auth_error" : "Sorry! Please enter the correct pin."
   },
 
@@ -148,6 +150,7 @@ export default {
     "purpose": "Purpose(s)",
     "cancel_order": "Cancel Order",
     "login": "Log in",
+    "register" : "Register",
     "goodcity_order": "GoodCity Order",
     "cart": "Cart",
     "order_details": "Order details",
