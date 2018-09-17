@@ -26,6 +26,11 @@ export default {
   "items_not_available": "One or many items in your cart are no longer available. Please remove those items from cart and then proceed.",
   "unauthorized": "You are not authorized.",
 
+  "banner": {
+    "presented_by": "Presented by",
+    "funded_by": "Funded by",
+  },
+
   "application": {
     "loading": "Loading",
     "sidebar": {
@@ -41,9 +46,7 @@ export default {
   },
 
   "browse": {
-    "title": "GoodCity for Charity",
-    "presented_by": "Presented by",
-    "funded_by": "Funded by"
+    "title": "GoodCity for Charity"
   },
 
   "home": {
