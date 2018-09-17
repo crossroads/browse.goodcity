@@ -1,99 +1,106 @@
 .home_page {
 
-    padding-bottom: 8rem;
+    .scroller {
+        height: 93vh;
+        overflow-y: auto;
+        padding-bottom: 8rem;
 
-    @media #{$medium-up} {
-        /**
-         * On desktop, show items side by side
-         * instead of on top of each otherds
-         */
-        .responsive_container {
-            display: flex;
+        @media #{$medium-up} {
+            /**
+            * On desktop, show items side by side
+            * instead of on top of each otherds
+            */
+            .responsive_container {
+                display: flex;
 
-            >div {
-                position: relative;
-                float: left;
-                width: 100%;
+                >div {
+                    position: relative;
+                    float: left;
+                    width: 100%;
+                }
             }
         }
-    }
 
-    .home_section {
-        position: relative;
-        color: white;
-        text-align: center;
-        border-bottom: 1px solid #334f75;
-        padding: 0.9rem;
+        .home_section {
+            position: relative;
+            color: white;
+            text-align: center;
+            padding: 0.9rem;
 
-        // Content
+            &:not(:last-child) {
+                border-bottom: 1px solid #334f75;
+            }
 
-        .section_title {
-            font-family: $header-font-family;
-            font-weight: bold;
-        }
+            // Content
 
-        .section_subtitle {
-            margin-top: 1rem;
-        }
+            .section_title {
+                font-family: $header-font-family;
+                font-weight: bold;
+            }
 
-        .section_text {
-            text-align: left;
-            padding-left: 0.5rem;
-            padding-right: 0.5rem;
-            margin-bottom: 1rem;
-            margin-top: 1rem;
+            .section_subtitle {
+                margin-top: 1rem;
+            }
 
-            .step {
-                @extend .small;
-                @extend .light;
-
+            .section_text {
+                text-align: left;
+                padding-left: 0.5rem;
+                padding-right: 0.5rem;
+                margin-bottom: 1rem;
                 margin-top: 1rem;
 
-                .bullet {
-                    padding-left: 1rem;
-                }
+                .step {
+                    @extend .small;
+                    @extend .light;
 
-                &.transport_option {
-                    margin-top: 0;
-                    text-indent: -1em;
-                    padding: 1rem 1em 0.1em 1em;
-                }
-            }
-        }
+                    margin-top: 1rem;
 
-        // Helpers
+                    .bullet {
+                        padding-left: 1rem;
+                    }
 
-        .button {
-
-            &.action {
-                width: 60%;
-                white-space: nowrap;
-                padding-left: 0px;
-                padding-right: 0px;
-                text-transform: uppercase;
-                margin-top: 1rem;
-                .fa {
-                    margin-left: 10px;
+                    &.transport_option {
+                        margin-top: 0;
+                        text-indent: -1em;
+                        padding: 1rem 1em 0.1em 1em;
+                    }
                 }
             }
 
-            &.scroll-down {
-                position: absolute;
-                top: 1rem;
-                right: 1rem;    
+            // Helpers
+
+            .button {
+
+                &.action {
+                    width: 60%;
+                    white-space: nowrap;
+                    padding-left: 0px;
+                    padding-right: 0px;
+                    text-transform: uppercase;
+                    margin-top: 1rem;
+                    .fa {
+                        margin-left: 10px;
+                    }
+                }
+
+                &.scroll-down {
+                    position: absolute;
+                    top: 1rem;
+                    right: 1rem;    
+                }
             }
-        }
 
-        &.small, .small {
-            font-size: 0.7rem;
-        }
-    
-        &.light, .light {
-            color: #e0e5ebdb;
-        }
+            &.small, .small {
+                font-size: 0.7rem;
+            }
+        
+            &.light, .light {
+                color: #e0e5ebdb;
+            }
 
-        a {
-            text-decoration: underline;
+            a {
+                text-decoration: underline;
+            }
         }
     }
 }

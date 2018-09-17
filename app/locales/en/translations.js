@@ -29,9 +29,14 @@ export default {
   "application": {
     "loading": "Loading",
     "sidebar": {
+      "home": "Home",
       "browse": "Browse",
       "myorders": "My Orders",
-      "faq": "Faq"
+      "faq": "Faq",
+      "about": "About",
+      "terms": "Terms",
+      "privacy_policy": "Privacy Policy",
+      "version": "Version"
     }
   },
 
