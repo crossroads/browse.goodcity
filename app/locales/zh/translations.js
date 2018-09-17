@@ -175,8 +175,7 @@ export default {
   },
 
   "_resend": {
-    "no_sms" : "收不到短訊？",
-    "please_wait" : "請稍候...",
+    "no_sms" : "收不到短訊？請稍候...",
     "resend" : "重新發送",
     "back_to_phone_number": "重新輸入電話號碼"
   },
