@@ -5,7 +5,7 @@
         <!-- Introduction -->
         <div class="home_section small light">
             {{ t "home.introduction" }}
-            {{#link-to "browse"}}
+            {{#link-to "faq"}}
                 {{ t "home.faq_text" }}
             {{/link-to}}
         </div>
@@ -15,9 +15,11 @@
             <div class="home_section">
                 <div class="section_title"> {{ t "home.order_goods.title" }} </div>
                 <div class="section_subtitle small"> <i class="fa fa-check"></i> {{ t "home.order_goods.subtitle" }} </div>
-                <div class="button small action">
-                    {{ t "home.order_goods.action" }} <i class="fa fa-shopping-cart"></i>
-                </div>
+                {{#link-to "browse"}}
+                    <div class="button small action">
+                        {{ t "home.order_goods.action" }} <i class="fa fa-shopping-cart"></i>
+                    </div>
+                {{/link-to}}
             </div>
 
             <!-- Visit button -->
@@ -38,9 +40,12 @@
 
             {{ logo-banner device="desktop" }}
 
-            {{#scroll-to href='#how_to'}}
-                <div class="button scroll-down"><i class="fa fa-lg fa-angle-double-down"></i></div>
-            {{/scroll-to}}
+            <!-- Scroll button disabled until it's spec'd out -->
+            <!--
+                {{#scroll-to href='#how_to'}}
+                    <div class="button scroll-down"><i class="fa fa-lg fa-angle-double-down"></i></div>
+                {{/scroll-to}}
+            -->
 
             <div class="section_title"> {{ t "home.user_guide_title" }} </div>
 
@@ -72,9 +77,11 @@
                     </div>
                     <div>
                         <div class="small">{{ t "home.tap_button" }}</div>
-                        <div class="button small action">
-                            {{ t "home.order_goods.action" }} <i class="fa fa-shopping-cart"></i>
-                        </div>
+                        {{#link-to "browse"}}
+                            <div class="button small action">
+                                {{ t "home.order_goods.action" }} <i class="fa fa-shopping-cart"></i>
+                            </div>
+                        {{/link-to}}
                     </div>
                 </div>
 

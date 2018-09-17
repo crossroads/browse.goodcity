@@ -40,7 +40,7 @@
     </li>
 
     <li>
-      {{#link-to "browse" class="menu-4"}}
+      {{#link-to "about" class="menu-4"}}
         <i class="fa fa-question"></i>
         <div>{{t "application.sidebar.about"}}</div>
       {{/link-to}}
@@ -58,9 +58,13 @@
     <li class="links">
       <div class="line">{{language-switcher}}</div>
       <div class="line">
-        <a href="http://www.crossroads.org.hk"><span>{{t "application.sidebar.terms"}} </span></a>
+        {{#link-to "terms" }}
+          <span>{{t "application.sidebar.terms"}} </span>
+        {{/link-to}}
         |
-        <a href="http://www.crossroads.org.hk"><span>{{t "application.sidebar.privacy_policy"}}</span></a>
+        {{#link-to "privacy" }}
+          <span>{{t "application.sidebar.privacy_policy"}}</span>
+        {{/link-to}}
       </div>
       <div class="line">{{t "application.sidebar.version" }} {{ appVersion }}</div>
     </li>
