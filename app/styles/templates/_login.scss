@@ -5,14 +5,10 @@
 }
 
 .warning_empty{
-  background: #ED4C4E;
-  color: #FCEFEE;
-  padding-left: 1rem;
-  padding-top: .4rem;
-  padding-bottom: .1rem;
-  font-size: .7rem;
-  margin-top: -17px;
-  font-weight: 100;
+  padding-left: 1rem !important;
+  padding-top: .4rem !important;
+  padding-bottom: .1rem !important;
+  font-size: .7rem !important;
 }
 
 .center_align_placeholder::placeholder {

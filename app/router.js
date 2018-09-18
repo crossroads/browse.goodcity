@@ -14,8 +14,10 @@ Router.map(function() {
   this.route('cart');
 
   this.route('login');
+  this.route('account_details');
   this.route('post_login');
   this.route('authenticate');
+  this.route('search_organisation');
 
   this.route('order_details');
   this.route('my_orders');

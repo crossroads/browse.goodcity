@@ -68,7 +68,23 @@ export default {
   "login": {
     "hk_only" : "電話號碼（只限香港）",
     "login" : "登入",
-    "smscode": "獲取短訊驗證碼"
+    "smscode": "獲取短訊驗證碼",
+    "privacy": "We don't share your data. We only use it to complete your goods request(s). See our Privacy Policy."
+  },
+
+  "account": {
+    "account": "Account Details",
+    "welcome": "Welcome!",
+    "contact_details": "Please complete contact details to continue.",
+    "organisation": "Organisation Name",
+    "title": "Title",
+    "first": "Your First Name",
+    "last": "Your Family Name",
+    "position": "Position",
+    "email": "Email address",
+    "work": "Please use your work address",
+    "done": "Done",
+    "contact_us": "Can't find your organisation? Please contact us for assistance."
   },
 
   "logout": {

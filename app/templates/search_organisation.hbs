@@ -1,0 +1,64 @@
+<div class="row fixed_search_header search-box ui organisations_search">
+  <div class="small-2 medium-2 columns ">
+    <div class="done" {{action "selectOrganisation" }}>{{t "account.done"}}</div>
+  </div>
+  <div class="small-1 medium-1"></div>
+  <div class="small-9 medium-9 columns">
+    {{input
+      name="searchText"
+      id="searchText"
+      value=searchText
+      disabled=false}}
+  </div>
+  <div class="row">
+    <div class="small-12 medium-12 columns">
+      <label class="form-label contact_us">{{t "account.contact_us"}}</label>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="row search">
+    <div class="small-12 columns">
+      {{!--<ul class="list list-activity">
+         {{#each filteredResults as |organisation|}}
+          <li>
+          {{#link-to 'organisations.detail' organisation.id tagName='div' href=false}}
+            <div class="row">
+              <div class="small-12 columns">
+                {{organisation.nameEn}}
+              </div>
+            </div>
+             <div class="row">
+              {{organisation.ordersCount}} {{t 'orders'}}
+              {{organisation.usersCount}} <i class="fa fa-users"></i>
+            </div>
+          {{/link-to}}
+          </li>
+        {{/each}}
+      </ul> --}}
+      <ul class="list list-activity">
+          <li>
+            <div class="row">
+              <div class="small-12 columns headline">
+                Jockey Club
+              </div>
+            </div>
+            <div class="row headline">
+              Something in chinese
+            </div>
+          </li>
+          <li>
+            <div class="row">
+              <div class="small-12 columns">
+                Jockey Club
+              </div>
+            </div>
+             <div class="row">
+              something in chinese
+            </div>
+          </li>
+      </ul>
+    </div>
+  </div>
+</div>

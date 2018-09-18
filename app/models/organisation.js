@@ -10,6 +10,7 @@ export default Model.extend({
   website:              attr('string'),
   descriptionEn:        attr('string'),
   descriptionZhTw:      attr('string'),
+  position:             attr('string'),
   user:                 belongsTo('user', { async: false }),
 
   nameAndDescription: Ember.computed('nameEn', 'descriptionEn', function() {
