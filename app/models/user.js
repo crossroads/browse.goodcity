@@ -8,6 +8,8 @@ export default Addressable.extend({
   lastName:    attr('string'),
   mobile:      attr('string'),
   createdAt:   attr('date'),
+  email:       attr('string'),
+
   organisations: hasMany('organisation', {async: false}),
   organisationsUsers: hasMany('organisationsUsers', {async: false}),
 
