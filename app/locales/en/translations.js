@@ -136,7 +136,23 @@ export default {
     "hk_only" : "Mobile phone (Hong Kong only)",
     "sms_pincode": "We SMS you pin code for secure access <br/> Been here before? Please use the same phone number",
     "login" : "Login",
-    "smscode": "Get 4-digit SMS code"
+    "smscode": "Get 4-digit SMS code",
+    "privacy": "We don't share your data. We only use it to complete your goods request(s). See our Privacy Policy."
+  },
+
+  "account": {
+    "account": "Account Details",
+    "welcome": "Welcome!",
+    "contact_details": "Please complete contact details to continue.",
+    "organisation": "Organisation Name",
+    "title": "Title",
+    "first": "Your First Name",
+    "last": "Your Family Name",
+    "position": "Position",
+    "email": "Email address",
+    "work": "Please use your work address",
+    "done": "Done",
+    "contact_us": "Can't find your organisation? Please contact us for assistance."
   },
 
   "logout": {
