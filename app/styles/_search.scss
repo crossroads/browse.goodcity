@@ -4,7 +4,6 @@
   background-color: $light-grey;
   z-index: 1000;
 
-
   @media #{$small-only} {
     font-size: 1.2rem;
     padding: 0.5rem 0.5rem;
@@ -95,6 +94,7 @@
       padding: 0.2rem 0;
     }
   }
+
   .org_search{
     color: #E2E6EB;
     margin-left: -2%;
