@@ -1,0 +1,90 @@
+<div class="row checkout_pages">
+  <div class="small-12 medium-9 large-6 columns">
+    <section class="main-section new-user-section ui login_page">
+      <nav class="tab-bar">
+        <section class="left-small">
+          {{#link-to "authenticate" classNames="back"}}{{t "back"}}{{/link-to}}
+        </section>
+
+        <section class="middle tab-bar-section">
+          <h1 class="title">{{t "account.account"}}</h1>
+        </section>
+      </nav>
+
+      {{small-cart-toggle-view}}
+
+      <div class="row">
+        <div class="small-12 columns">
+          <div class="mobile center_align">
+            <div class="row">
+              <div class="small-12 columns">
+               <label class="form-label">{{t "account.welcome"}}</label>
+              </div>
+              <div class="small-12 columns">
+               <label class="form-label">{{t "account.contact_details"}}</label>
+              </div>
+            </div>
+
+            <br>
+
+            {{#validatable-form onSubmit=(action 'saveAccount') as |form|}}
+              <div class="row">
+                <div class="small-12 columns">
+                    <label class="form-label">{{t "account.organisation"}}</label>
+                    {{#form-control}}
+                      {{input type="text" classNames="number_input center_align_placeholder" required='true' value=model.organisation.nameEn}}
+                      <div class="input-error warning_empty">{{fa-icon "warning"}}&nbsp;&nbsp;You must select valid organisation to proceed</div>
+                    {{/form-control}}
+                </div>
+              </div>
+              <br>
+              <div class="row">
+                <div class="small-2 columns">
+                    <label class="form-label">{{t "account.title"}}</label>
+                    {{#form-control}}
+                      {{input type="text" classNames="number_input center_align_placeholder" required='true'}}
+                    {{/form-control}}
+                </div>
+                <div class="small-5 columns">
+                    <label class="form-label">{{t "account.first"}}</label>
+                    {{#form-control}}
+                      {{input type="text" value=model.user.firstName classNames="number_input center_align_placeholder" required='true'}}
+                    {{/form-control}}
+                </div>
+                <div class="small-5 columns">
+                    <label class="form-label">{{t "account.last"}}</label>
+                    {{#form-control}}
+                      {{input type="text" value=model.user.lastName classNames="number_input center_align_placeholder" required='true'}}
+                    {{/form-control}}
+                </div>
+              </div>
+              <br>
+              <div class="row">
+                <div class="small-12 columns">
+                    <label class="form-label">{{t "account.position"}}</label>
+                    {{#form-control}}
+                      {{input type="text" value=model.organisationsUser.position classNames="number_input center_align_placeholder" required='true' autoFocus=true}}
+                    {{/form-control}}
+                </div>
+              </div>
+              <br>
+              <div class="row">
+                <div class="small-12 columns">
+                    <label class="form-label">{{t "account.email"}}</label>
+                    <label class="form-label">{{t "account.work"}}</label>
+                    {{#form-control}}
+                      {{input value=email value=model.user.email classNames="number_input center_align_placeholder" id="email" type="email" required='true'}}
+                      <div class="input-error warning_empty">{{fa-icon "warning"}}&nbsp;&nbsp;Add correct E-mail.</div>
+                    {{/form-control}}
+                </div>
+              </div>
+              <div class="row">
+                <div {{action 'submit' target=form}} class="save_button"><i class="fa fa-angle-double-down fa-2x"></i></div>
+              </div>
+            {{/validatable-form}}
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
