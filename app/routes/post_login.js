@@ -38,15 +38,11 @@ export default Ember.Route.extend(preloadDataMixin, {
         new AjaxPromise(`/orders/${draftOrder.id}`, "PUT", this.get('session.authToken'), { order: orderParams })
           .then(data => {
             this.get("store").pushPayload(data);
+            this.transitionTo("account_details");
           });
       }
-    }
-
-    // After everthying has been loaded, redirect user to requested url
-    var attemptedTransition = this.controllerFor('login').get('attemptedTransition');
-    if (attemptedTransition) {
-      attemptedTransition.retry();
-      this.set('attemptedTransition', null);
+    }else{
+      this.transitionTo("account_details");
     }
   }
 });

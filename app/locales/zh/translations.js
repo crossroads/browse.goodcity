@@ -69,7 +69,9 @@ export default {
     "hk_only" : "電話號碼（只限香港）",
     "login" : "登入",
     "smscode": "獲取短訊驗證碼",
-    "privacy": "We don't share your data. We only use it to complete your goods request(s). See our Privacy Policy."
+    "privacy": "We don't share your data. We only use it to complete your goods request(s). See our ",
+    "policy": "Privacy Policy.",
+    "mobile_warning": "Please provide a valid Hong Kong mobile number"
   },
 
   "account": {
@@ -84,7 +86,15 @@ export default {
     "email": "Email address",
     "work": "Please use your work address",
     "done": "Done",
-    "contact_us": "Can't find your organisation? Please contact us for assistance."
+    "contact_us": "Can't find your organisation? Please contact us for assistance.",
+    "continue": "Continue",
+    "organisation_warning": "You must select valid organisation to proceed",
+    "title_warning": "Add Title",
+    "title_warning": "Add Title",
+    "first_name_warning": "Add First Name",
+    "last_name_warning": "Add Last Name",
+    "position_warning": "Add Position",
+    "email_warning": "Add valid E-mail"
   },
 
   "logout": {
