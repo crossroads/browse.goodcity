@@ -1,6 +1,6 @@
 <div class="row checkout_pages">
   <div class="small-12 medium-9 large-6 columns">
-    <section class="main-section login-page">
+    <section class="main-section new-user-section ui login_page">
 
       <nav class="tab-bar">
         <section class="left-small">
@@ -29,11 +29,11 @@
 
               <div class="row collapse">
                 <div class="small-12 medium-8 columns">
-                  {{!-- {{#form-control}} --}}
+                  {{#form-control}}
                     <span class="prefix">+852</span>
                     {{numeric-input classNames="number_input" value=mobilePhone name="mobilePhone" id="mobile" maxlength="8" required=true pattern=".{8,}" autoFocus=true}}
-                    <div class="warning_empty">{{fa-icon "warning"}}&nbsp;&nbsp;Please provide a valid Hong Kong mobile number</div>
-                  {{!-- {{/form-control}} --}}
+                    <div class="input-error warning_empty">{{fa-icon "warning"}}&nbsp;&nbsp;{{t "login.mobile_warning"}}</div>
+                  {{/form-control}}
                 </div>
               </div>
 
@@ -43,7 +43,7 @@
                 </div>
               </div>
               <div class="small-12 columns">
-                <label class="form-label">{{t "login.privacy"}}</label>
+                <label class="form-label">{{t "login.privacy"}}<a href="">{{t "login.policy"}}</a></label>
               </div>
             </div>
           </div>
