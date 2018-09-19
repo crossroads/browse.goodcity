@@ -33,7 +33,7 @@
                     <label class="form-label">{{t "account.organisation"}}</label>
                     {{#form-control}}
                       {{input type="text" classNames="number_input center_align_placeholder" required='true' value=model.organisation.nameEn}}
-                      <div class="input-error warning_empty">{{fa-icon "warning"}}&nbsp;&nbsp;You must select valid organisation to proceed</div>
+                      <div class="input-error warning_empty">{{fa-icon "warning"}}&nbsp;&nbsp;{{t "account.organisation_warning"}}</div>
                     {{/form-control}}
                 </div>
               </div>
@@ -43,18 +43,21 @@
                     <label class="form-label">{{t "account.title"}}</label>
                     {{#form-control}}
                       {{input type="text" classNames="number_input center_align_placeholder" required='true'}}
+                      <div class="input-error warning_empty">{{fa-icon "warning"}}&nbsp;&nbsp;{{t "account.title_warning"}}</div>
                     {{/form-control}}
                 </div>
                 <div class="small-5 columns">
                     <label class="form-label">{{t "account.first"}}</label>
                     {{#form-control}}
                       {{input type="text" value=model.user.firstName classNames="number_input center_align_placeholder" required='true'}}
+                      <div class="input-error warning_empty">{{fa-icon "warning"}}&nbsp;&nbsp;{{t "account.first_name_warning"}}</div>
                     {{/form-control}}
                 </div>
                 <div class="small-5 columns">
                     <label class="form-label">{{t "account.last"}}</label>
                     {{#form-control}}
                       {{input type="text" value=model.user.lastName classNames="number_input center_align_placeholder" required='true'}}
+                      <div class="input-error warning_empty">{{fa-icon "warning"}}&nbsp;&nbsp;{{t "account.last_name_warning"}}</div>
                     {{/form-control}}
                 </div>
               </div>
@@ -64,6 +67,7 @@
                     <label class="form-label">{{t "account.position"}}</label>
                     {{#form-control}}
                       {{input type="text" value=model.organisationsUser.position classNames="number_input center_align_placeholder" required='true' autoFocus=true}}
+                      <div class="input-error warning_empty">{{fa-icon "warning"}}&nbsp;&nbsp;{{t "account.position_warning"}}</div>
                     {{/form-control}}
                 </div>
               </div>
@@ -74,12 +78,15 @@
                     <label class="form-label">{{t "account.work"}}</label>
                     {{#form-control}}
                       {{input value=email value=model.user.email classNames="number_input center_align_placeholder" id="email" type="email" required='true'}}
-                      <div class="input-error warning_empty">{{fa-icon "warning"}}&nbsp;&nbsp;Add correct E-mail.</div>
+                      <div class="input-error warning_empty">{{fa-icon "warning"}}&nbsp;&nbsp;{{t "account.email_warning"}}</div>
                     {{/form-control}}
                 </div>
               </div>
               <div class="row">
-                <div {{action 'submit' target=form}} class="save_button"><i class="fa fa-angle-double-down fa-2x"></i></div>
+                {{!-- <div class="save_button"><i class="fa fa-angle-double-down fa-2x"></i></div> --}}
+                <div class="small-12 medium-12 columns">
+                  <button {{action 'submit' target=form}} class="button expand expand_button">{{t "account.continue"}}</button>
+                </div>
               </div>
             {{/validatable-form}}
           </div>
