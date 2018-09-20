@@ -58,9 +58,19 @@ export default Ember.Controller.extend({
 
       new AjaxPromise("/auth/signup", "POST", null, {user_auth: user_auth})
         .then(data => {
-          this.set('session.otpAuthKey', data.otp_auth_key);
-          this.setProperties({pin:null});
-          this.transitionToRoute('/authenticate');
+          if (data.new_user) {
+            _this.setProperties({pin:null});
+            _this.set('session.authToken', data.jwt_token);
+            _this.set('session.otpAuthKey', null);
+            _this.store.pushPayload(data.user);
+            _this.setProperties({pin: null});
+            _this.get("application").set('loggedInUser', true);
+            _this.transitionToRoute('account_details');
+          }else{
+            this.set('session.otpAuthKey', data.otp_auth_key);
+            this.setProperties({pin:null});
+            this.transitionToRoute('/authenticate');
+          }
         })
         .catch(error => {
           if([401].indexOf(error.status) >= 0) {
