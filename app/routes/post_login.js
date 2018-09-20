@@ -41,8 +41,30 @@ export default Ember.Route.extend(preloadDataMixin, {
             this.transitionTo("account_details");
           });
       }
+    }
+
+    if(this.isDetailsComplete()){
+      var attemptedTransition = this.get('authenticate').get('attemptedTransition');
+      if (attemptedTransition) {
+        this.set('attemptedTransition', null);
+        attemptedTransition.retry();
+      }else{
+        this.transitionToRoute("browse");
+      }
     }else{
       this.transitionTo("account_details");
+    }
+  },
+
+  isDetailsComplete(){
+    var organisation = this.store.peekAll('organisation').objectAt(0);
+    var organisationsUser = this.store.peekAll('organisations_user').objectAt(0);
+    var user = this.store.peekAll('user').objectAt(0);
+
+    if(organisation.nameEn && organisationsUser.position && user.firstName && user.lastName && user.email && user.title){
+      return;
+    }else{
+      return false;
     }
   }
 });
