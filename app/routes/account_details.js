@@ -1,6 +1,6 @@
 import AuthorizeRoute from './authorize';
 
-export default AuthorizeRoute.extend({
+export default Ember.Route.extend({
   model() {
     return Ember.RSVP.hash({
       organisation: this.store.peekAll('organisation').objectAt(0),
