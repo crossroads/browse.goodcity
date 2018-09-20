@@ -27,80 +27,78 @@ export default {
 
   "banner": {
     "presented_by": "Presented by",
-    "funded_by": "Funded by",
+    "funded_by": "贊助",
   },
 
   "application": {
     "loading": "正在加載...",
     "sidebar": {
-      "home": "Home",
+      "home": "主頁",
       "browse": "瀏覽",
       "myorders": "我的訂單",
       "faq": "常問問題",
-      "about": "About",
-      "terms": "Terms",
-      "privacy_policy": "Privacy Policy",
-      "version": "Version"
+      "about": "關於我們",
+      "terms": "條款",
+      "privacy_policy": "私隱政策",
+      "version": "版"
     }
   },
 
   "browse": {
-    "title": "GoodCity for Charity"
+    "title": "好人好市"
   },
 
   "home": {
-    "introduction": "Helping Hong Kong’s charities & Social Welfare agencies receive quality donated goods for their facilities and beneficiaries.",
-    "faq_text": "Eligibility and frequently asked questions.",
-    "user_guide_title": "How it works",
-    "tap_button": "Tap the button below to get started",
-    "coming_soon": "coming soon",
-    "transport_options": "Transport options",
-    "collection_transport_description": "Collect using your own vehicle at a scheduled time",
-    "van_transport_description": "Have our team send items to you in a hired van at a scheduled time",
-    "van_transport_note": "NOTE: driver is paid by you or the client. We sadly cannot offer free delivery under normal circumstances.",
+    "introduction": "為香港的慈善機構及社會福利組織或其服務對象提供優質的捐贈物品",
+    "faq_text": "受惠資格及常見問題",
+    "user_guide_title": "使用指南",
+    "tap_button": "立即開始",
+    "coming_soon": "即將面世",
+    "transport_options": "運輸選項",
+    "collection_transport_description": "自行安排車輛於指定時間到國際十字路會提取物資",
+    "van_transport_description": "國際十字路會安排租用貨車於指定時間將物資運送到受惠人或受惠機構地址",
+    "van_transport_note": "請注意，租用貨車費用需由受惠人或受惠機構承擔。除特殊情況外，我們一般不能提供免費運送物資服務。",
 
     "order_goods": {
-      "title": "Get immediate access to goods!",
-      "subtitle": "Instant access. Have items delivered.",
-      "action": "Browse goods",
+      "title": "隨時瀏覽選取優質物資",
+      "subtitle": "隨時瀏覽，安排運送。",
+      "action": "瀏覽物資",
       "step_1": {
-        "desc": "Browse a selection of available goods online"
+        "desc": "於網上瀏覽一系列特選物資"
       },
       "step_2": {
-        "desc": "Add needed items to your \"cart\" then checkout"
+        "desc": "新增物資到 \"cart\" 然後提交"
       },
       "step_3": {
-        "desc": "Fill in additional details:",
-        "bullet_1": "Contact details (for new users)",
-        "bullet_2": "Reason for requesting goods",
-        "bullet_3": "Details of beneficiary (if requesting for a client)",
-        "bullet_4": "Transport preferences (collect in person or delivery)"
+        "desc": "請填妥下列資料:",
+        "bullet_1": "聯絡資料(新用戶適用)",
+        "bullet_2": "申請物資原因",
+        "bullet_3": "受惠人資料(如代服務對象申請)",
+        "bullet_4": "運輸選項(親臨本會提取物資/安排運送服務)"
       },
       "step_4": {
-        "desc": "Our team will",
-        "bullet_1": "Verify your eligibility (for new users)",
-        "bullet_2": "Call you to confirm order approval & important details",
-        "bullet_3": "Prepare the requested items for collection or dispatch"
+        "desc": "我們團隊將會",
+        "bullet_1": "核對你的申請資格(新用戶適用)",
+        "bullet_2": "致電確認你的訂單及核對其他資料",
+        "bullet_3": "準備好你挑選的物資，等待你來提取或安排運送。"
       }
     },
 
     "visit": {
-      "title": "Visit our distribution center",
-      "subtitle": "Choose goods in-person.",
-      "action": "Book appointment",
+      "title": "親臨國際十字路會",
+      "subtitle": "親臨本會挑選物資",
+      "action": "預約時間",
       "guide_intro": `
-        If you represent a Hong Kong non-profit or social welfare or social welfare organisation
-        you can book an appointment for yourself or your client to select goods from our Tuen Mun
-        distribution center. Here's how it works:
+        如果你代表任何在香港特別行政區註冊的非牟利機構或是香港政府屬下社會福利機構，你可以申請預約時間親臨本會挑選物資。以下是申請程序:
       `,
-      "guide_step_1": "Register (or log in) using your cell phone number",
-      "guide_step_2": "Describe the needs including specific types of good",
-      "guide_step_3": "Choose an appointment time",
-      "guide_step_4": "Our staff will contact you to confirm",
-      "onsite_guide_intro": "When you (or your client) arrives for the appointment:",
-      "onsite_guide_step_1": "We will help you select items from available stock",
-      "onsite_guide_step_2": "We will help book a truck if you've requested this",
-      "onsite_guide_step_3": "Load the goods and take them to your location",
+      "guide_step_1": "用你的手提電話號碼登記(或登入)",
+      "guide_step_2": "請詳細描述你所需要的物資及申請原因",
+      "guide_step_3": "選擇預約時間",
+      "guide_step_4": "我們同事將會致電確認你的預約",
+      "onsite_guide_intro": "當你(或你的服務對象)於預約時間到達本會:",
+      "onsite_guide_step_1": "我們將會協助你於存貨中選擇適合你的物資",
+      "onsite_guide_step_2": "如果你要求了租用貨車，我們會幫你安排車輛。",
+      "onsite_guide_step_3": "上貨然後將物資運送到目的地",
     }
   },
 
