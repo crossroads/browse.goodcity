@@ -24,5 +24,9 @@ export default Addressable.extend({
 
   fullName: Ember.computed('firstName', 'lastName', function(){
     return (this.get('firstName') + " " + this.get('lastName'));
+  }),
+
+  isInfoComplete: Ember.computed('firstName', 'lastName', 'email', 'mobile', function(){
+    return this.get('firstName').length !== 0 && this.get('lastName').length !== 0 && this.get('email').length !== 0 && this.get('mobile').length !== 0 && this.get('title') && this.get('title').length !== 0;
   })
 });

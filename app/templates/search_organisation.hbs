@@ -1,6 +1,6 @@
 <div class="row fixed_search_header search-box ui organisations_search">
   <div class="small-2 medium-2 columns ">
-    <div class="done" {{action "selectOrganisation" }}>{{t "account.done"}}</div>
+    <div class="done">{{t "account.done"}}</div>
   </div>
   <div class="small-2 medium-2"></div>
   <div class="small-8 medium-8 columns">
@@ -23,7 +23,7 @@
 
 <section class="main-section organisation_search_result">
   <div class="row search">
-    <div class="small-12 columns">
+    <div class="small-12 medium-8 large-8 columns">
       {{#if isLoading}}
         <div class="loading_screen">
           {{partial 'loading'}}
@@ -32,18 +32,15 @@
         {{#if filteredResults}}
           <ul class="list list-activity">
             {{#each filteredResults as |organisation|}}
-              <li>
-              {{#link-to 'organisations.detail' organisation.id tagName='div' href=false}}
-                <div class="row">
-                  <div class="small-12 columns">
+              <li class="org_search">
+                <div class="row" {{action "selectOrganisation" organisation}}>
+                  <div class="small-12 large-12 columns">
                     {{organisation.nameEn}}
                   </div>
+                  <div class="small-12 large-12 columns">
+                    {{organisation.nameZhTw}}
+                  </div>
                 </div>
-                 <div class="row">
-                  {{organisation.ordersCount}} {{t 'orders'}}
-                  {{organisation.usersCount}} <i class="fa fa-users"></i>
-                </div>
-              {{/link-to}}
               </li>
             {{/each}}
           </ul>

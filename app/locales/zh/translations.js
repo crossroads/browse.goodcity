@@ -90,7 +90,6 @@ export default {
     "continue": "Continue",
     "organisation_warning": "You must select valid organisation to proceed",
     "title_warning": "Add Title",
-    "title_warning": "Add Title",
     "first_name_warning": "Add First Name",
     "last_name_warning": "Add Last Name",
     "position_warning": "Add Position",
