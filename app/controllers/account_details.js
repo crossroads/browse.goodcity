@@ -75,6 +75,16 @@ export default Ember.Controller.extend({
     return params;
   },
 
+  redirectToTransitionOrBrowse() {
+    var attemptedTransition = this.get('authenticate').get('attemptedTransition');
+    if (attemptedTransition) {
+      this.set('attemptedTransition', null);
+      attemptedTransition.retry();
+    }else{
+      this.transitionToRoute("browse");
+    }
+  },
+
   actions: {
     saveAccount() {
       let url, actionType;

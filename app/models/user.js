@@ -54,3 +54,4 @@ Similar blocks of code found in 2 locations. Consider refactoring.   …
     return this.roleNames().indexOf(role) >= 0;
   }
 });
+
