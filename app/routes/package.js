@@ -11,10 +11,13 @@ export default PublicRoute.extend({
   },
 
   setupController(controller, model){
-    controller.set('model', model);
-    controller.set('item', model);
-    controller.set("previewUrl", model.get("previewImageUrl"));
+    this._super(...arguments);
+    if(model) {
+      controller.set('model', model);
+      controller.set('item', model);
+      controller.set("previewUrl", model.get("previewImageUrl"));
+    }
     this.controllerFor('application').set('pageTitle',
-      this.get('i18n').t("itemdetail.view"));
+    this.get('i18n').t("itemdetail.view"));
   }
 });
