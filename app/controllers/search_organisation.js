@@ -24,6 +24,7 @@ export default searchModule.extend({
         { searchText: "searchText"}).then(data => {
           if(this.get("searchText") === data.meta.search) {
             this.set("filteredResults", data);
+            this.store.pushPayload(data);
             this.set("hasNoResults", data.get("length") === 0);
           }
         }).finally(() => this.set("isLoading", false));
@@ -36,6 +37,10 @@ export default searchModule.extend({
       Ember.$("#searchText").blur();
       this.send("clearSearch", true);
       this.transitionToRoute("app_menu_list");
+    },
+
+    selectOrganisation(organisation) {
+      this.transitionToRoute('account_details',{ queryParams: { orgId: organisation.id }});
     }
   }
 });

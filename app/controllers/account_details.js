@@ -3,6 +3,8 @@ import AjaxPromise from 'browse/utils/ajax-promise';
 const { getOwner } = Ember;
 
 export default Ember.Controller.extend({
+  queryParams: ['orgId'],
+
   authenticate:Ember.inject.controller(),
   messageBox: Ember.inject.service(),
   organisationId: Ember.computed.alias('model.organisation.id'),
@@ -18,6 +20,16 @@ export default Ember.Controller.extend({
     this.set('position', "");
   },
 
+  redirectToTransitionOrBrowse() {
+    var attemptedTransition = this.get('authenticate').get('attemptedTransition');
+    if (attemptedTransition) {
+      this.set('attemptedTransition', null);
+      attemptedTransition.retry();
+    }else{
+      this.transitionToRoute("browse");
+    }
+  },
+
   actions: {
     saveAccount() {
       var loadingView = getOwner(this).lookup('component:loading').append();
@@ -27,21 +39,17 @@ export default Ember.Controller.extend({
       var organisationId = this.get('organisationId');
       var position = this.get('model.organisationsUser.position');
       var email = this.get('model.user.email');
+      var title = this.get('model.user.title');
       new AjaxPromise("/organisations_users", "POST", this.get('session.authToken'), { organisations_user: {
         organisation_id: organisationId, position: position, user_attributes: { first_name: firstName,
-        last_name: lastName, mobile: mobilePhone, email: email }}}).then(data =>{
+        last_name: lastName, mobile: mobilePhone, email: email, title: title }}}).then(data =>{
           this.get("store").pushPayload(data);
           this.clearFormData();
-          var attemptedTransition = this.get('authenticate').get('attemptedTransition');
-          if (attemptedTransition) {
-            this.set('attemptedTransition', null);
-            attemptedTransition.retry();
-          }else{
-            this.transitionToRoute("browse");
-          }
+          this.redirectToTransitionOrBrowse();
       }).catch(xhr => {
         if (xhr.status === 422) {
-          this.get("messageBox").alert(xhr.responseJSON.errors);
+          // this.get("messageBox").alert(xhr.responseJSON.errors);
+          this.redirectToTransitionOrBrowse();
         } else {
           throw xhr;
         }

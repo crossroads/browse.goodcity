@@ -44,7 +44,7 @@ export default Ember.Route.extend(preloadDataMixin, {
     }
 
     if(this.isDetailsComplete()){
-      var attemptedTransition = this.get('authenticate').get('attemptedTransition');
+      var attemptedTransition = this.controllerFor('login').get('attemptedTransition');
       if (attemptedTransition) {
         this.set('attemptedTransition', null);
         attemptedTransition.retry();
@@ -60,9 +60,8 @@ export default Ember.Route.extend(preloadDataMixin, {
     var organisation = this.store.peekAll('organisation').objectAt(0);
     var organisationsUser = this.store.peekAll('organisations_user').objectAt(0);
     var user = this.store.peekAll('user').objectAt(0);
-
-    if(organisation.nameEn && organisationsUser.position && user.firstName && user.lastName && user.email && user.title){
-      return;
+    if(organisation && user && organisationsUser && organisationsUser.get('isInfoComplete') && user.get('isInfoComplete')){
+      return true;
     }else{
       return false;
     }
