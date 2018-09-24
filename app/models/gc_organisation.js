@@ -12,10 +12,5 @@ export default Model.extend({
   registration: attr('string'),
   usersCount: Ember.computed.alias('organisationsUsers.length'),
 
-  organisationsUsers: hasMany('organisations_user', { async: false }),
-  designations: hasMany('designation', { async: false }),
-
-  ordersCount: Ember.computed('designations.[]', function(){
-    return this.get('designations.length');
-  })
+  organisationsUsers: hasMany('organisations_user', { async: false })
 });
