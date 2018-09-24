@@ -16,6 +16,8 @@ FactoryGuy.define('user',{
     id:        FactoryGuy.generate('id'),
     firstName: FactoryGuy.generate('collectionFirstName'),
     lastName:  FactoryGuy.generate('collectionLastName'),
+    email: "rock.programmer@hotmail.com",
+    title: "Mr",
     userRoles: FactoryGuy.hasMany('user_role'),
     organisations: FactoryGuy.hasMany('organisation'),
     mobile: Math.floor(Math.random() * 8999922 + 67110000).toString()
