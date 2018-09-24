@@ -34,12 +34,12 @@
                     {{#link-to "search_organisation"}}
                       {{#if model.organisation}}
                         {{#form-control}}
-                          {{input type="text" classNames="number_input center_align_placeholder" required='true' value=model.organisation.nameEn}}
+                          {{input type="text" id = "organisation_details" classNames="number_input center_align_placeholder" required='true' value=model.organisation.nameEn}}
                           <div class="input-error warning_empty">{{fa-icon "warning"}}&nbsp;&nbsp;{{t "account.organisation_warning"}}</div>
                         {{/form-control}}
                       {{else}}
                         {{#form-control}}
-                          {{input type="text" classNames="number_input center_align_placeholder" required='true' }}
+                          {{input type="text" id = "organisation_details" classNames="number_input center_align_placeholder" required='true' }}
                           <div class="input-error warning_empty">{{fa-icon "warning"}}&nbsp;&nbsp;{{t "account.organisation_warning"}}</div>
                         {{/form-control}}
                       {{/if}}
@@ -51,21 +51,21 @@
                 <div class="small-2 columns">
                     <label class="form-label">{{t "account.title"}}</label>
                     {{#form-control}}
-                      {{input type="text" value=model.user.title classNames="number_input center_align_placeholder" required='true'}}
+                      {{input type="text" value=model.user.title id="title" classNames="number_input center_align_placeholder" required='true'}}
                       <div class="input-error warning_empty">{{fa-icon "warning"}}&nbsp;&nbsp;{{t "account.title_warning"}}</div>
                     {{/form-control}}
                 </div>
                 <div class="small-5 columns">
                     <label class="form-label">{{t "account.first"}}</label>
                     {{#form-control}}
-                      {{input type="text" value=model.user.firstName classNames="number_input center_align_placeholder" required='true'}}
+                      {{input type="text" value=model.user.firstName id="firstName" classNames="number_input center_align_placeholder" required='true'}}
                       <div class="input-error warning_empty">{{fa-icon "warning"}}&nbsp;&nbsp;{{t "account.first_name_warning"}}</div>
                     {{/form-control}}
                 </div>
                 <div class="small-5 columns">
                     <label class="form-label">{{t "account.last"}}</label>
                     {{#form-control}}
-                      {{input type="text" value=model.user.lastName classNames="number_input center_align_placeholder" required='true'}}
+                      {{input type="text" value=model.user.lastName id="lastName" classNames="number_input center_align_placeholder" required='true'}}
                       <div class="input-error warning_empty">{{fa-icon "warning"}}&nbsp;&nbsp;{{t "account.last_name_warning"}}</div>
                     {{/form-control}}
                 </div>
@@ -76,7 +76,7 @@
                     <label class="form-label">{{t "account.position"}}</label>
                     {{#if model.organisationsUser}}
                       {{#form-control}}
-                        {{input type="text" value=model.organisationsUser.position classNames="number_input center_align_placeholder" required='true' autoFocus=true}}
+                        {{input type="text" value=model.organisationsUser.position id="position" classNames="number_input center_align_placeholder" required='true' autoFocus=true}}
                         <div class="input-error warning_empty">{{fa-icon "warning"}}&nbsp;&nbsp;{{t "account.position_warning"}}</div>
                       {{/form-control}}
                     {{else}}
