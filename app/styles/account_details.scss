@@ -1,10 +1,11 @@
 .new-user-section {
 
   .input-error {
-    background: #f46769;
+    background: #ED4C4E;
     color: white;
     padding: 0.2rem;
     display: none;
+    padding-bottom: 0.25rem !important;
 
     @media #{$small-only} {
       font-size: 0.65rem;
@@ -207,5 +208,10 @@
     padding: .9rem;
     color: white;
     font-weight: 600;
+  }
+
+  .search_organisation, #organisation_details {
+    text-decoration: none;
+    cursor: pointer;
   }
 }

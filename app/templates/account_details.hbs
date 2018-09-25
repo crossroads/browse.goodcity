@@ -3,7 +3,7 @@
     <section class="main-section new-user-section ui login_page">
       <nav class="tab-bar">
         <section class="left-small">
-          {{#link-to "authenticate" classNames="back"}}{{t "back"}}{{/link-to}}
+          {{fa-icon "angle-left"}} {{#link-to "authenticate" classNames="back"}}{{t "back"}}{{/link-to}}
         </section>
 
         <section class="middle tab-bar-section">
@@ -31,7 +31,7 @@
               <div class="row">
                 <div class="small-12 columns">
                     <label class="form-label">{{t "account.organisation"}}</label>
-                    {{#link-to "search_organisation"}}
+                    {{#link-to "search_organisation" classNames='search_organisation'}}
                       {{#if model.organisation}}
                         {{#form-control}}
                           {{input type="text" id = "organisation_details" classNames="number_input center_align_placeholder" required='true' value=model.organisation.nameEn}}
@@ -48,27 +48,33 @@
               </div>
               <br>
               <div class="row">
+                {{#form-control}}
                 <div class="small-2 columns">
                     <label class="form-label">{{t "account.title"}}</label>
-                    {{#form-control}}
+
                       {{input type="text" value=model.user.title id="title" classNames="number_input center_align_placeholder" required='true'}}
-                      <div class="input-error warning_empty">{{fa-icon "warning"}}&nbsp;&nbsp;{{t "account.title_warning"}}</div>
-                    {{/form-control}}
+
+
                 </div>
                 <div class="small-5 columns">
                     <label class="form-label">{{t "account.first"}}</label>
-                    {{#form-control}}
+
                       {{input type="text" value=model.user.firstName id="firstName" classNames="number_input center_align_placeholder" required='true'}}
-                      <div class="input-error warning_empty">{{fa-icon "warning"}}&nbsp;&nbsp;{{t "account.first_name_warning"}}</div>
-                    {{/form-control}}
+
+
                 </div>
                 <div class="small-5 columns">
                     <label class="form-label">{{t "account.last"}}</label>
-                    {{#form-control}}
+
                       {{input type="text" value=model.user.lastName id="lastName" classNames="number_input center_align_placeholder" required='true'}}
-                      <div class="input-error warning_empty">{{fa-icon "warning"}}&nbsp;&nbsp;{{t "account.last_name_warning"}}</div>
-                    {{/form-control}}
+
+
                 </div>
+
+                <div class="small-12 columns">
+                    <div class="input-error warning_empty">{{fa-icon "warning"}}&nbsp;&nbsp;User Information is incomplete</div>
+                </div>
+                {{/form-control}}
               </div>
               <br>
               <div class="row">

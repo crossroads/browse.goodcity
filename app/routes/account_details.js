@@ -8,5 +8,14 @@ export default AuthorizeRoute.extend({
       organisationsUser: this.store.peekAll('organisations_user').objectAt(0),
       user: this.store.peekAll('user').objectAt(0)
     });
+  },
+
+  setupController(controller, model) {
+    this._super(controller, model);
+    this.controllerFor('application').set('showSidebar', false);
+  },
+
+  deactivate() {
+    this.controllerFor('application').set('showSidebar', true);
   }
 });
