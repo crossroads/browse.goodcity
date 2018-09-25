@@ -157,7 +157,8 @@ export default {
     "first_name_warning": "Add First Name",
     "last_name_warning": "Add Last Name",
     "position_warning": "Add Position",
-    "email_warning": "Add valid E-mail"
+    "email_warning": "Add valid E-mail",
+    "user_info": "User Information is incomplete"
   },
 
   "logout": {

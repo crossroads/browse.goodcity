@@ -29,80 +29,67 @@
 
             {{#validatable-form onSubmit=(action 'saveAccount') as |form|}}
               <div class="row">
-                <div class="small-12 columns">
-                    <label class="form-label">{{t "account.organisation"}}</label>
-                    {{#link-to "search_organisation" classNames='search_organisation'}}
-                      {{#if model.organisation}}
-                        {{#form-control}}
-                          {{input type="text" id = "organisation_details" classNames="number_input center_align_placeholder" required='true' value=model.organisation.nameEn}}
-                          <div class="input-error warning_empty">{{fa-icon "warning"}}&nbsp;&nbsp;{{t "account.organisation_warning"}}</div>
-                        {{/form-control}}
-                      {{else}}
-                        {{#form-control}}
-                          {{input type="text" id = "organisation_details" classNames="number_input center_align_placeholder" required='true' }}
-                          <div class="input-error warning_empty">{{fa-icon "warning"}}&nbsp;&nbsp;{{t "account.organisation_warning"}}</div>
-                        {{/form-control}}
-                      {{/if}}
-                    {{/link-to}}
-                </div>
-              </div>
-              <br>
-              <div class="row">
                 {{#form-control}}
-                <div class="small-2 columns">
-                    <label class="form-label">{{t "account.title"}}</label>
-
-                      {{input type="text" value=model.user.title id="title" classNames="number_input center_align_placeholder" required='true'}}
-
-
-                </div>
-                <div class="small-5 columns">
-                    <label class="form-label">{{t "account.first"}}</label>
-
-                      {{input type="text" value=model.user.firstName id="firstName" classNames="number_input center_align_placeholder" required='true'}}
-
-
-                </div>
-                <div class="small-5 columns">
-                    <label class="form-label">{{t "account.last"}}</label>
-
-                      {{input type="text" value=model.user.lastName id="lastName" classNames="number_input center_align_placeholder" required='true'}}
-
-
-                </div>
-
-                <div class="small-12 columns">
-                    <div class="input-error warning_empty">{{fa-icon "warning"}}&nbsp;&nbsp;User Information is incomplete</div>
-                </div>
+                  <div class="small-12 columns" {{action "goToSearchOrg"}}>
+                      <label class="form-label">{{t "account.organisation"}}</label>
+                        {{#if model.organisation}}
+                            {{input type="text" id = "organisation_details" classNames="number_input center_align_placeholder" required='true' value=model.organisation.nameEn}}
+                        {{else}}
+                            {{input type="text" id = "organisation_details" classNames="number_input center_align_placeholder" required='true' }}
+                        {{/if}}
+                  </div>
+                  <div class="small-12 columns input-error warning_empty">{{fa-icon "warning"}}&nbsp;&nbsp;{{t "account.organisation_warning"}}</div>
                 {{/form-control}}
               </div>
               <br>
               <div class="row">
-                <div class="small-12 columns">
-                    <label class="form-label">{{t "account.position"}}</label>
-                    {{#if model.organisationsUser}}
-                      {{#form-control}}
-                        {{input type="text" value=model.organisationsUser.position id="position" classNames="number_input center_align_placeholder" required='true' autoFocus=true}}
-                        <div class="input-error warning_empty">{{fa-icon "warning"}}&nbsp;&nbsp;{{t "account.position_warning"}}</div>
-                      {{/form-control}}
-                    {{else}}
-                      {{#form-control}}
-                      {{input type="text" classNames="number_input center_align_placeholder" required='true' autoFocus=true}}
-                      <div class="input-error warning_empty">{{fa-icon "warning"}}&nbsp;&nbsp;{{t "account.position_warning"}}</div>
-                    {{/form-control}}
-                    {{/if}}
-                </div>
+                {{#form-control}}
+                  <div class="small-2 columns">
+                      <label class="form-label">{{t "account.title"}}</label>
+                        {{input type="text" value=model.user.title id="title" classNames="number_input center_align_placeholder" required='true'}}
+                  </div>
+                  <div class="small-5 columns">
+                      <label class="form-label">{{t "account.first"}}</label>
+                        {{input type="text" value=model.user.firstName id="firstName" classNames="number_input center_align_placeholder" required='true'}}
+                  </div>
+                  <div class="small-5 columns">
+                      <label class="form-label">{{t "account.last"}}</label>
+                        {{input type="text" value=model.user.lastName id="lastName" classNames="number_input center_align_placeholder" required='true'}}
+                  </div>
+
+                  <div class="small-12 columns input-error warning_empty">
+                      {{fa-icon "warning"}}&nbsp;&nbsp;{{t "account.user_info"}}
+                  </div>
+                {{/form-control}}
               </div>
               <br>
               <div class="row">
-                <div class="small-12 columns">
-                    <label class="form-label">{{t "account.email"}}</label>
-                    <label class="form-label">{{t "account.work"}}</label>
-                    {{#form-control}}
-                      {{input value=email value=model.user.email classNames="number_input center_align_placeholder" id="email" type="email" required='true'}}
-                      <div class="input-error warning_empty">{{fa-icon "warning"}}&nbsp;&nbsp;{{t "account.email_warning"}}</div>
-                    {{/form-control}}
-                </div>
+                {{#form-control}}
+                  <div class="small-12 columns">
+                      <label class="form-label">{{t "account.position"}}</label>
+                      {{#if model.organisationsUser}}
+                          {{input type="text" value=model.organisationsUser.position id="position" classNames="number_input center_align_placeholder" required='true' autoFocus=true}}
+                      {{else}}
+                        {{input type="text" classNames="number_input center_align_placeholder" required='true' autoFocus=true}}
+                      {{/if}}
+                  </div>
+                  <div class="small-12 columns input-error warning_empty">
+                    {{fa-icon "warning"}}&nbsp;&nbsp;{{t "account.position_warning"}}
+                  </div>
+                {{/form-control}}
+              </div>
+              <br>
+              <div class="row">
+                {{#form-control}}
+                  <div class="small-12 columns">
+                      <label class="form-label">{{t "account.email"}}</label>
+                      <label class="form-label">{{t "account.work"}}</label>
+                        {{input value=email value=model.user.email classNames="number_input center_align_placeholder" id="email" type="email" required='true'}}
+                  </div>
+                  <div class="small-12 columns input-error warning_empty">
+                    {{fa-icon "warning"}}&nbsp;&nbsp;{{t "account.email_warning"}}
+                  </div>
+                {{/form-control}}
               </div>
               <div class="row">
                 {{!-- <div class="save_button"><i class="fa fa-angle-double-down fa-2x"></i></div> --}}
