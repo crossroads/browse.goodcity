@@ -12,6 +12,6 @@ export default Model.extend({
   organisation:    belongsTo('organisation', { async: false }),
 
   isInfoComplete: Ember.computed('position', function(){
-    return this.get('position').length !== 0;
+    return this.get('position') && this.get('position').length !== 0;
   })
 });
