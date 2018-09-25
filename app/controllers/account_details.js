@@ -57,6 +57,10 @@ export default Ember.Controller.extend({
       .finally(() =>
         loadingView.destroy()
       );
+    },
+
+    goToSearchOrg(){
+      this.transitionToRoute("search_organisation");
     }
   }
 });
