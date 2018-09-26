@@ -11,7 +11,9 @@
         </section>
       </nav>
 
-      {{small-cart-toggle-view}}
+      {{#if model.order.length}}
+        {{small-cart-toggle-view}}
+      {{/if}}
 
       <div class="row">
         <div class="small-12 columns">
@@ -44,9 +46,16 @@
               <br>
               <div class="row">
                 {{#form-control}}
-                  <div class="small-2 columns">
+                  <div class="small-2 columns user_title">
                       <label class="form-label">{{t "account.title"}}</label>
-                        {{input type="text" value=model.user.title id="title" classNames="number_input center_align_placeholder" required='true'}}
+                        {{select-list
+                          content=titles
+                          on-change=(action (mut selectedTitle))
+                          selectedValue=selectedTitle
+                          value= userTitle
+                          selectArrow=true
+                          classNames='condition'
+                          idNames='title' }}
                   </div>
                   <div class="small-5 columns">
                       <label class="form-label">{{t "account.first"}}</label>
