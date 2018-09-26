@@ -7,6 +7,7 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
+  this.route("home");
   this.route("browse");
   this.route('package_category', { path: '/category/:id' });
   this.route('item', { path: '/item/:id' });
@@ -27,6 +28,10 @@ Router.map(function() {
 
   this.route('confirm');
   this.route('not-found', { path: '/*path' });
+  this.route('privacy');
+  this.route('faq');
+  this.route('terms');
+  this.route('about');
 });
 
 export default Router;

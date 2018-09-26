@@ -26,16 +26,83 @@ export default {
   "items_not_available": "One or many items in your cart are no longer available. Please remove those items from cart and then proceed.",
   "unauthorized": "You are not authorized.",
 
+  "banner": {
+    "presented_by": "Presented by",
+    "funded_by": "Funded by",
+  },
+
   "application": {
     "loading": "Loading",
     "sidebar": {
+      "home": "Home",
       "browse": "Browse",
       "myorders": "My Orders",
-      "faq": "Faq"
+      "faq": "Faq",
+      "about": "About",
+      "terms": "Terms",
+      "privacy_policy": "Privacy Policy",
+      "version": "Version"
     }
   },
+
   "browse": {
-    "title": "Browse Goods"
+    "title": "GoodCity for Charity"
+  },
+
+  "home": {
+    "introduction": "Helping Hong Kong’s charities & Social Welfare agencies receive quality donated goods for their facilities and beneficiaries.",
+    "faq_text": "Eligibility and frequently asked questions.",
+    "user_guide_title": "How it works",
+    "tap_button": "Tap the button below to get started",
+    "coming_soon": "coming soon",
+    "transport_options": "Transport options",
+    "collection_transport_description": "Collect using your own vehicle at a scheduled time",
+    "van_transport_description": "Have our team send items to you in a hired van at a scheduled time",
+    "van_transport_note": "NOTE: driver is paid by you or the client. We sadly cannot offer free delivery under normal circumstances.",
+
+    "order_goods": {
+      "title": "Get immediate access to goods!",
+      "subtitle": "Instant access. Have items delivered.",
+      "action": "Browse goods",
+      "step_1": {
+        "desc": "Browse a selection of available goods online"
+      },
+      "step_2": {
+        "desc": "Add needed items to your \"cart\" then checkout"
+      },
+      "step_3": {
+        "desc": "Fill in additional details:",
+        "bullet_1": "Contact details (for new users)",
+        "bullet_2": "Reason for requesting goods",
+        "bullet_3": "Details of beneficiary (if requesting for a client)",
+        "bullet_4": "Transport preferences (collect in person or delivery)"
+      },
+      "step_4": {
+        "desc": "Our team will",
+        "bullet_1": "Verify your eligibility (for new users)",
+        "bullet_2": "Call you to confirm order approval & important details",
+        "bullet_3": "Prepare the requested items for collection or dispatch"
+      }
+    },
+
+    "visit": {
+      "title": "Visit our distribution center",
+      "subtitle": "Choose goods in-person.",
+      "action": "Book appointment",
+      "guide_intro": `
+        If you represent a Hong Kong non-profit or social welfare or social welfare organisation
+        you can book an appointment for yourself or your client to select goods from our Tuen Mun
+        distribution center. Here's how it works:
+      `,
+      "guide_step_1": "Register (or log in) using your cell phone number",
+      "guide_step_2": "Describe the needs including specific types of good",
+      "guide_step_3": "Choose an appointment time",
+      "guide_step_4": "Our staff will contact you to confirm",
+      "onsite_guide_intro": "When you (or your client) arrives for the appointment:",
+      "onsite_guide_step_1": "We will help you select items from available stock",
+      "onsite_guide_step_2": "We will help book a truck if you've requested this",
+      "onsite_guide_step_3": "Load the goods and take them to your location",
+    }
   },
 
   "category": {
