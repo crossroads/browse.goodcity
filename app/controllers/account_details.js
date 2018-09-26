@@ -9,6 +9,20 @@ export default Ember.Controller.extend({
   messageBox: Ember.inject.service(),
   organisationId: Ember.computed.alias('model.organisation.id'),
   organisationsUserId: Ember.computed.alias('model.organisationsUser.id'),
+  userTitle: Ember.computed.alias('model.user.title'),
+
+  selectedTitle: Ember.computed('userTitle', function (){
+    return{ name: this.get('userTitle'), id: this.get('userTitle')};
+  }),
+
+  titles: Ember.computed(function(){
+    return [
+      { name: "Mr", id: "Mr" },
+      { name: "Mrs", id: "Mrs" },
+      { name: "Miss", id: "Miss" },
+      { name: "Ms", id: "Ms" }
+    ];
+  }),
 
   clearFormData() {
     this.set('organisationName', "");
@@ -39,7 +53,7 @@ export default Ember.Controller.extend({
       var organisationId = this.get('organisationId');
       var position = this.get('model.organisationsUser.position');
       var email = this.get('model.user.email');
-      var title = this.get('model.user.title');
+      var title = this.get('selectedTitle.name');
       new AjaxPromise("/organisations_users", "POST", this.get('session.authToken'), { organisations_user: {
         organisation_id: organisationId, position: position, user_attributes: { first_name: firstName,
         last_name: lastName, mobile: mobilePhone, email: email, title: title }}}).then(data =>{
