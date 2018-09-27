@@ -3,10 +3,14 @@ import AuthorizeRoute from './authorize';
 
 export default AuthorizeRoute.extend({
   model(params) {
+    var user = this.get('session.currentUser');
+    var organisationsUser = user.get('organisationsUsers') && user.get('organisationsUsers.firstObject');
+    var organisation = organisationsUser && organisationsUser.get('organisation');
+
     return Ember.RSVP.hash({
-      organisation: params.orgId? this.store.peekRecord('gc_organisation', parseInt(params.orgId)) : this.store.peekAll('organisation', {reload: true}).objectAt(0),
-      organisationsUser: this.store.peekAll('organisations_user').objectAt(0),
-      user: this.store.peekAll('user').objectAt(0),
+      organisation: params.orgId? this.store.peekRecord('gc_organisation', parseInt(params.orgId)) : organisation,
+      organisationsUser: organisationsUser,
+      user: user,
       order: this.store.peekAll("order").filterBy("state", "draft")
     });
   },

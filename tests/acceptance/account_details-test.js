@@ -8,11 +8,10 @@ var App, user, organisation, organisationsUser, gogo_van, order, pkg, ordersPack
 
 module('Acceptance | Account Details Page', {
   beforeEach: function() {
-    window.localStorage.authToken = '"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo2LCJpYXQiOjE1MTg3NzI4MjcsImlzcyI6Ikdvb2RDaXR5SEsiLCJleHAiOjE1MTk5ODI0Mjd9.WdsVvss9khm81WNScV5r6DiIwo8CQfHM1c4ON2IACes"';
     App = startApp();
     user = make("user");
     organisation = make("organisation");
-    organisationsUser = make("organisations_user", {user_id: user.id, organisation_id: organisation.id});
+    organisationsUser = make("organisations_user", {user: user, organisation: organisation});
     pkg = make('package');
     ordersPackage = make("orders_package", { quantity: 1, state: "requested", package: pkg, packageId: pkg.id, order: order});
     order = make("order", { state: "draft", created_by_id: user.id });
@@ -43,14 +42,22 @@ module('Acceptance | Account Details Page', {
         organisations_users: [organisationsUser.toJSON({includeId: true})]
       }
     });
+
+    $.mockjax({url:"/api/v1/org*", type: 'PUT', status: 200,responseText:{
+        users: [user.toJSON({ includeId: true })],
+        organisations: [organisation.toJSON({includeId: true})],
+        organisations_users: [organisationsUser.toJSON({includeId: true})]
+      }
+    });
   },
 
   afterEach: function() {
+    $.mockjax.clear();
     Ember.run(App, App.destroy);
   }
 });
 
-test("Clicking organisations from search organisation page fills organisatin details on account_details page", function(assert){
+test("Account details page displays all user and organisation user details", function(assert){
   assert.expect(6);
   visit('/account_details');
   andThen(function(){

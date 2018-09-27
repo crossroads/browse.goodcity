@@ -11,7 +11,7 @@ module('Acceptance: Login', {
     App = startApp({}, 2);
     user = make("user");
     organisation = make("organisation");
-    organisationsUser = make("organisations_user", {user_id: user.id, organisation_id: organisation.id});
+    organisationsUser = make("organisations_user", {user: user, organisation: organisation});
     pkg = make('package');
     ordersPackage = make("orders_package", { quantity: 1, state: "requested", package: pkg, packageId: pkg.id, order: order});
     order = make("order", { state: "draft", created_by_id: user.id });
@@ -51,6 +51,7 @@ module('Acceptance: Login', {
 
   },
   afterEach: function() {
+    $.mockjax.clear();
     Ember.run(App, 'destroy');
   }
 });

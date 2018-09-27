@@ -5,6 +5,7 @@ import AjaxPromise from 'browse/utils/ajax-promise';
 export default Ember.Route.extend(preloadDataMixin, {
 
   cart: Ember.inject.service(),
+  messageBox: Ember.inject.service(),
 
   model() {
     return this.preloadData();
@@ -39,9 +40,11 @@ export default Ember.Route.extend(preloadDataMixin, {
           .then(data => {
             this.get("store").pushPayload(data);
             this.redirectToTransitionOrDetails();
+          }).catch(xhr => {
+            this.get("messageBox").alert(xhr.responseJSON.errors);
           });
       }
-    }else{
+    } else {
       this.redirectToTransitionOrDetails();
     }
   },
@@ -52,21 +55,22 @@ export default Ember.Route.extend(preloadDataMixin, {
       if (attemptedTransition) {
         attemptedTransition.retry();
         this.controllerFor('login').set('attemptedTransition', null);
-      }else{
+      } else {
         this.transitionTo("browse");
       }
-    }else{
+    } else {
       this.transitionTo("account_details");
     }
   },
 
   isDetailsComplete(){
-    var organisation = this.store.peekAll('organisation').objectAt(0);
-    var organisationsUser = this.store.peekAll('organisations_user').objectAt(0);
-    var user = this.store.peekAll('user').objectAt(0);
+    var user = this.get('session.currentUser');
+    var organisationsUser = user.get('organisationsUsers') && user.get('organisationsUsers.firstObject');
+    var organisation = organisationsUser && organisationsUser.get('organisation');
+
     if(organisation && user && organisationsUser && organisationsUser.get('isInfoComplete') && user.get('isInfoComplete')){
       return true;
-    }else{
+    } else {
       return false;
     }
   }
