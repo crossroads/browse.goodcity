@@ -24,6 +24,7 @@ export default {
   "dispatching": "派送中",
   "items_not_available": "您的購物車内有已不存在的物資，請刪除該物資以繼續。",
   "unauthorized": "您沒有此權限。",
+  "back": "back",
 
   "banner": {
     "presented_by": "建立機構",
@@ -131,7 +132,33 @@ export default {
   "login": {
     "hk_only" : "電話號碼（只限香港）",
     "login" : "登入",
-    "smscode": "獲取短訊驗證碼"
+    "smscode": "獲取短訊驗證碼",
+    "privacy": "We don't share your data. We only use it to complete your goods request(s). See our ",
+    "policy": "Privacy Policy.",
+    "mobile_warning": "Please provide a valid Hong Kong mobile number"
+  },
+
+  "account": {
+    "account": "Account Details",
+    "welcome": "Welcome!",
+    "contact_details": "Please complete contact details to continue.",
+    "organisation": "Organisation Name",
+    "title": "Title",
+    "first": "Your First Name",
+    "last": "Your Family Name",
+    "position": "Position",
+    "email": "Email address",
+    "work": "Please use your work address",
+    "done": "Done",
+    "contact_us": "Can't find your organisation? Please contact us for assistance.",
+    "continue": "Continue",
+    "organisation_warning": "You must select valid organisation to proceed",
+    "title_warning": "Add Title",
+    "first_name_warning": "Add First Name",
+    "last_name_warning": "Add Last Name",
+    "position_warning": "Add Position",
+    "email_warning": "Add valid E-mail",
+    "user_info": "User Information is incomplete"
   },
 
   "logout": {
@@ -139,14 +166,14 @@ export default {
   },
 
   "_resend": {
-    "no_sms" : "收不到短訊？",
-    "please_wait" : "請稍候...",
+    "no_sms" : "收不到短訊？請稍候...",
     "resend" : "重新發送",
     "back_to_phone_number": "重新輸入電話號碼"
   },
 
   "_verification_pin": {
     "input_code" : "輸入四位數短訊驗證碼",
+    "send_code" : "We just send a code to",
     "auth_error" : "對不起！請輸入正確的驗證碼。"
   },
 
@@ -212,6 +239,7 @@ export default {
     "cancel_order": "取消訂單",
     "purpose": "申請目的",
     "login": "登入",
+    "register" : "Register",
     "goodcity_order": "好人好市訂單",
     "cart": "購物車",
     "order_details": "訂單詳情",

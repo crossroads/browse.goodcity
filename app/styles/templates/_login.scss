@@ -4,6 +4,31 @@
   }
 }
 
+.warning_empty{
+  padding-left: 1rem !important;
+  padding-top: .4rem !important;
+  padding-bottom: .1rem !important;
+  font-size: .7rem !important;
+}
+
+.center_align_placeholder::placeholder {
+  text-align: center;
+}
+
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 30px #002352 inset;
+}
+
+input:-webkit-autofill {
+    -webkit-text-fill-color: white !important;
+}
+
+.number_input{
+  background: #002352 !important;
+  color: white !important;
+  border: 1px solid !important;
+}
+
 .login-page {
   @media #{$medium-only}{
     margin-left: 3.5rem;
@@ -131,7 +156,7 @@
 
   span {
     position: absolute;
-    color: #000;
+    color: white;
     width: 4rem;
   }
 
@@ -145,8 +170,15 @@
   }
 
   label.form-label {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     padding-bottom: 0.5rem;
+    color: #DFE5EC;
+  }
+
+  .expand_button {
+    margin-top: 4rem;
+    padding: 1rem;
+    font-size: 1.2rem;
   }
 
   a {
@@ -159,6 +191,7 @@
 .center_align{
     margin-left: 20%;
     @media #{$small-only} {
-    margin-left: 10%;
+    margin-left: 0%;
+    width: 96.5% !important;
   }
 }

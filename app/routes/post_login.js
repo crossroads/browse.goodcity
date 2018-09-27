@@ -38,15 +38,36 @@ export default Ember.Route.extend(preloadDataMixin, {
         new AjaxPromise(`/orders/${draftOrder.id}`, "PUT", this.get('session.authToken'), { order: orderParams })
           .then(data => {
             this.get("store").pushPayload(data);
+            this.redirectToTransitionOrDetails();
           });
       }
+    }else{
+      this.redirectToTransitionOrDetails();
     }
+  },
 
-    // After everthying has been loaded, redirect user to requested url
-    var attemptedTransition = this.controllerFor('login').get('attemptedTransition');
-    if (attemptedTransition) {
-      attemptedTransition.retry();
-      this.set('attemptedTransition', null);
+  redirectToTransitionOrDetails() {
+    if(this.isDetailsComplete()){
+      var attemptedTransition = this.controllerFor('login').get('attemptedTransition');
+      if (attemptedTransition) {
+        attemptedTransition.retry();
+        this.controllerFor('login').set('attemptedTransition', null);
+      }else{
+        this.transitionTo("browse");
+      }
+    }else{
+      this.transitionTo("account_details");
+    }
+  },
+
+  isDetailsComplete(){
+    var organisation = this.store.peekAll('organisation').objectAt(0);
+    var organisationsUser = this.store.peekAll('organisations_user').objectAt(0);
+    var user = this.store.peekAll('user').objectAt(0);
+    if(organisation && user && organisationsUser && organisationsUser.get('isInfoComplete') && user.get('isInfoComplete')){
+      return true;
+    }else{
+      return false;
     }
   }
 });

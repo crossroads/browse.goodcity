@@ -8,6 +8,9 @@ export default Addressable.extend({
   lastName:    attr('string'),
   mobile:      attr('string'),
   createdAt:   attr('date'),
+  email:       attr('string'),
+  title:       attr('string'),
+
   organisations: hasMany('organisation', {async: false}),
   organisationsUsers: hasMany('organisationsUsers', {async: false}),
 
@@ -21,5 +24,9 @@ export default Addressable.extend({
 
   fullName: Ember.computed('firstName', 'lastName', function(){
     return (this.get('firstName') + " " + this.get('lastName'));
+  }),
+
+  isInfoComplete: Ember.computed('firstName', 'lastName', 'email', 'mobile', function(){
+    return this.get('firstName') && this.get('firstName').length !== 0 && this.get('lastName') && this.get('lastName').length !== 0 && this.get('email') && this.get('email').length !== 0 && this.get('mobile') && this.get('mobile').length !== 0 && this.get('title') && this.get('title').length !== 0;
   })
 });
