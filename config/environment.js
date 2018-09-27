@@ -65,6 +65,7 @@ module.exports = function(environment) {
       defaultLocale: 'en'
     },
     cordova: {
+      enabled: process.env.EMBER_CLI_CORDOVA !== '0',
       rebuildOnChange: false,
       emulate: false
     }
@@ -92,6 +93,8 @@ module.exports = function(environment) {
   }
 
   if (environment === 'test') {
+    ENV.cordova.enabled = false;
+
     // Testem prefers this...
     ENV.baseURL = '/';
     ENV.locationType = 'auto';

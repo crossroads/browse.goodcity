@@ -46,7 +46,13 @@ export default Ember.Route.extend(preloadDataMixin, {
       this.get("messageBox").alert(this.get("i18n").t("QuotaExceededError"));
     }
     localStorage.removeItem('test');
-    this.set("i18n.locale", this.get("session.language") || config.i18n.defaultLocale);
+
+    let language = this.get('session.language') || config.i18n.defaultLocale;
+    if (transition.queryParams.ln) {
+      language = transition.queryParams.ln === "zh-tw" ? "zh-tw" : "en";
+    }
+    this.set('session.language', language);
+    this.set("i18n.locale", language);
     this.set('previousRoute',transition);
     Ember.onerror = window.onerror = error => {
       if(error.errors && error.errors[0] && error.errors[0].status === "401") {

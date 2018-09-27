@@ -64,6 +64,10 @@
                     width: 30%;
                     &.logo {
                         background-image: url(/assets/images/crossroads_logo.png);
+
+                        &.cordova {
+                            background-image: url(images/crossroads_logo.png); 
+                        }
                     }
                 }
 
@@ -71,6 +75,10 @@
                     width: 60%;
                     &.logo {
                         background-image: url(/assets/images/jockey_club_logo.png);
+
+                        &.cordova {
+                            background-image: url(images/jockey_club_logo.png);
+                        }
                     }
                 }
             }
