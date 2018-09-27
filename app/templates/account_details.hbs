@@ -33,39 +33,40 @@
               <div class="row">
                 {{#form-control}}
                   <div class="small-12 columns" {{action "goToSearchOrg"}}>
-                      <label class="form-label">{{t "account.organisation"}}</label>
-                        {{#if model.organisation}}
-                            {{input type="text" id = "organisation_details" classNames="number_input center_align_placeholder" required='true' value=model.organisation.nameEn}}
-                        {{else}}
-                            {{input type="text" id = "organisation_details" classNames="number_input center_align_placeholder" required='true' }}
-                        {{/if}}
+                    <label class="form-label">{{t "account.organisation"}}</label>
+                    {{#if model.organisation}}
+                        {{input type="text" id = "organisation_details" classNames="number_input center_align_placeholder" required='true' value=model.organisation.nameEn}}
+                    {{else}}
+                        {{input type="text" id = "organisation_details" classNames="number_input center_align_placeholder" required='true' }}
+                    {{/if}}
                   </div>
-                  <div class="small-12 columns input-error warning_empty">{{fa-icon "warning"}}&nbsp;&nbsp;{{t "account.organisation_warning"}}</div>
+                  <div class="small-12 columns input-error warning_empty">
+                    {{fa-icon "warning"}}&nbsp;&nbsp;{{t "account.organisation_warning"}}
+                  </div>
                 {{/form-control}}
               </div>
               <br>
               <div class="row">
                 {{#form-control}}
                   <div class="small-2 columns user_title">
-                      <label class="form-label">{{t "account.title"}}</label>
-                        {{select-list
-                          content=titles
-                          on-change=(action (mut selectedTitle))
-                          selectedValue=selectedTitle
-                          value= userTitle
-                          selectArrow=true
-                          classNames='condition'
-                          idNames='title' }}
+                    <label class="form-label">{{t "account.title"}}</label>
+                    {{select-list
+                      content=titles
+                      on-change=(action (mut selectedTitle))
+                      selectedValue=selectedTitle
+                      value= userTitle
+                      selectArrow=true
+                      classNames='condition'
+                      idNames='title' }}
                   </div>
                   <div class="small-5 columns">
-                      <label class="form-label">{{t "account.first"}}</label>
-                        {{input type="text" value=model.user.firstName id="firstName" classNames="number_input center_align_placeholder" required='true'}}
+                    <label class="form-label">{{t "account.first"}}</label>
+                    {{input type="text" value=model.user.firstName id="firstName" classNames="number_input center_align_placeholder" required='true'}}
                   </div>
                   <div class="small-5 columns">
-                      <label class="form-label">{{t "account.last"}}</label>
-                        {{input type="text" value=model.user.lastName id="lastName" classNames="number_input center_align_placeholder" required='true'}}
+                    <label class="form-label">{{t "account.last"}}</label>
+                    {{input type="text" value=model.user.lastName id="lastName" classNames="number_input center_align_placeholder" required='true'}}
                   </div>
-
                   <div class="small-12 columns input-error warning_empty">
                       {{fa-icon "warning"}}&nbsp;&nbsp;{{t "account.user_info"}}
                   </div>
@@ -75,12 +76,12 @@
               <div class="row">
                 {{#form-control}}
                   <div class="small-12 columns">
-                      <label class="form-label">{{t "account.position"}}</label>
-                      {{#if model.organisationsUser}}
-                          {{input type="text" value=model.organisationsUser.position id="position" classNames="number_input center_align_placeholder" required='true' autoFocus=true}}
-                      {{else}}
-                        {{input type="text" classNames="number_input center_align_placeholder" required='true' autoFocus=true}}
-                      {{/if}}
+                    <label class="form-label">{{t "account.position"}}</label>
+                    {{#if model.organisationsUser}}
+                        {{input type="text" value=model.organisationsUser.position id="position" classNames="number_input center_align_placeholder" required='true' autoFocus=true}}
+                    {{else}}
+                      {{input type="text" value=position classNames="number_input center_align_placeholder" required='true' autoFocus=true}}
+                    {{/if}}
                   </div>
                   <div class="small-12 columns input-error warning_empty">
                     {{fa-icon "warning"}}&nbsp;&nbsp;{{t "account.position_warning"}}
@@ -91,9 +92,9 @@
               <div class="row">
                 {{#form-control}}
                   <div class="small-12 columns">
-                      <label class="form-label">{{t "account.email"}}</label>
-                      <label class="form-label">{{t "account.work"}}</label>
-                        {{input value=email value=model.user.email classNames="number_input center_align_placeholder" id="email" type="email" required='true'}}
+                    <label class="form-label">{{t "account.email"}}</label>
+                    <label class="form-label">{{t "account.work"}}</label>
+                    {{input value=email value=model.user.email classNames="number_input center_align_placeholder" id="email" type="email" required='true'}}
                   </div>
                   <div class="small-12 columns input-error warning_empty">
                     {{fa-icon "warning"}}&nbsp;&nbsp;{{t "account.email_warning"}}
