@@ -26,6 +26,7 @@ export default {
   "items_not_available": "One or many items in your cart are no longer available. Please remove those items from cart and then proceed.",
   "unauthorized": "You are not authorized.",
   "back": "back",
+  "no_search_results": "No Search Results.",
 
   "banner": {
     "presented_by": "Presented by",
@@ -143,7 +144,7 @@ export default {
   },
 
   "account": {
-    "account": "Account Details",
+    "account_details": "Account Details",
     "welcome": "Welcome!",
     "contact_details": "Please complete contact details to continue.",
     "organisation": "Organisation Name",

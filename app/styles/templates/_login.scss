@@ -29,10 +29,21 @@ input:-webkit-autofill {
   border: 1px solid !important;
 }
 
-.login-page {
-  @media #{$medium-only}{
-    margin-left: 3.5rem;
+.login {
+  width: 100% !important;
+  margin-left: .28rem !important;
+
+  @media #{$small-only} {
+    margin-left: 0rem !important;
   }
+
+  @media #{$medium-only} {
+    margin-left: 0 !important;
+    width: 100% !important;
+  }
+}
+
+.login-page {
 
   .tab-bar-section {
     padding: 0;
