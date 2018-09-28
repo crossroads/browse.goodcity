@@ -7,7 +7,7 @@
         </section>
 
         <section class="middle tab-bar-section">
-          <h1 class="title">{{t "account.account"}}</h1>
+          <h1 class="title">{{t "account.account_details"}}</h1>
         </section>
       </nav>
 
@@ -32,14 +32,18 @@
             {{#validatable-form onSubmit=(action 'saveAccount') as |form|}}
               <div class="row">
                 {{#form-control}}
-                  <div class="small-12 columns" {{action "goToSearchOrg"}}>
-                    <label class="form-label">{{t "account.organisation"}}</label>
-                    {{#if model.organisation}}
-                        {{input type="text" id = "organisation_details" classNames="number_input center_align_placeholder" required='true' value=model.organisation.nameEn}}
-                    {{else}}
-                        {{input type="text" id = "organisation_details" classNames="number_input center_align_placeholder" required='true' }}
-                    {{/if}}
-                  </div>
+                  {{#if model.organisation}}
+                    <div class="small-12 columns" id="organisation_id">
+                      <label class="form-label">{{t "account.organisation"}}</label>
+                      {{input type="text" id = "organisation_details" classNames="number_input center_align_placeholder" required='true' value=model.organisation.nameEn}}
+                    </div>
+                  {{else}}
+                    <div class="small-12 columns" {{action "goToSearchOrg"}}>
+                      <label class="form-label">{{t "account.organisation"}}</label>
+                      {{input type="text" id = "organisation_details" classNames="number_input center_align_placeholder" required='true' }}
+                    </div>
+                  {{/if}}
+
                   <div class="small-12 columns input-error warning_empty">
                     {{fa-icon "warning"}}&nbsp;&nbsp;{{t "account.organisation_warning"}}
                   </div>

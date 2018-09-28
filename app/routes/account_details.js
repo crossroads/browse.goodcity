@@ -18,6 +18,7 @@ export default AuthorizeRoute.extend({
   setupController(controller, model) {
     this._super(controller, model);
     this.controllerFor('application').set('showSidebar', false);
+    controller.init();
   },
 
   deactivate() {

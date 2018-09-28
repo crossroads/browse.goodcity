@@ -9,12 +9,24 @@ export default Ember.Controller.extend({
   messageBox: Ember.inject.service(),
   organisationId: Ember.computed.alias('model.organisation.id'),
   organisationsUserId: Ember.computed.alias('model.organisationsUser.id'),
-  userTitle: Ember.computed.alias('model.user.title'),
   position: "",
+
+  userTitle: Ember.computed('model', function() {
+    return this.get('model.user.title') ? this.get('model.user.title') : "Mr";
+  }),
 
   selectedTitle: Ember.computed('userTitle', function (){
     return{ name: this.get('userTitle'), id: this.get('userTitle')};
   }),
+
+  init() {
+    this._super();
+    Ember.run.schedule("afterRender",this,function() {
+      if (this.get('organisationId')) {
+        Ember.$("#organisation_id *").prop('disabled',true);
+      }
+    });
+  },
 
   titles: Ember.computed(function(){
     return [
@@ -36,13 +48,17 @@ export default Ember.Controller.extend({
   },
 
   organisationsUserParams() {
+    var organisationsUserId = this.get('organisationsUserId');
     var user = this.get('model.user');
     var position = this.get('organisationsUserId') ? this.get('model.organisationsUser.position') : this.get('position');
-
-    return {
-      organisation_id: this.get('organisationId'), position: position, user_attributes: { first_name: user.get('firstName'),
-      last_name: user.get('lastName'), mobile: user.get('mobile'), email: user.get('email'), title: this.get('selectedTitle.name') }
+    var params = { organisation_id: this.get('organisationId'), position: position,
+      user_attributes: { first_name: user.get('firstName'),last_name: user.get('lastName'), mobile: user.get('mobile'), email: user.get('email'), title: this.get('selectedTitle.name') }
     };
+    if (organisationsUserId) {
+      params.id = organisationsUserId;
+    }
+
+    return params;
   },
 
   saveOrUpdateAccount(url, actionType) {

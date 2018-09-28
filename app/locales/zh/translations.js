@@ -25,6 +25,7 @@ export default {
   "items_not_available": "您的購物車内有已不存在的物資，請刪除該物資以繼續。",
   "unauthorized": "您沒有此權限。",
   "back": "back",
+  "no_search_results": "No Search Results.",
 
   "banner": {
     "presented_by": "建立機構",
@@ -139,7 +140,7 @@ export default {
   },
 
   "account": {
-    "account": "Account Details",
+    "account_details": "Account Details",
     "welcome": "Welcome!",
     "contact_details": "Please complete contact details to continue.",
     "organisation": "Organisation Name",
