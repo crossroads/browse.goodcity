@@ -1,8 +1,7 @@
 import Ember from 'ember';
 import { module, test } from 'qunit';
 import startApp from '../helpers/start-app';
-import {make} from 'ember-data-factory-guy';
-import { mockFindAll } from 'ember-data-factory-guy';
+import { make, mockFindAll } from 'ember-data-factory-guy';
 
 var App, pkg, organisationsUser, ordersPackage, order, organisation, user, gogo_van;
 

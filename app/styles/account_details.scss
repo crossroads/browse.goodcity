@@ -14,9 +14,15 @@
 
     @media #{$small-only} {
       font-size: 0.65rem;
-      margin-left: .3rem !important;
-      width: 97%;
+      margin-left: 0.3rem;
+      width: 98%;
       float: left !important;
+    }
+
+    @media #{$medium-only} {
+      float: left !important;
+      width: 98% !important;
+      margin-left: 0.25rem;
     }
   }
 
