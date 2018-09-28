@@ -84,11 +84,20 @@ $sidebar-width: 7.8rem;
 
       .line {
         margin-bottom: 0.8rem;
+        display: flex;
+        justify-content: space-evenly;
+   
         a {
           text-decoration: underline;
           text-transform: capitalize;
           color: #a3aab6;
           display: inline;
+          padding: 0;
+
+          &:hover {
+            background-color: transparent;
+          }
+
           @media #{$small-only} {
             font-size: 0.6rem !important;
           }

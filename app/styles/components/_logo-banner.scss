@@ -53,25 +53,19 @@
             .contributor {
                 height: 100%;
 
-                &.logo {
-                    background-color: transparent;
-                    background-size: contain;
-                    background-repeat: no-repeat;
-                    background-position: center;
+                .static-image {
+                    max-width: 100%;
+                    max-height: 100%;
+                    padding-top: 0.8rem;
+                    padding-bottom: 0.2rem;
                 }
 
                 &.crossroads {
                     width: 30%;
-                    &.logo {
-                        background-image: url("assets/images/crossroads_logo.png");
-                    }
                 }
 
                 &.jockey_club {
                     width: 60%;
-                    &.logo {
-                        background-image: url("assets/images/jockey_club_logo.png");
-                    }
                 }
             }
         }

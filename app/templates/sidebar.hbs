@@ -58,13 +58,17 @@
     <li class="links">
       <div class="line">{{language-switcher}}</div>
       <div class="line">
-        {{#link-to "terms" }}
-          <span>{{t "application.sidebar.terms"}} </span>
-        {{/link-to}}
-        |
-        {{#link-to "privacy" }}
-          <span>{{t "application.sidebar.privacy_policy"}}</span>
-        {{/link-to}}
+        <div>
+          {{#link-to "terms" }}
+            <span>{{t "application.sidebar.terms"}} </span>
+          {{/link-to}}
+        </div>
+        <div>|</div>
+        <div>
+          {{#link-to "privacy" }}
+            <span>{{t "application.sidebar.privacy_policy"}}</span>
+          {{/link-to}}
+        </div>
       </div>
       <div class="line">{{t "application.sidebar.version" }} {{ appVersion }}</div>
     </li>
