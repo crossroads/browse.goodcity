@@ -54,9 +54,10 @@
                 height: 100%;
 
                 .static-image {
-                    width: 100%;
-                    height: auto;
-                    margin-top: 1rem;
+                    max-width: 100%;
+                    max-height: 100%;
+                    padding-top: 0.8rem;
+                    padding-bottom: 0.2rem;
                 }
 
                 &.crossroads {
