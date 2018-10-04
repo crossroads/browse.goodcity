@@ -12,23 +12,15 @@ export default Ember.Controller.extend({
   position: "",
 
   userTitle: Ember.computed('model', function() {
-    return this.get('model.user.title') ? this.get('model.user.title') : "Mr";
+    let userTitle = this.get('model.user.title');
+    return userTitle ? userTitle : "Mr";
   }),
 
   selectedTitle: Ember.computed('userTitle', function (){
     return{ name: this.get('userTitle'), id: this.get('userTitle')};
   }),
 
-  init() {
-    this._super();
-    Ember.run.schedule("afterRender",this,function() {
-      if (this.get('organisationId')) {
-        Ember.$("#organisation_id *").prop('disabled',true);
-      }
-    });
-  },
-
-  titles: Ember.computed(function(){
+  titles: Ember.computed(function() {
     return [
       { name: "Mr", id: "Mr" },
       { name: "Mrs", id: "Mrs" },
@@ -50,9 +42,17 @@ export default Ember.Controller.extend({
   organisationsUserParams() {
     var organisationsUserId = this.get('organisationsUserId');
     var user = this.get('model.user');
-    var position = this.get('organisationsUserId') ? this.get('model.organisationsUser.position') : this.get('position');
-    var params = { organisation_id: this.get('organisationId'), position: position,
-      user_attributes: { first_name: user.get('firstName'),last_name: user.get('lastName'), mobile: user.get('mobile'), email: user.get('email'), title: this.get('selectedTitle.name') }
+    var position = organisationsUserId ? this.get('model.organisationsUser.position') : this.get('position');
+    var params = {
+      organisation_id: this.get('organisationId'),
+      position: position,
+      user_attributes: {
+        first_name: user.get('firstName'),
+        last_name: user.get('lastName'),
+        mobile: user.get('mobile'),
+        email: user.get('email'),
+        title: this.get('selectedTitle.name')
+      }
     };
     if (organisationsUserId) {
       params.id = organisationsUserId;
@@ -64,9 +64,9 @@ export default Ember.Controller.extend({
   saveOrUpdateAccount(url, actionType) {
     var loadingView = getOwner(this).lookup('component:loading').append();
 
-    new AjaxPromise(url, actionType, this.get('session.authToken'), { organisations_user: this.organisationsUserParams()}).then(data =>{
-        this.get("store").pushPayload(data);
-        this.redirectToTransitionOrBrowse();
+    new AjaxPromise(url, actionType, this.get('session.authToken'), { organisations_user: this.organisationsUserParams()} ).then(data => {
+      this.get("store").pushPayload(data);
+      this.redirectToTransitionOrBrowse();
     }).catch(xhr => {
       this.get("messageBox").alert(xhr.responseJSON.errors);
     })
@@ -77,9 +77,10 @@ export default Ember.Controller.extend({
 
   actions: {
     saveAccount() {
-      var url, actionType;
-      if (this.get('organisationsUserId')) {
-        url = "/organisations_users/"+this.get('organisationsUserId');
+      let url, actionType;
+      let organisationUserId = this.get('organisationsUserId');
+      if (organisationUserId) {
+        url = "/organisations_users/"+organisationUserId;
         actionType = "PUT";
         this.saveOrUpdateAccount(url, actionType);
       } else {
