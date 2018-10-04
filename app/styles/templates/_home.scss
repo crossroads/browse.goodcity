@@ -1,5 +1,11 @@
 .home_page {
 
+  @media #{$medium-up} {
+    &.shift_left {
+      width: 90%;
+    }
+  }
+
   .scroller {
     height: 93vh;
     overflow-y: auto;
