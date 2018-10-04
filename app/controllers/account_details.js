@@ -98,9 +98,9 @@ export default Ember.Controller.extend({
   saveOrUpdateAccount(url, actionType) {
     var loadingView = getOwner(this).lookup('component:loading').append();
 
-    new AjaxPromise(url, actionType, this.get('session.authToken'), { organisations_user: this.organisationsUserParams()}).then(data =>{
-        this.get("store").pushPayload(data);
-        this.redirectToTransitionOrBrowse();
+    new AjaxPromise(url, actionType, this.get('session.authToken'), { organisations_user: this.organisationsUserParams()} ).then(data => {
+      this.get("store").pushPayload(data);
+      this.redirectToTransitionOrBrowse();
     }).catch(xhr => {
       this.get("messageBox").alert(xhr.responseJSON.errors);
     })
