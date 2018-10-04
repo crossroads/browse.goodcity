@@ -35,7 +35,7 @@
                   {{#if model.organisation}}
                     <div class="small-12 columns" id="organisation_id">
                       <label class="form-label">{{t "account.organisation"}}</label>
-                      {{input type="text" id = "organisation_details" classNames="number_input center_align_placeholder" required='true' value=model.organisation.nameEn}}
+                      {{input type="text" id = "organisation_details" classNames="number_input center_align_placeholder" required='true' value=model.organisation.nameEn disabled=true}}
                     </div>
                   {{else}}
                     <div class="small-12 columns" {{action "goToSearchOrg"}}>
@@ -72,7 +72,7 @@
                     {{input type="text" value=model.user.lastName id="lastName" classNames="number_input center_align_placeholder" required='true'}}
                   </div>
                   <div class="small-12 columns input-error warning_empty">
-                      {{fa-icon "warning"}}&nbsp;&nbsp;{{t "account.user_info"}}
+                    {{fa-icon "warning"}}&nbsp;&nbsp;{{t "account.user_info"}}
                   </div>
                 {{/form-control}}
               </div>
@@ -82,7 +82,7 @@
                   <div class="small-12 columns">
                     <label class="form-label">{{t "account.position"}}</label>
                     {{#if model.organisationsUser}}
-                        {{input type="text" value=model.organisationsUser.position id="position" classNames="number_input center_align_placeholder" required='true' autoFocus=true}}
+                      {{input type="text" value=model.organisationsUser.position id="position" classNames="number_input center_align_placeholder" required='true' autoFocus=true}}
                     {{else}}
                       {{input type="text" value=position classNames="number_input center_align_placeholder" required='true' autoFocus=true}}
                     {{/if}}

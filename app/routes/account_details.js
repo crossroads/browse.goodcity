@@ -8,7 +8,7 @@ export default AuthorizeRoute.extend({
     var organisation = organisationsUser && organisationsUser.get('organisation');
 
     return Ember.RSVP.hash({
-      organisation: params.orgId? this.store.peekRecord('gc_organisation', parseInt(params.orgId)) : organisation,
+      organisation: params.orgId ? this.store.peekRecord('gc_organisation', parseInt(params.orgId)) : organisation,
       organisationsUser: organisationsUser,
       user: user,
       order: this.store.peekAll("order").filterBy("state", "draft")
@@ -18,7 +18,6 @@ export default AuthorizeRoute.extend({
   setupController(controller, model) {
     this._super(controller, model);
     this.controllerFor('application').set('showSidebar', false);
-    controller.init();
   },
 
   deactivate() {
