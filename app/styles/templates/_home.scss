@@ -16,26 +16,11 @@
       padding-left: 10rem;
       padding-right: 10rem;
 
-      /**
-        * On desktop, show items side by side
-        * instead of on top of each otherds
-        */
-      .responsive_container {
-        display: flex;
-
-        > div {
-          position: relative;
-          float: left;
-          width: 100%;
-        }
-
-        &.home_section {
-          border-bottom: 1px solid #334f75;
-          >div {
+      .button_container {
+        border-bottom: 1px solid #334f75;
+        .home_section {
             border-bottom: none;
-          }
         }
-
       }
     }
 
@@ -44,11 +29,8 @@
       color: white;
       text-align: center;
       padding: 0.9rem;
-
-      &:not(:last-child) {
-        border-bottom: 1px solid #334f75;
-      }
-
+      border-bottom: 1px solid #334f75;
+ 
       // Content
 
       .section_title {

@@ -3,16 +3,16 @@
     <div class="scroller">
 
         <!-- Introduction -->
-        <div class="home_section small light">
+        <div class="row home_section small light">
             {{ t "home.introduction" }}
             {{#link-to "faq"}}
                 {{ t "home.faq_text" }}
             {{/link-to}}
         </div>
 
-        <div class="responsive_container home_section">
+        <div class="row button_container">
             <!-- Browse button -->
-            <div class="home_section">
+            <div class="columns home_section medium-6">
                 <div class="section_title"> {{ t "home.order_goods.title" }} </div>
                 <div class="section_subtitle small"> <i class="fa fa-check"></i> {{ t "home.order_goods.subtitle" }} </div>
                 {{#link-to "browse"}}
@@ -23,7 +23,7 @@
             </div>
 
             <!-- Visit button -->
-            <div class="home_section">
+            <div class="columns home_section medium-6">
                 <div class="section_title"> {{ t "home.visit.title" }} </div>
                 <div class="section_subtitle small"> 
                     <div><i class="fa fa-check"></i> {{ t "home.visit.subtitle" }} </div>
@@ -49,9 +49,9 @@
 
             <div class="section_title"> {{ t "home.user_guide_title" }} </div>
 
-            <div class="responsive_container">
+            <div class="row">
                 <!-- How to browse -->
-                <div>
+                <div class="columns medium-6">
                     <div class="section_text small">
                         <div> {{ t "home.order_goods.title" }} </div>
                         <div class="step"> 1) {{ t "home.order_goods.step_1.desc" }} </div>
@@ -85,7 +85,7 @@
                 </div>
 
                 <!-- How to visit -->
-                <div>
+                <div class="columns medium-6">
                     <div class="section_text small">
                         <div> {{ t "home.visit.title" }} </div>
                         <div class="step light"> {{ t "home.visit.guide_intro" }} </div>
