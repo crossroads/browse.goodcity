@@ -1,5 +1,4 @@
 .home_page {
-
   @media #{$medium-up} {
     &.shift_left {
       width: 90%;
@@ -10,7 +9,7 @@
     height: 93vh;
     overflow-y: auto;
     padding-bottom: 8rem;
-  
+
     @media #{$medium-up} {
       margin-left: -10rem;
       padding-left: 10rem;
@@ -19,7 +18,7 @@
       .button_container {
         border-bottom: 1px solid #334f75;
         .home_section {
-            border-bottom: none;
+          border-bottom: none;
         }
       }
     }
@@ -30,7 +29,7 @@
       text-align: center;
       padding: 0.9rem;
       border-bottom: 1px solid #334f75;
- 
+
       // Content
 
       .section_title {
