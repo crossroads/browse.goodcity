@@ -111,7 +111,7 @@ $sidebar-width: 7.8rem;
   }
 }
 .inner-wrap {
-  width: auto%;
+  width: auto;
   @media #{$small-only}{
     width: 100% !important;
   }
