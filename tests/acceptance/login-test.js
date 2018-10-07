@@ -36,18 +36,17 @@ module('Acceptance: Login', {
       }
     });
 
-    $.mockjax({url:"/api/v1/auth/send_pi*",responseText:{
-    "otp_auth_key" : "/JqONEgEjrZefDV3ZIQsNA=="
-  }});
+    $.mockjax({url:"/api/v1/auth/register_us*",responseText:{
+      "otp_auth_key" : "/JqONEgEjrZefDV3ZIQsNA=="
+    }});
 
-  $.mockjax({url:"/api/v1/auth/verif*",responseText:{
-    "jwt_token" : "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo3LCJpYXQiOjE1MjU5MjQ0NzYsImlzcyI6Ikdvb2RDaXR5SEsiLCJleHAiOjEzNTI1OTI0NDc2fQ.lO6AdJtFrhOI9VaGRR55Wq-YWmeNoLagZthsIW39b2k"
-  }});
+    $.mockjax({url:"/api/v1/auth/verif*",responseText:{
+      "jwt_token" : "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo3LCJpYXQiOjE1MjU5MjQ0NzYsImlzcyI6Ikdvb2RDaXR5SEsiLCJleHAiOjEzNTI1OTI0NDc2fQ.lO6AdJtFrhOI9VaGRR55Wq-YWmeNoLagZthsIW39b2k"
+    }});
 
-  $.mockjax({url:"/api/v1/order*", type: 'PUT', status: 200,responseText:{"order": order.toJSON({includeId: true}),"package": pkg.toJSON({includeId: true}), "orders_packages": [ordersPackage.toJSON({includeId: true})]}});
+    $.mockjax({url:"/api/v1/order*", type: 'PUT', status: 200,responseText:{"order": order.toJSON({includeId: true}),"package": pkg.toJSON({includeId: true}), "orders_packages": [ordersPackage.toJSON({includeId: true})]}});
 
     window.localStorage.removeItem('authToken');
-
   },
   afterEach: function() {
     $.mockjax.clear();
@@ -57,7 +56,7 @@ module('Acceptance: Login', {
 
 test("User able to enter mobile number and get the sms code", function(assert) {
   assert.expect(1);
-  $.mockjax({url:"/api/v1/auth/send_pi*",responseText:{
+  $.mockjax({url:"/api/v1/auth/register_us*",responseText:{
     "otp_auth_key" : "/JqONEgEjrZefDV3ZIQsNA=="
   }});
   visit('/login');
@@ -73,7 +72,7 @@ test("User able to enter mobile number and get the sms code", function(assert) {
 test("User is able to resend the sms code, submit pin and logout", function(assert) {
   assert.expect(4);
 
-  $.mockjax({url:"/api/v1/auth/send_pi*",responseText:{
+  $.mockjax({url:"/api/v1/auth/register_us*",responseText:{
     "otp_auth_key" : "/JqONEgEjrZefDV3ZIQsNA=="
   }});
 

@@ -26,7 +26,18 @@ export default Addressable.extend({
     return (this.get('firstName') + " " + this.get('lastName'));
   }),
 
-  isInfoComplete: Ember.computed('firstName', 'lastName', 'email', 'mobile', function(){
-    return this.get('firstName') && this.get('firstName').length && this.get('lastName') && this.get('lastName').length && this.get('email') && this.get('email').length && this.get('mobile') && this.get('mobile').length && this.get('title') && this.get('title').length;
-  })
+  isInfoComplete: Ember.computed('firstName', 'lastName', 'email', 'mobile', 'title', function(){
+    return this.hasValue('firstName', 'lastName', 'email', 'mobile', 'title');
+  }),
+
+  hasValue(...args) {
+    let hasValue = true;
+    for (let i = 0; i < args.length; i ++) {
+      if(!this.get(args[i]) || !this.get(args[i]).length) {
+        hasValue = false;
+        break;
+      }
+    }
+    return hasValue;
+  }
 });
