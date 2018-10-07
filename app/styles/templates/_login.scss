@@ -7,8 +7,8 @@
 .warning_empty{
   padding-left: 1rem !important;
   padding-top: .4rem !important;
-  padding-bottom: .1rem !important;
-  font-size: .7rem !important;
+  padding-bottom: .1rem;
+  font-size: .7rem;
 }
 
 .center_align_placeholder::placeholder {
@@ -24,9 +24,9 @@ input:-webkit-autofill {
 }
 
 .number_input{
-  background: #002352 !important;
+  background: #002352;
   color: white !important;
-  border: 1px solid !important;
+  border: 1px solid;
 }
 
 .login {

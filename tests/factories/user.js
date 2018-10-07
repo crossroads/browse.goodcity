@@ -10,13 +10,16 @@ FactoryGuy.define('user',{
     },
     collectionLastName: function(num) {
       return 'Stepp' + num;
+    },
+    collectionEmail: function(num) {
+      return "danie.stepp" + num + "@example.com";
     }
   },
   default: {
     id:        FactoryGuy.generate('id'),
     firstName: FactoryGuy.generate('collectionFirstName'),
     lastName:  FactoryGuy.generate('collectionLastName'),
-    email: "rock.programmer@hotmail.com",
+    email: FactoryGuy.generate('collectionEmail'),
     title: "Mr",
     userRoles: FactoryGuy.hasMany('user_role'),
     organisations: FactoryGuy.hasMany('organisation'),

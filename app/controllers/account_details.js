@@ -7,25 +7,38 @@ export default Ember.Controller.extend({
 
   authenticate:Ember.inject.controller(),
   messageBox: Ember.inject.service(),
+  i18n: Ember.inject.service(),
   organisationId: Ember.computed.alias('model.organisation.id'),
   organisationsUserId: Ember.computed.alias('model.organisationsUser.id'),
   position: "",
 
   userTitle: Ember.computed('model', function() {
     let userTitle = this.get('model.user.title');
-    return userTitle ? userTitle : "Mr";
+    let titles = this.get('titles');
+
+    if(userTitle) {
+      let filteredUserTitle = titles.filter((title) => userTitle === title.id);
+      return { name: filteredUserTitle[0].name.string, id: userTitle };
+    }
+    return { name: titles.get('firstObject.name').string, id: 'Mr' };
   }),
 
   selectedTitle: Ember.computed('userTitle', function (){
-    return{ name: this.get('userTitle'), id: this.get('userTitle')};
+    return { name: this.get('userTitle.name'), id: this.get('userTitle.id')};
   }),
 
   titles: Ember.computed(function() {
+    let translation = this.get("i18n");
+    let mr = translation.t("account.user_title.mr");
+    let mrs = translation.t("account.user_title.mrs");
+    let miss = translation.t("account.user_title.miss");
+    let ms = translation.t("account.user_title.ms");
+
     return [
-      { name: "Mr", id: "Mr" },
-      { name: "Mrs", id: "Mrs" },
-      { name: "Miss", id: "Miss" },
-      { name: "Ms", id: "Ms" }
+      { name: mr, id: "Mr" },
+      { name: mrs, id: "Mrs" },
+      { name: miss, id: "Miss" },
+      { name: ms, id: "Ms" }
     ];
   }),
 
@@ -43,6 +56,7 @@ export default Ember.Controller.extend({
     var organisationsUserId = this.get('organisationsUserId');
     var user = this.get('model.user');
     var position = organisationsUserId ? this.get('model.organisationsUser.position') : this.get('position');
+    var title = this.get('selectedTitle.id');
     var params = {
       organisation_id: this.get('organisationId'),
       position: position,
@@ -51,7 +65,7 @@ export default Ember.Controller.extend({
         last_name: user.get('lastName'),
         mobile: user.get('mobile'),
         email: user.get('email'),
-        title: this.get('selectedTitle.name')
+        title: title
       }
     };
     if (organisationsUserId) {
@@ -61,20 +75,6 @@ export default Ember.Controller.extend({
     return params;
   },
 
-  saveOrUpdateAccount(url, actionType) {
-    var loadingView = getOwner(this).lookup('component:loading').append();
-
-    new AjaxPromise(url, actionType, this.get('session.authToken'), { organisations_user: this.organisationsUserParams()} ).then(data => {
-      this.get("store").pushPayload(data);
-      this.redirectToTransitionOrBrowse();
-    }).catch(xhr => {
-      this.get("messageBox").alert(xhr.responseJSON.errors);
-    })
-    .finally(() =>
-      loadingView.destroy()
-    );
-  },
-
   actions: {
     saveAccount() {
       let url, actionType;
@@ -82,14 +82,26 @@ export default Ember.Controller.extend({
       if (organisationUserId) {
         url = "/organisations_users/"+organisationUserId;
         actionType = "PUT";
-        this.saveOrUpdateAccount(url, actionType);
       } else {
         url = "/organisations_users";
         actionType = "POST";
-        this.saveOrUpdateAccount(url, actionType);
       }
+      this.send('saveOrUpdateAccount', url, actionType);
     },
 
+    saveOrUpdateAccount(url, actionType) {
+      var loadingView = getOwner(this).lookup('component:loading').append();
+
+      new AjaxPromise(url, actionType, this.get('session.authToken'), { organisations_user: this.organisationsUserParams()} ).then(data => {
+        this.get("store").pushPayload(data);
+        this.redirectToTransitionOrBrowse();
+      }).catch(xhr => {
+        this.get("messageBox").alert(xhr.responseJSON.errors);
+      })
+      .finally(() =>
+        loadingView.destroy()
+      );
+    },
     goToSearchOrg(){
       this.transitionToRoute("search_organisation");
     }
