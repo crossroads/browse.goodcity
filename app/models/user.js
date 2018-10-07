@@ -22,7 +22,6 @@ export default Addressable.extend({
     return mobile ? ((mobile.indexOf("+852") >= 0) ? mobile.substring('4') : mobile) : '';
   }),
 
-Similar blocks of code found in 2 locations. Consider refactoring.   …
   fullName: Ember.computed('firstName', 'lastName', function(){
     return (this.get('firstName') + " " + this.get('lastName'));
   }),
