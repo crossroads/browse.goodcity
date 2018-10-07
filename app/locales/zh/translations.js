@@ -42,7 +42,8 @@ export default {
       "about": "關於我們",
       "terms": "條款",
       "privacy_policy": "私隱政策",
-      "version": "版本"
+      "version": "版本",
+      "login": "Login"
     }
   },
 
@@ -159,7 +160,13 @@ export default {
     "last_name_warning": "Add Last Name",
     "position_warning": "Add Position",
     "email_warning": "Add valid E-mail",
-    "user_info": "User Information is incomplete"
+    "user_info": "User Information is incomplete",
+    "user_title": {
+      "mr": "先生",
+      "mrs": "太太",
+      "miss": "小姐",
+      "ms": "女士"
+    }
   },
 
   "logout": {

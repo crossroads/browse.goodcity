@@ -43,7 +43,8 @@ export default {
       "about": "About",
       "terms": "Terms",
       "privacy_policy": "Privacy Policy",
-      "version": "Version"
+      "version": "Version",
+      "login": "Login"
     }
   },
 
@@ -163,7 +164,13 @@ export default {
     "last_name_warning": "Add Last Name",
     "position_warning": "Add Position",
     "email_warning": "Add valid E-mail",
-    "user_info": "User Information is incomplete"
+    "user_info": "User Information is incomplete",
+    "user_title": {
+      "mr": "Mr",
+      "mrs": "Mrs",
+      "miss": "Miss",
+      "ms": "Ms"
+    }
   },
 
   "logout": {
@@ -172,6 +179,7 @@ export default {
 
   "_resend": {
     "no_sms" : "Haven't received SMS code? Please wait a few minutes",
+    "please_wait" : "Please wait...",
     "resend" : "Resend Code",
     "back_to_phone_number": "Back to phone number input"
   },
