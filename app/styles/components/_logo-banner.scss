@@ -1,73 +1,73 @@
 .goodcity-logo-banner {
 
-    width: 100%;
-    display: none;
+  width: 100%;
+  display: none;
 
-   @media #{$medium-up} {
-        &.desktop {
-            display: block;
-            margin-top: 30px;
-            margin-bottom: 30px;
-            .content {
-                width: 50%;
-            }
-        }
+  @media #{$medium-up} {
+    &.desktop {
+      display: block;
+      margin-top: 30px;
+      margin-bottom: 30px;
+      .content {
+        max-width: 700px;
+      }
     }
+  }
 
-    @media #{$small-only} {
-        &.mobile {
-            // Stick to bottom
-            display: block;
-            position: fixed;
-            bottom: 0;
-            .content {
-                width: 100%;
-                box-shadow: 0px -10px 10px black;
-            }
-        }
+  @media #{$small-only} {
+    &.mobile {
+      // Stick to bottom
+      display: block;
+      position: fixed;
+      bottom: 0;
+      .content {
+        width: 100%;
+        box-shadow: 0px -10px 10px black;
+      }
     }
+  }
 
-    .content {
+  .content {
+    height: 100%;
+    background-color: black;
+    margin: 0 auto;
+
+    .contributors {
+      position: relative;
+      display: flex;
+      justify-content: space-around;
+
+      &.labels {
+        height: 1rem;
+        padding-top: 0.5rem;
+        font-size: 0.7rem;
+        color: #e0e5ebdb;
+      }
+
+      &.logos {
+        height: 5rem;
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .contributor {
         height: 100%;
-        background-color: black;
-        margin: 0 auto;
 
-        .contributors {
-            position: relative;
-            display: flex;
-            justify-content: space-around;
-
-            &.labels {
-                height: 1rem;
-                padding-top: 0.5rem;
-                font-size: 0.7rem;
-                color: #e0e5ebdb;
-            }
-
-            &.logos {
-                height: 5rem;
-                margin-top: 0.5rem;
-                margin-bottom: 0.5rem;
-            }
-
-            .contributor {
-                height: 100%;
-
-                .static-image {
-                    max-width: 100%;
-                    max-height: 100%;
-                    padding-top: 0.8rem;
-                    padding-bottom: 0.2rem;
-                }
-
-                &.crossroads {
-                    width: 30%;
-                }
-
-                &.jockey_club {
-                    width: 60%;
-                }
-            }
+        .static-image {
+          max-width: 100%;
+          max-height: 100%;
+          padding-top: 0.8rem;
+          padding-bottom: 0.2rem;
         }
+
+        &.crossroads {
+          width: 30%;
+        }
+
+        &.jockey_club {
+          width: 60%;
+        }
+      }
     }
+  }
 }

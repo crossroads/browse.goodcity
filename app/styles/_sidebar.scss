@@ -78,7 +78,7 @@ $sidebar-width: 7.8rem;
       bottom: 0;
       position: absolute;
       padding-bottom: 2rem;
-      font-size: 0.6rem;  
+      font-size: 0.6rem;
       text-align: center;
       width: 100%;;
 
@@ -86,7 +86,7 @@ $sidebar-width: 7.8rem;
         margin-bottom: 0.8rem;
         display: flex;
         justify-content: space-evenly;
-   
+
         a {
           text-decoration: underline;
           text-transform: capitalize;
@@ -111,7 +111,10 @@ $sidebar-width: 7.8rem;
   }
 }
 .inner-wrap {
-  width: 100%;
+  width: auto;
+  @media #{$small-only}{
+    width: 100% !important;
+  }
 }
 .off-canvas-wrap {
   @media only screen and (min-width: 71.063em) and (max-width: 120em){
