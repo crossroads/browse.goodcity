@@ -67,7 +67,7 @@ export default {
         "desc": "於網上瀏覽一系列可供選取物資"
       },
       "step_2": {
-        "desc": "新增物資到 \"cart\" 然後提交"
+        "desc": "新增物資到 \"購物車\" 然後提交"
       },
       "step_3": {
         "desc": "請填妥下列資料:",
@@ -94,7 +94,7 @@ export default {
       "guide_step_1": "用您的手提電話號碼登記(或登入)",
       "guide_step_2": "請詳細描述您所需要的物資類別",
       "guide_step_3": "選擇預約時間",
-      "guide_step_4": "我們同事將會致電確認你您的預約",
+      "guide_step_4": "我們同事將會致電確認您的預約",
       "onsite_guide_intro": "當您(或您的服務使用者)於預約時間到達本會:",
       "onsite_guide_step_1": "我們將會協助您於存貨中選擇適合您的物資",
       "onsite_guide_step_2": "如果您要求了租用貨車，我們會幫您安排車輛。",
