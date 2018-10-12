@@ -1,9 +1,11 @@
 import Ember from 'ember';
+import config from '../config/environment';
 import AjaxPromise from 'browse/utils/ajax-promise';
 const { getOwner } = Ember;
 
 export default Ember.Controller.extend({
 
+  appVersion: config.APP.VERSION,
   subscription: Ember.inject.controller(),
   messageBox: Ember.inject.service(),
   loggedInUser: false,
@@ -82,12 +84,14 @@ export default Ember.Controller.extend({
 
     showCartItem(itemId, type) {
       var item = this.get('store').peekRecord(type, itemId);
-      this.transitionToRoute(type, itemId,
-        { queryParams:
-          {
-            categoryId: item.get("allPackageCategories.firstObject.id")
-          }
-        });
+      if(item) {
+        this.transitionToRoute(type, itemId,
+          { queryParams:
+            {
+              categoryId: item.get("allPackageCategories.firstObject.id")
+            }
+          });
+      }
     },
 
     removeItem(itemId, type) {

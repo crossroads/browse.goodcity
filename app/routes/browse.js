@@ -6,7 +6,7 @@ export default PublicRoute.extend({
 
   beforeModel() {
     this._super(...arguments);
-    var previousRoutes = this.router.router.currentHandlerInfos;
+    var previousRoutes = this.router.router && this.router.router.currentHandlerInfos;
     var previousRoute = previousRoutes && previousRoutes.pop();
 
     if(previousRoute)

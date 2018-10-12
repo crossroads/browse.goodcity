@@ -9,7 +9,7 @@ namespace :deploy do
   desc "Locally build the ember site"
   task :build do
     run_locally do
-      env = {}
+      env = {"EMBER_CLI_CORDOVA" => "0"}
       env["staging"] = "true" if fetch(:stage) == :staging
       system(env, "ember build --environment=production")
     end

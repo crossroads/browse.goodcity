@@ -1,0 +1,119 @@
+<div class="home_page {{if showCartDetailSidebar "shift_left" "" }}">
+
+  <div class="scroller">
+
+    <!-- Introduction -->
+    <div class="row home_section small light">
+      {{ t "home.introduction" }}
+      {{#link-to "faq"}}
+        {{ t "home.faq_text" }}
+      {{/link-to}}
+    </div>
+
+    <div class="row button_container">
+      <!-- Browse button -->
+      <div class="columns home_section medium-6">
+        <div class="section_title"> {{ t "home.order_goods.title" }} </div>
+        <div class="section_subtitle small"> <i class="fa fa-check"></i> {{ t "home.order_goods.subtitle" }} </div>
+        {{#link-to "browse"}}
+          <div class="button small action">
+            {{ t "home.order_goods.action" }} <i class="fa fa-shopping-cart"></i>
+          </div>
+        {{/link-to}}
+      </div>
+
+      <!-- Visit button -->
+      <div class="columns home_section medium-6">
+        <div class="section_title"> {{ t "home.visit.title" }} </div>
+        <div class="section_subtitle small">
+          <div><i class="fa fa-check"></i> {{ t "home.visit.subtitle" }} </div>
+          <div class="small light">({{ t "home.coming_soon" }})</div>
+        </div>
+        <div class="button small action disabled">
+          {{ t "home.visit.action" }} <i class="fa fa-calendar"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- How to -->
+    <div class="home_section" id="how_to">
+
+      {{ logo-banner device="desktop" }}
+
+      <!-- Scroll button disabled until it's spec'd out -->
+      <!--
+          {{#scroll-to href='#how_to'}}
+              <div class="button scroll-down"><i class="fa fa-lg fa-angle-double-down"></i></div>
+          {{/scroll-to}}
+      -->
+
+      <div class="section_title"> {{ t "home.user_guide_title" }} </div>
+
+      <div class="row">
+        <!-- How to browse -->
+        <div class="columns medium-6">
+          <div class="section_text small">
+            <div> {{ t "home.order_goods.title" }} </div>
+            <div class="step"> 1) {{ t "home.order_goods.step_1.desc" }} </div>
+            <div class="step"> 2) {{ t "home.order_goods.step_2.desc" }} </div>
+            <div class="step">
+              <div> 3) {{ t "home.order_goods.step_3.desc" }} </div>
+              {{#each (range 1 4) as |num|}}
+                <div class="bullet"> - {{ t (concat "home.order_goods.step_3.bullet_" num )}} </div>
+              {{/each}}
+            </div>
+            <div class="step">
+              <div> 4) {{ t "home.order_goods.step_4.desc" }} </div>
+              {{#each (range 1 3) as |num|}}
+                <div class="bullet"> - {{ t (concat "home.order_goods.step_4.bullet_" num )}} </div>
+              {{/each}}
+            </div>
+          </div>
+          <div class="section_text small">
+            <div>{{ t "home.transport_options" }} </div>
+            <div class="step transport_option">a) {{ t "home.collection_transport_description" }} </div>
+            <div class="step transport_option">b) {{ t "home.van_transport_description" }} <br> {{ t
+              "home.van_transport_note" }} </div>
+          </div>
+          <div>
+            <div class="small">{{ t "home.tap_button" }}</div>
+            {{#link-to "browse"}}
+              <div class="button small action">
+                {{ t "home.order_goods.action" }} <i class="fa fa-shopping-cart"></i>
+              </div>
+            {{/link-to}}
+          </div>
+        </div>
+
+        <!-- How to visit -->
+        <div class="columns medium-6">
+          <div class="section_text small">
+            <div> {{ t "home.visit.title" }} </div>
+            <div class="step light"> {{ t "home.visit.guide_intro" }} </div>
+            <div class="step light">
+              {{#each (range 1 4) as |num|}}
+                <div> {{ num }}) {{ t (concat "home.visit.guide_step_" num )}} </div>
+              {{/each}}
+            </div>
+            <div class="step light"> {{ t "home.visit.onsite_guide_intro" }} </div>
+            <div class="step light">
+              {{#each (range 1 3) as |num|}}
+                <div> {{ num }}) {{ t (concat "home.visit.onsite_guide_step_" num )}} </div>
+              {{/each}}
+            </div>
+          </div>
+          <div>
+            <div class="small">{{ t "home.tap_button" }}</div>
+            <div class="small light"> ({{ t "home.coming_soon" }}) </div>
+            <div class="button small disabled action">
+              {{ t "home.visit.action" }} <i class="fa fa-calendar"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {{ logo-banner device="mobile" }}
+
+</div>

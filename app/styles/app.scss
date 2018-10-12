@@ -18,10 +18,12 @@
 @import "my_orders";
 @import "foundation_large";
 
+@import "templates/home";
 @import "templates/loading";
 @import "templates/application";
 @import "templates/browse";
 @import "templates/package_category";
 @import "templates/item";
 @import "templates/login";
+@import "components/logo-banner";
 @import "ember_offline";

@@ -19,23 +19,30 @@
 <aside class="left-off-canvas-menu menu-list">
   <ul class="off-canvas-list menu">
     <li>
-      {{#link-to "browse" class="menu-1"}}
+      {{#link-to "home" class="menu-1"}}
+        <i class="fa fa-home"></i>
+        <div>{{t "application.sidebar.home"}}</div>
+      {{/link-to}}
+    </li>
+
+     <li>
+      {{#link-to "browse" class="menu-2"}}
         <i class="fa fa-folder-open"></i>
         <div>{{t "application.sidebar.browse"}}</div>
       {{/link-to}}
     </li>
 
     <li>
-      {{#link-to "my_orders" class="menu-2"}}
+      {{#link-to "my_orders" class="menu-3"}}
         <i class="fa fa-shopping-cart"></i>
         <div>{{t "application.sidebar.myorders"}}</div>
       {{/link-to}}
     </li>
 
     <li>
-      {{#link-to "browse" class="menu-3"}}
+      {{#link-to "about" class="menu-4"}}
         <i class="fa fa-question"></i>
-        <div>{{t "application.sidebar.faq"}}</div>
+        <div>{{t "application.sidebar.about"}}</div>
       {{/link-to}}
     </li>
     {{#if isUserLoggedIn}}
@@ -47,15 +54,23 @@
       </li>
     {{/if}}
 
-    <li class="language">
-      {{language-switcher}}
-    </li>
 
-    <li class="cr-logo">
-      <a href="http://www.crossroads.org.hk" class="menu-4">
-        <img src="assets/images/Global-Distribution_logo.gif" >
-        <label>{{t "by"}} <span>{{t "company.name"}}</span></label>
-      </a>
+    <li class="links">
+      <div class="line">{{language-switcher}}</div>
+      <div class="line">
+        <div>
+          {{#link-to "terms" }}
+            <span>{{t "application.sidebar.terms"}} </span>
+          {{/link-to}}
+        </div>
+        <div>|</div>
+        <div>
+          {{#link-to "privacy" }}
+            <span>{{t "application.sidebar.privacy_policy"}}</span>
+          {{/link-to}}
+        </div>
+      </div>
+      <div class="line">{{t "application.sidebar.version" }} {{ appVersion }}</div>
     </li>
   </ul>
 </aside>

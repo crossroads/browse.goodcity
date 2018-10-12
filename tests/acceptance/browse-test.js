@@ -41,15 +41,15 @@ module('Acceptance | Browse Page', {
 });
 
 test("should redirect browse page", function(assert) {
-  visit("/").then(function() {
+  visit("/browse").then(function() {
     assert.equal(currentURL(), '/browse');
-    assert.equal(Ember.$('h1.title').text(), "Browse Goods");
+    assert.equal(Ember.$('h1.title').text(), "GoodCity for Charity");
     assert.equal(Ember.$('.main-section li').length, 0);
   });
 });
 
 test("should list main-category with subcategories if has items", function(assert) {
-  visit("/").then(function() {
+  visit("/browse").then(function() {
     // check first group of main-category
     assert.equal(Ember.$('.main-section li:first .main_category').text().indexOf(category_title) <= 0, true);
     assert.equal(Ember.$('.main-section li:first .subcategories').text().indexOf(subcategory_title) >= 0, false);
@@ -57,7 +57,7 @@ test("should list main-category with subcategories if has items", function(asser
 });
 
 test("should list main-category without subcategories if has no items", function(assert) {
-  visit("/");
+  visit("/browse");
 
   andThen(function() {
     // check last group of main-category with no-items
@@ -68,9 +68,9 @@ test("should list main-category without subcategories if has no items", function
 
 test("clear orders and orders_packages from ember data on logout", function(assert){
   var store = FactoryGuy.store;
-  visit("/").then(function() {
+  visit("/browse").then(function() {
     assert.equal(currentURL(), '/browse');
-    click(".left-off-canvas-menu li:nth-child(4) a");
+    click(".left-off-canvas-menu li:nth-child(5) a");
     andThen(function(){
       assert.equal(currentURL(), "/browse");
       //assert.equal(store.peekAll("order").get("length"), 0); //This has been commented due to problem in ember-data 2.13 unloadAll method. https://github.com/emberjs/data/issues/4795

@@ -25,17 +25,81 @@ export default {
   "items_not_available": "您的購物車内有已不存在的物資，請刪除該物資以繼續。",
   "unauthorized": "您沒有此權限。",
 
+  "banner": {
+    "presented_by": "建立機構",
+    "funded_by": "捐助機構",
+  },
+
   "application": {
     "loading": "正在加載...",
     "sidebar": {
+      "home": "主頁",
       "browse": "瀏覽",
       "myorders": "我的訂單",
-      "faq": "常問問題"
+      "faq": "常問問題",
+      "about": "關於我們",
+      "terms": "條款",
+      "privacy_policy": "私隱政策",
+      "version": "版本"
     }
   },
 
   "browse": {
-    "title": "瀏覽物資"
+    "title": "好人好市"
+  },
+
+  "home": {
+    "introduction": "為香港的非牟利機構及社會福利組織或其服務對使用者提供優質的捐贈物品",
+    "faq_text": "受惠資格及常見問題",
+    "user_guide_title": "使用指南",
+    "tap_button": "立即開始",
+    "coming_soon": "即將面世",
+    "transport_options": "運輸選項",
+    "collection_transport_description": "自行安排車輛於指定時間到國際十字路會提取物資",
+    "van_transport_description": "國際十字路會安排租用貨車於指定時間將物資運送到受惠人或受惠機構地址",
+    "van_transport_note": "請注意，貨車租用費需由受惠人或受惠機構承擔。除特殊情況外，我們一般不能提供免費運送物資服務。",
+
+    "order_goods": {
+      "title": "隨時瀏覽選取優質物資",
+      "subtitle": "隨時瀏覽，安排運送。",
+      "action": "瀏覽物資",
+      "step_1": {
+        "desc": "於網上瀏覽一系列可供選取物資"
+      },
+      "step_2": {
+        "desc": "新增物資到 \"購物車\" 然後提交"
+      },
+      "step_3": {
+        "desc": "請填妥下列資料:",
+        "bullet_1": "聯絡資料(新用戶適用)",
+        "bullet_2": "申請物資原因",
+        "bullet_3": "受惠人資料(如代服務使用者申請)",
+        "bullet_4": "運輸選項(親臨本會提取物資/安排運送服務)"
+      },
+      "step_4": {
+        "desc": "我們團隊將會",
+        "bullet_1": "核對您的申請資格(新用戶適用)",
+        "bullet_2": "致電確認您的訂單及核對其他資料",
+        "bullet_3": "準備好您的已選物資，等待您來提取或安排運送。"
+      }
+    },
+
+    "visit": {
+      "title": "親臨國際十字路會",
+      "subtitle": "親臨本會挑選物資",
+      "action": "預約時間",
+      "guide_intro": `
+        如果您代表任何在香港特別行政區註冊的非牟利機構或是香港政府屬下社會福利機構，您可以申請預約時間親臨本會挑選物資。以下是申請程序:
+      `,
+      "guide_step_1": "用您的手提電話號碼登記(或登入)",
+      "guide_step_2": "請詳細描述您所需要的物資類別",
+      "guide_step_3": "選擇預約時間",
+      "guide_step_4": "我們同事將會致電確認您的預約",
+      "onsite_guide_intro": "當您(或您的服務使用者)於預約時間到達本會:",
+      "onsite_guide_step_1": "我們將會協助您於存貨中選擇適合您的物資",
+      "onsite_guide_step_2": "如果您要求了租用貨車，我們會幫您安排車輛。",
+      "onsite_guide_step_3": "載貨然後將物資運送到收貨地點",
+    }
   },
 
   "category": {
