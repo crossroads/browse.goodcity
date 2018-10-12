@@ -29,9 +29,13 @@
           <div><i class="fa fa-check"></i> {{ t "home.visit.subtitle" }} </div>
           <div class="small light">({{ t "home.coming_soon" }})</div>
         </div>
-        <div class="button small action disabled">
-          {{ t "home.visit.action" }} <i class="fa fa-calendar"></i>
-        </div>
+        {{#unless isUserLoggedIn}}
+          {{#link-to "login" (query-params bookAppointment=true)}}
+            <div class="button small action disabled">
+              {{ t "home.visit.action" }} <i class="fa fa-calendar"></i>
+            </div>
+          {{/link-to}}
+        {{/unless }}
       </div>
     </div>
 
