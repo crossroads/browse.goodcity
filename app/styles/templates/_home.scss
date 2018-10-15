@@ -11,10 +11,7 @@
     padding-bottom: 8rem;
 
     @media #{$medium-up} {
-      margin-left: -10rem;
-      padding-left: 10rem;
-      padding-right: 10rem;
-
+      height: 100%;
       .button_container {
         border-bottom: 1px solid #334f75;
         .home_section {
@@ -50,10 +47,6 @@
         margin-top: 1rem;
         max-width: 30rem;
 
-        @media #{$medium-up} {
-          padding-left: 4rem;
-        }
-
         .step {
           @extend .small;
           @extend .light;
@@ -76,7 +69,7 @@
 
       .button {
         &.action {
-          white-space: nowrap;
+          white-space: normal;
           padding-left: 2rem;
           padding-right: 2rem;
           text-transform: uppercase;
