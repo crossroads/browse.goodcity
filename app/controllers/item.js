@@ -37,6 +37,7 @@ export default Ember.Controller.extend({
   }),
 
   hasDraftOrder: Ember.computed.alias("session.draftOrder"),
+  isCharityUser: Ember.computed.alias("session.isCharityUser"),
 
   presentInCart: Ember.computed('item', 'cart.counter', function(){
     return this.get('cart').hasCartItem(this.get('item'));
@@ -81,6 +82,22 @@ export default Ember.Controller.extend({
   actions: {
     showPreview(image) {
       this.set('previewUrl', image.get("previewImageUrl"));
+    },
+
+    gotoStockItem(inventoryNumber) {
+      let url = window.location.hostname.split('.')[0];
+      let finalUrl;
+      switch(url) {
+          case "browse-staging":
+              finalUrl = "https://stock-staging.goodcity.hk/items/"+inventoryNumber;
+              break;
+          case "browse":
+              finalUrl = "https://stock.goodcity.hk/items/"+inventoryNumber;
+              break;
+          case "localhost":
+              finalUrl = "http://localhost:4203/items/"+inventoryNumber;
+      }
+      window.open(finalUrl, '_blank');
     },
 
     setDirectionAndRender(direction) {

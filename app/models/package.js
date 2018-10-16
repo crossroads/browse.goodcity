@@ -13,6 +13,7 @@ export default Model.extend(cloudinaryImage, {
   width:           attr('number'),
   height:          attr('number'),
   notes:           attr('string'),
+  inventoryNumber: attr('string'),
 
   createdAt:       attr('date'),
   updatedAt:       attr('date'),

@@ -73,6 +73,11 @@
           {{#each allPackages key="@index" as |package|}}
             <div class="item_name">{{package.notes}}</div>
             <p>
+              {{#if isCharityUser}}
+                <div class="item_details" {{ action 'gotoStockItem' package.id }}>
+                  {{t "itemdetail.inventory"}}: <span class="inventory_redirect">{{package.inventoryNumber}}</span>
+                </div>
+              {{/if}}
               <div class="item_details">
                 {{t "itemdetail.quantity"}}: {{package.quantity}}
               </div>

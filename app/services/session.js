@@ -13,6 +13,10 @@ export default Ember.Service.extend({
     return store.peekAll('user').get('firstObject') || null;
   }).volatile(),
 
+  isCharityUser: Ember.computed(function() {
+    return this.get('store').peekAll('role').getEach('name').includes('Charity');
+  }),
+
   clear() {
     this.set("authToken", null);
     this.set("otpAuthKey", null);
