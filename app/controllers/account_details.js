@@ -80,7 +80,7 @@ export default Ember.Controller.extend({
       let url, actionType;
       let organisationUserId = this.get('organisationsUserId');
       if (organisationUserId) {
-        url = "/organisations_users/"+organisationUserId;
+        url = "/organisations_users/" + organisationUserId;
         actionType = "PUT";
       } else {
         url = "/organisations_users";
