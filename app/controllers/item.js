@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import config from "../config/environment";
 
 export default Ember.Controller.extend({
 
@@ -37,7 +38,7 @@ export default Ember.Controller.extend({
   }),
 
   hasDraftOrder: Ember.computed.alias("session.draftOrder"),
-  isCharityUser: Ember.computed.alias("session.isCharityUser"),
+  isOrderFulfilmentUser: Ember.computed.alias("session.currentUser.isOrderFulfilmentUser"),
 
   presentInCart: Ember.computed('item', 'cart.counter', function(){
     return this.get('cart').hasCartItem(this.get('item'));
@@ -84,19 +85,8 @@ export default Ember.Controller.extend({
       this.set('previewUrl', image.get("previewImageUrl"));
     },
 
-    gotoStockItem(inventoryNumber) {
-      let url = window.location.hostname.split('.')[0];
-      let finalUrl;
-      switch(url) {
-          case "browse-staging":
-              finalUrl = "https://stock-staging.goodcity.hk/items/"+inventoryNumber;
-              break;
-          case "browse":
-              finalUrl = "https://stock.goodcity.hk/items/"+inventoryNumber;
-              break;
-          case "localhost":
-              finalUrl = "http://localhost:4203/items/"+inventoryNumber;
-      }
+    goToStockItem(inventoryNumber) {
+      let finalUrl = config.APP.BASE_HOST_URL + "/items/" + inventoryNumber;
       window.open(finalUrl, '_blank');
     },
 

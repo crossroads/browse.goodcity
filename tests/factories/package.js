@@ -13,6 +13,7 @@ FactoryGuy.define('package', {
     length:   10,
     width:    10,
     height:   10,
+    inventoryNumber: 'E00001',
     item:     FactoryGuy.belongsTo('item'),
     packageType:  FactoryGuy.belongsTo('package_type'),
     notes:    "example",

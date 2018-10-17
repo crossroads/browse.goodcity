@@ -124,7 +124,7 @@ export default {
     "size": "尺寸",
     "categories": "分類",
     "image_unavailable": "沒有照片提供",
-    "inventory": "Inventory Number"
+    "inventory_number": "Inventory Number"
   },
 
   "page": {

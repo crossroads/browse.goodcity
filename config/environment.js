@@ -81,6 +81,7 @@ module.exports = function(environment) {
     // RESTAdapter Settings
     ENV.APP.SOCKETIO_WEBSERVICE_URL = 'http://localhost:1337/goodcity';
     ENV.APP.API_HOST_URL = 'http://localhost:3000';
+    ENV.APP.BASE_HOST_URL = 'http://localhost:4203';
 
     ENV.contentSecurityPolicy["connect-src"] = [
       'http://localhost:4202',
@@ -88,7 +89,7 @@ module.exports = function(environment) {
       'http://localhost:1337',
       'https://api.cloudinary.com',
       'ws://localhost:1337',
-      'wss://localhost:1337',
+      'wss://localhost:1337'
     ].join(' ');
   }
 
@@ -115,6 +116,7 @@ module.exports = function(environment) {
 
     ENV.APP.API_HOST_URL = 'https://api.goodcity.hk';
     ENV.APP.SOCKETIO_WEBSERVICE_URL = 'https://socket.goodcity.hk:81/goodcity';
+    ENV.APP.BASE_HOST_URL = 'https://stock.goodcity.hk';
 
     ENV.contentSecurityPolicy["connect-src"] = [
       'https://app.goodcity.hk',
@@ -129,6 +131,7 @@ module.exports = function(environment) {
       ENV.staging = true;
       ENV.APP.API_HOST_URL = 'https://api-staging.goodcity.hk';
       ENV.APP.SOCKETIO_WEBSERVICE_URL = 'https://socket-staging.goodcity.hk:81/goodcity';
+      ENV.APP.BASE_HOST_URL = 'https://stock-staging.goodcity.hk';
 
       ENV.contentSecurityPolicy["connect-src"] = [
         'https://app-staging.goodcity.hk',
