@@ -6,6 +6,11 @@ export default Ember.Route.extend(preloadDataMixin, {
 
   cart: Ember.inject.service(),
   messageBox: Ember.inject.service(),
+  isBookAppointment: false,
+
+  beforeModel(params){
+    this.set('isBookAppointment', params.queryParams.bookAppointment);
+  },
 
   model() {
     return this.preloadData();
@@ -52,10 +57,15 @@ export default Ember.Route.extend(preloadDataMixin, {
   redirectToTransitionOrDetails() {
     if(this.isDetailsComplete()){
       var attemptedTransition = this.controllerFor('login').get('attemptedTransition');
+      var isBookAppointment = this.get('isBookAppointment');
       if (attemptedTransition) {
         attemptedTransition.retry();
         this.controllerFor('login').set('attemptedTransition', null);
-      } else {
+      } else if( isBookAppointment === "true"){
+        console.log('abc');
+        this.transitionTo("request_purpose");
+      }
+      else {
         this.transitionTo("browse");
       }
     } else {
