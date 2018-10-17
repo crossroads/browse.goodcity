@@ -34,6 +34,7 @@ Router.map(function() {
   this.route('faq');
   this.route('terms');
   this.route('about');
+  this.route('request_purpose');
 });
 
 export default Router;
