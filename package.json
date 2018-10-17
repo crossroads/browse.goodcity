@@ -8,9 +8,9 @@
     "test": "tests"
   },
   "scripts": {
-    "start": "ember server --port 4202 --live-reload-port 35731",
-    "build": "ember build",
-    "test": "ember test --server"
+    "start": "EMBER_CLI_CORDOVA=0 ember server --port 4202 --live-reload-port 35731",
+    "build": "EMBER_CLI_CORDOVA=0 ember build",
+    "test": "EMBER_CLI_CORDOVA=0 ember test --server"
   },
   "repository": "",
   "engines": {

@@ -16,6 +16,7 @@ export default Ember.Controller.extend({
   smallScreenPreviewUrl: Ember.computed.alias('item.displayImage.smallScreenPreviewImageUrl'),
   itemNotAvailableShown: false,
   hasCartItems: Ember.computed.alias('application.hasCartItems'),
+  isMobileApp: config.cordova.enabled,
 
   direction: null,
 
@@ -89,8 +90,15 @@ export default Ember.Controller.extend({
     },
 
     goToStockItem(inventoryNumber) {
-      let finalUrl = config.APP.STOCK_APP_HOST_URL + "/items/" + inventoryNumber;
-      window.open(finalUrl, '_blank');
+      let finalUrl;
+
+      if(this.get('isMobileApp') && cordova.platformId === "android") { // jshint ignore:line
+        finalUrl = "android-app://hk.goodcity.stockstaging/https/" + config.APP.STOCK_ANDROID_APP_HOST_URL + "/items/" + inventoryNumber;
+        window.open(finalUrl, '_system');
+      } else {
+        finalUrl = config.APP.STOCK_APP_HOST_URL + "/items/" + inventoryNumber;
+        window.open(finalUrl, '_blank');
+      }
     },
 
     setDirectionAndRender(direction) {
