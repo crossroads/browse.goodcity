@@ -1,0 +1,46 @@
+.client-information{
+  .type-of-id-text{
+    margin-bottom: .2rem;
+    margin-top: 1rem;
+  }
+  .id-confidential-text{
+    font-size: 0.7rem;
+    // margin-bottom: 0.5rem;
+  }
+  .id-type-radio-input{
+    .custom_radio_buttons {
+      border: 1px solid;
+      padding: .4rem;
+      width: 96.5%!important;
+      margin-top: 1rem;
+      height: 2.7rem;
+      // border: 1px solid white !important;
+      input[type=radio] {
+        margin: 0 0 0 0px;
+      }
+      label {
+        @media #{$small-only} {
+          font-size: 0.8rem;
+          margin-top: 0.4rem;
+        }
+      }
+    }
+  }
+  .client-name-labels{
+    label{
+      font-size: .7rem;
+    }
+  }
+  .client-name-inputs{
+    padding-right: 0.8rem;
+  }
+}
+div .hk-id{
+  padding-top: 5rem;
+  label{
+    font-size: 1.8rem;
+  }
+  .hk-id-input{
+    width: 25%
+  }
+}

@@ -1,0 +1,75 @@
+<div class="small-12 medium-9 large-9 columns type-of-id-text">
+  Input the last 4 digits of the client's HKID
+</div>
+<div class="small-12 medium-9 large-9 columns id-confidential-text">
+  You do not need to include number in brackets
+</div>
+<div class="row hk-id">
+  <div class="small-3 medium-9 large-9 columns">
+    <label> P12 </label>
+  </div>
+  <div class="columns small-3">
+    {{#form-control}}
+      {{input type='number' value=peopleCount required='true'}}
+    {{/form-control}}
+  </div>
+  <div class="columns small-6">
+    (*)
+  </div>
+</div>
+<div class='small-12 columns input-error type-of-id-text'>Please input number only</div>
+
+<div class='row client-name-labels'>
+  <div class="columns small-2">
+    <label>
+      Title
+    </label>
+  </div>
+  <div class="columns small-5">
+    <label>
+      Client's First Name
+    </label>
+  </div>
+  <div class="columns small-5">
+    <label>
+      Client's First Name
+    </label>
+  </div>
+</div>
+<div class="row client-name-inputs">
+  <div class="columns small-2">
+    {{#form-control}}
+      {{input type='number' value=peopleCount required='true'}}
+    {{/form-control}}
+  </div>
+  <div class="columns small-5">
+    {{#form-control}}
+      {{input type='number' value=peopleCount required='true'}}
+    {{/form-control}}
+  </div>
+  <div class="columns small-5">
+    {{#form-control}}
+      {{input type='number' value=peopleCount required='true'}}
+    {{/form-control}}
+  </div>
+</div>
+
+<div class="row client-name-inputs">
+  <div class="small-12 medium-9 large-9 columns type-of-id-text">
+    Clients contact phone number
+  </div>
+  <div class="small-12 medium-9 large-9 columns id-confidential-text">
+    We will use this number to confirm schedule and details.
+  </div>
+  <div class="columns small-12">
+    {{#form-control}}
+      {{input type='number' value=peopleCount required='true'}}
+    {{/form-control}}
+  </div>
+  <div class="row">
+    <div class="small-12 columns">
+      <a {{action 'submit' target=form}} class="button expand">Continue</a>
+    </div>
+  </div>
+</div>
+

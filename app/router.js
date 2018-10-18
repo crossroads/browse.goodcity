@@ -35,6 +35,7 @@ Router.map(function() {
   this.route('terms');
   this.route('about');
   this.route('request_purpose');
+  this.route('client_information')
 });
 
 export default Router;

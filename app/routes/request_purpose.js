@@ -2,5 +2,12 @@ import AuthorizeRoute from './authorize';
 import Ember from 'ember';
 
 export default AuthorizeRoute.extend({
-  isOwnSelected: Ember.computed.equal("selectedId", "own"),
+  setUpFormData(model, controller) {
+    controller.set('selectedId', "benificiery");
+  },
+
+  setupController(controller, model) {
+    this._super(...arguments);
+    this.setUpFormData(model, controller);
+  }
 });
