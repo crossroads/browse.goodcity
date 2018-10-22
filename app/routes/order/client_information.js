@@ -1,7 +1,12 @@
-import AuthorizeRoute from './authorize';
+import AuthorizeRoute from './../authorize';
 import Ember from 'ember';
 
 export default AuthorizeRoute.extend({
+  model() {
+    var orderId = this.paramsFor('order').order_id;
+    var order = this.store.peekRecord('order', orderId);
+  },
+
   setUpFormData(model, controller) {
     controller.set('selectedId', "hkId");
   },

@@ -39,13 +39,14 @@ export default Ember.Controller.extend({
       new AjaxPromise("/orders", "POST", this.get('session.authToken'), { order: orderParams })
         .then(data => {
           this.get("store").pushPayload(data);
+          var orderId = data.order.id;
           var purpose_ids = data.orders_purposes.filterBy("order_id", data.order.id).getEach("purpose_id");
           isOrganisationPuropose = purpose_ids.get('length') === 1 && purpose_ids.indexOf(1) >= 0;
           loadingView.destroy();
           if(isOrganisationPuropose){
             this.transitionToRoute('goods_details');
           } else {
-            this.transitionToRoute('client_information');
+            this.transitionToRoute("order.client_information", orderId);
           }
         });
     }
