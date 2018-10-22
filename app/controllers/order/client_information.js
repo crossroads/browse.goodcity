@@ -3,6 +3,7 @@ import AjaxPromise from 'browse/utils/ajax-promise';
 const { getOwner } = Ember;
 
 export default Ember.Controller.extend({
+  order: Ember.computed.alias("model.order"),
   isHkIdSelected: Ember.computed.equal("selectedId", "hkId"),
 
   titles: Ember.computed(function() {
