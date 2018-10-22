@@ -79,3 +79,26 @@ div .hk-id{
   margin-bottom: 1rem;
 }
 
+.client_title, .client_last_name, .client_first_name{
+  select, input{
+    width: 3rem;
+    height: 2.7rem;
+    padding: 0 0.5rem;
+    width: 97%;
+    background: #002352;
+    border: 1px solid $tabbar-menu-icon-color;
+    color: white;
+    height: 2.7rem !important;
+    margin-bottom: 0;
+  }
+}
+
+.input-error {
+  background: #ED4C4E ;
+  color: white;
+  padding: 0.2rem;
+  display: none;
+  padding-bottom: 0.25rem !important;
+  width: 98.7%;
+}
+

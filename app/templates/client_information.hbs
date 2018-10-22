@@ -28,11 +28,11 @@
       All client data is kept strictly confidential.
     </div>
     <div class="row time_inputs id-type-radio-input" >
-      <div class=" custom_radio_buttons small-12 columns purpose" for="For organisation's own purpose">
+      <div class=" custom_radio_buttons small-12 columns purpose" for="For HKID">
           {{radio-button
           name="selectReason"
-          id="own"
-          value="own"
+          id="hkId"
+          value="hkId"
           selection=selectedId
           required='true'}}
         <label class="radio-button-text align-text">
@@ -40,11 +40,11 @@
         </label>
       </div>
 
-      <div class=" custom_radio_buttons small-12 columns purpose end" for="For benificiery">
+      <div class=" custom_radio_buttons small-12 columns purpose end" for="For asyLum">
           {{radio-button
           name="selectReason"
-          id="benificiery"
-          value="benificiery"
+          id="asyLum"
+          value="asyLum"
           selection=selectedId
           required='true'}}
         <label class="radio-button-text align-text">
@@ -52,7 +52,66 @@
         </label>
       </div>
     </div>
-    {{partial 'request/hk_identity_type_details'}}
+    <br>
+    {{#if isHkIdSelected}}
+      {{partial 'request/hk_identity_type_details'}}
+    {{else}}
+      {{partial 'request/rbcl_identity_type_details'}}
+    {{/if}}
+
+    <div class="row">
+      {{#form-control}}
+        <div class="small-2 columns client_title">
+          <label class="form-label">{{t "account.title"}}</label>
+          {{select-list
+            content=titles
+            on-change=(action (mut selectedTitle))
+            selectedValue=selectedTitle
+            value= selectedTitle
+            selectArrow=true
+            classNames='condition'
+            idNames='title' }}
+        </div>
+        <div class="small-5 columns client_first_name">
+          <label class="form-label">{{t "account.first"}}</label>
+          {{input type="text" value=firstName id="firstName" classNames="number_input center_align_placeholder" required='true'}}
+        </div>
+        <div class="small-5 columns client_last_name">
+          <label class="form-label">{{t "account.last"}}</label>
+          {{input type="text" value=lastName id="lastName" classNames="number_input center_align_placeholder" required='true'}}
+        </div>
+        <div class="small-12 columns input-error warning_empty">
+          {{fa-icon "warning"}}&nbsp;&nbsp;{{t "account.user_info"}}
+        </div>
+      {{/form-control}}
+    </div>
+
+    <div class="row client-name-inputs">
+      <div class="small-12 medium-9 large-9 columns type-of-id-text">
+        Clients contact phone number
+      </div>
+      <div class="small-12 medium-9 large-9 columns id-confidential-text">
+        We will use this number to confirm schedule and details.
+      </div>
+      <div class="row">
+        {{#form-control}}
+          <div class="row client-name-inputs">
+            <div class="small-3 large-1 columns">
+              <span class="prefix">+852</span>
+            </div>
+            <div class="small-9 large-11 columns">
+              {{numeric-input value=mobilePhone name="mobilePhone" id="mobile" maxlength="8" required=true pattern=".{8,}" autoFocus=true}}
+            </div>
+          </div>
+        {{/form-control}}
+      </div>
+
+      <div class="row">
+        <div class="small-12 columns">
+          <a {{action 'submit' target=form}} class="button expand">Continue</a>
+        </div>
+      </div>
+    </div>
   {{/validatable-form}}
 </section>
 
