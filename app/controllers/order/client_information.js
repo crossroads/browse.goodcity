@@ -1,10 +1,21 @@
 import Ember from "ember";
+import config from '../../config/environment';
 import AjaxPromise from 'browse/utils/ajax-promise';
 const { getOwner } = Ember;
 
 export default Ember.Controller.extend({
+  firstName: null,
+  lastName: null,
+  mobilePhone: null,
+  selectedId: null,
+  identityNumber: null,
   order: Ember.computed.alias("model.order"),
+
   isHkIdSelected: Ember.computed.equal("selectedId", "hkId"),
+
+  mobile: Ember.computed('mobilePhone', function(){
+    return config.APP.HK_COUNTRY_CODE + this.get('mobilePhone');
+  }),
 
   titles: Ember.computed(function() {
     let translation = this.get("i18n");
@@ -23,7 +34,30 @@ export default Ember.Controller.extend({
 
   actions: {
     saveClientDetails(){
-      console.log('client info controller');
+      var identityTypeId = null;
+      if(this.get('selectedId') === 'hkId'){
+        identityTypeId = 1;
+      } else if(this.get('selectedId') === 'abcl'){
+        identityTypeId = 2;
+      }
+
+      var beneficieryParams = {
+        first_name: this.get('firstName'),
+        last_name: this.get('lastName'),
+        identity_number: this.get('identityNumber'),
+        phone_number: this.get('mobile'),
+        order_id: this.get('order.id'),
+        identity_type_id: identityTypeId,
+      };
+
+      var loadingView = getOwner(this).lookup('component:loading').append();
+
+      new AjaxPromise("/beneficiaries", "POST", this.get('session.authToken'), { beneficiary: beneficieryParams, order_id: this.get('order.id') })
+        .then(data => {
+          this.get("store").pushPayload(data);
+          console.log('client info controller');
+          loadingView.destroy();
+        });
     }
   }
 });
