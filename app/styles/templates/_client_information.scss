@@ -27,6 +27,8 @@
     }
   }
   .client-name-labels{
+    padding-top: 1rem;
+    padding-bottom: 0.5rem;
     label{
       font-size: .7rem;
     }
@@ -36,11 +38,44 @@
   }
 }
 div .hk-id{
-  padding-top: 5rem;
+  #hk-id-number, input{
+    height: 2.7rem;
+    padding: 0 0.5rem;
+    width: 97%;
+    background: #002352;
+    border: 1px solid $tabbar-menu-icon-color;
+    color: white;
+    height: 2.7rem !important;
+    margin-bottom: 0;
+  }
+  .input-error {
+    background: #ED4C4E !important;
+    color: white;
+    padding: 0.2rem;
+    display: none;
+    padding-bottom: 0.25rem !important;
+    width: 98.7%;
+  }
+
   label{
     font-size: 1.8rem;
   }
   .hk-id-input{
     width: 25%
   }
+  .x-with-brackets{
+    font-size: 1.7rem;
+  }
 }
+
+#title input{
+  height: 2.7rem;
+  padding: 0 0.5rem;
+  width: 97%;
+  background: #002352;
+  border: 1px solid $tabbar-menu-icon-color;
+  color: white;
+  height: 2.7rem !important;
+  margin-bottom: 1rem;
+}
+

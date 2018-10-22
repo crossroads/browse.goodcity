@@ -35,7 +35,8 @@ Router.map(function() {
   this.route('terms');
   this.route('about');
   this.route('request_purpose');
-  this.route('client_information')
+  this.route('client_information');
+  this.route('goods_details');
 });
 
 export default Router;

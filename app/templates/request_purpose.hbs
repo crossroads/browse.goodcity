@@ -18,7 +18,7 @@
 
 
 <section class="main-section request-purpose">
-  {{#validatable-form onSubmit=(action 'saveBenificieryDetails') as |form|}}
+  {{#validatable-form onSubmit=(action 'createOrderWithRequestPuropose') as |form|}}
       <div class="small-12 medium-9 large-9 columns">
         Purpose of Goods
       </div>
@@ -27,8 +27,8 @@
         <div class=" custom_radio_buttons small-12 columns purpose" for="For organisation's own purpose">
             {{radio-button
             name="selectReason"
-            id="own"
-            value="own"
+            id="1"
+            value="organisation"
             selection=selectedId
             required='true'}}
           <label class="radio-button-text align-text">
@@ -39,8 +39,8 @@
         <div class=" custom_radio_buttons small-12 columns purpose end" for="For benificiery">
             {{radio-button
             name="selectReason"
-            id="benificiery"
-            value="benificiery"
+            id="2"
+            value="client"
             selection=selectedId
             required='true'}}
           <label class="radio-button-text align-text">
