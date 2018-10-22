@@ -36,7 +36,7 @@ module('Acceptance: Login', {
       }
     });
 
-    $.mockjax({url:"/api/v1/auth/register_us*",responseText:{
+    $.mockjax({url:"/api/v1/auth/sig*",responseText:{
       "otp_auth_key" : "/JqONEgEjrZefDV3ZIQsNA=="
     }});
 
@@ -56,7 +56,7 @@ module('Acceptance: Login', {
 
 test("User able to enter mobile number and get the sms code", function(assert) {
   assert.expect(1);
-  $.mockjax({url:"/api/v1/auth/register_us*",responseText:{
+  $.mockjax({url:"/api/v1/auth/sig*",responseText:{
     "otp_auth_key" : "/JqONEgEjrZefDV3ZIQsNA=="
   }});
   visit('/login');
@@ -72,7 +72,7 @@ test("User able to enter mobile number and get the sms code", function(assert) {
 test("User is able to resend the sms code, submit pin and logout", function(assert) {
   assert.expect(4);
 
-  $.mockjax({url:"/api/v1/auth/register_us*",responseText:{
+  $.mockjax({url:"/api/v1/auth/sig*",responseText:{
     "otp_auth_key" : "/JqONEgEjrZefDV3ZIQsNA=="
   }});
 
