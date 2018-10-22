@@ -39,21 +39,17 @@
   </div>
 </div>
 <div class="row client-name-inputs">
-  <div class="columns small-2">
-    {{#form-control}}
+  {{#form-control}}
+    <div class="columns small-2">
       {{input type='text' id="title" value=title required='true'}}
-    {{/form-control}}
-  </div>
-  <div class="columns small-5">
-    {{#form-control}}
+    </div>
+    <div class="columns small-5">
       {{input type='text' value=firstName required='true'}}
-    {{/form-control}}
-  </div>
-  <div class="columns small-5">
-    {{#form-control}}
+    </div>
+    <div class="columns small-5">
       {{input type='text' value=lastName required='true'}}
-    {{/form-control}}
-  </div>
+    </div>
+  {{/form-control}}
 </div>
 
 <div class="row client-name-inputs">
