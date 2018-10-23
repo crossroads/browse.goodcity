@@ -11,6 +11,14 @@ ul.pagination {
       @media #{$medium-up} {
         display: inline-block !important;
       }
+      @media #{$medium-only} {
+        &:not(.narrow) {
+          display: inline-block !important;
+        }
+        &.narrow {
+          display: none !important;
+        }
+      }
       font-size: 70%;
     }
   }

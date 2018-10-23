@@ -14,7 +14,9 @@ export default Ember.Controller.extend({
   hideThumbnails: Ember.computed.gt('item.sortedImages.length', 1),
   smallScreenPreviewUrl: Ember.computed.alias('item.displayImage.smallScreenPreviewImageUrl'),
   itemNotAvailableShown: false,
+  hasCartItems: Ember.computed.alias('application.hasCartItems'),
 
+  
   direction: null,
 
   hasQuantityAndIsAvailable: Ember.observer('item.isAvailable', 'item.packages.@each.orderId', 'item.isUnavailableAndDesignated', function() {
