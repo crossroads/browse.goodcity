@@ -39,5 +39,17 @@ export default Addressable.extend({
       }
     }
     return hasValue;
+  },
+
+  //*****************
+  // Utility methods
+  //*****************
+
+  roleNames() {
+    return this.get('userRoles').getEach('role.name');
+  },
+
+  hasRole(role) {
+    return this.roleNames().indexOf(role) >= 0;
   }
 });

@@ -38,7 +38,10 @@ export default Ember.Controller.extend({
   }),
 
   hasDraftOrder: Ember.computed.alias("session.draftOrder"),
-  isOrderFulfilmentUser: Ember.computed.alias("session.currentUser.isOrderFulfilmentUser"),
+  isOrderFulfilmentUser: Ember.computed(function() {
+    let user = this.get('session.currentUser');
+    return user.hasRole('Order fulfilment');
+  }),
 
   presentInCart: Ember.computed('item', 'cart.counter', function(){
     return this.get('cart').hasCartItem(this.get('item'));
@@ -86,7 +89,7 @@ export default Ember.Controller.extend({
     },
 
     goToStockItem(inventoryNumber) {
-      let finalUrl = config.APP.BASE_HOST_URL + "/items/" + inventoryNumber;
+      let finalUrl = config.APP.STOCK_APP_HOST_URL + "/items/" + inventoryNumber;
       window.open(finalUrl, '_blank');
     },
 
