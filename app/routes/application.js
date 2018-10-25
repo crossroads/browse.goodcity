@@ -15,7 +15,7 @@ export default Ember.Route.extend(preloadDataMixin, {
 
   unlessIncludesCurrentPath() {
     var currentPath = window.location.href;
-    return !(currentPath.indexOf("login") >= 0 || currentPath.indexOf("authenticate") >= 0 || currentPath.indexOf("category") >= 0 || currentPath.indexOf("package") >= 0 || currentPath.indexOf("item") >= 0 || window.location.pathname === "/");
+    return !(currentPath.indexOf("login") >= 0 || currentPath.indexOf("authenticate") >= 0 || currentPath.indexOf("category") >= 0 || currentPath.indexOf("package") >= 0 || currentPath.indexOf("item") >= 0 || currentPath.indexOf("browse") >= 0 || window.location.pathname === "/");
   },
 
   init() {
