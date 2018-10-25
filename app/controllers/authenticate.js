@@ -49,8 +49,14 @@ export default Ember.Controller.extend({
       var mobile = this.get('mobile');
       var loadingView = getOwner(this).lookup('component:loading').append();
       var _this = this;
+      var user_auth = { mobile: mobile,
+                        address_attributes: {
+                          district_id: null,
+                          address_type: null
+                        }
+                      };
 
-      new AjaxPromise("/auth/send_pin", "POST", null, {mobile: mobile})
+      new AjaxPromise("/auth/signup", "POST", null, {user_auth: user_auth})
         .then(data => {
           this.set('session.otpAuthKey', data.otp_auth_key);
           this.setProperties({pin:null});
@@ -62,8 +68,7 @@ export default Ember.Controller.extend({
               _this.transitionToRoute("/");
              });
           } else if ([422, 403].indexOf(error.status) >= 0) {
-            Ember.$('#mobile').closest('.mobile').addClass('error');
-            return;
+            _this.get("messageBox").alert(error.responseJSON.errors);
           }
           throw error;
         })

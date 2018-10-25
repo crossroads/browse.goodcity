@@ -5,7 +5,7 @@ export default {
   "language.zh": "中文",
   "company.name": "Crossroads Foundation",
   "by": "By",
-  "ok": "Ok",
+  "ok": "OK",
   "must_login": "You must login!",
   "okay": "Okay",
   "unexpected_error": "Something went wrong",
@@ -25,6 +25,8 @@ export default {
   "dispatching": "dispatching",
   "items_not_available": "One or many items in your cart are no longer available. Please remove those items from cart and then proceed.",
   "unauthorized": "You are not authorized.",
+  "back": "back",
+  "no_search_results": "No Search Results.",
 
   "banner": {
     "presented_by": "Presented by",
@@ -41,7 +43,8 @@ export default {
       "about": "About",
       "terms": "Terms",
       "privacy_policy": "Privacy Policy",
-      "version": "Version"
+      "version": "Version",
+      "login": "Login"
     }
   },
 
@@ -133,8 +136,41 @@ export default {
 
   "login": {
     "hk_only" : "Mobile phone (Hong Kong only)",
+    "sms_pincode": "We SMS you pin code for secure access <br/> Been here before? Please use the same phone number",
     "login" : "Login",
-    "smscode": "Get 4-digit SMS code"
+    "smscode": "Get 4-digit SMS code",
+    "privacy": "We don't share your data. We only use it to complete your goods request(s). See our ",
+    "policy": "Privacy Policy.",
+    "mobile_warning": "Please provide a valid Hong Kong mobile number"
+  },
+
+  "account": {
+    "account_details": "Account Details",
+    "welcome": "Welcome!",
+    "contact_details": "Please complete contact details to continue.",
+    "organisation": "Organisation Name",
+    "title": "Title",
+    "first": "Your First Name",
+    "last": "Your Family Name",
+    "position": "Position",
+    "email": "Email address",
+    "work": "Please use your work address",
+    "done": "Done",
+    "contact_us": "Can't find your organisation? Please contact us for assistance.",
+    "continue": "Continue",
+    "organisation_warning": "You must select valid organisation to proceed",
+    "title_warning": "Add Title",
+    "first_name_warning": "Add First Name",
+    "last_name_warning": "Add Last Name",
+    "position_warning": "Add Position",
+    "email_warning": "Add valid E-mail",
+    "user_info": "User Information is incomplete",
+    "user_title": {
+      "mr": "Mr",
+      "mrs": "Mrs",
+      "miss": "Miss",
+      "ms": "Ms"
+    }
   },
 
   "logout": {
@@ -142,14 +178,15 @@ export default {
   },
 
   "_resend": {
-    "no_sms" : "Haven't received SMS code?",
-    "please_wait" : "Please wait a few minutes",
+    "no_sms" : "Haven't received SMS code? Please wait a few minutes",
+    "please_wait" : "Please wait...",
     "resend" : "Resend Code",
     "back_to_phone_number": "Back to phone number input"
   },
 
   "_verification_pin": {
     "input_code" : "Input 4-digit SMS code",
+    "send_code" : "We just send a code to",
     "auth_error" : "Sorry! Please enter the correct pin."
   },
 
@@ -215,6 +252,7 @@ export default {
     "purpose": "Purpose(s)",
     "cancel_order": "Cancel Order",
     "login": "Log in",
+    "register" : "Register",
     "goodcity_order": "GoodCity Order",
     "cart": "Cart",
     "order_details": "Order details",

@@ -1,0 +1,63 @@
+<div class="row">
+  <div class="small-12 large-offset-2 large-8">
+    <div class="row fixed_search_header search-box ui organisations_search">
+      <div class="row">
+        <div class="small-2 medium-2 large-2 columns">
+          <div class="done">{{t "account.done"}}</div>
+        </div>
+        <div class="small-8 small-offset-1 large-offset-1 large-8 medium-8 columns">
+          {{input
+            name="searchText"
+            id="searchText"
+            value=searchText
+            disabled=false}}
+
+          {{#if hasSearchText}}
+            <i class="fa fa-times-circle" {{action "clearSearch"}}></i>
+          {{/if}}
+        </div>
+        <div class="large-1 columns"></div>
+      </div>
+      <div class="row">
+        <div class="small-12 medium-12 columns">
+          <label class="form-label contact_us">{{t "account.contact_us"}}</label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<section class="main-section organisation_search_result">
+  <div class="row search">
+    <div class="small-12 medium-12 large-offset-2 large-8 columns">
+      {{#if isLoading}}
+        <div class="loading_screen">
+          {{partial 'loading'}}
+        </div>
+      {{else}}
+        {{#if filteredResults}}
+          <ul class="list list-activity">
+            {{#each filteredResults as |organisation|}}
+              <li class="org_search">
+                <div class="row" {{action "selectOrganisation" organisation}}>
+                  <div class="small-12 large-12 columns">
+                    {{organisation.nameEn}}
+                  </div>
+                  <div class="small-12 large-12 columns">
+                    {{organisation.nameZhTw}}
+                  </div>
+                </div>
+              </li>
+            {{/each}}
+          </ul>
+
+          {{#infinity-loader}}
+          {{/infinity-loader}}
+
+        {{else if hasNoResults}}
+          <div class='no_result'>{{t "no_search_results"}}</div>
+        {{/if}}
+      {{/if}}
+    </div>
+  </div>
+</section>
+

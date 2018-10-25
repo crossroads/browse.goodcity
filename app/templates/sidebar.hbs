@@ -52,6 +52,13 @@
           <div>{{t "logout.logout"}}</div>
         </a>
       </li>
+    {{else}}
+      <li>
+        {{#link-to "login" class="menu-5"}}
+          <i class="fa fa-sign-out"></i>
+          <div>{{t "application.sidebar.login"}}</div>
+        {{/link-to}}
+      </li>
     {{/if}}
 
 
