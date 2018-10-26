@@ -78,7 +78,7 @@
     "blueimp-file-upload": "^9.17.0",
     "cloudinary-jquery-file-upload": "^2.2.0",
     "cordova": "^6.5.0",
-    "cordova-lib": "https://github.com/crossroads/goodcity-lib.git",
+    "cordova-lib": "https://github.com/crossroads/goodcity-lib.git#master",
     "jquery": "^3.2.0",
     "phantomjs-prebuilt": "^2.1.14",
     "yarn": "^1.9.2"
