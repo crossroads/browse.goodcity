@@ -10,8 +10,7 @@ export default AuthorizeRoute.extend({
     return Ember.RSVP.hash({
       organisation: params.orgId ? this.store.peekRecord('gc_organisation', parseInt(params.orgId)) : organisation,
       organisationsUser: organisationsUser,
-      user: user,
-      order: this.store.peekAll("order").filterBy("state", "draft")
+      user: user
     });
   },
 

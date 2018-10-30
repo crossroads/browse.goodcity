@@ -2,8 +2,8 @@
   <div class="small-12 medium-9 large-9 columns">
     <section class="main-section new-user-section ui login_page">
       <nav class="tab-bar">
-        <section class="left-small">
-          {{fa-icon "angle-left"}} {{#link-to "authenticate" classNames="back"}}{{t "back"}}{{/link-to}}
+        <section class="left-large">
+          {{#link-to "authenticate" classNames="back"}}{{fa-icon "angle-left"}} {{t "back"}}{{/link-to}}
         </section>
 
         <section class="middle tab-bar-section">
@@ -11,9 +11,9 @@
         </section>
       </nav>
 
-      {{#if model.order.length}}
+      {{#unless cart.isEmpty}}
         {{small-cart-toggle-view}}
-      {{/if}}
+      {{/unless}}
 
       <div class="row">
         <div class="small-12 columns">
@@ -33,7 +33,7 @@
               <div class="row">
                 {{#form-control}}
                   {{#if model.organisation}}
-                    <div class="small-12 columns" id="organisation_id">
+                    <div class="small-12 columns" id="organisation_id" {{action "goToSearchOrg"}}>
                       <label class="form-label">{{t "account.organisation"}}</label>
                       {{input type="text" id = "organisation_details" classNames="number_input center_align_placeholder" required='true' value=model.organisation.nameEn disabled=true}}
                     </div>

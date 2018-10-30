@@ -25,7 +25,7 @@ export default {
   "dispatching": "dispatching",
   "items_not_available": "One or many items in your cart are no longer available. Please remove those items from cart and then proceed.",
   "unauthorized": "You are not authorized.",
-  "back": "back",
+  "back": "Back",
   "no_search_results": "No Search Results.",
 
   "banner": {
