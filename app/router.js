@@ -26,7 +26,10 @@ Router.map(function() {
   this.route('order', { path: '/order/:order_id/' }, function() {
     this.route('transport_details');
     this.route('confirm');
-    this.route('client_information')
+    this.route('client_information');
+    this.route('goods_details');
+    this.route("search_code");
+    this.route('appointment_details')
   });
 
   this.route('confirm');
@@ -36,7 +39,6 @@ Router.map(function() {
   this.route('terms');
   this.route('about');
   this.route('request_purpose');
-  this.route('goods_details');
 });
 
 export default Router;
