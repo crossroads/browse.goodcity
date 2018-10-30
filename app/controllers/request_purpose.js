@@ -44,7 +44,7 @@ export default Ember.Controller.extend({
           isOrganisationPuropose = purpose_ids.get('length') === 1 && purpose_ids.indexOf(1) >= 0;
           loadingView.destroy();
           if(isOrganisationPuropose){
-            this.transitionToRoute('goods_details');
+            this.transitionToRoute('order.goods_details', orderId);
           } else {
             this.transitionToRoute("order.client_information", orderId);
           }
