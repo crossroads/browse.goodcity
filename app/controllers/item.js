@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import config from "../config/environment";
 
 export default Ember.Controller.extend({
 
@@ -37,6 +38,10 @@ export default Ember.Controller.extend({
   }),
 
   hasDraftOrder: Ember.computed.alias("session.draftOrder"),
+  isOrderFulfilmentUser: Ember.computed(function() {
+    let user = this.get('session.currentUser');
+    return user.hasRole('Order fulfilment');
+  }),
 
   presentInCart: Ember.computed('item', 'cart.counter', function(){
     return this.get('cart').hasCartItem(this.get('item'));
@@ -81,6 +86,11 @@ export default Ember.Controller.extend({
   actions: {
     showPreview(image) {
       this.set('previewUrl', image.get("previewImageUrl"));
+    },
+
+    goToStockItem(inventoryNumber) {
+      let finalUrl = config.APP.STOCK_APP_HOST_URL + "/items/" + inventoryNumber;
+      window.open(finalUrl, '_blank');
     },
 
     setDirectionAndRender(direction) {

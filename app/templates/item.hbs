@@ -73,6 +73,11 @@
           {{#each allPackages key="@index" as |package|}}
             <div class="item_name">{{package.notes}}</div>
             <p>
+              {{#if isOrderFulfilmentUser}}
+                <div class="item_details" {{ action 'goToStockItem' package.id }}>
+                  {{t "itemdetail.inventory_number"}}: <span class="inventory_redirect">{{package.inventoryNumber}}</span>
+                </div>
+              {{/if}}
               <div class="item_details">
                 {{t "itemdetail.quantity"}}: {{package.quantity}}
               </div>

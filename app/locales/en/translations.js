@@ -126,7 +126,8 @@ export default {
     "quantity": "Quantity",
     "size": "Size",
     "categories": "Categories",
-    "image_unavailable": "No image available."
+    "image_unavailable": "No image available.",
+    "inventory_number": "Inventory Number"
   },
 
   "page": {
