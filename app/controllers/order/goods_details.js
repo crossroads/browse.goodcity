@@ -11,8 +11,11 @@ export default Ember.Controller.extend({
   otherDetails: "",
 
   description: Ember.computed('typeId', function(){
-    var selected = this.get("store").peekRecord("package_type", this.get('typeId'));
-    return selected.get('name');
+  	var typeId = this.get('typeId');
+  	if(typeId){
+	    var selected = this.get("store").peekRecord("package_type", this.get('typeId'));
+	    return selected.get('name');
+	  }
   }),
 
   getRequestParams() {

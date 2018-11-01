@@ -29,7 +29,9 @@ Router.map(function() {
     this.route('client_information');
     this.route('goods_details');
     this.route("search_code");
-    this.route('appointment_details')
+    this.route('appointment_details');
+    this.route('confirm_booking');
+    this.route('booking_sucess');
   });
 
   this.route('confirm');

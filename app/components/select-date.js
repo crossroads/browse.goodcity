@@ -159,17 +159,17 @@ export default Ember.TextField.extend({
       var value = Ember.$(element).val();
 
       if(!value || value.length === 0) {
-        parent.addClass('form__control--error');
+        parent.addClass('has-error');
         return false;
       } else {
-        parent.removeClass('form__control--error');
+        parent.removeClass('has-error');
         return true;
       }
     }
 
     function removeHighlight(element){
       var parent = Ember.$(element).parent();
-      parent.removeClass('form__control--error');
+      parent.removeClass('has-error');
     }
   }
 
