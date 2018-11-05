@@ -8,7 +8,10 @@
             <h1 class="title">{{t "order.login"}}/{{t "order.register"}}</h1>
           </section>
         </nav>
-        {{small-cart-toggle-view}}
+
+        {{#unless cart.isEmpty}}
+          {{small-cart-toggle-view}}
+        {{/unless}}
 
         <div class="small-12 columns mobile">
           {{#validatable-form onSubmit=(action 'authenticateUser') as |form|}}

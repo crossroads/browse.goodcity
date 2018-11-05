@@ -3,8 +3,8 @@
     <section class="main-section new-user-section ui login_page">
 
       <nav class="tab-bar">
-        <section class="left-small">
-          {{#link-to "browse" classNames="back"}}{{t "back"}}{{/link-to}}
+        <section class="left-large">
+          {{#link-to "browse" classNames="back"}}{{fa-icon "angle-left"}} {{t "back"}}{{/link-to}}
         </section>
 
         <section class="middle tab-bar-section">
@@ -12,7 +12,9 @@
         </section>
       </nav>
 
-      {{small-cart-toggle-view}}
+      {{#unless cart.isEmpty}}
+        {{small-cart-toggle-view}}
+      {{/unless}}
 
       {{#validatable-form onSubmit=(action 'resendPin') as |form|}}
         <div class="row">

@@ -102,8 +102,11 @@ export default Ember.Controller.extend({
         loadingView.destroy()
       );
     },
+
     goToSearchOrg(){
-      this.transitionToRoute("search_organisation");
+      if (!this.get('organisationsUserId')) {
+        this.transitionToRoute("search_organisation");
+      }
     }
   }
 });
