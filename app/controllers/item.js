@@ -17,7 +17,6 @@ export default Ember.Controller.extend({
   itemNotAvailableShown: false,
   hasCartItems: Ember.computed.alias('application.hasCartItems'),
 
-  
   direction: null,
 
   hasQuantityAndIsAvailable: Ember.observer('item.isAvailable', 'item.packages.@each.orderId', 'item.isUnavailableAndDesignated', function() {
@@ -38,9 +37,10 @@ export default Ember.Controller.extend({
   }),
 
   hasDraftOrder: Ember.computed.alias("session.draftOrder"),
-  isOrderFulfilmentUser: Ember.computed(function() {
+  isOrderFulfilmentUser: Ember.computed('session.authToken', function() {
     let user = this.get('session.currentUser');
-    return user.hasRole('Order fulfilment');
+    let isLoggedIn = this.get('session.isLoggedIn');
+    return user && isLoggedIn ? user.hasRole('Order fulfilment') : false;
   }),
 
   presentInCart: Ember.computed('item', 'cart.counter', function(){
