@@ -1,0 +1,26 @@
+<div class="row">
+  <div class="small-12 columns">
+    <div class="small-6 columns">
+    	{{#link-to 'order.search_code' order.id}}
+  			{{#form-control}}
+  		    {{auto-resize-textarea data-autoresize=true name="description" value=req.description pattern=".*\S.*" id=num}}
+  		  {{/form-control}}
+    	{{/link-to}}
+    </div>
+    <div class="small-6 columns">
+      {{#form-control}}
+        {{numeric-input id=num name="qty" value=req.quantity maxlength="8" required='true' pattern="\d{1,8}"}}
+        <div class='input-error'>Quantity cannot be blank.</div>
+      {{/form-control}}
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="small-12 columns">
+    <div class="small-12 columns">
+      {{#form-control}}
+        {{input type="text" id=num name="otherDetails" value=req.otherDetails classNames="number_input center_align_placeholder"}}
+      {{/form-control}}
+    </div>
+  </div>
+</div>

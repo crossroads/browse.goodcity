@@ -9,6 +9,22 @@ export default Ember.Controller.extend({
   typeId: null,
   qty: null,
   otherDetails: "",
+  requestCount: 3,
+
+  requests: Ember.computed('order.goodcity_requests.[]', function(){
+  	var req = [];
+  	if(this.get('order.goodcity_requests')){
+  		req = this.get('order.goodcity_requests');
+  	} else {
+  		req.pushObject({
+	  		description: '',
+				quantity: '',
+				otherDetails: '',
+				order: this.get('order')
+	  	});
+  	} 
+  	return req;
+  }),
 
   description: Ember.computed('typeId', function(){
   	var typeId = this.get('typeId');
@@ -17,6 +33,16 @@ export default Ember.Controller.extend({
 	    return selected.get('name');
 	  }
   }),
+
+
+  newRequest(){
+  	this.get('requests').pushObject({
+  		description: '',
+			quantity: '',
+			otherDetails: '',
+			order: this.get('order')
+  	});
+  },
 
   getRequestParams() {
     var quantity = this.get("quantity");
@@ -33,24 +59,34 @@ export default Ember.Controller.extend({
   },
 
   actions: {
+  	addRequest(){
+  		this.get('requests').pushObject({
+	  		description: '',
+				quantity: '',
+				otherDetails: '',
+				order: this.get('order')
+	  	});
+  	},
+
   	saveGoodsDetails(){
   		if(this.get("quantity").toString().trim().length === 0) {
         return false;
       } else {
         var loadingView = getOwner(this).lookup('component:loading').append();
         new AjaxPromise("/goodcity_requests", "POST", this.get('session.authToken'), this.getRequestParams())
-          .then(data => {
-            this.get("store").pushPayload(data);
-          })
-          .catch(response => {
-            this.get("messageBox").alert(response.responseJSON.errors[0]);
-          })
-          .finally(() => {
-            this.transitionToRoute('order.appointment_details', this.get("order.id"));
-            loadingView.destroy();
-          });
+        .then(data => {
+          this.get("store").pushPayload(data);
+        })
+        .catch(response => {
+          this.get("messageBox").alert(response.responseJSON.errors[0]);
+        })
+        .finally(() => {
+          this.transitionToRoute('order.appointment_details', this.get("order.id"));
+          loadingView.destroy();
+        });
       }
   		console.log('inside goods details submission');
-  	}
+  	},
+
   }
 });
