@@ -37,10 +37,9 @@ export default Ember.Controller.extend({
   }),
 
   hasDraftOrder: Ember.computed.alias("session.draftOrder"),
-  isOrderFulfilmentUser: Ember.computed('session.authToken', function() {
+  isOrderFulfilmentUser: Ember.computed(function() {
     let user = this.get('session.currentUser');
-    let isLoggedIn = this.get('session.isLoggedIn');
-    return user && isLoggedIn ? user.hasRole('Order fulfilment') : false;
+    return user.hasRole('Order fulfilment');
   }),
 
   presentInCart: Ember.computed('item', 'cart.counter', function(){
