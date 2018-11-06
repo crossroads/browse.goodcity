@@ -17,7 +17,7 @@ export default Ember.Controller.extend({
       .then(data => {
         this.get("store").pushPayload(data);
         loadingView.destroy();
-        this.transitionToRoute('order.booking_sucess', this.get("order.id"));
+        this.transitionToRoute('order.booking_success', this.get("order.id"));
       });
 		}
 	}

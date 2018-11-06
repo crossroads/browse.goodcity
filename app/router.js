@@ -31,7 +31,7 @@ Router.map(function() {
     this.route("search_code");
     this.route('appointment_details');
     this.route('confirm_booking');
-    this.route('booking_sucess');
+    this.route('booking_success');
   });
 
   this.route('confirm');

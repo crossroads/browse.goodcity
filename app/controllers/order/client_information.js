@@ -48,7 +48,7 @@ export default Ember.Controller.extend({
         phone_number: this.get('mobile'),
         order_id: this.get('order.id'),
         identity_type_id: identityTypeId,
-      };
+      };    
 
       var loadingView = getOwner(this).lookup('component:loading').append();
 
