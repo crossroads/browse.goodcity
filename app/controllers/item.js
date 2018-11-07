@@ -17,7 +17,6 @@ export default Ember.Controller.extend({
   itemNotAvailableShown: false,
   hasCartItems: Ember.computed.alias('application.hasCartItems'),
 
-  
   direction: null,
 
   hasQuantityAndIsAvailable: Ember.observer('item.isAvailable', 'item.packages.@each.orderId', 'item.isUnavailableAndDesignated', function() {
