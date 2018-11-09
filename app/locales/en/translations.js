@@ -224,7 +224,34 @@ export default {
     "my_orders": "My Orders",
     "order_no": "Order No",
     "order_state": "Order State",
-    "item_count": "Item Count"
+    "item_count": "Item Count",
+    "processing": "Processing",
+    "submitted": "Submitted",
+    "draft": "Draft",
+    "submitted_by": "Submitted By",
+    "start_process": "Start Processing",
+    "restart_process": "Restart Processing",
+    "finish_process": "Finish Processing",
+    "process_summary": "Process Summary",
+    "due_date": "Due Date",
+    "submitted_for_client": "Client Name",
+    "start_dispatching": "Start Dispatching",
+    "cancel_order": "Cancel Order",
+    "awaiting_dispatch": "Awaiting Dispatch",
+    "cancelled": "Cancelled",
+    "dispatching": "Dispatching",
+    "dispatch_later": "Dispatch Later",
+    "closed": "Closed",
+    "close_order": "Close Order",
+    "reopen_order": "Reopen Order",
+    "resubmit": "Resubmit Order",
+    "order_transports": {
+      "gogovan_transport": "Send by van",
+      "collection_transport": "Collection",
+      "appointment_transport": "Appointment",
+      "shipment_transport": "Shipment",
+      "unknown_transport": "Other"
+    }
   },
 
   "item": {

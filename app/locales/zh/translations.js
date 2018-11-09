@@ -220,7 +220,34 @@ export default {
     "my_orders": "我的訂單",
     "order_no": "訂單編號",
     "order_state": "訂單狀態",
-    "item_count": "物資數量"
+    "item_count": "物資數量",
+    "processing": "處理中",
+    "submitted": "訂單已經提交",
+    "draft": "等待提交",
+    "start_process": "開始訂單處理",
+    "restart_process": "重新開始訂單處理",
+    "finish_process": "完成訂單處理",
+    "start_dispatching": "開始派送",
+    "cancel_order": "取消訂單",
+    "awaiting_dispatch": "等待派送",
+    "dispatch_later": "稍後派送",
+    "cancelled": "已取消",
+    "dispatching": "派送中",
+    "closed": "訂單已完成",
+    "close_order": "完成訂單",
+    "reopen_order": "重開訂單",
+    "resubmit": "重新提交訂單",
+    "submitted_by": "提交自",
+    "process_summary": "概覽",
+    "due_date": "到期日",
+    "submitted_for_client": "為服務使用者提交",
+    "order_transports": {
+      "gogovan_transport": "由貨車運送",
+      "collection_transport": "自行提取",
+      "appointment_transport": "預約",
+      "shipment_transport": "運送安排",
+      "unknown_transport": "其他"
+    }
   },
 
   "item": {

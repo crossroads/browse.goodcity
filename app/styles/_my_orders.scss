@@ -1,38 +1,16 @@
-.title {
-  font-weight: bold;
-  font-size: 1rem;
-  color: white;
-  text-align: center;
-  margin: 1rem;
-}
-.order-heading {
-  font-weight: bold;
-  color: white;
-  text-align: center;
-  margin: 1rem 0 1rem 0 !important;
-}
-.list-items {
-  text-align: center;
-  li {
-    border: 1px solid white;
-    padding: 0.5rem;
-    margin: 0.2rem;
-  }
-}
-.order-summery{
-  .organisation-detail {
-    margin-left: 13rem !important;
-    @media #{$medium-only} {
-      margin-left: 0.3rem !important;
-    }
-    @media #{$small-only} {
-      margin-left: 0.3rem !important;
-    }
-  }
-}
 .my_orders {
-  @media only screen and (min-width: 120.1em) {
-    margin-left: 4rem !important;
+  .title {
+    font-weight: bold;
+    font-size: 1rem;
+    color: white;
+    text-align: center;
+    margin: 1rem;
+  }
+
+  .list-items {
+    li {
+      padding-right: 0;
+    }
   }
 }
 .empty-cart-message{

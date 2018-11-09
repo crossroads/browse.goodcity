@@ -8,6 +8,9 @@
     <ul class="list list-items">
       {{#each arrangedOrders as |order|}}
         <li {{action "setOrder" order}}>
+          {{ partial 'order/order_block'}}
+        </li>
+        {{!-- <li {{action "setOrder" order}}>
           <div class="row">
             <div class="small-6 columns">
               {{order.code}}
@@ -16,13 +19,13 @@
               {{t order.updatedState}}
             </div>
           </div>
-        </li>
+        </li> --}}
       {{/each}}
     </ul>
   </div>
-  {{#if selectedOrder}}
+  {{!-- {{#if selectedOrder}}
     <div class="order-summery">
       {{partial "order/summery"}}
     </div>
-  {{/if}}
+  {{/if}} --}}
 </div>
