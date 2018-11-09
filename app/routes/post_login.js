@@ -64,14 +64,14 @@ export default Ember.Route.extend(preloadDataMixin, {
   },
 
   isDetailsComplete(){
-    var user = this.get('session.currentUser');
-    var organisationsUser = user.get('organisationsUsers') && user.get('organisationsUsers.firstObject');
-    var organisation = organisationsUser && organisationsUser.get('organisation');
+    const user = this.get('session.currentUser');
+    if (!user) { return false; }
 
-    if(organisation && user && organisationsUser && organisationsUser.get('isInfoComplete') && user.get('isInfoComplete')){
-      return true;
-    } else {
-      return false;
-    }
+    const organisationsUser = user.get('organisationsUsers.firstObject');
+    const organisation = organisationsUser && organisationsUser.get('organisation');
+    const userInfoComplete = user.get('isInfoComplete') && user.hasRole('Charity');
+    const organisationUserComplete = organisationsUser && organisationsUser.get('isInfoComplete');
+
+    return (userInfoComplete && organisation && organisationUserComplete);
   }
 });

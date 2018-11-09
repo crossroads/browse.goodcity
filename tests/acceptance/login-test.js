@@ -3,12 +3,14 @@ import { module, test } from 'qunit';
 import startApp from '../helpers/start-app';
 import { make, mockFindAll } from 'ember-data-factory-guy';
 
-var App, pkg, organisationsUser, ordersPackage, order, organisation, user, gogo_van;
+var App, pkg, organisationsUser, ordersPackage, order, organisation, user, gogo_van, role, user_role;
 
 module('Acceptance: Login', {
   beforeEach: function() {
     App = startApp({}, 2);
+    role = make('role', {name: "Charity"});
     user = make("user");
+    user_role = make('user_role', { userId: user.id, roleId: role.id, user: user, role: role });
     organisation = make("organisation");
     organisationsUser = make("organisations_user", {user: user, organisation: organisation});
     pkg = make('package');
@@ -16,7 +18,7 @@ module('Acceptance: Login', {
     order = make("order", { state: "draft", created_by_id: user.id });
     gogo_van = make("gogovan_transport");
 
-    var user_profile = {"id": user.id,"first_name": user.get('firstName'), "last_name": user.get('lastName'), "mobile": user.get('mobile'), "user_role_ids": [1] };
+    var user_profile = {"id": user.id,"first_name": user.get('firstName'), "last_name": user.get('lastName'), "mobile": user.get('mobile'), "user_role_ids": [user_role.id]};
 
     $.mockjax({url:"/api/v1/auth/current_user_profil*",
       responseText: {
