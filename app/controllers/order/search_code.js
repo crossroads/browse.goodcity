@@ -10,7 +10,7 @@ export default Ember.Controller.extend({
   reqId: null,
   backToNewItem: false,
   changeCode: false,
-  orderId: null,
+  order: Ember.computed.alias("model"),
   filter: '',
   searchText: '',
   fetchMoreResult: true,
@@ -91,18 +91,38 @@ export default Ember.Controller.extend({
     cancelSearch() {
       Ember.$("#searchText").blur();
       this.send("clearSearch", true);
-      if(this.get("backToNewItem")) {
-        this.transitionToRoute("items.new");
-      } else {
-        this.transitionToRoute("index");
-      }
+      this.transitionToRoute("order.goods_details", orderId);
     },
 
     assignItemLabel(type){
-      this.set("isSearchCodePreviousRoute", true);
-      if(type) {
-        this.transitionToRoute("order.goods_details", this.get('orderId'), { queryParams: { typeId: type.get("id") }});
-      }
+      var orderId = this.get('order.id');
+      var url = `/goodcity_requests/`;
+      var key = 'package_type_id';
+      var goodcityRequestParams = {};
+      goodcityRequestParams[key] = type.get('id');
+      goodcityRequestParams['quantity'] = 1;
+      goodcityRequestParams['order_id'] = orderId;
+
+      var loadingView = getOwner(this).lookup('component:loading').append();
+
+      new AjaxPromise(url, "POST", this.get('session.authToken'), { goodcity_request: goodcityRequestParams })
+        .then(data => {
+          this.get("store").pushPayload(data);
+        })
+        .finally(() => {
+          loadingView.destroy();
+        });
+      this.transitionToRoute("order.goods_details", orderId);
     }
   }
 });
+
+// let url, actionType;
+//       let organisationUserId = this.get('organisationsUserId');
+//       if (organisationUserId) {
+//         url = "/organisations_users/" + organisationUserId;
+//         actionType = "PUT";
+//       } else {
+//         url = "/organisations_users";
+//         actionType = "POST";
+//       }
