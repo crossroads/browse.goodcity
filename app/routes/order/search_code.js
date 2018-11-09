@@ -2,17 +2,8 @@
 import AuthorizeRoute from './../authorize';
 
 export default AuthorizeRoute.extend({
-
-  queryParams: {
-    backToNewItem: false
-  },
-
   model() {
-    // return this.store.query('package_type', { stock: true });
-  },
-
-  setupController(controller, model){
-    this._super(controller, model);
-    controller.set('searchText', "");
+    var orderId = this.paramsFor('order').order_id;
+    return this.store.peekRecord('order', orderId);
   }
 });

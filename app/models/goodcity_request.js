@@ -7,5 +7,9 @@ export default Model.extend({
   description: attr('string'),
   itemSpecifics: attr('string'),
   packageType: belongsTo('package_type', { async: false }),
-  order:       belongsTo('order', { async: false })
+  order:       belongsTo('order', { async: false }),
+
+  packageTypeName: Ember.computed('packageType', function(){
+    return this.get('packageType.name');
+  })
 });

@@ -2,14 +2,14 @@
   <div class="small-12 columns">
     <div class="small-6 columns">
     	{{#link-to 'order.search_code' order.id}}
-  			{{#form-control}}
-  		    {{auto-resize-textarea data-autoresize=true name="description" value=req.description pattern=".*\S.*" id=num}}
+  		  {{#form-control}}
+  		    {{auto-resize-textarea data-autoresize=true name="packageTypeDescription" value=request.packageTypeName pattern=".*\S.*" id=(concat 'packageTypeDescription' num)}}
   		  {{/form-control}}
     	{{/link-to}}
     </div>
     <div class="small-6 columns">
       {{#form-control}}
-        {{numeric-input id=num name="qty" value=req.quantity maxlength="8" required='true' pattern="\d{1,8}"}}
+        {{numeric-input id=(concat 'quantity' num) name="qty" value=request.quantity maxlength="8" required='true' pattern="\d{1,8}"}}
         <div class='input-error'>Quantity cannot be blank.</div>
       {{/form-control}}
     </div>
@@ -19,7 +19,7 @@
   <div class="small-12 columns">
     <div class="small-12 columns">
       {{#form-control}}
-        {{input type="text" id=num name="otherDetails" value=req.otherDetails classNames="number_input center_align_placeholder"}}
+        {{input type="text" id=(concat 'description' num) name="otherDetails" value=request.description classNames="number_input center_align_placeholder"}}
       {{/form-control}}
     </div>
   </div>

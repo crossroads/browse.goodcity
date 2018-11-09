@@ -1,6 +1,4 @@
 import Ember from "ember";
-// import config from '../../config/environment';
-import AjaxPromise from 'browse/utils/ajax-promise';
 const { getOwner } = Ember;
 
 export default Ember.Controller.extend({
@@ -13,8 +11,8 @@ export default Ember.Controller.extend({
 
   requests: Ember.computed('order.goodcity_requests.[]', function(){
   	var req = [];
-  	if(this.get('order.goodcity_requests')){
-  		req = this.get('order.goodcity_requests');
+  	if(this.get('order.goodcityRequests')){
+  		req = this.get('order.goodcityRequests');
   	} else {
   		req.pushObject({
 	  		description: '',
@@ -26,22 +24,12 @@ export default Ember.Controller.extend({
   	return req;
   }),
 
-  description: Ember.computed('typeId', function(){
-  	var typeId = this.get('typeId');
-  	if(typeId){
-	    var selected = this.get("store").peekRecord("package_type", this.get('typeId'));
-	    return selected.get('name');
-	  }
-  }),
-
-
   newRequest(){
-  	this.get('requests').pushObject({
+  	return this.get('requests').pushObject(this.store.createRecord('goodcityRequest',{
   		description: '',
 			quantity: '',
-			otherDetails: '',
 			order: this.get('order')
-  	});
+  	}));
   },
 
   getRequestParams() {
@@ -60,33 +48,27 @@ export default Ember.Controller.extend({
 
   actions: {
   	addRequest(){
-  		this.get('requests').pushObject({
+  		this.get('requests').pushObject(this.store.createRecord('goodcityRequest',{
 	  		description: '',
 				quantity: '',
 				otherDetails: '',
 				order: this.get('order')
-	  	});
+	  	}));
   	},
 
   	saveGoodsDetails(){
-  		if(this.get("quantity").toString().trim().length === 0) {
-        return false;
-      } else {
-        var loadingView = getOwner(this).lookup('component:loading').append();
-        new AjaxPromise("/goodcity_requests", "POST", this.get('session.authToken'), this.getRequestParams())
-        .then(data => {
-          this.get("store").pushPayload(data);
-        })
-        .catch(response => {
-          this.get("messageBox").alert(response.responseJSON.errors[0]);
-        })
-        .finally(() => {
-          this.transitionToRoute('order.appointment_details', this.get("order.id"));
-          loadingView.destroy();
-        });
-      }
-  		console.log('inside goods details submission');
-  	},
+      var promises = [];
+      this.get('order.goodcityRequests').forEach(goodcityRequest => {
+        promises.push(goodcityRequest.save());
+      });
 
+      var loadingView = getOwner(this).lookup('component:loading').append();
+
+      Ember.RSVP.all(promises).then(function(){
+        loadingView.destroy();
+      }).finally(() =>{
+        this.transitionToRoute('order.appointment_details', this.get("order.id"));
+      });
+  	},
   }
 });
