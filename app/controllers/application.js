@@ -96,11 +96,10 @@ export default Ember.Controller.extend({
     },
 
     removeItem(itemId, type) {
-      var item = this.get('store').peekRecord(type, itemId);
-      var ordersPackages = this.store.peekAll('orders_package').filterBy("package.id", itemId);
-      var orderPackageId;
+      var item = this.get('store').peekRecord(type, itemId) || itemId;
+      var ordersPackages = this.store.peekAll('orders_package').filterBy("packageId", itemId);
       if(this.get('draftOrder') && ordersPackages.length){
-        orderPackageId = ordersPackages.get("firstObject.id");
+        let orderPackageId = ordersPackages.get("firstObject.id");
         var loadingView = getOwner(this).lookup('component:loading').append();
         new AjaxPromise(`/orders_packages/${orderPackageId}`, "DELETE", this.get('session.authToken'))
         .then(() => {
