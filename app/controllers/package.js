@@ -24,6 +24,7 @@ export default itemController.extend({
       }
       this.get('messageBox').alert(this.get('i18n').t('cart_content.unavailable'),
       () => {
+        this.store.unloadRecord(pkg);
         this.set('pkgNotAvailableShown', false);
         this.transitionToRoute('/browse');
       });

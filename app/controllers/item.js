@@ -30,6 +30,7 @@ export default Ember.Controller.extend({
       }
       this.get('messageBox').alert(this.get('i18n').t('cart_content.unavailable'),
       () => {
+        item.get('packages').forEach((pkg) => this.store.unloadRecord(pkg));
         this.set("itemNotAvailableShown", false);
         this.transitionToRoute('/browse');
       });
