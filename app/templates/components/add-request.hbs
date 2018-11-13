@@ -1,15 +1,15 @@
 <div class="row">
   <div class="small-12 columns">
     <div class="small-6 columns">
-    	{{#link-to 'order.search_code' order.id}}
+    	{{#link-to 'order.search_code' order.id (query-params reqId=request.id)}}
   		  {{#form-control}}
-  		    {{auto-resize-textarea data-autoresize=true name="packageTypeDescription" value=request.packageTypeName pattern=".*\S.*" id=(concat 'packageTypeDescription' num)}}
+  		    {{auto-resize-textarea data-autoresize=true name="packageTypeDescription" value=packageTypeName pattern=".*\S.*" id=(concat 'packageTypeDescription' request.id)}}
   		  {{/form-control}}
     	{{/link-to}}
     </div>
     <div class="small-6 columns">
       {{#form-control}}
-        {{numeric-input id=(concat 'quantity' num) name="qty" value=request.quantity maxlength="8" required='true' pattern="\d{1,8}"}}
+        {{numeric-input id=(concat 'quantity' request.id) name="qty" value=request.quantity maxlength="8" required='true' pattern="\d{1,8}"}}
         <div class='input-error'>Quantity cannot be blank.</div>
       {{/form-control}}
     </div>
@@ -19,8 +19,11 @@
   <div class="small-12 columns">
     <div class="small-12 columns">
       {{#form-control}}
-        {{input type="text" id=(concat 'description' num) name="otherDetails" value=request.description classNames="number_input center_align_placeholder"}}
+        {{input type="text" id=(concat 'description' request.id) name="otherDetails" value=request.description classNames="number_input center_align_placeholder"}}
       {{/form-control}}
     </div>
   </div>
+</div>
+<div class='small-2 columns icon-center'>
+  <i class='fa fa-times-circle fa-2x icon' {{action "removeRequest" request.id on="click"}}></i>
 </div>

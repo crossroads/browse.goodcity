@@ -17,7 +17,7 @@ export default Model.extend({
   updatedAt:        attr('date'),
   detailType:       attr('string'),
   ordersPurposes:     hasMany('ordersPurpose', { async: false }),
-  goodcityRequests:   hasMany('goodcity_request', { async: false }),
+  goodcityRequests:   hasMany('goodcityRequest', { async: false }),
 
   isGoodCityOrder: Ember.computed.equal('detailType', 'GoodCity'),
   isDraft: Ember.computed.equal("state", "draft"),
