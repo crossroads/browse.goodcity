@@ -19,7 +19,7 @@ export default Ember.Controller.extend({
   isSearchCodePreviousRoute: Ember.computed.localStorage(),
 
   allPackageTypes: Ember.computed("fetchMoreResult", function(){
-    return this.store.peekAll('package_type')
+    return this.store.peekAll('package_type');
   }),
 
   hasSearchText: Ember.computed('searchText', function(){
@@ -91,21 +91,31 @@ export default Ember.Controller.extend({
     cancelSearch() {
       Ember.$("#searchText").blur();
       this.send("clearSearch", true);
-      this.transitionToRoute("order.goods_details", orderId);
+      this.transitionToRoute("order.goods_details", this.get('orderId'));
     },
 
     assignItemLabel(type){
+      let url, actionType;
       var orderId = this.get('order.id');
-      var url = `/goodcity_requests/`;
+      var reqId = this.get('reqId');
+      // var url = `/goodcity_requests/`;
       var key = 'package_type_id';
       var goodcityRequestParams = {};
       goodcityRequestParams[key] = type.get('id');
       goodcityRequestParams['quantity'] = 1;
       goodcityRequestParams['order_id'] = orderId;
 
+      if(reqId){
+        url = "/goodcity_requests/" + reqId;
+        actionType = "PUT";
+      } else {
+        url = "/goodcity_requests";
+        actionType = "POST";
+      }
+
       var loadingView = getOwner(this).lookup('component:loading').append();
 
-      new AjaxPromise(url, "POST", this.get('session.authToken'), { goodcity_request: goodcityRequestParams })
+      new AjaxPromise(url, actionType, this.get('session.authToken'), { goodcity_request: goodcityRequestParams })
         .then(data => {
           this.get("store").pushPayload(data);
         })

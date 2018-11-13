@@ -9,7 +9,7 @@ export default Ember.Controller.extend({
   mobilePhone: null,
   selectedId: null,
   identityNumber: null,
-  order: Ember.computed.alias("model.order"),
+  order: Ember.computed.alias("model"),
 
   isHkIdSelected: Ember.computed.equal("selectedId", "hkId"),
 
@@ -35,6 +35,7 @@ export default Ember.Controller.extend({
   actions: {
     saveClientDetails(){
       var identityTypeId = null;
+      var orderId = this.get('order.id');
       if(this.get('selectedId') === 'hkId'){
         identityTypeId = 1;
       } else if(this.get('selectedId') === 'abcl'){
