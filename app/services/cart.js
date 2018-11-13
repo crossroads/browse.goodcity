@@ -66,7 +66,18 @@ const Service = ArrayProxy.extend({
     });
   },
 
+  findItem(item) {
+    //If item is unpublished/designated(no longer available in ember-data in case of refresh)
+    //then item argument contains id of an Item which is string
+    //Above statement is only true in case of "removeItem" action in application controller
+    if(typeof(item) === "string") {
+      return this.findBy('id', item);
+    }
+    return item;
+  },
+
   removeItem(item) {
+    item = this.findItem(item);
     let cartItem = this.currentCartItem(item);
     let foundCartItem = this.findBy('guid', get(cartItem, 'guid'));
     if (foundCartItem) {
