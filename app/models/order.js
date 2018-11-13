@@ -21,6 +21,8 @@ export default Model.extend({
   goodcityRequests:   hasMany('goodcityRequest', { async: false }),
   beneficiaryId: attr('number'),
   beneficiary: belongsTo('beneficiary', { async: false }),
+  peopleHelped: attr('number'),
+  goodcityRequests:   hasMany('goodcity_request', { async: false }),
 
   isGoodCityOrder: Ember.computed.equal('detailType', 'GoodCity'),
   isDraft: Ember.computed.equal("state", "draft"),
@@ -30,10 +32,6 @@ export default Model.extend({
   isClosed: Ember.computed.equal("state", "closed"),
   isProcessing: Ember.computed.equal("state", "processing"),
   isCancelled: Ember.computed.equal("state", "cancelled"),
-
-  updatedState: Ember.computed('state', function() {
-    return this.get("state");
-  }),
 
   orderItems: Ember.computed('ordersPackages.[]', function() {
     var items = [];
@@ -66,6 +64,8 @@ export default Model.extend({
         return "thumbs-down";
       case "closed":
         return "lock";
+      case "draft":
+        return "pencil";
       default:
         return "";
     }

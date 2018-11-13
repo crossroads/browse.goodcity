@@ -82,6 +82,9 @@
         &.closed {
           background-color: $closed-state-color;
         }
+        &.draft {
+          background-color: $draft-state-color;
+        }
       }
     }
 

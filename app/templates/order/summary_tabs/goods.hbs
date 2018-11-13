@@ -1,0 +1,19 @@
+<div class="goods-tab">
+
+  {{#if hasRequestedGoods}}
+    {{!-- GOODS --}}
+    <section class="details">
+      <div class="section-title">
+        {{ t "my_orders.details.goods_requested" }}
+      </div>
+
+      {{#each requestedGoods as |good|}}
+        <div class="detail-row">
+          <div class="data-type">{{ good.category }}</div>
+          <div class="data">{{ good.text }}</div>
+        </div>
+      {{/each}}
+    </section>
+  {{/if}}
+
+</div>

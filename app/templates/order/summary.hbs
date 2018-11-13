@@ -1,0 +1,25 @@
+<div class="row header tab-bar">
+  <div class="columns small-2">
+    <i class="fa fa-lg fa-times-circle-o" aria-hidden="true" {{ action "setOrder" null }}></i>
+  </div>
+  <div class="columns small-8 strong">
+    {{ selectedOrder.code }}
+  </div>
+  <div class="columns small-2 header-icon">
+    <div class="icon">
+      <i class="fa fa-lg fa-{{ selectedOrder.stateIcon }}"></i>
+    </div>
+    <div class="sub-text">{{ t (concat 'my_orders.' selectedOrder.state) }}</div>
+  </div>
+</div>
+<div class="row tabs tab-bar">
+  {{#each orderSummaryTabs as |tab|}}
+    <div class="tab columns small-{{math 12 '/' orderSummaryTabs.length}} {{if (is-equal tab.name selectedOrderTab.name) 'selected' 'dimmed' }}" {{action "selectTab" tab}}>
+      <i class="fa fa-{{ tab.icon }}" aria-hidden="true"></i>
+      {{ t (concat 'my_orders.details.tabs.' tab.name) }}
+    </div>
+  {{/each}}
+</div>
+<div class="tab-content">
+  {{ partial (concat 'order/summary_tabs/' selectedOrderTab.name)}}
+</div>

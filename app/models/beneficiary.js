@@ -10,5 +10,4 @@ export default Model.extend({
   phoneNumber:      attr('string'),
   identityTypeId: attr('number'),
   identityType: belongsTo('identityType', { async: false }),
-
 });
