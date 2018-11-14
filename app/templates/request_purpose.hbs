@@ -1,25 +1,22 @@
 <div class="row checkout_pages">
-  <div class="small-12 medium-9 large-9 columns">
+  <div class="small-12 columns">
     <section class="main-section new-user-section ui login_page">
       <nav class="tab-bar">
         <section class="left-small">
-          {{fa-icon "angle-left"}} {{#link-to "authenticate" classNames="back"}}{{t "back"}}{{/link-to}}
+          {{fa-icon "angle-left"}} {{#link-to "home" classNames="back"}}{{t "back"}}{{/link-to}}
         </section>
          <section class="middle tab-bar-section">
           <h1 class="title">Request Purpose</h1>
         </section>
       </nav>
-      {{small-cart-toggle-view}}
     </section>
   </div>
-
-  {{!-- {{partial "cart_content/checkout_full_view"}} --}}
 </div>
 
 
 <section class="main-section request-purpose">
   {{#validatable-form onSubmit=(action 'createOrderWithRequestPuropose') as |form|}}
-      <div class="small-12 medium-9 large-9 columns">
+      <div class="small-12 columns">
         Purpose of Goods
       </div>
       <div class="row time_inputs purpose" >
@@ -49,7 +46,7 @@
         </div>
       </div>
     <div class="row people-count">
-        <div class="small-12 medium-9 large-9 columns people-count-label">
+        <div class="small-12 columns people-count-label">
           How many people will benefit from these items?
         </div>
         <div class="small-12 columns">
@@ -62,10 +59,10 @@
         </div>
     </div>
     <div class="row description-of-need">
-      <div class="small-12 medium-9 large-9 columns description">
+      <div class="small-12 columns description">
         Description of need
       </div>
-      <div class="small-12 medium-9 large-9 columns reason-of-need">
+      <div class="small-12 columns reason-of-need">
         Please briefly describe why goods are needed.
       </div>
       {{#form-control}}

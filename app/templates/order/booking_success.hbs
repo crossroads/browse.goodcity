@@ -1,5 +1,5 @@
 <div class="row checkout_pages">
-  <div class="small-12 medium-9 large-9 columns">
+  <div class="small-12 columns">
     <section class="main-section new-user-section ui login_page">
       <nav class="tab-bar">
         <section class="left-small">
@@ -14,33 +14,33 @@
 </div>
 
 <section class="main-section client-information">
-	<div class="small-12 medium-9 large-9 columns type-of-id-text">
+	<div class="small-12 columns type-of-id-text">
 	  Reference Number
 	</div>
 	<br>
 	<div class="row time_inputs id-type-radio-input" >
-    <div class=" custom_radio_buttons small-12 columns purpose" for="For HKID">
+    <div class=" custom_radio_buttons small-12  large-4 columns purpose" for="For HKID">
     	{{model.code}}
     </div>
   </div>
 
-  <div class="small-12 medium-9 large-9 columns type-of-id-text">
+  <div class="small-12 medium-9 large-4 columns type-of-id-text">
 	  Reference Number
 	</div>
 	<br>
 
   <div class="row time_inputs id-type-radio-input" >
-    <div class=" custom_radio_buttons small-12 columns purpose" for="For HKID">
+    <div class=" custom_radio_buttons small-12  large-4 columns purpose" for="For HKID">
     	{{model.state}}
     </div>
   </div>
 
   <div class="row">
-		<div class="small-12 medium-9 large-9 columns type-of-id-text">
+		<div class="small-12 columns type-of-id-text">
       What happens now?
     </div>
 
-    <div class="small-12 medium-9 large-9 columns id-confidential-text">
+    <div class="small-12 columns id-confidential-text">
       Our staff will soon start checking the details and may contact you and/or beneficiery to clarify.
       If everything is okay then the order will be marked confirmed.
       <br><br>
@@ -51,12 +51,12 @@
   <br>
 
   <div class="row">
-		<div class="small-12 columns">
+    <div class="small-12 columns">
       {{#link-to 'home'}}
         <button id="submit_pin" class="button expand drop_off">
           Go to your dashboard
         </button>
       {{/link-to}}
-		</div>
-	</div>
+    </div>
+  </div>
 </section>

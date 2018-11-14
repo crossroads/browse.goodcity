@@ -1,5 +1,5 @@
 <div class="row checkout_pages">
-  <div class="small-12 medium-9 large-9 columns">
+  <div class="small-12 columns">
     <section class="main-section new-user-section ui login_page">
       <nav class="tab-bar">
         <section class="left-small">
@@ -14,7 +14,7 @@
 </div>
 <br>
 <section class="main-section client-information">
-	<div class="small-12 medium-9 large-9 columns id-confidential-text">
+	<div class="small-12 columns id-confidential-text">
   	Please indicate type and quantity of each item needed. <br>
   	We regularly update the categories available based on the items we normally have in our stock. For unusual requirements not listed here please email local@crossroads.org.hk and we will help if we can.
   </div>
@@ -34,16 +34,9 @@
     </div>
     <br>
     <div class="row">
-      <div class="small-12 medium-12 columns">
+      <div class="small-12 columns">
         <button {{action 'submit' target=form}} class="button expand expand_button">{{t "account.continue"}}</button>
       </div>
     </div>
   {{/validatable-form}}
 </section>
-{{!-- <div class="small-9 columns description-block">
-    {{#form-control}}
-      <i class="fa fa-times-circle remove-text" aria-hidden="true" {{action "clearDescription"}}></i>
-      {{auto-resize-textarea data-autoresize=true name="description" value=description pattern=".*\S.*" id="description"}}
-    {{/form-control}}
-    </div>
-  </div> --}}
