@@ -9,7 +9,8 @@ export default Ember.Controller.extend({
   mobilePhone: null,
   selectedId: null,
   identityNumber: null,
-  order: Ember.computed.alias("model"),
+  order: Ember.computed.alias("model.order"),
+  beneficiary: Ember.computed.alias("model.beneficiary"),
 
   isHkIdSelected: Ember.computed.equal("selectedId", "hkId"),
 
@@ -32,28 +33,40 @@ export default Ember.Controller.extend({
     ];
   }),
 
+  beneficiaryParams(){
+    var beneficieryParams = {
+      first_name: this.get('firstName'),
+      last_name: this.get('lastName'),
+      identity_number: this.get('identityNumber'),
+      phone_number: this.get('mobile'),
+      order_id: this.get('order.id'),
+      identity_type_id: this.identityTypeId(),
+    };
+    return beneficieryParams;
+  },
+
+  identityTypeId(){
+    return this.get('selectedId') === 'hkId' ? 1 : 2;
+  },
+
   actions: {
     saveClientDetails(){
-      var identityTypeId = null;
       var orderId = this.get('order.id');
-      if(this.get('selectedId') === 'hkId'){
-        identityTypeId = 1;
-      } else if(this.get('selectedId') === 'abcl'){
-        identityTypeId = 2;
-      }
+      var beneficiaryId = this.get('beneficiary.id');
 
-      var beneficieryParams = {
-        first_name: this.get('firstName'),
-        last_name: this.get('lastName'),
-        identity_number: this.get('identityNumber'),
-        phone_number: this.get('mobile'),
-        order_id: orderId,
-        identity_type_id: identityTypeId,
-      };    
+      var url, actionType;
+
+      if (beneficiaryId) {
+        url = "/beneficiaries/" + beneficiaryId;
+        actionType = "PUT";
+      } else {
+        url = "/beneficiaries";
+        actionType = "POST";
+      }    
 
       var loadingView = getOwner(this).lookup('component:loading').append();
 
-      new AjaxPromise("/beneficiaries", "POST", this.get('session.authToken'), { beneficiary: beneficieryParams, order_id: orderId })
+      new AjaxPromise(url, actionType, this.get('session.authToken'), { beneficiary: this.beneficiaryParams(), order_id: orderId })
         .then(data => {
           this.get("store").pushPayload(data);
           console.log('client info controller');

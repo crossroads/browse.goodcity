@@ -4,15 +4,23 @@ import AjaxPromise from 'browse/utils/ajax-promise';
 
 export default AuthorizeRoute.extend({
   model() {
+    var orderId = this.paramsFor('order').order_id;
     return Ember.RSVP.hash({
       availableDates: new AjaxPromise("/available_dates", "GET", this.get('session.authToken'), {schedule_days: 40}),
-      order: this.store.peekRecord('order', this.paramsFor('order').order_id)
+      order: this.store.peekRecord('order', orderId),
+      orderTransport: this.store.peekAll("orderTransport").filterBy("order.id", orderId).get("firstObject")
     });
   },
 
   setUpFormData(model, controller) {
-    controller.set('selectedId', "self");
-    controller.set('selectedTimeId', "11:00am");
+    var selectedId = "self";
+    var selectedTime = "11:00am";
+    if (model.orderTransport){
+      selectedId = model.orderTransport.get('transportType');
+      selectedTime = model.orderTransport.get('timeslot');
+    }
+    controller.set('selectedId', selectedId);
+    controller.set('selectedTimeId', selectedTime);
     controller.set('available_dates', model.availableDates);
   },
 

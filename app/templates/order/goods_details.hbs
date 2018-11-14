@@ -1,6 +1,6 @@
 <div class="row checkout_pages">
   <div class="small-12 columns">
-    <section class="main-section new-user-section ui login_page">
+    <section class=" login_page">
       <nav class="tab-bar">
         <section class="left-small">
           {{fa-icon "angle-left"}} 
@@ -27,23 +27,25 @@
   </div>
 </section>
 <br>
-<section class="main-section client-information">
+<section class="main-section client-information request-add-remove-section">
   {{#validatable-form onSubmit=(action 'saveGoodsDetails') as |form|}}
     {{#each sortedGcRequests as |req index|}}
       {{add-request id=index order=model request=req num=index}}
     {{/each}}
-     <div class='row'>
+     <div class='row req-more-goods'>
+      <div class='small-2 columns'>&nbsp;</div>
+      <div class='small-6 columns link-blue add_package_link' {{action "removeRequest" on="click"}}> Request more goods </div>
       <div class='small-2 columns icon-center'>
         <i class='fa fa-plus-circle fa-2x icon' {{action "addRequest" on="click"}}></i>
       </div>
-      <div class='small-9 columns link-blue add_package_link' {{action "removeRequest" on="click"}}> Request more goods </div>
-      <div class='small-1 columns'>&nbsp;</div>
+      <div class='small-2 columns'>&nbsp;</div>
     </div>
     <br>
     <div class="row">
-      <div class="small-12 columns">
+      <div class="small-11 columns">
         <button {{action 'submit' target=form}} class="button expand expand_button">{{t "account.continue"}}</button>
       </div>
+      <div class='small-1 columns'>&nbsp;</div>
     </div>
   {{/validatable-form}}
 </section>

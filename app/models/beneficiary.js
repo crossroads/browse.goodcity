@@ -8,6 +8,7 @@ export default Model.extend({
   identityNumber:   attr('string'),
   title:            attr('string'),
   phoneNumber:      attr('string'),
+  identityTypeId: attr('number'),
 
   identityType: belongsTo('identityType', { async: false }),
 

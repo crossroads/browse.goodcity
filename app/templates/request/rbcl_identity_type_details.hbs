@@ -1,20 +1,20 @@
-<div class="small-12 medium-9 large-9 columns type-of-id-text">
-  Input recognizance form ID [Numbers Only]
+<div class="small-12 columns type-of-id-text">
+  Input recognizance form ID (numbers only)
 </div>
-<div class="small-12 medium-9 large-9 columns id-confidential-text">
-  Numbers appear after four letters e.g "RBCL"
+<div class="small-12 columns id-confidential-text">
+  Numbers appear after four letters e.g "RBCL" <br> <br>
 </div>
 <div class="row hk-id">
   <div class="small-12 columns">
-    <div class="small-3 medium-9 large-9 columns p12">
+    <div class="small-3 medium-3 large-2 columns p12">
       <label> RBCL </label>
     </div>
-    <div class="columns small-3">
+    <div class="columns small-3 medium-2 large-2">
       {{#form-control}}
         {{numeric-input name="hk_id" id="hk-id-number" value=identityNumber maxlength="4" placeholder="XXXX" required='true'}}
       {{/form-control}}
     </div>
-    <div class="columns small-6 x-with-brackets">
+    <div class="columns small-6 medium-6 large-8 x-with-brackets">
       / XX
     </div>
     <div class='small-12 columns input-error type-of-id-text'>Please input number only</div>
