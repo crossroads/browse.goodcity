@@ -1,6 +1,5 @@
 import AuthorizeRoute from './../authorize';
 import AjaxPromise from 'browse/utils/ajax-promise';
-const { getOwner } = Ember;
 
 export default AuthorizeRoute.extend({
   model() {
@@ -19,9 +18,5 @@ export default AuthorizeRoute.extend({
       });
     }
     return order;
-  },
-
-  setupController(controller, model) {
-    this._super(...arguments);
   }
 });

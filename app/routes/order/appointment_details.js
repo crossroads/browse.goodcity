@@ -1,3 +1,4 @@
+import Ember from 'ember';
 import AuthorizeRoute from './../authorize';
 import AjaxPromise from 'browse/utils/ajax-promise';
 
@@ -12,7 +13,7 @@ export default AuthorizeRoute.extend({
   setUpFormData(model, controller) {
     controller.set('selectedId', "self");
     controller.set('selectedTimeId', "11:00am");
-    controller.set('available_dates', model.availableDates)
+    controller.set('available_dates', model.availableDates);
   },
 
   setupController(controller, model) {
