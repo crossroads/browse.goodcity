@@ -62,7 +62,6 @@ export default Ember.Route.extend(preloadDataMixin, {
         attemptedTransition.retry();
         this.controllerFor('login').set('attemptedTransition', null);
       } else if( isBookAppointment === "true"){
-        console.log('abc');
         this.transitionTo("request_purpose");
       }
       else {

@@ -52,9 +52,11 @@
 
   <div class="row">
 		<div class="small-12 columns">
-		  <button id="submit_pin" class="button expand drop_off">
-		    {{t "order.submit_this_order"}}
-		  </button>
+      {{#link-to 'home'}}
+        <button id="submit_pin" class="button expand drop_off">
+          Go to your dashboard
+        </button>
+      {{/link-to}}
 		</div>
 	</div>
 </section>
