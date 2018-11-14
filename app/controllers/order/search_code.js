@@ -5,10 +5,8 @@ import AjaxPromise from 'browse/utils/ajax-promise';
 const { getOwner } = Ember;
 
 export default Ember.Controller.extend({
-
-  queryParams: ["backToNewItem", "orderId", "changeCode", "reqId"],
+  queryParams: ["changeCode", "reqId"],
   reqId: null,
-  backToNewItem: false,
   changeCode: false,
   order: Ember.computed.alias("model"),
   filter: '',
@@ -91,7 +89,7 @@ export default Ember.Controller.extend({
     cancelSearch() {
       Ember.$("#searchText").blur();
       this.send("clearSearch", true);
-      this.transitionToRoute("order.goods_details", this.get('orderId'));
+      this.transitionToRoute("order.goods_details", this.get('order.id'));
     },
 
     assignItemLabel(type){
