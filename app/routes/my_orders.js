@@ -20,7 +20,7 @@ export default AuthorizeRoute.extend({
     return Ember.RSVP.hash({
       organisation: this.store.peekAll('organisation').objectAt(0),
       user: this.store.peekAll('user').objectAt(0),
-      orders: this.store.peekAll('order')
+      orders: this.store.query('order', { shallow: true })
     });
   },
 
