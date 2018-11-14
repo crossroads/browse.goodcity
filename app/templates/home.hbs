@@ -29,13 +29,7 @@
           <div><i class="fa fa-check"></i> {{ t "home.visit.subtitle" }} </div>
           <div class="small light">({{ t "home.coming_soon" }})</div>
         </div>
-        {{#unless isUserLoggedIn}}
-          {{#link-to "login" (query-params bookAppointment=true)}}
-            <div class="button small action disabled">
-              {{ t "home.visit.action" }} <i class="fa fa-calendar"></i>
-            </div>
-          {{/link-to}}
-        {{/unless }}
+        {{partial 'book_appointment_button'}}
       </div>
     </div>
 
@@ -109,9 +103,7 @@
           <div>
             <div class="small">{{ t "home.tap_button" }}</div>
             <div class="small light"> ({{ t "home.coming_soon" }}) </div>
-            <div class="button small disabled action">
-              {{ t "home.visit.action" }} <i class="fa fa-calendar"></i>
-            </div>
+            {{partial 'book_appointment_button'}}
           </div>
         </div>
       </div>
