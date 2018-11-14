@@ -1,0 +1,37 @@
+.remove-request{
+	margin-top: 2rem;
+  padding-left: 1rem;
+}
+
+.request-section {
+  .request-block {
+    border-bottom: 1px solid;
+  }
+  .req-description input{
+    margin-top: 1rem !important;
+  }
+}
+
+.req-more-goods{
+	border-top: 1px solid;	
+}
+
+.add-request{
+	margin-top: 1rem;
+}
+
+.request-add-remove-section{
+	margin-top: 5rem;
+	.remove-request{
+		color: #f34d4f;
+	}
+}
+
+.req-more-goods div.link-blue, .req-more-goods div.icon-center{
+	text-align: right;
+	margin-top: 2rem;
+	margin-bottom: 2rem;
+	color: #f34d4f;
+}
+
+

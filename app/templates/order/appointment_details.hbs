@@ -54,7 +54,7 @@
     </div>
     <div class="row time_inputs id-type-radio-input" >
       <div class='checkbox custom_radio_buttons small-12 columns purpose'>
-        {{input type="checkbox" name="labor" checked=true id='4' }}
+        {{input type="checkbox" name="labor" checked=false id='4' required=true}}
         <label class="radio-button-text  align-text" for='4'>
         <span> I confirm understanding of labor requirements </span>
         </label>
@@ -68,7 +68,7 @@
       </div>
     </div>
 
-    <div class="row time_inputs id-type-radio-input">
+    <div class="row time_inputs id-type-radio-input appointment-date">
         <div class="checkbox custom_radio_buttons small-12 columns date_selector">
           {{select-date
             name='selectedDate'
@@ -89,44 +89,42 @@
         Appointment Time
       </div>
       <div class="row time_inputs id-type-radio-input" >
-          <div class="columns small-12">
-            <div class="custom_radio_buttons small-4 columns purpose" for="For HKID">
-              {{radio-button
-              name="selectTime"
-              id="11:00am"
-              value="11:00am"
-              selection=selectedTimeId
-              required='true'}}
-              <label class="radio-button-text align-text">
-                11:00am
-              </label>
-            </div>
+        <div class="custom_radio_buttons small-4 columns purpose" for="For HKID">
+          {{radio-button
+          name="selectTime"
+          id="11:00am"
+          value="11:00am"
+          selection=selectedTimeId
+          required='true'}}
+          <label class="radio-button-text align-text">
+            11:00am
+          </label>
+        </div>
 
-            <div class="custom_radio_buttons small-4 columns purpose" for="For asyLum">
-              {{radio-button
-              name="selectTime"
-              id="2:00pm"
-              value="2:00pm"
-              selection=selectedTimeId
-              required='true'}}
-              <label class="radio-button-text align-text">
-                2:00pm
-              </label>
-            </div>
+        <div class="custom_radio_buttons small-4 columns purpose" for="For asyLum">
+          {{radio-button
+          name="selectTime"
+          id="2:00pm"
+          value="2:00pm"
+          selection=selectedTimeId
+          required='true'}}
+          <label class="radio-button-text align-text">
+            2:00pm
+          </label>
+        </div>
 
-            <div class="custom_radio_buttons small-4 columns purpose end" for="For asyLum">
-              {{radio-button
-              name="selectTime"
-              id="3:30pm"
-              value="3:30pm"
-              selection=selectedTimeId
-              required='true'}}
-              <label class="radio-button-text align-text">
-                3:30pm
-              </label>
-            </div>
-          </div>
-          <br>
+        <div class="custom_radio_buttons small-4 columns purpose end" for="For asyLum">
+          {{radio-button
+          name="selectTime"
+          id="3:30pm"
+          value="3:30pm"
+          selection=selectedTimeId
+          required='true'}}
+          <label class="radio-button-text align-text">
+            3:30pm
+          </label>
+        </div>
+        <br>
       </div>
       <br>
       <div class="row">

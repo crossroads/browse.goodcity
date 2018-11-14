@@ -12,6 +12,7 @@ export default Model.extend({
   orderTransport: belongsTo('order_transport', { async: false }),
   organisation: belongsTo('organisation', { async: false }),
   createdById:      belongsTo('user', { async: false }),
+  beneficiary:   belongsTo('beneficiary', { async: false }),
   createdAt:        attr('date'),
   updatedAt:        attr('date'),
   detailType:       attr('string'),

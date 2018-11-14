@@ -4,6 +4,7 @@ const { getOwner } = Ember;
 
 export default Ember.Controller.extend({
   order: Ember.computed.alias("model.order"),
+  orderTransport: Ember.computed.alias('model.orderTransport'),
   selectedId: null,
   selectedTimeId: null,
   selectedDate: null,
@@ -21,9 +22,8 @@ export default Ember.Controller.extend({
   actions: {
   	saveTransportDetails(){
       var orderId = this.get('order.id');
-
-      var orderTransport = this.store.peekAll("orderTransport").filterBy("order.id", orderId).get("firstObject");
-
+      var orderTransport = this.get('orderTransport');
+      
       var url, actionType;
 
       if (orderTransport) {
