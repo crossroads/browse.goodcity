@@ -166,15 +166,28 @@ export default applicationController.extend({
     }
   }),
 
-  getUrlAndMethod(order, url, method) {
-    if(order && order.get("isDraft") && order.get("orderTransport")) {
-      url = "/order_transports/" + order.get("orderTransport.id");
-      method = "PUT";
-    } else {
-      url = "/order_transports";
-      method = "POST";
-    }
-    return { url: url, method: method };
+  saveTransport(order, orderTransport) {
+    const transportId = order.get("orderTransport.id");
+    const exists      = order && order.get("isDraft") && order.get("orderTransport");
+    const method      = exists ? 'PUT' : 'POST';
+    const url         = '/order_transports' + (exists ? `/${transportId}` : '');
+
+    return new AjaxPromise(url, method, this.get('session.authToken'), { order_transport: orderTransport })
+        .then(data => {
+          this.get("store").pushPayload(data);
+          return data;
+        });
+  },
+
+  saveAddressToOrder(addressId) {
+    const method      = 'PUT';
+    const url         = `/orders/${this.get("order.id")}`;
+
+    return new AjaxPromise(url, method, this.get('session.authToken'), { order: { address_id: addressId }})
+        .then(data => {
+          this.get("store").pushPayload(data);
+          return data;
+        });
   },
 
   isCartEmpty(message) {
@@ -200,23 +213,23 @@ export default applicationController.extend({
   actions: {
     bookSchedule() {
       var cartEmpty = this.isCartEmpty("order.transport_details_pop_up");
-      if(cartEmpty) { return false; }
+      if(cartEmpty) { 
+        return false;
+      }
       var order = this.get("store").peekAll("order").filterBy("detailType", "GoodCity").filterBy("state", "draft").get("firstObject");
-      var url, method, params;
       if(!this.get("selectedTime.name")) {
         Ember.$('.time_selector').addClass('form__control--error');
         return false;
-      } else {
-        Ember.$('.time_selector').removeClass('form__control--error');
       }
+      
+      Ember.$('.time_selector').removeClass('form__control--error');
       this.set('displayUserPrompt', false);
-      var controller = this;
-      var loadingView = getOwner(this).lookup('component:loading').append();
-      var transportType = controller.get("selectedId");
-      var selectedSlot = controller.get('selectedTime');
-      var slotName = controller.get('timeSlots').filterBy('id', selectedSlot.id).get('firstObject.name');
-      var selectedDateSlot=controller.get('selectedDate');
-      selectedDateSlot= selectedDateSlot===null ? controller.get('dateSlot1'):selectedDateSlot;
+      var loadingView       = getOwner(this).lookup('component:loading').append();
+      var controller        = this;
+      var transportType     = controller.get("selectedId");
+      var selectedSlot      = controller.get('selectedTime');
+      var slotName          = controller.get('timeSlots').filterBy('id', selectedSlot.id).get('firstObject.name');
+      var selectedDateSlot  = controller.get('selectedDate') || controller.get('dateSlot1');
 
       var scheduleDetails = {
         scheduled_at:   selectedDateSlot,
@@ -224,77 +237,77 @@ export default applicationController.extend({
         transport_type: transportType,
         order_id:       this.get("order.id") };
 
-      params = this.getUrlAndMethod(order, url, method);
-
-      url = params["url"];
-      method = params["method"];
-
-      new AjaxPromise(url, method, this.get('session.authToken'), { order_transport: scheduleDetails })
-        .then(data => {
-          this.get("store").pushPayload(data);
-          loadingView.destroy();
-          this.transitionToRoute("order.confirm", this.get("order.id"));
-        });
+      this.saveTransport(order, scheduleDetails)
+          .then(() => {
+            loadingView.destroy();
+            this.transitionToRoute("order.confirm", this.get("order.id"));
+          });
     },
 
     bookGGVSchedule() {
+      // Validation
       if(this.get('userName').trim() === ""){
         Ember.$('#name').focus();
         return;
-      } else if (this.get('mobilePhone').length < 8 ) {
+      }
+
+      if (this.get('mobilePhone').length < 8 ) {
         Ember.$('#mobile').focus();
         return;
       }
+
       var cartEmpty = this.isCartEmpty("order.transport_details_pop_up");
-      if(cartEmpty) { return false; }
+      if(cartEmpty) { 
+        return false;
+      }
+
       var order = this.get("store").peekAll("order").filterBy("detailType", "GoodCity").filterBy("state", "draft").get("firstObject");
-      var url, method, params;
       if(!this.get("selectedTime.name")) {
         Ember.$('.time_selector').addClass('form__control--error');
         return false;
-      } else {
-        Ember.$('.time_selector').removeClass('form__control--error');
       }
+      
+      // Request
+      Ember.$('.time_selector').removeClass('form__control--error');
       this.set('displayUserPrompt', false);
-      var controller = this;
-      var loadingView = getOwner(controller).lookup('component:loading').append();
-      var selectedDateSlot=controller.get('selectedDate');
-      selectedDateSlot = selectedDateSlot===null ? controller.get('dateSlot1'):selectedDateSlot;
+      var controller        = this;
+      var loadingView       = getOwner(this).lookup('component:loading').append();
+      var selectedDateSlot  = controller.get('selectedDate') || controller.get('dateSlot1');
 
-      var requestProperties = {};
-      requestProperties.scheduled_at = selectedDateSlot;
-      requestProperties.timeslot = this.get('selectedTime.name');
-      requestProperties.transport_type = controller.get("selectedId");
-      requestProperties.need_english = controller.get("speakEnglish");
-      requestProperties.need_cart = controller.get("borrowTrolley");
-      requestProperties.need_carry = controller.get("porterage");
-      requestProperties.order_id = controller.get('order.id');
-      requestProperties.gogovan_transport_id = controller.get('selectedGogovanOption');
+      var address = {
+        district_id: controller.get('selectedDistrict.id')
+      };
 
-      if(this.get("isSelectedVan")) {
+      var requestProperties = {
+        scheduled_at: selectedDateSlot,
+        timeslot: controller.get('selectedTime.name'),
+        transport_type: controller.get("selectedId"),
+        need_english: controller.get("speakEnglish"),
+        need_cart: controller.get("borrowTrolley"),
+        need_carry: controller.get("porterage"),
+        order_id: controller.get('order.id'),
+        gogovan_transport_id: controller.get('selectedGogovanOption'),
+        contact_attributes: {
+          name: controller.get("userName"),
+          mobile: "+852" + controller.get("mobilePhone"),
+          address_attributes: address
+        }
+      };
+
+      if (this.get("isSelectedVan")) {
         requestProperties.need_over_6ft = this.get("longerGoods");
         requestProperties.remove_net = this.get("longGoodSelection");
       }
 
-      requestProperties.contact_attributes = {
-        name: controller.get("userName"),
-        mobile: "+852" + controller.get("mobilePhone"),
-        address_attributes: {
-          district_id: controller.get('selectedDistrict.id')
-        }
-      };
-
-      params = this.getUrlAndMethod(order, url, method);
-
-      url = params["url"];
-      method = params["method"];
-
-      new AjaxPromise(url, method, this.get('session.authToken'), { order_transport: requestProperties })
-        .then(data => {
-          this.get("store").pushPayload(data);
-          loadingView.destroy();
-          this.transitionToRoute("order.confirm", this.get("order.id"));
-        });
+      this.saveTransport(order, requestProperties)
+          .then(() => {
+            const addressId = this.get('order.orderTransport.contact.address.id');
+            return this.saveAddressToOrder(addressId);
+          })
+          .then(() => {
+            loadingView.destroy();
+            this.transitionToRoute("order.confirm", this.get("order.id"));
+          });
     }
   }
 });
