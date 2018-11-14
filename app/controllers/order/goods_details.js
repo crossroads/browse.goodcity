@@ -3,9 +3,10 @@ const { getOwner } = Ember;
 import AjaxPromise from 'browse/utils/ajax-promise';
 
 export default Ember.Controller.extend({
-  queryParams: ["typeId"],
+  queryParams: ["typeId", "fromClientInformation"],
   order: Ember.computed.alias("model"),
   typeId: null,
+  fromClientInformation: false,
   qty: null,
   otherDetails: "",
   requestCount: 3,

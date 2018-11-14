@@ -58,7 +58,7 @@ export default Ember.Controller.extend({
           this.get("store").pushPayload(data);
           console.log('client info controller');
           loadingView.destroy();
-          this.transitionToRoute('order.goods_details', orderId);
+          this.transitionToRoute('order.goods_details', orderId, { queryParams: { fromClientInformation: true }});
         });
     }
   }
