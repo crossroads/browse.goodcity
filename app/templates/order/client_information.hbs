@@ -1,30 +1,27 @@
 <div class="row checkout_pages">
-  <div class="small-12 medium-9 large-9 columns">
+  <div class="small-12 columns">
     <section class="main-section new-user-section ui login_page">
       <nav class="tab-bar">
         <section class="left-small">
-          {{fa-icon "angle-left"}} {{#link-to "authenticate" classNames="back"}}{{t "back"}}{{/link-to}}
+          {{fa-icon "angle-left"}} {{#link-to "request_purpose" classNames="back"}}{{t "back"}}{{/link-to}}
         </section>
          <section class="middle tab-bar-section">
           <h1 class="title">Client Information</h1>
         </section>
       </nav>
-      {{!-- {{small-cart-toggle-view}} --}}
     </section>
   </div>
-
-  {{!-- {{partial "cart_content/checkout_full_view"}} --}}
 </div>
 
 <section class="main-section client-information">
   {{#validatable-form onSubmit=(action 'saveClientDetails') as |form|}}
-    <div class="small-12 medium-9 large-9 columns type-of-id-text">
+    <div class="small-12 columns type-of-id-text">
       Type of ID held by client
     </div>
-    <div class="small-12 medium-9 large-9 columns id-confidential-text">
+    <div class="small-12 columns id-confidential-text">
       We will use this ID to verify client on arrival.
     </div>
-    <div class="small-12 medium-9 large-9 columns id-confidential-text">
+    <div class="small-12 columns id-confidential-text">
       All client data is kept strictly confidential.
     </div>
     <div class="row time_inputs id-type-radio-input" >
@@ -108,7 +105,7 @@
 
       <div class="row">
         <div class="small-12 columns">
-          <a {{action 'submit' target=form}} class="button expand">Continue</a>
+          <a {{action 'submit' target=form}} class="button expand"> Continue </a>
         </div>
       </div>
     </div>

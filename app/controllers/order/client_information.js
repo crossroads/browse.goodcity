@@ -47,18 +47,18 @@ export default Ember.Controller.extend({
         last_name: this.get('lastName'),
         identity_number: this.get('identityNumber'),
         phone_number: this.get('mobile'),
-        order_id: this.get('order.id'),
+        order_id: orderId,
         identity_type_id: identityTypeId,
       };    
 
       var loadingView = getOwner(this).lookup('component:loading').append();
 
-      new AjaxPromise("/beneficiaries", "POST", this.get('session.authToken'), { beneficiary: beneficieryParams, order_id: this.get('order.id') })
+      new AjaxPromise("/beneficiaries", "POST", this.get('session.authToken'), { beneficiary: beneficieryParams, order_id: orderId })
         .then(data => {
           this.get("store").pushPayload(data);
           console.log('client info controller');
           loadingView.destroy();
-          this.transitionToRoute('order.goods_details', this.get('order.id'));
+          this.transitionToRoute('order.goods_details', orderId);
         });
     }
   }

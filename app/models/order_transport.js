@@ -9,6 +9,7 @@ export default Model.extend({
   transportType: attr('string'),
   vehicleType:   attr('string'),
   scheduledAt:   attr('date'),
+  orderId: attr('number'),
 
   contact:  belongsTo('contact', { async: false }),
   order:    belongsTo('order', { async: false }),

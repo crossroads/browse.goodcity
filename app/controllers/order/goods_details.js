@@ -36,7 +36,6 @@ export default Ember.Controller.extend({
 
   actions: {
   	addRequest(){
-      let url, actionType;
       var orderId = this.get('order.id');
       var goodcityRequestParams = {};
       goodcityRequestParams['quantity'] = 1;
