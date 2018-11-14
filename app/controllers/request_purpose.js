@@ -10,6 +10,10 @@ export default Ember.Controller.extend({
   user: Ember.computed.alias('session.currentUser'),
 
   actions: {
+    clearDescription() {
+      this.set("description", "");
+    },
+    
     createOrderWithRequestPuropose(){
       var user = this.get('user');
       var purposeIds = [];
