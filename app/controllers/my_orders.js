@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import _ from 'lodash';
 
 export default Ember.Controller.extend({
   sortProperties: ["createdAt:desc"],
@@ -12,37 +13,36 @@ export default Ember.Controller.extend({
 
   getCategoryForCode: function (code) {
     const categories = this.get('model.packageCategories');
-    const category = categories.find(cat => {
-      return cat.get('packageTypeCodes').indexOf(code) >= 0;
-    });
+    const category = categories.find(c => _.includes(c.get('packageTypeCodes'), code));
     return category && category.get('name');
   },
 
   requestedGoods: Ember.computed('selectedOrder', 'model.packageCategories', function () {
-    const order = this.get('selectedOrder');
-    if (!order) {
+    const requests = this.get('selectedOrder.goodcityRequests');
+    if (!requests) {
       return [];
     }
-    return order.get('goodcityRequests').map(req => {
-      const text = req.get('packageType.name');
-      const category = this.getCategoryForCode(req.get('packageType.code'));
-      return { category, text };
-    });
+    return requests.map(req => ({ 
+      category: this.getCategoryForCode(req.get('packageType.code')),
+      text: req.get('packageType.name')
+    }));
   }),
 
   hasRequestedGoods: Ember.computed.notEmpty('requestedGoods'),
 
   orderedGoods: Ember.computed('selectedOrder', 'model.packageCategories', function () {
-    const order = this.get('selectedOrder');
-    if (!order) {
+    const orderPackages = this.get('selectedOrder.ordersPackages');
+    if (!orderPackages) {
       return [];
     }
-    return order.get('ordersPackages').map((orderPackage) => {
-      const text = orderPackage.get('package.packageType.name');
-      const category = this.getCategoryForCode(orderPackage.get('package.packageType.code'));
-      return { category, text };
-    });
+    return orderPackages.map(op => ({ 
+      notes: op.get('package.notes'), 
+      text: op.get('package.packageType.name'),
+      imageUrl: op.get('package.favouriteImage.imageUrl')
+    }));
   }),
+
+  hasOrderedGoods: Ember.computed.notEmpty('orderedGoods'),
 
   submitted: false,
   orderSummaryTabs: [

@@ -244,6 +244,7 @@ export default {
       "transport": "Transport",
       "appointment": "Appointment",
       "goods_requested": "Goods Requested",
+      "goods_ordered": "Goods Selected",
       "request": {
         "request_purpose": "Request purpose",
         "purpose_of_goods": "Purpose of goods",

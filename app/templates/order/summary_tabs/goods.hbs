@@ -1,7 +1,7 @@
 <div class="goods-tab">
 
   {{#if hasRequestedGoods}}
-    {{!-- GOODS --}}
+  {{!-- REQUESTS --}}
     <section class="details">
       <div class="section-title">
         {{ t "my_orders.details.goods_requested" }}
@@ -11,6 +11,27 @@
         <div class="detail-row">
           <div class="data-type">{{ good.category }}</div>
           <div class="data">{{ good.text }}</div>
+        </div>
+      {{/each}}
+    </section>
+  {{/if}}
+
+  {{#if hasOrderedGoods}}
+    {{!-- ORDERS --}}
+    <section class="details">
+      <div class="section-title">
+        {{ t "my_orders.details.goods_ordered" }}
+      </div>
+
+      {{#each orderedGoods as |good|}}
+        <div class="row product-row">
+          <div class="columns small-4 image-container">
+            <img src={{good.imageUrl}} />
+          </div>
+          <div class="columns small-8 text-container">
+            <div class="text">{{ good.text }}</div>
+            <div class="notes">{{ good.notes }}</div>
+          </div>
         </div>
       {{/each}}
     </section>

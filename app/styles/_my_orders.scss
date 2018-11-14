@@ -109,7 +109,7 @@
               padding-left: 6%;
               .data-type {
                 margin-right: 1rem;
-                width: 30%;
+                width: 35%;
               }
               .data {
                 color: white;
@@ -149,6 +149,31 @@
               margin-bottom: 0;
             }
           }
+        }
+
+        // ---- GOODS TAB
+        .goods-tab {
+          .product-row {
+            &:not(:last-child) {
+              border-bottom: 1px solid white;
+            }
+            .image-container {
+              padding: 1rem;
+              img {
+                border: 1px solid white;
+              }
+            }
+            .text-container {
+              padding-top: 1rem;
+              >div {
+                &.text {
+                  color: white;
+                }
+                font-size: 0.75rem;
+              }
+            }
+          }
+
         }
 
 
