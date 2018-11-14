@@ -66,6 +66,14 @@
   }
 }
 
+.cart-redirect-link {
+  background-color: transparent !important;
+  cursor: pointer;
+  &.disabled {
+    cursor: default;
+  }
+}
+
 .cart-icon {
   font-size: 1.3rem;
   vertical-align: text-top;
