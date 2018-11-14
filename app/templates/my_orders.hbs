@@ -1,23 +1,19 @@
 <div class="row my_orders">
   <div class="title">{{t "my_orders.my_orders"}}</div>
   <div class="row order-heading">
-    <div class="small-4 columns">{{t "my_orders.order_no"}}</div>
-    <div class="small-4 columns">{{t "my_orders.order_state"}}</div>
-    <div class="small-4 columns">{{t "my_orders.item_count"}}</div>
+    <div class="small-6 columns">{{t "my_orders.order_no"}}</div>
+    <div class="small-6 columns">{{t "my_orders.order_state"}}</div>
   </div>
   <div class="small-12 columns">
     <ul class="list list-items">
       {{#each arrangedOrders as |order|}}
         <li {{action "setOrder" order}}>
           <div class="row">
-            <div class="small-4 columns">
+            <div class="small-6 columns">
               {{order.code}}
             </div>
-            <div class="small-4 columns">
+            <div class="small-6 columns">
               {{t order.updatedState}}
-            </div>
-            <div class="small-4 columns">
-              {{order.orderItems.length}}
             </div>
           </div>
         </li>
