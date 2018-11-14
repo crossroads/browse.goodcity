@@ -2,11 +2,15 @@
   <li>
     <div class="row">
       <div class="large-3 medium-3 columns">
-        <img class="thumb-image {{unless record.available 'grayed-image'}}" src="{{record.imageUrl}}" />
+        {{#link-to 'package' record.id (query-params sortBy=sortBy categoryId=category) disabled=(is-not record.available) class="cart-redirect-link"}}
+          <img class="thumb-image {{unless record.available 'grayed-image'}}" src="{{record.imageUrl}}" />
+        {{/link-to}}
       </div>
 
       <div class="large-9 medium-9 columns">
-        {{record.name}}
+        {{#link-to 'package' record.id (query-params sortBy=sortBy categoryId=category) disabled=(is-not record.available) class="cart-redirect-link"}}
+          {{record.name}}
+        {{/link-to}}
 
         {{#unless record.available}}
           <div class="unavailable">{{t "cart_content.unavailable"}}</div>

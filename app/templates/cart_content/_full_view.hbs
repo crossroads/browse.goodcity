@@ -27,16 +27,19 @@
         <li>
           <div class="row">
             <div class="small-3 columns">
-              <img class="thumb-image {{unless record.available 'grayed-image'}}" src="{{record.imageUrl}}" />
+              {{#link-to 'package' record.id (query-params sortBy=sortBy categoryId=category) disabled=(is-not record.available) class="cart-redirect-link"}}
+                <img class="thumb-image {{unless record.available 'grayed-image'}}" src="{{record.imageUrl}}" />
+              {{/link-to}}
             </div>
 
             <div class="small-6 columns">
-              {{record.name}}
+              {{#link-to 'package' record.id (query-params sortBy=sortBy categoryId=category) disabled=(is-not record.available) class="cart-redirect-link"}}
+                {{record.name}}
+              {{/link-to}}
               {{#unless record.available}}
                 <div class="unavailable">{{t "cart_content.unavailable"}}</div>
               {{/unless}}
             </div>
-
             <div class="small-3 columns remove_link" {{action 'removeItem' record.id record.modelType}}>
               <i class="fa fa-times" aria-hidden="true"></i>
               <span>{{t "cart_content.remove"}}</span>
