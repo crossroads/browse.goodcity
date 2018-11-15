@@ -14,7 +14,6 @@ export default Ember.Controller.extend({
   fetchMoreResult: true,
   searchPlaceholder: t("search.placeholder"),
   i18n: Ember.inject.service(),
-  isSearchCodePreviousRoute: Ember.computed.localStorage(),
 
   allPackageTypes: Ember.computed("fetchMoreResult", function(){
     return this.store.peekAll('package_type');
@@ -124,13 +123,3 @@ export default Ember.Controller.extend({
     }
   }
 });
-
-// let url, actionType;
-//       let organisationUserId = this.get('organisationsUserId');
-//       if (organisationUserId) {
-//         url = "/organisations_users/" + organisationUserId;
-//         actionType = "PUT";
-//       } else {
-//         url = "/organisations_users";
-//         actionType = "POST";
-//       }

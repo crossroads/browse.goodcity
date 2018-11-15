@@ -8,5 +8,10 @@ export default AuthorizeRoute.extend({
   setupController(controller, model) {
     this._super(...arguments);
     this.setUpFormData(model, controller);
+    this.controllerFor('application').set('showSidebar', false);
+  },
+  
+  deactivate() {
+    this.controllerFor('application').set('showSidebar', true);
   }
 });

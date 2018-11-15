@@ -83,6 +83,7 @@ module.exports = function(environment) {
     ENV.APP.API_HOST_URL = 'http://localhost:3000';
     ENV.APP.STOCK_APP_HOST_URL = 'http://localhost:4203';
 
+
     ENV.contentSecurityPolicy["connect-src"] = [
       'http://localhost:4202',
       'http://localhost:3000',

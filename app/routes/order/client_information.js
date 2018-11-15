@@ -4,7 +4,7 @@ import AuthorizeRoute from './../authorize';
 export default AuthorizeRoute.extend({
   model() {
     var orderId = this.paramsFor('order').order_id;
-    var order = this.store.peekRecord('order', orderId);
+    var order = this.store.peekRecord('order', orderId) || this.store.findRecord('order', orderId);
 
     return Ember.RSVP.hash({
       order: order,
@@ -14,7 +14,7 @@ export default AuthorizeRoute.extend({
 
   setUpFormData(model, controller) {
     var selectedId = "hkId";
-    var beneficiary = model.beneficiary
+    var beneficiary = model.beneficiary;
     if(beneficiary){
       var phoneNumber = beneficiary.get('phoneNumber').slice(4);
       selectedId = beneficiary.get('identityTypeId') === 1 ? "hkId" : "abcl";
@@ -29,5 +29,10 @@ export default AuthorizeRoute.extend({
   setupController(controller, model) {
     this._super(...arguments);
     this.setUpFormData(model, controller);
+    this.controllerFor('application').set('showSidebar', false);
+  },
+
+  deactivate(){
+    this.controllerFor('application').set('showSidebar', true);
   }
 });

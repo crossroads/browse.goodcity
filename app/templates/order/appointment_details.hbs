@@ -84,7 +84,7 @@
 
     <br>
 
-    {{!-- {{#if selectedDate}} --}}
+    {{#if selectedDate}}
       <div class="small-12 columns type-of-id-text">
         Appointment Time
       </div>
@@ -127,11 +127,11 @@
         <br>
       </div>
       <br>
-      <div class="row">
-        <div class="small-12 columns">
-          <a {{action 'submit' target=form}} class="button expand"> Continue </a>
-        </div>
+    {{/if}}
+    <div class="row">
+      <div class="small-12 columns">
+        <a {{action 'submit' target=form}} class="button expand"> Continue </a>
       </div>
-    {{!-- {{/if}} --}}
+    </div>
   {{/validatable-form}}
 </section>

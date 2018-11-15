@@ -75,40 +75,6 @@ export default Ember.Controller.extend({
     return params;
   },
 
-  redirectToTransitionOrBrowse() {
-    var attemptedTransition = this.get('authenticate').get('attemptedTransition');
-    if (attemptedTransition) {
-      this.set('attemptedTransition', null);
-      attemptedTransition.retry();
-    } else {
-      this.transitionToRoute("browse");
-    }
-  },
-
-  organisationsUserParams() {
-    var user = this.get('model.user');
-    var position = this.get('organisationsUserId') ? this.get('model.organisationsUser.position') : this.get('position');
-
-    return {
-      organisation_id: this.get('organisationId'), position: position, user_attributes: { first_name: user.get('firstName'),
-      last_name: user.get('lastName'), mobile: user.get('mobile'), email: user.get('email'), title: this.get('selectedTitle.name') }
-    };
-  },
-
-  saveOrUpdateAccount(url, actionType) {
-    var loadingView = getOwner(this).lookup('component:loading').append();
-
-    new AjaxPromise(url, actionType, this.get('session.authToken'), { organisations_user: this.organisationsUserParams()} ).then(data => {
-      this.get("store").pushPayload(data);
-      this.redirectToTransitionOrBrowse();
-    }).catch(xhr => {
-      this.get("messageBox").alert(xhr.responseJSON.errors);
-    })
-    .finally(() =>
-      loadingView.destroy()
-    );
-  },
-
   actions: {
     saveAccount() {
       let url, actionType;
@@ -136,20 +102,7 @@ export default Ember.Controller.extend({
         loadingView.destroy()
       );
     },
-
-    saveOrUpdateAccount(url, actionType) {
-      var loadingView = getOwner(this).lookup('component:loading').append();
-
-      new AjaxPromise(url, actionType, this.get('session.authToken'), { organisations_user: this.organisationsUserParams()} ).then(data => {
-        this.get("store").pushPayload(data);
-        this.redirectToTransitionOrBrowse();
-      }).catch(xhr => {
-        this.get("messageBox").alert(xhr.responseJSON.errors);
-      })
-      .finally(() =>
-        loadingView.destroy()
-      );
-    },
+    
     goToSearchOrg(){
       if (!this.get('organisationsUserId')) {
         this.transitionToRoute("search_organisation");

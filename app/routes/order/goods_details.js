@@ -26,7 +26,7 @@ export default AuthorizeRoute.extend({
 
   model() {
     var orderId = this.paramsFor('order').order_id;
-    var order = this.store.peekRecord('order', orderId);
+    var order = this.store.peekRecord('order', orderId) || this.store.findRecord('order', orderId);
     var goodcityRequestParams = {};
     goodcityRequestParams['quantity'] = 1;
     goodcityRequestParams['order_id'] = orderId;
@@ -49,5 +49,10 @@ export default AuthorizeRoute.extend({
     } else {
       controller.set('backLinkPath', 'request_purpose');
     }
+    this.controllerFor('application').set('showSidebar', false);
+  },
+
+  deactivate() {
+    this.controllerFor('application').set('showSidebar', true);
   }
 });

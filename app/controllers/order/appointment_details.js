@@ -21,7 +21,6 @@ export default Ember.Controller.extend({
 
   actions: {
   	saveTransportDetails(){
-      var orderId = this.get('order.id');
       var orderTransport = this.get('orderTransport');
       
       var url, actionType;
