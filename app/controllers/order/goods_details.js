@@ -12,20 +12,6 @@ export default Ember.Controller.extend({
   requestCount: 3,
   sortProperties: ["id"],
   sortedGcRequests: Ember.computed.sort("model.goodcityRequests", "sortProperties"),
-  
-  getRequestParams() {
-    var quantity = this.get("quantity");
-    var description = this.get("description");
-    var itemSpecifics = this.get('otherDetails');
-    var params = {
-      quantity: quantity,
-      description: description,
-      item_specifics: itemSpecifics,
-      package_type_id: this.get("typeId"),
-      order_id: this.get("order.id")
-    };
-    return { goodcity_request: params };
-  },
 
   actions: {
   	addRequest(){
