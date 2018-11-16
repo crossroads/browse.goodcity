@@ -14,7 +14,7 @@
         {{/unless}}
 
         <div class="small-12 columns mobile">
-          {{#validatable-form onSubmit=(action 'authenticateUser') as |form|}}
+          {{#validatable-form onSubmit=(action 'authenticateUser' bookAppointment) as |form|}}
             <div class="row">
               <div class="small-12 columns">
                 <label class="form-label">{{t "_verification_pin.input_code"}}</label>
