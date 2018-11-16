@@ -12,15 +12,7 @@ export default Ember.Controller.extend({
   requestCount: 3,
   sortProperties: ["id"],
   sortedGcRequests: Ember.computed.sort("model.goodcityRequests", "sortProperties"),
-
-  newRequest(){
-    return this.get('requests').pushObject(this.store.createRecord('goodcityRequest',{
-      description: '',
-      quantity: '',
-      order: this.get('order')
-    }));
-  },
-
+  
   getRequestParams() {
     var quantity = this.get("quantity");
     var description = this.get("description");
@@ -51,20 +43,6 @@ export default Ember.Controller.extend({
           loadingView.destroy();
         });
   	},
-
-    removeRequest(reqId) {
-      var url = `/goodcity_requests/${reqId}`;
-      var req = this.get("store").peekRecord("goodcity_request", reqId);
-      var loadingView = getOwner(this).lookup('component:loading').append();
-      new AjaxPromise(url, "DELETE", this.get('session.authToken'))
-        .then(data => {
-          this.get("store").pushPayload(data);
-        })
-        .finally(() => {
-          loadingView.destroy();
-          this.get("store").unloadRecord(req);
-        });
-    },
 
     saveGoodsDetails(){
       var promises = [];

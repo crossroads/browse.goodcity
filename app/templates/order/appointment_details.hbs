@@ -2,7 +2,7 @@
   <div class="small-12 columns">
     <section class="main-section new-user-section ui login_page">
       <nav class="tab-bar">
-        <section class="left-small">
+        <section class="left-large">
           {{fa-icon "angle-left"}} {{#link-to 'order.goods_details' order.id classNames="back"}}{{t "back"}}{{/link-to}}
         </section>
          <section class="middle tab-bar-section">
@@ -69,11 +69,12 @@
     </div>
 
     <div class="row time_inputs id-type-radio-input appointment-date">
-        <div class="checkbox custom_radio_buttons small-12 columns date_selector">
+        <div class="checkbox small-12 columns date_selector">
           {{select-date
             name='selectedDate'
             id='selectedDate'
             value=''
+            required='true'
             available=available_dates
             selection=selectedDate
             placeholder=datePrompt

@@ -2,7 +2,7 @@
   <div class="small-12 columns">
     <section class=" login_page">
       <nav class="tab-bar">
-        <section class="left-small">
+        <section class="left-large">
           {{fa-icon "angle-left"}} 
           {{#if fromClientInformation}}
             {{#link-to 'order.client_information' order.id classNames="back"}}{{t "back"}}{{/link-to}}
@@ -34,7 +34,7 @@
     {{/each}}
      <div class='row req-more-goods'>
       <div class='small-2 columns'>&nbsp;</div>
-      <div class='small-6 columns link-blue add_package_link' {{action "removeRequest" on="click"}}> Request more goods </div>
+      <div class='small-6 columns link-blue add_package_link' {{action "addRequest" on="click"}}> Request more goods </div>
       <div class='small-2 columns icon-center'>
         <i class='fa fa-plus-circle fa-2x icon' {{action "addRequest" on="click"}}></i>
       </div>

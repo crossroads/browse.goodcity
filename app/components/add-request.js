@@ -22,17 +22,17 @@ export default Ember.Component.extend({
     },
 
     removeRequest(reqId) {
-        var url = `/goodcity_requests/${reqId}`;
-        var req = this.get("store").peekRecord("goodcity_request", reqId);
-        var loadingView = getOwner(this).lookup('component:loading').append();
-        new AjaxPromise(url, "DELETE", this.get('session.authToken'))
-          .then(data => {
-            this.get("store").pushPayload(data);
-          })
-          .finally(() => {
-            loadingView.destroy();
-            this.get("store").unloadRecord(req);
-          });
-      },
+      var url = `/goodcity_requests/${reqId}`;
+      var req = this.get("store").peekRecord("goodcity_request", reqId);
+      var loadingView = getOwner(this).lookup('component:loading').append();
+      new AjaxPromise(url, "DELETE", this.get('session.authToken'))
+      .then(data => {
+        this.get("store").pushPayload(data);
+      })
+      .finally(() => {
+        loadingView.destroy();
+        this.get("store").unloadRecord(req);
+      });
+    },
   }
 });
