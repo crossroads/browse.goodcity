@@ -19,6 +19,7 @@
 @import "foundation_large";
 @import "search";
 @import "account_details";
+@import "request_purpose";
 
 @import "templates/home";
 @import "templates/loading";
@@ -27,5 +28,8 @@
 @import "templates/package_category";
 @import "templates/item";
 @import "templates/login";
+@import "templates/client_information";
+@import "templates/appointment_details";
 @import "components/logo-banner";
+@import "components/add-request";
 @import "ember_offline";

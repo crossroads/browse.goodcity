@@ -4,10 +4,11 @@ import config from '../config/environment';
 const { getOwner } = Ember;
 
 export default Ember.Controller.extend({
-
+  queryParams: ['bookAppointment'],
   messageBox: Ember.inject.service(),
   application: Ember.inject.controller(),
   attemptedTransition: null,
+  bookAppointment: false,
   pin: "",
   mobilePhone: "",
 
@@ -17,7 +18,7 @@ export default Ember.Controller.extend({
 
   actions: {
 
-    authenticateUser() {
+    authenticateUser(bookAppointment) {
       Ember.$('.auth_error').hide();
       var pin = this.get('pin');
       var otp_auth_key = this.get('session.otpAuthKey');
@@ -32,7 +33,9 @@ export default Ember.Controller.extend({
           _this.store.pushPayload(data.user);
           _this.setProperties({pin: null});
           _this.get("application").set('loggedInUser', true);
-          _this.transitionToRoute('post_login');
+          _this.transitionToRoute('post_login' , {
+            queryParams: { bookAppointment: bookAppointment }
+          });
         })
         .catch(function(jqXHR) {
           Ember.$('#pin').closest('div').addClass('error');
@@ -60,7 +63,7 @@ export default Ember.Controller.extend({
         .then(data => {
           this.set('session.otpAuthKey', data.otp_auth_key);
           this.setProperties({pin:null});
-          this.transitionToRoute('/authenticate');
+          this.transitionToRoute('authenticate', { queryParams: { bookAppointment: this.get('bookAppointment') }});
         })
         .catch(error => {
           if([401].indexOf(error.status) >= 0) {

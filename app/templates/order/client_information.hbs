@@ -1,0 +1,127 @@
+<div class="row checkout_pages">
+  <div class="small-12 columns">
+    <section class="main-section new-user-section ui login_page">
+      <nav class="tab-bar">
+        <section class="left-large">
+          {{fa-icon "angle-left"}} {{#link-to "request_purpose" classNames="back"}}{{t "back"}}{{/link-to}}
+        </section>
+         <section class="middle tab-bar-section">
+          <h1 class="title">Client Information</h1>
+        </section>
+      </nav>
+    </section>
+  </div>
+</div>
+
+<section class="main-section client-information">
+  {{#validatable-form onSubmit=(action 'saveClientDetails') as |form|}}
+    <div class="small-12 columns type-of-id-text">
+      Type of ID held by client
+    </div>
+    <div class="small-12 columns id-confidential-text">
+      We will use this ID to verify client on arrival.
+    </div>
+    <div class="small-12 columns id-confidential-text">
+      All client data is kept strictly confidential.
+    </div>
+    <div class="row time_inputs id-type-radio-input" >
+      <div class=" custom_radio_buttons small-12 columns purpose" for="For HKID">
+          {{radio-button
+          name="selectReason"
+          id="hkId"
+          value="hkId"
+          selection=selectedId
+          required='true'}}
+        <label class="radio-button-text align-text">
+          Hong Kong Identity Card
+        </label>
+      </div>
+
+      <div class=" custom_radio_buttons small-12 columns purpose end" for="For asyLum">
+          {{radio-button
+          name="selectReason"
+          id="abcl"
+          value="abcl"
+          selection=selectedId
+          required='true'}}
+        <label class="radio-button-text align-text">
+          Asylum Seeker Recognizance Form
+        </label>
+      </div>
+    </div>
+    <br>
+    {{#if isHkIdSelected}}
+      {{partial 'request/hk_identity_type_details'}}
+    {{else}}
+      {{partial 'request/rbcl_identity_type_details'}}
+    {{/if}}
+
+    <div class="row">
+      {{#form-control}}
+        <div class="small-2 columns client_title">
+          <label class="form-label">{{t "account.title"}}</label>
+        </div>
+        <div class="small-5 columns client_first_name">
+          <label class="form-label"> Client's First Name </label>
+        </div>
+        <div class="small-5 columns client_last_name">
+          <label class="form-label"> Client's Family Name </label>
+        </div>
+        <br>
+        <div class="small-12 columns id-confidential-text">
+          As shown on identity document <br> <br>
+        </div>
+        <div class="hk-id">
+          <div class="small-2 columns client_title">
+            {{select-list
+              content=titles
+              on-change=(action (mut selectedTitle))
+              selectedValue=selectedTitle
+              value= selectedTitle
+              selectArrow=true
+              classNames='condition'
+              idNames='title' }}
+          </div>
+
+          <div class="small-5 columns client_first_name">
+            {{input type="text" value=firstName id="hk-id-firstName" classNames=" center_align_placeholder" required='true'}}
+          </div>
+          <div class="small-5 columns client_last_name">
+            {{input type="text" value=lastName id="hk-id-lastName" classNames="center_align_placeholder" required='true'}}
+          </div>
+        </div>
+        <div class="small-12 columns input-error warning_empty">
+          {{fa-icon "warning"}}&nbsp;&nbsp;{{t "account.user_info"}}
+        </div>
+      {{/form-control}}
+    </div>
+
+    <div class="row client-name-inputs">
+      <div class="small-12 columns type-of-id-text">
+        Clients contact phone number <br>
+      </div>
+      <div class="small-12 columns id-confidential-text">
+        We will use this number to confirm schedule and details. <br><br>
+      </div>
+      <div class="row hk-id">
+        {{#form-control}}
+          <div class="row client-name-inputs">
+            <div class="small-3 columns">
+              <span class="prefix">+852</span>
+            </div>
+            <div class="small-9 columns">
+              {{numeric-input value=mobilePhone name="mobilePhone" id="mobile" maxlength="8" required=true pattern=".{8,}" autoFocus=true}}
+            </div>
+          </div>
+        {{/form-control}}
+      </div>
+
+      <div class="row">
+        <div class="small-12 columns">
+          <a {{action 'submit' target=form}} class="button expand"> Continue </a>
+        </div>
+      </div>
+    </div>
+  {{/validatable-form}}
+</section>
+

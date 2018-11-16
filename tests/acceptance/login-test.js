@@ -123,7 +123,6 @@ test("User is able to resend the sms code, submit pin and logout", function(asse
 
 });
 
-
 test("User redirected to browse page after login if account_details is complete", function(assert){
   var authToken = window.localStorage.authToken;
   visit('/login');

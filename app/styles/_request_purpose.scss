@@ -1,0 +1,110 @@
+.request-purpose {
+  .button{
+    width: 97%;
+    margin-top: 1rem;
+  }
+  .input-error {
+    background: #ED4C4E !important;
+    color: white;
+    padding: 0.2rem;
+    display: none;
+    padding-bottom: 0.25rem !important;
+    width: 98.7%;
+
+    @media #{$small-only} {
+      font-size: 0.65rem;
+      width: 97%;
+      float: left !important;
+    }
+
+    @media #{$medium-only} {
+      float: left !important;
+      width: 98% !important;
+      margin-left: 0.25rem;
+    }
+  }
+
+  .form__control.form__control--error .input-error {
+    display: block;
+  }
+  .purpose {
+    .custom_radio_buttons {
+      border: 1px solid;
+      padding: .4rem;
+      width: 96.5%!important;
+      margin-top: 1rem;
+      height: 2.7rem;
+      // border: 1px solid white !important;
+      input[type=radio] {
+        margin: 0 0 0 0px;
+      }
+      label {
+        @media #{$small-only} {
+          font-size: 0.8rem;
+          margin-top: 0.4rem;
+        }
+      }
+    }
+
+    @media #{$small-only} {
+      font-size: 0.65rem;
+      margin-left: 0.3rem;
+      width: 98%;
+      float: left !important;
+    }
+
+    @media #{$medium-only} {
+      float: left !important;
+      width: 98% !important;
+      margin-left: 0.25rem;
+    }
+  }
+
+  .people-count{
+    padding-left: 0rem !important;
+
+    .people-count-label{
+      margin-top: 1rem !important;
+      margin-bottom: 0.5rem;
+    }
+    .people-count-input{
+      input {
+        height: 2.7rem;
+        padding: 0 0.5rem;
+        width: 97%;
+        background: #002352;
+        border: 1px solid $tabbar-menu-icon-color;
+        color: white;
+        height: 2.7rem !important;
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .description-of-need {
+    .description {
+      margin-top: 1rem !important;
+      margin-bottom: 0.2rem;
+    }
+    .reason-of-need{
+      font-size: 0.8rem;
+      margin-bottom: 0.5rem;
+    }
+    textarea {
+      max-width: 97%;
+      padding: 0.3rem 0.5rem;
+      background: #002352;
+      border: 1px solid $tabbar-menu-icon-color;
+      color: white;
+      padding-right: 1.5rem;
+      margin-bottom: 0;
+    }
+    .remove-text{
+      position: absolute;
+      right: 3%;
+      font-size: 1rem;
+      padding: 4.4rem 0.3rem;
+      cursor: pointer;
+    }
+  }
+}

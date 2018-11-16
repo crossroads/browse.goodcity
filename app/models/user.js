@@ -53,3 +53,4 @@ export default Addressable.extend({
     return this.roleNames().indexOf(role) >= 0;
   }
 });
+
