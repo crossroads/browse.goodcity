@@ -4,6 +4,7 @@ import AjaxPromise from 'browse/utils/ajax-promise';
 
 export default AuthorizeRoute.extend({
   backLinkPath: Ember.computed.localStorage(),
+  orderId: null,
 
   queryParams: {
     fromClientInformation: false
@@ -26,24 +27,27 @@ export default AuthorizeRoute.extend({
 
   model() {
     var orderId = this.paramsFor('order').order_id;
-    var order = this.store.peekRecord('order', orderId) || this.store.findRecord('order', orderId);
     var goodcityRequestParams = {};
     goodcityRequestParams['quantity'] = 1;
     goodcityRequestParams['order_id'] = orderId;
 
-    if (!(order.get('goodcityRequests').length)){
-    	new AjaxPromise("/goodcity_requests", "POST", this.get('session.authToken'), {  goodcity_request: goodcityRequestParams })
-      .then(data => {
+    // chaining here is not working as expected thats why we need return for both promises here.
+    return new AjaxPromise(`/orders/${orderId}/`, "GET", this.get('session.authToken'))
+      .then((data) => {
+        this.set("orderId", data["order"]["id"]);
         this.get("store").pushPayload(data);
-      }).catch(xhr => {
-        this.get("messageBox").alert(xhr.responseJSON.errors);
-      });
-    }
-    return order;
+        if(!data['goodcity_requests'].length){
+          return new AjaxPromise("/goodcity_requests", "POST", this.get('session.authToken'), {  goodcity_request: goodcityRequestParams })
+          .then(data => {
+            this.get("store").pushPayload(data);
+          });
+        }
+    });
   },
 
   setupController(controller, model) {
-    this._super(controller, model);
+    model = this.store.peekRecord("order", this.get("orderId"));
+    controller.set("model", model);
     if(this.get('backLinkPath') !== null) {
       controller.set('backLinkPath', this.get('backLinkPath'));
     } else {
