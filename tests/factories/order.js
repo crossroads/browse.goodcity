@@ -19,5 +19,6 @@ FactoryGuy.define('order', {
     createdAt:        '12/07/2016',
     updatedAt:        '12/07/2016',
     orders_packages:     FactoryGuy.hasMany('orders_package'),
+    order_transport: FactoryGuy.belongsTo('order_transport')
   }
 });

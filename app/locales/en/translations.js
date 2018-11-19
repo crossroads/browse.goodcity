@@ -228,7 +228,7 @@ export default {
     "submitted_by": "Submitted By",
     "due_date": "Due Date",
     "submitted_for_client": "Client Name",
-    "awaiting_dispatch": "Awaiting Dispatch",
+    "awaiting_dispatch": "Scheduled",
     "cancelled": "Cancelled",
     "dispatching": "Dispatching",
     "closed": "Closed",

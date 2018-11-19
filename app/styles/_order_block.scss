@@ -21,13 +21,20 @@
     height: $header-height;
     line-height: $header-height;
 
-    @media screen and (max-width: 325px) {
+    @mixin hide-transport() {
       .order_transport {
         display: none;
       }
       .order_code  {
         padding-left: 2rem;
       }
+    }
+
+    @media screen and (max-width: 325px) {
+      @include hide-transport();
+    }
+    @media #{$medium-only} {
+      @include hide-transport();
     }
 
     .order_code  {

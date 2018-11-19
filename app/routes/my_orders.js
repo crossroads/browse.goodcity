@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import _ from 'lodash';
 import AuthorizeRoute from './authorize';
 
 export default AuthorizeRoute.extend({
@@ -21,7 +22,14 @@ export default AuthorizeRoute.extend({
       organisation: this.store.peekAll('organisation').objectAt(0),
       user: this.store.peekAll('user').objectAt(0),
       orders: this.store.query('order', { shallow: true }),
-      packageCategories: this.store.peekAll('package_category')
+      packageCategories: this.store.peekAll('package_category'),
+    })
+    .then((res) => {
+      // Load dependant associations
+      return Ember.RSVP.all([
+        this.store.findAll('beneficiary', { reload: false }),
+        this.store.query('order_transport', { order_ids: res.orders.map(o => o.id).join(',') })
+      ]).then(_.constant(res));
     });
   },
 

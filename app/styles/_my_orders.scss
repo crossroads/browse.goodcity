@@ -15,7 +15,8 @@
     .button-container {
       text-align: center;
       .button {
-        font-size: 0.9em;
+        width: 80%;
+        font-size: 0.8em;
         margin-top: 1.25rem;
         margin-bottom: 1.25rem;
         .fa {
@@ -97,21 +98,22 @@
             color:white;
             font-family: $header-font-family;
             padding-left: 6%;
+            margin-bottom: 1.5rem;
           }
 
           // ---- PAIRS OF LABELS AND TEXT
           &.details {
             .detail-row {
-              display: flex;
-              flex-wrap: wrap;
-              margin-top: 0.75rem;
-              margin-bottom: 0.75rem;
+              font-size: 0.9rem;
+              margin: 0.5rem 0;
               padding-left: 6%;
               .data-type {
-                margin-right: 1rem;
-                width: 35%;
+                @extend .columns;
+                @extend .small-4;
               }
               .data {
+                @extend .columns;
+                @extend .small-8;
                 color: white;
               }
             }

@@ -4,7 +4,7 @@
   <section class="details">
 
     {{!-- ORDER TYPE --}}
-    <div class="detail-row">
+    <div class="detail-row row">
       <div class="data-type">{{ t "my_orders.details.type" }}</div>
       <div class="data">
         {{#if selectedOrder.orderTransport.isAppointment}}
@@ -16,13 +16,13 @@
     </div>
 
     {{!-- TRANSPORT --}}
-    <div class="detail-row">
+    <div class="detail-row row">
       <div class="data-type">{{ t "my_orders.details.transport" }}</div>
       <div class="data">{{ t (concat "my_orders.details.transports." selectedOrder.transportKey) }}</div>
     </div>
 
     {{!-- SCHEDULED DATE --}}
-    <div class="detail-row">
+    <div class="detail-row row">
       <div class="data-type">{{ t "my_orders.details.appointment" }}</div>
       <div class="data">{{ display-datetime selectedOrder.orderTransport.scheduledAt format="dddd Do MMMM hh:mm a" }}</div>
     </div>
@@ -48,17 +48,17 @@
         {{ t 'my_orders.details.beneficiary.client_information' }}
       </div>
       {{!-- ID TYPE --}}
-      <div class="detail-row">
+      <div class="detail-row row">
         <div class="data-type">{{ t 'my_orders.details.beneficiary.id_type' }}</div>
         <div class="data">{{ selectedOrder.beneficiary.identityType.name }}</div>
       </div>
       {{!-- ID NO --}}
-      <div class="detail-row">
+      <div class="detail-row row">
         <div class="data-type">{{ t 'my_orders.details.beneficiary.id_number' }}</div>
         <div class="data">{{ selectedOrder.beneficiary.identityNumber }}</div>
       </div>
       {{!-- NAME --}}
-      <div class="detail-row">
+      <div class="detail-row row">
         <div class="data-type">{{ t 'my_orders.details.beneficiary.client_name' }}</div>
         <div class="data">
           {{ selectedOrder.beneficiary.title }}
@@ -67,7 +67,7 @@
         </div>
       </div>
       {{!-- MOBILE --}}
-      <div class="detail-row">
+      <div class="detail-row row">
         <div class="data-type">{{ t 'my_orders.details.beneficiary.client_phone' }}</div>
         <div class="data">{{ selectedOrder.beneficiary.phoneNumber }}</div>
       </div>
@@ -80,7 +80,7 @@
       {{ t 'my_orders.details.request.request_purpose' }}
     </div>
     {{!-- Purpose --}}
-    <div class="detail-row">
+    <div class="detail-row row">
       <div class="data-type">{{ t 'my_orders.details.request.purpose_of_goods' }}</div>
       <div class="data">
         <ul>
@@ -93,12 +93,12 @@
       </div>
     </div>
     {{!-- Number benefiting --}}
-    <div class="detail-row">
+    <div class="detail-row row">
       <div class="data-type">{{ t 'my_orders.details.request.number_benefiting' }}</div>
       <div class="data">{{ selectedOrder.peopleHelped }}</div>
     </div>
     {{!-- Description of needs --}}
-    <div class="detail-row">
+    <div class="detail-row row">
       <div class="data-type">{{ t 'my_orders.details.request.description_of_needs' }}</div>
       <div class="data">{{ selectedOrder.purposeDescription }}</div>
     </div>

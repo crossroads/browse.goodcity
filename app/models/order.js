@@ -9,6 +9,7 @@ export default Model.extend({
   state: attr('string'),
   purposeDescription: attr('string'),
   ordersPackages: hasMany("orders_packages", { async: false }),
+  orderTransportId: attr('string'),
   orderTransport: belongsTo('order_transport', { async: false }),
   address: belongsTo('address', { async: false }),
   organisation: belongsTo('organisation', { async: false }),
