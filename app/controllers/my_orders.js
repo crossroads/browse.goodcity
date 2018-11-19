@@ -103,7 +103,7 @@ export default Ember.Controller.extend({
           this.set('selectedOrder', record);
           this.set('selectedOrderTab', this.orderSummaryTabs[0]);
         })
-        .catch(err => {
+        .catch(() => {
           this.get("messageBox").alert();
         })
         .finally(() => this.hideLoadingSpinner());

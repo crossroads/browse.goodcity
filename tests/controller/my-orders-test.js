@@ -28,17 +28,3 @@ test('Checking for default set values', function(assert) {
   assert.equal(ctrl.get('sortProperties')[0], "createdAt:desc");
   assert.equal(ctrl.get('selectedOrder'), null);
 });
-
-test('calling setOrder action sets order ', function(assert) {
-  assert.expect(2);
-
-  // get the controller instance
-  var ctrl = this.subject();
-
-  assert.equal(ctrl.get('selectedOrder'), null);
-
-  ctrl.send('setOrder', order);
-
-  assert.equal(ctrl.get('selectedOrder'), order);
-});
-
