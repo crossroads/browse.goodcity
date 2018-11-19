@@ -23,13 +23,13 @@ export default AuthorizeRoute.extend({
       user: this.store.peekAll('user').objectAt(0),
       orders: this.store.query('order', { shallow: true }),
       packageCategories: this.store.peekAll('package_category'),
+      beneficiaries: this.store.findAll('beneficiary', { reload: false }) // Will only return beneficiaries created by current user
     })
     .then((res) => {
       // Load dependant associations
-      return Ember.RSVP.all([
-        this.store.findAll('beneficiary', { reload: false }),
-        this.store.query('order_transport', { order_ids: res.orders.map(o => o.id).join(',') })
-      ]).then(_.constant(res));
+      return this.store.query('order_transport', { 
+        order_ids: res.orders.map(o => o.id).join(',')
+      }).then(_.constant(res));
     });
   },
 
