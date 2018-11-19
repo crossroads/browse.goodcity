@@ -268,7 +268,6 @@ export default {
         "cancelled": "Cancelled"
       },
       "state_descriptions": {
-        // TODO: recheck all
         "draft": `
           This order has not yet been submitted. You may still make modifications to it.
         `,
