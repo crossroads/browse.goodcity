@@ -5,8 +5,6 @@ export default Ember.TextField.extend({
   type:    "text",
   maxlength: "25",
   attributeBindings: [ "name", "id", "value", 'placeholder'],
-  cordova: Ember.inject.service(),
-  store: Ember.inject.service(),
 
   triggerAutofocus: Ember.observer("value", function() {
     if (this.get('value').length === 0) {

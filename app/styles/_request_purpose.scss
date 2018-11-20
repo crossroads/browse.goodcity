@@ -1,4 +1,4 @@
-.request-purpose {
+.request-purpose, .client-information {
   .button{
     width: 97%;
     margin-top: 1rem;
@@ -25,7 +25,13 @@
   }
 
   .form__control.form__control--error .input-error {
-    display: block;
+    display: block !important;
+  }
+
+  .form__control.form__control--error .input-error {
+    .input-error{
+      display: block !important;
+    }
   }
   .purpose {
     .custom_radio_buttons {

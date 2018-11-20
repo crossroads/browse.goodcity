@@ -9,7 +9,6 @@ export default Ember.Controller.extend({
   fromClientInformation: false,
   qty: null,
   otherDetails: "",
-  requestCount: 3,
   sortProperties: ["id"],
   sortedGcRequests: Ember.computed.sort("model.goodcityRequests", "sortProperties"),
 

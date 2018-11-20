@@ -91,7 +91,7 @@
           </div>
         </div>
         <div class="small-12 columns input-error warning_empty">
-          {{fa-icon "warning"}}&nbsp;&nbsp;{{t "account.user_info"}}
+          <div class='input-error'>You must input a number here</div>
         </div>
       {{/form-control}}
     </div>
@@ -112,6 +112,9 @@
             <div class="small-9 columns">
               {{numeric-input value=mobilePhone name="mobilePhone" id="mobile" maxlength="8" required=true pattern=".{8,}" autoFocus=true}}
             </div>
+            <div class="small-12 columns input-error">
+              <div class='input-error'>Please provide a valid Hong Kong mobile number.</div>  
+            </div>  
           </div>
         {{/form-control}}
       </div>
