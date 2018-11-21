@@ -7,7 +7,7 @@
             {{fa-icon "angle-left"}} {{#link-to "home" classNames="back"}}{{t "back"}}{{/link-to}}
           </section>
            <section class="middle tab-bar-section">
-            <h1 class="title">Request Purpose</h1>
+            <h1 class="title"> {{t 'order.request_purpose.title'}} </h1>
           </section>
         </nav>
       </section>
@@ -17,7 +17,7 @@
   <section class="main-section request-purpose large-12">
     {{#validatable-form onSubmit=(action 'createOrderWithRequestPuropose') as |form|}}
       <div class="small-12 columns">
-        Purpose of Goods
+        {{t 'order.request_purpose.purpose'}}
       </div>
       <div class="row time_inputs purpose" >
         <div class=" custom_radio_buttons small-12 columns purpose" for="For organisation's own purpose">
@@ -28,7 +28,7 @@
           selection=selectedId
           required='true'}}
           <label class="radio-button-text align-text">
-            For organisation's own programs
+            {{t 'order.request_purpose.for_organisation'}}
           </label>
         </div>
         <div class=" custom_radio_buttons small-12 columns purpose end" for="For benificiery">
@@ -39,39 +39,39 @@
             selection=selectedId
             required='true'}}
           <label class="radio-button-text align-text">
-            For a client/benificiary
+            {{t 'order.request_purpose.for_client'}}
           </label>
         </div>
       </div>
       <div class="row people-count">
         <div class="small-12 columns people-count-label">
-          How many people will benefit from these items?
+          {{t 'order.request_purpose.people_count_info'}}
         </div>
         <div class="small-12 columns">
           <div class="small-12 people-count-input">
             {{#form-control}}
               {{input type='number' value=peopleCount required='true'}}
-              <div class='input-error'>You must input a number here</div>
+              <div class='input-error'> {{t 'order.request_purpose.people_count_warning'}} </div>
             {{/form-control}}
           </div>
         </div>
       </div>
       <div class="row description-of-need">
         <div class="small-12 columns description">
-          Description of need
+          {{t 'order.request_purpose.need_description'}}
         </div>
         <div class="small-12 columns reason-of-need">
-          Please briefly describe why goods are needed.
+          {{t 'order.request_purpose.need_description_info'}}
         </div>
         {{#form-control}}
           <i class="fa fa-times-circle remove-text" aria-hidden="true" {{action "clearDescription"}}></i>
           {{auto-resize-textarea data-autoresize=true name="description" value=description required="required" pattern=".*\S.*" id="description"}}
-          <div class='input-error'>Description cannot be blank.</div>
+          <div class='input-error'> {{t 'order.request_purpose.description_warning'}} </div>
         {{/form-control}}
       </div>
       <div class="row">
         <div class="small-12 columns">
-          <a {{action 'submit' target=form}} class="button expand">Continue</a>
+          <a {{action 'submit' target=form}} class="button expand"> {{t 'continue'}} </a>
         </div>
       </div>
     {{/validatable-form}}

@@ -5,9 +5,9 @@
         <i class="fa fa-angle-left back_icon" aria-hidden="true"></i>
         <div class="back_text">
           {{#if inlineDescription}}
-            Cancel
+            {{t 'cancel'}}
           {{else}}
-            Back
+            {{t 'back'}}
           {{/if}}
         </div>
       </a>
@@ -44,7 +44,7 @@
               {{/each}}
             </ul>
           {{else if hasFilter}}
-            <div class='no_result'> not available </div>
+            <div class='no_result'> {{t 'no_search_results'}} </div>
           {{/if}}
         {{/if}}
       </div>

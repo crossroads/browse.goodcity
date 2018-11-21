@@ -1,8 +1,8 @@
 <div class="small-12 columns type-of-id-text">
-  Input the last 4 digits of the client's HKID
+  {{t "order.client_information.hk_id_instruction.title"}} 
 </div>
 <div class="small-12 columns id-confidential-text">
-  You do not need to include number in brackets <br> <br>
+  {{t "order.client_information.hk_id_instruction.sub_title"}} <br> <br>
 </div>
 <div class="row hk-id">
   <div class="small-12 columns">
@@ -17,7 +17,7 @@
         (X)
       </div>
       <div class="small-12 columns input-error warning_empty">
-        <div class='input-error'>Please input numbers only.</div>  
+        <div class='input-error'> {{t "order.numbers_warning"}} </div>  
       </div>
     {{/form-control}}
   </div>

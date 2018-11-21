@@ -7,7 +7,7 @@
             {{fa-icon "angle-left"}} {{#link-to 'order.goods_details' order.id classNames="back"}}{{t "back"}}{{/link-to}}
           </section>
            <section class="middle tab-bar-section">
-            <h1 class="title">Appointment Details</h1>
+            <h1 class="title"> {{t 'order.appointment.title'}} </h1>
           </section>
         </nav>
       </section>
@@ -17,7 +17,7 @@
   <section class="main-section client-information">
     {{#validatable-form onSubmit=(action 'saveTransportDetails') as |form|}}
       <div class="small-12 columns type-of-id-text">
-        Transport
+        {{t 'order.appointment.transport'}}
       </div>
       <div class="row time_inputs id-type-radio-input" >
         <div class=" custom_radio_buttons small-12 columns purpose" for="For HKID">
@@ -28,7 +28,7 @@
           selection=selectedId
           required='true'}}
           <label class="radio-button-text align-text">
-            Client will bring private vehicle
+            {{t 'order.appointment.self_vehicle'}}
           </label>
         </div>
 
@@ -40,24 +40,24 @@
           selection=selectedId
           required='true'}}
           <label class="radio-button-text align-text">
-            Client needs information about hiring vehicle
+            {{t 'order.appointment.hire_vehicle'}}
           </label>
         </div>
       </div>
       <br>
 
       <div class="small-12 columns type-of-id-text">
-        Confirm understanding od labor requirements
+        {{t 'order.appointment.confirm_labor'}}
       </div>
 
       <div class="small-12 columns id-confidential-text">
-        If the request is too large for the client to carry alone, Please advice them to bring their own labor to load at our end and unload at their end. Crossroads does not provide labor, and hired truck drivers do not provide loading services without charge.
+        {{t 'order.appointment.labor_info'}}
       </div>
       <div class="row time_inputs id-type-radio-input" >
         <div class='checkbox custom_radio_buttons small-12 columns purpose'>
           {{input type="checkbox" name="labor" checked=false id='4' required=true}}
           <label class="radio-button-text  align-text" for='4'>
-          <span> I confirm understanding of labor requirements </span>
+          <span> {{t 'order.appointment.labor_confirmation'}} </span>
           </label>
         </div>
       </div>
@@ -65,7 +65,7 @@
 
       <div class="row">
         <div class="small-12 columns type-of-id-text">
-          Appointment Date
+          {{t 'order.appointment.date'}}
         </div>
       </div>
 
@@ -88,7 +88,7 @@
 
       {{#if selectedDate}}
         <div class="small-12 columns type-of-id-text">
-          Appointment Time
+          {{t 'order.appointment.time'}}
         </div>
         <div class="row time_inputs id-type-radio-input" >
           <div class="custom_radio_buttons small-4 columns purpose" for="For HKID">
@@ -132,7 +132,7 @@
       {{/if}}
       <div class="row">
         <div class="small-12 columns">
-          <a {{action 'submit' target=form}} class="button expand"> Continue </a>
+          <a {{action 'submit' target=form}} class="button expand"> {{t 'continue'}} </a>
         </div>
       </div>
     {{/validatable-form}}
