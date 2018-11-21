@@ -26,6 +26,8 @@ export default {
   "unauthorized": "您沒有此權限。",
   "back": "back",
   "no_search_results": "No Search Results.",
+  "cancel": "Cancel",
+  "continue": "Continue",
 
   "banner": {
     "presented_by": "建立機構",
@@ -154,7 +156,6 @@ export default {
     "work": "Please use your work address",
     "done": "Done",
     "contact_us": "Can't find your organisation? Please contact us for assistance.",
-    "continue": "Continue",
     "organisation_warning": "You must select valid organisation to proceed",
     "title_warning": "Add Title",
     "first_name_warning": "Add First Name",
@@ -270,6 +271,7 @@ export default {
     "order_detail_pop_up": "請在購物車中新增物資以提交訂單詳情。",
     "transport_order_detail_pop_up": "請先填寫訂單詳情",
     "transport_details_pop_up": "請在購物車中新增物資以提交運輸詳情。",
+    "numbers_warning": "Please input numbers only.",
     "transport_details": {
       "transport_method": "運輸方式: ",
       "collect_with_own_vehicle": "我會自行安排運輸接收",
@@ -291,7 +293,73 @@ export default {
     },
     "purpose_section": {
       "title": "申請目的*"
+    },
+    "client_information": {
+      "title": "Client Information",
+      "id_type_held_by_client": "Type of ID held by client",
+      "verify": "We will use this ID to verify client on arrival.",
+      "data_confidentiality": "All client data is kept strictly confidential.",
+      "hk_id": "Hong Kong Identity Card",
+      "asrf_id": "Asylum Seeker Recognizance Form",
+      "first_name": "Client's First Name",
+      "family_name": "Client's Family Name",
+      "name_instruction": "As shown on identity document",
+      "name_warning": "You must enter your name here.",
+      "phone_number": "Clients contact phone number",
+      "phone_number_instruction": "We will use this number to confirm schedule and details.",
+      "hk_id_instruction": {
+        "title": "Input the last 4 digits of the client's HKID",
+        "sub_title": "You do not need to include number in brackets"
+      },
+      "rbcl": {
+        "title": "Input recognizance form ID (numbers only)",
+        "sub_title": 'Numbers appear after four letters e.g "RBCL"'
+      }
+    },
+    "request_purpose": {
+      "title": "Request Purpose",
+      "purpose": "Purpose of Goods",
+      "for_organisation": "For organisation's own programs",
+      "for_client": "For a client/benificiary",
+      "people_count_info": "How many people will benefit from these items?",
+      "people_count_warning": "You must input a number here",
+      "need_description": "Description of need",
+      "need_description_info": "Please briefly describe why goods are needed.",
+      "description_warning": "Description cannot be blank."
+    },
+    "goods_details":{
+      "title": "Goods Details",
+      "info_1": "Please indicate type and quantity of each item needed.",
+      "info_2": "We regularly update the categories available based on the items we normally have in our stock. For unusual requirements not listed here please email local@crossroads.org.hk and we will help if we can.",
+      "request_more": "Request more goods"
+    }, 
+    "request": {
+      "remove_req": "Remove this request from order",
+      "remove": "Remove"
+    },
+    "appointment": {
+      "title": "Appointment Details",
+      "transport": "Transport",
+      "self_vehicle": "Client will bring private vehicle",
+      "hire_vehicle": "Client needs information about hiring vehicle",
+      "confirm_labor": "Confirm understanding of labor requirements",
+      "labor_info": "If the request is too large for the client to carry alone, Please advice them to bring their own labor to load at our end and unload at their end. Crossroads does not provide labor, and hired truck drivers do not provide loading services without charge.",
+      "labor_confirmation": "I confirm understanding of labor requirements.",
+      "date": "Appointment Date",
+      "time": "Appointment Time"
+    },
+    "booking_success": {
+      "success": "Success!",
+      "reference_number": "Reference Number",
+      "status": "Status",
+      "what_happen_after_booking": "What happens now?" ,
+      "after_booking_info_1": "Our staff will soon start checking the details and may contact you and/or beneficiery to clarify. If everything is okay then the order will be marked confirmed.",
+      "after_booking_info_2": "To see or modify your orders / appointments / preferences etc. visit your dashboard.",
+      "visit_dashboard": "Go to your dashboard"
+    },
+    "confirm_booking": {
+      "title": "Confirmation",
+      "submit_order": "Submit your Order"
     }
   }
-
 };
