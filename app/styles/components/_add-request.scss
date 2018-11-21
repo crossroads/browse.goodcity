@@ -17,11 +17,11 @@
 }
 
 .add-request{
-  margin-top: 1rem;
+  margin-top: 2rem;
 }
 
 .request-add-remove-section{
-  margin-top: 5rem;
+  margin-top: 1rem;
   .remove-request{
     color: #f34d4f;
   }
@@ -32,7 +32,4 @@
   margin-top: 2rem;
   margin-bottom: 2rem;
   color: #f34d4f;
-  @media #{$large-only} {
-    margin-left: -6.25rem;
-  }
 }
