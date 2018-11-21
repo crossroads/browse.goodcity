@@ -1,8 +1,8 @@
 <div class="small-12 columns type-of-id-text">
-  Input recognizance form ID (numbers only)
+  {{t "order.client_information.rbcl.title"}} 
 </div>
 <div class="small-12 columns id-confidential-text">
-  Numbers appear after four letters e.g "RBCL" <br> <br>
+  {{t "order.client_information.rbcl.sub_title"}} <br> <br>
 </div>
 <div class="row hk-id">
   {{#form-control}}
@@ -17,7 +17,7 @@
         / XX
       </div>
       <div class="small-12 columns input-error warning_empty">
-        <div class='input-error'>You must input a number here</div>  
+        <div class='input-error'> {{t "order.numbers_warning"}} </div>  
       </div>
     </div>
   {{/form-control}}

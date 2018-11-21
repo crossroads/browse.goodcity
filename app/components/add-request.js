@@ -14,10 +14,11 @@ export default Ember.Component.extend({
 
   actions: {
     deleteRequest(reqId) {
+      var i18n = this.get("i18n");
       this.get("messageBox").custom(
-        "Remove this request from order " + this.get("model.code"),
-        "Remove", () => this.send("removeRequest", reqId),
-        "Not Now"
+        i18n.t("order.request.remove_req").string + this.get("model.code"),
+        i18n.t("order.request.remove").string, () => this.send("removeRequest", reqId),
+        i18n.t("not_now").string
       );
     },
 
