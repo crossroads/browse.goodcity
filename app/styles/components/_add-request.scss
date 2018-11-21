@@ -13,7 +13,7 @@
 }
 
 .req-more-goods{
-  border-top: 1px solid;	
+  border-top: 1px solid;
 }
 
 .add-request{
@@ -32,4 +32,7 @@
   margin-top: 2rem;
   margin-bottom: 2rem;
   color: #f34d4f;
+  @media #{$large-only} {
+    margin-left: -6.25rem;
+  }
 }
