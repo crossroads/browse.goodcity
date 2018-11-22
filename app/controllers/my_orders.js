@@ -20,12 +20,12 @@ export default Ember.Controller.extend({
 
   fetchPackageImages(pkg) {
     return Ember.RSVP.all(
-      pkg.get('imageIds').map(id => this.store.findRecord('image', id, { reload: false }))
+      pkg.getWithDefault('imageIds', []).map(id => this.store.findRecord('image', id, { reload: false }))
     );
   },
 
   fetchMissingImages(order) {
-    const ordersPackages = order.get('ordersPackages');
+    const ordersPackages = order.getWithDefault('ordersPackages', []);
     return Ember.RSVP.all(
       ordersPackages.map(op => this.fetchPackageImages(op.get('package')))
     );

@@ -1,5 +1,12 @@
 .my_orders {
 
+  @media #{$large-up} {
+    &.row {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+  }
+
   .title {
     font-weight: bold;
     font-size: 1rem;
