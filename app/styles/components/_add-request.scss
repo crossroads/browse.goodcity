@@ -4,6 +4,16 @@
 }
 
 .request-section {
+  label{
+    @media #{$small-only}{
+      font-size: 0.8rem;
+    }
+  }
+  .request-more{
+    @media #{$small-only}{
+      width: 64% !important;
+    }
+  }
   .request-block {
     border-bottom: 1px solid;
   }
@@ -35,4 +45,7 @@
   margin-top: 2rem;
   margin-bottom: 2rem;
   color: #f34d4f;
+  @media #{$small-only}{
+    margin-left: 1rem;
+  }
 }

@@ -1,6 +1,8 @@
 .request-purpose, .client-information {
   .button{
-    width: 97%;
+    @media #{$small-only} {
+      width: 97%;
+    }
     margin-top: 1rem;
   }
   .input-error {
@@ -9,8 +11,6 @@
     padding: 0.2rem;
     display: none;
     padding-bottom: 0.25rem !important;
-    width: 98.7%;
-
     @media #{$small-only} {
       font-size: 0.65rem;
       width: 97%;
@@ -19,8 +19,8 @@
 
     @media #{$medium-only} {
       float: left !important;
-      width: 98% !important;
-      margin-left: 0.25rem;
+      width: 100% !important;
+      margin-left: 0rem !important;
     }
   }
 
@@ -35,9 +35,12 @@
   }
   .purpose {
     .custom_radio_buttons {
+      @media #{$small-only}{
+        width: 100% !important;
+        margin-left: -10px;
+      }
       border: 1px solid;
       padding: .4rem;
-      width: 96.5%!important;
       margin-top: 1rem;
       height: 2.7rem;
       // border: 1px solid white !important;
@@ -45,24 +48,37 @@
         margin: 0 0 0 0px;
       }
       label {
-        @media #{$small-only} {
-          font-size: 0.8rem;
-          margin-top: 0.4rem;
-        }
+        font-size: 0.8rem !important;
+        margin-top: 0.4rem !important;
       }
     }
-
     @media #{$small-only} {
       font-size: 0.65rem;
       margin-left: 0.3rem;
-      width: 98%;
       float: left !important;
     }
 
     @media #{$medium-only} {
       float: left !important;
-      width: 98% !important;
-      margin-left: 0.25rem;
+      width: 100%;
+      margin-left: 0rem;
+    }
+  }
+
+  .time-slots{
+    .custom_radio_buttons {
+      border: 1px solid;
+      padding: .4rem;
+      margin-top: 1rem;
+      height: 2.7rem;
+      // border: 1px solid white !important;
+      input[type=radio] {
+        margin: 0 0 0 0px;
+      }
+      label {
+        font-size: 0.8rem !important;
+        margin-top: 0.4rem !important;
+      }
     }
   }
 
@@ -77,12 +93,14 @@
       input {
         height: 2.7rem;
         padding: 0 0.5rem;
-        width: 97%;
         background: #002352;
         border: 1px solid $tabbar-menu-icon-color;
         color: white;
         height: 2.7rem !important;
         margin-bottom: 0;
+        @media #{$small-only}{
+          width: 97%;
+        }
       }
     }
   }
@@ -97,20 +115,32 @@
       margin-bottom: 0.5rem;
     }
     textarea {
-      max-width: 97%;
+      @media #{$small-only}{
+        max-width: 97%;
+      }
       padding: 0.3rem 0.5rem;
       background: #002352;
       border: 1px solid $tabbar-menu-icon-color;
       color: white;
       padding-right: 1.5rem;
       margin-bottom: 0;
+      height: 5rem !important;
     }
     .remove-text{
       position: absolute;
-      right: 3%;
+      right: 0.8%;
+      @media #{$small-only}{
+        right: 3%;
+      }
       font-size: 1rem;
       padding: 4.4rem 0.3rem;
       cursor: pointer;
     }
+  }
+}
+.col-width-appointment{
+  @media #{$small-only}{
+    width: 98%;
+    margin-left: 0px;
   }
 }

@@ -5,6 +5,9 @@
   }
   .id-confidential-text{
     font-size: 0.7rem;
+    @media #{$large-only}{
+      font-size: 0.9rem;
+    }
   }
   .id-type-radio-input{
     .custom_radio_buttons {
@@ -17,7 +20,7 @@
       }
       label {
         @media #{$small-only} {
-          font-size: 0.8rem;
+          font-size: 0.6rem;
           margin-top: 0.4rem;
         }
       }
@@ -109,7 +112,6 @@ div .hk-id{
   display: none;
   padding: 0.2rem;
   padding-bottom: 0.25rem !important;
-  width: 96.5%;
 }
 
 .goods_details{
