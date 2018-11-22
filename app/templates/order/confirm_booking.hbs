@@ -1,31 +1,33 @@
-<div class="large-10 columns large-offset-1 small-12">
-  <div class="row checkout_pages">
-    <div class="small-12 columns">
-      <section class="main-section new-user-section ui login_page">
-        <nav class="tab-bar">
-          <section class="left-large">
-            {{fa-icon "angle-left"}} {{#link-to "order.appointment_details" order.id classNames="back"}}{{t "back"}}{{/link-to}}
-          </section>
-           <section class="middle tab-bar-section">
-            <h1 class="title"> {{t "order.confirm_booking.title"}} </h1>
-          </section>
-        </nav>
-      </section>
-    </div>
-  </div>
-
-  <section class="main-section client-information">
-    <div class="small-12 columns type-of-id-text">
-      {{t "order.confirm_booking.submit_order"}}
-    </div>
-    <br>
-    <br>
-    <div class="row">
+<div class="row">
+  <div class="large-12 columns medium-12 small-12">
+    <div class="row checkout_pages">
       <div class="small-12 columns">
-        <button id="submit_pin" class="button expand drop_off" {{action 'confirmBooking' order}}>
-          {{t "order.submit_this_order"}}
-        </button>
+        <section class="main-section new-user-section ui login_page large-10 large-offset-1 medium-10 medium-offset-1 small-12">
+          <nav class="tab-bar">
+            <section class="left-large">
+              {{fa-icon "angle-left"}} {{#link-to "order.appointment_details" order.id classNames="back"}}{{t "back"}}{{/link-to}}
+            </section>
+             <section class="middle tab-bar-section">
+              <h1 class="title"> {{t "order.confirm_booking.title"}} </h1>
+            </section>
+          </nav>
+        </section>
       </div>
     </div>
-  </section>
+
+    <section class="main-section client-information large-10 large-offset-1 medium-10 medium-offset-1 small-12">
+      <div class="small-12 columns type-of-id-text">
+        {{t "order.confirm_booking.submit_order"}}
+      </div>
+      <br>
+      <br>
+      <div class="row">
+        <div class="small-12 columns">
+          <button id="submit_pin" class="button expand drop_off" {{action 'confirmBooking' order}}>
+            {{t "order.submit_this_order"}}
+          </button>
+        </div>
+      </div>
+    </section>
+  </div>
 </div>
