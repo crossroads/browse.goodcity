@@ -45,4 +45,7 @@
   margin-top: 2rem;
   margin-bottom: 2rem;
   color: #f34d4f;
+  @media #{$small-only}{
+    margin-left: 1rem;
+  }
 }
