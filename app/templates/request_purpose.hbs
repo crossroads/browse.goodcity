@@ -1,79 +1,82 @@
-<div class="large-10 columns large-offset-1 small-12">
-  <div class="row checkout_pages">
-    <div class="small-12 columns">
-      <section class="main-section new-user-section ui login_page">
-        <nav class="tab-bar">
-          <section class="left-large">
-            {{fa-icon "angle-left"}} {{#link-to "home" classNames="back"}}{{t "back"}}{{/link-to}}
-          </section>
-           <section class="middle tab-bar-section">
-            <h1 class="title"> {{t 'order.request_purpose.title'}} </h1>
-          </section>
-        </nav>
-      </section>
+<div class="row">
+  <div class="large-12 columns medium-12 small-12">
+    <div class="row checkout_pages">
+        <div class="small-12 columns">
+          <div class="row">
+            <section class="main-section new-user-section ui login_page">
+              <nav class="tab-bar">
+                <section class="left-large">
+                  {{fa-icon "angle-left"}} {{#link-to "home" classNames="back"}}{{t "back"}}{{/link-to}}
+                </section>
+                 <section class="middle tab-bar-section">
+                  <h1 class="title"> {{t 'order.request_purpose.title'}} </h1>
+                </section>
+              </nav>
+            </section>
+            <div class="row inner-section">
+              <section class="main-section request-purpose medium-10 medium-offset-1 large-10 large-offset-1 columns">
+              {{#validatable-form onSubmit=(action 'createOrderWithRequestPuropose') as |form|}}
+                <div class="small-12 columns">
+                  {{t 'order.request_purpose.purpose'}}
+                </div>
+                <div class="row time_inputs purpose" >
+                  <div class=" custom_radio_buttons small-12 columns purpose" for="For organisation's own purpose">
+                    {{radio-button
+                    name="selectReason"
+                    id="1"
+                    value="organisation"
+                    selection=selectedId
+                    required='true'}}
+                    <label class="radio-button-text align-text">
+                      {{t 'order.request_purpose.for_organisation'}}
+                    </label>
+                  </div>
+                  <div class=" custom_radio_buttons small-12 columns purpose end" for="For benificiery">
+                      {{radio-button
+                      name="selectReason"
+                      id="2"
+                      value="client"
+                      selection=selectedId
+                      required='true'}}
+                    <label class="radio-button-text align-text">
+                      {{t 'order.request_purpose.for_client'}}
+                    </label>
+                  </div>
+                </div>
+                <div class="row people-count">
+                  <div class="small-12 columns people-count-label">
+                    {{t 'order.request_purpose.people_count_info'}}
+                  </div>
+                  <div class="people-count-input">
+                    {{#form-control}}
+                      {{input type='number' value=peopleCount required='true'}}
+                      <div class='input-error'> {{t 'order.request_purpose.people_count_warning'}} </div>
+                    {{/form-control}}
+                  </div>
+                </div>
+                <div class="row description-of-need">
+                  <div class="small-12 columns description">
+                    {{t 'order.request_purpose.need_description'}}
+                  </div>
+                  <div class="small-12 columns reason-of-need">
+                    {{t 'order.request_purpose.need_description_info'}}
+                  </div>
+                  {{#form-control}}
+                    <i class="fa fa-times-circle remove-text" aria-hidden="true" {{action "clearDescription"}}></i>
+                    {{auto-resize-textarea data-autoresize=true name="description" value=description required="required" pattern=".*\S.*" id="description"}}
+                    <div class='input-error'> {{t 'order.request_purpose.description_warning'}} </div>
+                  {{/form-control}}
+                </div>
+                <div class="row">
+                  <div class="small-12 columns">
+                    <a {{action 'submit' target=form}} class="button expand"> {{t 'continue'}} </a>
+                  </div>
+                </div>
+              {{/validatable-form}}
+            </section>
+            </div>
+        </div>
+      </div>
     </div>
   </div>
-
-  <section class="main-section request-purpose large-12">
-    {{#validatable-form onSubmit=(action 'createOrderWithRequestPuropose') as |form|}}
-      <div class="small-12 columns">
-        {{t 'order.request_purpose.purpose'}}
-      </div>
-      <div class="row time_inputs purpose" >
-        <div class=" custom_radio_buttons small-12 columns purpose" for="For organisation's own purpose">
-          {{radio-button
-          name="selectReason"
-          id="1"
-          value="organisation"
-          selection=selectedId
-          required='true'}}
-          <label class="radio-button-text align-text">
-            {{t 'order.request_purpose.for_organisation'}}
-          </label>
-        </div>
-        <div class=" custom_radio_buttons small-12 columns purpose end" for="For benificiery">
-            {{radio-button
-            name="selectReason"
-            id="2"
-            value="client"
-            selection=selectedId
-            required='true'}}
-          <label class="radio-button-text align-text">
-            {{t 'order.request_purpose.for_client'}}
-          </label>
-        </div>
-      </div>
-      <div class="row people-count">
-        <div class="small-12 columns people-count-label">
-          {{t 'order.request_purpose.people_count_info'}}
-        </div>
-        <div class="small-12 columns">
-          <div class="small-12 people-count-input">
-            {{#form-control}}
-              {{input type='number' value=peopleCount required='true'}}
-              <div class='input-error'> {{t 'order.request_purpose.people_count_warning'}} </div>
-            {{/form-control}}
-          </div>
-        </div>
-      </div>
-      <div class="row description-of-need">
-        <div class="small-12 columns description">
-          {{t 'order.request_purpose.need_description'}}
-        </div>
-        <div class="small-12 columns reason-of-need">
-          {{t 'order.request_purpose.need_description_info'}}
-        </div>
-        {{#form-control}}
-          <i class="fa fa-times-circle remove-text" aria-hidden="true" {{action "clearDescription"}}></i>
-          {{auto-resize-textarea data-autoresize=true name="description" value=description required="required" pattern=".*\S.*" id="description"}}
-          <div class='input-error'> {{t 'order.request_purpose.description_warning'}} </div>
-        {{/form-control}}
-      </div>
-      <div class="row">
-        <div class="small-12 columns">
-          <a {{action 'submit' target=form}} class="button expand"> {{t 'continue'}} </a>
-        </div>
-      </div>
-    {{/validatable-form}}
-  </section>
 </div>
