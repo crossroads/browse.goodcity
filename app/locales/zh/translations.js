@@ -411,7 +411,10 @@ export default {
       "title": "Goods Details",
       "info_1": "Please indicate type and quantity of each item needed.",
       "info_2": "We regularly update the categories available based on the items we normally have in our stock. For unusual requirements not listed here please email local@crossroads.org.hk and we will help if we can.",
-      "request_more": "Request more goods"
+      "request_more": "Request more goods",
+      "type_label": "Goods type",
+      "quantity_label": "Quantity",
+      "description_details_label": "Specifics of item (Optional)"
     }, 
     "request": {
       "remove_req": "Remove this request from order",
