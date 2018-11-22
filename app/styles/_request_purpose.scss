@@ -48,24 +48,37 @@
         margin: 0 0 0 0px;
       }
       label {
-        @media #{$small-only} {
-          font-size: 0.6rem !important;
-          margin-top: 0.4rem !important;
-        }
+        font-size: 0.8rem !important;
+        margin-top: 0.4rem !important;
       }
     }
-
     @media #{$small-only} {
       font-size: 0.65rem;
       margin-left: 0.3rem;
-      width: 98%;
       float: left !important;
     }
 
     @media #{$medium-only} {
       float: left !important;
-      width: 100% !important;
-      margin-left: 0rem !important;
+      width: 100%;
+      margin-left: 0rem;
+    }
+  }
+
+  .time-slots{
+    .custom_radio_buttons {
+      border: 1px solid;
+      padding: .4rem;
+      margin-top: 1rem;
+      height: 2.7rem;
+      // border: 1px solid white !important;
+      input[type=radio] {
+        margin: 0 0 0 0px;
+      }
+      label {
+        font-size: 0.8rem !important;
+        margin-top: 0.4rem !important;
+      }
     }
   }
 
@@ -125,13 +138,9 @@
     }
   }
 }
-.col-width{
-  @media #{$small-only} {
-    width: 97% !important;
-  }
-}
-.date-picker-appointment{
-  @media #{$small-only} {
-    width: 103% !important;
+.col-width-appointment{
+  @media #{$small-only}{
+    width: 98%;
+    margin-left: 0px;
   }
 }
