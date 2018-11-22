@@ -19,7 +19,7 @@ FactoryGuy.define('package', {
     notes:    "example",
     state:    "expected",
     allowWebPublish: true,
-    ordersPackages:     FactoryGuy.hasMany('orders_package'),
+    ordersPackages:     FactoryGuy.hasMany('orders_package')
   }
 });
 

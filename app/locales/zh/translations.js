@@ -219,9 +219,89 @@ export default {
 
   "my_orders": {
     "my_orders": "我的訂單",
-    "order_no": "訂單編號",
-    "order_state": "訂單狀態",
-    "item_count": "物資數量"
+    "processing": "處理中",
+    "submitted": "訂單已經提交",
+    "draft": "等待提交",
+    "submitted_by": "Submitted By",
+    "due_date": "到期日",
+    "submitted_for_client": "為服務使用者提交",
+    "awaiting_dispatch": "等待派送",
+    "cancelled": "已取消",
+    "dispatching": "派送中",
+    "closed": "訂單已完成",
+    "order_transports": {
+      "gogovan_transport": "由貨車運送",
+      "collection_transport": "自行提取",
+      "appointment_transport": "預約",
+      "shipment_transport": "運送安排",
+      "unknown_transport": "其他"
+    },
+    "details": {
+      "type": "Type",
+      "transport": "Transport",
+      "appointment": "Appointment",
+      "goods_requested": "Goods Requested",
+      "goods_ordered": "Goods Selected",
+      "request": {
+        "request_purpose": "Request purpose",
+        "purpose_of_goods": "Purpose of goods",
+        "number_benefiting": "Number benefiting",
+        "description_of_needs": "Description of needs"
+      },
+      "beneficiary": {
+        "client_information": "Client Information",
+        "id_type": "Type of ID held",
+        "id_number": "ID Number",
+        "client_name": "Client's name",
+        "client_phone": "Client's phone"
+      },
+      "tabs": {
+        "booking": "Booking",
+        "goods": "Goods"
+      },
+      "state_titles": {
+        "draft": "Draft (not yet submitted)",
+        "submitted": "Submitted (not yet confirmed)",
+        "processing": "Processing",
+        "awaiting_dispatch": "Scheduled (not yet dispatched)",
+        "dispatching": "Dispatched",
+        "closed": "Closed",
+        "cancelled": "Cancelled"
+      },
+      "state_descriptions": {
+        "draft": `
+          This order has not yet been submitted. You may still make modifications to it.
+        `,
+        "submitted": `
+          Our staff may contact you/or the beneficiary to check details. 
+          If everything is ok then the order will be marked confirmed
+        `,
+        "dispatching": `
+          The goods are on their way.
+        `,
+        "processing": `
+          Our staff is working on your order. They may contact you to request
+          further information. If everything is ok, they will schedule the dispatch of your goods
+        `,
+        "awaiting_dispatch": `
+          Your order has been scheduled for dispatch. This page will update once the goods have been sent
+        `,
+        "closed": `
+          This order has been completed and all the goods have been dispatched successfully.
+          Please submit another order for any additional needs.
+        `,
+        "cancelled": ``
+      },
+      "types": {
+        "visit": "Warehouse visit",
+        "delivery": "Online order"
+      },
+      "transports": {
+        "gogovan_transport": "Hire commercial vehicle",
+        "collection_transport": "Pickup in-person",
+        "unknown_transport": "Other"
+      }
+    }
   },
 
   "item": {
