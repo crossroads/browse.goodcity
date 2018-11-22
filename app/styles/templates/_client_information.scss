@@ -116,4 +116,11 @@ div .hk-id{
   a.crossroads_email{
     text-decoration: underline;
   }
+  .request-add-remove-section{
+    .req-more-goods {
+      div.add_more_request{
+        cursor: pointer !important;
+      }
+    }
+  }
 }
