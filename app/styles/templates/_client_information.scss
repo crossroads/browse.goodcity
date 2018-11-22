@@ -119,9 +119,7 @@ div .hk-id{
 }
 
 .request-add-remove-section{
-  .req-more-goods {
-    .add_more_request{
-      cursor: pointer;
-    }
+  .req-more-goods .add_more_request, .req-more-goods .add_more_request i {
+    cursor: pointer;
   }
 }
