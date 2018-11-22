@@ -9,13 +9,13 @@
           {{/form-control}}
         {{/link-to}}
       </div>
-      <div class="small-3 columns remove-request-click">
+      <div class="small-3 columns">
         <label> {{t 'order.goods_details.quantity_label'}} </label>
         {{#form-control}}
           {{numeric-input id=(concat 'quantity' request.id) name="qty" value=request.quantity maxlength="8" required='true' pattern="\d{1,8}"}}
         {{/form-control}}
       </div>
-      <div class='small-2 columns icon-center remove-request'>
+      <div class='small-2 columns icon-center remove-request remove-request-click'>
         <i class='fa fa-times-circle fa-2x icon' {{action "removeRequest" request.id on="click"}}></i>
       </div>
     </div>
