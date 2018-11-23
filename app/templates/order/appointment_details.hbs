@@ -26,7 +26,7 @@
                 value="self"
                 selection=selectedId
                 required='true'}}
-                <label class="radio-button-text align-text">
+                <label class="radio-button-text align-text" for="self">
                   {{t 'order.appointment.self_vehicle'}}
                 </label>
               </div>
@@ -38,7 +38,7 @@
                 value="ggv"
                 selection=selectedId
                 required='true'}}
-                <label class="radio-button-text align-text">
+                <label class="radio-button-text align-text" for="ggv">
                   {{t 'order.appointment.hire_vehicle'}}
                 </label>
               </div>
@@ -91,38 +91,38 @@
                 {{t 'order.appointment.time'}}
               </div>
               <div class="row time_inputs id-type-radio-input time-slots" >
-                <div class="custom_radio_buttons small-3 large-3 medium-3 columns" for="For HKID">
+                <div class="custom_radio_buttons small-3 large-3 medium-3 columns">
                   {{radio-button
                   name="selectTime"
                   id="11:00am"
                   value="11:00am"
                   selection=selectedTimeId
                   required='true'}}
-                  <label class="radio-button-text align-text">
+                  <label class="radio-button-text align-text" for="11:00am">
                     11:00am
                   </label>
                 </div>
 
-                <div class="custom_radio_buttons small-3 small-offset-1 columns large-3 large-offset-1 medium-3 medium-offset-1" for="For asyLum">
+                <div class="custom_radio_buttons small-3 small-offset-1 columns large-3 large-offset-1 medium-3 medium-offset-1">
                   {{radio-button
                   name="selectTime"
                   id="2:00pm"
                   value="2:00pm"
                   selection=selectedTimeId
                   required='true'}}
-                  <label class="radio-button-text align-text">
+                  <label class="radio-button-text align-text" for="2:00pm">
                     2:00pm
                   </label>
                 </div>
 
-                <div class="custom_radio_buttons small-3 small-offset-1 columns large-3 large-offset-1 medium-3 medium-offset-1 end" for="For asyLum">
+                <div class="custom_radio_buttons small-3 small-offset-1 columns large-3 large-offset-1 medium-3 medium-offset-1 end">
                   {{radio-button
                   name="selectTime"
                   id="3:30pm"
                   value="3:30pm"
                   selection=selectedTimeId
                   required='true'}}
-                  <label class="radio-button-text align-text">
+                  <label class="radio-button-text align-text" for="3:30pm">
                     3:30pm
                   </label>
                 </div>
