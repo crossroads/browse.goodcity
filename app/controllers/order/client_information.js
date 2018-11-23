@@ -62,14 +62,13 @@ export default Ember.Controller.extend({
       } else {
         url = "/beneficiaries";
         actionType = "POST";
-      }    
+      }
 
       var loadingView = getOwner(this).lookup('component:loading').append();
 
       new AjaxPromise(url, actionType, this.get('session.authToken'), { beneficiary: this.beneficiaryParams(), order_id: orderId })
         .then(data => {
           this.get("store").pushPayload(data);
-          console.log('client info controller');
           loadingView.destroy();
           this.transitionToRoute('order.goods_details', orderId, { queryParams: { fromClientInformation: true }});
         });

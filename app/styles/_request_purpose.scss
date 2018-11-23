@@ -65,6 +65,34 @@
     }
   }
 
+  .booking-success {
+    .custom_radio_buttons {
+      border: 1px solid;
+      padding: .4rem;
+      margin-top: 1rem;
+      height: 2.7rem;
+      // border: 1px solid white !important;
+      input[type=radio] {
+        margin: 0 0 0 0px;
+      }
+      label {
+        font-size: 0.8rem !important;
+        margin-top: 0.4rem !important;
+      }
+    }
+    @media #{$small-only} {
+      font-size: 0.65rem;
+      width: 98%;
+      float: left !important;
+    }
+
+    @media #{$medium-only} {
+      float: left !important;
+      width: 100%;
+      margin-left: 0rem;
+    }
+  }
+
   .time-slots{
     .custom_radio_buttons {
       border: 1px solid;
@@ -143,4 +171,10 @@
     width: 98%;
     margin-left: 0px;
   }
+}
+.success-submit{
+  background: cornflowerblue !important;
+  color: white !important;
+  text-transform: capitalize !important;
+  margin-left: 0.6 rem !important;
 }
