@@ -1,7 +1,8 @@
+import applicationController from './application';
 import Ember from 'ember';
 import _ from 'lodash';
 
-export default Ember.Controller.extend({
+export default applicationController.extend({
   sortProperties: ["createdAt:desc"],
   arrangedOrders: Ember.computed.sort("model.orders", "sortProperties"),
   selectedOrder: null,
@@ -11,6 +12,8 @@ export default Ember.Controller.extend({
   queryParams: ['submitted'],
   triggerFlashMessage: false,
   previousRouteName: null,
+
+  buttonStyle: "light",
 
   getCategoryForCode: function (code) {
     const categories = this.get('model.packageCategories');

@@ -4,7 +4,7 @@
   </div>
 {{else}}
   {{#link-to "login" (query-params bookAppointment=true)}}
-    <div class="button small action">
+    <div class="button {{if buttonStyle buttonStyle 'small action' }}">
       {{ t "home.visit.action" }} <i class="fa fa-calendar"></i>
     </div>
   {{/link-to}}
