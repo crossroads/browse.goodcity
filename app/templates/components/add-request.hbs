@@ -1,32 +1,34 @@
 <section class="new-user-section request-section">
   <div class="request-block">
-    <div class="small-12 columns add-request">
-      <div class="small-7 columns ">
-        <label> {{t 'order.goods_details.type_label'}} </label>
-        {{#link-to 'order.search_code' order.id (query-params reqId=request.id)}}
-          {{#form-control}}
-            {{input type="text" name="packageTypeDescription" value=packageTypeName pattern=".*\S.*" id=(concat 'packageTypeDescription' request.id)}}
-          {{/form-control}}
-        {{/link-to}}
-      </div>
-      <div class="small-3 columns">
-        <label> {{t 'order.goods_details.quantity_label'}} </label>
-        {{#form-control}}
-          {{numeric-input id=(concat 'quantity' request.id) name="qty" value=request.quantity maxlength="8" required='true' pattern="\d{1,8}"}}
-        {{/form-control}}
-      </div>
-      <div class='small-2 columns icon-center remove-request remove-request-click'>
-        <i class='fa fa-times-circle fa-2x icon' {{action "removeRequest" request.id on="click"}}></i>
-      </div>
-    </div>
+    {{#form-control}}
+        <div class="small-12 columns add-request">
+          <div class="small-7 columns ">
+            <label> {{t 'order.goods_details.type_label'}} </label>
+            {{#link-to 'order.search_code' order.id (query-params reqId=request.id)}}
+                {{input type="text" name="packageTypeDescription" value=packageTypeName pattern=".*\S.*" id=(concat 'packageTypeDescription' request.id)}}
+            {{/link-to}}
+          </div>
+          <div class="small-3 columns">
+            <label> {{t 'order.goods_details.quantity_label'}} </label>
+            {{numeric-input id=(concat 'quantity' request.id) name="qty" value=request.quantity maxlength="8" required='true' pattern="\d{1,8}"}}
+          </div>
+          <div class='small-2 columns icon-center remove-request remove-request-click'>
+            <i class='fa fa-times-circle fa-2x icon' {{action "removeRequest" request.id on="click"}}></i>
+          </div>
+        </div>
+        {{!-- <div class="small-12 columns"> --}}
+          <div class="small-10 columns input-error warning_empty request-error">
+            <div class='input-error'> Enter valid details. </div>
+          </div>
+          <div class='small-2 columns'>&nbsp;</div>
+        {{!-- </div> --}}
+    {{/form-control}}
   </div>
   <div class="row">
     <div class="small-12 columns">
       <div class="small-10 columns req-description">
         <label> {{t 'order.goods_details.description_details_label'}} </label>
-        {{#form-control}}
-          {{input type="text" id=(concat 'description' request.id) name="otherDetails" value=request.description classNames="number_input center_align_placeholder"}}
-        {{/form-control}}
+        {{input type="text" id=(concat 'description' request.id) name="otherDetails" value=request.description classNames="number_input center_align_placeholder"}}
       </div>
     </div>
   </div>
