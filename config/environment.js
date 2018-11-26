@@ -130,7 +130,7 @@ module.exports = function(environment) {
       'https://api.cloudinary.com'
     ].join(' ');
 
-    if (process.env.staging === 'true') {
+    if ((process.env.staging || process.env.STAGING) === 'true') {
       ENV.staging = true;
       ENV.APP.API_HOST_URL = 'https://api-staging.goodcity.hk';
       ENV.APP.SOCKETIO_WEBSERVICE_URL = 'https://socket-staging.goodcity.hk:81/goodcity';
