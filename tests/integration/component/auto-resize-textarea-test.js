@@ -29,8 +29,8 @@ test('is of textarea type', function(assert) {
   assert.equal($('#description')[0].type, "textarea");
 });
 
-test('initial height is 66px', function(assert) {
+test('initial height is 68px', function(assert) {
   assert.expect(1);
-  assert.equal($('#description').css('height'), "66px");
+  assert.equal($('#description').css('height'), "68px");
 });
 

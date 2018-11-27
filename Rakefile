@@ -16,9 +16,6 @@
 #   Other tasks
 #     > rake clean (removes dist, cordova/www and app files)
 #     > rake clobber (also removes cordova/platforms and cordova/plugins)
-#     > rake ember:install (multitask that does bower and npm in parallel)
-#     > rake ember:build
-#     > rake cordova:install
 #     > rake cordova:prepare
 #     > rake cordova:build
 #
@@ -29,10 +26,10 @@
 #   Gradle can sign the releases during the build process.
 #   Set environment varibles: GOODCITY_KEYSTORE_PASSWORD and GOODCITY_KEYSTORE_ALIAS
 #   You must also ensure the signing key exists at CORDOVA/goodcity.keystore
-
-require 'json'
-require 'fileutils'
-require 'rake/clean'
+require "json"
+require "fileutils"
+require "rake/clean"
+require 'plist'
 
 ROOT_PATH = File.dirname(__FILE__)
 CORDOVA_PATH = "#{ROOT_PATH}/cordova".freeze
@@ -45,17 +42,6 @@ TESTFAIRY_PLUGIN_URL = 'https://github.com/testfairy/testfairy-cordova-plugin'.f
 TESTFAIRY_PLUGIN_NAME = 'com.testfairy.cordova-plugin'.freeze
 KEYSTORE_FILE = "#{CORDOVA_PATH}/goodcity.keystore".freeze
 BUILD_JSON_FILE = "#{CORDOVA_PATH}/build.json".freeze
-IOS_SIGNING_STYLE = false
-IOS_DEBUGMODE_BUILDCONF = {
-  code_signing: "\'iPhone Developer\'",
-  package_type: 'development',
-  icloud_container_environment: 'Development'
-}.freeze
-IOS_RELEASEMODE_BUILDCONF = {
-  code_signing: "\'iPhone Distribution\'",
-  package_type: 'app-store',
-  icloud_container_environment: 'Production'
-}.freeze
 
 # Default task
 task default: %w[app:build]
@@ -63,7 +49,7 @@ task default: %w[app:build]
 # Main namespace
 namespace :app do
   desc 'Builds the app'
-  task build: %w[ember:install ember:build cordova:install cordova:prepare cordova:build]
+  task build: %w[cordova:prepare cordova:build]
   desc 'Uploads the app to Azure storage'
   task deploy: %w[azure:upload]
   desc 'Equivalent to rake app:build app:deploy'
@@ -82,50 +68,9 @@ PLATFORMS.each do |platform|
   end
 end
 
-namespace :ember do
-  multitask install_parallel: %w(bower_install yarn_install)
-  desc "Ember install dependencies"
-  task :install do
-    Dir.chdir(ROOT_PATH) do
-      Rake::MultiTask["ember:install_parallel"].invoke
-    end
-  end
-  task :bower_install do
-    sh %{ bower install }
-  end
-  task :yarn_install do
-    sh %{ yarn install }
-  end
-  desc "Ember build with Cordova enabled"
-  task :build do
-    # Before starting Ember build clean up folders
-    Rake::Task["clobber"].invoke
-    Dir.chdir(ROOT_PATH) do
-      system({
-        "EMBER_CLI_CORDOVA" => "1",
-        "APP_SHA" => app_sha,
-        "staging" => is_staging.to_s,
-        "VERSION" => app_version
-        }, "ember build --environment=production")
-    end
-  end
-end
-
 namespace :cordova do
-  desc "Install cordova package globally"
-  task :install do
-    if platform == 'android'
-      sh %{ npm list --depth 1 --global cordova; if [ $? -ne 0 ]; then npm install -g cordova@6.5.0; fi }
-    else
-      sh %{ npm list --depth 1 --global cordova; if [ $? -ne 0 ]; then npm install -g cordova@7.1.0; fi }
-    end
-      sh %{ npm list --depth 1 --global cordova-update-config; if [ $? -ne 0 ]; then npm install -g cordova-update-config; fi }
-  end
-
   desc "Cordova prepare {platform}"
   task :prepare do
-    # Before cordova prepare build ember app that will auto update the dist folder too
-    Rake::Task["ember:build"].invoke
     create_build_json_file
     sh %{ ln -s "#{ROOT_PATH}/dist" "#{CORDOVA_PATH}/www" } unless File.exists?("#{CORDOVA_PATH}/www")
     build_details.map{|key, value| log("#{key.upcase}: #{value}")}
@@ -150,10 +95,6 @@ namespace :cordova do
       build = (environment == "staging" && platform == 'android') ? "debug" : "release"
       extra_params = (platform === "android") ? '' : ios_build_config
       system({"ENVIRONMENT" => environment}, "cordova compile #{platform} --#{build} --device #{extra_params}")
-    end
-    # Copy build artifacts
-    if ENV["CI"]
-      sh %{ if [ -e "#{app_file}" ]; then cp "#{app_file}" "${CIRCLE_ARTIFACTS:-$BUILD_STAGINGDIRECTORY}/"; fi }
     end
   end
 end
@@ -214,29 +155,29 @@ def app_file
   when /ios/
     "#{CORDOVA_PATH}/platforms/ios/build/device/#{app_name}.ipa"
   when /android/
-    build = is_staging ? 'debug' : 'release'
+    build = is_staging ? "debug" : "release"
     "#{CORDOVA_PATH}/platforms/android/build/outputs/apk/android-#{build}.apk"
   when /windows/
-    raise(BuildError, 'Need to get Windows app path')
+    raise(BuildError, "Need to get Windows app path")
   end
 end
 
 def azure_file
   case platform
   when /ios/
-    extn = 'ipa'
+    extn = "ipa"
   when /android/
-    extn = 'apk'
+    extn = "apk"
   end
   "#{app_id}-#{app_version}.#{extn}"
 end
 
 def app_name
-  is_staging ? 'S. Browse' : 'Browse'
+  is_staging ? "S. Browse" : "Browse"
 end
 
 def app_id
-  is_staging ? 'hk.goodcity.browsestaging' : 'hk.goodcity.browse'
+  is_staging ? "hk.goodcity.browsestaging" : "hk.goodcity.browse"
 end
 
 def app_version
@@ -245,32 +186,54 @@ def app_version
   elsif @ver
     @ver
   else
-    print 'Enter Browse app version: '
+    print "Enter Browse app version: "
     @ver = STDIN.gets.strip
   end
 end
 
-def ios_build_config
-  signing_style = IOS_SIGNING_STYLE
-  team_id = ENV['IOS_DEVELOPMENT_TEAM_ID']
+def mobile_provisioning_file
+  prefix = ['~', 'Library', 'MobileDevice', 'Provisioning\ Profiles']
+  file = if production_env?
+      "GoodCity_Browse.mobileprovision"
+    else
+      "GoodCity_Browse_Staging.mobileprovision"
+    end
+  File.join(prefix, file)
+end
 
-  if(environment === 'production')
-    provisioning_profile = ENV['PROVISIONING_PROFILE_CHARITY_PROD']
-    code_signing = IOS_RELEASEMODE_BUILDCONF[:code_signing]
-    package_type = IOS_RELEASEMODE_BUILDCONF[:package_type]
-    icloud_container_environment = IOS_RELEASEMODE_BUILDCONF[:icloud_container_environment]
-  else
-    provisioning_profile = ENV['PROVISIONING_PROFILE_CHARITY_STAGING']
-    code_signing = IOS_DEBUGMODE_BUILDCONF[:code_signing]
-    package_type = IOS_DEBUGMODE_BUILDCONF[:package_type]
-    icloud_container_environment = IOS_DEBUGMODE_BUILDCONF[:icloud_container_environment]
+def mobile_provisioning_plist
+  @mobile_provisioning_plist ||= begin
+    profile = `openssl smime -inform der -verify -noverify -in #{mobile_provisioning_file}`
+    Plist.parse_xml(profile)
   end
+end
 
-  " --codeSignIdentity=#{code_signing} --developmentTeam=#{team_id} --packageType=#{package_type} --provisioningProfile=\'#{provisioning_profile}\' --automaticProvisionin=#{signing_style} --icloud_container_environment=#{icloud_container_environment}"
+def ios_build_config
+  opts = {}
+  opts["developmentTeam"] = mobile_provisioning_plist["TeamIdentifier"].first
+  opts["automaticProvisionin"] = false
+  opts["provisioningProfile"] = mobile_provisioning_plist["UUID"]
+  if production_env?
+    opts["codeSignIdentity"] = "\'iPhone Distribution\'"
+    opts["packageType"] = "app-store"
+    opts["icloud_container_environment"] = "Production"
+  else
+    opts["codeSignIdentity"] = "\'iPhone Developer\'"
+    opts["packageType"] = 'development'
+    opts["icloud_container_environment"] = "Development"
+  end
+  opts.map do |key, value|
+    "--#{key}=#{value}"
+  end.join(" ")
+  #" --codeSignIdentity=#{code_signing} --developmentTeam=#{team_id} --packageType=#{package_type} --provisioningProfile=\'#{provisioning_profile}\' --automaticProvisionin=#{signing_style} --icloud_container_environment=#{icloud_container_environment}"
 end
 
 def is_staging
   environment == 'staging'
+end
+
+def production_env?
+  environment == 'production'
 end
 
 def build_details

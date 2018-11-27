@@ -8,6 +8,23 @@ platform :ios do
     COPYRIGHT = "#{Time.now.year} Crossroads Foundation Limited"
   end
 
+  lane :prepare_certificates do |options|
+    create_keychain(
+      name: "default_keychain",
+      default_keychain: true,
+      unlock: true,
+      password: ENV['KEYCHAIN_PWD']
+    )
+    import_certificate(
+      certificate_path: "fastlane/#{options[:cert]}",
+      certificate_password: ENV['CERTIFICATE_PASSWORD'],
+      keychain_name: "default_keychain",
+      keychain_password: ENV['KEYCHAIN_PWD']
+    )
+    unlock_keychain(path:"default_keychain", password:ENV['KEYCHAIN_PWD'])
+    sh "security set-keychain-settings -t 3600 -l ~/Library/Keychains/default_keychain-db"
+  end
+
   desc "Generate staging build (just upload to TestFairy)"
   lane :staging do
     raise_if_no_env_var(["FL_TESTFAIRY_API_KEY", "TESTFAIRY_IPA_PATH"])
@@ -15,7 +32,7 @@ platform :ios do
   end
 
   desc "Upload to TestFlight"
-  lane :beta do
+  lane :production do
     raise_if_no_env_var(["APP_VERSION", "PILOT_USERNAME", "PILOT_IPA", "PILOT_TESTER_EMAIL", "ITUNESCONNECT_PASSWORD"])
     version_number = ENV["APP_VERSION"]
     sh %{ source ~/.circlerc; bundle exec fastlane fastlane-credentials add --username $PILOT_USERNAME --password $ITUNESCONNECT_PASSWORD }
@@ -59,7 +76,7 @@ platform :android do
   end
 
   desc "Upload to GooglePlay beta track"
-  lane :beta do
+  lane :production do
     raise_if_no_env_var(["SUPPLY_APK", "SUPPLY_JSON_KEY"])
     supply(
       track: "beta",
