@@ -73,9 +73,11 @@ export default Ember.TextField.extend({
     var available_count = 0, available_array = [true];
 
     if(list) {
-      available_count = list.length;
-      for (var i = available_count - 1; i >= 0; i--) {
-        date = new Date(list[i]);
+      available_count = list['appointment_calendar_dates'].length;
+      var dates = list['appointment_calendar_dates'].rejectBy('isClosed', true).getEach('date');
+
+      for (var i = dates.length - 1; i >= 0; i--) {
+        date = new Date(dates[i]);
         var date_array = [];
         date_array.push(date.getFullYear());
         date_array.push(date.getMonth());

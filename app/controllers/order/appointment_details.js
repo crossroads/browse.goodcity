@@ -9,6 +9,19 @@ export default Ember.Controller.extend({
   selectedTimeId: null,
   selectedDate: null,
 
+  timeSlots: Ember.computed('selectedDate', function(){
+    var selectedDate = this.get('selectedDate');
+    var availableTimeSlots = [];
+    if(selectedDate){
+      var timeSlots = this.get('available_dates').appointment_calendar_dates.filter( date => date.date === moment(selectedDate).format('YYYY-MM-DD'))[0].slots;
+      timeSlots.forEach(time => {
+        console.log(time.timestamp.substr(11, 5)),
+        availableTimeSlots.push(time.timestamp.substr(11, 5))
+      })
+      return availableTimeSlots;
+    }
+  }),
+
   orderTransportParams(){
     var orderTransportProperties = {};
     orderTransportProperties.scheduled_at = this.get('selectedDate');

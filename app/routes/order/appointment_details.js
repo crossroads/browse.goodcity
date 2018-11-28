@@ -6,7 +6,7 @@ export default AuthorizeRoute.extend({
   model() {
     var orderId = this.paramsFor('order').order_id;
     return Ember.RSVP.hash({
-      availableDates: new AjaxPromise("/available_dates", "GET", this.get('session.authToken'), {schedule_days: 40}),
+      availableDatesAndtime: new AjaxPromise("/appointment_slots/calendar", "GET", this.get('session.authToken'), {to: '2018-12-28'}),
       order: this.store.peekRecord('order', orderId) || this.store.findRecord('order', orderId),
       orderTransport: this.store.peekAll("orderTransport").filterBy("order.id", orderId).get("firstObject")
     });
@@ -21,7 +21,7 @@ export default AuthorizeRoute.extend({
     }
     controller.set('selectedId', selectedId);
     controller.set('selectedTimeId', selectedTime);
-    controller.set('available_dates', model.availableDates);
+    controller.set('available_dates', model.availableDatesAndtime);
   },
 
   setupController(controller, model) {
