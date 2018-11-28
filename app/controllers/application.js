@@ -129,6 +129,18 @@ export default Ember.Controller.extend({
       }
     },
 
+    updateCartItemParams(pkgId){
+      let pkg = this.store.peekRecord('package', pkgId)
+      let categoryId = pkg.get("allPackageCategories.firstObject.id");
+      let sortBy = 'createdAt:desc'
+      this.transitionToRoute('package', pkgId,
+        { queryParams:
+          {
+            categoryId: categoryId,
+            sortBy: sortBy
+          }
+        });
+    },
     openCart(){
       this.transitionToRoute('cart');
     }

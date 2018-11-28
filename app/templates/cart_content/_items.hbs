@@ -1,6 +1,6 @@
 {{#each cart.content as |record|}}
   <li>
-    <div class="row">
+    <div class="row" {{action 'updateCartItemParams' record.id}}>
       <div class="large-3 medium-3 columns">
         {{#link-to 'package' record.id (query-params sortBy=sortBy categoryId=category) disabled=(is-not record.available) class="cart-redirect-link"}}
           <img class="thumb-image {{unless record.available 'grayed-image'}}" src="{{record.imageUrl}}" />
