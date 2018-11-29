@@ -25,17 +25,13 @@
 
     {{#each cart.content as |record|}}
         <li>
-          <div class="row">
-            <div class="small-3 columns">
-              {{#link-to 'package' record.id (query-params sortBy=sortBy categoryId=category) disabled=(is-not record.available) class="cart-redirect-link"}}
-                <img class="thumb-image {{unless record.available 'grayed-image'}}" src="{{record.imageUrl}}" />
-              {{/link-to}}
+          <div class="row" {{action 'updateCartItemParams' record.id}}>
+            <div class="small-3 columns cart-redirect-link {{if (is-not record.available) disabled}}" {{action 'updateCartItemParams' record.id}}>
+              <img class="thumb-image {{unless record.available 'grayed-image'}}" src="{{record.imageUrl}}" />
             </div>
 
-            <div class="small-6 columns">
-              {{#link-to 'package' record.id (query-params sortBy=sortBy categoryId=category) disabled=(is-not record.available) class="cart-redirect-link"}}
-                {{record.name}}
-              {{/link-to}}
+            <div class="small-6 columns cart-redirect-link {{if (is-not record.available) disabled}}" {{action 'updateCartItemParams' record.id}}>
+              {{record.name}}
               {{#unless record.available}}
                 <div class="unavailable">{{t "cart_content.unavailable"}}</div>
               {{/unless}}

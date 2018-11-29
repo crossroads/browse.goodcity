@@ -4,6 +4,9 @@ import itemController from './item';
 export default itemController.extend({
   messageBox:           Ember.inject.service(),
   package:              Ember.computed.alias('model'),
+  queryParams:          ['categoryId', 'sortBy'],
+  categoryId:           null,
+  sortBy:               "createdAt",
   pkgNotAvailableShown: false,
   cart:                 Ember.inject.service(),
 
