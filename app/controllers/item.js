@@ -128,7 +128,7 @@ export default Ember.Controller.extend({
 
     requestItem(item) {
       this.get('cart').pushItem(item);
-      if(!isMobileApp) {
+      if(!this.get('isMobileApp')) {
         Ember.run.later(this, function() {
           this.get('application').send('displayCart');
         }, 50);
