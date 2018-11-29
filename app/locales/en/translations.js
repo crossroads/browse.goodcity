@@ -6,7 +6,7 @@ export default {
   "company.name": "Crossroads Foundation",
   "by": "By",
   "ok": "OK",
-  "must_login": "You must login!",
+  "must_login": "You must log in!",
   "okay": "Okay",
   "unexpected_error": "Something went wrong",
   "QuotaExceededError": "Site may not work in Safari's <b>private mode.</b> Please try</br><ul><li><a href='http://www.apple.com/itunes/' style='color: black!important; background-color: #dee4eb !important;'>Downloading the iOS App</a></li><li>Using regular (not private) mode in Safari</li><li>Using Chrome's private browsing mode</li></ul>",
@@ -277,7 +277,7 @@ export default {
           This order has not yet been submitted. You may still make modifications to it.
         `,
         "submitted": `
-          Our staff may contact you/or the beneficiary to check details. 
+          Our staff may contact you/or the beneficiary to check details.
           If everything is ok then the order will be marked confirmed
         `,
         "dispatching": `
@@ -420,7 +420,7 @@ export default {
       "type_label": "Goods type",
       "quantity_label": "Quantity",
       "description_details_label": "Specifics of item (Optional)"
-    }, 
+    },
     "request": {
       "remove_req": "Remove this request from order",
       "remove": "Remove"
