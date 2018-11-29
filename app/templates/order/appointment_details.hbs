@@ -83,26 +83,28 @@
                   <i class="fa fa-calendar calender_icon"></i>
                 </div>
             </div>
-            
+
             <br>
             {{#if selectedDate}}
               <div class="small-12 columns type-of-id-text">
                 {{t 'order.appointment.time'}}
               </div>
               {{#each timeSlots as |time|}}
-                <div class="row time_inputs id-type-radio-input time-slots" >
-                  <div class="custom_radio_buttons small-3 large-3 medium-3 columns">
-                    {{radio-button
-                    name="selectTime"
-                    id=time
-                    value=time
-                    selection=selectedTimeId
-                    required='true'}}
-                    <label class="radio-button-text align-text" for={{time}}>
-                      {{time}}
-                    </label>
+                {{#unless time.isClosed}}
+                  <div class="row time_inputs id-type-radio-input time-slots" >
+                    <div class="custom_radio_buttons small-3 large-3 medium-3 columns">
+                      {{radio-button
+                      name="selectTime"
+                      id=time.timestamp
+                      value=time.timestamp
+                      selection=selectedTimeId
+                      required='true'}}
+                      <label class="radio-button-text align-text" for={{time.timestamp}}>
+                        {{display-time time.timestamp}}
+                      </label>
+                    </div>
                   </div>
-                </div>
+                {{/unless}}
               {{/each}}
             {{/if}}
             <div class="row">

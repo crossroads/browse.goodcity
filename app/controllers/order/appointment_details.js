@@ -11,24 +11,21 @@ export default Ember.Controller.extend({
 
   timeSlots: Ember.computed('selectedDate', function(){
     var selectedDate = this.get('selectedDate');
-    var availableTimeSlots = [];
+
     if(selectedDate){
       var timeSlots = this.get('available_dates').appointment_calendar_dates.filter( date => date.date === moment(selectedDate).format('YYYY-MM-DD'))[0].slots;
-      timeSlots.forEach(time => {
-        console.log(time.timestamp.substr(11, 5)),
-        availableTimeSlots.push(time.timestamp.substr(11, 5))
-      })
-      return availableTimeSlots;
+
+      return timeSlots;
     }
   }),
 
   orderTransportParams(){
     var orderTransportProperties = {};
-    orderTransportProperties.scheduled_at = this.get('selectedDate');
-    orderTransportProperties.timeslot = this.get('selectedTimeId');
+    orderTransportProperties.scheduled_at = this.get('selectedTimeId');
+    orderTransportProperties.timeslot = this.get('selectedTimeId').substr(11, 5);
     orderTransportProperties.transport_type = this.get("selectedId");
     orderTransportProperties.order_id = this.get('order.id');
-    orderTransportProperties.booking_type_id = 1;
+    orderTransportProperties.booking_type_id = this.store.peekAll('booking_type').filterBy('nameEn', 'appointment').get('firstObject.id');
     return orderTransportProperties;
   },
 

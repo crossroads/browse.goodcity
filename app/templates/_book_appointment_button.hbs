@@ -1,13 +1,15 @@
-{{#if isUserLoggedIn}}
-  {{#link-to "request_purpose"}}
-    <div class="button small action">
-      {{ t "home.visit.action" }} <i class="fa fa-calendar"></i>
-    </div>
-  {{/link-to}}
-{{else}}
-  {{#link-to "login" (query-params bookAppointment=true)}}
-    <div class="button small action">
-      {{ t "home.visit.action" }} <i class="fa fa-calendar"></i>
-    </div>
-  {{/link-to}}
+{{#if (is-and isUserLoggedIn session.currentUser.isCharity)}}
+  {{!-- {{#if isUserLoggedIn}} --}}
+    {{#link-to "request_purpose"}}
+      <div class="button small action">
+        {{ t "home.visit.action" }} <i class="fa fa-calendar"></i>
+      </div>
+    {{/link-to}}
+  {{else}}
+    {{#link-to "login" (query-params bookAppointment=true)}}
+      <div class="button small action">
+        {{ t "home.visit.action" }} <i class="fa fa-calendar"></i>
+      </div>
+    {{/link-to}}
+  {{!-- {{/if}} --}}
 {{/if}}
