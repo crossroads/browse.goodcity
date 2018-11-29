@@ -130,9 +130,10 @@ export default Ember.Controller.extend({
     },
 
     updateCartItemParams(pkgId){
-      let pkg = this.store.peekRecord('package', pkgId)
+      let pkg = this.store.peekRecord('package', pkgId);
+      if(!pkg.isAvailable){return false;}
       let categoryId = pkg.get("allPackageCategories.firstObject.id");
-      let sortBy = 'createdAt:desc'
+      let sortBy = 'createdAt:desc';
       this.transitionToRoute('package', pkgId,
         { queryParams:
           {
