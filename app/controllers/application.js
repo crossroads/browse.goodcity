@@ -141,6 +141,7 @@ export default Ember.Controller.extend({
             sortBy: sortBy
           }
         });
+      this.toggleProperty("showCartDetailSidebar");
     },
     openCart(){
       this.transitionToRoute('cart');
