@@ -10,5 +10,6 @@ export default {
     application.inject('controller', 'screenresize', 'service:screenresize');
     application.inject('route', 'screenresize', 'service:screenresize');
     application.inject('component', 'screenresize', 'service:screenresize');
+    application.inject('component', 'router', 'router:main');    
   }
 };

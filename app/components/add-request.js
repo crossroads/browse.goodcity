@@ -36,6 +36,10 @@ export default Ember.Component.extend({
       });
     },
 
+    searchPackageType(reqId, orderId){
+      this.get('router').transitionTo('order.search_code', orderId, { queryParams: { reqId: reqId }});
+    },
+
     //Fix: Too deeply nested component(3 levels) failing randomly(Known issue with Ember)
     //Remove when Ember is upgraded to >= 3.0
     updateErrorMessage() {

@@ -1,12 +1,10 @@
 <section class="new-user-section request-section">
   <div class="request-block">
     {{#form-control}}
-        <div class="small-12 columns add-request">
-          <div class="small-7 columns ">
+        <div class="small-12 columns add-request" >
+          <div class="small-7 columns" {{action "searchPackageType" request.id order.id}}>
             <label> {{t 'order.goods_details.type_label'}} </label>
-            {{#link-to 'order.search_code' order.id (query-params reqId=request.id)}}
-                {{input type="text" name="packageTypeDescription" value=packageTypeName pattern=".*\S.*" id=(concat 'packageTypeDescription' request.id)}}
-            {{/link-to}}
+              {{input type="text" name="packageTypeDescription" value=packageTypeName pattern=".*\S.*" id=(concat 'packageTypeDescription' request.id) required='true'}}
           </div>
           <div class="small-3 columns">
             <label> {{t 'order.goods_details.quantity_label'}} </label>
