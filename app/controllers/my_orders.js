@@ -36,7 +36,7 @@ export default applicationController.extend({
 
   requestedGoods: Ember.computed('selectedOrder', 'model.packageCategories', function () {
     const requests = this.getWithDefault('selectedOrder.goodcityRequests', []);
-    return requests.map(req => ({ 
+    return requests.map(req => ({
       category: this.getCategoryForCode(req.get('packageType.code')),
       text: req.get('packageType.name')
     }));
@@ -46,8 +46,8 @@ export default applicationController.extend({
 
   orderedGoods: Ember.computed('selectedOrder', 'model.packageCategories', function () {
     const orderPackages = this.getWithDefault('selectedOrder.ordersPackages', []);
-    return orderPackages.map(op => ({ 
-      notes: op.get('package.notes'), 
+    return orderPackages.map(op => ({
+      notes: op.get('package.notes'),
       text: op.get('package.packageType.name'),
       imageUrl: op.get('package.previewImageUrl')
     }));

@@ -66,7 +66,7 @@
     "ember-load-initializers": "^1.0.0",
     "ember-lodash": "4.19.1",
     "ember-offline": "1.0.0",
-    "ember-pretty-test": "1.0.3",
+    "ember-pretty-test": "1.0.4",
     "ember-resolver": "^4.5.0",
     "ember-rollbar-client": "0.2.2",
     "ember-scroll-to": "0.6.4",

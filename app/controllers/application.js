@@ -25,7 +25,7 @@ export default Ember.Controller.extend({
 
   draftOrder: Ember.computed.alias('session.draftOrder'),
 
-  isUserLoggedIn: Ember.computed('loggedInUser', function() {
+  isUserLoggedIn: Ember.computed('session', function() {
     return !!this.session.get('authToken');
   }),
 
