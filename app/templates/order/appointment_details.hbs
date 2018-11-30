@@ -70,7 +70,7 @@
 
             <div class="row time_inputs id-type-radio-input appointment-date">
                 <div class="checkbox small-12 columns date_selector">
-                  {{select-date
+                  {{select-appointment-date
                     name='selectedDate'
                     id='selectedDate'
                     value=''
@@ -100,7 +100,7 @@
                       selection=selectedTimeId
                       required='true'}}
                       <label class="radio-button-text align-text" for={{time.timestamp}}>
-                        {{display-time time.timestamp}}
+                        {{display-time time.timestamp "HH:mm"}}
                       </label>
                     </div>
                   </div>
