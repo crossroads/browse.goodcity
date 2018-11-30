@@ -3,7 +3,7 @@ import AjaxPromise from 'browse/utils/ajax-promise';
 const { getOwner } = Ember;
 
 export default Ember.Controller.extend({
-  queryParams: ['orgId'],
+  queryParams: ['orgId', 'bookAppointment'],
 
   authenticate:Ember.inject.controller(),
   messageBox: Ember.inject.service(),
@@ -11,6 +11,7 @@ export default Ember.Controller.extend({
   organisationId: Ember.computed.alias('model.organisation.id'),
   organisationsUserId: Ember.computed.alias('model.organisationsUser.id'),
   position: "",
+  bookAppointment: false,
 
   userTitle: Ember.computed('model', function() {
     let userTitle = this.get('model.user.title');
@@ -42,9 +43,12 @@ export default Ember.Controller.extend({
     ];
   }),
 
-  redirectToTransitionOrBrowse() {
+  redirectToTransitionOrBrowse(bookAppointment) {
     var attemptedTransition = this.get('authenticate').get('attemptedTransition');
-    if (attemptedTransition) {
+    if(bookAppointment){
+      this.transitionToRoute("request_purpose");
+    }
+    else if (attemptedTransition) {
       this.set('attemptedTransition', null);
       attemptedTransition.retry();
     } else {
@@ -91,10 +95,10 @@ export default Ember.Controller.extend({
 
     saveOrUpdateAccount(url, actionType) {
       var loadingView = getOwner(this).lookup('component:loading').append();
-
+      var bookAppointment = this.get('bookAppointment');
       new AjaxPromise(url, actionType, this.get('session.authToken'), { organisations_user: this.organisationsUserParams()} ).then(data => {
         this.get("store").pushPayload(data);
-        this.redirectToTransitionOrBrowse();
+        this.redirectToTransitionOrBrowse(bookAppointment);
       }).catch(xhr => {
         this.get("messageBox").alert(xhr.responseJSON.errors);
       })

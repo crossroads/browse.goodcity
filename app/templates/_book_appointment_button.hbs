@@ -1,9 +1,7 @@
 {{#if isUserLoggedIn}}
-  {{#link-to "request_purpose"}}
-    <div class="button small action">
-      {{ t "home.visit.action" }} <i class="fa fa-calendar"></i>
-    </div>
-  {{/link-to}}
+  <div class="button small action" {{action "redirectAsPerUserDetails"}}>
+    {{ t "home.visit.action" }} <i class="fa fa-calendar"></i>
+  </div>
 {{else}}
   {{#link-to "login" (query-params bookAppointment=true)}}
     <div class="button small action">
