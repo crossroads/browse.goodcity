@@ -13,107 +13,108 @@
           </nav>
         </section>
 
-        <section class="main-section client-information large-10 large-offset-1 medium-10 medium-offset-1 columns">
-          {{#validatable-form onSubmit=(action 'saveTransportDetails') as |form|}}
-            <div class="small-12 columns type-of-id-text">
-              {{t 'order.appointment.transport'}}
-            </div>
-            <div class="row time_inputs id-type-radio-input" >
-              <div class=" custom_radio_buttons small-12 columns purpose col-width-appointment" for="For HKID">
-                {{radio-button
-                name="selectReason"
-                id="self"
-                value="self"
-                selection=selectedId
-                required='true'}}
-                <label class="radio-button-text align-text" for="self">
-                  {{t 'order.appointment.self_vehicle'}}
-                </label>
-              </div>
-
-              <div class=" custom_radio_buttons small-12 columns purpose col-width-appointment end" for="For asyLum">
-                {{radio-button
-                name="selectReason"
-                id="ggv"
-                value="ggv"
-                selection=selectedId
-                required='true'}}
-                <label class="radio-button-text align-text" for="ggv">
-                  {{t 'order.appointment.hire_vehicle'}}
-                </label>
-              </div>
-            </div>
-            <br>
-
-            <div class="small-12 columns type-of-id-text">
-              {{t 'order.appointment.confirm_labor'}}
-            </div>
-
-            <div class="small-12 columns id-confidential-text">
-              {{t 'order.appointment.labor_info'}}
-            </div>
-            <div class="row time_inputs id-type-radio-input" >
-              <div class='checkbox custom_radio_buttons small-12 columns purpose col-width-appointment'>
-                {{input type="checkbox" name="labor" checked=false id='4' required=true}}
-                <label class="radio-button-text  align-text" for='4'>
-                <span> {{t 'order.appointment.labor_confirmation'}} </span>
-                </label>
-              </div>
-            </div>
-            <br>
-
-            <div class="row">
-              <div class="small-12 columns type-of-id-text">
-                {{t 'order.appointment.date'}}
-              </div>
-            </div>
-
-            <div class="row time_inputs id-type-radio-input appointment-date">
-                <div class="checkbox small-12 columns date_selector">
-                  {{select-appointment-date
-                    name='selectedDate'
-                    id='selectedDate'
-                    value=''
-                    required='true'
-                    available=available_dates
-                    class="date-picker-appointment"
-                    selection=selectedDate
-                    placeholder=datePrompt
-                    pattern="[a-zA-Z]{3}\s?[a-zA-Z]{3}\s?[0-9]{1,2}"}}
-                  <i class="fa fa-calendar calender_icon"></i>
+        
+          {{#validate-appointment}}
+            {{#validatable-form onSubmit=(action 'saveTransportDetails') as |form|}}
+              <section class="main-section client-information large-10 large-offset-1 medium-10 medium-offset-1 columns appointment-date">
+                <div class="small-12 columns type-of-id-text">
+                  {{t 'order.appointment.transport'}}
                 </div>
-            </div>
+                <div class="row time_inputs id-type-radio-input" >
+                  <div class=" custom_radio_buttons small-12 columns purpose col-width-appointment" for="For HKID">
+                    {{radio-button
+                    name="selectReason"
+                    id="self"
+                    value="self"
+                    selection=selectedId
+                    required='true'}}
+                    <label class="radio-button-text align-text" for="self">
+                      {{t 'order.appointment.self_vehicle'}}
+                    </label>
+                  </div>
 
-            <br>
-            {{#if selectedDate}}
-              <div class="small-12 columns type-of-id-text">
-                {{t 'order.appointment.time'}}
-              </div>
-              <div class="row time_inputs id-type-radio-input time-slots" >
-                {{#each timeSlots as |time|}}
-                  {{#unless time.isClosed}}
-                      <div class="custom_radio_buttons small-4 large-3 medium-3 columns end">
-                        {{radio-button
-                        name="selectTime"
-                        id=time.timestamp
-                        value=time.timestamp
-                        selection=selectedTimeId
-                        required='true'}}
-                        <label class="radio-button-text align-text" for={{time.timestamp}}>
-                          {{display-time time.timestamp "HH:mm"}}
-                        </label>
-                      </div>
-                  {{/unless}}
-                {{/each}}
-              </div>
-            {{/if}}
-            <div class="row">
-              <div class="small-12 columns">
-                <a {{action 'submit' target=form}} class="button expand"> {{t 'continue'}} </a>
-              </div>
-            </div>
-          {{/validatable-form}}
-        </section>
+                  <div class=" custom_radio_buttons small-12 columns purpose col-width-appointment end" for="For asyLum">
+                    {{radio-button
+                    name="selectReason"
+                    id="ggv"
+                    value="ggv"
+                    selection=selectedId
+                    required='true'}}
+                    <label class="radio-button-text align-text" for="ggv">
+                      {{t 'order.appointment.hire_vehicle'}}
+                    </label>
+                  </div>
+                </div>
+                <br>
+
+                <div class="small-12 columns type-of-id-text">
+                  {{t 'order.appointment.confirm_labor'}}
+                </div>
+
+                <div class="small-12 columns id-confidential-text">
+                  {{t 'order.appointment.labor_info'}}
+                </div>
+                <div class="row time_inputs id-type-radio-input" >
+                  <div class='checkbox custom_radio_buttons small-12 columns purpose col-width-appointment confirmation-checkbox'>
+                    {{input type="checkbox" name="labor" checked=false id='4' required=true}}
+                    <label class="radio-button-text  align-text" for='4'>
+                    <span> {{t 'order.appointment.labor_confirmation'}} </span>
+                    </label>
+                  </div>
+                </div>
+                <br>
+
+                <div class="row">
+                  <div class="small-12 columns type-of-id-text">
+                    {{t 'order.appointment.date'}}
+                  </div>
+                </div>
+
+                <div class="row time_inputs">
+                  <div class=" small-12 columns date_selector">
+                    {{select-appointment-date
+                      name='selectedDate'
+                      id='selectedDate'
+                      value=''
+                      available=available_dates
+                      selection=selectedDate
+                      placeholder="Date"
+                      pattern="[a-zA-Z]{3}\s?[a-zA-Z]{3}\s?[0-9]{1,2}"}}
+                    <i class="fa fa-calendar calender_icon"></i>
+                  </div>
+                </div>
+
+                <br>
+                {{#if selectedDate}}
+                  <div class="small-12 columns type-of-id-text">
+                    {{t 'order.appointment.time'}}
+                  </div>
+                  <div class="row time_inputs id-type-radio-input time-slots" >
+                    {{#each timeSlots as |time|}}
+                      {{#unless time.isClosed}}
+                          <div class="custom_radio_buttons small-4 large-3 medium-3 columns end">
+                            {{radio-button
+                            name="selectTime"
+                            id=time.timestamp
+                            value=time.timestamp
+                            selection=selectedTimeId
+                            required='true'}}
+                            <label class="radio-button-text align-text" for={{time.timestamp}}>
+                              {{display-time time.timestamp "HH:mm"}}
+                            </label>
+                          </div>
+                      {{/unless}}
+                    {{/each}}
+                  </div>
+                {{/if}}
+                <div class="row">
+                  <div class="small-12 columns">
+                    <a {{action 'submit' target=form}} class="button expand appointment"> {{t 'continue'}} </a>
+                  </div>
+                </div>
+              </section>
+            {{/validatable-form}}
+          {{/validate-appointment}}
       </div>
     </div>
   </div>

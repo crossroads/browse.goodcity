@@ -140,7 +140,7 @@ export default Ember.TextField.extend({
     });
 
     function validateForm(){
-      Ember.$('.button.book_van').click(function(){
+      Ember.$('.a.appointment').click(function(){
         var date = checkInput(Ember.$('.date_selector input'));
         var time = checkInput(Ember.$('.time_selector select'));
         return date && time;

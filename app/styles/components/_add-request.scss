@@ -21,7 +21,12 @@
     margin-top: 0.1rem;
   }
   div .warning_empty{
-    width: 80%;
+    @media #{$small-only} {
+      width: 80%;
+    }
+    @media #{$large-only} {
+      width: 82%;
+    }
     margin-top: -1rem;
   }
 }
