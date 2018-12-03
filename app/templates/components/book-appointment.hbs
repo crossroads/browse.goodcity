@@ -1,11 +1,11 @@
 
 {{#if session.isLoggedIn}}
-  <div class="button {{if buttonStyle buttonStyle 'small action' }}" {{action "redirectAsPerUserDetails"}}>
+  <div class="button book-appointment {{if buttonStyle buttonStyle 'small action' }}" {{action "redirectAsPerUserDetails"}}>
     {{ t "home.visit.action" }} <i class="fa fa-calendar"></i>
   </div>
 {{else}}
   {{#link-to "login" (query-params bookAppointment=true)}}
-    <div class="button {{if buttonStyle buttonStyle 'small action' }}">
+    <div class="button book-appointment {{if buttonStyle buttonStyle 'small action' }}">
       {{ t "home.visit.action" }} <i class="fa fa-calendar"></i>
     </div>
   {{/link-to}}
