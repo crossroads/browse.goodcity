@@ -3,7 +3,7 @@ import { module, test } from 'qunit';
 import startApp from '../helpers/start-app';
 import { make, mockFindAll } from 'ember-data-factory-guy';
 
-var App, pkg, organisationsUser, ordersPackage, order, organisation, user, gogo_van, role, user_role;
+var App, pkg, organisationsUser, ordersPackage, order, organisation, user, gogo_van, role, user_role, session, appController;
 
 module('Acceptance: Login', {
   beforeEach: function() {
@@ -49,6 +49,10 @@ module('Acceptance: Login', {
     $.mockjax({url:"/api/v1/order*", type: 'PUT', status: 200,responseText:{"order": order.toJSON({includeId: true}),"package": pkg.toJSON({includeId: true}), "orders_packages": [ordersPackage.toJSON({includeId: true})]}});
 
     window.localStorage.removeItem('authToken');
+
+    session = App.__container__.lookup('service:session');
+    appController = App.__container__.lookup('controller:application');
+    session.set('authToken', null);
   },
   afterEach: function() {
     $.mockjax.clear();
@@ -72,7 +76,7 @@ test("User able to enter mobile number and get the sms code", function(assert) {
 });
 
 test("User is able to resend the sms code, submit pin and logout", function(assert) {
-  assert.expect(4);
+  assert.expect(6);
 
   $.mockjax({url:"/api/v1/auth/sig*",responseText:{
     "otp_auth_key" : "/JqONEgEjrZefDV3ZIQsNA=="
@@ -102,6 +106,7 @@ test("User is able to resend the sms code, submit pin and logout", function(asse
 
   andThen(function() {
     assert.equal(find('#pin').val().length, 4);
+    session.set('authToken', authToken);
     window.localStorage.authToken = authToken;
   });
 
@@ -110,6 +115,8 @@ test("User is able to resend the sms code, submit pin and logout", function(asse
   });
 
   andThen(function() {
+    assert.equal(currentURL(), '/home');
+    assert.equal(appController.get('isUserLoggedIn'), true);
     click("a:contains('Logout')");
   });
 

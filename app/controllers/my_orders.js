@@ -1,7 +1,8 @@
+import applicationController from './application';
 import Ember from 'ember';
 import _ from 'lodash';
 
-export default Ember.Controller.extend({
+export default applicationController.extend({
   sortProperties: ["createdAt:desc"],
   arrangedOrders: Ember.computed.sort("model.orders", "sortProperties"),
   selectedOrder: null,
@@ -11,6 +12,8 @@ export default Ember.Controller.extend({
   queryParams: ['submitted'],
   triggerFlashMessage: false,
   previousRouteName: null,
+
+  buttonStyle: "light",
 
   getCategoryForCode: function (code) {
     const categories = this.get('model.packageCategories');
@@ -33,7 +36,7 @@ export default Ember.Controller.extend({
 
   requestedGoods: Ember.computed('selectedOrder', 'model.packageCategories', function () {
     const requests = this.getWithDefault('selectedOrder.goodcityRequests', []);
-    return requests.map(req => ({ 
+    return requests.map(req => ({
       category: this.getCategoryForCode(req.get('packageType.code')),
       text: req.get('packageType.name')
     }));
@@ -43,8 +46,8 @@ export default Ember.Controller.extend({
 
   orderedGoods: Ember.computed('selectedOrder', 'model.packageCategories', function () {
     const orderPackages = this.getWithDefault('selectedOrder.ordersPackages', []);
-    return orderPackages.map(op => ({ 
-      notes: op.get('package.notes'), 
+    return orderPackages.map(op => ({
+      notes: op.get('package.notes'),
       text: op.get('package.packageType.name'),
       imageUrl: op.get('package.previewImageUrl')
     }));

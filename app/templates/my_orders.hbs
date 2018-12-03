@@ -16,10 +16,12 @@
             {{/link-to}}
           </div>
           <div class="columns button-container small-6">
-            <div class="button light">
-              <i class="fa fa-calendar" aria-hidden="true"></i>
-              {{t 'home.visit.action'}}
-            </div>
+            {{#link-to "request_purpose"}}
+              <div class="button light">
+                <i class="fa fa-calendar"></i>
+                {{ t "home.visit.action" }}
+              </div>
+            {{/link-to}}
           </div>
         </div>
         <ul class="list list-items">
