@@ -16,7 +16,12 @@
             {{/link-to}}
           </div>
           <div class="columns button-container small-6">
-            {{partial 'book_appointment_button'}}
+            {{#link-to "request_purpose"}}
+              <div class="button light">
+                <i class="fa fa-calendar"></i>
+                {{ t "home.visit.action" }}
+              </div>
+            {{/link-to}}
           </div>
         </div>
         <ul class="list list-items">
