@@ -5413,9 +5413,9 @@ ember-offline@1.0.0:
     fastboot-transform "^0.1.2"
     offline-js "^0.7.19"
 
-ember-pretty-test@1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/ember-pretty-test/-/ember-pretty-test-1.0.3.tgz#8abd4f4bf5aa1219a48c39cf2bad895605875d81"
+ember-pretty-test@1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/ember-pretty-test/-/ember-pretty-test-1.0.4.tgz#1269402dee84436586cff9eb866a5638495404e5"
   dependencies:
     chalk "^2.4.1"
     ember-cli "^3.5.1"
