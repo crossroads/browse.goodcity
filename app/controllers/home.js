@@ -1,9 +1,6 @@
 import applicationController from './application';
-import config from "../config/environment";
 
 export default applicationController.extend({
-  isMobileApp: config.cordova.enabled,
-
   isDetailsComplete(){
     const user = this.get('session.currentUser');
     if (!user) { return false; }
@@ -18,7 +15,7 @@ export default applicationController.extend({
 
   actions: {
     redirectAsPerUserDetails(){
-      if(this.isDetailsComplete){
+      if(this.isDetailsComplete){   
         this.transitionToRoute("request_purpose");
       }
       else{
