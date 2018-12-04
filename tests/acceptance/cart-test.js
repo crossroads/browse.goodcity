@@ -5,7 +5,7 @@ import {make} from 'ember-data-factory-guy';
 import { mockFindAll } from 'ember-data-factory-guy';
 import FactoryGuy from 'ember-data-factory-guy';
 
-var App, pkgCategory, subcategory1, pkg, pkgType1, pkgType2, subcategory2, order, ordersPackage, gogo_van, order_purpose, user;
+var App, pkgCategory, subcategory1, pkg, pkgType1, pkgType2, subcategory2, order, ordersPackage, gogo_van, order_purpose, user, bookingType;
 
 module('Acceptance | Cart Page', {
   beforeEach: function() {
@@ -22,8 +22,10 @@ module('Acceptance | Cart Page', {
     subcategory1 = make("package_category", {parentId: parseInt(pkgCategory.id), packageTypeCodes: pkgType1.get("code") });
     subcategory2 = make("package_category", {parentId: parseInt(pkgCategory.id), packageTypeCodes: pkgType2.get("code") });
     gogo_van = make("gogovan_transport");
+    bookingType = make("booking_type");
     $.mockjax({url: "/api/v1/available_*", type: 'GET', status: 200, responseText:["2018-06-14", "2018-06-15", "2018-06-16", "2018-06-19", "2018-06-20", "2018-06-21"]});
     mockFindAll("gogovan_transport").returns({json: {gogovan_transports: [gogo_van.toJSON({includeId: true})]}});
+    mockFindAll("booking_type").returns({json: {booking_types: [bookingType.toJSON({includeId: true})]}});
 
     var data = {"user_profile": [{"id": 2,"first_name": "David", "last_name": "Dara51", "mobile": "61111111", "user_role_ids": [1]}], "users": [{"id": 2,"first_name": "David", "last_name": "Dara51", "mobile": "61111111"}], "roles": [{"id": 4, "name": "Supervisor"}], "user_roles": [{"id": 1, "user_id": 2, "role_id": 4}]};
     $.mockjax({url:"/api/v1/auth/current_user_profil*",

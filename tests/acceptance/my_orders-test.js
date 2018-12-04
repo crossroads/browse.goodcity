@@ -78,6 +78,7 @@ module('Acceptance | My Orders Page', {
 
     doMock("beneficiary", beneficiaries);
     doMock("gogovan_transport", [ make("gogovan_transport").toJSON({includeId: true}) ]);
+    doMock("booking_type", [ make("booking_type").toJSON({includeId: true})]);
     doMock('order_transport', [ order_transport.toJSON({includeId: true}), order_transport2.toJSON({includeId: true}) ]);
     doMock('order', { 
       orders: [ order.toJSON({includeId: true}), order2.toJSON({includeId: true}) ], 

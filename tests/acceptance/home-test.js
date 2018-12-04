@@ -1,11 +1,16 @@
 import Ember from 'ember';
 import { module, test } from 'qunit';
+import {make} from 'ember-data-factory-guy';
+import { mockFindAll } from 'ember-data-factory-guy';
 import startApp from '../helpers/start-app';
-var App;
+
+var App, bookingType;
 
 module('Acceptance | Home Page', {
   beforeEach: function() {
     App = startApp();
+    bookingType = make("booking_type");
+    mockFindAll("booking_type").returns({json: {booking_types: [bookingType.toJSON({includeId: true})]}});
   },
 
   afterEach: function() {

@@ -1,4 +1,5 @@
-{{#if isUserLoggedIn}}
+
+{{#if session.isLoggedIn}}
   <div class="button small action" {{action "redirectAsPerUserDetails"}}>
     {{ t "home.visit.action" }} <i class="fa fa-calendar"></i>
   </div>
