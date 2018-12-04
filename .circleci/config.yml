@@ -338,9 +338,9 @@ workflows:
             filters:
               branches:
                 only: /^(master|live)$/
-        - ios_build_and_deploy:
-            requires:
-              - test_cases
-            filters:
-              branches:
-                only: /^(master|live)$/
+        # - ios_build_and_deploy:
+        #     requires:
+        #       - test_cases
+        #     filters:
+        #       branches:
+        #         only: /^(master|live)$/
