@@ -3,7 +3,7 @@ import { module, test } from 'qunit';
 import startApp from 'browse/tests/helpers/start-app';
 import { make, mockFindAll } from 'ember-data-factory-guy';
 
-var App, order, gogo_van, user, user_profile, orderPurpose1, orderPurpose2 , organisation, pkg, ordersPackage, mocks, goodcityRequest, benificiary, identity_types;
+var App, order, gogo_van, user, user_profile, orderPurpose1, orderPurpose2 , organisation, pkg, ordersPackage, mocks, goodcityRequest, benificiary, identity_type1;
 
 module('Acceptance | BookAppointment', {
   beforeEach: function() {
@@ -20,8 +20,9 @@ module('Acceptance | BookAppointment', {
     "mobile": user.get('mobile'), "user_role_ids": [1] };
     goodcityRequest = {id: 1, quantity: 1, description: null, code_id: null,
       order_id: order.id, package_type_id: null};
-    benificiary = {created_by_id: user.id, first_name: "Test" ,id: 44, identity_number: "1233",identity_type_id: 1 , last_name: "John", phone_number: "+85212312312", title: null};
-    identity_types = [{id: 2, name: "Asylum Seeker Recognizance Form"}];
+    benificiary = {created_by_id: user.id, first_name: "Test", id: 12, identity_number: "1233",
+      identity_type_id: 1, last_name: "John", phone_number: "+85212312312", title: null};
+    identity_type1 = {id: 1, name: "Hong Kong Identity Card"};
     mocks = [];
     $.mockjaxSettings.matchInRegistrationOrder = false;
     mocks.push(
@@ -196,6 +197,90 @@ test("Select RBCL on client info should display form for rbcl", function(assert)
     click('.abcl');
     andThen(function(){
       assert.equal(Ember.$('#id-initials').text().trim(), "RBCL");
+    });
+  });
+});
+
+test("Filled Up client info page, should redirect to goods details page on submit", function(assert){
+  orderPurpose2 = {id: 1, purpose_id: 2, order_id: order.id, designation_id: 1};
+  let client_info_url = `/order/${order.id}/client_information`;
+  assert.expect(1);
+  mocks.push(
+    $.mockjax({url: '/api/v1/order*', type: 'POST', status: 201,responseText: {
+      order: order.toJSON({includeId: true}),
+      orders_purposes: [orderPurpose2],
+      user: user.toJSON({includeId: true})}
+    })
+  );
+  visit(client_info_url);
+  andThen(function(){
+    click('#hkId');
+  });
+  andThen(function(){
+    fillIn("#hk-id-number", "1234");
+  });
+  andThen(function(){
+    fillIn("#hk-id-firstName", "Test");
+  });
+  andThen(function(){
+    fillIn("#hk-id-lastName", "John");
+  });
+  andThen(function(){
+    fillIn("#mobile", "98876353");
+  });
+  andThen(function(){
+    mocks.push(
+      $.mockjax({url: '/api/v1/order*', type: 'POST', status: 201,responseText: {
+        order: order.toJSON({includeId: true}),
+        orders_purposes: [orderPurpose2],
+        user: user.toJSON({includeId: true})}
+      }),
+      $.mockjax({url: '/api/v1/beneficiarie*', type: 'POST', status: 201,
+        responseText: {
+          beneficiary: benificiary,
+          identity_types: [identity_type1]
+        }
+      })
+    );
+    click('.button.expand');
+    andThen(function(){
+      assert.equal(Ember.$('.title').text().trim(), "Goods Details");
+    });
+  });
+});
+
+test("Incomplete form submit client info page, should not redirect to goods details", function(assert){
+  orderPurpose2 = {id: 1, purpose_id: 2, order_id: order.id, designation_id: 1};
+  let client_info_url = `/order/${order.id}/client_information`;
+  assert.expect(1);
+  mocks.push(
+    $.mockjax({url: '/api/v1/order*', type: 'POST', status: 201,responseText: {
+      order: order.toJSON({includeId: true}),
+      orders_purposes: [orderPurpose2],
+      user: user.toJSON({includeId: true})}
+    })
+  );
+  visit(client_info_url);
+  andThen(function(){
+    click('#hkId');
+  });
+  andThen(function(){
+    mocks.push(
+      $.mockjax({url: '/api/v1/order*', type: 'POST', status: 201,responseText: {
+        order: order.toJSON({includeId: true}),
+        orders_purposes: [orderPurpose2],
+        user: user.toJSON({includeId: true})}
+      }),
+      $.mockjax({url: '/api/v1/beneficiarie*', type: 'POST', status: 201,
+        responseText: {
+          beneficiary: benificiary,
+          identity_types: [identity_type1]
+        }
+      })
+    );
+    click('.button.expand');
+    andThen(function(){
+      assert.equal(Ember.$('.title').text().trim(), "Client Information");
     });
   });
 });
