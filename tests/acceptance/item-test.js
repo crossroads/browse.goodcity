@@ -5,7 +5,7 @@ import FactoryGuy from 'ember-data-factory-guy';
 import { make, mockFindAll } from 'ember-data-factory-guy';
 import testSkip from 'browse/tests/helpers/test-skip';
 
-var pkgCategory, subcategory1, pkgType1, subcategory2, role, order,ordersPackage, pkg, gogo_van, organisation, user, userRole, item_with_packages, prev_item, item, next_item, item_path, user_profile;
+var pkgCategory, subcategory1, pkgType1, subcategory2, role, order,ordersPackage, pkg, gogo_van, organisation, user, userRole, item_with_packages, prev_item, item, next_item, item_path, user_profile, bookingType;
 
 module('Acceptance | Item Page', {
   beforeEach: function() {
@@ -19,6 +19,7 @@ module('Acceptance | Item Page', {
     organisation = make("organisation");
     pkg = make('package');
     gogo_van = make("gogovan_transport");
+    bookingType = make("booking_type");
     role = make("role");
     user = make("user");
     userRole = make("user_role", { userId: user.id, roleId: role.id, user: user, role: role });
@@ -30,6 +31,7 @@ module('Acceptance | Item Page', {
     user_profile = {"id": user.id,"first_name": user.get('firstName'), "last_name": user.get('lastName'), "mobile": user.get('mobile')};
     mockFindAll("package_category").returns({json: {package_categories: [pkgCategory.toJSON({includeId: true}), subcategory1.toJSON({includeId: true}), subcategory2.toJSON({includeId: true})]}});
     mockFindAll("package_type").returns({json: {package_types: [pkgType1.toJSON({includeId: true})]}});
+    mockFindAll("booking_type").returns({json: {booking_types: [bookingType.toJSON({includeId: true})]}});
     mockFindAll('item').returns({json: {items: [item_with_packages.toJSON({includeId: true}), next_item.toJSON({includeId: true}), item.toJSON({includeId: true}), prev_item.toJSON({includeId: true})]}});
 
     item_path = "/item/" + item.id +"?categoryId="+ pkgCategory.id +"&sortBy=createdAt%3Adesc";
