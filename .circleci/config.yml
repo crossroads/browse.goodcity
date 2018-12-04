@@ -343,4 +343,4 @@ workflows:
               - test_cases
             filters:
               branches:
-                only: /^(master|live)$/
+                only: /^(live)$/ #For now iOS build available for live only
