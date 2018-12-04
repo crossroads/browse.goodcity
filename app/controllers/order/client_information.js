@@ -18,6 +18,21 @@ export default Ember.Controller.extend({
     return config.APP.HK_COUNTRY_CODE + this.get('mobilePhone');
   }),
 
+  userTitle: Ember.computed('model', function() {
+    let userTitle = this.get('model.user.title');
+    let titles = this.get('titles');
+
+    if(userTitle) {
+      let filteredUserTitle = titles.filter((title) => userTitle === title.id);
+      return { name: filteredUserTitle[0].name.string, id: userTitle };
+    }
+    return { name: titles.get('firstObject.name').string, id: 'Mr' };
+  }),
+
+  selectedTitle: Ember.computed('userTitle', function (){
+    return { name: this.get('userTitle.name'), id: this.get('userTitle.id')};
+  }),
+
   titles: Ember.computed(function() {
     let translation = this.get("i18n");
     let mr = translation.t("account.user_title.mr");
@@ -41,6 +56,7 @@ export default Ember.Controller.extend({
       phone_number: this.get('mobile'),
       order_id: this.get('order.id'),
       identity_type_id: this.identityTypeId(),
+      title: this.get('selectedTitle.id')
     };
     return beneficieryParams;
   },
