@@ -137,6 +137,7 @@ export default {
   "login": {
     "hk_only" : "電話號碼（只限香港）",
     "login" : "登入",
+    "sms_pincode": "We SMS you pin code for secure access <br/> Been here before? Please use the same phone number",
     "smscode": "獲取短訊驗證碼",
     "privacy": "We don't share your data. We only use it to complete your goods request(s). See our ",
     "policy": "Privacy Policy.",
