@@ -5,6 +5,13 @@
     }
     margin-top: 1rem;
   }
+  .people-count-input {
+    .input-error{
+      @media #{$small-only} {
+        margin-left: 0.4rem;
+      }
+    }
+  }
   .input-error {
     background: #ED4C4E !important;
     color: white;
@@ -13,7 +20,8 @@
     padding-bottom: 0.25rem !important;
     @media #{$small-only} {
       font-size: 0.65rem;
-      width: 97%;
+      width: 94%;
+      margin-left: 0.5rem;
       float: left !important;
     }
 
@@ -34,11 +42,11 @@
     }
   }
   .purpose {
+    @media #{$small-only} {
+      width: 96%;
+      margin-left: -2px;
+    }
     .custom_radio_buttons {
-      @media #{$small-only}{
-        width: 100% !important;
-        margin-left: -10px;
-      }
       border: 1px solid;
       padding: .4rem;
       margin-top: 1rem;
@@ -123,6 +131,8 @@
     .people-count-label{
       margin-top: 1rem !important;
       margin-bottom: 0.5rem;
+      width: 94%;
+      margin-left: 0.4rem;
     }
     .people-count-input{
       input {
@@ -134,7 +144,8 @@
         height: 2.7rem !important;
         margin-bottom: 0;
         @media #{$small-only}{
-          width: 97%;
+          width: 94%;
+          margin-left: 0.4rem;
         }
       }
     }
@@ -144,14 +155,19 @@
     .description {
       margin-top: 1rem !important;
       margin-bottom: 0.2rem;
+      width: 94%;
+      margin-left: .4rem;
     }
     .reason-of-need{
       font-size: 0.8rem;
       margin-bottom: 0.5rem;
+      width: 94%;
+      margin-left: .4rem;
     }
     textarea {
       @media #{$small-only}{
-        max-width: 97%;
+        max-width: 94%;
+        margin-left: 0.5rem;
       }
       padding: 0.3rem 0.5rem;
       background: #002352;
@@ -165,7 +181,7 @@
       position: absolute;
       right: 0.8%;
       @media #{$small-only}{
-        right: 3%;
+        right: 4%;
       }
       font-size: 1rem;
       padding: 4.4rem 0.3rem;
