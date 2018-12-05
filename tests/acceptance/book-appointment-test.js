@@ -3,7 +3,7 @@ import { module, test } from 'qunit';
 import startApp from 'browse/tests/helpers/start-app';
 import { make, mockFindAll } from 'ember-data-factory-guy';
 
-var App, order, gogo_van, user, user_profile, orderPurpose1, orderPurpose2 , organisation, pkg, ordersPackage, mocks, goodcityRequest, benificiary, identity_type1, package_type, bookingType;
+var App, order, gogo_van, user, user_profile, orderPurpose1, orderPurpose2 , organisation, pkg, ordersPackage, mocks, goodcityRequest, benificiary, identity_type1, package_type, bookingType, requestPurposeUrl, goodsDetailsUrl, appointmentPageUrl, clientInfoUrl, bookingSuccessUrl, confirmBookingUrl;
 
 module('Acceptance | BookAppointment', {
   beforeEach: function() {
@@ -45,6 +45,12 @@ module('Acceptance | BookAppointment', {
         packages: [pkg.toJSON({includeId: true})], orders_packages: [ordersPackage.toJSON({includeId: true})]}}),
       mockFindAll("booking_type").returns({json: {booking_types: [bookingType.toJSON({includeId: true})]}})
     );
+    requestPurposeUrl = '/request_purpose';
+    clientInfoUrl = `/order/${order.id}/client_information`;
+    goodsDetailsUrl = `/order/${order.id}/goods_details`;
+    appointmentPageUrl = `/order/${order.id}/appointment_details`;
+    confirmBookingUrl = `/order/${order.id}/confirm_booking`;
+    bookingSuccessUrl = `/order/${order.id}/booking_success`;
   },
 
   afterEach: function() {
@@ -87,8 +93,8 @@ test("should redirect to Account details page if user is logged in and account d
 //Request Purpose Page tests
 test("request purpose page on completely filled should redirect to Goods details if For organisation's own programs is selected", function(assert){
   orderPurpose1 = {id: 1, purpose_id: 1, order_id: order.id, designation_id: 1};
-  assert.expect(1);
-  visit('/request_purpose');
+  assert.expect(2);
+  visit(requestPurposeUrl);
   andThen(function(){
     click(".for-organisation");
   });
@@ -111,20 +117,22 @@ test("request purpose page on completely filled should redirect to Goods details
     );
     click('.button.expand');
     andThen(function(){
+      assert.equal(currentURL(), goodsDetailsUrl);
       assert.equal(Ember.$('.title').text().trim(), "Goods Details");
     });
   });
 });
 
 test("request purpose page should not redirect if incomplete form", function(assert){
-  assert.expect(1);
-  visit('/request_purpose');
+  assert.expect(2);
+  visit(requestPurposeUrl);
   andThen(function(){
     click(".for-organisation");
   });
   andThen(function(){
     click('.button.expand');
     andThen(function(){
+      assert.equal(currentURL(), requestPurposeUrl)
       assert.equal(Ember.$('.title').text().trim(), "Request Purpose");
     });
   });
@@ -132,8 +140,8 @@ test("request purpose page should not redirect if incomplete form", function(ass
 
 test("request purpose page on completely filled should redirect to client information if For client benificiary is selected", function(assert){
   orderPurpose2 = {id: 1, purpose_id: 2, order_id: order.id, designation_id: 1};
-  assert.expect(1);
-  visit('/request_purpose');
+  assert.expect(2);
+  visit(requestPurposeUrl);
   andThen(function(){
     click(".for-client");
   });
@@ -156,6 +164,7 @@ test("request purpose page on completely filled should redirect to client inform
     );
     click('.button.expand');
     andThen(function(){
+      assert.equal(currentURL(), clientInfoUrl)
       assert.equal(Ember.$('.title').text().trim(), "Client Information");
     });
   });
@@ -172,7 +181,6 @@ test("Select HkID on client info should display form for hkid", function(assert)
       user: user.toJSON({includeId: true})}
     })
   );
-  let clientInfoUrl = `/order/${order.id}/client_information`;
   visit('/');
   andThen(function(){
     visit(clientInfoUrl);
@@ -198,7 +206,6 @@ test("Select RBCL on client info should display form for rbcl", function(assert)
       user: user.toJSON({includeId: true})}
     })
   );
-  let clientInfoUrl = `/order/${order.id}/client_information`;
   visit(clientInfoUrl);
   andThen(function(){
     assert.equal(currentURL(), clientInfoUrl);
@@ -213,8 +220,7 @@ test("Select RBCL on client info should display form for rbcl", function(assert)
 
 test("Filled Up client info page, should redirect to goods details page on submit", function(assert){
   orderPurpose2 = {id: 1, purpose_id: 2, order_id: order.id, designation_id: 1};
-  let clientInfoUrl = `/order/${order.id}/client_information`;
-  assert.expect(1);
+  assert.expect(2);
   mocks.push(
     $.mockjax({url: '/api/v1/order*', type: 'POST', status: 201,responseText: {
       order: order.toJSON({includeId: true}),
@@ -257,6 +263,7 @@ test("Filled Up client info page, should redirect to goods details page on submi
     );
     click('.button.expand');
     andThen(function(){
+      assert.equal(currentURL(), `${goodsDetailsUrl}?fromClientInformation=true`);
       assert.equal(Ember.$('.title').text().trim(), "Goods Details");
     });
   });
@@ -264,8 +271,7 @@ test("Filled Up client info page, should redirect to goods details page on submi
 
 test("Incomplete form submit client info page, should not redirect to goods details", function(assert){
   orderPurpose2 = {id: 1, purpose_id: 2, order_id: order.id, designation_id: 1};
-  let clientInfoUrl = `/order/${order.id}/client_information`;
-  assert.expect(1);
+  assert.expect(2);
   mocks.push(
     $.mockjax({url: '/api/v1/order*', type: 'POST', status: 201,responseText: {
       order: order.toJSON({includeId: true}),
@@ -296,6 +302,7 @@ test("Incomplete form submit client info page, should not redirect to goods deta
     );
     click('.button.expand');
     andThen(function(){
+      assert.equal(currentURL(), clientInfoUrl);
       assert.equal(Ember.$('.title').text().trim(), "Client Information");
     });
   });
@@ -303,7 +310,6 @@ test("Incomplete form submit client info page, should not redirect to goods deta
 
 // Goods Details Page tests
 test("Goods Details Page on incomplete submit should not redirect to appointment page", function(assert){
-  let goodsDetailsUrl=`/order/${order.id}/goods_details`;
   assert.expect(2);
   mocks.push(
     $.mockjax({url: '/api/v1/order*', type: 'POST', status: 201,responseText: {
@@ -317,19 +323,16 @@ test("Goods Details Page on incomplete submit should not redirect to appointment
     visit(goodsDetailsUrl);
   });
   andThen(function(){
-    assert.equal(currentURL(), goodsDetailsUrl);
-  });
-  andThen(function(){
     click('.expand_button');
   });
   andThen(function(){
+    assert.equal(currentURL(), goodsDetailsUrl);
     assert.equal(Ember.$('.title').text().trim(), "Goods Details");
   });
 });
 
 // // fill good details page and click submit, should redirect to appointment
 // test("Goods Details Page on successfull submit should redirect to appointment page", function(assert){
-//   let goodsDetailsUrl=`/order/${order.id}/goods_details`;
 //   assert.expect(1);
 //   mocks.push(
 //     $.mockjax({url: '/api/v1/order*', type: 'POST', status: 201,responseText: {
@@ -378,6 +381,7 @@ test("Goods Details Page on incomplete submit should not redirect to appointment
 //     click('.expand_button');
 //   });
 //   andThen(function(){
+//     assert.equal(currentURL(), appointmentPageUrl);
 //     assert.equal(Ember.$('.title').text().trim(), "Appointment Details");
 //   });
 // });
