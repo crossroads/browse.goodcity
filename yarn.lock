@@ -5413,7 +5413,7 @@ ember-offline@1.0.0:
     fastboot-transform "^0.1.2"
     offline-js "^0.7.19"
 
-ember-pretty-test@1.0.4:
+ember-pretty-test@^1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/ember-pretty-test/-/ember-pretty-test-1.0.4.tgz#1269402dee84436586cff9eb866a5638495404e5"
   dependencies:
