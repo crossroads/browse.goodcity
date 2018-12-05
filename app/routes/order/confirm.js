@@ -24,5 +24,14 @@ export default AuthorizeRoute.extend({
       user: this.store.peekAll('user').objectAt(0),
       order: order || this.store.findRecord('order', orderId)
     });
+  },
+
+  setupController(controller, model) {
+    this._super(controller, model);
+    this.controllerFor('application').set('showSidebar', false);
+  },
+
+  deactivate() {
+    this.controllerFor('application').set('showSidebar', true);
   }
 });
