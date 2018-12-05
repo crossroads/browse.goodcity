@@ -1,4 +1,8 @@
-<div class="row">
+{{#if isMobileApp}}
+  {{scroll-to-bottom customClass="client-info-scroll-arrow"}}
+{{/if}}
+
+<div class="row client_info">
   <div class="large-12 columns medium-12 small-12">
     <div class="row checkout_pages">
       <div class="small-12 columns">
@@ -109,7 +113,7 @@
                       <span class="prefix">+852</span>
                     </div>
                     <div class="small-9 columns">
-                      {{numeric-input value=mobilePhone name="mobilePhone" id="mobile" maxlength="8" required=true pattern=".{8,}" autoFocus=true}}
+                      {{numeric-input value=mobilePhone name="mobilePhone" id="mobile" maxlength="8" required=true pattern=".{8,}"}}
                     </div>
                     <div class="small-12 columns input-error">
                       <div class='input-error'>

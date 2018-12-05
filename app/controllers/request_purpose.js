@@ -1,8 +1,10 @@
 import Ember from "ember";
 import AjaxPromise from 'browse/utils/ajax-promise';
 const { getOwner } = Ember;
+import config from "../config/environment";
 
 export default Ember.Controller.extend({
+  isMobileApp: config.cordova.enabled,
   peopleCount: null,
   description: "",
   selectedId: null,
@@ -13,7 +15,7 @@ export default Ember.Controller.extend({
     clearDescription() {
       this.set("description", "");
     },
-    
+
     createOrderWithRequestPuropose(){
       var user = this.get('user');
       var purposeIds = [];

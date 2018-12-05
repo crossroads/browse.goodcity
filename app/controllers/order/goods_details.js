@@ -1,9 +1,11 @@
 import Ember from "ember";
 const { getOwner } = Ember;
 import AjaxPromise from 'browse/utils/ajax-promise';
+import config from "../../config/environment";
 
 export default Ember.Controller.extend({
   queryParams: ["typeId", "fromClientInformation"],
+  isMobileApp: config.cordova.enabled,
   order: Ember.computed.alias("model"),
   typeId: null,
   fromClientInformation: false,

@@ -1,3 +1,7 @@
+{{#if isMobileApp}}
+  {{scroll-to-bottom customClass="appointment-detail-info-scroll-arrow"}}
+{{/if}}
+
 <div class="row">
   <div class="large-12 columns medium-12 small-12">
     <div class="row checkout_pages">
@@ -13,7 +17,7 @@
           </nav>
         </section>
 
-        
+
           {{#validate-appointment}}
             {{#validatable-form onSubmit=(action 'saveTransportDetails') as |form|}}
               <section class="main-section client-information large-10 large-offset-1 medium-10 medium-offset-1 columns appointment-date">
