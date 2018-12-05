@@ -43,7 +43,8 @@
             <br>
             <div class="row">
               <div class="small-11 columns">
-                <button {{action 'submit' target=form}} class="button expand expand_button">{{t "continue"}}</button>
+                {{#if hasNoGcRequests}}<p align="center" class="no-gc-req-error">Atleast one Item is required.</p>{{/if}}
+                <button {{action 'submit' target=form}} disabled={{hasNoGcRequests}} class="button expand expand_button">{{t "continue"}}</button>
               </div>
               <div class='small-1 columns'>&nbsp;</div>
             </div>
