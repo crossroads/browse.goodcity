@@ -300,9 +300,6 @@ workflows:
         - test_cases:
             requires:
               - package_dependencies
-            filters:
-              commit_message:
-                contains: /#test/
         - upload-coverage:
             requires:
               - package_dependencies
