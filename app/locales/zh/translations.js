@@ -274,7 +274,7 @@ export default {
           This order has not yet been submitted. You may still make modifications to it.
         `,
         "submitted": `
-          Our staff may contact you/or the beneficiary to check details. 
+          Our staff may contact you/or the beneficiary to check details.
           If everything is ok then the order will be marked confirmed
         `,
         "dispatching": `
@@ -415,8 +415,9 @@ export default {
       "request_more": "Request more goods",
       "type_label": "Goods type",
       "quantity_label": "Quantity",
-      "description_details_label": "Specifics of item (Optional)"
-    }, 
+      "description_details_label": "Specifics of item (Optional)",
+      "no_goods_error": "At least one Item is required."
+    },
     "request": {
       "remove_req": "Remove this request from order",
       "remove": "Remove"
