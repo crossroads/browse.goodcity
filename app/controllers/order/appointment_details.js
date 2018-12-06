@@ -8,6 +8,7 @@ export default Ember.Controller.extend({
   selectedId: null,
   selectedTimeId: null,
   selectedDate: null,
+  timeSlotNotSelected: false,
 
   timeSlots: Ember.computed('selectedDate', function(){
     var selectedDate = this.get('selectedDate');
@@ -31,8 +32,15 @@ export default Ember.Controller.extend({
 
   actions: {
   	saveTransportDetails(){
+      const isTimeSlotSelected = Ember.$('.time-slots input').toArray().filter(radioButton => radioButton.checked === true).length;
+      if(isTimeSlotSelected) {
+        this.set("timeSlotNotSelected", false);
+      } else {
+        this.set("timeSlotNotSelected", true);
+        return false;
+      }
       var orderTransport = this.get('orderTransport');
-      
+
       var url, actionType;
 
       if (orderTransport) {
@@ -55,6 +63,6 @@ export default Ember.Controller.extend({
         loadingView.destroy();
         this.transitionToRoute("order.confirm_booking", this.get("order.id"));
       });
-    }    
+    }
   }
 });

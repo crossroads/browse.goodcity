@@ -416,7 +416,8 @@ export default {
       "type_label": "Goods type",
       "quantity_label": "Quantity",
       "description_details_label": "Specifics of item (Optional)",
-      "no_goods_error": "At least one Item is required."
+      "no_goods_error": "At least one Item is required.",
+      "no_time_slot_selected_error": "Please select time slot."
     },
     "request": {
       "remove_req": "Remove this request from order",
