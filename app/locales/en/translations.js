@@ -432,7 +432,7 @@ export default {
       "self_vehicle": "Client will bring private vehicle",
       "hire_vehicle": "Client needs information about hiring vehicle",
       "confirm_labor": "Confirm understanding of labor requirements",
-      "labor_info": "If the request is too large for the client to carry alone, Please advice them to bring their own labor to load at our end and unload at their end. Crossroads does not provide labor, and hired truck drivers do not provide loading services without charge.",
+      "labor_info": "If the request is too large for the client to carry alone, please advise them to bring their own labor to load at our end and unload at their end. Crossroads does not provide labor, and hired truck drivers do not provide loading services without charge.",
       "labor_confirmation": "I confirm understanding of labor requirements.",
       "date": "Appointment Date",
       "time": "Appointment Time"

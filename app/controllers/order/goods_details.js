@@ -48,6 +48,6 @@ export default Ember.Controller.extend({
       }).finally(() =>{
         this.transitionToRoute('order.appointment_details', this.get("order.id"));
       });
-    },
+    }
   }
 });
