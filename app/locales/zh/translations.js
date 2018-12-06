@@ -401,7 +401,7 @@ export default {
       "type_label": "貨物類型",
       "quantity_label": "數量",
       "description_details_label": "項目詳情（可選）",
-      "no_goods_error": "At least one Item is required."
+      "no_goods_error": "需要申請最少一件物品。"
     },
     "request": {
       "remove_req": "從此訂單中刪除申請",
