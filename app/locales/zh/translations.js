@@ -366,7 +366,7 @@ export default {
       "verify": "我們將在送抵時用此身份證明以核實服務對象身份。",
       "data_confidentiality": "所有服務對象資料均嚴格保密。",
       "hk_id": "香港身份證",
-      "asrf_id": "Asylum Seeker Recognizance Form尋求庇護者確認表格",
+      "asrf_id": "尋求庇護者確認表格",
       "first_name": "服務對象的名",
       "family_name": "服務對象的姓",
       "name_instruction": "在身份證明文件中顯示",
