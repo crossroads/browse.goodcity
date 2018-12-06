@@ -1,6 +1,6 @@
 
 {{#if session.isLoggedIn}}
-  <div class="button small action" {{action "redirectAsPerUserDetails"}}>
+  <div class="button {{if buttonStyle buttonStyle 'small action' }}" {{action "redirectAsPerUserDetails"}}>
     {{ t "home.visit.action" }} <i class="fa fa-calendar"></i>
   </div>
 {{else}}
