@@ -352,7 +352,7 @@ export default {
     "order_detail_pop_up": "請在購物車中新增物資以提交訂單詳情。",
     "transport_order_detail_pop_up": "請先填寫訂單詳情",
     "transport_details_pop_up": "請在購物車中新增物資以提交運輸詳情。",
-    "numbers_warning": "Please input numbers only.",
+    "numbers_warning": "Please enter 4 digit number.",
     "transport_details": {
       "transport_method": "運輸方式: ",
       "collect_with_own_vehicle": "我會自行安排運輸接收",

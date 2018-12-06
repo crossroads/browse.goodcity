@@ -355,7 +355,7 @@ export default {
     "order_detail_pop_up": "Add items to your cart before submitting Order details.",
     "transport_order_detail_pop_up": "You need to fill up Order details first",
     "transport_details_pop_up": "Add items to your cart before submitting transport details.",
-    "numbers_warning": "Please input numbers only.",
+    "numbers_warning": "Please enter 4 digit number.",
     "transport_details": {
       "transport_method": "Transport method: ",
       "collect_with_own_vehicle": "We will collect with our own vehicle(s)",
