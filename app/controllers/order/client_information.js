@@ -34,7 +34,7 @@ export default Ember.Controller.extend({
   }),
 
   beneficiaryParams(){
-    let title = Ember.$("option").toArray().filter((title) => title.selected === true)[0].value;
+    let title = Ember.$("select#title option").toArray().filter((title) => title.selected === true)[0].value;
     var beneficieryParams = {
       first_name: this.get('firstName'),
       last_name: this.get('lastName'),
