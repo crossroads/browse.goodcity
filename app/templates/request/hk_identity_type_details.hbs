@@ -1,5 +1,5 @@
 <div class="small-12 columns type-of-id-text">
-  {{t "order.client_information.hk_id_instruction.title"}} 
+  {{t "order.client_information.hk_id_instruction.title"}}
 </div>
 <div class="small-12 columns id-confidential-text">
   {{t "order.client_information.hk_id_instruction.sub_title"}} <br> <br>
@@ -11,13 +11,13 @@
         <label> P12 </label>
       </div>
       <div class="columns small-3 medium-3 large-2">
-          {{numeric-input name="hk_id" id="hk-id-number" value=identityNumber maxlength="4" placeholder="XXXX" required='true'}}
+          {{numeric-input name="hk_id" id="hk-id-number" value=identityNumber minlength="4" maxlength="4" placeholder="XXXX" required='true'}}
       </div>
       <div class="columns small-6 medium-6 large-8 x-with-brackets">
         (X)
       </div>
       <div class="small-12 columns input-error warning_empty">
-        <div class='input-error'> {{t "order.numbers_warning"}} </div>  
+        <div class='input-error'> {{t "order.numbers_warning"}} </div>
       </div>
     {{/form-control}}
   </div>
