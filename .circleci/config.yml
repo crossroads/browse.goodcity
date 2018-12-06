@@ -63,7 +63,7 @@ jobs:
       - restore-cache: *restore-bower-cache
       - run:
           name: Run Ember tests
-          command: COVERAGE=true yarn run test
+          command: COVERAGE=true yarn run test:ci
       - persist_to_workspace:
           root: .
           paths:
@@ -300,6 +300,9 @@ workflows:
         - test_cases:
             requires:
               - package_dependencies
+            filters:
+              commit_message:
+                contains: /#test/
         - upload-coverage:
             requires:
               - package_dependencies
