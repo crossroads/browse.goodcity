@@ -10,11 +10,11 @@ module.exports = function(defaults) {
     },
     minifyJS: {
       options: {
-        exclude: ["**/browse.js"]
+        exclude: ["**/*.js"]
       }
     },
     fingerprint: {
-      extensions: ['css', 'png', 'jpg', 'gif', 'map'],
+      extensions: ['js', 'css', 'png', 'jpg', 'gif', 'map'],
       enabled: webRelease
     },
     gzip: {
@@ -52,6 +52,9 @@ module.exports = function(defaults) {
 
   app.import('bower_components/socket.io-client/socket.io.js');
   app.import('bower_components/moment/moment.js');
+  app.import('bower_components/moment-timezone/moment-timezone.js');
+  app.import('bower_components/moment-timezone/builds/moment-timezone-with-data.js');
+
   // app.import('bower_components/moment/locale/zh-tw.js');
 
   app.import('bower_components/pickadate/lib/picker.js');

@@ -73,9 +73,11 @@ export default Ember.TextField.extend({
     var available_count = 0, available_array = [true];
 
     if(list) {
-      available_count = list.length;
-      for (var i = available_count - 1; i >= 0; i--) {
-        date = new Date(list[i]);
+      available_count = list['appointment_calendar_dates'].length;
+      var dates = list['appointment_calendar_dates'].rejectBy('isClosed', true).getEach('date');
+
+      for (var i = dates.length - 1; i >= 0; i--) {
+        date = new Date(dates[i]);
         var date_array = [];
         date_array.push(date.getFullYear());
         date_array.push(date.getMonth());
@@ -138,7 +140,7 @@ export default Ember.TextField.extend({
     });
 
     function validateForm(){
-      Ember.$('.button.book_van').click(function(){
+      Ember.$('.a.appointment').click(function(){
         var date = checkInput(Ember.$('.date_selector input'));
         var time = checkInput(Ember.$('.time_selector select'));
         return date && time;
@@ -159,17 +161,17 @@ export default Ember.TextField.extend({
       var value = Ember.$(element).val();
 
       if(!value || value.length === 0) {
-        parent.addClass('form__control--error');
+        parent.addClass('has-error');
         return false;
       } else {
-        parent.removeClass('form__control--error');
+        parent.removeClass('has-error');
         return true;
       }
     }
 
     function removeHighlight(element){
       var parent = Ember.$(element).parent();
-      parent.removeClass('form__control--error');
+      parent.removeClass('has-error');
     }
   }
 

@@ -4,6 +4,9 @@ import itemController from './item';
 export default itemController.extend({
   messageBox:           Ember.inject.service(),
   package:              Ember.computed.alias('model'),
+  queryParams:          ['categoryId', 'sortBy'],
+  categoryId:           null,
+  sortBy:               "createdAt",
   pkgNotAvailableShown: false,
   cart:                 Ember.inject.service(),
 
@@ -24,6 +27,7 @@ export default itemController.extend({
       }
       this.get('messageBox').alert(this.get('i18n').t('cart_content.unavailable'),
       () => {
+        this.store.unloadRecord(pkg);
         this.set('pkgNotAvailableShown', false);
         this.transitionToRoute('/browse');
       });

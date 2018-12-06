@@ -9,6 +9,8 @@ export default Model.extend({
   transportType: attr('string'),
   vehicleType:   attr('string'),
   scheduledAt:   attr('date'),
+  orderId: attr('number'),
+  bookingType:   belongsTo('booking_type', { async: false }),
 
   contact:  belongsTo('contact', { async: false }),
   order:    belongsTo('order', { async: false }),
@@ -35,6 +37,15 @@ export default Model.extend({
     } else {
       return "";
     }
+  }),
+
+  isAppointment: Ember.computed("bookingType", function() {
+    const bookingType = this.get('bookingType');
+    if (!bookingType) {
+      // Orders created before appointments were supported may not have bookingTypes
+      return false;
+    }
+    return bookingType.get('isAppointment');
   })
 
 });

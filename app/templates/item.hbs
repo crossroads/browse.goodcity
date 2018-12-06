@@ -4,12 +4,12 @@
 <nav class="tab-bar item-controls">
   <section class='main-section'>
     <div class="row">
-      <div class="large-8 medium-6 small-12 columns hide-for-small package_catogory_header">
+      <div class="large-8 medium-8 small-12 columns hide-for-small package_catogory_header">
           {{#link-to 'package_category' categoryObj.id class="package_category_link"}}{{categoryObj.name}}{{/link-to}}
           <span class="package-type">\ {{item.packageType.name}}</span>
       </div>
 
-      <div class="large-4 medium-6 small-12 columns item-page">
+      <div class="large-4 medium-4 small-12 columns item-page">
         {{#link-to 'package_category' categoryObj class="no-avatar left show-for-small item-remove-icon"}}
           <i class="fa fa-2x fa-times remove-icon"></i>
         {{/link-to}}
@@ -18,13 +18,13 @@
           <li class="arrow prev enabled-arrow" {{action "setDirectionAndRender" "moveRight" on="click"}}>
             <a disabled="{{noPreviousItem}}" class="no-avatar">
               <i class="fa fa-arrow-left"></i>
-              <span class="hide-for-small">{{t "itemdetail.previous"}}</span>
+              <span class="hide-for-small {{if hasCartItems 'narrow' ''}}">{{t "itemdetail.previous"}}</span>
             </a>
           </li>
 
           <li class="arrow next enabled-arrow" {{action "setDirectionAndRender" "moveLeft" on="click"}}>
             <a disabled="{{noNextItem}}" class="no-avatar">
-              <span class="hide-for-small">{{t "itemdetail.next"}}</span>
+              <span class="hide-for-small {{if hasCartItems 'narrow' ''}}">{{t "itemdetail.next"}}</span>
               <i class="fa fa-arrow-right"></i>
             </a>
           </li>
@@ -73,6 +73,13 @@
           {{#each allPackages key="@index" as |package|}}
             <div class="item_name">{{package.notes}}</div>
             <p>
+              {{#if session.isLoggedIn}}
+                {{#if isOrderFulfilmentUser }}
+                  <div class="item_details" {{ action 'goToStockItem' package.id }}>
+                    {{t "itemdetail.inventory_number"}}: <span class="inventory_redirect">{{package.inventoryNumber}}</span>
+                  </div>
+                {{/if}}
+              {{/if}}
               <div class="item_details">
                 {{t "itemdetail.quantity"}}: {{package.quantity}}
               </div>

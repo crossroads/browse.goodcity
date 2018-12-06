@@ -1,0 +1,126 @@
+<div class="row">
+  <div class="large-8 columns large-offset-2 medium-offset-1 medium-10 small-12">
+    <div class="row checkout_pages">
+      <div class="small-12 columns">
+        <div class="row">
+          <section class="main-section new-user-section ui login_page">
+            <nav class="tab-bar">
+              <section class="left-large">
+                {{#link-to "authenticate" classNames="back"}}{{fa-icon "angle-left"}} {{t "back"}}{{/link-to}}
+              </section>
+
+              <section class="middle tab-bar-section">
+                <h1 class="title">{{t "account.account_details"}}</h1>
+              </section>
+            </nav>
+
+            {{#unless cart.isEmpty}}
+              {{small-cart-toggle-view}}
+            {{/unless}}
+            <div class="row">
+              <div class="small-12 large-10 large-offset-1 medium-10 medium-offset-1 columns">
+                <div class="mobile">
+                  <div class="row">
+                    <div class="small-12 columns">
+                      <label class="form-label">{{t "account.welcome"}}</label>
+                    </div>
+                    <div class="small-12 columns">
+                      <label class="form-label">{{t "account.contact_details"}}</label>
+                    </div>
+                  </div>
+
+                  <br>
+
+                  {{#validatable-form onSubmit=(action 'saveAccount') as |form|}}
+                    <div class="row">
+                      {{#form-control}}
+                        {{#if model.organisation}}
+                          <div class="small-12 columns" id="organisation_id" {{action "goToSearchOrg"}}>
+                            <label class="form-label">{{t "account.organisation"}}</label>
+                            {{input type="text" id = "organisation_details" classNames="number_input center_align_placeholder" required='true' value=model.organisation.nameEn disabled=true}}
+                          </div>
+                        {{else}}
+                          <div class="small-12 columns" {{action "goToSearchOrg"}}>
+                            <label class="form-label">{{t "account.organisation"}}</label>
+                            {{input type="text" id = "organisation_details" classNames="number_input center_align_placeholder" required='true' }}
+                          </div>
+                        {{/if}}
+
+                        <div class="small-12 columns input-error warning_empty">
+                          {{fa-icon "warning"}}&nbsp;&nbsp;{{t "account.organisation_warning"}}
+                        </div>
+                      {{/form-control}}
+                    </div>
+                    <br>
+                    <div class="row">
+                      {{#form-control}}
+                        <div class="small-2 columns user_title">
+                          <label class="form-label">{{t "account.title"}}</label>
+                          {{select-list
+                            content=titles
+                            on-change=(action (mut selectedTitle))
+                            selectedValue=selectedTitle
+                            value= selectedTitle
+                            selectArrow=true
+                            classNames='condition'
+                            idNames='title' }}
+                        </div>
+                        <div class="small-5 columns">
+                          <label class="form-label">{{t "account.first"}}</label>
+                          {{input type="text" value=model.user.firstName id="firstName" classNames="number_input center_align_placeholder" required='true'}}
+                        </div>
+                        <div class="small-5 columns">
+                          <label class="form-label">{{t "account.last"}}</label>
+                          {{input type="text" value=model.user.lastName id="lastName" classNames="number_input center_align_placeholder" required='true'}}
+                        </div>
+                        <div class="small-12 columns input-error warning_empty">
+                          {{fa-icon "warning"}}&nbsp;&nbsp;{{t "account.user_info"}}
+                        </div>
+                      {{/form-control}}
+                    </div>
+                    <br>
+                    <div class="row">
+                      {{#form-control}}
+                        <div class="small-12 columns">
+                          <label class="form-label">{{t "account.position"}}</label>
+                          {{#if model.organisationsUser}}
+                            {{input type="text" value=model.organisationsUser.position id="position" classNames="number_input center_align_placeholder" required='true' autoFocus=true}}
+                          {{else}}
+                            {{input type="text" value=position classNames="number_input center_align_placeholder" required='true' autoFocus=true}}
+                          {{/if}}
+                        </div>
+                        <div class="small-12 columns input-error warning_empty">
+                          {{fa-icon "warning"}}&nbsp;&nbsp;{{t "account.position_warning"}}
+                        </div>
+                      {{/form-control}}
+                    </div>
+                    <br>
+                    <div class="row">
+                      {{#form-control}}
+                        <div class="small-12 columns">
+                          <label class="form-label">{{t "account.email"}}</label>
+                          <label class="form-label">{{t "account.work"}}</label>
+                          {{input value=email value=model.user.email classNames="number_input center_align_placeholder" id="email" type="email" required='true'}}
+                        </div>
+                        <div class="small-12 columns input-error warning_empty">
+                          {{fa-icon "warning"}}&nbsp;&nbsp;{{t "account.email_warning"}}
+                        </div>
+                      {{/form-control}}
+                    </div>
+                    <div class="row">
+                      {{!-- <div class="save_button"><i class="fa fa-angle-double-down fa-2x"></i></div> --}}
+                      <div class="small-12 medium-12 columns">
+                        <button {{action 'submit' target=form}} class="button expand expand_button">{{t "continue"}}</button>
+                      </div>
+                    </div>
+                  {{/validatable-form}}
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

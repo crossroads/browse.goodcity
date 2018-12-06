@@ -8,6 +8,9 @@ export default Addressable.extend({
   lastName:    attr('string'),
   mobile:      attr('string'),
   createdAt:   attr('date'),
+  email:       attr('string'),
+  title:       attr('string'),
+
   organisations: hasMany('organisation', {async: false}),
   organisationsUsers: hasMany('organisationsUsers', {async: false}),
 
@@ -21,5 +24,33 @@ export default Addressable.extend({
 
   fullName: Ember.computed('firstName', 'lastName', function(){
     return (this.get('firstName') + " " + this.get('lastName'));
-  })
+  }),
+
+  isInfoComplete: Ember.computed('firstName', 'lastName', 'email', 'mobile', 'title', function(){
+    return this.hasValue('firstName', 'lastName', 'email', 'mobile', 'title');
+  }),
+
+  hasValue(...args) {
+    let hasValue = true;
+    for (let i = 0; i < args.length; i ++) {
+      if(!this.get(args[i]) || !this.get(args[i]).length) {
+        hasValue = false;
+        break;
+      }
+    }
+    return hasValue;
+  },
+
+  //*****************
+  // Utility methods
+  //*****************
+
+  roleNames() {
+    return this.get('userRoles').getEach('role.name');
+  },
+
+  hasRole(role) {
+    return this.roleNames().indexOf(role) >= 0;
+  }
 });
+

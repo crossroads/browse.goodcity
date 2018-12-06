@@ -10,6 +10,7 @@ export default Ember.Controller.extend({
   messageBox: Ember.inject.service(),
   loggedInUser: false,
   i18n: Ember.inject.service(),
+  showSidebar: true,
 
   initSubscription: Ember.on('init', function() {
     this.get('subscription').send('wire');
@@ -24,10 +25,8 @@ export default Ember.Controller.extend({
 
   draftOrder: Ember.computed.alias('session.draftOrder'),
 
-  isUserLoggedIn: Ember.computed('loggedInUser', function() {
-    this.set('loggedInUser', false);
-    let authToken = window.localStorage.authToken;
-    return authToken ? true : false;
+  isUserLoggedIn: Ember.computed('session', function() {
+    return !!this.session.get('authToken');
   }),
 
   unloadModels() {
@@ -95,11 +94,10 @@ export default Ember.Controller.extend({
     },
 
     removeItem(itemId, type) {
-      var item = this.get('store').peekRecord(type, itemId);
-      var ordersPackages = this.store.peekAll('orders_package').filterBy("package.id", itemId);
-      var orderPackageId;
+      var item = this.get('store').peekRecord(type, itemId) || itemId;
+      var ordersPackages = this.store.peekAll('orders_package').filterBy("packageId", itemId);
       if(this.get('draftOrder') && ordersPackages.length){
-        orderPackageId = ordersPackages.get("firstObject.id");
+        let orderPackageId = ordersPackages.get("firstObject.id");
         var loadingView = getOwner(this).lookup('component:loading').append();
         new AjaxPromise(`/orders_packages/${orderPackageId}`, "DELETE", this.get('session.authToken'))
         .then(() => {
@@ -129,6 +127,21 @@ export default Ember.Controller.extend({
       }
     },
 
+    updateCartItemParams(pkgId){
+      let pkg = this.store.peekRecord('package', pkgId);
+      if(!pkg.isAvailable){return false;}
+      let categoryId = pkg.get("allPackageCategories.firstObject.id");
+      let sortBy = 'createdAt:desc';
+      this.transitionToRoute('package', pkgId,
+        { queryParams:
+          {
+            categoryId: categoryId,
+            sortBy: sortBy
+          }
+        });
+      this.set('displayCart', false);
+      this.set("showCartDetailSidebar", false);
+    },
     openCart(){
       this.transitionToRoute('cart');
     }

@@ -6,7 +6,8 @@
     "Foundation",
     "io",
     "moment",
-    "airbrakeJs"
+    "airbrakeJs",
+    "moment-timezone"
   ],
   "browser": true,
   "boss": true,

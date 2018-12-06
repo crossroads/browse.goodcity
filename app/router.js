@@ -15,8 +15,10 @@ Router.map(function() {
   this.route('cart');
 
   this.route('login');
+  this.route('account_details');
   this.route('post_login');
   this.route('authenticate');
+  this.route('search_organisation');
 
   this.route('order_details');
   this.route('my_orders');
@@ -24,6 +26,12 @@ Router.map(function() {
   this.route('order', { path: '/order/:order_id/' }, function() {
     this.route('transport_details');
     this.route('confirm');
+    this.route('client_information');
+    this.route('goods_details');
+    this.route("search_code");
+    this.route('appointment_details');
+    this.route('confirm_booking');
+    this.route('booking_success');
   });
 
   this.route('confirm');
@@ -32,6 +40,7 @@ Router.map(function() {
   this.route('faq');
   this.route('terms');
   this.route('about');
+  this.route('request_purpose');
 });
 
 export default Router;

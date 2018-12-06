@@ -15,7 +15,7 @@ export default Ember.Route.extend(preloadDataMixin, {
 
   unlessIncludesCurrentPath() {
     var currentPath = window.location.href;
-    return !(currentPath.indexOf("login") >= 0 || currentPath.indexOf("authenticate") >= 0 || currentPath.indexOf("category") >= 0 || currentPath.indexOf("package") >= 0 || currentPath.indexOf("item") >= 0);
+    return !(currentPath.indexOf("login") >= 0 || currentPath.indexOf("authenticate") >= 0 || currentPath.indexOf("category") >= 0 || currentPath.indexOf("package") >= 0 || currentPath.indexOf("item") >= 0 || currentPath.indexOf("browse") >= 0 || window.location.pathname === "/");
   },
 
   init() {
@@ -28,7 +28,7 @@ export default Ember.Route.extend(preloadDataMixin, {
         object.get('messageBox').alert(object.get("i18n").t('must_login'), () => {
           object.session.clear();
           object.store.unloadAll();
-          window.location.reload();
+          object.transitionTo("/login");
         });
       } else if(authToken && (currentPath.indexOf("login") >= 0 || currentPath.indexOf("authenticate") >= 0)) {
         object.transitionTo("/");

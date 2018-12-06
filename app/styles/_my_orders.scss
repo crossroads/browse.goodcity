@@ -1,40 +1,197 @@
-.title {
-  font-weight: bold;
-  font-size: 1rem;
-  color: white;
-  text-align: center;
-  margin: 1rem;
-}
-.order-heading {
-  font-weight: bold;
-  color: white;
-  text-align: center;
-  margin: 1rem 0 1rem 0 !important;
-}
-.list-items {
-  text-align: center;
-  li {
-    border: 1px solid white;
-    padding: 0.5rem;
-    margin: 0.2rem;
-  }
-}
-.order-summery{
-  .organisation-detail {
-    margin-left: 13rem !important;
-    @media #{$medium-only} {
-      margin-left: 0.3rem !important;
-    }
-    @media #{$small-only} {
-      margin-left: 0.3rem !important;
-    }
-  }
-}
 .my_orders {
-  @media only screen and (min-width: 120.1em) {
-    margin-left: 4rem !important;
+
+  @media #{$large-up} {
+    &.row {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+  }
+
+  .title {
+    font-weight: bold;
+    font-size: 1rem;
+    color: white;
+    text-align: center;
+    margin: 1rem;
+  }
+
+  .content {
+    margin: 0 auto;
+
+    // ---- ACTION BUTTONS ('Browse goods', 'Book appointment')
+    .button-container {
+      text-align: center;
+      .button {
+        width: 80%;
+        font-size: 0.8em;
+        margin-top: 1.25rem;
+        margin-bottom: 1.25rem;
+        .fa {
+          margin-right: 0.35rem;
+        }
+      }
+    }
+
+    // ---- LIST OF ORDERS
+    .list-items {
+      li {
+        padding-right: 0;
+      }
+    }
+
+    // ---- ORDER DETAILS (WHEN SELECTED)
+    .order-summary {
+      @each $state, $color in (
+        submitted: $submitted-state-color,
+        processing: $processing-state-color,
+        awaiting_dispatch: $scheduled-state-color,
+        scheduled: $scheduled-state-color,
+        dispatching: $dispatching-state-color,
+        cancelled: $cancelled-state-color,
+        closed: $closed-state-color,
+        draft: $draft-state-color
+      ) {
+        &.#{$state} {
+          .header, .booking-tab .state-container {
+            background-color: $color;
+          }
+        }
+      }
+
+      // ---- TOP COLORED HEADER
+      .header {
+        border-bottom: none;
+        text-align: center;
+        .strong {
+          font-family: $header-font-family;
+        }
+        .header-icon {
+          padding-top: 0.2rem;
+          padding-left: 0;
+          .icon {
+            line-height: 1.5rem;
+          }
+          .sub-text {
+            font-size: 0.6rem;
+            line-height: 0.6rem;
+          }
+        }
+      }
+
+      // ---- TABS (BOOKING/GOODS/...)
+      .tabs .tab {
+        text-align: center;
+        opacity: 0.5;
+        &.selected {
+          opacity: 1;
+        }
+        .fa {
+          margin-right: 0.5rem;
+        }
+      }
+
+      // ---- TAB DATA
+      .tab-content {
+
+        // ---- SECTIONS (Separated by lines)
+        section {
+          &:not(:last-child) {
+            border-bottom: 1px solid white;
+          }
+          padding-bottom: 1rem;
+          padding-top: 1rem;
+
+          .section-title {
+            color:white;
+            font-family: $header-font-family;
+            padding-left: 6%;
+            margin-bottom: 1.5rem;
+          }
+
+          // ---- PAIRS OF LABELS AND TEXT
+          &.details {
+            .detail-row {
+              font-size: 0.9rem;
+              margin: 0.5rem 0;
+              padding-left: 6%;
+              .data-type {
+                @extend .columns;
+                @extend .small-4;
+              }
+              .data {
+                @extend .columns;
+                @extend .small-8;
+                color: white;
+              }
+            }
+          }
+        }
+
+
+        // ---- TAB SPECIFIC STYLES
+
+        // ---- BOOKING TAB
+        .booking-tab {
+          
+          .state-description {
+            padding: 0 10%;
+            margin: 1.5rem 0;
+            color: white;
+            .state-container {
+              padding: 1rem;
+              .state-title {
+                .fa {
+                  margin-right: 0.5rem;
+                }
+                margin-bottom: 1rem;
+                font-family: $header-font-family;
+                text-transform: capitalize;
+              }
+              .state-text {
+                font-style: italic;
+              }
+            }
+          }
+
+          section.purpose {
+            ul {
+              margin-bottom: 0;
+            }
+          }
+        }
+
+        // ---- GOODS TAB
+        .goods-tab {
+          .product-row {
+            &:not(:last-child) {
+              border-bottom: 1px solid white;
+            }
+            .image-container {
+              padding: 1rem;
+              img {
+                border: 1px solid white;
+              }
+            }
+            .text-container {
+              padding-top: 1rem;
+              >div {
+                &.text {
+                  color: white;
+                }
+                font-size: 0.75rem;
+              }
+            }
+          }
+
+        }
+
+
+
+      }
+    }
   }
 }
+
 .empty-cart-message{
   padding-left: 7px !important;
   font-size:1rem !important;
@@ -42,4 +199,9 @@
 }
 .cart-message-box{
   margin-top: 4rem;
+}
+
+.inventory_redirect {
+  text-decoration: underline;
+  cursor: pointer;
 }

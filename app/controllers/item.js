@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import config from "../config/environment";
 
 export default Ember.Controller.extend({
 
@@ -14,6 +15,8 @@ export default Ember.Controller.extend({
   hideThumbnails: Ember.computed.gt('item.sortedImages.length', 1),
   smallScreenPreviewUrl: Ember.computed.alias('item.displayImage.smallScreenPreviewImageUrl'),
   itemNotAvailableShown: false,
+  hasCartItems: Ember.computed.alias('application.hasCartItems'),
+  isMobileApp: config.cordova.enabled,
 
   direction: null,
 
@@ -28,6 +31,7 @@ export default Ember.Controller.extend({
       }
       this.get('messageBox').alert(this.get('i18n').t('cart_content.unavailable'),
       () => {
+        item.get('packages').forEach((pkg) => this.store.unloadRecord(pkg));
         this.set("itemNotAvailableShown", false);
         this.transitionToRoute('/browse');
       });
@@ -35,6 +39,10 @@ export default Ember.Controller.extend({
   }),
 
   hasDraftOrder: Ember.computed.alias("session.draftOrder"),
+  isOrderFulfilmentUser: Ember.computed(function() {
+    let user = this.get('session.currentUser');
+    return user.hasRole('Order fulfilment');
+  }),
 
   presentInCart: Ember.computed('item', 'cart.counter', function(){
     return this.get('cart').hasCartItem(this.get('item'));
@@ -79,6 +87,18 @@ export default Ember.Controller.extend({
   actions: {
     showPreview(image) {
       this.set('previewUrl', image.get("previewImageUrl"));
+    },
+
+    goToStockItem(inventoryNumber) {
+      let finalUrl;
+
+      if(this.get('isMobileApp') && cordova.platformId === "android") { // jshint ignore:line
+        finalUrl = "android-app://hk.goodcity.stockstaging/https/" + config.APP.STOCK_ANDROID_APP_HOST_URL + "/items/" + inventoryNumber;
+        window.open(finalUrl, '_system');
+      } else {
+        finalUrl = config.APP.STOCK_APP_HOST_URL + "/items/" + inventoryNumber;
+        window.open(finalUrl, '_blank');
+      }
     },
 
     setDirectionAndRender(direction) {

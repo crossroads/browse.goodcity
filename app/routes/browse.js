@@ -9,7 +9,7 @@ export default PublicRoute.extend({
     var previousRoutes = this.router.router && this.router.router.currentHandlerInfos;
     var previousRoute = previousRoutes && previousRoutes.pop();
 
-    if(previousRoute)
+    if(previousRoute && previousRoute.name)
     {
       this.set("previousRouteName", previousRoute.name);
       if(previousRoute.name === "cart") {

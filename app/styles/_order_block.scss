@@ -1,0 +1,134 @@
+.order_block {
+  $header-height: 3em;
+  border: none;
+  padding-left: 0;
+  padding-right: 0;
+
+  .order_process_summary .value {
+    >span {
+      margin-right: 0.7em;
+    }
+  }
+
+
+  // ------------
+  // HEADER
+  // ------------
+
+  .order_header {
+    background-color: #384F72;
+    padding-top: 0;
+    height: $header-height;
+    line-height: $header-height;
+
+    @mixin hide-transport() {
+      .order_transport {
+        display: none;
+      }
+      .order_code  {
+        padding-left: 2rem;
+      }
+    }
+
+    @media screen and (max-width: 325px) {
+      @include hide-transport();
+    }
+    @media #{$medium-only} {
+      @include hide-transport();
+    }
+
+    .order_code  {
+      text-align: right;
+    }
+    .order_transport, .order_code {
+      color: white;
+      white-space: nowrap;
+
+      .fa {
+        margin-right: 0.5em;
+        margin-left: 0.5em;
+      }
+    }
+
+    .order_state {
+      text-transform: capitalize;
+      padding-right: 0;
+
+      >div {
+        float: right;
+      }
+
+      .order_state_text {
+        padding-right: 1em;
+      }
+
+      .order_state_icon {
+        color: white;
+        height: $header-height;
+        width: $header-height;
+
+        .fa {
+          margin-left: 1em;
+        }
+
+        &.submitted {
+          background-color: $submitted-state-color;
+        }
+        &.scheduled, &.awaiting_dispatch {
+          background-color: $scheduled-state-color;
+        }
+        &.cancelled {
+          background-color: $cancelled-state-color;
+        }
+        &.dispatching {
+          background-color: $dispatching-state-color;
+        }
+        &.processing {
+          background-color: $processing-state-color;
+        }
+        &.closed {
+          background-color: $closed-state-color;
+        }
+        &.draft {
+          background-color: $draft-state-color;
+        }
+      }
+    }
+
+  }
+
+  // ------------
+  // DETAILS
+  // ------------
+
+  .order_body {
+
+    position: relative;
+    padding-top: 1em;
+    padding-bottom: 1.2rem;
+
+    .row {
+      margin-bottom: 0.5em;
+      .field {
+        padding-left: 2em;
+        opacity: 0.8;
+      }
+      .value {
+        color: white;
+        padding-left: 0.5em;
+        padding-right: 1rem;
+      }
+    }
+
+    .arrow-right {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 3em;
+      height: 100%;
+      i {
+        @include center-vh;
+      }
+    }
+  }
+}

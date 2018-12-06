@@ -1,0 +1,49 @@
+.date_selector {
+  .picker__holder {
+    min-width: 280px;
+    margin-top: 0 !important; }
+}
+
+.pickadate, .timepicker {
+  background-color: white !important;
+  &.error {
+    border-color: $coral-red !important;
+    background: $light-pitch !important;
+    margin-bottom: 1.5rem; }
+}
+
+.picker--time {
+  min-width: 100px; }
+
+.picker__frame {
+  @media #{$large-only} {
+    top: 20% !important;
+  }
+  @media #{$medium-only} {
+    top: 20% !important;
+  }
+}
+
+.time_selector {
+  .picker__holder {
+    max-width: 10rem !important;
+    min-width: 5rem !important;
+    width: inherit !important;
+    .picker__list-item {
+      font-size: 0.8rem; }
+  }
+}
+
+.picker {
+  width: 95%; }
+
+.picker__input.picker__input--active {
+  border-color: $medium-blue; }
+
+.picker__holder {
+  outline: none;
+}
+
+.picker__box {
+  display: inline-block;
+}

@@ -25,18 +25,17 @@
 
     {{#each cart.content as |record|}}
         <li>
-          <div class="row">
-            <div class="small-3 columns">
+          <div class="row" {{action 'updateCartItemParams' record.id}}>
+            <div class="small-3 columns cart-redirect-link {{if (is-not record.available) disabled}}" {{action 'updateCartItemParams' record.id}}>
               <img class="thumb-image {{unless record.available 'grayed-image'}}" src="{{record.imageUrl}}" />
             </div>
 
-            <div class="small-6 columns">
+            <div class="small-6 columns cart-redirect-link {{if (is-not record.available) disabled}}" {{action 'updateCartItemParams' record.id}}>
               {{record.name}}
               {{#unless record.available}}
                 <div class="unavailable">{{t "cart_content.unavailable"}}</div>
               {{/unless}}
             </div>
-
             <div class="small-3 columns remove_link" {{action 'removeItem' record.id record.modelType}}>
               <i class="fa fa-times" aria-hidden="true"></i>
               <span>{{t "cart_content.remove"}}</span>

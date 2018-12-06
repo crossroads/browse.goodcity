@@ -24,10 +24,14 @@ export default {
   "dispatching": "派送中",
   "items_not_available": "您的購物車内有已不存在的物資，請刪除該物資以繼續。",
   "unauthorized": "您沒有此權限。",
+  "back": "返回",
+  "no_search_results": "沒有搜尋結果",
+  "cancel": "取消",
+  "continue": "繼續",
 
   "banner": {
     "presented_by": "建立機構",
-    "funded_by": "捐助機構",
+    "funded_by": "捐助機構"
   },
 
   "application": {
@@ -40,7 +44,8 @@ export default {
       "about": "關於我們",
       "terms": "條款",
       "privacy_policy": "私隱政策",
-      "version": "版本"
+      "version": "版本",
+      "login": "登入"
     }
   },
 
@@ -120,7 +125,8 @@ export default {
     "quantity": "數量",
     "size": "尺寸",
     "categories": "分類",
-    "image_unavailable": "沒有照片提供"
+    "image_unavailable": "沒有照片提供",
+    "inventory_number": "存貨編號"
   },
 
   "page": {
@@ -131,7 +137,39 @@ export default {
   "login": {
     "hk_only" : "電話號碼（只限香港）",
     "login" : "登入",
-    "smscode": "獲取短訊驗證碼"
+    "sms_pincode": "We SMS you pin code for secure access <br/> Been here before? Please use the same phone number",
+    "smscode": "獲取短訊驗證碼",
+    "privacy": "我們不會使用分享你的資料，我們只會用於你的貨物申請",
+    "policy": "隱私政策",
+    "mobile_warning": "請提供有效的香港電話號碼"
+  },
+
+  "account": {
+    "account_details": "帳號詳情",
+    "welcome": "歡迎！",
+    "contact_details": "請完成聯絡資料以繼續",
+    "organisation": "機構名稱",
+    "title": "稱謂",
+    "first": "名",
+    "last": "姓",
+    "position": "職位",
+    "email": "電郵",
+    "work": "請使用工作地址",
+    "done": "完成",
+    "contact_us": "未能尋找你的機構？請聯絡我們尋求協助。",
+    "organisation_warning": "你必須選擇有效的機構以繼續",
+    "title_warning": "請輸入稱謂",
+    "first_name_warning": "請輸入名字",
+    "last_name_warning": "請輸入姓氏",
+    "position_warning": "請輸入職位",
+    "email_warning": "請輸入有效的電子郵件地址",
+    "user_info": "用戶資料不齊",
+    "user_title": {
+      "mr": "先生",
+      "mrs": "太太",
+      "miss": "小姐",
+      "ms": "女士"
+    }
   },
 
   "logout": {
@@ -147,6 +185,7 @@ export default {
 
   "_verification_pin": {
     "input_code" : "輸入四位數短訊驗證碼",
+    "send_code": "我們把認證碼發送到",
     "auth_error" : "對不起！請輸入正確的驗證碼。"
   },
 
@@ -181,9 +220,74 @@ export default {
 
   "my_orders": {
     "my_orders": "我的訂單",
-    "order_no": "訂單編號",
-    "order_state": "訂單狀態",
-    "item_count": "物資數量"
+    "processing": "處理中",
+    "submitted": "訂單已經提交",
+    "draft": "等待提交",
+    "submitted_by": "提交者",
+    "due_date": "到期日",
+    "submitted_for_client": "為服務使用者提交",
+    "awaiting_dispatch": "等待派送",
+    "cancelled": "已取消",
+    "dispatching": "派送中",
+    "closed": "訂單已完成",
+    "order_transports": {
+      "gogovan_transport": "由貨車運送",
+      "collection_transport": "自行提取",
+      "appointment_transport": "預約",
+      "shipment_transport": "運送安排",
+      "unknown_transport": "其他"
+    },
+    "details": {
+      "type": "輸入",
+      "transport": "交通",
+      "appointment": "預約",
+      "goods_requested": "已申請貨物",
+      "goods_ordered": "貨物",
+      "request": {
+        "request_purpose": "申請目的",
+        "purpose_of_goods": "貨物用途",
+        "number_benefiting": "受惠數量",
+        "description_of_needs": "申請詳情"
+      },
+      "beneficiary": {
+        "client_information": "服務對象資料",
+        "id_type": "所持身份證種類",
+        "id_number": "身份證號碼",
+        "client_name": "服務對象姓名",
+        "client_phone": "服務對象電話號碼"
+      },
+      "tabs": {
+        "booking": "預約",
+        "goods": "貨物"
+      },
+      "state_titles": {
+        "draft": "草稿（未提交）",
+        "submitted": "已提交（未確認）",
+        "processing": "處理中",
+        "awaiting_dispatch": "安排中（未發送）",
+        "dispatching": "已發送",
+        "closed": "已完成",
+        "cancelled": "已取消"
+      },
+      "state_descriptions": {
+        "draft": "訂單並未提交。您仍然可以修改訂單。",
+        "submitted": "為了獲得更詳細資料，我們的職員可能會與你或受惠人聯絡。",
+        "dispatching": "貨物在運送途中。",
+        "processing": "我們的職員正在處理您的訂單。他們可能會與您聯絡已獲得更多信息。如果一切正常，他們將安排您的貨品發貨。",
+        "awaiting_dispatch": "您的訂單已安排發貨。 一旦發貨，此頁面便會更新。 ",
+        "closed": "此訂單已完成，所有貨物已成功發貨。如有任何其他申請，請提交另一訂單。",
+        "cancelled": ""
+      },
+      "types": {
+        "visit": "參觀貨倉",
+        "delivery": "網上訂單"
+      },
+      "transports": {
+        "gogovan_transport": "租商用車輛",
+        "collection_transport": "親身提取",
+        "unknown_transport": "其他"
+      }
+    }
   },
 
   "item": {
@@ -212,6 +316,7 @@ export default {
     "cancel_order": "取消訂單",
     "purpose": "申請目的",
     "login": "登入",
+    "register": "註冊",
     "goodcity_order": "好人好市訂單",
     "cart": "購物車",
     "order_details": "訂單詳情",
@@ -232,6 +337,7 @@ export default {
     "order_detail_pop_up": "請在購物車中新增物資以提交訂單詳情。",
     "transport_order_detail_pop_up": "請先填寫訂單詳情",
     "transport_details_pop_up": "請在購物車中新增物資以提交運輸詳情。",
+    "numbers_warning": "請輸入一個4位數字。",
     "transport_details": {
       "transport_method": "運輸方式: ",
       "collect_with_own_vehicle": "我會自行安排運輸接收",
@@ -253,7 +359,78 @@ export default {
     },
     "purpose_section": {
       "title": "申請目的*"
+    },
+    "client_information": {
+      "title": "服務對象資料",
+      "id_type_held_by_client": "服務對象所持身份證明種類",
+      "verify": "我們將在送抵時用此身份證明以核實服務對象身份。",
+      "data_confidentiality": "所有服務對象資料均嚴格保密。",
+      "hk_id": "香港身份證",
+      "asrf_id": "尋求庇護者確認表格",
+      "first_name": "服務對象的名",
+      "family_name": "服務對象的姓",
+      "name_instruction": "在身份證明文件中顯示",
+      "name_warning": "您必須在此輸入您的名稱。",
+      "phone_number": "服務對象的聯絡電話號碼",
+      "phone_number_instruction": "我們將會用此號碼確認行程和資料。",
+      "hk_id_instruction": {
+        "title": "請輸入服務對象香港身份證最後的四個數字。",
+        "sub_title": "您不需要包含括號內的數字。"
+      },
+      "rbcl": {
+        "title": "請輸入確認表格的身份證明號碼(只限數字)。",
+        "sub_title": "四個字母後的數字，例如RBCL“”"
+      }
+    },
+    "request_purpose": {
+      "title": "申請目的",
+      "purpose": "貨物用途",
+      "for_organisation": "予機構自用",
+      "for_client": "予服務對象",
+      "people_count_info": "多少人會從這些物品中受惠？",
+      "people_count_warning": "您必須在這裡輸入一個數字",
+      "need_description": "描述申請需求",
+      "need_description_info": "請簡述申請貨物的原因。",
+      "description_warning": "抱歉，描述的位置不能留空。"
+    },
+    "goods_details": {
+      "title": "貨物詳情",
+      "info_1": "請指出所需每件貨物的類型和數量。",
+      "info_2": "我們會根據庫存常有的項目定期更新可用類別。 有關此處未列出的特殊類別要求，請發送電子郵件至local@crossroads.org.hk。我們會盡力提供幫助。",
+      "request_more": "申請更多貨物",
+      "type_label": "貨物類型",
+      "quantity_label": "數量",
+      "description_details_label": "項目詳情（可選）",
+      "no_goods_error": "需要申請最少一件物品",
+      "no_time_slot_selected_error": "請選擇預約時間"
+    },
+    "request": {
+      "remove_req": "從此訂單中刪除申請",
+      "remove": "移除"
+    },
+    "appointment": {
+      "title": "預約詳情",
+      "transport": "運輸方式",
+      "self_vehicle": "服務對象將自攜帶車輛",
+      "hire_vehicle": "服務對象需要有關僱用車輛的信息",
+      "confirm_labor": "確認理解搬運需要",
+      "labor_info": "如果貨物太大而服務對象無法獨自搬運，請建議他們安排搬運卸載的人手。抱歉，國際十字路會不提供搬運，而僱用的貨車司機亦不提供免費的搬運服務。",
+      "labor_confirmation": "我確認理解搬運需要。",
+      "date": " 預約日期",
+      "time": "預約日"
+    },
+    "booking_success": {
+      "success": "成功！",
+      "reference_number": "參考編號",
+      "status": "狀態",
+      "what_happen_after_booking": "現在發生了什麼事情？",
+      "after_booking_info_1": "我們的職員正在處理您的訂單。他們可能會與您聯絡已獲得更多信息。如果一切正常，您的訂單將被標記為已確認。",
+      "after_booking_info_2": "請到您的操控板查看或修改訂單/預約/偏好等",
+      "visit_dashboard": "進入您的操控板"
+    },
+    "confirm_booking": {
+      "title": "確認",
+      "submit_order": "提交訂單"
     }
   }
-
 };

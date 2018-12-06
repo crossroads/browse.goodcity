@@ -1,0 +1,136 @@
+.search-box {
+  position: relative;
+  padding: 0;
+  background-color: $light-grey;
+  z-index: 1000;
+
+  @media #{$small-only} {
+    font-size: 1.2rem;
+    padding: 0.5rem 0.5rem;
+    width: 100% !important;
+  }
+
+  input {
+    padding-left: 0.5rem;
+    width: 97.5%;
+    margin: 0.5rem;
+    border-radius: 0.25rem;
+    height: 2rem;
+
+    @media #{$small-only} {
+      width: 95%;
+    }
+  }
+
+  i {
+    position: absolute;
+    right: 2.5%;
+    top: 0.93rem;
+    color: $black;
+    font-size: 1.2rem;
+    cursor: pointer;
+
+    @media #{$small-only} {
+      font-size: 1.2rem;
+      padding: 0.5rem 0.5rem;
+      top: 0.41rem;
+    }
+  }
+
+  a {
+    color: $medium-blue !important;
+    text-decoration: underline;
+    top: 0.6rem;
+    margin-top: 0.6rem;
+    right: 3%;
+    font-size: 1.1rem;
+    font-weight: bold;
+
+    @media #{$small-only} {
+      font-size: 0.8rem;
+      top: 0.8rem;
+    }
+  }
+}
+
+.no_result {
+  text-align: center;
+  font-weight: bold;
+  color: white;
+  margin-top: 2rem;
+  @media #{$small-only} {
+    font-size: 0.9rem;
+  }
+}
+
+.search {
+  padding-bottom: 5rem;
+  min-height: 25rem;
+  margin-top: 1.5rem;
+
+  .columns {
+    padding: 0;
+  }
+
+  .list.list-activity {
+    margin-left: 0rem;
+    margin-right: 0rem;
+    cursor: pointer;
+  }
+
+  li {
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid #707070;
+    @media #{$small-only} {
+      font-size: 0.7rem;
+    }
+
+    .state_details {
+      color: $white;
+      font-weight: bold;
+    }
+
+    .row {
+      padding: 0.2rem 0;
+    }
+  }
+
+  .org_search{
+    color: #E2E6EB;
+    margin-left: -2%;
+    padding-bottom: 1rem;
+  }
+}
+
+.fixed_search_header {
+  //position: fixed;
+  z-index: 1000;
+
+  @media #{$medium-up} {
+    -webkit-transform: translate(-50%, 0);
+    left: 50%;
+  }
+}
+
+.done{
+  padding-top: 1rem;
+  color: #979797;
+  cursor: pointer;
+  font-size: 1rem;
+  padding-left: 2rem;
+  font-weight: 100;
+}
+
+.contact_us{
+  color: #A5A5A5;
+  padding: .7rem 1rem 1rem 1.8rem;
+  font-size: .7rem !important;
+}
+
+.headline{
+  color: white;
+  font-size: .8rem;
+  margin-left: 2rem;
+  font-weight: 100;
+  text-transform: uppercase;
+}

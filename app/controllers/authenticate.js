@@ -4,10 +4,11 @@ import config from '../config/environment';
 const { getOwner } = Ember;
 
 export default Ember.Controller.extend({
-
+  queryParams: ['bookAppointment'],
   messageBox: Ember.inject.service(),
   application: Ember.inject.controller(),
   attemptedTransition: null,
+  bookAppointment: false,
   pin: "",
   mobilePhone: "",
 
@@ -17,7 +18,7 @@ export default Ember.Controller.extend({
 
   actions: {
 
-    authenticateUser() {
+    authenticateUser(bookAppointment) {
       Ember.$('.auth_error').hide();
       var pin = this.get('pin');
       var otp_auth_key = this.get('session.otpAuthKey');
@@ -32,7 +33,9 @@ export default Ember.Controller.extend({
           _this.store.pushPayload(data.user);
           _this.setProperties({pin: null});
           _this.get("application").set('loggedInUser', true);
-          _this.transitionToRoute('post_login');
+          _this.transitionToRoute('post_login' , {
+            queryParams: { bookAppointment: bookAppointment }
+          });
         })
         .catch(function(jqXHR) {
           Ember.$('#pin').closest('div').addClass('error');
@@ -49,12 +52,18 @@ export default Ember.Controller.extend({
       var mobile = this.get('mobile');
       var loadingView = getOwner(this).lookup('component:loading').append();
       var _this = this;
+      var user_auth = { mobile: mobile,
+                        address_attributes: {
+                          district_id: null,
+                          address_type: null
+                        }
+                      };
 
-      new AjaxPromise("/auth/send_pin", "POST", null, {mobile: mobile})
+      new AjaxPromise("/auth/signup", "POST", null, {user_auth: user_auth})
         .then(data => {
           this.set('session.otpAuthKey', data.otp_auth_key);
           this.setProperties({pin:null});
-          this.transitionToRoute('/authenticate');
+          this.transitionToRoute('authenticate', { queryParams: { bookAppointment: this.get('bookAppointment') }});
         })
         .catch(error => {
           if([401].indexOf(error.status) >= 0) {
@@ -62,8 +71,7 @@ export default Ember.Controller.extend({
               _this.transitionToRoute("/");
              });
           } else if ([422, 403].indexOf(error.status) >= 0) {
-            Ember.$('#mobile').closest('.mobile').addClass('error');
-            return;
+            _this.get("messageBox").alert(error.responseJSON.errors);
           }
           throw error;
         })

@@ -5,6 +5,12 @@ import AjaxPromise from 'browse/utils/ajax-promise';
 export default Ember.Route.extend(preloadDataMixin, {
 
   cart: Ember.inject.service(),
+  messageBox: Ember.inject.service(),
+  isBookAppointment: false,
+
+  beforeModel(params){
+    this.set('isBookAppointment', params.queryParams.bookAppointment);
+  },
 
   model() {
     return this.preloadData();
@@ -38,15 +44,43 @@ export default Ember.Route.extend(preloadDataMixin, {
         new AjaxPromise(`/orders/${draftOrder.id}`, "PUT", this.get('session.authToken'), { order: orderParams })
           .then(data => {
             this.get("store").pushPayload(data);
+            this.redirectToTransitionOrDetails();
+          }).catch(xhr => {
+            this.get("messageBox").alert(xhr.responseJSON.errors);
           });
       }
+    } else {
+      this.redirectToTransitionOrDetails();
     }
+  },
 
-    // After everthying has been loaded, redirect user to requested url
-    var attemptedTransition = this.controllerFor('login').get('attemptedTransition');
-    if (attemptedTransition) {
-      attemptedTransition.retry();
-      this.set('attemptedTransition', null);
+  redirectToTransitionOrDetails() {
+    if(this.isDetailsComplete()){
+      var attemptedTransition = this.controllerFor('login').get('attemptedTransition');
+      var isBookAppointment = this.get('isBookAppointment');
+      if (attemptedTransition) {
+        attemptedTransition.retry();
+        this.controllerFor('login').set('attemptedTransition', null);
+      } else if( isBookAppointment === "true"){
+        this.transitionTo("request_purpose");
+      }
+      else {
+        this.transitionTo("browse");
+      }
+    } else {
+      this.transitionTo("account_details");
     }
+  },
+
+  isDetailsComplete(){
+    const user = this.get('session.currentUser');
+    if (!user) { return false; }
+
+    const organisationsUser = user.get('organisationsUsers.firstObject');
+    const organisation = organisationsUser && organisationsUser.get('organisation');
+    const userInfoComplete = user.get('isInfoComplete') && user.hasRole('Charity');
+    const organisationUserComplete = organisationsUser && organisationsUser.get('isInfoComplete');
+
+    return (userInfoComplete && organisation && organisationUserComplete);
   }
 });

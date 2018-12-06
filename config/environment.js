@@ -55,10 +55,10 @@ module.exports = function(environment) {
       NAMESPACE: 'api/v1',
       HK_COUNTRY_CODE: '+852',
       PRELOAD_TYPES: ["package_type", "district", "territory", "package_category", "donor_condition", "package"],
-      PRELOAD_AUTHORIZED_TYPES: ["order", "gogovan_transport"],
+      PRELOAD_AUTHORIZED_TYPES: ["order", "gogovan_transport", "booking_type"],
 
       SHA: process.env.APP_SHA || "00000000",
-      VERSION: "1.0.0"
+      VERSION: process.env.VERSION || "1.0.0"
     },
 
     i18n: {
@@ -81,6 +81,9 @@ module.exports = function(environment) {
     // RESTAdapter Settings
     ENV.APP.SOCKETIO_WEBSERVICE_URL = 'http://localhost:1337/goodcity';
     ENV.APP.API_HOST_URL = 'http://localhost:3000';
+    ENV.APP.STOCK_APP_HOST_URL = 'http://localhost:4203';
+    ENV.APP.STOCK_ANDROID_APP_HOST_URL = "stock-staging.goodcity.hk"; //Added for localhost replacement
+
 
     ENV.contentSecurityPolicy["connect-src"] = [
       'http://localhost:4202',
@@ -88,7 +91,7 @@ module.exports = function(environment) {
       'http://localhost:1337',
       'https://api.cloudinary.com',
       'ws://localhost:1337',
-      'wss://localhost:1337',
+      'wss://localhost:1337'
     ].join(' ');
   }
 
@@ -115,6 +118,8 @@ module.exports = function(environment) {
 
     ENV.APP.API_HOST_URL = 'https://api.goodcity.hk';
     ENV.APP.SOCKETIO_WEBSERVICE_URL = 'https://socket.goodcity.hk:81/goodcity';
+    ENV.APP.STOCK_APP_HOST_URL = 'https://stock.goodcity.hk';
+    ENV.APP.STOCK_ANDROID_APP_HOST_URL = "stock.goodcity.hk";
 
     ENV.contentSecurityPolicy["connect-src"] = [
       'https://app.goodcity.hk',
@@ -125,10 +130,12 @@ module.exports = function(environment) {
       'https://api.cloudinary.com'
     ].join(' ');
 
-    if (process.env.staging === 'true') {
+    if ((process.env.staging || process.env.STAGING) === 'true') {
       ENV.staging = true;
       ENV.APP.API_HOST_URL = 'https://api-staging.goodcity.hk';
       ENV.APP.SOCKETIO_WEBSERVICE_URL = 'https://socket-staging.goodcity.hk:81/goodcity';
+      ENV.APP.STOCK_APP_HOST_URL = 'https://stock-staging.goodcity.hk';
+      ENV.APP.STOCK_ANDROID_APP_HOST_URL = "stock-staging.goodcity.hk";
 
       ENV.contentSecurityPolicy["connect-src"] = [
         'https://app-staging.goodcity.hk',

@@ -1,32 +1,31 @@
 <div class="row my_orders">
-  <div class="title">{{t "my_orders.my_orders"}}</div>
-  <div class="row order-heading">
-    <div class="small-4 columns">{{t "my_orders.order_no"}}</div>
-    <div class="small-4 columns">{{t "my_orders.order_state"}}</div>
-    <div class="small-4 columns">{{t "my_orders.item_count"}}</div>
-  </div>
-  <div class="small-12 columns">
-    <ul class="list list-items">
-      {{#each arrangedOrders as |order|}}
-        <li {{action "setOrder" order}}>
-          <div class="row">
-            <div class="small-4 columns">
-              {{order.code}}
-            </div>
-            <div class="small-4 columns">
-              {{t order.updatedState}}
-            </div>
-            <div class="small-4 columns">
-              {{order.orderItems.length}}
-            </div>
+  <div class="title show-for-medium-up">{{t "my_orders.my_orders"}}</div>
+    <div class="small-12 columns content">
+      {{#if selectedOrder}}
+        <div class="order-summary {{selectedOrder.state}}">
+          {{partial "order/summary"}}
+        </div>
+      {{else}}
+        <div class="row">
+          <div class="columns button-container small-6">
+            {{#link-to "browse"}}
+              <div class="button light">
+                {{t 'home.order_goods.action'}}
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+              </div>
+            {{/link-to}}
           </div>
-        </li>
-      {{/each}}
-    </ul>
-  </div>
-  {{#if selectedOrder}}
-    <div class="order-summery">
-      {{partial "order/summery"}}
+          <div class="columns button-container small-6">
+            {{book-appointment buttonStyle='light'}}
+          </div>
+        </div>
+        <ul class="list list-items">
+          {{#each arrangedOrders as |order|}}
+            <li {{action "setOrder" order}}>
+              {{ partial 'order/order_block'}}
+            </li>
+          {{/each}}
+        </ul>
+      {{/if}}
     </div>
-  {{/if}}
 </div>

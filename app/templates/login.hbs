@@ -1,8 +1,20 @@
 <div class="row checkout_pages">
   <div class="small-12 medium-9 large-6 columns">
-    <section class="main-section login-page">
+    <section class="main-section new-user-section ui login_page">
 
-      {{partial "navigation_list"}}
+      <nav class="tab-bar">
+        <section class="left-large">
+          {{#link-to "browse" classNames="back"}}{{fa-icon "angle-left"}} {{t "back"}}{{/link-to}}
+        </section>
+
+        <section class="middle tab-bar-section">
+          <h1 class="title">{{t "order.login"}}/{{t "order.register"}}</h1>
+        </section>
+      </nav>
+
+      {{#unless cart.isEmpty}}
+        {{small-cart-toggle-view}}
+      {{/unless}}
 
       {{#validatable-form onSubmit=(action 'resendPin') as |form|}}
         <div class="row">
@@ -10,23 +22,32 @@
             <div class="mobile center_align">
               <div class="row">
                 <div class="small-12 columns">
-                 <label class="form-label">{{t "login.hk_only"}}</label>
+                  <label class="form-label">{{t "login.hk_only"}}</label>
+                </div>
+                <div class="small-12 columns">
+                  <label class="form-label">{{t "login.sms_pincode"}}</label>
                 </div>
               </div>
 
-              <div class="row collapse">
-                <div class="small-10 medium-8 columns">
-                  {{#form-control}}
+              <div class="row">
+                {{#form-control}}
+                  <div class="small-12 medium-8 columns">
                     <span class="prefix">+852</span>
-                    {{numeric-input value=mobilePhone name="mobilePhone" id="mobile" maxlength="8" required=true pattern=".{8,}" autoFocus=true}}
-                  {{/form-control}}
-                </div>
+                    {{numeric-input classNames="number_input" value=mobilePhone name="mobilePhone" id="mobile" maxlength="8" required=true pattern=".{8,}" autoFocus=true}}
+                    <div class="small-12 columns input-error warning_empty login">
+                      {{fa-icon "warning"}}&nbsp;&nbsp;{{t "login.mobile_warning"}}
+                    </div>
+                  </div>
+                {{/form-control}}
               </div>
 
               <div class="row collapse">
-                <div class="small-10 medium-8 columns">
-                  <button id="getsmscode" class="button expand" {{action 'submit' target=form}}>{{t "login.smscode"}}</button>
+                <div class="small-12 medium-8 columns">
+                  <button id="getsmscode" class="button expand expand_button" {{action 'submit' target=form}}>{{t "login.smscode"}}</button>
                 </div>
+              </div>
+              <div class="small-12 columns">
+                <label class="form-label">{{t "login.privacy"}}<a href="">{{t "login.policy"}}</a></label>
               </div>
             </div>
           </div>
@@ -35,6 +56,5 @@
 
     </section>
   </div>
-
   {{partial "cart_content/checkout_full_view"}}
 </div>

@@ -5,7 +5,7 @@ import {make} from 'ember-data-factory-guy';
 import { mockFindAll } from 'ember-data-factory-guy';
 import FactoryGuy from 'ember-data-factory-guy';
 
-var App, pkgCategory1, pkgCategory2, subcategory1, pkgType, category_title, subcategory_title, empty_category_title, order, orders_package, gogo_van;
+var App, pkgCategory1, pkgCategory2, subcategory1, pkgType, category_title, subcategory_title, empty_category_title, order, orders_package, gogo_van, bookingType;
 
 module('Acceptance | Browse Page', {
   beforeEach: function() {
@@ -17,8 +17,10 @@ module('Acceptance | Browse Page', {
     order = make("order");
     orders_package = make("orders_package");
     gogo_van = make("gogovan_transport");
+    bookingType = make("booking_type");
 
     mockFindAll("gogovan_transport").returns({json: {gogovan_transports: [gogo_van.toJSON({includeId: true})]}});
+    mockFindAll("booking_type").returns({json: {booking_types: [bookingType.toJSON({includeId: true})]}});
 
     var data = {"user_profile": [{"id": 2,"first_name": "David", "last_name": "Dara51", "mobile": "61111111", "user_role_ids": [1]}], "users": [{"id": 2,"first_name": "David", "last_name": "Dara51", "mobile": "61111111"}], "roles": [{"id": 4, "name": "Supervisor"}], "user_roles": [{"id": 1, "user_id": 2, "role_id": 4}]};
     $.mockjax({url:"/api/v1/auth/current_user_profil*",
@@ -44,15 +46,15 @@ test("should redirect browse page", function(assert) {
   visit("/browse").then(function() {
     assert.equal(currentURL(), '/browse');
     assert.equal(Ember.$('h1.title').text(), "GoodCity for Charity");
-    assert.equal(Ember.$('.main-section li').length, 0);
+    assert.equal(Ember.$('.main-section li').length, 3);
   });
 });
 
 test("should list main-category with subcategories if has items", function(assert) {
   visit("/browse").then(function() {
     // check first group of main-category
-    assert.equal(Ember.$('.main-section li:first .main_category').text().indexOf(category_title) <= 0, true);
-    assert.equal(Ember.$('.main-section li:first .subcategories').text().indexOf(subcategory_title) >= 0, false);
+    assert.equal(Ember.$('.main-section li:first .main_category').text().trim().indexOf(category_title) <= 0, true);
+    assert.equal(Ember.$('.main-section li:first .subcategories').text().trim().indexOf(subcategory_title) <= 0, true);
   });
 });
 
@@ -61,7 +63,7 @@ test("should list main-category without subcategories if has no items", function
 
   andThen(function() {
     // check last group of main-category with no-items
-    assert.equal(Ember.$('.main-section li:last .main_category').text().indexOf(empty_category_title) <= 0, true);
+    assert.equal(Ember.$('.main-section li:last .main_category').text().trim().indexOf(empty_category_title) <= 0, true);
     assert.equal(Ember.$.trim(Ember.$('.main-section li:last .subcategories').text()), "");
   });
 });
