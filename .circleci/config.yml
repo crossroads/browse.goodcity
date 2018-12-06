@@ -55,6 +55,8 @@ jobs:
 
   test_cases:
     <<: *defaults
+    docker:
+      - image: circleci/node:6-browsers
     environment:
       JOBS: 1
     steps:
@@ -297,19 +299,20 @@ workflows:
         - package_dependencies:
             requires:
               - checkout_code
-#         - test_cases:
-#             requires:
-#               - package_dependencies
-#         - upload-coverage:
-#             requires:
-#               - package_dependencies
-#               - test_cases
-#             filters:
-#               branches:
-#                 only: /^(master|live)$/
+        - test_cases:
+            requires:
+              - package_dependencies
+        - upload-coverage:
+            requires:
+              - package_dependencies
+              - test_cases
+            filters:
+              branches:
+                only: /^(master|live)$/
         - www_build:
             requires:
               - package_dependencies
+              - test_cases
             filters:
               branches:
                 only: /^(master|live)$/
@@ -321,7 +324,7 @@ workflows:
                 only: /^(master|live)$/
         - ember_cordova_build:
             requires:
-              - package_dependencies
+              - test_cases
             filters:
               branches:
                 only: /^(master|live)$/
@@ -333,7 +336,7 @@ workflows:
                 only: /^(master|live)$/
         - ios_build_and_deploy:
             requires:
-              - package_dependencies
+              - test_cases
             filters:
               branches:
-                only: /^(live)$/
+                only: live
