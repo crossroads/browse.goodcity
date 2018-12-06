@@ -402,6 +402,7 @@ export default {
       "quantity_label": "數量",
       "description_details_label": "項目詳情（可選）",
       "no_goods_error": "需要申請最少一件物品。"
+      "no_time_slot_selected_error": "Please select appointment time."
     },
     "request": {
       "remove_req": "從此訂單中刪除申請",
