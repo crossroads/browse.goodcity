@@ -35,7 +35,7 @@ export default Ember.Controller.extend({
   	},
 
     saveGoodsDetails(){
-      if(this.get('hasNoGcRequests')){return false};
+      if(this.get('hasNoGcRequests')){return false;}
       var promises = [];
       this.get('order.goodcityRequests').forEach(goodcityRequest => {
         promises.push(goodcityRequest.save());
