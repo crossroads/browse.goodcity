@@ -1,5 +1,5 @@
 /* jshint node: true */
-const pkgJson = require('../package.json')
+const pkgJson = require('../package.json');
 
 module.exports = function(environment) {
   var ENV = {
