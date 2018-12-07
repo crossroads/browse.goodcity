@@ -388,8 +388,9 @@ test("Goods Details Page on incomplete submit should not redirect to appointment
 // });
 
 test("Appointment Details Page on incomplete sumission should not redirect to order confirm page", function(assert){
-  let date = moment().format("YYYY-MM-DD");
-  let slot = {id:1};
+    let date = moment().format("YYYY-MM-DD"); // jshint ignore:line
+    let timestamp = moment().format(); // jshint ignore:line
+    let slots =  [{id: null, timestamp , quota: 3, isClosed: false, note: "", remaining: 3}];
   assert.expect(1);
   mocks.push(
   $.mockjax({url: '/api/v1/order*', type: 'POST', status: 201,responseText: {
@@ -398,8 +399,8 @@ test("Appointment Details Page on incomplete sumission should not redirect to or
         user: user.toJSON({includeId: true})}
   }),
   $.mockjax({url: '/api/v1/appointment_slots/calenda*', type: 'GET', status: 200,responseText: {
-    appointment_calendar_dates: [date]}
-  }),
+    appointment_calendar_dates: [{date: date, isClosed: false, slots: slots}]
+  }}),
   mockFindAll('package_type').returns({ json: {package_types: [package_type.toJSON({includeId: true})]}})
   );
   visit('/');
