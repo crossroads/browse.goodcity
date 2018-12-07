@@ -1,0 +1,29 @@
+.home-page-scroll-arrow {
+  @media #{$small-only} {
+    top: 66%;
+  }
+}
+
+.client-info-scroll-arrow {
+  @media #{$small-only} {
+    top: 80%;
+  }
+}
+
+.goods-detail-info-scroll-arrow {
+  @media #{$small-only} {
+    top: 80%;
+  }
+}
+
+.appointment-detail-info-scroll-arrow {
+  @media #{$small-only} {
+    top: 60%;
+  }
+}
+
+.account-detail-info-scroll-arrow {
+  @media #{$small-only} {
+    top: 60%;
+  }
+}

@@ -1,5 +1,8 @@
-<div class="home_page {{if showCartDetailSidebar "shift_left" "" }}">
+{{#if isMobileApp}}
+  {{scroll-to-bottom customClass="home-page-scroll-arrow" customScrollElement=".scroller"}}
+{{/if}}
 
+<div class="home_page {{if showCartDetailSidebar "shift_left" "" }}">
   <div class="scroller">
 
     <!-- Introduction -->
