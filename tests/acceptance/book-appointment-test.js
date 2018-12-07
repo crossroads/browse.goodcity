@@ -116,7 +116,7 @@ test("request purpose page on completely filled should redirect to Goods details
         user: user.toJSON({includeId: true})}
       })
     );
-    click('.button.expand');
+    click('#request-submit');
     andThen(function(){
       assert.equal(currentURL(), goodsDetailsUrl);
       assert.equal(Ember.$('.title').text().trim(), "Goods Details");
@@ -131,7 +131,7 @@ test("request purpose page should not redirect if incomplete form", function(ass
     click(".for-organisation");
   });
   andThen(function(){
-    click('.button.expand');
+    click('#request-submit');
     andThen(function(){
       assert.equal(currentURL(), requestPurposeUrl);
       assert.equal(Ember.$('.title').text().trim(), "Request Purpose");
@@ -163,7 +163,7 @@ test("request purpose page on completely filled should redirect to client inform
         user: user.toJSON({includeId: true})}
       })
     );
-    click('.button.expand');
+    click('#request-submit');
     andThen(function(){
       assert.equal(currentURL(), clientInfoUrl);
       assert.equal(Ember.$('.title').text().trim(), "Client Information");
@@ -262,7 +262,7 @@ test("Filled Up client info page, should redirect to goods details page on submi
         }
       })
     );
-    click('.button.expand');
+    click('#client-info-submit');
     andThen(function(){
       assert.equal(currentURL(), `${goodsDetailsUrl}?fromClientInformation=true`);
       assert.equal(Ember.$('.title').text().trim(), "Goods Details");
@@ -301,7 +301,7 @@ test("Incomplete form submit client info page, should not redirect to goods deta
         }
       })
     );
-    click('.button.expand');
+    click('#client-info-submit');
     andThen(function(){
       assert.equal(currentURL(), clientInfoUrl);
       assert.equal(Ember.$('.title').text().trim(), "Client Information");
@@ -324,7 +324,7 @@ test("Goods Details Page on incomplete submit should not redirect to appointment
     visit(goodsDetailsUrl);
   });
   andThen(function(){
-    click('.expand_button');
+    click('#goods-details-submit');
   });
   andThen(function(){
     assert.equal(currentURL(), goodsDetailsUrl);
@@ -379,7 +379,7 @@ test("Goods Details Page on incomplete submit should not redirect to appointment
 //           appointment_calendar_dates: [{date: date, slots: slots, isClosed: false}]
 //       }})
 //     );
-//     click('.expand_button');
+//    click('#goods-details-submit');
 //   });
 //   andThen(function(){
 //     assert.equal(currentURL(), appointmentPageUrl);
@@ -387,31 +387,35 @@ test("Goods Details Page on incomplete submit should not redirect to appointment
 //   });
 // });
 
-// test("Appointment Details Page on incomplete sumission should not redirect to order confirm page", function(assert){
-  // let date = moment().format("YYYY-MM-DD");
-  // let slot = {id:1};
-  // assert.expect(2);
-  // mocks.push(
-  // $.mockjax({url: '/api/v1/order*', type: 'POST', status: 201,responseText: {
-  //       order: order.toJSON({includeId: true}),
-  //       orders_purposes: [orderPurpose1],
-  //       user: user.toJSON({includeId: true})}
-  // }),
-  // $.mockjax({url: '/api/v1/calendar?to=*', type: 'POST', status: 201,responseText: {
-  //       order: order.toJSON({includeId: true}),
-  //       orders_purposes: [orderPurpose1],
-  //       user: user.toJSON({includeId: true})}
-  // }),
-  // mockFindAll('package_type').returns({ json: {package_types: [package_type.toJSON({includeId: true})]}})
-  // );
-  // visit('/');
-  // andThen(function(){
-  //   visit(requestPurposeUrl);
-  // });
-  // andThen(function(){
-  //   visit(appointmentPageUrl);
-  // });
-// });
+test("Appointment Details Page on incomplete sumission should not redirect to order confirm page", function(assert){
+  let date = moment().format("YYYY-MM-DD");
+  let slot = {id:1};
+  assert.expect(1);
+  mocks.push(
+  $.mockjax({url: '/api/v1/order*', type: 'POST', status: 201,responseText: {
+        order: order.toJSON({includeId: true}),
+        orders_purposes: [orderPurpose1],
+        user: user.toJSON({includeId: true})}
+  }),
+  $.mockjax({url: '/api/v1/appointment_slots/calenda*', type: 'GET', status: 200,responseText: {
+    appointment_calendar_dates: [date]}
+  }),
+  mockFindAll('package_type').returns({ json: {package_types: [package_type.toJSON({includeId: true})]}})
+  );
+  visit('/');
+  andThen(function(){
+    visit(requestPurposeUrl);
+  });
+  andThen(function(){
+    visit(appointmentPageUrl);
+  });
+  andThen(function(){
+    click("#appointment-submit");
+  });
+  andThen(function(){
+    assert.equal(currentURL(), appointmentPageUrl);
+  });
+});
 
 test("confirm page on clicking submit should redirect to success page", function(assert){
   mocks.push(
