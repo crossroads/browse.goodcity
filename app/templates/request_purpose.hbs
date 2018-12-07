@@ -30,7 +30,7 @@
                     value="organisation"
                     selection=selectedId
                     required='true'}}
-                    <label class="radio-button-text align-text" for="1">
+                    <label class="radio-button-text for-organisation align-text" for="1">
                       {{t 'order.request_purpose.for_organisation'}}
                     </label>
                   </div>
@@ -41,7 +41,7 @@
                       value="client"
                       selection=selectedId
                       required='true'}}
-                    <label class="radio-button-text align-text" for="2">
+                    <label class="radio-button-text for-client align-text" for="2">
                       {{t 'order.request_purpose.for_client'}}
                     </label>
                   </div>
@@ -52,7 +52,7 @@
                   </div>
                   <div class="people-count-input">
                     {{#form-control}}
-                      {{input type='number' value=peopleCount required='true'}}
+                      {{input type='number' value=peopleCount required='true' id="people-count"}}
                       <div class='input-error'> {{t 'order.request_purpose.people_count_warning'}} </div>
                     {{/form-control}}
                   </div>
@@ -72,7 +72,7 @@
                 </div>
                 <div class="row">
                   <div class="small-12 columns">
-                    <a {{action 'submit' target=form}} class="button expand"> {{t 'continue'}} </a>
+                    <a {{action 'submit' target=form}} class="button expand" id="request-submit"> {{t 'continue'}} </a>
                   </div>
                 </div>
               {{/validatable-form}}
