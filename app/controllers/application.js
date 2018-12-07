@@ -5,7 +5,9 @@ const { getOwner } = Ember;
 
 export default Ember.Controller.extend({
 
-  appVersion: config.APP.VERSION,
+  appVersion: Ember.computed(function(){
+    return config.cordova.enabled ? config.APP.VERSION : null;
+  }),
   subscription: Ember.inject.controller(),
   messageBox: Ember.inject.service(),
   loggedInUser: false,
