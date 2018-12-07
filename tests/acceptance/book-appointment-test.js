@@ -3,7 +3,7 @@ import { module, test } from 'qunit';
 import startApp from 'browse/tests/helpers/start-app';
 import { make, mockFindAll } from 'ember-data-factory-guy';
 
-var App, order, gogo_van, user, user_profile, orderPurpose1, orderPurpose2 , organisation, pkg, ordersPackage, mocks, goodcityRequest, benificiary, identity_type1, package_type, bookingType, requestPurposeUrl, goodsDetailsUrl, appointmentPageUrl, clientInfoUrl, bookingSuccessUrl, confirmBookingUrl;
+var App, order, gogo_van, user, user_profile, orderPurpose1, orderPurpose2 , organisation, pkg, ordersPackage, mocks, goodcityRequest, benificiary, identity_type1, package_type, bookingType, requestPurposeUrl, goodsDetailsUrl, appointmentPageUrl, clientInfoUrl, bookingSuccessUrl, confirmBookingUrl, orderTransport;
 
 module('Acceptance | BookAppointment', {
   beforeEach: function() {
@@ -25,6 +25,7 @@ module('Acceptance | BookAppointment', {
       identity_type_id: 1, last_name: "John", phone_number: "+85212312312", title: null};
     identity_type1 = {id: 1, name: "Hong Kong Identity Card"};
     package_type = make("package_type");
+    orderTransport = make("order_transport");
     mocks = [];
     $.mockjaxSettings.matchInRegistrationOrder = false;
     mocks.push(
@@ -132,7 +133,7 @@ test("request purpose page should not redirect if incomplete form", function(ass
   andThen(function(){
     click('.button.expand');
     andThen(function(){
-      assert.equal(currentURL(), requestPurposeUrl)
+      assert.equal(currentURL(), requestPurposeUrl);
       assert.equal(Ember.$('.title').text().trim(), "Request Purpose");
     });
   });
@@ -164,7 +165,7 @@ test("request purpose page on completely filled should redirect to client inform
     );
     click('.button.expand');
     andThen(function(){
-      assert.equal(currentURL(), clientInfoUrl)
+      assert.equal(currentURL(), clientInfoUrl);
       assert.equal(Ember.$('.title').text().trim(), "Client Information");
     });
   });
@@ -385,3 +386,60 @@ test("Goods Details Page on incomplete submit should not redirect to appointment
 //     assert.equal(Ember.$('.title').text().trim(), "Appointment Details");
 //   });
 // });
+
+// test("Appointment Details Page on incomplete sumission should not redirect to order confirm page", function(assert){
+  // let date = moment().format("YYYY-MM-DD");
+  // let slot = {id:1};
+  // assert.expect(2);
+  // mocks.push(
+  // $.mockjax({url: '/api/v1/order*', type: 'POST', status: 201,responseText: {
+  //       order: order.toJSON({includeId: true}),
+  //       orders_purposes: [orderPurpose1],
+  //       user: user.toJSON({includeId: true})}
+  // }),
+  // $.mockjax({url: '/api/v1/calendar?to=*', type: 'POST', status: 201,responseText: {
+  //       order: order.toJSON({includeId: true}),
+  //       orders_purposes: [orderPurpose1],
+  //       user: user.toJSON({includeId: true})}
+  // }),
+  // mockFindAll('package_type').returns({ json: {package_types: [package_type.toJSON({includeId: true})]}})
+  // );
+  // visit('/');
+  // andThen(function(){
+  //   visit(requestPurposeUrl);
+  // });
+  // andThen(function(){
+  //   visit(appointmentPageUrl);
+  // });
+// });
+
+test("confirm page on clicking submit should redirect to success page", function(assert){
+  mocks.push(
+    $.mockjax({url: '/api/v1/order*', type: 'POST', status: 201,responseText: {
+        order: order.toJSON({includeId: true}),
+        orders_purposes: [orderPurpose1],
+        user: user.toJSON({includeId: true})}
+    }),
+    $.mockjax({url: 'api/v1/order_transport*', status: 201, type: 'POST', responseText:{
+      order_transport: orderTransport
+    }}),
+    $.mockjax({url: '/api/v1/order*', type: 'PUT', status: 201,responseText: {
+      order: order.toJSON({includeId: true}),
+      orders_purposes: [orderPurpose1],
+      user: user.toJSON({includeId: true})}
+    })
+  );
+  visit('/');
+  andThen(function(){
+    visit(requestPurposeUrl);
+  });
+  andThen(function(){
+    visit(confirmBookingUrl);
+  });
+  andThen(function(){
+    click("#submit_pin");
+  });
+  andThen(function(){
+    assert.equal(currentURL(), bookingSuccessUrl);
+  });
+});
