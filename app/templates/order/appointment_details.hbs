@@ -3,7 +3,7 @@
 {{/if}}
 
 <div class="row">
-  <div class="large-12 columns medium-12 small-12">
+  <div class="large-8 columns large-offset-2 medium-offset-1 medium-10 small-12">
     <div class="row checkout_pages">
       <div class="small-12">
         <section class="main-section new-user-section ui login_page">
@@ -32,7 +32,7 @@
                     value="self"
                     selection=selectedId
                     required='true'}}
-                    <label class="radio-button-text align-text" for="self">
+                    <label class="radio-button-text align-text self_vehicle" for="self">
                       {{t 'order.appointment.self_vehicle'}}
                     </label>
                   </div>
@@ -44,7 +44,7 @@
                     value="ggv"
                     selection=selectedId
                     required='true'}}
-                    <label class="radio-button-text align-text" for="ggv">
+                    <label class="radio-button-text align-text hire_vehicle" for="ggv">
                       {{t 'order.appointment.hire_vehicle'}}
                     </label>
                   </div>
@@ -62,7 +62,7 @@
                   <div class='checkbox custom_radio_buttons small-12 columns purpose col-width-appointment confirmation-checkbox'>
                     {{input type="checkbox" name="labor" checked=false id='4' required=true}}
                     <label class="radio-button-text  align-text" for='4'>
-                    <span> {{t 'order.appointment.labor_confirmation'}} </span>
+                    <span class="labor_confirmation"> {{t 'order.appointment.labor_confirmation'}} </span>
                     </label>
                   </div>
                 </div>
@@ -96,20 +96,25 @@
                   <div class="row time_inputs id-type-radio-input time-slots" >
                     {{#each timeSlots as |time|}}
                       {{#unless time.isClosed}}
-                          <div class="custom_radio_buttons small-4 large-3 medium-3 columns end">
+                          <div class="custom_radio_buttons small-4 large-4 medium-4 columns end">
                             {{radio-button
                             name="selectTime"
                             id=time.timestamp
                             value=time.timestamp
                             selection=selectedTimeId
                             required='true'}}
-                            <label class="radio-button-text align-text" for={{time.timestamp}}>
+                            <label class="radio-button-text align-text time_slots" for={{time.timestamp}}>
                               {{display-time time.timestamp "HH:mm"}}
                             </label>
                           </div>
                       {{/unless}}
                     {{/each}}
                   </div>
+                  {{#if timeSlotNotSelected}}
+                    <p align="center" class="no-time-slot-selected-error">
+                      {{t "order.goods_details.no_time_slot_selected_error"}}
+                    </p>
+                  {{/if}}
                 {{/if}}
                 <div class="row">
                   <div class="small-12 columns">

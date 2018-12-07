@@ -16,7 +16,7 @@ export default Ember.Component.extend({
           checkInput(Ember.$(input));
         });
 
-        checkCheckBoxInput(Ember.$('.checkbox input'));
+        checkCheckBoxInput(Ember.$('.checkbox input')[0]);
 
         if(Ember.$('.form__control--error').length > 0) { return false; }
       });
@@ -53,7 +53,7 @@ export default Ember.Component.extend({
 
     function checkCheckBoxInput(element){
       var parent = Ember.$(element).parent();
-      if (!( Ember.$(element).context.checked)){
+      if (!( Ember.$(element).context.checked || element.checked)){
         parent.addClass('form__control--error');
       } else {
         parent.removeClass('form__control--error');

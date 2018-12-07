@@ -355,7 +355,7 @@ export default {
     "order_detail_pop_up": "Add items to your cart before submitting Order details.",
     "transport_order_detail_pop_up": "You need to fill up Order details first",
     "transport_details_pop_up": "Add items to your cart before submitting transport details.",
-    "numbers_warning": "Please input numbers only.",
+    "numbers_warning": "Please enter 4 digit number.",
     "transport_details": {
       "transport_method": "Transport method: ",
       "collect_with_own_vehicle": "We will collect with our own vehicle(s)",
@@ -419,7 +419,9 @@ export default {
       "request_more": "Request more goods",
       "type_label": "Goods type",
       "quantity_label": "Quantity",
-      "description_details_label": "Specifics of item (Optional)"
+      "description_details_label": "Specifics of item (Optional)",
+      "no_goods_error": "At least one Item is required.",
+      "no_time_slot_selected_error": "Please select appointment time."
     },
     "request": {
       "remove_req": "Remove this request from order",
@@ -431,7 +433,7 @@ export default {
       "self_vehicle": "Client will bring private vehicle",
       "hire_vehicle": "Client needs information about hiring vehicle",
       "confirm_labor": "Confirm understanding of labor requirements",
-      "labor_info": "If the request is too large for the client to carry alone, Please advice them to bring their own labor to load at our end and unload at their end. Crossroads does not provide labor, and hired truck drivers do not provide loading services without charge.",
+      "labor_info": "If the request is too large for the client to carry alone, please advise them to bring their own labor to load at our end and unload at their end. Crossroads does not provide labor, and hired truck drivers do not provide loading services without charge.",
       "labor_confirmation": "I confirm understanding of labor requirements.",
       "date": "Appointment Date",
       "time": "Appointment Time"

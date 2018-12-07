@@ -13,8 +13,6 @@ export default applicationController.extend({
   triggerFlashMessage: false,
   previousRouteName: null,
 
-  buttonStyle: "light",
-
   getCategoryForCode: function (code) {
     const categories = this.get('model.packageCategories');
     const category = categories.find(c => _.includes(c.get('packageTypeCodes'), code));

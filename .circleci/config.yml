@@ -55,6 +55,8 @@ jobs:
 
   test_cases:
     <<: *defaults
+    docker:
+      - image: circleci/node:6-browsers
     environment:
       JOBS: 1
     steps:
@@ -63,11 +65,11 @@ jobs:
       - restore-cache: *restore-bower-cache
       - run:
           name: Start Ember test server
-          command: yarn run ember server --port 4203
+          command: yarn run ember server --port 4202
           background: true
       - run:
           name: Wait for Ember test server to start
-          command: dockerize -wait tcp://localhost:4203 -timeout 1m
+          command: dockerize -wait tcp://localhost:4202 -timeout 1m
       - run:
           name: Run Ember tests
           command: COVERAGE=true yarn run test:ci
@@ -316,6 +318,7 @@ workflows:
                 only: /^(master|live)$/
         - www_build:
             requires:
+              - package_dependencies
               - test_cases
             filters:
               branches:
@@ -337,10 +340,10 @@ workflows:
               - ember_cordova_build
             filters:
               branches:
-                only: /^(master|live)$/
-        # - ios_build_and_deploy:
-        #     requires:
-        #       - test_cases
-        #     filters:
-        #       branches:
-        #         only: /^(master|live)$/
+                only: /^(master)$/
+        - ios_build_and_deploy:
+            requires:
+              - test_cases
+            filters:
+              branches:
+                only: live

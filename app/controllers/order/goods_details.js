@@ -14,6 +14,11 @@ export default Ember.Controller.extend({
   sortProperties: ["id"],
   sortedGcRequests: Ember.computed.sort("model.goodcityRequests", "sortProperties"),
 
+  hasNoGcRequests: Ember.computed("model.goodcityRequests", function() {
+    return (!this.get('model.goodcityRequests').length);
+  }),
+
+
   actions: {
   	addRequest(){
       var orderId = this.get('order.id');
@@ -32,6 +37,7 @@ export default Ember.Controller.extend({
   	},
 
     saveGoodsDetails(){
+      if(this.get('hasNoGcRequests')){return false;}
       var promises = [];
       this.get('order.goodcityRequests').forEach(goodcityRequest => {
         promises.push(goodcityRequest.save());
@@ -44,6 +50,6 @@ export default Ember.Controller.extend({
       }).finally(() =>{
         this.transitionToRoute('order.appointment_details', this.get("order.id"));
       });
-    },
+    }
   }
 });
