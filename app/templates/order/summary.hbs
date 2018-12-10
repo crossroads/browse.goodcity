@@ -1,4 +1,4 @@
-<div class="row header tab-bar">
+<div class="row header tab-bar" data-topbar>
   <div class="columns small-2">
     <i class="fa fa-lg fa-times-circle-o" aria-hidden="true" {{ action "setOrder" null }}></i>
   </div>
@@ -12,7 +12,7 @@
     <div class="sub-text">{{ t (concat 'my_orders.' selectedOrder.state) }}</div>
   </div>
 </div>
-<div class="row tabs tab-bar">
+<div class="row tabs tab-bar" data-topbar>
   {{#each orderSummaryTabs as |tab|}}
     <div class="{{ tab.name }} tab columns small-{{math 12 '/' orderSummaryTabs.length}} {{if (is-equal tab.name selectedOrderTab.name) 'selected' 'dimmed' }}" {{action "selectTab" tab}}>
       <i class="fa fa-{{ tab.icon }}" aria-hidden="true"></i>
