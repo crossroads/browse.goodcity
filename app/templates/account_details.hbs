@@ -99,13 +99,25 @@
                     <br>
                     <div class="row">
                       {{#form-control}}
-                        <div class="small-12 columns">
+                        <div class="large-12 small-12 medium-12 columns">
+                          <label class="form-label">District</label>
+                          {{select-list
+                            content=districts
+                            on-change=(action (mut selectedDistrict))
+                            selectedValue=selectedDistrict
+                            value= selectedDistrict
+                            selectArrow=true
+                            classNames='district'
+                            idNames='district-select-dropdown'}}
+                          <br />
+                        </div>
+                        <div class="large-12 small-12 medium-12 columns">
                           <label class="form-label">{{t "account.email"}}</label>
                           <label class="form-label">{{t "account.work"}}</label>
                           {{input value=email value=model.user.email classNames="number_input center_align_placeholder" id="email" type="email" required='true'}}
-                        </div>
-                        <div class="small-12 columns input-error warning_empty">
-                          {{fa-icon "warning"}}&nbsp;&nbsp;{{t "account.email_warning"}}
+                          <div class="small-12 columns input-error warning_empty">
+                            {{fa-icon "warning"}}&nbsp;&nbsp;{{t "account.email_warning"}}
+                          </div>
                         </div>
                       {{/form-control}}
                     </div>

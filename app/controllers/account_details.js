@@ -15,6 +15,24 @@ export default Ember.Controller.extend({
   bookAppointment: false,
   isMobileApp: config.cordova.enabled,
 
+  districts: Ember.computed(function(){
+    return this.store.peekAll('district');
+  }),
+
+  userDistrict: Ember.computed('model', function(){
+    let userDistrict = this.get('model.user.address.district');
+    let districts = this.get('districts');
+    if(userDistrict){
+      let filteredUserDistrict = districts.filterBy('name', userDistrict.get('name'));
+      return {id: filteredUserDistrict.get('firstObject.id'), name: filteredUserDistrict.get('firstObject.name')};
+    }
+    return { name: districts.get('firstObject.name'), id: districts.get('firstObject.id') };
+  }),
+
+  selectedDistrict: Ember.computed('userDistrict', function (){
+    return { name: this.get('userDistrict.name'), id: this.get('userDistrict.id')};
+  }),
+
   userTitle: Ember.computed('model', function() {
     let userTitle = this.get('model.user.title');
     let titles = this.get('titles');
@@ -63,6 +81,7 @@ export default Ember.Controller.extend({
     var user = this.get('model.user');
     var position = organisationsUserId ? this.get('model.organisationsUser.position') : this.get('position');
     var title = this.get('selectedTitle.id');
+    var district = this.get('selectedDistrict.id');
     var params = {
       organisation_id: this.get('organisationId'),
       position: position,
@@ -72,6 +91,9 @@ export default Ember.Controller.extend({
         mobile: user.get('mobile'),
         email: user.get('email'),
         title: title
+      },
+      user_address_attributes: {
+        district_id: district
       }
     };
     if (organisationsUserId) {
