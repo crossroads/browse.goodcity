@@ -17,6 +17,12 @@ export default Ember.Controller.extend({
   isSelfSelected: Ember.computed.equal("selectedId", "organisation"),
   user: Ember.computed.alias('session.currentUser'),
 
+  districts: Ember.computed(function(){
+    return this.store.peekAll('district');
+  }),
+
+  selectedDistrict: null,
+
   actions: {
     clearDescription() {
       this.set("description", "");
@@ -41,7 +47,8 @@ export default Ember.Controller.extend({
         purpose_description: this.get('description'),
         state: "draft",
         purpose_ids: purposeIds,
-        people_helped: this.get('peopleCount')
+        people_helped: this.get('peopleCount'),
+        district_id: this.get('selectedDistrict.id')
       };
 
       const orderId = this.get("orderId");

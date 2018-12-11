@@ -14,10 +14,12 @@
   }
 }
 
-select {
-  width: 10rem;
-  @media #{$small-only} {
-    max-width: 7rem;
+.package-category{
+  select {
+    width: 10rem;
+    @media #{$small-only} {
+      max-width: 7rem;
+    }
   }
 }
 

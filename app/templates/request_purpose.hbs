@@ -62,6 +62,21 @@
                     {{/form-control}}
                   </div>
                 </div>
+                <div class="row district-select">
+                  <div class="large-12 small-12 medium-12 columns">
+                    <br />
+                    <label class="form-label">District</label>
+                    <small id="district_label">Please select the district.</small>
+                    {{select-list
+                      content=districts
+                      on-change=(action (mut selectedDistrict))
+                      selectedValue=selectedDistrict
+                      value= selectedDistrict
+                      selectArrow=true
+                      classNames='district-select'
+                      idNames='district-select-dropdown'}}
+                  </div>
+                </div>
                 <div class="row description-of-need">
                   <div class="small-12 columns description">
                     {{t 'order.request_purpose.need_description'}}

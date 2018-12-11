@@ -10,7 +10,7 @@
               {{t "category.filter"}}:
             </div>
             <div class="small-8 medium-7 large-8 columns filter-list">
-              {{select-list content=selectCategories on-change=(action (mut selectedCategoryId)) prompt=(t "category.all")}}
+              {{select-list class="package-category" content=selectCategories on-change=(action (mut selectedCategoryId)) prompt=(t "category.all")}}
             </div>
           </div>
         </div>
@@ -22,7 +22,7 @@
             {{t "category.sort.title"}}:
           </div>
           <div class="small-8 medium-6 large-10 columns filter-list">
-            {{select-list content=sortOptions on-change=(action (mut selectedSort)) }}
+            {{select-list class="package-category" content=sortOptions on-change=(action (mut selectedSort)) }}
           </div>
         </div>
       </div>

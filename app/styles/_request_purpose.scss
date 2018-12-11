@@ -187,6 +187,7 @@
   color: #ee4f4b;
 }
 
+<<<<<<< HEAD
 .book_appointment_headers{
   @media #{$small-only}{
     width: 96%
@@ -196,5 +197,21 @@
 .labor_confirmation{
   @media #{$small-only}{
     font-size: 0.9em;
+
+#district_label{
+  font-size: .8rem;
+  margin-bottom: .5rem;
+}
+
+.district-select{
+  select{
+    @media #{$small-only}{
+      margin-left: -5px;
+    }
+    border: 1px solid #8091a9;
+    width: 100%;
+    background: bottom;
+    color: #a3aab6;
+    max-width: unset;
   }
 }
