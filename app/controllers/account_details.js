@@ -19,6 +19,10 @@ export default Ember.Controller.extend({
     return this.store.peekAll('district');
   }),
 
+  returnSelectedField (selectedFieldName){
+    return { name: this.get(`${selectedFieldName}.name`), id: this.get(`${selectedFieldName}.id`)};
+  },
+
   userDistrict: Ember.computed('model', function(){
     let userDistrict = this.get('model.user.address.district');
     let districts = this.get('districts');
@@ -30,7 +34,7 @@ export default Ember.Controller.extend({
   }),
 
   selectedDistrict: Ember.computed('userDistrict', function (){
-    return { name: this.get('userDistrict.name'), id: this.get('userDistrict.id')};
+    return this.returnSelectedField('userDistrict');
   }),
 
   userTitle: Ember.computed('model', function() {
@@ -45,7 +49,7 @@ export default Ember.Controller.extend({
   }),
 
   selectedTitle: Ember.computed('userTitle', function (){
-    return { name: this.get('userTitle.name'), id: this.get('userTitle.id')};
+    return this.returnSelectedField('userTitle');
   }),
 
   titles: Ember.computed(function() {
