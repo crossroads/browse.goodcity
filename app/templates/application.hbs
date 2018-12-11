@@ -9,10 +9,10 @@
           <div class="inner-wrap">
             {{#if showSidebar}}
               {{partial "sidebar"}}
+              <div class="show-for-small">
+                <a class="exit-off-canvas"></a>
+              </div>
             {{/if}}
-            <div class="show-for-small">
-              <a class="exit-off-canvas"></a>
-            </div>
             {{liquid-outlet}}
           </div>
         </div>
