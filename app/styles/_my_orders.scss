@@ -101,8 +101,21 @@
           padding-bottom: 1rem;
           padding-top: 1rem;
 
+
+          .cancel-booking {
+            border: none !important;
+            text-decoration: underline;
+          }
+
+          .edit-appointment-details {
+            right: 1rem;
+            background-color: transparent;
+            border: 1px solid white;
+          }
+
           .section-title {
             color:white;
+            top: 0.5rem;
             font-family: $header-font-family;
             padding-left: 6%;
             margin-bottom: 1.5rem;
@@ -132,7 +145,7 @@
 
         // ---- BOOKING TAB
         .booking-tab {
-          
+
           .state-description {
             padding: 0 10%;
             margin: 1.5rem 0;
@@ -190,6 +203,11 @@
       }
     }
   }
+}
+
+.cancel-booking-warning {
+  font-size: 1.2rem !important;
+  font-weight: bolder;
 }
 
 .empty-cart-message{

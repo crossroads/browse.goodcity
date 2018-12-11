@@ -13,6 +13,7 @@ export default {
   "show": "Show",
   "date": "Date",
   "time": "Time",
+  "edit": "Edit",
   "contact": "Contact",
   "draft": "draft",
   "submitted": "submitted",
@@ -29,6 +30,8 @@ export default {
   "no_search_results": "No Search Results.",
   "continue": "Continue",
   "cancel": "Cancel",
+  "save_changes": "Save changes",
+  "discard_changes": "Discard changes",
 
   "banner": {
     "presented_by": "Presented by",
@@ -221,6 +224,13 @@ export default {
     }
   },
 
+  "cancel_booking": {
+    "title": "Cancel Booking",
+    "cancel_booking_warning": "Cancel this booking?",
+    "cancel_booking_info": "This will cancel booking and all associated request for goods.",
+    "cancel_booking_reason_title": "Reason for canceling order"
+  },
+
   "my_orders": {
     "my_orders": "My Orders",
     "processing": "Processing",
@@ -253,6 +263,7 @@ export default {
         "description_of_needs": "Description of needs"
       },
       "beneficiary": {
+        "appointment_details": "Appointment Details",
         "client_information": "Client Information",
         "id_type": "Type of ID held",
         "id_number": "ID Number",

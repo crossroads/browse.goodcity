@@ -5,9 +5,11 @@ const { getOwner } = Ember;
 
 export default Ember.Controller.extend({
   isMobileApp: config.cordova.enabled,
+  previousRouteName: null,
   firstName: null,
   lastName: null,
   mobilePhone: null,
+  isEditing: false,
   selectedId: null,
   identityNumber: null,
   order: Ember.computed.alias("model.order"),

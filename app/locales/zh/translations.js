@@ -11,6 +11,7 @@ export default {
   "okay": "確定",
   "show": "顯示",
   "date": "日期",
+  "edit": "Edit",
   "time": "時間",
   "contact": "聯絡電話",
   "draft": "等待提交",
@@ -28,6 +29,8 @@ export default {
   "no_search_results": "沒有搜尋結果",
   "cancel": "取消",
   "continue": "繼續",
+  "save_changes": "Save changes",
+  "discard_changes": "Discard changes",
 
   "banner": {
     "presented_by": "建立機構",
@@ -218,6 +221,13 @@ export default {
     }
   },
 
+  "cancel_booking": {
+    "title": "Cancel Booking",
+    "cancel_booking_warning": "Cancel this booking?",
+    "cancel_booking_info": "This will cancel booking and all associated request for goods.",
+    "cancel_booking_reason_title": "Reason for canceling order"
+  },
+
   "my_orders": {
     "my_orders": "我的訂單",
     "processing": "處理中",
@@ -250,6 +260,7 @@ export default {
         "description_of_needs": "申請詳情"
       },
       "beneficiary": {
+        "appointment_details": "Appointment Details",
         "client_information": "服務對象資料",
         "id_type": "所持身份證種類",
         "id_number": "身份證號碼",

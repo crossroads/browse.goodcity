@@ -29,3 +29,11 @@
       {{/if}}
     </div>
 </div>
+
+{{#message-box btn1Text=(t "not_now") btn2Text=(t "cancel_booking.title") btn2Callback=(action "cancelOrder") isVisible=showCancelBookingPopUp classNames="popupOverlay designate-form"}}
+
+    <p class="cancel-booking-warning">{{t "cancel_booking.cancel_booking_warning"}}</p>
+    <p>{{t "cancel_booking.cancel_booking_info"}}</p>
+    <p>{{t "cancel_booking.cancel_booking_reason_title"}}</p>
+
+{{/message-box}}

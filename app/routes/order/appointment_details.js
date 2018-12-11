@@ -3,6 +3,19 @@ import AuthorizeRoute from './../authorize';
 import AjaxPromise from 'browse/utils/ajax-promise';
 
 export default AuthorizeRoute.extend({
+  previousRouteName: null,
+
+  beforeModel() {
+    this._super(...arguments);
+    var previousRoutes = this.router.router && this.router.router.currentHandlerInfos;
+    var previousRoute = previousRoutes && previousRoutes.pop();
+
+    if(previousRoute && previousRoute.name)
+    {
+      this.set("previousRouteName", previousRoute.name);
+    }
+  },
+
   model() {
     var orderId = this.paramsFor('order').order_id;
     return Ember.RSVP.hash({
@@ -15,21 +28,43 @@ export default AuthorizeRoute.extend({
   setUpFormData(model, controller) {
     var selectedId = "self";
     var selectedTime = "11:00am";
-    if (model.orderTransport){
-      selectedId = model.orderTransport.get('transportType');
-      selectedTime = model.orderTransport.get('timeslot');
+    let selectedDate = null;
+    let selectedSlot = null;
+    let orderTransport = model.orderTransport;
+    let availableDatesAndTime = model.availableDatesAndtime;
+    let slots = null;
+    controller.set('isEditing', false);
+    if (orderTransport){
+      selectedId = orderTransport.get('transportType');
+      selectedTime = orderTransport.get('timeslot');
+      selectedDate = orderTransport.get("scheduledAt");
+      if(selectedDate) {
+        slots = availableDatesAndTime.appointment_calendar_dates.filter( date => date.date === moment(selectedDate).format('YYYY-MM-DD'))[0].slots;
+        selectedSlot = slots.filter(slot => slot.timestamp.indexOf(orderTransport.get("timeslot")) >= 0)[0];
+      }
+      controller.set('isEditing', true);
     }
     controller.set('selectedId', selectedId);
     controller.set('selectedTimeId', selectedTime);
-    controller.set('available_dates', model.availableDatesAndtime);
+    controller.set('available_dates', availableDatesAndTime);
+    controller.set('selectedDate', selectedDate);
+    if(selectedSlot) {
+      controller.set("selectedTimeId", selectedSlot.timestamp);
+    }
   },
 
   setupController(controller, model) {
     this._super(...arguments);
     this.setUpFormData(model, controller);
+    controller.set("previousRouteName", this.get("previousRouteName"));
+    if(this.get("previousRouteName") === "my_orders") {
+      this.controllerFor('my_orders').set("selectedOrder", model.order);
+    } else {
+      this.controllerFor('my_orders').set("selectedOrder", null);
+    }
     this.controllerFor('application').set('showSidebar', false);
   },
-  
+
   deactivate(){
     this.controllerFor('application').set('showSidebar', true);
   }

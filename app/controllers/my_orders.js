@@ -1,6 +1,7 @@
 import applicationController from './application';
 import Ember from 'ember';
 import _ from 'lodash';
+import AjaxPromise from 'browse/utils/ajax-promise';
 
 export default applicationController.extend({
   sortProperties: ["createdAt:desc"],
@@ -12,6 +13,7 @@ export default applicationController.extend({
   queryParams: ['submitted'],
   triggerFlashMessage: false,
   previousRouteName: null,
+  showCancelBookingPopUp: false,
 
   getCategoryForCode: function (code) {
     const categories = this.get('model.packageCategories');
@@ -91,6 +93,43 @@ export default applicationController.extend({
   },
 
   actions: {
+    redirectToEdit(routeName) {
+      let orderId = this.get("selectedOrder.id");
+      this.transitionToRoute(`order.${routeName}`, orderId);
+    },
+
+    editRequestPurpose() {
+      let orderId = this.get("selectedOrder.id");
+      this.transitionToRoute(`request_purpose`,
+        {
+          queryParams: {
+            orderId: orderId,
+            editRequest: true
+          }
+        });
+    },
+
+    cancelBookingPopUp() {
+      this.set("showCancelBookingPopUp", true);
+    },
+
+    cancelOrder() {
+      let order = this.get("selectedOrder");
+      var url = `/orders/${order.id}/transition`;
+      this.showLoadingSpinner();
+      new AjaxPromise(url, "PUT", this.get('session.authToken'), { transition: "cancel" })
+        .then(data => {
+          this.get("store").pushPayload(data);
+        })
+        .catch(() => {
+          this.get("messageBox").alert();
+        })
+        .finally(() => {
+          this.hideLoadingSpinner();
+          this.set("showCancelBookingPopUp", false);
+        });
+    },
+
     setOrder(order) {
       if (!order) {
         this.set('selectedOrder', null);
