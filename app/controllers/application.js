@@ -26,7 +26,7 @@ export default Ember.Controller.extend({
 
   draftOrder: Ember.computed.alias('session.draftOrder'),
 
-  isUserLoggedIn: Ember.computed('session', function() {
+  isUserLoggedIn: Ember.computed('loggedInUser', function() {
     return !!this.session.get('authToken');
   }),
 
@@ -69,7 +69,7 @@ export default Ember.Controller.extend({
     logMeOut() {
       this.session.clear(); // this should be first since it updates isLoggedIn status
       this.unloadModels();
-      this.set('loggedInUser', "");
+      this.set('loggedInUser', false);
       this.get("cart").clearItems();
       this.transitionToRoute('browse');
     },
