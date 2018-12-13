@@ -14,12 +14,17 @@ export default applicationController.extend({
   triggerFlashMessage: false,
   previousRouteName: null,
   showCancelBookingPopUp: false,
+  cancellationReasonWarning: false,
 
   getCategoryForCode: function (code) {
     const categories = this.get('model.packageCategories');
     const category = categories.find(c => _.includes(c.get('packageTypeCodes'), code));
     return category && category.get('name');
   },
+
+  selectedOrderId: Ember.computed("selectedOrder", function() {
+    return this.get("selectedOrder.id");
+  }),
 
   fetchPackageImages(pkg) {
     return Ember.RSVP.all(
@@ -113,11 +118,24 @@ export default applicationController.extend({
       this.set("showCancelBookingPopUp", true);
     },
 
+    removePopUp() {
+      this.set("showCancelBookingPopUp", false);
+    },
+
     cancelOrder() {
       let order = this.get("selectedOrder");
+      let cancellationReason = Ember.$(`#appointment-cancellation-reason`).val().trim();
+      if(!cancellationReason.length) {
+        this.set("cancellationReasonWarning", true);
+        Ember.$('#appointment-cancellation-reason').addClass("cancel-booking-error");
+        return false;
+      } else {
+        Ember.$('#appointment-cancellation-reason').removeClass("cancel-booking-error");
+        this.set("cancellationReasonWarning", false);
+      }
       var url = `/orders/${order.id}/transition`;
       this.showLoadingSpinner();
-      new AjaxPromise(url, "PUT", this.get('session.authToken'), { transition: "cancel" })
+      new AjaxPromise(url, "PUT", this.get('session.authToken'), { transition: "cancel", cancellation_reason: cancellationReason })
         .then(data => {
           this.get("store").pushPayload(data);
         })

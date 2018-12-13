@@ -39,6 +39,12 @@ export default Ember.Component.extend({
 
     closeModal() {
       this.close();
+    },
+
+    //Fix: Too deeply nested component(3 levels) failing randomly(Known issue with Ember)
+    //Remove when Ember is upgraded to >= 3.0
+    updateErrorMessage() {
+      return false;
     }
   }
 });

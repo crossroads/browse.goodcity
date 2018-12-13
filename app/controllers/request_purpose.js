@@ -47,7 +47,7 @@ export default Ember.Controller.extend({
       const orderId = this.get("orderId");
       let order;
       let url = "/orders";
-      let actionType = "POST"
+      let actionType = "POST";
       if(orderId) {
         order = this.get("store").peekRecord("order", orderId);
         if(order) {

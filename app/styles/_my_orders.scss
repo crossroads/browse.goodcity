@@ -205,9 +205,25 @@
   }
 }
 
+.cancel-appointment {
+  a#btn1 {
+    display: none;
+  }
+}
+
+.cancel-appointment-buttons {
+  padding: 0.5rem;
+  margin-top: 1rem !important;
+}
+
 .cancel-booking-warning {
   font-size: 1.2rem !important;
   font-weight: bolder;
+}
+
+.cancel-booking-error {
+  background: #fddbdc;
+  border-color: #f34d4f;
 }
 
 .empty-cart-message{
