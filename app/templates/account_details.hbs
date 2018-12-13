@@ -1,14 +1,16 @@
+{{#if isMobileApp}}
+  {{scroll-to-bottom customClass="account-detail-info-scroll-arrow"}}
+{{/if}}
 <div class="row">
   <div class="large-8 columns large-offset-2 medium-offset-1 medium-10 small-12">
     <div class="row checkout_pages">
       <div class="small-12 columns">
         <div class="row">
           <section class="main-section new-user-section ui login_page">
-            <nav class="tab-bar">
+            <nav class="tab-bar" data-topbar>
               <section class="left-large">
                 {{#link-to "authenticate" classNames="back"}}{{fa-icon "angle-left"}} {{t "back"}}{{/link-to}}
               </section>
-
               <section class="middle tab-bar-section">
                 <h1 class="title">{{t "account.account_details"}}</h1>
               </section>

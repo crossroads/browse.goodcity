@@ -4,6 +4,7 @@ import AjaxPromise from 'browse/utils/ajax-promise';
 const { getOwner } = Ember;
 
 export default Ember.Controller.extend({
+  isMobileApp: config.cordova.enabled,
   firstName: null,
   lastName: null,
   mobilePhone: null,

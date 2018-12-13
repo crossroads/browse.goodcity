@@ -1,9 +1,12 @@
+{{#if isMobileApp}}
+  {{scroll-to-bottom customClass="goods-detail-info-scroll-arrow"}}
+{{/if}}
 <div class="row">
   <div class="large-8 columns large-offset-2 medium-offset-1 medium-10 small-12">
     <div class="row checkout_pages">
       <div class="small-12 columns">
         <section class=" login_page">
-          <nav class="tab-bar">
+          <nav class="tab-bar" data-topbar>
             <section class="left-large">
               {{fa-icon "angle-left"}}
               {{#if fromClientInformation}}
@@ -44,7 +47,7 @@
             <div class="row">
               <div class="small-11 columns">
                 {{#if hasNoGcRequests}}<p align="center" class="no-gc-req-error">{{t "order.goods_details.no_goods_error"}}</p>{{/if}}
-                <button {{action 'submit' target=form}} disabled={{hasNoGcRequests}} class="button expand expand_button">{{t "continue"}}</button>
+                <button {{action 'submit' target=form}} id="goods-details-submit" disabled={{hasNoGcRequests}} class="button expand expand_button">{{t "continue"}}</button>
               </div>
               <div class='small-1 columns'>&nbsp;</div>
             </div>

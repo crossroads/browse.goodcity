@@ -1,4 +1,5 @@
 /* jshint node: true */
+const pkgJson = require('../package.json');
 
 module.exports = function(environment) {
   var ENV = {
@@ -58,7 +59,7 @@ module.exports = function(environment) {
       PRELOAD_AUTHORIZED_TYPES: ["order", "gogovan_transport", "booking_type"],
 
       SHA: process.env.APP_SHA || "00000000",
-      VERSION: process.env.VERSION || "1.0.0"
+      VERSION: pkgJson.version
     },
 
     i18n: {

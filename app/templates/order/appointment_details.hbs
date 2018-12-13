@@ -1,9 +1,13 @@
+{{#if isMobileApp}}
+  {{scroll-to-bottom customClass="appointment-detail-info-scroll-arrow"}}
+{{/if}}
+
 <div class="row">
   <div class="large-8 columns large-offset-2 medium-offset-1 medium-10 small-12">
     <div class="row checkout_pages">
       <div class="small-12">
         <section class="main-section new-user-section ui login_page">
-          <nav class="tab-bar">
+          <nav class="tab-bar" data-topbar>
             <section class="left-large">
               {{fa-icon "angle-left"}} {{#link-to 'order.goods_details' order.id classNames="back"}}{{t "back"}}{{/link-to}}
             </section>
@@ -114,7 +118,7 @@
                 {{/if}}
                 <div class="row">
                   <div class="small-12 columns">
-                    <a {{action 'submit' target=form}} class="button expand appointment"> {{t 'continue'}} </a>
+                    <a {{action 'submit' target=form}} id="appointment-submit" class="button expand appointment"> {{t 'continue'}} </a>
                   </div>
                 </div>
               </section>

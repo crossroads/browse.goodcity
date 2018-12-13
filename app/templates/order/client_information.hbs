@@ -1,9 +1,12 @@
+{{#if isMobileApp}}
+  {{scroll-to-bottom customClass="client-info-scroll-arrow"}}
+{{/if}}
 <div class="row">
   <div class="large-8 columns large-offset-2 medium-offset-1 medium-10 small-12">
     <div class="row checkout_pages">
       <div class="small-12 columns">
         <section class="main-section new-user-section ui login_page">
-          <nav class="tab-bar">
+          <nav class="tab-bar" data-topbar>
             <section class="left-large">
               {{fa-icon "angle-left"}} {{#link-to "request_purpose" classNames="back"}}{{t "back"}}{{/link-to}}
             </section>
@@ -31,7 +34,7 @@
                   value="hkId"
                   selection=selectedId
                   required='true'}}
-                <label class="radio-button-text align-text" for="hkId">
+                <label class="radio-button-text align-text hkId" for="hkId">
                   {{t 'order.client_information.hk_id'}}
                 </label>
               </div>
@@ -43,7 +46,7 @@
                   value="abcl"
                   selection=selectedId
                   required='true'}}
-                <label class="radio-button-text align-text" for="abcl">
+                <label class="radio-button-text align-text abcl" for="abcl">
                   {{t 'order.client_information.asrf_id'}}
                 </label>
               </div>
@@ -109,7 +112,7 @@
                       <span class="prefix">+852</span>
                     </div>
                     <div class="small-9 columns">
-                      {{numeric-input value=mobilePhone name="mobilePhone" id="mobile" maxlength="8" required=true pattern=".{8,}" autoFocus=true}}
+                      {{numeric-input value=mobilePhone name="mobilePhone" id="mobile" maxlength="8" required=true pattern=".{8,}"}}
                     </div>
                     <div class="small-12 columns input-error">
                       <div class='input-error'>
@@ -122,7 +125,7 @@
 
               <div class="row">
                 <div class="small-12 columns">
-                  <a {{action 'submit' target=form}} class="button expand"> {{t 'continue'}} </a>
+                  <a {{action 'submit' target=form}} id="client-info-submit" class="button expand"> {{t 'continue'}} </a>
                 </div>
               </div>
             </div>

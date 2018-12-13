@@ -1,6 +1,7 @@
 import Ember from "ember";
 import AjaxPromise from 'browse/utils/ajax-promise';
 const { getOwner } = Ember;
+import config from "../config/environment";
 
 export default Ember.Controller.extend({
   queryParams: ['orgId', 'bookAppointment'],
@@ -12,6 +13,7 @@ export default Ember.Controller.extend({
   organisationsUserId: Ember.computed.alias('model.organisationsUser.id'),
   position: "",
   bookAppointment: false,
+  isMobileApp: config.cordova.enabled,
 
   userTitle: Ember.computed('model', function() {
     let userTitle = this.get('model.user.title');
@@ -106,7 +108,7 @@ export default Ember.Controller.extend({
         loadingView.destroy()
       );
     },
-    
+
     goToSearchOrg(){
       if (!this.get('organisationsUserId')) {
         this.transitionToRoute("search_organisation");

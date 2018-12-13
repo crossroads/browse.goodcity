@@ -1,3 +1,11 @@
+.goods_detail_info {
+  height: 93vh;
+}
+
+.client_info {
+  height: 93vh;
+}
+
 .new-user-section {
   .user_title select{
     width: 100%;
@@ -12,7 +20,7 @@
     color: white;
     padding: 0.2rem;
     display: none;
-    padding-bottom: 0.25rem !important; 
+    padding-bottom: 0.25rem !important;
     width: 98.7%;
 
     @media #{$small-only} {
