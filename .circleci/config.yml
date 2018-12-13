@@ -16,6 +16,14 @@ aliases:
       paths:
         - node_modules
         - ~/.cache/yarn
+  - &restore-ios-yarn-cache
+      keys:
+        - v2-browse-goodcity-ios-yarn-packages-{{ checksum "yarn.lock" }}
+  - &save-ios-yarn-cache
+      key: v2-browse-goodcity-ios-yarn-packages-{{ checksum "yarn.lock" }}
+      paths:
+        - node_modules
+        - ~/.cache/yarn
   - &yarn
     |
       yarn install --non-interactive --cache-folder ~/.cache/yarn --frozen-lockfile
@@ -25,10 +33,22 @@ aliases:
       key: v2-browse-goodcity-bower-{{ checksum "bower.json" }}
       paths:
         - bower_components
+  - &restore-ios-bower-cache
+      key: v2-browse-goodcity-ios-bower-components-{{ checksum "bower.json" }}
+  - &save-ios-bower-cache
+      key: v2-browse-goodcity-ios-bower-components-{{ checksum "bower.json" }}
+      paths:
+        - bower_components
   - &restore-bundle-cache
       key: v2-browse-goodcity-bundle-{{ checksum "Gemfile.lock" }}
   - &save-bundle-cache
       key: v2-browse-goodcity-bundle-{{ checksum "Gemfile.lock" }}
+      paths:
+        - vendor/bundle
+  - &restore-ios-bundler-cache
+      key: v2-browse-goodcity-ios-bundle-{{ checksum "Gemfile.lock" }}
+  - &save-ios-bundler-cache
+      key: v2-browse-goodcity-ios-bundle-{{ checksum "Gemfile.lock" }}
       paths:
         - vendor/bundle
 
@@ -236,14 +256,15 @@ jobs:
 
     steps:
       - checkout
+      - restore-cache: *restore-ios-yarn-cache
       - run: *yarn
-      - save-cache: *save-yarn-cache
+      - save-cache: *save-ios-yarn-cache
+      - restore-cache: *restore-ios-bower-cache
       - run: yarn run bower install
-      - save-cache: *save-bower-cache
+      - save-cache: *save-ios-bower-cache
       - run:
           name: Setup Environment variables
           command: |
-            echo 'export PATH=$PATH:`yarn bin`' >> $BASH_ENV
             echo 'export STAGING=$(if [ "$CIRCLE_BRANCH" == "live" ]; then echo false; else echo true; fi)' >> $BASH_ENV
             echo 'export ENVIRONMENT=$(if [ "$CIRCLE_BRANCH" == "live" ]; then echo production; else echo staging; fi)' >> $BASH_ENV
             echo 'export PROVISIONING_PROFILE=$(if [ "$CIRCLE_BRANCH" == "live" ]; then echo 'GoodCity_Browse.mobileprovision'; else echo 'GoodCity_Browse_Staging.mobileprovision'; fi)' >> $BASH_ENV
@@ -258,8 +279,9 @@ jobs:
           root: .
           paths:
             - cordova/www
-      - run: bundle check || bundle install --path vendor/bundle
-      - save-cache: *save-bundle-cache
+      - restore-cache: *restore-ios-bundler-cache
+      - run: bundle install --deployment --jobs=4 --retry=3
+      - save-cache: *save-ios-bundler-cache
       - attach_workspace:
           at: ~/code
       - run:
@@ -275,7 +297,11 @@ jobs:
               yarn run azure-filestore download -f $CERTIFICATE
               mv $CERTIFICATE ~/code/fastlane
           working_directory: ~/code
-      - run: pod setup
+      - run:
+          name: Install CocoaPods
+          command: |
+            curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
+            pod setup
       - run:
           name: Install cordova-update-config globally
           command: npm i -g cordova-update-config
@@ -341,9 +367,9 @@ workflows:
             filters:
               branches:
                 only: /^(master|live)$/
-        # - ios_build_and_deploy:
-        #     requires:
-        #       - test_cases
-        #     filters:
-        #       branches:
-        #         only: live
+        - ios_build_and_deploy:
+            requires:
+              - test_cases
+            filters:
+              branches:
+                only: /^(master|live)$/
