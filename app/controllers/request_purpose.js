@@ -17,11 +17,12 @@ export default Ember.Controller.extend({
   isSelfSelected: Ember.computed.equal("selectedId", "organisation"),
   user: Ember.computed.alias('session.currentUser'),
 
+  selectedDistrict: "xyzdsfads dsfadf",
+
   districts: Ember.computed(function(){
     return this.store.peekAll('district');
   }),
 
-  selectedDistrict: null,
 
   actions: {
     clearDescription() {

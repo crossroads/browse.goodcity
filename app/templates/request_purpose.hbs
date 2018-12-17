@@ -65,16 +65,20 @@
                 <div class="row district-select">
                   <div class="large-12 small-12 medium-12 columns">
                     <br />
-                    <label class="form-label">District</label>
-                    <small id="district_label">Please select the district.</small>
-                    {{select-list
-                      content=districts
-                      on-change=(action (mut selectedDistrict))
-                      selectedValue=selectedDistrict
-                      value= selectedDistrict
-                      selectArrow=true
-                      classNames='district-select'
-                      idNames='district-select-dropdown'}}
+                    <label class="form-label">Where in Hong Kong will these goods be primarily used?</label>
+                    <p><small>This assists us with our reporting.</small></p>
+                      {{#form-control}}
+                        {{select-list
+                          content=districts
+                          on-change=(action (mut selectedDistrict))
+                          selectedValue=selectedDistrict
+                          placeHolderValue="----Please select District----"
+                          value= selectedDistrict
+                          selectArrow=true
+                          required=true
+                          classNames='district-select'
+                          idNames='district-select-dropdown'}}
+                      {{/form-control}}
                   </div>
                 </div>
                 <div class="row description-of-need">

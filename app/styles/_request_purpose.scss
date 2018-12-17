@@ -163,7 +163,7 @@
       right: 0.8%;
       @media #{$small-only}{
         right: 3%;
-        top: 53%
+        top: auto;
       }
       font-size: 1rem;
       padding: 4.4rem 0.3rem;
@@ -187,7 +187,6 @@
   color: #ee4f4b;
 }
 
-<<<<<<< HEAD
 .book_appointment_headers{
   @media #{$small-only}{
     width: 96%
@@ -197,7 +196,8 @@
 .labor_confirmation{
   @media #{$small-only}{
     font-size: 0.9em;
-
+  }
+}
 #district_label{
   font-size: .8rem;
   margin-bottom: .5rem;
