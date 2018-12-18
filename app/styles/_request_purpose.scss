@@ -1,8 +1,5 @@
 .request-purpose, .client-information {
   .button{
-    @media #{$small-only} {
-      width: 97%;
-    }
     margin-top: 1rem;
   }
   .input-error {
@@ -166,6 +163,7 @@
       right: 0.8%;
       @media #{$small-only}{
         right: 3%;
+        top: 53%
       }
       font-size: 1rem;
       padding: 4.4rem 0.3rem;
@@ -187,4 +185,16 @@
 
 .no-gc-req-error, .no-time-slot-selected-error{
   color: #ee4f4b;
+}
+
+.book_appointment_headers{
+  @media #{$small-only}{
+    width: 96%
+  }
+}
+
+.labor_confirmation{
+  @media #{$small-only}{
+    font-size: 0.9em;
+  }
 }

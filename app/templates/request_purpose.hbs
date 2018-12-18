@@ -6,7 +6,7 @@
     <div class="row checkout_pages">
         <div class="small-12 columns">
           <div class="row">
-            <section class="main-section new-user-section ui login_page">
+            <section class="main-section new-user-section ui login_page book_appointment_headers">
               <nav class="tab-bar">
                 <section class="left-large">
                   {{fa-icon "angle-left"}}
@@ -22,7 +22,7 @@
               </nav>
             </section>
             <div class="row inner-section">
-              <section class="main-section request-purpose medium-10 medium-offset-1 large-10 large-offset-1 columns">
+              <section class="main-section request-purpose medium-10 medium-offset-1 large-10 large-offset-1 small-10 small-offset-1 columns">
               {{#validatable-form onSubmit=(action 'createOrderWithRequestPuropose') as |form|}}
                 <div class="small-12 columns">
                   {{t 'order.request_purpose.purpose'}}
