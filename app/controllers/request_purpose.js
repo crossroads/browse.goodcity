@@ -5,6 +5,12 @@ import config from "../config/environment";
 
 export default Ember.Controller.extend({
   isMobileApp: config.cordova.enabled,
+  myOrders: Ember.inject.controller(),
+  queryParams: ["orderId", "editRequest"],
+  editRequest: null,
+  previousRouteName: null,
+  orderId: null,
+  isEditing: false,
   peopleCount: null,
   description: "",
   selectedId: null,
@@ -38,18 +44,33 @@ export default Ember.Controller.extend({
         people_helped: this.get('peopleCount')
       };
 
+      const orderId = this.get("orderId");
+      let order;
+      let url = "/orders";
+      let actionType = "POST";
+      if(orderId) {
+        order = this.get("store").peekRecord("order", orderId);
+        if(order) {
+          url = "/orders/" + orderId;
+          actionType = "PUT";
+        }
+      }
+
       var loadingView = getOwner(this).lookup('component:loading').append();
 
       var isOrganisationPuropose = false;
 
-      new AjaxPromise("/orders", "POST", this.get('session.authToken'), { order: orderParams })
+      new AjaxPromise(url, actionType, this.get('session.authToken'), { order: orderParams })
         .then(data => {
           this.get("store").pushPayload(data);
           var orderId = data.order.id;
           var purpose_ids = data.orders_purposes.filterBy("order_id", data.order.id).getEach("purpose_id");
           isOrganisationPuropose = purpose_ids.get('length') === 1 && purpose_ids.indexOf(1) >= 0;
           loadingView.destroy();
-          if(isOrganisationPuropose){
+          if(this.get("previousRouteName") === "my_orders") {
+            this.get("myOrders").set("selectedOrder", this.get("store").peekRecord("order", orderId));
+            this.transitionToRoute('my_orders');
+          } else if(isOrganisationPuropose) {
             this.transitionToRoute('order.goods_details', orderId);
           } else {
             this.transitionToRoute("order.client_information", orderId);

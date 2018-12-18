@@ -47,6 +47,11 @@ export default Model.extend({
     return items.uniq();
   }),
 
+  isEditAllowed: Ember.computed('state', function() {
+    let editableStates = ["draft", "submitted", "processing", "restart_process", "awaiting_dispatch"];
+    return editableStates.indexOf(this.get("state")) >= 0;
+  }),
+
   stateIcon: Ember.computed('state', function () {
     const state = this.get("state");
     switch (state) {

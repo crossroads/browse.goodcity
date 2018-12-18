@@ -29,3 +29,24 @@
       {{/if}}
     </div>
 </div>
+
+{{#message-box  isVisible=showCancelBookingPopUp classNames="popupOverlay cancel-appointment"}}
+
+    <p class="cancel-booking-warning">{{t "cancel_booking.cancel_booking_warning"}}</p>
+    <p>{{t "cancel_booking.cancel_booking_info"}}</p>
+    <p>{{t "cancel_booking.cancel_booking_reason_title"}}</p>
+    {{auto-resize-textarea data-autoresize=true name="cancellation-reason" required="required" pattern=".*\S.*" id="appointment-cancellation-reason"}}
+
+    <div class="row cancel-appointment-buttons">
+      <div class="small-6 medium-6 large-6 columns">
+        <a {{action 'removePopUp'}} class="button expand">
+          {{t 'not_now'}}
+        </a>
+      </div>
+      <div class="small-6 medium-6 large-6 columns">
+        <a {{action 'cancelOrder'}} class="button expand">
+          {{t 'cancel_booking.title'}}
+        </a>
+      </div>
+    </div>
+{{/message-box}}

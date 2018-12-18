@@ -8,7 +8,12 @@
         <section class="main-section new-user-section ui login_page">
           <nav class="tab-bar">
             <section class="left-large">
-              {{fa-icon "angle-left"}} {{#link-to "request_purpose" classNames="back"}}{{t "back"}}{{/link-to}}
+              {{fa-icon "angle-left"}}
+              {{#if (is-equal previousRouteName "my_orders")}}
+                {{#link-to 'my_orders' classNames="back"}}{{t "back"}}{{/link-to}}
+              {{else}}
+                {{#link-to "request_purpose" classNames="back"}}{{t "back"}}{{/link-to}}
+              {{/if}}
             </section>
              <section class="middle tab-bar-section">
               <h1 class="title">{{t 'order.client_information.title'}}</h1>
@@ -124,9 +129,26 @@
               </div>
 
               <div class="row">
-                <div class="small-12 columns">
-                  <a {{action 'submit' target=form}} id="client-info-submit" class="button expand"> {{t 'continue'}} </a>
-                </div>
+                {{#if isEditing}}
+                  <div class="small-6 medium-6 large-6 columns">
+                   <a {{action 'submit' target=form}} id="client-info-submit" class="button expand"> {{t 'save_changes'}} </a>
+                  </div>
+                  <div class="small-6 medium-6 large-6 columns">
+                    {{#if (is-equal previousRouteName "my_orders")}}
+                      {{#link-to 'my_orders' classNames="button expand"}}
+                        {{t 'discard_changes'}}
+                      {{/link-to}}
+                    {{else}}
+                      {{#link-to 'request_purpose' classNames="button expand"}}
+                        {{t 'discard_changes'}}
+                      {{/link-to}}
+                    {{/if}}
+                  </div>
+                {{else}}
+                  <div class="small-12 columns">
+                    <a {{action 'submit' target=form}} id="client-info-submit" class="button expand"> {{t 'continue'}} </a>
+                  </div>
+                {{/if}}
               </div>
             </div>
           {{/validatable-form}}
