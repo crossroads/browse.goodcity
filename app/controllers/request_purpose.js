@@ -29,7 +29,7 @@ export default Ember.Controller.extend({
       this.set("description", "");
     },
 
-    createOrderWithRequestPurpose(){
+    createOrderWithRequestPuropose(){
       var user = this.get('user');
       var purposeIds = [];
       if(this.get('selectedId') === 'organisation'){
