@@ -22,6 +22,12 @@
   }
 }
 
+.confirm-booking-detail-info-scroll-arrow {
+  @media #{$small-only} {
+    top: 46%;
+  }
+}
+
 .account-detail-info-scroll-arrow {
   @media #{$small-only} {
     top: 60%;

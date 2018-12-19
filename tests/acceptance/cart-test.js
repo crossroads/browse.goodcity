@@ -88,7 +88,7 @@ test("restricting transport details page to confirm page without userName and mo
     assert.equal(currentURL(), '/order/'+ order.id +'/transport_details');
     click('#ggv');
     andThen(function(){
-      assert.equal($('#name')[0].value, user.get('firstName')+" "+user.get('lastName'));
+      assert.equal($('#name')[0].value, user.get('fullName'));
       assert.equal($('#mobile')[0].value, user.get('mobile'));
       click('#submit_pin');
       andThen(function(){

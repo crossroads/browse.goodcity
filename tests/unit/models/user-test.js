@@ -40,9 +40,10 @@ test('check fullName computedProperty', function(assert){
   assert.expect(1);
   var model = this.subject();
   Ember.run(function() {
+    model.set('title', 'Mr');
     model.set('firstName', 'David');
     model.set('lastName', 'Dara');
   });
 
-  assert.equal(model.get('fullName'), 'David Dara');
+  assert.equal(model.get('fullName'), 'Mr David Dara');
 });

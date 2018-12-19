@@ -31,6 +31,8 @@ export default Model.extend({
   isClosed: Ember.computed.equal("state", "closed"),
   isProcessing: Ember.computed.equal("state", "processing"),
   isCancelled: Ember.computed.equal("state", "cancelled"),
+  session: Ember.inject.service(),
+  i18n: Ember.inject.service(),
 
   orderItems: Ember.computed('ordersPackages.[]', function() {
     var items = [];
@@ -50,6 +52,37 @@ export default Model.extend({
   isEditAllowed: Ember.computed('state', function() {
     let editableStates = ["draft", "submitted", "processing", "restart_process", "awaiting_dispatch"];
     return editableStates.indexOf(this.get("state")) >= 0;
+  }),
+
+  clientIdType: Ember.computed("beneficiary", "beneficiary.identityType", function() {
+    return this.get("beneficiary.identityType.name");
+  }),
+
+  clientIdNumber: Ember.computed("beneficiary", function() {
+    return this.get("beneficiary.identityNumber");
+  }),
+
+  clientName: Ember.computed("beneficiary", function() {
+    return this.get("beneficiary.fullName");
+  }),
+
+  clientPhone: Ember.computed("beneficiary", function() {
+    return this.get("beneficiary.phoneNumber");
+  }),
+
+  appointmentTransport: Ember.computed("orderTransport", function() {
+    let i18n = this.get("i18n");
+    return this.get("orderTransport.transportType") === "self" ?
+      i18n.t("order.appointment.self_vehicle") : i18n.t("order.appointment.hire_vehicle");
+  }),
+
+  appointmentTime: Ember.computed("orderTransport", function() {
+    let orderTransport = this.get("orderTransport");
+    if(orderTransport) {
+      return `${moment(orderTransport.get("scheduledAt")).format('dddd MMMM Do')}, ${orderTransport.get("timeslot")}`;
+    } else {
+      return "";
+    }
   }),
 
   stateIcon: Ember.computed('state', function () {
@@ -73,6 +106,10 @@ export default Model.extend({
       default:
         return "";
     }
+  }),
+
+  purposeName: Ember.computed("ordersPurposes.[]", function() {
+    return this.get("ordersPurposes.firstObject.purpose.description");
   }),
 
   transportIcon: Ember.computed("transportKey", function() {
