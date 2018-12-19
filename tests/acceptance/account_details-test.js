@@ -3,7 +3,7 @@ import { module, test } from 'qunit';
 import startApp from '../helpers/start-app';
 import { make, mockFindAll } from 'ember-data-factory-guy';
 
-var App, user, user1, organisation, organisationsUser, user_profile, gogo_van, order, pkg, ordersPackage, gcOrganisations, bookingType;
+var App, user, user1, organisation, organisationsUser, user_profile, gogo_van, order, pkg, ordersPackage, gcOrganisations, bookingType, role, userRole;
 
 module('Acceptance | Account Details Page', {
   beforeEach: function() {
@@ -17,12 +17,14 @@ module('Acceptance | Account Details Page', {
     gogo_van = make("gogovan_transport");
     bookingType = make("booking_type");
     gcOrganisations = make("gc_organisation", {nameEn: "GCC club"});
+    role = make("role");
+    userRole = make("user_role", { userId: user.id, roleId: role.id, user: user, role: role });
 
     $.mockjax({url: "/api/v1/available_*", type: 'GET', status: 200, responseText:["2018-06-14", "2018-06-15", "2018-06-16", "2018-06-19", "2018-06-20", "2018-06-21"]});
     mockFindAll("gogovan_transport").returns({json: {gogovan_transports: [gogo_van.toJSON({includeId: true})]}});
     mockFindAll("booking_type").returns({json: {booking_types: [bookingType.toJSON({includeId: true})]}});
     mockFindAll('order').returns({ json: {orders: [order.toJSON({includeId: true})], packages: [pkg.toJSON({includeId: true})], orders_packages: [ordersPackage.toJSON({includeId: true})]}});
-    user_profile = {"id": user.id,"first_name": user.get('firstName'), "last_name": user.get('lastName'), "mobile": user.get('mobile'), "user_role_ids": [1] };
+    user_profile = {"id": user.id,"first_name": user.get('firstName'), "last_name": user.get('lastName'), "mobile": user.get('mobile'), "user_role_ids": [userRole.get('id')] };
   },
 
   afterEach: function() {
@@ -58,10 +60,18 @@ test("After saving user details user gets redirected to browse page", function(a
   organisationsUser = make("organisations_user", {user: user, organisation: organisation});
   $.mockjax({url:"/api/v1/auth/current_user_profil*",
       responseText: {
-        user_profile: user_profile,
+        user: user_profile,
         organisations: [organisation.toJSON({includeId: true})],
         organisations_users: [organisationsUser.toJSON({includeId: true})]
       }});
+
+  $.mockjax({url:"/api/v1/organisations_use*",
+      responseText: {
+        users: [user_profile],
+        organisations: [organisation.toJSON({includeId: true})],
+        organisations_users: [organisationsUser.toJSON({includeId: true})]
+      }});
+
 
   $.mockjax({url: "api/v1/gc_org*", type: 'GET', responseText: {
      meta :{ total_pages:1, search: "club"},
@@ -95,7 +105,7 @@ test("After saving user details user gets redirected to browse page", function(a
 });
 
 test("User redirects to search_organisation page on clicking Organisation Name Input", function(assert){
-  user_profile = {"id": user1.id,"first_name": user1.get('firstName'), "last_name": user1.get('lastName'), "mobile": user1.get('mobile'), "user_role_ids": [1] };
+  user_profile = {"id": user1.id,"first_name": user1.get('firstName'), "last_name": user1.get('lastName'), "mobile": user1.get('mobile'), "user_role_ids": [userRole.get('id')] };
   $.mockjax({url:"/api/v1/auth/current_user_profil*",
       responseText: {
         user_profile: user_profile

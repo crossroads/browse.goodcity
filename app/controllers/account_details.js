@@ -100,6 +100,11 @@ export default Ember.Controller.extend({
       var bookAppointment = this.get('bookAppointment');
       new AjaxPromise(url, actionType, this.get('session.authToken'), { organisations_user: this.organisationsUserParams()} ).then(data => {
         this.get("store").pushPayload(data);
+        if(!(this.get('session.currentUser').hasRole('Charity')) && data.users.length && data.users[0]['user_roles_ids']){
+          data.users[0]['user_roles_ids'].forEach(id => {
+            this.store.findRecord('user_role', id);
+          });
+        }
         this.redirectToTransitionOrBrowse(bookAppointment);
       }).catch(xhr => {
         this.get("messageBox").alert(xhr.responseJSON.errors);
