@@ -8,7 +8,7 @@ export default Ember.Component.extend({
       validateInputs();
       validateForm();
       validateRequestForm();
-      validateRequestInputs()
+      validateRequestInputs();
       validateCheckCheckBoxInput();
     });
 
