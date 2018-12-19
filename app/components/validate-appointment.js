@@ -7,47 +7,8 @@ export default Ember.Component.extend({
     Ember.run.scheduleOnce('afterRender', this, function(){
       validateInputs();
       validateForm();
-      validateRequestForm();
-      validateRequestInputs();
       validateCheckCheckBoxInput();
     });
-
-    function validateRequestInputs(){
-      Ember.$('#people-count').focusout(function(){
-        return checkInput(this);
-      });
-
-      Ember.$('#people-count').focus(function(){
-        return removeHighlight(this);
-      });
-
-      Ember.$('#description').focusout(function(){
-        return checkInput(this);
-      });
-
-      Ember.$('#description').focus(function(){
-        return removeHighlight(this);
-      });
-
-      Ember.$('.district-selector select').focusout(function(){
-        return checkSelect(this);
-      });
-
-      Ember.$('.district-selector select').focus(function(){
-        return removeHighlight(this);
-      });
-    }
-
-    function checkSelect(element){
-      var parent = Ember.$(element).parent();
-      var value = Ember.$(element).val();
-
-      if(value === "") {
-        parent.addClass('form__control--error');
-      } else {
-        parent.removeClass('form__control--error');
-      }
-    }
 
     function validateForm(){
       Ember.$('.appointment').click(function(){
@@ -56,15 +17,6 @@ export default Ember.Component.extend({
         });
         checkCheckBoxInput(Ember.$('.checkbox input')[0]);
 
-        if(Ember.$('.form__control--error').length > 0) { return false; }
-      });
-    }
-
-    function validateRequestForm(){
-      Ember.$('#request-submit').click(function(){
-        checkInput('#people-count');
-        checkSelect('.district-selector select');
-        checkInput('#description');
         if(Ember.$('.form__control--error').length > 0) { return false; }
       });
     }
