@@ -139,7 +139,6 @@
 
   .description-of-need {
     .description {
-      margin-top: 1rem !important;
       margin-bottom: 0.2rem;
     }
     .reason-of-need{
@@ -160,10 +159,13 @@
     }
     .remove-text{
       position: absolute;
-      right: 0.8%;
+      right: 1%;
+      top: 64%;
       @media #{$small-only}{
         right: 3%;
-        top: auto;
+      }
+      @media #{$medium-only}{
+        top: 62%;
       }
       font-size: 1rem;
       padding: 4.4rem 0.3rem;
@@ -198,13 +200,9 @@
     font-size: 0.9em;
   }
 }
-#district_label{
-  font-size: .8rem;
-  margin-bottom: .5rem;
-}
 
-.district-select{
-  select{
+.district-select {
+  #district-select-dropdown{
     @media #{$small-only}{
       margin-left: -5px;
     }
@@ -214,4 +212,12 @@
     color: #a3aab6;
     max-width: unset;
   }
+  .district-label {
+    margin-bottom: 0.2rem;
+  }
+  .district-label-info{
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+  }
 }
+
