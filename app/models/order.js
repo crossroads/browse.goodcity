@@ -17,11 +17,13 @@ export default Model.extend({
   createdAt:        attr('date'),
   updatedAt:        attr('date'),
   detailType:       attr('string'),
+  districtId:       attr('number'),
   ordersPurposes:     hasMany('ordersPurpose', { async: false }),
   beneficiaryId: attr('number'),
   beneficiary: belongsTo('beneficiary', { async: false }),
   peopleHelped: attr('number'),
   goodcityRequests:   hasMany('goodcity_request', { async: false }),
+  district: belongsTo('district', {async: false}),
 
   isGoodCityOrder: Ember.computed.equal('detailType', 'GoodCity'),
   isDraft: Ember.computed.equal("state", "draft"),
