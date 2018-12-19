@@ -1,0 +1,16 @@
+.your-detail {
+  .detail {
+    color: white;
+  }
+
+  .info {
+    margin-bottom: 0.5rem;
+  }
+
+  h1 {
+    font-size: 1.125rem;
+    @media #{$small-only} {
+      font-size: 0.9rem;
+    }
+  }
+}

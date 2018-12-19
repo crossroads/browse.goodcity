@@ -1,3 +1,6 @@
+{{#if isMobileApp}}
+  {{scroll-to-bottom customClass="confirm-booking-detail-info-scroll-arrow"}}
+{{/if}}
 <div class="row">
   <div class="large-8 columns large-offset-2 medium-offset-1 medium-10 small-12 book">
     <div class="row checkout_pages">
@@ -17,14 +20,41 @@
 
     <section class="main-section client-information large-10 large-offset-1 medium-10 small-10 small-offset-1 medium-offset-1">
       <div class="small-12 columns type-of-id-text">
-        {{t "order.confirm_booking.submit_order"}}
+        {{t "order.confirm_booking.info"}}
       </div>
       <br>
       <br>
       <div class="row">
         <div class="small-12 columns">
           <button id="submit_pin" class="button expand drop_off" {{action 'confirmBooking' order}}>
-            {{t "order.submit_this_order"}}
+            {{t "order.confirm_booking.submit_order"}}
+          </button>
+        </div>
+      </div>
+    </section>
+
+    {{!-- User details section --}}
+    {{partial "order/user_details"}}
+
+    {{!-- Request purpose details section --}}
+    {{partial "order/request_purpose_detail"}}
+
+    {{!-- Client information details section --}}
+    {{#if order.beneficiaryId}}
+      {{partial "order/client_info_detail"}}
+    {{/if}}
+
+    {{!-- Goods details section --}}
+    {{partial "order/goods_detail"}}
+
+    {{!-- Appointment details section --}}
+    {{partial "order/appointment_detail"}}
+
+    <section class="main-section client-information large-10 large-offset-1 medium-10 medium-offset-1 small-12">
+      <div class="row">
+        <div class="small-12 columns">
+          <button id="confirm_booking_button" class="button expand drop_off" {{action 'confirmBooking' order}}>
+            {{t "order.confirm_booking.submit_order"}}
           </button>
         </div>
       </div>

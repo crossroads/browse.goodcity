@@ -3,7 +3,7 @@ import { test, moduleForModel } from 'ember-qunit';
 
 moduleForModel('order', {
   needs: ['model:orders_package', 'model:order_transport', 'model:user', 'model:organisation', 'model:address', 'model:organisations-user',
-    'model:package', 'model:item', 'model:package-type', 'model:image', 'model:donor-condition', 'model:user-role', 'model:role', 'model:orders-purpose']
+    'model:package', 'model:item', 'model:package-type', 'model:image', 'model:donor-condition', 'model:user-role', 'model:role', 'model:orders-purpose', 'service:i18n']
 });
 
 test('Relationship with other models', function(assert){
