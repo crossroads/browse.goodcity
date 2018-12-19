@@ -160,12 +160,10 @@
     .remove-text{
       position: absolute;
       right: 1%;
-      top: 64%;
+      top: 62%;
       @media #{$small-only}{
         right: 3%;
-      }
-      @media #{$medium-only}{
-        top: 62%;
+        top: 64%;
       }
       font-size: 1rem;
       padding: 4.4rem 0.3rem;

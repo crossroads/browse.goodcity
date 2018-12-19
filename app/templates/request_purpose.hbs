@@ -23,7 +23,9 @@
             </section>
             <div class="row inner-section">
               <section class="main-section request-purpose medium-10 medium-offset-1 large-10 large-offset-1 small-10 small-offset-1 columns">
-              {{#validate-request-purpose}}
+              {{#validate-request-purpose
+                elementArray='["#people-count", "#description", ".district-selector select"]'
+              }}
                 {{#validatable-form onSubmit=(action 'createOrderWithRequestPurpose') as |form|}}
                   <div class="small-12 columns">
                     {{t 'order.request_purpose.purpose'}}
