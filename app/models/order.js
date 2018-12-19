@@ -31,7 +31,6 @@ export default Model.extend({
   isClosed: Ember.computed.equal("state", "closed"),
   isProcessing: Ember.computed.equal("state", "processing"),
   isCancelled: Ember.computed.equal("state", "cancelled"),
-  session: Ember.inject.service(),
   i18n: Ember.inject.service(),
 
   orderItems: Ember.computed('ordersPackages.[]', function() {
