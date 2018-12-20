@@ -400,9 +400,9 @@ export default {
       "for_client": "予服務對象",
       "people_count_info": "多少人會從這些物品中受惠？",
       "people_count_warning": "您必須在這裡輸入一個數字",
-      "district_label": "Where in Hong Kong will these goods be primarily used?",
-      "district-label-info": "This assists us with our reporting.",
-      "select_placeholder": "Select District",
+      "district_label": "這些物資將在香港哪區使用?",
+      "district-label-info": "此項能協助我們作出準確的紀錄及數據",
+      "select_placeholder": "請選擇區域",
       "need_description": "描述申請需求",
       "need_description_info": "請簡述申請貨物的原因。",
       "description_warning": "抱歉，描述的位置不能留空。"
