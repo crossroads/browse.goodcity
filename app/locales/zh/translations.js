@@ -466,6 +466,7 @@ export default {
       },
       "goods_detail": {
         "title": "Goods Details",
+        "no_description": "No description provided",
       },
       "appointment_detail": {
         "title": "Appointment Details",

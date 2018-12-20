@@ -11,7 +11,11 @@
         {{request.packageType.name}}
       </div>
       <div class="small-5 detail columns">
-        {{request.description}}
+        {{#if request.description}}
+         {{request.description}}
+        {{else}}
+          <i>{{t "order.confirm_booking.goods_detail.no_description"}}</i>
+        {{/if}}
       </div>
       <div class="small-2 detail columns">
         {{request.quantity}}
