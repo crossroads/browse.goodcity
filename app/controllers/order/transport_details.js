@@ -235,7 +235,9 @@ export default applicationController.extend({
         scheduled_at:   selectedDateSlot,
         timeslot:       slotName,
         transport_type: transportType,
-        order_id:       this.get("order.id") };
+        order_id:       this.get("order.id"),
+        booking_type_id: this.store.peekAll('booking_type').filterBy('identifier', 'online-order').get('firstObject.id') 
+      };
 
       this.saveTransport(order, scheduleDetails)
           .then(() => {

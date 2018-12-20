@@ -5,6 +5,7 @@ import attr from "ember-data/attr";
 export default Model.extend({
   nameEn: attr("string"),
   nameZh: attr("string"),
+  identifier: attr("string"),
 
   isAppointment: Ember.computed("nameEn", function() {
     const name = this.get('nameEn') && this.get('nameEn').toLowerCase();
