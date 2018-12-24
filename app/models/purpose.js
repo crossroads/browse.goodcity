@@ -13,6 +13,7 @@ export default Model.extend({
 
   nameEn: attr('string'),
   nameZhTw: attr('string'),
+  identifier: attr('string'),
 
   description: Ember.computed('nameEn', function () {
     const name = this.get('nameEn');
