@@ -236,6 +236,7 @@ export default applicationController.extend({
         timeslot:       slotName,
         transport_type: transportType,
         order_id:       this.get("order.id"),
+        order_type: 'online-order',
         booking_type_id: this.store.peekAll('booking_type').filterBy('identifier', 'online-order').get('firstObject.id') 
       };
 

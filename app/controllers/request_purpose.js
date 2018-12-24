@@ -48,20 +48,17 @@ export default Ember.Controller.extend({
         purpose_description: this.get('description'),
         state: "draft",
         purpose_ids: purposeIds,
+        order_type: 'appointment',
         people_helped: this.get('peopleCount'),
         district_id: this.get('selectedDistrict.id')
       };
 
-      const orderId = this.get("orderId");
-      let order;
+      let order = this.get('model');
       let url = "/orders";
       let actionType = "POST";
-      if(orderId) {
-        order = this.get("store").peekRecord("order", orderId);
-        if(order) {
-          url = "/orders/" + orderId;
-          actionType = "PUT";
-        }
+      if(order) {
+        url = "/orders/" + order.get('id');
+        actionType = "PUT";
       }
 
       var loadingView = getOwner(this).lookup('component:loading').append();

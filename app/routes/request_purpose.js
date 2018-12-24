@@ -18,7 +18,13 @@ export default AuthorizeRoute.extend({
     const orderId = transition.queryParams.orderId;
     if(orderId && orderId.length && transition.queryParams.editRequest === "true") {
       this.set("order", this.store.peekRecord("order", orderId));
+    } else if (!(this.get('previousRouteName') === 'my_orders')){
+      this.set("order", this.store.peekAll("order").filterBy("detailType", "GoodCity").filterBy("state", "draft").filterBy('orderType', 'appointment').get("firstObject"));
     }
+  },
+
+  model(){
+    return this.get('order');
   },
 
   setUpFormData(model, controller) {
