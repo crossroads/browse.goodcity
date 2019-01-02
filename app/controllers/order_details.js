@@ -70,6 +70,7 @@ export default applicationController.extend({
         purpose_description: description,
         state: "draft",
         purpose_ids: purpose_ids,
+        order_type: 'online-order',
         cart_package_ids: package_ids
       };
 

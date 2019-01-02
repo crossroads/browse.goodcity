@@ -8,6 +8,7 @@ export default Model.extend({
   code: attr('string'),
   state: attr('string'),
   purposeDescription: attr('string'),
+  orderType: attr('string'),
   ordersPackages: hasMany("orders_packages", { async: false }),
   orderTransportId: attr('string'),
   orderTransport: belongsTo('order_transport', { async: false }),

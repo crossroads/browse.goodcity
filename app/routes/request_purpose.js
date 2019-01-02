@@ -16,19 +16,31 @@ export default AuthorizeRoute.extend({
     }
 
     const orderId = transition.queryParams.orderId;
+    const isMyOrdersPreviousRoute = this.get('previousRouteName') === 'my_orders';
     if(orderId && orderId.length && transition.queryParams.editRequest === "true") {
       this.set("order", this.store.peekRecord("order", orderId));
+    } else if (!isMyOrdersPreviousRoute){
+      const sortedOrders = this.store.peekAll('order').sortBy('id');
+      this.set("order", sortedOrders.filterBy("detailType", "GoodCity").filterBy("state", "draft").filterBy('orderType', 'appointment').get("lastObject"));
     }
+  },
+
+  model(){
+    return this.get('order');
   },
 
   setUpFormData(model, controller) {
     let order = this.get("order");
-    controller.set('selectedId', "organisation");
+    
     controller.set('isEditing', false);
 
     if(order) {
-      if(order.get("beneficiaryId")) {
-        controller.set('selectedId', "client");
+      let ordersPurposes = order.get('ordersPurposes');
+
+      if(ordersPurposes.get('length')){
+        controller.set('selectedId', ordersPurposes.get('firstObject').get('purpose.identifier'));
+      } else{
+        controller.set('selectedId',  "organisation");
       }
 
       if(this.get("previousRouteName") === "my_orders") {
@@ -37,6 +49,7 @@ export default AuthorizeRoute.extend({
         this.controllerFor('my_orders').set("selectedOrder", null);
       }
 
+      controller.set('selectedDistrict', order.get('district'));
       controller.set('peopleCount', order.get("peopleHelped"));
       controller.set('description', order.get("purposeDescription"));
       controller.set('isEditing', true);
