@@ -109,6 +109,7 @@ export default applicationController.extend({
         {
           queryParams: {
             orderId: orderId,
+            bookAppointment: false,
             editRequest: true
           }
         });
