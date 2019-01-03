@@ -46,7 +46,6 @@ export default Ember.Controller.extend({
       var orderParams = {
         organisation_id: user_organisation_id,
         purpose_description: this.get('description'),
-        state: "draft",
         purpose_ids: purposeIds,
         order_type: 'appointment',
         people_helped: this.get('peopleCount'),
