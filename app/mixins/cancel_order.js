@@ -16,6 +16,7 @@ export default Ember.Mixin.create({
         _this.store.unloadRecord(order);
       }
       loadingView.destroy();
+      _this.set("showCancelBookingPopUp", false);
       _this.transitionToRoute("home");
     });
   },
