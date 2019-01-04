@@ -69,7 +69,7 @@ export default AuthorizeRoute.extend({
     controller.set("previousRouteName", this.get("previousRouteName"));
     this.setUpFormData(model, controller, transition);
     this.controllerFor('application').set('showSidebar', false);
-    this.set('order', null);
+    controller.set("model", this.get('order'));
   },
 
   deactivate() {
