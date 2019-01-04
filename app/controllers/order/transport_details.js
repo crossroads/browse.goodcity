@@ -303,7 +303,7 @@ export default applicationController.extend({
       this.saveTransport(order, requestProperties)
           .then((data) => {
             let contactId = this.get('order.orderTransport.contact.id');
-            let address = _.find(data.addresses, ['addressable_id.id', contactId])
+            let address = _.find(data.addresses, ['addressable_id.id', contactId]);
             return address && this.saveAddressToOrder(address.id);
           })
           .then(() => {
