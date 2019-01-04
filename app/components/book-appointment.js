@@ -15,11 +15,11 @@ export default Ember.Component.extend({
 
 	actions: {
 	  redirectAsPerUserDetails(){
-      if(this.isDetailsComplete()){
-        this.get('router').transitionTo("request_purpose", { queryParams: { orderId: null } });
+      if(this.isDetailsComplete()){   
+        this.get('router').transitionTo("request_purpose", { queryParams: { bookAppointment: true, orderId: null }});
       }
       else{
-        this.get('router').transitionTo("account_details", { queryParams: { bookAppointment: true } });
+        this.get('router').transitionTo("account_details", { queryParams: { bookAppointment: true }});
       }
     }
 	}

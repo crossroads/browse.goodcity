@@ -4,6 +4,7 @@ export default AuthorizeRoute.extend({
   orderId: null,
   order: null,
   previousRouteName: null,
+  isBookAppointment: null,
 
   beforeModel(transition) {
     this._super(...arguments);
@@ -15,11 +16,14 @@ export default AuthorizeRoute.extend({
       this.set("previousRouteName", previousRoute.name);
     }
 
+    if(transition.queryParams.bookAppointment === 'true'){
+      this.set('isBookAppointment', true);
+    }
+
     const orderId = transition.queryParams.orderId;
-    const isMyOrdersPreviousRoute = this.get('previousRouteName') === 'my_orders';
-    if(orderId && orderId.length && transition.queryParams.editRequest === "true") {
+    if(orderId && orderId.length && !this.get('isBookAppointment')) {
       this.set("order", this.store.peekRecord("order", orderId));
-    } else if (!isMyOrdersPreviousRoute){
+    } else if ( transition.queryParams.bookAppointment === 'true'){
       const sortedOrders = this.store.peekAll('order').sortBy('id');
       this.set("order", sortedOrders.filterBy("detailType", "GoodCity").filterBy("state", "draft").filterBy('orderType', 'appointment').get("lastObject"));
     }
@@ -43,7 +47,7 @@ export default AuthorizeRoute.extend({
         controller.set('selectedId',  "organisation");
       }
 
-      if(this.get("previousRouteName") === "my_orders") {
+      if(this.get("previousRouteName") === "my_orders" && !this.get('isBookAppointment')) {
         this.controllerFor('my_orders').set("selectedOrder", order);
       } else {
         this.controllerFor('my_orders').set("selectedOrder", null);
@@ -53,15 +57,19 @@ export default AuthorizeRoute.extend({
       controller.set('peopleCount', order.get("peopleHelped"));
       controller.set('description', order.get("purposeDescription"));
       controller.set('isEditing', true);
+    } else {
+      controller.set('selectedDistrict', null);
+      controller.set('peopleCount', null);
+      controller.set('description', null);
     }
   },
 
-  setupController(controller, model) {
+  setupController(controller, model, transition) {
     this._super(...arguments);
     controller.set("previousRouteName", this.get("previousRouteName"));
-    this.setUpFormData(model, controller);
+    this.setUpFormData(model, controller, transition);
     this.controllerFor('application').set('showSidebar', false);
-    this.get('order', null);
+    controller.set("model", this.get('order'));
   },
 
   deactivate() {

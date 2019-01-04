@@ -8,11 +8,12 @@ export default Ember.Controller.extend(cancelOrder, {
   showCancelBookingPopUp: false,
   isMobileApp: config.cordova.enabled,
   myOrders: Ember.inject.controller(),
-  queryParams: ["orderId", "editRequest"],
+  queryParams: ["orderId", "editRequest", "bookAppointment"],
   editRequest: null,
   previousRouteName: null,
   orderId: null,
   isEditing: false,
+  bookAppointment: false,
   peopleCount: null,
   description: "",
   order: Ember.computed.alias("model"),
@@ -74,7 +75,7 @@ export default Ember.Controller.extend(cancelOrder, {
           var purpose_ids = data.orders_purposes.filterBy("order_id", data.order.id).getEach("purpose_id");
           isOrganisationPuropose = purpose_ids.get('length') === 1 && purpose_ids.indexOf(1) >= 0;
           loadingView.destroy();
-          if(this.get("previousRouteName") === "my_orders") {
+          if(this.get("previousRouteName") === "my_orders" && !this.get('bookAppointment')) {
             this.get("myOrders").set("selectedOrder", this.get("store").peekRecord("order", orderId));
             this.transitionToRoute('my_orders');
           } else if(isOrganisationPuropose) {
