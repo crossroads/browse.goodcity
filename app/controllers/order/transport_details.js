@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import AjaxPromise from './../../utils/ajax-promise';
 import applicationController from './../application';
+import _ from 'lodash';
 const { getOwner } = Ember;
 
 export default applicationController.extend({
@@ -213,7 +214,7 @@ export default applicationController.extend({
   actions: {
     bookSchedule() {
       var cartEmpty = this.isCartEmpty("order.transport_details_pop_up");
-      if(cartEmpty) { 
+      if(cartEmpty) {
         return false;
       }
       var order = this.get("store").peekAll("order").filterBy("detailType", "GoodCity").filterBy("state", "draft").get("firstObject");
@@ -221,7 +222,7 @@ export default applicationController.extend({
         Ember.$('.time_selector').addClass('form__control--error');
         return false;
       }
-      
+
       Ember.$('.time_selector').removeClass('form__control--error');
       this.set('displayUserPrompt', false);
       var loadingView       = getOwner(this).lookup('component:loading').append();
@@ -237,7 +238,7 @@ export default applicationController.extend({
         transport_type: transportType,
         order_id:       this.get("order.id"),
         order_type: 'online-order',
-        booking_type_id: this.store.peekAll('booking_type').filterBy('identifier', 'online-order').get('firstObject.id') 
+        booking_type_id: this.store.peekAll('booking_type').filterBy('identifier', 'online-order').get('firstObject.id')
       };
 
       this.saveTransport(order, scheduleDetails)
@@ -260,7 +261,7 @@ export default applicationController.extend({
       }
 
       var cartEmpty = this.isCartEmpty("order.transport_details_pop_up");
-      if(cartEmpty) { 
+      if(cartEmpty) {
         return false;
       }
 
@@ -269,7 +270,7 @@ export default applicationController.extend({
         Ember.$('.time_selector').addClass('form__control--error');
         return false;
       }
-      
+
       // Request
       Ember.$('.time_selector').removeClass('form__control--error');
       this.set('displayUserPrompt', false);
@@ -303,9 +304,10 @@ export default applicationController.extend({
       }
 
       this.saveTransport(order, requestProperties)
-          .then(() => {
-            const addressId = this.get('order.orderTransport.contact.address.id');
-            return this.saveAddressToOrder(addressId);
+          .then((data) => {
+            let contactId = this.get('order.orderTransport.contact.id');
+            let address = _.find(data.addresses, ['addressable_id.id', contactId])
+            return address && this.saveAddressToOrder(address.id);
           })
           .then(() => {
             loadingView.destroy();
