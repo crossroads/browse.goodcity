@@ -12,11 +12,11 @@ export default Ember.Component.extend({
 
     return hasInfoAndCharityRole && organisation && hasCompleteOrganisationUserInfo;
   },
-  
+
 	actions: {
 	  redirectAsPerUserDetails(){
       if(this.isDetailsComplete()){   
-        this.get('router').transitionTo("request_purpose", { queryParams: { bookAppointment: true }});
+        this.get('router').transitionTo("request_purpose", { queryParams: { bookAppointment: true, orderId: null }});
       }
       else{
         this.get('router').transitionTo("account_details", { queryParams: { bookAppointment: true }});

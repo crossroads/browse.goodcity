@@ -1,7 +1,22 @@
-<div class="row order_button">
-  <div class="small-4 columns">
-  </div>
-  <div class="small-8 columns cancel_order">
-    <a href="#" id="cancel_order" class="drop_off" {{action 'cancelOrderPopUp' order.id}}><u>{{t "order.cancel_order"}}</u></a>
-  </div>
-</div>
+{{#message-box  isVisible=showCancelBookingPopUp classNames="popupOverlay cancel-appointment"}}
+  {{#if (is-and order order.isDraft)}}
+    <p class="cancel-booking-warning">{{t "cancel_booking.draft_cancel_booking_warning"}}</p>
+  {{else}}
+    <p class="cancel-booking-warning">{{t "cancel_booking.cancel_booking_warning"}}</p>
+    <p>{{t "cancel_booking.cancel_booking_info"}}</p>
+    <p>{{t "cancel_booking.cancel_booking_reason_title"}}</p>
+    {{auto-resize-textarea data-autoresize=true name="cancellation-reason" required="required" pattern=".*\S.*" id=(concat "cancel-appointment-reason" order.id)}}
+  {{/if}}
+    <div class="row cancel-appointment-buttons">
+      <div class="small-6 medium-6 large-6 columns">
+        <a {{action 'removePopUp'}} class="button expand">
+          {{t 'not_now'}}
+        </a>
+      </div>
+      <div class="small-6 medium-6 large-6 columns">
+        <a {{action 'cancelOrder'}} class="button expand">
+          {{t 'cancel_booking.title'}}
+        </a>
+      </div>
+    </div>
+{{/message-box}}
