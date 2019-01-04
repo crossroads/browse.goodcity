@@ -8,7 +8,7 @@
       <div class="small-12">
         <section class="main-section new-user-section ui login_page book_appointment_headers">
           <nav class="tab-bar">
-            <section class="left-large">
+            <section class="left-large inline-content">
               {{fa-icon "angle-left"}}
               {{#if (is-equal previousRouteName "my_orders")}}
                 {{#link-to 'my_orders' classNames="back"}}{{t "back"}}{{/link-to}}
@@ -18,6 +18,9 @@
             </section>
              <section class="middle tab-bar-section">
               <h1 class="title"> {{t 'order.appointment.title'}} </h1>
+            </section>
+            <section {{action "cancelBookingPopUp"}} id="cancel-booking-link" class="right-large inline-content right-align">
+              {{t "cancel"}}
             </section>
           </nav>
         </section>
@@ -154,3 +157,4 @@
     </div>
   </div>
 </div>
+{{partial "order/cancel_order"}}

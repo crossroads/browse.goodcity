@@ -224,6 +224,7 @@ export default {
   "cancel_booking": {
     "title": "Cancel Booking",
     "cancel_booking_warning": "Cancel this booking?",
+    "draft_cancel_booking_warning": "This will permanently remove all information associated with this booking.",
     "cancel_booking_info": "This will cancel booking and all associated request for goods.",
     "cancel_booking_reason_title": "Reason for canceling order"
   },

@@ -2,8 +2,9 @@ import Ember from "ember";
 const { getOwner } = Ember;
 import AjaxPromise from 'browse/utils/ajax-promise';
 import config from "../../config/environment";
+import cancelOrder from '../../mixins/cancel_order';
 
-export default Ember.Controller.extend({
+export default Ember.Controller.extend(cancelOrder, {
   queryParams: ["typeId", "fromClientInformation"],
   isMobileApp: config.cordova.enabled,
   order: Ember.computed.alias("model"),
@@ -17,7 +18,6 @@ export default Ember.Controller.extend({
   hasNoGcRequests: Ember.computed("model.goodcityRequests", function() {
     return (!this.get('model.goodcityRequests').length);
   }),
-
 
   actions: {
   	addRequest(){
