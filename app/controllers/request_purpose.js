@@ -5,6 +5,7 @@ import config from "../config/environment";
 import cancelOrder from '../mixins/cancel_order';
 
 export default Ember.Controller.extend(cancelOrder, {
+  showCancelBookingPopUp: false,
   isMobileApp: config.cordova.enabled,
   myOrders: Ember.inject.controller(),
   queryParams: ["orderId", "editRequest"],

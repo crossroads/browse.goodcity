@@ -4,6 +4,7 @@ const { getOwner } = Ember;
 import config from "../config/environment";
 
 export default Ember.Controller.extend({
+  showCancelBookingPopUp: false,
   queryParams: ['orgId', 'bookAppointment'],
 
   authenticate:Ember.inject.controller(),

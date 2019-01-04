@@ -4,6 +4,7 @@ const { getOwner } = Ember;
 import cancelOrder from '../../mixins/cancel_order';
 
 export default Ember.Controller.extend(cancelOrder, {
+  showCancelBookingPopUp: false,
   order: Ember.computed.alias("model.order"),
   orderTransport: Ember.computed.alias('model.orderTransport'),
   myOrders: Ember.inject.controller(),

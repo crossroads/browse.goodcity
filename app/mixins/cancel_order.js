@@ -3,8 +3,6 @@ const { getOwner } = Ember;
 import AjaxPromise from 'browse/utils/ajax-promise';
 
 export default Ember.Mixin.create({
-  showCancelBookingPopUp: false,
-
   deleteOrder(order) {
     var _this = this;
     var loadingView = getOwner(this).lookup('component:loading').append();

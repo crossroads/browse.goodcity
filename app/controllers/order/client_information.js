@@ -5,6 +5,7 @@ const { getOwner } = Ember;
 import cancelOrder from '../../mixins/cancel_order';
 
 export default Ember.Controller.extend(cancelOrder, {
+  showCancelBookingPopUp: false,
   isMobileApp: config.cordova.enabled,
   previousRouteName: null,
   firstName: null,
