@@ -226,6 +226,17 @@
   border-color: #f34d4f;
 }
 
+.inline-content {
+  display: inline-block;
+}
+
+.right-align {
+  float: right;
+  cursor: pointer;
+  margin-right: 0.5rem;
+  text-decoration: underline;
+}
+
 .empty-cart-message{
   padding-left: 7px !important;
   font-size:1rem !important;

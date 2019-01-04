@@ -56,6 +56,11 @@ export default Model.extend({
     return editableStates.indexOf(this.get("state")) >= 0;
   }),
 
+  isCancelAllowed: Ember.computed('state', function() {
+    let cancellableStates = ["submitted", "processing", "restart_process", "awaiting_dispatch"];
+    return cancellableStates.indexOf(this.get("state")) >= 0;
+  }),
+
   clientIdType: Ember.computed("beneficiary", "beneficiary.identityType", function() {
     return this.get("beneficiary.identityType.name");
   }),

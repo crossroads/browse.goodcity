@@ -2,8 +2,9 @@ import Ember from "ember";
 import AjaxPromise from 'browse/utils/ajax-promise';
 const { getOwner } = Ember;
 import config from "../config/environment";
+import cancelOrder from '../mixins/cancel_order';
 
-export default Ember.Controller.extend({
+export default Ember.Controller.extend(cancelOrder, {
   isMobileApp: config.cordova.enabled,
   myOrders: Ember.inject.controller(),
   queryParams: ["orderId", "editRequest"],
@@ -13,6 +14,7 @@ export default Ember.Controller.extend({
   isEditing: false,
   peopleCount: null,
   description: "",
+  order: Ember.computed.alias("model"),
   selectedId: null,
   isSelfSelected: Ember.computed.equal("selectedId", "organisation"),
   user: Ember.computed.alias('session.currentUser'),
