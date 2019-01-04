@@ -16,8 +16,12 @@ export default AuthorizeRoute.extend({
       this.set("previousRouteName", previousRoute.name);
     }
 
+    if(transition.queryParams.bookAppointment === 'true'){
+      this.set('isBookAppointment', true);
+    }
+
     const orderId = transition.queryParams.orderId;
-    if(orderId && orderId.length && transition.queryParams.editRequest === "true") {
+    if(orderId && orderId.length && !this.get('isBookAppointment')) {
       this.set("order", this.store.peekRecord("order", orderId));
     } else if ( transition.queryParams.bookAppointment === 'true'){
       const sortedOrders = this.store.peekAll('order').sortBy('id');
@@ -29,12 +33,10 @@ export default AuthorizeRoute.extend({
     return this.get('order');
   },
 
-  setUpFormData(model, controller, transition) {
+  setUpFormData(model, controller) {
     let order = this.get("order");
     
     controller.set('isEditing', false);
-
-    const isBookAppointment = transition.queryParams.bookAppointment === 'true';
 
     if(order) {
       let ordersPurposes = order.get('ordersPurposes');
@@ -45,7 +47,7 @@ export default AuthorizeRoute.extend({
         controller.set('selectedId',  "organisation");
       }
 
-      if(this.get("previousRouteName") === "my_orders" && !isBookAppointment) {
+      if(this.get("previousRouteName") === "my_orders" && !this.get('isBookAppointment')) {
         this.controllerFor('my_orders').set("selectedOrder", order);
       } else {
         this.controllerFor('my_orders').set("selectedOrder", null);
