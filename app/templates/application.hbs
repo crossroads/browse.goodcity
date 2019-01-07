@@ -5,7 +5,7 @@
   {{#app-canvas}}
     <div class="row application-layout">
       <div class="large-12 medium-12 columns collapse no-padding" id="content">
-        <div class="{{if showSidebar 'off-canvas-wrap move-right' ''}} {{if hasCartItems 'move-left' ''}}" data-offcanvas>
+        <div class="{{if moveSidebarToRight 'off-canvas-wrap move-right' ''}} {{if (is-and (is-not isMobileApp) hasCartItems) 'move-left' ''}}" data-offcanvas>
           <div class="inner-wrap">
             {{#if showSidebar}}
               {{partial "sidebar"}}
