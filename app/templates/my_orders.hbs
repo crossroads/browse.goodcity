@@ -3,7 +3,7 @@
     <div class="title show-for-medium-up">{{t "my_orders.my_orders"}}</div>
   {{/unless}}
     <div class="small-12 columns content">
-      {{#if selectedOrder}}
+      {{#if (is-and selectedOrder (is-not selectedOrder.isDraft))}}
         <div class="order-summary {{selectedOrder.state}}">
           {{partial "order/summary"}}
         </div>

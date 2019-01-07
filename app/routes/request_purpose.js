@@ -21,7 +21,7 @@ export default AuthorizeRoute.extend({
     }
 
     const orderId = transition.queryParams.orderId;
-    if(orderId && orderId.length && !this.get('isBookAppointment')) {
+    if(orderId && orderId.length) {
       this.set("order", this.store.peekRecord("order", orderId));
     } else if ( transition.queryParams.bookAppointment === 'true'){
       const sortedOrders = this.store.peekAll('order').sortBy('id');
