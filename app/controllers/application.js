@@ -12,6 +12,7 @@ export default Ember.Controller.extend({
   loggedInUser: false,
   i18n: Ember.inject.service(),
   showSidebar: true,
+  moveSidebarToRight: true,
 
   initSubscription: Ember.on('init', function() {
     this.get('subscription').send('wire');
