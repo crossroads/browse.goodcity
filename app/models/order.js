@@ -29,6 +29,8 @@ export default Model.extend({
 
   isGoodCityOrder: Ember.computed.equal('detailType', 'GoodCity'),
   isDraft: Ember.computed.equal("state", "draft"),
+  isAppointment: Ember.computed.equal('orderType', 'appointment'),
+  isOnlineOrder: Ember.computed.equal('orderType', 'online-order'),
   isSubmitted: Ember.computed.equal("state", "submitted"),
   isAwaitingDispatch: Ember.computed.equal("state", "awaiting_dispatch"),
   isDispatching: Ember.computed.equal("state", "dispatching"),
@@ -50,6 +52,14 @@ export default Model.extend({
       }
     });
     return items.uniq();
+  }),
+
+  isAppointmentDraft: Ember.computed('state', 'orderType', function(){
+    return this.get('isAppointment') && this.get('isDraft');
+  }),
+
+  isOnlineOrderDraft: Ember.computed('state', 'orderType', function(){
+    return this.get('isOnlineOrder') && this.get('isDraft');
   }),
 
   isEditAllowed: Ember.computed('state', function() {
