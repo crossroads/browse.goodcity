@@ -54,7 +54,7 @@ export default Ember.Controller.extend({
       this.clearHiglight();
     }
 
-    return types.sortBy("name").uniq();
+    return types.filterBy("allowRequests").sortBy("name").uniq();
   }),
 
   highlight() {
