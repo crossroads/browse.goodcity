@@ -63,7 +63,7 @@ export default AuthorizeRoute.extend({
   },
 
   setIsEditing(order, controller){
-    if(order.isDraft){
+    if(order.get('isDraft')){
       controller.set('isEditing', false);
     } else {
       controller.set('isEditing', true);
