@@ -1,5 +1,7 @@
 <div class="row my_orders">
-  <div class="title show-for-medium-up">{{t "my_orders.my_orders"}}</div>
+  {{#unless hideHeaderBar}}
+    <div class="title show-for-medium-up">{{t "my_orders.my_orders"}}</div>
+  {{/unless}}
     <div class="small-12 columns content">
       {{#if selectedOrder}}
         <div class="order-summary {{selectedOrder.state}}">

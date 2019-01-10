@@ -2,28 +2,24 @@
   <section class='main-section ui'>
     <h1 class="title hide-for-small">{{model.name}}</h1>
 
-    <div class="row">
+    <div class="filter-container">
       {{#if model.isParent}}
-        <div class="large-5 medium-8 small-12 columns">
-          <div class="row">
-            <div class="small-4 medium-5 large-4 columns">
-              {{t "category.filter"}}:
-            </div>
-            <div class="small-8 medium-7 large-8 columns filter-list">
-              {{select-list class="package-category" content=selectCategories on-change=(action (mut selectedCategoryId)) prompt=(t "category.all")}}
-            </div>
+        <div class="filter">
+          <div class="filter-label">
+            {{t "category.filter"}}:
+          </div>
+          <div class="filter-list">
+            {{select-list class="package-category" content=selectCategories on-change=(action (mut selectedCategoryId)) prompt=(t "category.all")}}
           </div>
         </div>
       {{/if}}
 
-      <div class="large-7 medium-4 small-12 columns end">
-        <div class="row">
-          <div class="small-4 medium-6 large-2 columns">
-            {{t "category.sort.title"}}:
-          </div>
-          <div class="small-8 medium-6 large-10 columns filter-list">
-            {{select-list class="package-category" content=sortOptions on-change=(action (mut selectedSort)) }}
-          </div>
+      <div class="filter">
+        <div class="filter-label">
+          {{t "category.sort.title"}}:
+        </div>
+        <div class="filter-list">
+          {{select-list class="package-category" content=sortOptions on-change=(action (mut selectedSort)) }}
         </div>
       </div>
     </div>
