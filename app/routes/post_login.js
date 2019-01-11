@@ -37,6 +37,10 @@ export default Ember.Route.extend(preloadDataMixin, {
           }
         });
 
+        if (!package_ids || !package_ids.length) {
+          return this.redirectToTransitionOrDetails();
+        }
+
         var orderParams = {
           cart_package_ids: package_ids
         };
