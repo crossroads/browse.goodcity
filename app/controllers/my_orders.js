@@ -15,6 +15,8 @@ export default applicationController.extend({
   previousRouteName: null,
   showCancelBookingPopUp: false,
   cancellationReasonWarning: false,
+  applicationController: Ember.inject.controller('application'),
+  hideHeaderBar: Ember.computed.alias("applicationController.hideHeaderBar"),
 
   getCategoryForCode: function (code) {
     const categories = this.get('model.packageCategories');
@@ -183,6 +185,7 @@ export default applicationController.extend({
     setOrder(order) {
       if (!order) {
         this.set('selectedOrder', null);
+        this.get('applicationController').set('hideHeaderBar', false);
         return;
       }
       // Request the order to load dependant associations
@@ -192,6 +195,7 @@ export default applicationController.extend({
         .then(record => {
           this.set('selectedOrder', record);
           this.set('selectedOrderTab', this.orderSummaryTabs[0]);
+          this.get('applicationController').set('hideHeaderBar', true);
         })
         .catch(() => {
           this.get("messageBox").alert();

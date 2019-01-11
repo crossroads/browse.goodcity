@@ -38,6 +38,7 @@ export default AuthorizeRoute.extend({
     controller.set("previousRouteName", this.get("previousRouteName"));
     controller.toggleProperty("triggerFlashMessage");
     this.controllerFor('application').set('pageTitle', this.get('i18n').t("my_orders.my_orders"));
+    this.controllerFor('application').set('hideHeaderBar', !!controller.get('selectedOrder'));
   },
 
   resetController: function(controller, isExiting) {
@@ -45,6 +46,7 @@ export default AuthorizeRoute.extend({
     if (isExiting) {
       controller.set('selectedOrder', null);
       this.controllerFor('application').set("pageTitle", this.get('i18n').t("browse.title"));
+      this.controllerFor('application').set('hideHeaderBar', false);
     }
   }
 });
