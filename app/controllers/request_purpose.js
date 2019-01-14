@@ -53,7 +53,8 @@ export default Ember.Controller.extend(cancelOrder, {
         purpose_ids: purposeIds,
         order_type: 'appointment',
         people_helped: this.get('peopleCount'),
-        district_id: this.get('selectedDistrict.id')
+        district_id: this.get('selectedDistrict.id'),
+        booking_type_id: this.store.peekAll('booking_type').filterBy('nameEn', 'appointment').get('firstObject.id')
       };
 
       let order = this.get('model');
