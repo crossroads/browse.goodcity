@@ -10,7 +10,6 @@ export default Model.extend({
   vehicleType:   attr('string'),
   scheduledAt:   attr('date'),
   orderId: attr('number'),
-  bookingType:   belongsTo('booking_type', { async: false }),
 
   contact:  belongsTo('contact', { async: false }),
   order:    belongsTo('order', { async: false }),
