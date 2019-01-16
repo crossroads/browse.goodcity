@@ -29,7 +29,6 @@ export default Ember.Controller.extend(cancelOrder, {
     orderTransportProperties.timeslot = this.get('selectedTimeId').substr(11, 5);
     orderTransportProperties.transport_type = this.get("selectedId");
     orderTransportProperties.order_id = this.get('order.id');
-    orderTransportProperties.booking_type_id = this.store.peekAll('booking_type').filterBy('nameEn', 'appointment').get('firstObject.id');
     return orderTransportProperties;
   },
 
