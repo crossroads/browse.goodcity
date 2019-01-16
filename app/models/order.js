@@ -1,4 +1,4 @@
-import Ember from 'ember';
+ import Ember from 'ember';
 import Model from 'ember-data/model';
 import attr from 'ember-data/attr';
 import { belongsTo, hasMany } from 'ember-data/relationships';
@@ -21,6 +21,7 @@ export default Model.extend({
   districtId:       attr('number'),
   ordersPurposes:     hasMany('ordersPurpose', { async: false }),
   beneficiaryId: attr('number'),
+  bookingTypeId: attr('number'),
   beneficiary: belongsTo('beneficiary', { async: false }),
   peopleHelped: attr('number'),
   goodcityRequests:   hasMany('goodcity_request', { async: false }),
@@ -29,8 +30,6 @@ export default Model.extend({
 
   isGoodCityOrder: Ember.computed.equal('detailType', 'GoodCity'),
   isDraft: Ember.computed.equal("state", "draft"),
-  isAppointment: Ember.computed.equal('orderType', 'appointment'),
-  isOnlineOrder: Ember.computed.equal('orderType', 'online-order'),
   isSubmitted: Ember.computed.equal("state", "submitted"),
   isAwaitingDispatch: Ember.computed.equal("state", "awaiting_dispatch"),
   isDispatching: Ember.computed.equal("state", "dispatching"),
@@ -38,6 +37,14 @@ export default Model.extend({
   isProcessing: Ember.computed.equal("state", "processing"),
   isCancelled: Ember.computed.equal("state", "cancelled"),
   i18n: Ember.inject.service(),
+
+  isAppointment: Ember.computed('bookingTypeId', function(){
+    return this.get('bookingType.isAppointment');
+  }),
+
+  isOnlineOrder: Ember.computed('bookingTypeId', function(){
+    return this.get('bookingType.isOnlineOrder');
+  }),
 
   orderItems: Ember.computed('ordersPackages.[]', function() {
     var items = [];

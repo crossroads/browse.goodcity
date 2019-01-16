@@ -7,8 +7,11 @@ export default Model.extend({
   nameZh: attr("string"),
   identifier: attr("string"),
 
-  isAppointment: Ember.computed("nameEn", function() {
-    const name = this.get('nameEn') && this.get('nameEn').toLowerCase();
-    return name === "appointment";
+  isAppointment: Ember.computed("identifier", function() {
+    return this.get('identifier') === "appointment";
+  }),
+
+  isOnlineOrder: Ember.computed('identifier', function(){
+    return this.get('identifier') === 'online-order';
   })
 });
