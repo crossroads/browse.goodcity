@@ -1,5 +1,4 @@
 <div class="order_block">
-
     <div class="row order_header">
       <div class="small-4 medium-0 large-4 columns order_transport"> 
         <i class="fa fa-lg fa-{{ order.transportIcon }}"></i> {{ order.transportLabel }}
@@ -16,7 +15,6 @@
         <div class="order_state_text"> {{ t (concat "my_orders." order.state) }} </div>
       </div>
     </div>
-
     <div class="row order_body">
       <div class="arrow-right">
         <i class="fa fa-chevron-right" aria-hidden="true"></i>
@@ -44,5 +42,4 @@
         </div>
       {{/if}}
     </div>
-
 </div>

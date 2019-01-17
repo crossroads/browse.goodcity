@@ -21,7 +21,7 @@ export default AuthorizeRoute.extend({
     }
 
     const orderId = transition.queryParams.orderId;
-    if(orderId && orderId.length && !this.get('isBookAppointment')) {
+    if(orderId && orderId.length) {
       this.set("order", this.store.peekRecord("order", orderId));
     } else if ( transition.queryParams.bookAppointment === 'true'){
       const sortedOrders = this.store.peekAll('order').sortBy('id');
@@ -36,8 +36,6 @@ export default AuthorizeRoute.extend({
   setUpFormData(model, controller) {
     let order = this.get("order");
     
-    controller.set('isEditing', false);
-
     if(order) {
       let ordersPurposes = order.get('ordersPurposes');
 
@@ -56,7 +54,7 @@ export default AuthorizeRoute.extend({
       controller.set('selectedDistrict', order.get('district'));
       controller.set('peopleCount', order.get("peopleHelped"));
       controller.set('description', order.get("purposeDescription"));
-      controller.set('isEditing', true);
+      this.setIsEditing(order, controller);
     } else {
       controller.set('selectedDistrict', null);
       controller.set('peopleCount', null);
@@ -64,9 +62,18 @@ export default AuthorizeRoute.extend({
     }
   },
 
+  setIsEditing(order, controller){
+    if(order.get('isDraft')){
+      controller.set('isEditing', false);
+    } else {
+      controller.set('isEditing', true);
+    }
+  },
+
   setupController(controller, model, transition) {
     this._super(...arguments);
     controller.set("previousRouteName", this.get("previousRouteName"));
+    controller.set('isEditing', false);
     this.setUpFormData(model, controller, transition);
     this.controllerFor('application').set('showSidebar', false);
     controller.set("model", this.get('order'));

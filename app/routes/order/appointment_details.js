@@ -33,16 +33,18 @@ export default AuthorizeRoute.extend({
     let orderTransport = model.orderTransport;
     let availableDatesAndTime = model.availableDatesAndtime;
     let slots = null;
+    let order = null;
     controller.set('isEditing', false);
     if (orderTransport){
       selectedId = orderTransport.get('transportType');
       selectedTime = orderTransport.get('timeslot');
       selectedDate = orderTransport.get("scheduledAt");
+      order = orderTransport.get('order');
       if(selectedDate) {
         slots = availableDatesAndTime.appointment_calendar_dates.filter( date => date.date === moment(selectedDate).format('YYYY-MM-DD'))[0].slots;
         selectedSlot = slots.filter(slot => slot.timestamp.indexOf(orderTransport.get("timeslot")) >= 0)[0];
       }
-      controller.set('isEditing', true);
+      this.setIsEditing(order, controller);
     }
     controller.set('selectedId', selectedId);
     controller.set('selectedTimeId', selectedTime);
@@ -50,6 +52,14 @@ export default AuthorizeRoute.extend({
     controller.set('selectedDate', selectedDate);
     if(selectedSlot) {
       controller.set("selectedTimeId", selectedSlot.timestamp);
+    }
+  },
+
+  setIsEditing(order, controller){
+    if(order.get('isDraft')){
+      controller.set('isEditing', false);
+    } else {
+      controller.set('isEditing', true);
     }
   },
 

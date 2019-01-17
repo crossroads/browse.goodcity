@@ -2,6 +2,8 @@ import Ember from 'ember';
 import AuthorizeRoute from './authorize';
 
 export default AuthorizeRoute.extend({
+  orderId: null,
+  editRequest: null,
 
   model() {
     return Ember.RSVP.hash({
@@ -10,8 +12,19 @@ export default AuthorizeRoute.extend({
     });
   },
 
-  setupController(controller) {
-    var order = this.get("store").peekAll("order").filterBy("state", "draft").get("firstObject");
+  getOrder(transition){
+    if(transition.queryParams){
+      const orderId = transition.queryParams.orderId;
+      if(orderId && orderId.length && transition.queryParams.editRequest) {
+        return this.store.peekRecord("order", orderId);
+      } 
+    } else {
+      return this.get("store").peekAll("order").filterBy("state", "draft").get("firstObject");
+    }
+  },
+
+  setupController(controller, transition) {
+    var order = this.getOrder(transition);
     if(order) {
       controller.set("description", order.get("purposeDescription"));
       var purpose_ids = order.get("ordersPurposes").filterBy("orderId", parseInt(order.id)).getEach("purposeId");
