@@ -31,6 +31,23 @@ export default Ember.Controller.extend({
     return !!this.session.get('authToken');
   }),
 
+  containsAny(str, substrings) {
+    for (var i = 0; i != substrings.length; i++) {
+       var substring = substrings[i];
+       if (str.indexOf(substring) != - 1) {
+         return true;
+       }
+    }
+    return false;
+  },
+
+
+  showOffCanvas: Ember.computed('showSidebar', 'moveSidebarToRight', function() {
+    let url = window.location.pathname;
+    return !(this.containsAny(url, ["request_purpose", "appointment_details",
+      "goods_details", "client_information", "confirm_booking", "booking_success"]));
+  }),
+
   unloadModels() {
     var UNLOAD_MODELS = ['order', 'orders_package', 'user', 'user_role', 'organisation', 'organisations_user', 'role'];
     UNLOAD_MODELS.forEach((model) => this.store.unloadAll(model));
