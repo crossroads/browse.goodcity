@@ -22,7 +22,7 @@
         </div>
       </div>
       <ul class="list list-items">
-        {{#each arrangedOrders as |order|}}
+        {{#each myorders as |order|}}
           <li {{action "setOrder" order}}>
             {{#if order.isAppointmentDraft}} 
               {{#link-to 'request_purpose' (query-params bookAppointment=true orderId=order.id)}}

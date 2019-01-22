@@ -19,6 +19,7 @@ export default Model.extend({
   updatedAt:        attr('date'),
   detailType:       attr('string'),
   districtId:       attr('number'),
+  authorisedById: attr('number'),
   ordersPurposes:     hasMany('ordersPurpose', { async: false }),
   beneficiaryId: attr('number'),
   bookingTypeId: attr('number'),
@@ -44,6 +45,19 @@ export default Model.extend({
 
   isOnlineOrder: Ember.computed('bookingTypeId', function(){
     return this.get('bookingType.isOnlineOrder');
+  }),
+
+  // hasSiblingPackages: Ember.computed('_packages.@each.itemId', function() {
+  //   return this.get("itemId") && (this.get("_packages").filterBy("itemId", this.get("itemId")).length > 1);
+  // }),
+
+  _orders: Ember.computed(function() {
+    return this.store.peekAll("package");
+  }),
+
+  hasAuthorisedDraft: Ember.computed('', function(){
+    var draftOrders = this.get('_orders').filterBy('state', 'draft');
+    draftOrders.length && draftOrders.filterBy('authorisedById')
   }),
 
   orderItems: Ember.computed('ordersPackages.[]', function() {
