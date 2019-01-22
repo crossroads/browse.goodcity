@@ -22,14 +22,14 @@ export default Ember.TextField.extend({
   _getValidDate: function(selectedDate){
     var today = new Date();
     var currentDate = new Date();
-    var selected = selectedDate;
+    var selected = new Date(selectedDate);
     currentDate.setHours(0,0,0,0);
     selected.setHours(0,0,0,0);
     return currentDate > selected ? today : selectedDate;
   },
 
   _setTimeSlots: function(date){
-    var selectedDate = date;
+    var selectedDate = new Date(date);
     var currentDate = new Date();
     currentDate.setHours(0,0,0,0);
     selectedDate.setHours(0,0,0,0);
