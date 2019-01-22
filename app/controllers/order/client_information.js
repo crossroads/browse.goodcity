@@ -7,6 +7,7 @@ import cancelOrder from '../../mixins/cancel_order';
 export default Ember.Controller.extend(cancelOrder, {
   showCancelBookingPopUp: false,
   isMobileApp: config.cordova.enabled,
+  myOrders: Ember.inject.controller(),
   previousRouteName: null,
   firstName: null,
   lastName: null,
@@ -77,7 +78,12 @@ export default Ember.Controller.extend(cancelOrder, {
         .then(data => {
           this.get("store").pushPayload(data);
           loadingView.destroy();
-          this.transitionToRoute('order.goods_details', orderId, { queryParams: { fromClientInformation: true }});
+          if(this.get("previousRouteName") === "my_orders") {
+            this.get("myOrders").set("selectedOrder", this.get("order"));
+            this.transitionToRoute('my_orders');
+          } else {
+            this.transitionToRoute('order.goods_details', orderId, { queryParams: { fromClientInformation: true }});
+          }
         });
     }
   }
