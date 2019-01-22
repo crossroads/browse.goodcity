@@ -38,7 +38,7 @@ export default AuthorizeRoute.extend({
     if (orderTransport){
       selectedId = orderTransport.get('transportType');
       selectedTime = orderTransport.get('timeslot');
-      selectedDate = orderTransport.get("scheduledAt");
+      selectedDate = moment.tz(orderTransport.get("scheduledAt"), 'Asia/Hong_Kong');
       order = orderTransport.get('order');
       if(selectedDate) {
         slots = availableDatesAndTime.appointment_calendar_dates.filter( date => date.date === moment(selectedDate).format('YYYY-MM-DD'))[0].slots;
