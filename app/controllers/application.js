@@ -45,7 +45,7 @@ export default Ember.Controller.extend({
   showOffCanvas: Ember.computed('showSidebar', 'moveSidebarToRight', function() {
     let url = window.location.pathname;
     return !(this.containsAny(url, ["request_purpose", "appointment_details",
-      "goods_details", "client_information", "confirm_booking", "booking_success"]));
+      "goods_details", "client_information", "search_code", "confirm_booking", "booking_success"]));
   }),
 
   unloadModels() {
