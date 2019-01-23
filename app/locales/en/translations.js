@@ -467,6 +467,7 @@ export default {
       "your_details": {
         "title": "Your Details",
         "phone": "Phone",
+        "name": "Name",
         "organisation": "Organisation",
         "position": "Position",
         "email": "Email",
