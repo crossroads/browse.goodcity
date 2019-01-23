@@ -8,6 +8,7 @@
     <content src="index.html" />
     <hook src="scripts/update_build_number.py" type="before_prepare" />
     <access origin="*" />
+    <allow-intent href="mailto:*" />
     <preference name="DisallowOverscroll" value="true" />
     <platform name="android">
         <preference name="LoadUrlTimeoutValue" value="120000" />
