@@ -18,8 +18,8 @@ export default Ember.Controller.extend(cancelOrder, {
   timeSlots: Ember.computed('selectedDate', function(){
     var selectedDate = this.get('selectedDate');
     if(selectedDate){
-      var timeSlots = this.get('available_dates').appointment_calendar_dates.filter( date => date.date === moment(selectedDate).format('YYYY-MM-DD'))[0].slots;
-      return timeSlots;
+      var timeSlots = this.get('available_dates').appointment_calendar_dates.filter( date => date.date === moment(selectedDate).format('YYYY-MM-DD'))[0];
+      return timeSlots && timeSlots.slots;
     }
   }),
 

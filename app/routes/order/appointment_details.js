@@ -32,7 +32,7 @@ export default AuthorizeRoute.extend({
     let selectedSlot = null;
     let orderTransport = model.orderTransport;
     let availableDatesAndTime = model.availableDatesAndtime;
-    let slots = null;
+    let availableSlots = null;
     let order = null;
     controller.set('isEditing', false);
     if (orderTransport){
@@ -41,8 +41,8 @@ export default AuthorizeRoute.extend({
       selectedDate = moment.tz(orderTransport.get("scheduledAt"), 'Asia/Hong_Kong');
       order = orderTransport.get('order');
       if(selectedDate) {
-        slots = availableDatesAndTime.appointment_calendar_dates.filter( date => date.date === moment(selectedDate).format('YYYY-MM-DD'))[0].slots;
-        selectedSlot = slots.filter(slot => slot.timestamp.indexOf(orderTransport.get("timeslot")) >= 0)[0];
+        availableSlots = availableDatesAndTime.appointment_calendar_dates.filter( date => date.date === moment(selectedDate).format('YYYY-MM-DD'))[0];
+        selectedSlot = availableSlots && availableSlots.slots.filter(slot => slot.timestamp.indexOf(orderTransport.get("timeslot")) >= 0)[0];
       }
       this.setIsEditing(order, controller);
     }
