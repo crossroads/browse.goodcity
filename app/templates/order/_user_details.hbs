@@ -10,6 +10,15 @@
       {{t "order.confirm_booking.your_details.phone"}}
     </div>
     <div class="small-8 detail columns">
+      {{session.currentUser.mobile}}
+    </div>
+  </div>
+
+  <div class="row info">
+    <div class="small-4 columns">
+      {{t "order.confirm_booking.your_details.name"}}
+    </div>
+    <div class="small-8 detail columns">
       {{session.currentUser.fullName}}
     </div>
   </div>
