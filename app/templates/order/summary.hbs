@@ -20,6 +20,7 @@
     </div>
   {{/each}}
 </div>
-<div class="tab-content">
+
+<div class={{if (is-equal selectedOrderTab.name 'messages') "tab-content1" "tab-content"}}>
   {{ partial (concat 'order/summary_tabs/' selectedOrderTab.name)}}
 </div>

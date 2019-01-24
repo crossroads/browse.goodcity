@@ -276,7 +276,8 @@ export default {
       },
       "tabs": {
         "booking": "Booking",
-        "goods": "Goods"
+        "goods": "Goods",
+        "messages": "Messages"
       },
       "state_titles": {
         "draft": "Draft (not yet submitted)",
