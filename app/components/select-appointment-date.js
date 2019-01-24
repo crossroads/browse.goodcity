@@ -19,14 +19,17 @@ export default Ember.TextField.extend({
     return currentDate;
   },
 
-  _getValidDate: function(selectedDate){
-    var today = new Date();
-    var currentDate = new Date();
-    var selected = new Date(selectedDate);
-    currentDate.setHours(0,0,0,0);
-    selected.setHours(0,0,0,0);
-    return currentDate > selected ? today : selectedDate;
-  },
+
+  //This prevents from showing previous date in calender in case of due date is past today's date
+
+  // _getValidDate: function(selectedDate){
+  //   var today = new Date();
+  //   var currentDate = new Date();
+  //   var selected = new Date(selectedDate);
+  //   currentDate.setHours(0,0,0,0);
+  //   selected.setHours(0,0,0,0);
+  //   return currentDate > selected ? today : selectedDate;
+  // },
 
   _setTimeSlots: function(date){
     var selectedDate = new Date(date);
@@ -128,7 +131,8 @@ export default Ember.TextField.extend({
         onStart: function(){
           var date = _this.get('selection');
           if(date) {
-            date = _this._getValidDate(date);
+            //This prevents from showing previous date in calender in case of due date is past today's date
+            // date = _this._getValidDate(date);
             this.set('select', new Date(date), { format: 'ddd mmm d' });
             _this._setTimeSlots(date);
           }
