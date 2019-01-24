@@ -5,6 +5,7 @@ import AjaxPromise from 'browse/utils/ajax-promise';
 
 export default applicationController.extend({
   sortProperties: ["createdAt:desc"],
+  isPrivate: false,
   arrangedOrders: Ember.computed.sort("model.orders", "sortProperties"),
   selectedOrder: null,
   orders: Ember.computed.alias('model'),
@@ -71,6 +72,10 @@ export default applicationController.extend({
     {
       name: 'goods',
       icon: 'shopping-basket'
+    },
+    {
+      name: 'messages',
+      icon: 'comment-o'
     }
   ],
 
@@ -145,6 +150,18 @@ export default applicationController.extend({
       });
   },
 
+  createMessage(values) {
+    var message = this.store.createRecord("message", values);
+    message.save()
+      .then(() => {
+        this.set("body", "");
+      })
+      .catch(error => {
+        this.store.unloadRecord(message);
+        throw error;
+      });
+  },
+
   actions: {
     redirectToEdit(routeName) {
       let orderId = this.get("selectedOrder.id");
@@ -206,6 +223,15 @@ export default applicationController.extend({
       if (tab !== this.get('selectedOrderTab')) {
         this.set('selectedOrderTab', tab);
       }
+    },
+    sendMessage(){
+      Ember.$("textarea").trigger('blur');
+      var values = this.getProperties("body");
+      values.order = this.get('selectedOrder');
+      values.createdAt = new Date();
+      values.isPrivate = false;
+      values.sender = this.store.peekRecord("user", this.get("session.currentUser.id"));
+      this.createMessage(values);
     }
   }
 });

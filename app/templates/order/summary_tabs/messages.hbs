@@ -1,0 +1,49 @@
+<div class="row">
+  <div class="small-12 columns">
+    <div class="small-12 columns day_seperator">
+      <span></span>
+    </div>
+    <div class="ellipsis">
+      <div class='message_details'>
+        <div class="message_section">
+          {{#each selectedOrder.messages as |message|}}
+          {{#if message.isMessage}}
+          <div class="ellipsis {{message.state}} {{if message.myMessage 'my_message' 'received_message'}}" id={{message.id}}>
+            <div class="message_details">
+              {{#if message.myMessage}}
+              You
+              {{else}}
+              {{t "full_name" firstName=message.sender.firstName lastName=message.sender.lastName}}
+              {{/if}}
+              →
+              {{display-datetime message.createdAt format="HH:mm"}}
+            </div>
+            {{message.body}}
+          </div>
+          {{/if}}
+          {{/each}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="message-footer">
+  <div class="btm message-form">
+    <div class="row message-textbar">
+      <div class="row message-base">
+        <div class="small-12 columns">
+          {{#validatable-form class="form-horizontal" onSubmit=(action 'sendMessage') as |form|}}
+          <div class="row ui">
+            <div class="small-9 large-10 medium-10 columns">
+              {{input value=body placeholder="Enter Message here !"}}
+            </div>
+            <div class="small-3 large-2 medium-2 columns">
+              <button {{action 'submit' target=form}} class="button">Send</button>
+            </div>
+          </div>
+          {{/validatable-form}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,70 @@
+.tab-content1{
+  height: 498px;
+  width: 80%
+}
+
+.message_details {
+  font-size: .7rem;
+  margin-bottom: .5rem;
+}
+
+.my_message {
+  background-color: #ffdcac;
+  float: right;
+  color: #000;
+  width: 80%;
+  padding: .8rem;
+  margin-right: 2%;
+  margin-top: .8rem;
+  font-size: .9rem;
+  position: relative;
+  -webkit-border-radius: 10px;
+}
+
+.received_message {
+  background-color: #fff;
+  color: #000;
+  width: 80%;
+  border-radius: .5rem;
+  padding: .8rem;
+  margin-left: 2%;
+  margin-bottom: .8rem;
+  font-size: .9rem;
+  position: relative;
+  -webkit-border-radius: 10px;
+}
+
+.message-footer{
+  height: 17em;
+}
+
+.message-textbar{
+  position: fixed;
+  bottom: 0;
+  width: 73.6% !important;
+  margin-bottom: 0px;
+  margin-left: 1px !important;
+}
+
+.message-form {
+  padding-top: .1rem;
+  padding-right: .2rem;
+  z-index: 10;
+}
+
+.message-form .ui {
+  padding-bottom: .1rem;
+}
+
+.message-base {
+  background-color: #dee4eb;
+  .button {
+    padding: .53rem;
+    border-radius: .2rem;
+    line-height: 1.2rem;
+    width: 5rem;
+    margin: 0;
+    display: inline-block;
+    margin-top: -1px;
+  }
+}

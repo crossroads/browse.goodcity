@@ -20,7 +20,12 @@ export default Model.extend({
   detailType:       attr('string'),
   districtId:       attr('number'),
   ordersPurposes:     hasMany('ordersPurpose', { async: false }),
+<<<<<<< HEAD
   beneficiaryId: attr('string'),
+=======
+  messages: hasMany('message', {async: true}),
+  beneficiaryId: attr('number'),
+>>>>>>> setup browse app for messages
   bookingTypeId: attr('number'),
   beneficiary: belongsTo('beneficiary', { async: false }),
   peopleHelped: attr('number'),
