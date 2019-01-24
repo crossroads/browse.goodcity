@@ -25,7 +25,7 @@ export default AuthorizeRoute.extend({
       this.set("order", this.store.peekRecord("order", orderId));
     } else if ( transition.queryParams.bookAppointment === 'true'){
       const sortedOrders = this.store.peekAll('order').sortBy('id');
-      this.set("order", sortedOrders.filterBy("detailType", "GoodCity").filterBy("state", "draft").filterBy('orderType', 'appointment').get("lastObject"));
+      this.set("order", sortedOrders.filterBy("detailType", "GoodCity").filterBy("state", "draft").filterBy('isAppointment', true).get("lastObject"));
     }
   },
 
