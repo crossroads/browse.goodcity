@@ -1,7 +1,7 @@
-.tab-content1{
-  height: 498px;
-  width: 80%
-}
+// .tab-content1{
+//   height: 498px;
+//   width: 80%
+// }
 
 .message_details {
   font-size: .7rem;
@@ -16,10 +16,12 @@
   padding: .8rem;
   margin-right: 2%;
   margin-top: .8rem;
+  margin-bottom: .8rem;
   font-size: .9rem;
   position: relative;
   -webkit-border-radius: 10px;
 }
+
 
 .received_message {
   background-color: #fff;
@@ -27,24 +29,36 @@
   width: 80%;
   border-radius: .5rem;
   padding: .8rem;
-  margin-left: 2%;
-  margin-bottom: .8rem;
+  margin-left: 4%;
+  margin-top: .8rem;
   font-size: .9rem;
   position: relative;
   -webkit-border-radius: 10px;
 }
-
-.message-footer{
-  height: 17em;
+.day_seperator {
+text-align: center;
+border-bottom: 1px solid #334f75;
+width: 100%;
+line-height: .1em;
+margin: 30px 0 30px;
+  span {
+    padding: 0 10px;
+    color: #a3aab6;
+    background: #002352;
+  }
 }
 
-.message-textbar{
-  position: fixed;
-  bottom: 0;
-  width: 73.6% !important;
-  margin-bottom: 0px;
-  margin-left: 1px !important;
-}
+// .message-footer{
+//   height: 17em;
+// }
+
+// .message-textbar{
+//   position: fixed;
+//   bottom: 0;
+//   width: 73.6% !important;
+//   margin-bottom: 0px;
+//   margin-left: 1px !important;
+// }
 
 .message-form {
   padding-top: .1rem;

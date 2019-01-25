@@ -20,7 +20,12 @@
     </div>
   {{/each}}
 </div>
-
-<div class={{if (is-equal selectedOrderTab.name 'messages') "tab-content1" "tab-content"}}>
-  {{ partial (concat 'order/summary_tabs/' selectedOrderTab.name)}}
-</div>
+{{#if (is-equal selectedOrderTab.name 'messages')}}
+  <div class="tab-content1">
+    {{ partial (concat 'order/summary_tabs/' selectedOrderTab.name)}}
+  </div>
+{{else}}
+  <div class="tab-content">
+    {{ partial (concat 'order/summary_tabs/' selectedOrderTab.name)}}
+  </div>
+{{/if}}

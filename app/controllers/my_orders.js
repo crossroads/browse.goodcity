@@ -18,6 +18,34 @@ export default applicationController.extend({
   cancellationReasonWarning: false,
   applicationController: Ember.inject.controller('application'),
   hideHeaderBar: Ember.computed.alias("applicationController.hideHeaderBar"),
+  selectedOrderMessages: [],
+  messageSortOptions: ['createdAt:asc'],
+
+  sortedMessages: Ember.computed.sort("selectedOrderMessages", "messageSortOptions"),
+
+  groupedMessages: Ember.computed("sortedMessages", function () {
+    debugger
+    return this.groupBy(this.get("sortedMessages"), "createdDate");
+  }),
+
+  groupBy: function (content, key) {
+    var result = [];
+    var object, value;
+
+    content.forEach(function (item) {
+      value = item.get ? item.get(key) : item[key];
+      object = result.findBy('value', value);
+      if (!object) {
+        object = {
+          value: value,
+          items: []
+        };
+        result.push(object);
+      }
+      return object.items.push(item);
+    });
+    return result.getEach('items');
+  },
 
   getCategoryForCode: function (code) {
     const categories = this.get('model.packageCategories');
@@ -202,6 +230,7 @@ export default applicationController.extend({
     setOrder(order) {
       if (!order) {
         this.set('selectedOrder', null);
+        this.set('selectedOrderMessages', null)
         this.get('applicationController').set('hideHeaderBar', false);
         return;
       }
@@ -214,6 +243,10 @@ export default applicationController.extend({
           this.set('selectedOrderTab', this.orderSummaryTabs[0]);
           this.get('applicationController').set('hideHeaderBar', true);
         })
+        .then(() => this.store.query('message', {
+          order_id: this.get('selectedOrder').id
+        }))
+        .then(record => this.set('selectedOrderMessages', record))
         .catch(() => {
           this.get("messageBox").alert();
         })

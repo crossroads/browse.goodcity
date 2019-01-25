@@ -1,6 +1,6 @@
 <div class="order_block">
     <div class="row order_header">
-      <div class="small-4 medium-0 large-4 columns order_transport"> 
+      <div class="small-4 medium-0 large-4 columns order_transport">
         <i class="fa fa-lg fa-{{ order.transportIcon }}"></i> {{ order.transportLabel }}
       </div>
 
@@ -25,8 +25,11 @@
           <div class="small-4 columns field">
             {{ t "my_orders.due_date" }}
           </div>
-          <div class="small-8 columns value schedule">
+          <div class="small-6 columns value schedule">
             {{  display-datetime order.orderTransport.scheduledAt format="dddd Do MMMM hh:mm a" }}
+          </div>
+          <div class="message small-2 columns field">
+            <i class="fa fa-comment-o fa-2x" aria-hidden="true"></i>
           </div>
         </div>
       {{/if}}

@@ -34,7 +34,7 @@ export default {
   "discard_changes": "Discard changes",
   "morning": "Morning",
   "afternoon": "Afternoon",
-
+  "full_name": "{{firstName}} {{lastName}}",
   "banner": {
     "presented_by": "Presented by",
     "funded_by": "Funded by",
