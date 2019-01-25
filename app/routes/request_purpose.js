@@ -41,10 +41,7 @@ export default AuthorizeRoute.extend({
 
       if(ordersPurposes.get('length')){
         controller.set('selectedId', ordersPurposes.get('firstObject').get('purpose.identifier'));
-      } else{
-        controller.set('selectedId',  "organisation");
       }
-
       if(this.get("previousRouteName") === "my_orders" && !this.get('isBookAppointment')) {
         this.controllerFor('my_orders').set("selectedOrder", order);
       } else {
@@ -59,6 +56,7 @@ export default AuthorizeRoute.extend({
       controller.set('selectedDistrict', null);
       controller.set('peopleCount', null);
       controller.set('description', null);
+      controller.set('selectedId',  "organisation");
     }
   },
 
