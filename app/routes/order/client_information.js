@@ -29,6 +29,10 @@ export default AuthorizeRoute.extend({
     var selectedId = "hkId";
     var beneficiary = model.beneficiary;
     controller.set('isEditing', false);
+    controller.set('firstName', "");
+    controller.set('lastName', "");
+    controller.set('mobilePhone', "");
+    controller.set('identityNumber', "");
     if(beneficiary){
       var phoneNumber = beneficiary.get('phoneNumber').slice(4);
       selectedId = beneficiary.get('identityTypeId') === 1 ? "hkId" : "abcl";
@@ -36,7 +40,7 @@ export default AuthorizeRoute.extend({
       controller.set('lastName', beneficiary.get('lastName'));
       controller.set('mobilePhone', phoneNumber);
       controller.set('identityNumber', beneficiary.get('identityNumber'));
-    }
+    } 
     this.setIsEditing(model.order, controller);
     controller.set('selectedId', selectedId);
   },
