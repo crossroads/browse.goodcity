@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import preloadDataMixin from '../mixins/preload_data';
-import AjaxPromise from 'goodcity-for-charities/utils/ajax-promise';
+import AjaxPromise from 'browse/utils/ajax-promise';
 
 export default Ember.Route.extend(preloadDataMixin, {
 

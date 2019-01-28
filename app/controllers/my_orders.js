@@ -1,7 +1,7 @@
 import applicationController from './application';
 import Ember from 'ember';
 import _ from 'lodash';
-import AjaxPromise from 'goodcity-for-charities/utils/ajax-promise';
+import AjaxPromise from 'browse/utils/ajax-promise';
 
 export default applicationController.extend({
   sortProperties: ["createdAt:desc"],

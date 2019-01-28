@@ -1,8 +1,8 @@
 import Ember from 'ember';
 import { module } from 'qunit';
-import startApp from 'goodcity-for-charities/tests/helpers/start-app';
+import startApp from 'browse/tests/helpers/start-app';
 import {make} from 'ember-data-factory-guy';
-import testSkip from 'goodcity-for-charities/tests/helpers/test-skip';
+import testSkip from 'browse/tests/helpers/test-skip';
 
 var App, pkgCategory, subcategory1, pkgType1, pkgType2, subcategory2, latestItem, oldItem;
 

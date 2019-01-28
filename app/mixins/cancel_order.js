@@ -1,6 +1,6 @@
 import Ember from "ember";
 const { getOwner } = Ember;
-import AjaxPromise from 'goodcity-for-charities/utils/ajax-promise';
+import AjaxPromise from 'browse/utils/ajax-promise';
 
 export default Ember.Mixin.create({
   deleteOrder(order) {

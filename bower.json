@@ -1,5 +1,5 @@
 {
-  "name": "goodcity-for-charities",
+  "name": "browse",
   "dependencies": {
     "cloudinary": "~1.0.24",
     "ember": "~2.14.0",
