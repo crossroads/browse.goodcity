@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import { module, test } from 'qunit';
-import startApp from 'browse/tests/helpers/start-app';
+import startApp from 'goodcity-for-charities/tests/helpers/start-app';
 import { make, mockFindAll } from 'ember-data-factory-guy';
 
 var App, order, gogo_van, user, user_profile, orderPurpose1, orderPurpose2 , organisation, pkg, ordersPackage, mocks, goodcityRequest, benificiary, identity_type1, package_type, bookingType, requestPurposeUrl, goodsDetailsUrl, appointmentPageUrl, clientInfoUrl, bookingSuccessUrl, confirmBookingUrl, orderTransport;

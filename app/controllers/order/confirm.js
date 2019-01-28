@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import applicationController from './../application';
-import AjaxPromise from 'browse/utils/ajax-promise';
+import AjaxPromise from 'goodcity-for-charities/utils/ajax-promise';
 const { getOwner } = Ember;
 
 export default applicationController.extend({

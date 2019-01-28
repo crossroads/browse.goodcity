@@ -1,5 +1,5 @@
 import Ember from "ember";
-import AjaxPromise from 'browse/utils/ajax-promise';
+import AjaxPromise from 'goodcity-for-charities/utils/ajax-promise';
 const { getOwner } = Ember;
 import config from "../config/environment";
 import cancelOrder from '../mixins/cancel_order';

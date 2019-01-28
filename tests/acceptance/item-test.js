@@ -1,9 +1,9 @@
 import Ember from 'ember';
 import { module, test } from 'qunit';
-import startApp from 'browse/tests/helpers/start-app';
+import startApp from 'goodcity-for-charities/tests/helpers/start-app';
 import FactoryGuy from 'ember-data-factory-guy';
 import { make, mockFindAll } from 'ember-data-factory-guy';
-import testSkip from 'browse/tests/helpers/test-skip';
+import testSkip from 'goodcity-for-charities/tests/helpers/test-skip';
 
 var pkgCategory, subcategory1, pkgType1, subcategory2, role, order,ordersPackage, pkg, gogo_van, organisation, user, userRole, item_with_packages, prev_item, item, next_item, item_path, user_profile, bookingType;
 

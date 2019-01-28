@@ -3,7 +3,7 @@ const pkgJson = require('../package.json');
 
 module.exports = function(environment) {
   var ENV = {
-    modulePrefix: 'browse',
+    modulePrefix: 'goodcity-for-charities',
     environment: environment,
     baseURL: '/',
     defaultLocationType: 'auto',
