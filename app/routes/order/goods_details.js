@@ -51,7 +51,7 @@ export default AuthorizeRoute.extend({
     if(this.get('backLinkPath') !== null) {
       controller.set('backLinkPath', this.get('backLinkPath'));
     } else {
-      controller.set('backLinkPath', 'request_purpose');
+      controller.set('backLinkPath', 'order.client_information');
     }
     this.controllerFor('application').set('showSidebar', false);
   },

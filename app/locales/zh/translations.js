@@ -254,6 +254,7 @@ export default {
       "appointment": "預約",
       "goods_requested": "已申請貨物",
       "goods_ordered": "貨物",
+      "not_applicable": "Not applicable",
       "request": {
         "request_purpose": "申請目的",
         "purpose_of_goods": "貨物用途",

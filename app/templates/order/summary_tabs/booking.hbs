@@ -58,20 +58,20 @@
   </section>
 
   {{!-- SECOND SECTION: BENEFICIARY  --}}
-  {{#if selectedOrder.beneficiary}}
-    <section class="details beneficiary">
-      <div class="row">
-        <div class="small-9 medium-9 large-9 columns section-title">
-          {{ t 'my_orders.details.beneficiary.client_information' }}
-        </div>
-        {{#if selectedOrder.isEditAllowed}}
-          <div class="small-3 medium-3 large-3 columns section-title">
-            <a {{action "redirectToEdit" "client_information"}} class="button expand edit-appointment-details">
-              {{t 'edit'}}
-            </a>
-          </div>
-        {{/if}}
+  <section class="details beneficiary">
+    <div class="row">
+      <div class="small-9 medium-9 large-9 columns section-title">
+        {{ t 'my_orders.details.beneficiary.client_information' }}
       </div>
+      {{#if selectedOrder.isEditAllowed}}
+        <div class="small-3 medium-3 large-3 columns section-title">
+          <a {{action "redirectToEdit" "client_information"}} class="button expand edit-appointment-details">
+            {{t 'edit'}}
+          </a>
+        </div>
+      {{/if}}
+    </div>
+    {{#if selectedOrder.beneficiary}}
       {{!-- ID TYPE --}}
       <div class="detail-row row">
         <div class="data-type">{{ t 'my_orders.details.beneficiary.id_type' }}</div>
@@ -96,8 +96,12 @@
         <div class="data-type">{{ t 'my_orders.details.beneficiary.client_phone' }}</div>
         <div class="data">{{ selectedOrder.beneficiary.phoneNumber }}</div>
       </div>
-    </section>
-  {{/if}}
+    {{else}}
+      <div class="detail-row row">
+        <div class="data-type">{{ t 'my_orders.details.not_applicable' }}</div>
+      </div>
+    {{/if}}
+  </section>
 
   {{!-- THIRD SECTION: REQUEST INFO --}}
   <section class="details purpose">
