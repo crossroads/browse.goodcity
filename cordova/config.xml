@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget android-versionCode="0" id="hk.goodcity.browsestaging" ios-CFBundleVersion="0" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>S. Browse</name>
+    <name>S. GoodCity for Charities</name>
     <description>
       The GoodCity initiative is a new way to donate quality goods in Hong Kong. See www.goodcity.hk for more details.
   </description>
