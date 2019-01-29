@@ -19,6 +19,11 @@ export default Ember.Controller.extend(cancelOrder, {
   beneficiary: Ember.computed.alias("model.beneficiary"),
 
   isHkIdSelected: Ember.computed.equal("selectedId", "hkId"),
+  isOrganisationSelected: Ember.computed.equal("clientInfoId", "organisation"),
+
+  clientInfoId: Ember.computed('order', function() {
+    return this.get('order.ordersPurposes').get('firstObject').get('purpose.identifier') || 'organisation';
+  }),
 
   mobile: Ember.computed('mobilePhone', function(){
     return config.APP.HK_COUNTRY_CODE + this.get('mobilePhone');
@@ -59,8 +64,17 @@ export default Ember.Controller.extend(cancelOrder, {
 
   actions: {
     saveClientDetails(){
-      var orderId = this.get('order.id');
-      var beneficiaryId = this.get('beneficiary.id');
+      let order = this.get('order');
+      var orderId = order.id;
+      var beneficiaryId = order.get('beneficiary.id');
+      let purposeIds = [];
+      let clientInfo = this.get('clientInfoId');
+
+      if(clientInfo === 'organisation'){
+        purposeIds.push(1);
+      } else if(clientInfo === 'client'){
+        purposeIds.push(2);
+      }
 
       var url, actionType;
 
@@ -74,17 +88,58 @@ export default Ember.Controller.extend(cancelOrder, {
 
       var loadingView = getOwner(this).lookup('component:loading').append();
 
-      new AjaxPromise(url, actionType, this.get('session.authToken'), { beneficiary: this.beneficiaryParams(), order_id: orderId })
+      if (clientInfo === 'organisation') {
+        let orderParams = {
+          'purpose_ids': purposeIds,
+          'beneficiary_id': null
+        };
+
+        new AjaxPromise('/orders/' + orderId, 'PUT', this.get('session.authToken'), { order: orderParams })
         .then(data => {
-          this.get("store").pushPayload(data);
-          loadingView.destroy();
-          if(this.get("previousRouteName") === "my_orders") {
-            this.get("myOrders").set("selectedOrder", this.get("order"));
-            this.transitionToRoute('my_orders');
-          } else {
-            this.transitionToRoute('order.goods_details', orderId, { queryParams: { fromClientInformation: true }});
+          this.store.pushPayload(data);
+          if (beneficiaryId) {
+            var beneficiary = this.store.peekRecord('beneficiary', beneficiaryId);
+            if(beneficiary) {
+              new AjaxPromise("/beneficiaries/" + beneficiaryId, 'DELETE', this.get('session.authToken'))
+              .then(data => {
+                this.store.unloadRecord(beneficiary);
+                loadingView.destroy();
+              })
+            }
           }
+          this.send('redirectTo');
         });
+      } else {
+        let orderParams = {
+          'purpose_ids': purposeIds
+        };
+
+        new AjaxPromise('/orders/' + orderId, 'PUT', this.get('session.authToken'), { order: orderParams })
+        .then(() => {
+          new AjaxPromise(url, actionType, this.get('session.authToken'), { beneficiary: this.beneficiaryParams(), order_id: orderId })
+          .then(data => {
+            this.get("store").pushPayload(data);
+            loadingView.destroy();
+            this.send('redirectTo', true);
+          });
+        });
+      }
+    },
+
+    redirectTo(isClientInformation=false) {
+      var order = this.get("order");
+      var orderId = order.id;
+
+      if(this.get("previousRouteName") === "my_orders") {
+        this.get("myOrders").set("selectedOrder", order);
+        this.transitionToRoute('my_orders');
+      } else {
+        if (isClientInformation) {
+          this.transitionToRoute('order.goods_details', orderId, { queryParams: { fromClientInformation: true }});
+        } else {
+          this.transitionToRoute('order.goods_details', orderId);
+        }
+      }
     }
   }
 });

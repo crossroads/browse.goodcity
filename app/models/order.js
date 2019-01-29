@@ -20,13 +20,14 @@ export default Model.extend({
   detailType:       attr('string'),
   districtId:       attr('number'),
   ordersPurposes:     hasMany('ordersPurpose', { async: false }),
-  beneficiaryId: attr('number'),
+  beneficiaryId: attr('string'),
   bookingTypeId: attr('number'),
   beneficiary: belongsTo('beneficiary', { async: false }),
   peopleHelped: attr('number'),
   goodcityRequests:   hasMany('goodcity_request', { async: false }),
   district: belongsTo('district', {async: false}),
   bookingType:   belongsTo('booking_type', { async: false }),
+  purposeIds: attr(),
 
   isGoodCityOrder: Ember.computed.equal('detailType', 'GoodCity'),
   isDraft: Ember.computed.equal("state", "draft"),
@@ -59,6 +60,10 @@ export default Model.extend({
       }
     });
     return items.uniq();
+  }),
+
+  hasBenficiaries: Ember.computed('beneficiary.[]', function() {
+    return this.get("beneficiary");
   }),
 
   isAppointmentDraft: Ember.computed('state', 'orderType', function(){
