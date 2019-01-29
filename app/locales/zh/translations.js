@@ -53,7 +53,7 @@ export default {
   },
 
   "browse": {
-    "title": "好人好市"
+    "title": "好人好巿 (慈善組織)"
   },
 
   "home": {
