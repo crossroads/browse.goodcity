@@ -101,10 +101,10 @@ export default Ember.Controller.extend(cancelOrder, {
             var beneficiary = this.store.peekRecord('beneficiary', beneficiaryId);
             if(beneficiary) {
               new AjaxPromise("/beneficiaries/" + beneficiaryId, 'DELETE', this.get('session.authToken'))
-              .then(data => {
+              .then(() => {
                 this.store.unloadRecord(beneficiary);
                 loadingView.destroy();
-              })
+              });
             }
           }
           this.send('redirectTo');

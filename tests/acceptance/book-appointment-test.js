@@ -97,9 +97,6 @@ test("request purpose page on completely filled should not redirect to Goods det
   assert.expect(2);
   visit(requestPurposeUrl);
   andThen(function(){
-    click(".for-organisation");
-  });
-  andThen(function(){
     click("#people-count");
   });
   andThen(function(){
@@ -127,9 +124,6 @@ test("request purpose page on completely filled should not redirect to Goods det
 test("request purpose page should not redirect if incomplete form", function(assert){
   assert.expect(2);
   visit(requestPurposeUrl);
-  andThen(function(){
-    click(".for-organisation");
-  });
   andThen(function(){
     click('#request-submit');
     andThen(function(){
