@@ -21,10 +21,13 @@ export default applicationController.extend({
   selectedOrderMessages: [],
   messageSortOptions: ['createdAt:asc'],
 
+  selectedOrderMessages: Ember.computed("selectedOrder", function () {
+    return this.get('selectedOrder.messages');
+  }),
+
   sortedMessages: Ember.computed.sort("selectedOrderMessages", "messageSortOptions"),
 
   groupedMessages: Ember.computed("sortedMessages", function () {
-    debugger
     return this.groupBy(this.get("sortedMessages"), "createdDate");
   }),
 
@@ -243,10 +246,6 @@ export default applicationController.extend({
           this.set('selectedOrderTab', this.orderSummaryTabs[0]);
           this.get('applicationController').set('hideHeaderBar', true);
         })
-        .then(() => this.store.query('message', {
-          order_id: this.get('selectedOrder').id
-        }))
-        .then(record => this.set('selectedOrderMessages', record))
         .catch(() => {
           this.get("messageBox").alert();
         })
