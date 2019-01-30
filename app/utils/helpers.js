@@ -10,7 +10,7 @@ const containsAny = (str, substrings) => {
      }
   }
   return false;
-}
+};
 
 
 export default containsAny;
