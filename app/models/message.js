@@ -10,13 +10,14 @@ var attr = DS.attr,
 export default DS.Model.extend({
 
   body: attr('string'),
+  senderId: attr('number'),
   isPrivate: attr('boolean'),
   createdAt: attr('date'),
   updatedAt: attr('date'),
   state: attr('string', {
     defaultValue: 'read'
   }),
-  sender: belongsTo('user', {
+  sender: belongsTo('sender', {
     async: false
   }),
   order: belongsTo('order', {
