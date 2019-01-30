@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import containsAny from '../utils/helpers';
 import config from '../config/environment';
 import AjaxPromise from 'browse/utils/ajax-promise';
 const { getOwner } = Ember;
@@ -31,20 +32,9 @@ export default Ember.Controller.extend({
     return !!this.session.get('authToken');
   }),
 
-  containsAny(str, substrings) {
-    for (var i = 0; i !== substrings.length; i++) {
-       var substring = substrings[i];
-       if (str.indexOf(substring) !== - 1) {
-         return true;
-       }
-    }
-    return false;
-  },
-
-
   showOffCanvas: Ember.computed('showSidebar', 'moveSidebarToRight', function() {
     let url = window.location.pathname;
-    return !(this.containsAny(url, ["request_purpose", "appointment_details",
+    return !(containsAny(url, ["request_purpose", "appointment_details",
       "goods_details", "client_information", "search_code", "confirm_booking", "booking_success"]));
   }),
 
