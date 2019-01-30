@@ -1,0 +1,36 @@
+<section class="main-section your-detail client-information large-10 large-offset-1 medium-10 medium-offset-1 small-12">
+  <div class="row">
+    <div class="small-12 columns type-of-id-text">
+      <h1 class="title"> {{t "order.confirm_booking.request_purpose_detail.title"}} </h1>
+    </div>
+  </div>
+
+  <div class="row info">
+    <div class="small-4 columns">
+      {{t "order.confirm_booking.request_purpose_detail.purpose_of_goods"}}
+    </div>
+    <div class="small-8 detail columns">
+      {{order.purposeName}}
+    </div>
+  </div>
+
+  <div class="row info">
+    <div class="small-4 columns">
+      {{t "order.confirm_booking.request_purpose_detail.number_benefiting"}}
+    </div>
+
+    <div class="small-8 detail columns">
+      {{order.peopleHelped}}
+    </div>
+  </div>
+
+  <div class="row info">
+    <div class="small-4 columns">
+      {{t "order.confirm_booking.request_purpose_detail.description_of_need"}}
+    </div>
+
+    <div class="small-8 detail columns">
+      {{order.purposeDescription}}
+    </div>
+  </div>
+</section>

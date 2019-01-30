@@ -2,12 +2,17 @@ import Ember from "ember";
 import config from '../../config/environment';
 import AjaxPromise from 'browse/utils/ajax-promise';
 const { getOwner } = Ember;
+import cancelOrder from '../../mixins/cancel_order';
 
-export default Ember.Controller.extend({
+export default Ember.Controller.extend(cancelOrder, {
+  showCancelBookingPopUp: false,
   isMobileApp: config.cordova.enabled,
+  myOrders: Ember.inject.controller(),
+  previousRouteName: null,
   firstName: null,
   lastName: null,
   mobilePhone: null,
+  isEditing: false,
   selectedId: null,
   identityNumber: null,
   order: Ember.computed.alias("model.order"),
@@ -73,7 +78,12 @@ export default Ember.Controller.extend({
         .then(data => {
           this.get("store").pushPayload(data);
           loadingView.destroy();
-          this.transitionToRoute('order.goods_details', orderId, { queryParams: { fromClientInformation: true }});
+          if(this.get("previousRouteName") === "my_orders") {
+            this.get("myOrders").set("selectedOrder", this.get("order"));
+            this.transitionToRoute('my_orders');
+          } else {
+            this.transitionToRoute('order.goods_details', orderId, { queryParams: { fromClientInformation: true }});
+          }
         });
     }
   }

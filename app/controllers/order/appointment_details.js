@@ -1,22 +1,25 @@
 import Ember from "ember";
 import AjaxPromise from 'browse/utils/ajax-promise';
 const { getOwner } = Ember;
+import cancelOrder from '../../mixins/cancel_order';
 
-export default Ember.Controller.extend({
+export default Ember.Controller.extend(cancelOrder, {
+  showCancelBookingPopUp: false,
   order: Ember.computed.alias("model.order"),
   orderTransport: Ember.computed.alias('model.orderTransport'),
+  myOrders: Ember.inject.controller(),
   selectedId: null,
   selectedTimeId: null,
   selectedDate: null,
   timeSlotNotSelected: false,
+  isEditing: false,
+  previousRouteName: null,
 
   timeSlots: Ember.computed('selectedDate', function(){
     var selectedDate = this.get('selectedDate');
-
     if(selectedDate){
-      var timeSlots = this.get('available_dates').appointment_calendar_dates.filter( date => date.date === moment(selectedDate).format('YYYY-MM-DD'))[0].slots;
-
-      return timeSlots;
+      var timeSlots = this.get('available_dates').appointment_calendar_dates.filter( date => date.date === moment(selectedDate).format('YYYY-MM-DD'))[0];
+      return timeSlots && timeSlots.slots;
     }
   }),
 
@@ -26,7 +29,6 @@ export default Ember.Controller.extend({
     orderTransportProperties.timeslot = this.get('selectedTimeId').substr(11, 5);
     orderTransportProperties.transport_type = this.get("selectedId");
     orderTransportProperties.order_id = this.get('order.id');
-    orderTransportProperties.booking_type_id = this.store.peekAll('booking_type').filterBy('nameEn', 'appointment').get('firstObject.id');
     return orderTransportProperties;
   },
 
@@ -61,7 +63,12 @@ export default Ember.Controller.extend({
       .then(data => {
         this.get("store").pushPayload(data);
         loadingView.destroy();
-        this.transitionToRoute("order.confirm_booking", this.get("order.id"));
+        if(this.get("previousRouteName") === "my_orders") {
+          this.get("myOrders").set("selectedOrder", this.get("order"));
+          this.transitionToRoute('my_orders');
+        } else {
+          this.transitionToRoute("order.confirm_booking", this.get("order.id"));
+        }
       });
     }
   }

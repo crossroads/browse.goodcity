@@ -236,7 +236,8 @@ export default applicationController.extend({
         scheduled_at:   selectedDateSlot,
         timeslot:       slotName,
         transport_type: transportType,
-        order_id:       this.get("order.id") };
+        order_id:       this.get("order.id"),
+      };
 
       this.saveTransport(order, scheduleDetails)
           .then(() => {

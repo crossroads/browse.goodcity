@@ -22,8 +22,23 @@ export default Addressable.extend({
     return mobile ? ((mobile.indexOf("+852") >= 0) ? mobile.substring('4') : mobile) : '';
   }),
 
+  positionInOrganisation: Ember.computed('organisationsUsers.[]', function() {
+    let organisationsUser = this.get("organisationsUsers.firstObject");
+    return organisationsUser ? organisationsUser.get("position") : "";
+  }),
+
+  organisationName: Ember.computed('organisationsUsers.[]', function() {
+    let organisation = this.get("organisationsUsers.firstObject.organisation");
+    let language = JSON.parse(window.localStorage.getItem("language"));
+    if(organisation) {
+      return language === "en" ? organisation.get("nameEn") : organisation.get("nameZhTw");
+    } else {
+      return "";
+    }
+  }),
+
   fullName: Ember.computed('firstName', 'lastName', function(){
-    return (this.get('firstName') + " " + this.get('lastName'));
+    return (this.get("title") + " " + this.get('firstName') + " " + this.get('lastName'));
   }),
 
   isInfoComplete: Ember.computed('firstName', 'lastName', 'email', 'mobile', 'title', function(){

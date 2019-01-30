@@ -1,8 +1,5 @@
 .request-purpose, .client-information {
   .button{
-    @media #{$small-only} {
-      width: 97%;
-    }
     margin-top: 1rem;
   }
   .input-error {
@@ -142,7 +139,6 @@
 
   .description-of-need {
     .description {
-      margin-top: 1rem !important;
       margin-bottom: 0.2rem;
     }
     .reason-of-need{
@@ -163,9 +159,11 @@
     }
     .remove-text{
       position: absolute;
-      right: 0.8%;
+      right: 1%;
+      top: 62%;
       @media #{$small-only}{
         right: 3%;
+        top: 64%;
       }
       font-size: 1rem;
       padding: 4.4rem 0.3rem;
@@ -188,3 +186,36 @@
 .no-gc-req-error, .no-time-slot-selected-error{
   color: #ee4f4b;
 }
+
+.book_appointment_headers{
+  @media #{$small-only}{
+    width: 96%
+  }
+}
+
+.labor_confirmation{
+  @media #{$small-only}{
+    font-size: 0.9em;
+  }
+}
+
+.district-select {
+  #district-select-dropdown{
+    @media #{$small-only}{
+      margin-left: -5px;
+    }
+    border: 1px solid #8091a9;
+    width: 100%;
+    background: bottom;
+    color: #a3aab6;
+    max-width: unset;
+  }
+  .district-label {
+    margin-bottom: 0.2rem;
+  }
+  .district-label-info{
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+  }
+}
+

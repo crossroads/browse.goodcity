@@ -15,7 +15,6 @@ export default Ember.Component.extend({
         Ember.$.each(['.pickadate'], function(i, input){
           checkInput(Ember.$(input));
         });
-
         checkCheckBoxInput(Ember.$('.checkbox input')[0]);
 
         if(Ember.$('.form__control--error').length > 0) { return false; }
@@ -31,7 +30,7 @@ export default Ember.Component.extend({
 
       Ember.$('.pickadate').focus(function(){
         return removeHighlight(this);
-      });   
+      });
     }
 
     function validateCheckCheckBoxInput(){

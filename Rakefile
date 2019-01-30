@@ -212,6 +212,7 @@ def ios_build_config
   opts = {}
   opts["developmentTeam"] = mobile_provisioning_plist["TeamIdentifier"].first
   opts["automaticProvisionin"] = false
+  opts["buildFlag"] = '-UseModernBuildSystem=0'
   opts["provisioningProfile"] = mobile_provisioning_plist["UUID"]
   if production_env?
     opts["codeSignIdentity"] = "\'iPhone Distribution\'"

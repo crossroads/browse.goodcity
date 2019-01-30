@@ -6,6 +6,7 @@ import { hasMany } from 'ember-data/relationships';
 export default Model.extend({
   name:  attr('string'),
   code:  attr('string'),
+  allowRequests: attr('boolean'),
   items: hasMany('item', { async: false }),
   packages: hasMany('package', { async: false }),
 

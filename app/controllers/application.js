@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import containsAny from '../utils/helpers';
 import config from '../config/environment';
 import AjaxPromise from 'browse/utils/ajax-promise';
 const { getOwner } = Ember;
@@ -12,6 +13,7 @@ export default Ember.Controller.extend({
   loggedInUser: false,
   i18n: Ember.inject.service(),
   showSidebar: true,
+  moveSidebarToRight: true,
 
   initSubscription: Ember.on('init', function() {
     this.get('subscription').send('wire');
@@ -27,7 +29,14 @@ export default Ember.Controller.extend({
   draftOrder: Ember.computed.alias('session.draftOrder'),
 
   isUserLoggedIn: Ember.computed('loggedInUser', function() {
+    this.toggleProperty("loggedInUser");
     return !!this.session.get('authToken');
+  }),
+
+  showOffCanvas: Ember.computed('showSidebar', 'moveSidebarToRight', function() {
+    let url = window.location.pathname;
+    return !(containsAny(url, ["request_purpose", "appointment_details",
+      "goods_details", "client_information", "search_code", "confirm_booking", "booking_success"]));
   }),
 
   unloadModels() {
@@ -69,7 +78,7 @@ export default Ember.Controller.extend({
     logMeOut() {
       this.session.clear(); // this should be first since it updates isLoggedIn status
       this.unloadModels();
-      this.set('loggedInUser', false);
+      this.toggleProperty("loggedInUser");
       this.get("cart").clearItems();
       this.transitionToRoute('browse');
     },

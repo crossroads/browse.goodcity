@@ -70,7 +70,8 @@ export default applicationController.extend({
         purpose_description: description,
         state: "draft",
         purpose_ids: purpose_ids,
-        cart_package_ids: package_ids
+        cart_package_ids: package_ids,
+        booking_type_id: this.store.peekAll('booking_type').filterBy('identifier', 'online-order').get('firstObject.id')
       };
 
       if(order && order.get("isDraft")) {

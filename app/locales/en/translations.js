@@ -13,6 +13,7 @@ export default {
   "show": "Show",
   "date": "Date",
   "time": "Time",
+  "edit": "Edit",
   "contact": "Contact",
   "draft": "draft",
   "submitted": "submitted",
@@ -29,6 +30,8 @@ export default {
   "no_search_results": "No Search Results.",
   "continue": "Continue",
   "cancel": "Cancel",
+  "save_changes": "Save changes",
+  "discard_changes": "Discard changes",
 
   "banner": {
     "presented_by": "Presented by",
@@ -221,6 +224,14 @@ export default {
     }
   },
 
+  "cancel_booking": {
+    "title": "Cancel Booking",
+    "cancel_booking_warning": "Cancel this booking?",
+    "draft_cancel_booking_warning": "This will permanently remove all information associated with this booking.",
+    "cancel_booking_info": "This will cancel booking and all associated request for goods.",
+    "cancel_booking_reason_title": "Reason for canceling order"
+  },
+
   "my_orders": {
     "my_orders": "My Orders",
     "processing": "Processing",
@@ -253,6 +264,7 @@ export default {
         "description_of_needs": "Description of needs"
       },
       "beneficiary": {
+        "appointment_details": "Appointment Details",
         "client_information": "Client Information",
         "id_type": "Type of ID held",
         "id_number": "ID Number",
@@ -406,6 +418,9 @@ export default {
       "for_organisation": "For organisation's own programs",
       "for_client": "For a client/benificiary",
       "people_count_info": "How many people will benefit from these items?",
+      "district_label": "Where in Hong Kong will these goods be primarily used?",
+      "district-label-info": "This assists us with our reporting.",
+      "select_placeholder": "Select District",
       "people_count_warning": "You must input a number here",
       "need_description": "Description of need",
       "need_description_info": "Please briefly describe why goods are needed.",
@@ -449,7 +464,40 @@ export default {
     },
     "confirm_booking": {
       "title": "Confirmation",
-      "submit_order": "Submit your Order"
+      "your_details": {
+        "title": "Your Details",
+        "phone": "Phone",
+        "name": "Name",
+        "organisation": "Organisation",
+        "position": "Position",
+        "email": "Email",
+      },
+      "request_purpose_detail": {
+        "title": "Request Purpose",
+        "purpose_of_goods": "Purpose of goods",
+        "number_benefiting": "Number benefiting",
+        "description_of_need": "Description of need",
+      },
+      "client_info_detail": {
+        "title": "Client Information",
+        "id_type": "Type of ID held",
+        "id_number": "ID Number",
+        "client_name": "Client's Name",
+        "client_phone": "Client's Phone",
+      },
+      "goods_detail": {
+        "title": "Goods Details",
+        "no_description": "No description provided",
+      },
+      "appointment_detail": {
+        "title": "Appointment Details",
+        "transport": "Transport",
+        "labour": "Labour",
+        "labour_info": "Client understands labour requirements and can supply labour if needed.",
+        "appointment": "Appointment",
+      },
+      "submit_order": "Submit order",
+      "info": "Please review the information below and then submit.</br>If you need to change something, click 'back'.",
     }
   }
 };

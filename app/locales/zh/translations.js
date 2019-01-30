@@ -11,6 +11,7 @@ export default {
   "okay": "確定",
   "show": "顯示",
   "date": "日期",
+  "edit": "Edit",
   "time": "時間",
   "contact": "聯絡電話",
   "draft": "等待提交",
@@ -28,6 +29,8 @@ export default {
   "no_search_results": "沒有搜尋結果",
   "cancel": "取消",
   "continue": "繼續",
+  "save_changes": "Save changes",
+  "discard_changes": "Discard changes",
 
   "banner": {
     "presented_by": "建立機構",
@@ -218,6 +221,14 @@ export default {
     }
   },
 
+  "cancel_booking": {
+    "title": "Cancel Booking",
+    "cancel_booking_warning": "Cancel this booking?",
+    "draft_cancel_booking_warning": "This will permanently remove all information associated with this booking.",
+    "cancel_booking_info": "This will cancel booking and all associated request for goods.",
+    "cancel_booking_reason_title": "Reason for canceling order"
+  },
+
   "my_orders": {
     "my_orders": "我的訂單",
     "processing": "處理中",
@@ -250,6 +261,7 @@ export default {
         "description_of_needs": "申請詳情"
       },
       "beneficiary": {
+        "appointment_details": "Appointment Details",
         "client_information": "服務對象資料",
         "id_type": "所持身份證種類",
         "id_number": "身份證號碼",
@@ -389,6 +401,9 @@ export default {
       "for_client": "予服務對象",
       "people_count_info": "多少人會從這些物品中受惠？",
       "people_count_warning": "您必須在這裡輸入一個數字",
+      "district_label": "這些物資將在香港哪區使用?",
+      "district-label-info": "此項能協助我們作出準確的紀錄及數據",
+      "select_placeholder": "請選擇區域",
       "need_description": "描述申請需求",
       "need_description_info": "請簡述申請貨物的原因。",
       "description_warning": "抱歉，描述的位置不能留空。"
@@ -430,7 +445,40 @@ export default {
     },
     "confirm_booking": {
       "title": "確認",
-      "submit_order": "提交訂單"
+      "your_details": {
+        "title": "Your Details",
+        "phone": "Phone",
+        "name": "Name",
+        "organisation": "Organisation",
+        "position": "Position",
+        "email": "Email",
+      },
+      "request_purpose_detail": {
+        "title": "Request Purpose",
+        "purpose_of_goods": "Purpose of goods",
+        "number_benefiting": "Number benefiting",
+        "description_of_need": "Description of need",
+      },
+      "client_info_detail": {
+        "title": "Client Information",
+        "id_type": "Type of ID held",
+        "id_number": "ID Number",
+        "client_name": "Client's Name",
+        "client_phone": "Client's Phone",
+      },
+      "goods_detail": {
+        "title": "Goods Details",
+        "no_description": "No description provided",
+      },
+      "appointment_detail": {
+        "title": "Appointment Details",
+        "transport": "Transport",
+        "labour": "Labour",
+        "labour_info": "Client understands labour requirements and can supply labour if needed.",
+        "appointment": "Appointment",
+      },
+      "submit_order": "Submit order",
+      "info": "Please review the information below and then submit.</br>If you need to change something, click 'back'.",
     }
   }
 };

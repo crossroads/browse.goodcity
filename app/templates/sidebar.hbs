@@ -1,20 +1,22 @@
-<nav class="tab-bar show-for-small" data-topbar>
-  <section class="left-small">
-    <a class="left-off-canvas-toggle menu-icon" href="#">
-      <span></span>
-    </a>
-  </section>
-
-  <section class="middle tab-bar-section show-for-small">
-    <h1>{{pageTitle}}</h1>
-  </section>
-
-  {{#if hasCartItems}}
-    <section class="right-small" {{action 'displayCart'}}>
-      {{partial 'cart_truck_icon'}}
+{{#unless hideHeaderBar}}
+  <nav class="tab-bar show-for-small">
+    <section class="left-small">
+      <a class="left-off-canvas-toggle menu-icon" href="#">
+        <span></span>
+      </a>
     </section>
-  {{/if}}
-</nav>
+
+    <section class="middle tab-bar-section show-for-small">
+      <h1>{{pageTitle}}</h1>
+    </section>
+
+    {{#if hasCartItems}}
+      <section class="right-small" {{action 'displayCart'}}>
+        {{partial 'cart_truck_icon'}}
+      </section>
+    {{/if}}
+  </nav>
+{{/unless}}
 
 <aside class="left-off-canvas-menu menu-list">
   <ul class="off-canvas-list menu">

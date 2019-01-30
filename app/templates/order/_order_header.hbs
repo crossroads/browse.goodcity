@@ -1,0 +1,16 @@
+<div class="row order_header">
+  <div class="small-4 medium-0 large-4 columns order_transport"> 
+    <i class="fa fa-lg fa-{{ order.transportIcon }}"></i> {{ order.transportLabel }}
+  </div>
+
+  <div class="small-3 columns order_code">
+    {{order.code}}
+  </div>
+
+  <div class="small-5 medium-9 large-5 columns order_state">
+    <div class="order_state_icon {{ order.state }}">
+      <i class="fa fa-{{ order.stateIcon }}"></i>
+    </div>
+    <div class="order_state_text"> {{ t (concat "my_orders." order.state) }} </div>
+  </div>
+</div>

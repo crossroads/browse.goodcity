@@ -1,12 +1,30 @@
 .tab-bar.category_page {
-  height: 6rem;
+  height: auto;
   @media #{$small-only} {
     height: 6.5rem;
   }
   @media only screen and (min-width: 120.1em) {
     margin-left: 4rem !important;
   }
-}
+
+  .filter-container {
+    display: flex;
+    flex-wrap: wrap;
+    .filter {
+      display: flex;
+      flex-wrap: nowrap;
+      flex-grow: 1;
+      .filter-label {
+        white-space: nowrap;
+        width: 6rem;
+      }
+      .filter-list  {
+        min-width: 7rem;
+        flex: 0 0 7rem;
+      }
+    }
+  }
+} 
 
 .items_list {
   li {
@@ -14,10 +32,11 @@
   }
 }
 
-select {
-  width: 10rem;
-  @media #{$small-only} {
-    max-width: 7rem;
+.package-category{
+  select {
+    @media #{$small-only} {
+      max-width: 7rem;
+    }
   }
 }
 

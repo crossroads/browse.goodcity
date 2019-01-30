@@ -55,7 +55,7 @@ module('Acceptance | My Orders Page', {
     pkg = make('package', { imageIds: [ image.get('id') ]});
     orders_package = make("orders_package", { package: pkg, packageId: pkg.get('id' )});
     order_transport = make('order_transport', { scheduledAt: new Date(2018, 10, 19, 16, 0) });
-    order = make("order", { orderTransportId: order_transport.get('id'), orderTransport: order_transport, ordersPackages: [ orders_package ] });
+    order = make("order", { state: 'submitted', orderTransportId: order_transport.get('id'), orderTransport: order_transport, ordersPackages: [ orders_package ] });
     order_transport2 = make('order_transport');
     order2 = make("order", { orderTransportId: order_transport2.get('id'), orderTransport: order_transport2 });
     
