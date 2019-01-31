@@ -85,6 +85,7 @@
       .tabs .tab {
         text-align: center;
         opacity: 0.5;
+        cursor: pointer;
         &.selected {
           opacity: 1;
         }
