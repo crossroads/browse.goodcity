@@ -31,6 +31,8 @@ export default {
   "continue": "繼續",
   "save_changes": "Save changes",
   "discard_changes": "Discard changes",
+  "morning": "Morning",
+  "afternoon": "Afternoon",
 
   "banner": {
     "presented_by": "建立機構",
@@ -434,6 +436,14 @@ export default {
       "date": " 預約日期",
       "time": "預約日"
     },
+    "online_order": {
+      "preferred_date": "偏好的日期",
+      "goods_limit": "我們不能保存貨品多於幾天.",
+      "order_confirmation": "處理這指令前我們將會確定送貨或收貨日期.",
+      "choose_date": "選擇有效的日期",
+      "good_limit_dates": "我們不能保存貨品過於以下日期.",
+      "staff_contact": "處理這指令前我們的職員將會確定收貨或送貨時間."
+    },
     "booking_success": {
       "success": "成功！",
       "reference_number": "參考編號",
@@ -470,7 +480,7 @@ export default {
         "title": "Goods Details",
         "no_description": "No description provided",
       },
-      "appointment_detail": {
+      "schedule_summary": {
         "title": "Appointment Details",
         "transport": "Transport",
         "labour": "Labour",

@@ -3,7 +3,7 @@ import { module, test } from 'qunit';
 import startApp from 'browse/tests/helpers/start-app';
 import { make, mockFindAll } from 'ember-data-factory-guy';
 
-var App, order, gogo_van, user, user_profile, orderPurpose1, orderPurpose2 , organisation, pkg, ordersPackage, mocks, goodcityRequest, benificiary, identity_type1, package_type, bookingType, requestPurposeUrl, goodsDetailsUrl, appointmentPageUrl, clientInfoUrl, bookingSuccessUrl, confirmBookingUrl, orderTransport;
+var App, order, gogo_van, user, user_profile, orderPurpose1, orderPurpose2 , organisation, pkg, ordersPackage, mocks, goodcityRequest, benificiary, identity_type1, package_type, bookingTypes, requestPurposeUrl, goodsDetailsUrl, appointmentPageUrl, clientInfoUrl, bookingSuccessUrl, confirmBookingUrl, orderTransport;
 
 module('Acceptance | BookAppointment', {
   beforeEach: function() {
@@ -11,7 +11,10 @@ module('Acceptance | BookAppointment', {
     user = make("user");
     organisation = make("organisation");
     pkg = make('package');
-    bookingType = make("booking_type");
+    bookingTypes = [
+      make("booking_type", { identifier: 'appointment' }).toJSON({ includeId: true }),
+      make("booking_type", { identifier: 'online-order' }).toJSON({ includeId: true })
+    ];
     ordersPackage = make("orders_package", { quantity: 1, state: "requested", package: pkg,
       packageId: pkg.id, order: order});
     order = make("order", { state: "draft", created_by_id: user.id, organisation_id: organisation.id,
@@ -44,12 +47,12 @@ module('Acceptance | BookAppointment', {
       mockFindAll("gogovan_transport").returns({json: {gogovan_transports: [gogo_van.toJSON({includeId: true})]}}),
       mockFindAll('order').returns({ json: {orders: [order.toJSON({includeId: true})],
         packages: [pkg.toJSON({includeId: true})], orders_packages: [ordersPackage.toJSON({includeId: true})]}}),
-      mockFindAll("booking_type").returns({json: {booking_types: [bookingType.toJSON({includeId: true})]}})
+      mockFindAll("booking_type").returns({json: { booking_types}})
     );
     requestPurposeUrl = '/request_purpose';
     clientInfoUrl = `/order/${order.id}/client_information`;
     goodsDetailsUrl = `/order/${order.id}/goods_details`;
-    appointmentPageUrl = `/order/${order.id}/appointment_details`;
+    appointmentPageUrl = `/order/${order.id}/schedule_details`;
     confirmBookingUrl = `/order/${order.id}/confirm_booking`;
     bookingSuccessUrl = `/order/${order.id}/booking_success`;
   },

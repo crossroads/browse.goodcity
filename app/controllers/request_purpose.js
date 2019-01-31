@@ -27,6 +27,9 @@ export default Ember.Controller.extend(cancelOrder, {
     return this.store.peekAll('district');
   }),
 
+  getBookingTypeId(identifier) {
+    return this.store.peekAll('booking_type').filterBy('identifier', identifier).get('firstObject.id');
+  },
 
   actions: {
     clearDescription() {
@@ -34,53 +37,60 @@ export default Ember.Controller.extend(cancelOrder, {
     },
 
     createOrderWithRequestPuropose(){
-      var user = this.get('user');
-      var purposeIds = [];
-      if(this.get('selectedId') === 'organisation'){
+      let user = this.get('user');
+      let purposeIds = [];
+
+      if (this.get('selectedId') === 'organisation'){
         purposeIds.push(1);
-      } else if(this.get('selectedId') === 'client'){
+      } else if (this.get('selectedId') === 'client'){
         purposeIds.push(2);
       }
 
-      var user_organisation_id;
+      let user_organisation_id;
       if(user && user.get('organisationsUsers').length){
         user_organisation_id = user.get('organisationsUsers.firstObject.organisationId');
       }
 
-      var orderParams = {
-        organisation_id: user_organisation_id,
-        purpose_description: this.get('description'),
-        purpose_ids: purposeIds,
-        order_type: 'appointment',
-        people_helped: this.get('peopleCount'),
-        district_id: this.get('selectedDistrict.id'),
-        booking_type_id: this.store.peekAll('booking_type').filterBy('identifier', 'appointment').get('firstObject.id')
-      };
-
       let order = this.get('model');
       let url = "/orders";
       let actionType = "POST";
-      if(order) {
+      if (order) {
         url = "/orders/" + order.get('id');
         actionType = "PUT";
       }
 
-      var loadingView = getOwner(this).lookup('component:loading').append();
+      let bookingTypeId = order && order.get('bookingTypeId');
+      if (!bookingTypeId) {
+        bookingTypeId = this.getBookingTypeId(this.get('bookAppointment') ? 'appointment' : 'online-order');
+      }
 
-      var isOrganisationPuropose = false;
+      let isAppointment = Number(bookingTypeId) === Number(this.getBookingTypeId('appointment'));
+
+      let orderParams = {
+        organisation_id: user_organisation_id,
+        purpose_description: this.get('description'),
+        purpose_ids: purposeIds,
+        people_helped: this.get('peopleCount'),
+        district_id: this.get('selectedDistrict.id'),
+        booking_type_id: bookingTypeId
+      };
+
+      let loadingView = getOwner(this).lookup('component:loading').append();
 
       new AjaxPromise(url, actionType, this.get('session.authToken'), { order: orderParams })
         .then(data => {
           this.get("store").pushPayload(data);
-          var orderId = data.order.id;
-          var purpose_ids = data.orders_purposes.filterBy("order_id", data.order.id).getEach("purpose_id");
-          isOrganisationPuropose = purpose_ids.get('length') === 1 && purpose_ids.indexOf(1) >= 0;
+
+          let orderId = data.order.id;
+          let purpose_ids = data.orders_purposes.filterBy("order_id", data.order.id).getEach("purpose_id");
+          let isOrganisationPurpose = purpose_ids.get('length') === 1 && purpose_ids.indexOf(1) >= 0;
+
           loadingView.destroy();
-          if(this.get("previousRouteName") === "my_orders" && !this.get('bookAppointment')) {
+          if(this.get("previousRouteName") === "my_orders" && this.get('editRequest')) {
             this.get("myOrders").set("selectedOrder", this.get("store").peekRecord("order", orderId));
             this.transitionToRoute('my_orders');
-          } else if(isOrganisationPuropose) {
-            this.transitionToRoute('order.goods_details', orderId);
+          } else if (isOrganisationPurpose) {
+            this.transitionToRoute(`order.${isAppointment? 'goods_details' : 'schedule_details'}`, orderId);
           } else {
             this.transitionToRoute("order.client_information", orderId);
           }

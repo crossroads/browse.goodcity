@@ -44,7 +44,7 @@ export default Ember.Controller.extend({
 
   showOffCanvas: Ember.computed('showSidebar', 'moveSidebarToRight', function() {
     let url = window.location.pathname;
-    return !(this.containsAny(url, ["request_purpose", "appointment_details",
+    return !(this.containsAny(url, ["request_purpose", "schedule_details",
       "goods_details", "client_information", "search_code", "confirm_booking", "booking_success"]));
   }),
 
@@ -137,7 +137,7 @@ export default Ember.Controller.extend({
       var cartHasItems = this.get("cart.cartItems").length;
       if(cartHasItems > 0) {
         this.get('cart').set('checkout', true);
-        this.transitionToRoute('order_details');
+        this.transitionToRoute('request_purpose', { queryParams: { bookAppointment: false }});
       } else {
         this.get('messageBox').alert(this.get('i18n').t('cart_content.unavailable_and_add_item_to_proceed'), () => {
             this.get("cart").clearItems();

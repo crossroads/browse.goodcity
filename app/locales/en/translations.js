@@ -32,6 +32,8 @@ export default {
   "cancel": "Cancel",
   "save_changes": "Save changes",
   "discard_changes": "Discard changes",
+  "morning": "Morning",
+  "afternoon": "Afternoon",
 
   "banner": {
     "presented_by": "Presented by",
@@ -453,6 +455,14 @@ export default {
       "date": "Appointment Date",
       "time": "Appointment Time"
     },
+    "online_order": {
+      "preferred_date": "Preferred date",
+      "goods_limit": "We cannot reserve goods more than a few days.",
+      "order_confirmation": "We will confirm delivery/collection date before processing order.",
+      "choose_date": "Choose from available dates",
+      "good_limit_dates": "We cannot reserve goods longer than the dates below.",
+      "staff_contact": "Our staff will confirm the collection/delivery time before processing the order."
+    },
     "booking_success": {
       "success": "Success!",
       "reference_number": "Reference Number",
@@ -489,8 +499,8 @@ export default {
         "title": "Goods Details",
         "no_description": "No description provided",
       },
-      "appointment_detail": {
-        "title": "Appointment Details",
+      "schedule_summary": {
+        "title": "Logistic Details",
         "transport": "Transport",
         "labour": "Labour",
         "labour_info": "Client understands labour requirements and can supply labour if needed.",

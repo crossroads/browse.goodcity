@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import AuthorizeRoute from './../authorize';
+import AuthorizeRoute from '../authorize';
 import AjaxPromise from 'browse/utils/ajax-promise';
 
 export default AuthorizeRoute.extend({
@@ -33,13 +33,12 @@ export default AuthorizeRoute.extend({
     let orderTransport = model.orderTransport;
     let availableDatesAndTime = model.availableDatesAndtime;
     let slots = null;
-    let order = null;
+    let order = model.order;
     controller.set('isEditing', false);
     if (orderTransport){
       selectedId = orderTransport.get('transportType');
       selectedTime = orderTransport.get('timeslot');
       selectedDate = moment.tz(orderTransport.get("scheduledAt"), 'Asia/Hong_Kong');
-      order = orderTransport.get('order');
       if(selectedDate) {
         slots = availableDatesAndTime.appointment_calendar_dates.filter( date => date.date === moment(selectedDate).format('YYYY-MM-DD'))[0].slots;
         selectedSlot = slots.filter(slot => slot.timestamp.indexOf(orderTransport.get("timeslot")) >= 0)[0];
@@ -47,7 +46,7 @@ export default AuthorizeRoute.extend({
       this.setIsEditing(order, controller);
     }
     controller.set('selectedId', selectedId);
-    controller.set('selectedTimeId', selectedTime);
+    controller.set('selectedTimeId', selectedDate && selectedDate.format());
     controller.set('available_dates', availableDatesAndTime);
     controller.set('selectedDate', selectedDate);
     if(selectedSlot) {
@@ -73,6 +72,7 @@ export default AuthorizeRoute.extend({
       this.controllerFor('my_orders').set("selectedOrder", null);
     }
     this.controllerFor('application').set('showSidebar', false);
+    this.controllerFor('application').set('showOrderSlotSelection', false);
   },
 
   deactivate(){

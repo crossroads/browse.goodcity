@@ -7,8 +7,9 @@ FactoryGuy.define('booking_type',{
     },
   },
   default: {
-    id:        FactoryGuy.generate('id'),
-    nameEn:   'appointment'
+    id:         FactoryGuy.generate('id'),
+    nameEn:     'appointment',
+    identifier: 'appointment'
   },
 });
 export default {};
