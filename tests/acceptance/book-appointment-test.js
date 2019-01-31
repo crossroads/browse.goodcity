@@ -19,12 +19,12 @@ module('Acceptance | BookAppointment', {
     gogo_van = make("gogovan_transport");
     user_profile = {"id": user.id,"first_name": user.get('firstName'), "last_name": user.get('lastName'),
     "mobile": user.get('mobile'), "user_role_ids": [1] };
-    goodcityRequest = {id: 1, quantity: 1, description: null, code_id: null,
-      order_id: order.id, package_type_id: null};
     benificiary = {created_by_id: user.id, first_name: "Test", id: 12, identity_number: "1233",
       identity_type_id: 1, last_name: "John", phone_number: "+85212312312", title: null};
     identity_type1 = {id: 1, name: "Hong Kong Identity Card"};
     package_type = make("package_type");
+    goodcityRequest = {id: 1, quantity: 1, description: null, code_id: null,
+      order_id: order.id, packageTypes: [{id: package_type.id }]};
     orderTransport = make("order_transport");
     mocks = [];
     $.mockjaxSettings.matchInRegistrationOrder = false;
@@ -171,10 +171,10 @@ test("request purpose page should not redirect if incomplete form", function(ass
 
 //Client Information Page tests
 test("Select HkID on client info should display form for hkid", function(assert){
-  orderPurpose2 = {id: 1, purpose_id: 2, order_id: order.id, designation_id: 1};
+  orderPurpose2 = {id: 1, purposes: [{id: 2}], order_id: order.id, designation_id: 1};
   assert.expect(2);
   mocks.push(
-    $.mockjax({url: '/api/v1/order*', type: 'POST', status: 201,responseText: {
+    $.mockjax({url: '/api/v1/order*', type: 'GET', status: 201,responseText: {
       order: order.toJSON({includeId: true}),
       orders_purposes: [orderPurpose2],
       user: user.toJSON({includeId: true})}
@@ -188,7 +188,7 @@ test("Select HkID on client info should display form for hkid", function(assert)
     assert.equal(currentURL(), clientInfoUrl);
   });
   andThen(function(){
-    click('.hkId');
+    click('.custom_radio_buttons .for-client');
     andThen(function(){
       assert.equal(Ember.$('#id-initials').text().trim(), "P12");
     });
@@ -196,32 +196,10 @@ test("Select HkID on client info should display form for hkid", function(assert)
 });
 
 test("Select RBCL on client info should display form for rbcl", function(assert){
-  orderPurpose2 = {id: 1, purpose_id: 2, order_id: order.id, designation_id: 1};
-  assert.expect(2);
+  orderPurpose2 = {id: 1, purposes: [{id: 2}], order_id: order.id, designation_id: 1};
+  assert.expect(3);
   mocks.push(
-    $.mockjax({url: '/api/v1/order*', type: 'POST', status: 201,responseText: {
-      order: order.toJSON({includeId: true}),
-      orders_purposes: [orderPurpose2],
-      user: user.toJSON({includeId: true})}
-    })
-  );
-  visit(clientInfoUrl);
-  andThen(function(){
-    assert.equal(currentURL(), clientInfoUrl);
-  });
-  andThen(function(){
-    click('.abcl');
-    andThen(function(){
-      assert.equal(Ember.$('#id-initials').text().trim(), "RBCL");
-    });
-  });
-});
-
-test("Filled Up client info page, should redirect to goods details page on submit", function(assert){
-  orderPurpose2 = {id: 1, purpose_id: 2, order_id: order.id, designation_id: 1};
-  assert.expect(2);
-  mocks.push(
-    $.mockjax({url: '/api/v1/order*', type: 'POST', status: 201,responseText: {
+    $.mockjax({url: '/api/v1/order*', type: 'GET', status: 201,responseText: {
       order: order.toJSON({includeId: true}),
       orders_purposes: [orderPurpose2],
       user: user.toJSON({includeId: true})}
@@ -232,7 +210,40 @@ test("Filled Up client info page, should redirect to goods details page on submi
     visit(clientInfoUrl);
   });
   andThen(function(){
-    click('#hkId');
+    assert.equal(currentURL(), clientInfoUrl);
+  });
+  andThen(function(){
+    click('.custom_radio_buttons .for-client');
+    andThen(function(){
+      assert.equal(Ember.$('#id-initials').text().trim(), "P12");
+    });
+  });
+  andThen(function(){
+    click('.custom_radio_buttons .abcl');
+    andThen(function(){
+      assert.equal(Ember.$('#id-initials').text().trim(), "RBCL");
+    });
+  });
+});
+
+test("Filled Up client info page, should redirect to goods details page on submit", function(assert){
+  orderPurpose2 = {id: 1, purposes: [{id: 2}], order_id: order.id, designation_id: 1};
+  assert.expect(2);
+  mocks.push(
+    $.mockjax({url: '/api/v1/order*', type: 'GET', status: 201,responseText: {
+        order: order.toJSON({includeId: true}),
+        orders_purposes: [orderPurpose2],
+        user: user.toJSON({includeId: true}),
+        goodcity_requests: []
+      }
+    })
+  );
+  visit('/');
+  andThen(function(){
+    visit(clientInfoUrl);
+  });
+  andThen(function(){
+    click('.custom_radio_buttons .for-client');
   });
   andThen(function(){
     fillIn("#hk-id-number", "1234");
@@ -248,7 +259,7 @@ test("Filled Up client info page, should redirect to goods details page on submi
   });
   andThen(function(){
     mocks.push(
-      $.mockjax({url: '/api/v1/order*', type: 'POST', status: 201,responseText: {
+      $.mockjax({url: '/api/v1/order*', type: 'PUT', status: 201,responseText: {
         order: order.toJSON({includeId: true}),
         orders_purposes: [orderPurpose2],
         user: user.toJSON({includeId: true})}
@@ -262,6 +273,17 @@ test("Filled Up client info page, should redirect to goods details page on submi
     );
     click('#client-info-submit');
     andThen(function(){
+      let updated_gc_req = {id: goodcityRequest.id, code_id: package_type.id, order_id: order.id, package_type_id: package_type.id};
+      let location = {id:12, building:'26Med', area:'B2', stockit_id:null};
+      mocks.push(
+        $.mockjax({url: 'api/v1/goodcity_requests/*', type:'PUT', status: 201,
+          responseText:{
+            code: [package_type.toJSON({includeId: true})],
+            goodcity_request: updated_gc_req,
+            locations: [location]
+          }
+        })
+      );
       assert.equal(currentURL(), `${goodsDetailsUrl}?fromClientInformation=true`);
       assert.equal(Ember.$('.title').text().trim(), "Goods Details");
     });
@@ -269,10 +291,10 @@ test("Filled Up client info page, should redirect to goods details page on submi
 });
 
 test("Incomplete form submit client info page, should not redirect to goods details", function(assert){
-  orderPurpose2 = {id: 1, purpose_id: 2, order_id: order.id, designation_id: 1};
+  orderPurpose2 = {id: 1, purposes: [{id: 2}], order_id: order.id, designation_id: 1};
   assert.expect(2);
   mocks.push(
-    $.mockjax({url: '/api/v1/order*', type: 'POST', status: 201,responseText: {
+    $.mockjax({url: '/api/v1/order*', type: 'GET', status: 201,responseText: {
       order: order.toJSON({includeId: true}),
       orders_purposes: [orderPurpose2],
       user: user.toJSON({includeId: true})}
@@ -283,11 +305,11 @@ test("Incomplete form submit client info page, should not redirect to goods deta
     visit(clientInfoUrl);
   });
   andThen(function(){
-    click('#hkId');
+    click('.custom_radio_buttons .for-client');
   });
   andThen(function(){
     mocks.push(
-      $.mockjax({url: '/api/v1/order*', type: 'POST', status: 201,responseText: {
+      $.mockjax({url: '/api/v1/order*', type: 'PUT', status: 201,responseText: {
         order: order.toJSON({includeId: true}),
         orders_purposes: [orderPurpose2],
         user: user.toJSON({includeId: true})}
