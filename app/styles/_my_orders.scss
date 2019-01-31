@@ -65,6 +65,9 @@
         .strong {
           font-family: $header-font-family;
         }
+        .close-order-summary{
+          cursor: pointer;
+        }
         .header-icon {
           padding-top: 0.2rem;
           padding-left: 0;
