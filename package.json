@@ -20,7 +20,7 @@
     "test:ci": "EMBER_CLI_CORDOVA=0 ember-pretty-test"
   },
   "engines": {
-    "node": ">= 8"
+    "node": ">= 6"
   },
   "devDependencies": {
     "active-model-adapter": "2.2.0",
@@ -93,6 +93,6 @@
     "cordova-update-config": "^1.0.2",
     "jquery": "^3.2.0",
     "phantomjs-prebuilt": "^2.1.14",
-    "yarn": "^1.13.0"
+    "yarn": "^1.12.3"
   }
 }
