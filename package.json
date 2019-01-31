@@ -20,7 +20,7 @@
     "test:ci": "EMBER_CLI_CORDOVA=0 ember-pretty-test"
   },
   "engines": {
-    "node": ">= 6"
+    "node": ">= 8"
   },
   "devDependencies": {
     "active-model-adapter": "2.2.0",
