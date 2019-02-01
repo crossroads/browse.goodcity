@@ -27,6 +27,9 @@ module.exports = function(defaults) {
     },
     emberCliFontAwesome: {
      useCss: true
+    },
+    'ember-cli-babel': {
+      includePolyfill: true
     }
   });
 

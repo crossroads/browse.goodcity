@@ -62,10 +62,6 @@ export default Model.extend({
     return items.uniq();
   }),
 
-  hasBenficiaries: Ember.computed('beneficiary.[]', function() {
-    return this.get("beneficiary");
-  }),
-
   isAppointmentDraft: Ember.computed('state', 'orderType', function(){
     return this.get('isAppointment') && this.get('isDraft');
   }),
