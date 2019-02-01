@@ -18,7 +18,6 @@ export default applicationController.extend({
   cancellationReasonWarning: false,
   applicationController: Ember.inject.controller('application'),
   hideHeaderBar: Ember.computed.alias("applicationController.hideHeaderBar"),
-  selectedOrderMessages: [],
   messageSortOptions: ['createdAt:asc'],
 
   selectedOrderMessages: Ember.computed("selectedOrder", function () {
@@ -233,7 +232,6 @@ export default applicationController.extend({
     setOrder(order) {
       if (!order) {
         this.set('selectedOrder', null);
-        this.set('selectedOrderMessages', null)
         this.get('applicationController').set('hideHeaderBar', false);
         return;
       }
@@ -262,7 +260,7 @@ export default applicationController.extend({
       values.order = this.get('selectedOrder');
       values.createdAt = new Date();
       values.isPrivate = false;
-      values.sender = this.store.peekRecord("user", this.get("session.currentUser.id"));
+      values.sender = this.store.peekRecord("sender", this.get("session.currentUser.id"));
       this.createMessage(values);
     }
   }
