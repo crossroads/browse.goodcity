@@ -22,7 +22,8 @@ export default Ember.Controller.extend(cancelOrder, {
   isOrganisationSelected: Ember.computed.equal("clientInfoId", "organisation"),
 
   clientInfoId: Ember.computed('order', function() {
-    return this.get('order.ordersPurposes').get('firstObject').get('purpose.identifier') || 'organisation';
+    let orderPurpose = this.get('order.ordersPurposes').get('firstObject');
+    return (orderPurpose && orderPurpose.get('purpose.identifier')) || 'organisation';
   }),
 
   mobile: Ember.computed('mobilePhone', function(){
@@ -65,8 +66,8 @@ export default Ember.Controller.extend(cancelOrder, {
   actions: {
     saveClientDetails(){
       let order = this.get('order');
-      var orderId = order.id;
-      var beneficiaryId = order.get('beneficiary.id');
+      let orderId = order.id;
+      let beneficiaryId = order.get('beneficiary.id');
       let purposeIds = [];
       let clientInfo = this.get('clientInfoId');
 
@@ -76,7 +77,7 @@ export default Ember.Controller.extend(cancelOrder, {
         purposeIds.push(2);
       }
 
-      var url, actionType;
+      let url, actionType;
 
       if (beneficiaryId) {
         url = "/beneficiaries/" + beneficiaryId;
@@ -86,7 +87,7 @@ export default Ember.Controller.extend(cancelOrder, {
         actionType = "POST";
       }
 
-      var loadingView = getOwner(this).lookup('component:loading').append();
+      let loadingView = getOwner(this).lookup('component:loading').append();
 
       if (clientInfo === 'organisation') {
         let orderParams = {
@@ -98,7 +99,7 @@ export default Ember.Controller.extend(cancelOrder, {
         .then(data => {
           this.store.pushPayload(data);
           if (beneficiaryId) {
-            var beneficiary = this.store.peekRecord('beneficiary', beneficiaryId);
+            let beneficiary = this.store.peekRecord('beneficiary', beneficiaryId);
             if(beneficiary) {
               new AjaxPromise("/beneficiaries/" + beneficiaryId, 'DELETE', this.get('session.authToken'))
               .then(() => {
@@ -127,8 +128,8 @@ export default Ember.Controller.extend(cancelOrder, {
     },
 
     redirectToGoodsDetails(isClientInformation=false) {
-      var order = this.get("order");
-      var orderId = order.id;
+      let order = this.get("order");
+      let orderId = order.id;
 
       if(this.get("previousRouteName") === "my_orders") {
         this.get("myOrders").set("selectedOrder", order);

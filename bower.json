@@ -21,7 +21,7 @@
   },
   "devDependencies": {
     "ember-qunit-notifications": "0.1.0",
-    "jquery-mockjax": "2.5.0"
+    "jquery-mockjax": "~2.0.1"
   },
   "resolutions": {
     "jquery-placeholder": "^2.1.0"
