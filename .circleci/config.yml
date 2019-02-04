@@ -84,6 +84,9 @@ jobs:
       - restore-cache: *restore-yarn-cache
       - restore-cache: *restore-bower-cache
       - run:
+          name: rebuild node-sass
+          command: npm rebuild node-sass
+      - run:
           name: Start Ember test server
           command: yarn run ember server --port 4202
           background: true
