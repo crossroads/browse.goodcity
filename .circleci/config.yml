@@ -4,7 +4,7 @@ aliases:
 
   - defaults: &defaults
       docker:
-        - image: circleci/node:8-browsers
+        - image: circleci/node:boron
       working_directory: ~/code
   - &restore-repo-cache
       key: v2-browse-goodcity-{{ .Environment.CIRCLE_SHA1 }}
