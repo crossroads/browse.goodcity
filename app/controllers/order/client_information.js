@@ -64,20 +64,35 @@ export default Ember.Controller.extend(cancelOrder, {
   },
 
   actions: {
-    saveClientDetails(){
+    saveClientDetails() {
+      let orderParams;
+      let clientInfo = this.get('clientInfoId');
+
+      if (clientInfo === 'organisation') {
+        orderParams = {
+          'purpose_ids': [1],
+          'beneficiary_id': null
+        };
+
+        this.send('editOrder', orderParams);
+      } else if (clientInfo === 'client') {
+        orderParams = {
+          'purpose_ids': [2]
+        };
+
+        this.send('editOrder', orderParams, false);
+      }
+
+    },
+
+    editOrder(orderParams, isOrganisation=true) {
       let order = this.get('order');
       let orderId = order.id;
       let beneficiaryId = order.get('beneficiary.id');
-      let purposeIds = [];
-      let clientInfo = this.get('clientInfoId');
-
-      if(clientInfo === 'organisation'){
-        purposeIds.push(1);
-      } else if(clientInfo === 'client'){
-        purposeIds.push(2);
-      }
+      let store = this.store;
 
       let url, actionType;
+      let loadingView = getOwner(this).lookup('component:loading').append();
 
       if (beneficiaryId) {
         url = "/beneficiaries/" + beneficiaryId;
@@ -87,51 +102,38 @@ export default Ember.Controller.extend(cancelOrder, {
         actionType = "POST";
       }
 
-      let loadingView = getOwner(this).lookup('component:loading').append();
 
-      if (clientInfo === 'organisation') {
-        let orderParams = {
-          'purpose_ids': purposeIds,
-          'beneficiary_id': null
-        };
-
-        new AjaxPromise('/orders/' + orderId, 'PUT', this.get('session.authToken'), { order: orderParams })
+      new AjaxPromise('/orders/' + orderId, 'PUT', this.get('session.authToken'), { order: orderParams })
         .then(data => {
-          this.store.pushPayload(data);
-          if (beneficiaryId) {
-            let beneficiary = this.store.peekRecord('beneficiary', beneficiaryId);
-            if(beneficiary) {
-              new AjaxPromise("/beneficiaries/" + beneficiaryId, 'DELETE', this.get('session.authToken'))
+          store.pushPayload(data);
+          if (isOrganisation) {
+            if (beneficiaryId) {
+              let beneficiary = store.peekRecord('beneficiary', beneficiaryId);
+              new AjaxPromise(url, 'DELETE', this.get('session.authToken'))
               .then(() => {
-                this.store.unloadRecord(beneficiary);
-                loadingView.destroy();
+                store.unloadRecord(beneficiary);
               });
             }
+            this.send('redirectToGoodsDetails');
+          } else {
+            new AjaxPromise(url, actionType, this.get('session.authToken'), { beneficiary: this.beneficiaryParams(), order_id: orderId })
+            .then(data => {
+              store.pushPayload(data);
+              this.send('redirectToGoodsDetails', true);
+            });
           }
-          this.send('redirectToGoodsDetails');
+        })
+        .finally(() => {
+          loadingView.destroy();
         });
-      } else {
-        let orderParams = {
-          'purpose_ids': purposeIds
-        };
 
-        new AjaxPromise('/orders/' + orderId, 'PUT', this.get('session.authToken'), { order: orderParams })
-        .then(() => {
-          new AjaxPromise(url, actionType, this.get('session.authToken'), { beneficiary: this.beneficiaryParams(), order_id: orderId })
-          .then(data => {
-            this.get("store").pushPayload(data);
-            loadingView.destroy();
-            this.send('redirectToGoodsDetails', true);
-          });
-        });
-      }
     },
 
     redirectToGoodsDetails(isClientInformation=false) {
       let order = this.get("order");
       let orderId = order.id;
 
-      if(this.get("previousRouteName") === "my_orders") {
+      if (this.get("previousRouteName") === "my_orders") {
         this.get("myOrders").set("selectedOrder", order);
         this.transitionToRoute('my_orders');
       } else {
