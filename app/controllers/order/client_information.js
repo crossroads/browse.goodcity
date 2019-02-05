@@ -17,6 +17,7 @@ export default Ember.Controller.extend(cancelOrder, {
   identityNumber: null,
   order: Ember.computed.alias("model.order"),
   beneficiary: Ember.computed.alias("model.beneficiary"),
+  purposes: Ember.computed.alias("model.purposes"),
 
   isHkIdSelected: Ember.computed.equal("selectedId", "hkId"),
   isOrganisationSelected: Ember.computed.equal("clientInfoId", "organisation"),
@@ -81,13 +82,14 @@ export default Ember.Controller.extend(cancelOrder, {
     saveClientDetails() {
       let orderParams;
       let clientInfo = this.get('clientInfoId');
+      let purposeId = this.get('purposes').filterBy('identifier', clientInfo).get('firstObject.id');
 
       const isForOrganisation = clientInfo === 'organisation';
       orderParams = isForOrganisation ? {
-          'purpose_ids': [1],
+          'purpose_ids': [purposeId],
           'beneficiary_id': null
         } : {
-          'purpose_ids': [2]
+          'purpose_ids': [purposeId]
         };
 
       this.send('editOrder', orderParams, isForOrganisation);

@@ -56,7 +56,7 @@ module.exports = function(environment) {
       NAMESPACE: 'api/v1',
       HK_COUNTRY_CODE: '+852',
       PRELOAD_TYPES: ["package_type", "district", "territory", "package_category", "donor_condition", "package"],
-      PRELOAD_AUTHORIZED_TYPES: ["order", "gogovan_transport", "booking_type"],
+      PRELOAD_AUTHORIZED_TYPES: ["order", "gogovan_transport", "booking_type", "purpose"],
 
       SHA: process.env.APP_SHA || "00000000",
       VERSION: pkgJson.version
