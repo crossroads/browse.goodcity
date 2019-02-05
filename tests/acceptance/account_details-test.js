@@ -3,7 +3,7 @@ import { module, test } from 'qunit';
 import startApp from '../helpers/start-app';
 import { make, mockFindAll } from 'ember-data-factory-guy';
 
-var App, user, user1, organisation, organisationsUser, user_profile, gogo_van, order, pkg, ordersPackage, gcOrganisations, bookingType, role, userRole;
+var App, user, user1, organisation, organisationsUser, user_profile, gogo_van, order, pkg, ordersPackage, gcOrganisations, bookingType, purpose, role, userRole;
 
 module('Acceptance | Account Details Page', {
   beforeEach: function() {
@@ -16,6 +16,7 @@ module('Acceptance | Account Details Page', {
     order = make("order", { state: "draft", created_by_id: user.id });
     gogo_van = make("gogovan_transport");
     bookingType = make("booking_type");
+    purpose = make("purpose");
     gcOrganisations = make("gc_organisation", {nameEn: "GCC club"});
     role = make("role");
     userRole = make("user_role", { userId: user.id, roleId: role.id, user: user, role: role });
@@ -23,6 +24,7 @@ module('Acceptance | Account Details Page', {
     $.mockjax({url: "/api/v1/available_*", type: 'GET', status: 200, responseText:["2018-06-14", "2018-06-15", "2018-06-16", "2018-06-19", "2018-06-20", "2018-06-21"]});
     mockFindAll("gogovan_transport").returns({json: {gogovan_transports: [gogo_van.toJSON({includeId: true})]}});
     mockFindAll("booking_type").returns({json: {booking_types: [bookingType.toJSON({includeId: true})]}});
+    mockFindAll("purpose").returns({json: {purposes: [purpose.toJSON({includeId: true})]}});
     mockFindAll('order').returns({ json: {orders: [order.toJSON({includeId: true})], packages: [pkg.toJSON({includeId: true})], orders_packages: [ordersPackage.toJSON({includeId: true})]}});
     user_profile = {"id": user.id,"first_name": user.get('firstName'), "last_name": user.get('lastName'), "mobile": user.get('mobile'), "user_role_ids": [userRole.get('id')] };
   },

@@ -9,6 +9,7 @@ var App, bookingType;
 module('Acceptance | Home Page', {
   beforeEach: function() {
     App = startApp();
+    window.localStorage.authToken = '';
     bookingType = make("booking_type");
     mockFindAll("booking_type").returns({json: {booking_types: [bookingType.toJSON({includeId: true})]}});
   },
@@ -37,4 +38,4 @@ test("should link to the FAQ page", function(assert) {
         assert.ok(links.length >= 1);
     });
 });
-  
+
