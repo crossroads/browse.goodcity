@@ -155,48 +155,58 @@ export default Ember.Controller.extend({
       }
     }
 
-    var existingItem = this.store.peekRecord(type, item.id);
-    var hasNewItemSaving = this.store.peekAll(type).any(function(o) { return o.id === null && o.get("isSaving"); });
+    var existingItem;
+    if (this.get('session.currentUser.id') != data.sender.user.id){
+      existingItem = this.store.peekRecord(type, item.id) || this.store.findRecord(type, item.id);
+    } else {
+      existingItem = this.store.peekRecord(type, item.id);
+    }
+
+    var hasNewItemSaving = this.store.peekAll(type).any(function(o) {
+      return o.id === null && o.get("isSaving");
+    });
     var existingItemIsSaving = existingItem && existingItem.get("isSaving");
     if (data.operation === "create" && hasNewItemSaving || existingItemIsSaving) {
       run(success);
       return;
     }
 
-    var cartContent = this.get('cart.content');
-    var packageId = data.item.package.id;
-    var cartItem = cartContent.filterBy("modelType", "package").filterBy("id", packageId.toString()).get("firstObject");
-    var itemInCart = this.store.peekRecord('package', data.item.package.id);
+    if (type.toLowerCase() !== 'message'){
+      var cartContent = this.get('cart.content');
+      var packageId = data.item.package.id;
+      var cartItem = cartContent.filterBy("modelType", "package").filterBy("id", packageId.toString()).get("firstObject");
+      var itemInCart = this.store.peekRecord('package', data.item.package.id);
 
-    if (["create","update"].indexOf(data.operation) >= 0) {
-      if(data.item.package.allow_web_publish === null) {
-        return false;
-      }
-      this.store.pushPayload(data.item);
-      var unDispatchedPkg = [];
-      if(cartContent) {
-        var pkge = this.store.peekRecord('package', data.item.package.id);
-        unDispatchedPkg = this.getUndispatchedPackages(pkge);
-        if(unDispatchedPkg.length === 1) {
-          this.updateCart(pkge, unDispatchedPkg);
+      if (["create","update"].indexOf(data.operation) >= 0) {
+        if(data.item.package.allow_web_publish === null) {
+          return false;
+        }
+        this.store.pushPayload(data.item);
+        var unDispatchedPkg = [];
+        if(cartContent) {
+          var pkge = this.store.peekRecord('package', data.item.package.id);
+          unDispatchedPkg = this.getUndispatchedPackages(pkge);
+          if(unDispatchedPkg.length === 1) {
+            this.updateCart(pkge, unDispatchedPkg);
+          }
+        }
+        if(cartItem) {
+          this.get("cart").pushItem(this.store.peekRecord("package", packageId).toCartItem());
+        }
+      } else if (existingItem) { //delete
+        this.store.unloadRecord(existingItem);
+        if(cartItem) {
+          this.addItemToCart(cartItem);
         }
       }
-      if(cartItem) {
-        this.get("cart").pushItem(this.store.peekRecord("package", packageId).toCartItem());
-      }
-    } else if (existingItem) { //delete
-      this.store.unloadRecord(existingItem);
-      if(cartItem) {
-        this.addItemToCart(cartItem);
-      }
-    }
-    //checking if package is available in store and in cart
-    if(itemInCart && cartItem) {
-      //updating cart pkg availability accordingly
-      if((itemInCart.get("orderId") === null) && (itemInCart.get("allowWebPublish") || itemInCart._internalModel._data.allowWebPublish)) {
-        this.updateCartAvailability(1, cartItem);
-      } else {
-        this.updateCartAvailability(0, cartItem);
+      //checking if package is available in store and in cart
+      if(itemInCart && cartItem) {
+        //updating cart pkg availability accordingly
+        if((itemInCart.get("orderId") === null) && (itemInCart.get("allowWebPublish") || itemInCart._internalModel._data.allowWebPublish)) {
+          this.updateCartAvailability(1, cartItem);
+        } else {
+          this.updateCartAvailability(0, cartItem);
+        }
       }
     }
     run(success);

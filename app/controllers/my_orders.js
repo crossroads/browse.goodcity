@@ -20,11 +20,7 @@ export default applicationController.extend({
   hideHeaderBar: Ember.computed.alias("applicationController.hideHeaderBar"),
   messageSortOptions: ['createdAt:asc'],
 
-  selectedOrderMessages: Ember.computed("selectedOrder", function () {
-    return this.get('selectedOrder.messages');
-  }),
-
-  sortedMessages: Ember.computed.sort("selectedOrderMessages", "messageSortOptions"),
+  sortedMessages: Ember.computed.sort("selectedOrder.messages", "messageSortOptions"),
 
   groupedMessages: Ember.computed("sortedMessages", function () {
     return this.groupBy(this.get("sortedMessages"), "createdDate");
@@ -262,6 +258,11 @@ export default applicationController.extend({
       values.isPrivate = false;
       values.sender = this.store.peekRecord("sender", this.get("session.currentUser.id"));
       this.createMessage(values);
+
+      // Animate and scroll to bottom
+      Ember.$("body").animate({
+        scrollTop: Ember.$(document).height()
+      }, 1000);
     }
   }
 });

@@ -8,6 +8,7 @@ export default Model.extend({
   code: attr('string'),
   state: attr('string'),
   purposeDescription: attr('string'),
+  unreadMessagesCount: attr('number'),
   orderType: attr('string'),
   ordersPackages: hasMany("orders_packages", { async: false }),
   orderTransportId: attr('string'),
