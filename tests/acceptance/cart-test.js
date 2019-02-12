@@ -3,7 +3,7 @@ import { module, test } from 'qunit';
 import startApp from '../helpers/start-app';
 import {make} from 'ember-data-factory-guy';
 import { mockFindAll } from 'ember-data-factory-guy';
-import FactoryGuy from 'ember-data-factory-guy';
+// import FactoryGuy from 'ember-data-factory-guy';
 
 var App, pkgCategory, subcategory1, pkg, pkgType1, pkgType2, subcategory2, order, ordersPackage, gogo_van, order_purpose, user, bookingType, purpose;
 
@@ -43,7 +43,7 @@ module('Acceptance | Cart Page', {
 
 
 test("delete orders_packages from orders in draft", function(assert){
-  var store = FactoryGuy.store;
+  // var store = FactoryGuy.store;
   $.mockjax({url:"/api/v1/order*", type: 'POST', status: 200,responseText:{"order": order.toJSON({includeId: true}),"package": pkg.toJSON({includeId: true}), "orders_packages": [ordersPackage.toJSON({includeId: true})], "orders_purposes": [order_purpose.toJSON({includeId: true})]}});
   $.mockjax({url:"/api/v1/order*", type: 'PUT', status: 200,responseText:{"order": order.toJSON({includeId: true}),"package": pkg.toJSON({includeId: true}), "orders_packages": [ordersPackage.toJSON({includeId: true})], "orders_purposes": [order_purpose.toJSON({includeId: true})]}});
   $.mockjax({url: "/api/v1/orders_pac*", type: 'DELETE', status: 200, responseText:{ }});
@@ -57,20 +57,20 @@ test("delete orders_packages from orders in draft", function(assert){
       andThen(function(){
         click(".expand:last");
         andThen(function(){
-          assert.equal(currentURL(), "/order_details");
+          assert.equal(currentURL(), "/request_purpose");
 
-          click('input#1');
           andThen(function(){
-            $("#purpose_1").prop('checked', true);
             $("#description").val("Test");
-            click("#submit_pin");
+            $("#people-count").val("3");
+            click("#request-submit");
             andThen(function(){
               visit("/cart");
               andThen(function(){
                 assert.equal(currentURL(),"/cart");
+                assert.equal(find('.item-collection li').length, 1);
                 click(".item-collection li:first span");
                 andThen(function(){
-                  assert.equal(store.peekAll("orders_package").get("length"), 0);
+                  assert.equal(find('.item-collection li').length, 0);
                 });
               });
             });

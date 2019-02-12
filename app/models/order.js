@@ -102,13 +102,20 @@ export default Model.extend({
       i18n.t("order.appointment.self_vehicle") : i18n.t("order.appointment.hire_vehicle");
   }),
 
+  appointmentDate: Ember.computed("orderTransport", function() {
+    let orderTransport = this.get("orderTransport");
+    if (!orderTransport) {
+      return '';
+    }
+    return moment(orderTransport.get("scheduledAt")).format('dddd MMMM Do');
+  }),
+
   appointmentTime: Ember.computed("orderTransport", function() {
     let orderTransport = this.get("orderTransport");
-    if(orderTransport) {
-      return `${moment(orderTransport.get("scheduledAt")).format('dddd MMMM Do')}, ${orderTransport.get("timeslot")}`;
-    } else {
-      return "";
+    if (!orderTransport) {
+      return '';
     }
+    return `${this.get('appointmentDate')}, ${orderTransport.get("timeslot")}`;
   }),
 
   stateIcon: Ember.computed('state', function () {

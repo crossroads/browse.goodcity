@@ -5,15 +5,22 @@
 <div class="row">
   <div class="large-8 columns large-offset-2 medium-offset-1 medium-10 small-12">
     <div class="row checkout_pages">
-      <div class="small-12">
+      <div class="small-12 schedule_details">
+
+        {{#if showOrderSlotSelection }}
+          {{partial "order/online_order_timeslot_list_overlay" }}
+        {{/if}}
+
         <section class="main-section new-user-section ui login_page book_appointment_headers">
           <nav class="tab-bar">
             <section class="left-large inline-content">
               {{fa-icon "angle-left"}}
               {{#if (is-equal previousRouteName "my_orders")}}
                 {{#link-to 'my_orders' classNames="back"}}{{t "back"}}{{/link-to}}
-              {{else}}
+              {{else if isAppointment }}
                 {{#link-to 'order.goods_details' order.id classNames="back"}}{{t "back"}}{{/link-to}}
+              {{else}}
+                {{#link-to 'order.client_information' order.id classNames="back"}}{{t "back"}}{{/link-to}}
               {{/if}}
             </section>
              <section class="middle tab-bar-section">
@@ -76,52 +83,86 @@
                 </div>
                 <br>
 
-                <div class="row">
-                  <div class="small-12 columns type-of-id-text">
-                    {{t 'order.appointment.date'}}
+                {{#if order.isAppointment }}
+                    <!--
+                      FULL CALENDAR SELECTION FOR APPOINTMENTS
+                    -->
+                  <div class="row">
+                    <div class="small-12 columns type-of-id-text">
+                      {{t 'order.appointment.date'}}
+                    </div>
                   </div>
-                </div>
 
-                <div class="row time_inputs">
-                  <div class=" small-12 columns date_selector">
-                    {{select-appointment-date
-                      name='selectedDate'
-                      id='selectedDate'
-                      value=''
-                      available=available_dates
-                      selection=selectedDate
-                      placeholder="Date"
-                      pattern="[a-zA-Z]{3}\s?[a-zA-Z]{3}\s?[0-9]{1,2}"}}
-                    <i class="fa fa-calendar calender_icon"></i>
+                  <div class="row time_inputs">
+                    <div class=" small-12 columns date_selector">
+                      {{select-appointment-date
+                        name='selectedDate'
+                        id='selectedDate'
+                        value=''
+                        available=available_dates
+                        selection=selectedDate
+                        placeholder="Date"
+                        pattern="[a-zA-Z]{3}\s?[a-zA-Z]{3}\s?[0-9]{1,2}"}}
+                      <i class="fa fa-calendar calender_icon"></i>
+                    </div>
                   </div>
-                </div>
+                {{else}}
+                  <!--
+                    LIST OF UPCOMING DAYS FOR ORDERS
+                  -->
+                  <div class="small-12 columns type-of-id-text">
+                    {{t 'order.online_order.preferred_date'}}
+                  </div>
+
+                  <div class="small-12 columns id-confidential-text">
+                    {{t 'order.online_order.goods_limit'}} <br>
+                    {{t 'order.online_order.order_confirmation'}}
+                  </div>
+
+                  <div class="row time_inputs" {{ action 'showOrderSlotSelectionOverlay' }}>
+                    <div class="small-12 columns online-order-time-selection">
+                      <label class="align-text">
+                        <span>
+                          {{#if selectedTimeId}}
+                            {{display-time selectedTimeId "dddd MMMM Do"}}
+                          {{else}}
+                            {{t 'order.online_order.choose_date'}}
+                          {{/if}}
+                        </span>
+                        <div class="icon">{{fa-icon "calendar"}}</div>
+                      </label>
+                    </div>
+                  </div>
+                {{/if}}
 
                 <br>
-                {{#if selectedDate}}
-                  <div class="small-12 columns type-of-id-text">
-                    {{t 'order.appointment.time'}}
-                  </div>
-                  <div class="row time_inputs id-type-radio-input time-slots" >
-                    {{#each timeSlots as |time|}}
-                      {{#unless time.isClosed}}
-                          <div class="custom_radio_buttons small-4 large-4 medium-4 columns end">
-                            {{radio-button
-                            name="selectTime"
-                            id=time.timestamp
-                            value=time.timestamp
-                            selection=selectedTimeId
-                            required='true'}}
-                            <label class="radio-button-text align-text time_slots" for={{time.timestamp}}>
-                              {{display-time time.timestamp "HH:mm"}}
-                            </label>
-                          </div>
-                      {{/unless}}
-                    {{/each}}
-                  </div>
-                  {{#if timeSlotNotSelected}}
-                    <p align="center" class="no-time-slot-selected-error">
-                      {{t "order.goods_details.no_time_slot_selected_error"}}
-                    </p>
+                {{#if order.isAppointment}}
+                  {{#if selectedDate}}
+                    <div class="small-12 columns type-of-id-text">
+                      {{t 'order.appointment.time'}}
+                    </div>
+                    <div class="row time_inputs id-type-radio-input time-slots" >
+                      {{#each timeSlots as |time|}}
+                        {{#unless time.isClosed}}
+                            <div class="custom_radio_buttons small-4 large-4 medium-4 columns end">
+                              {{radio-button
+                              name="selectTime"
+                              id=time.timestamp
+                              value=time.timestamp
+                              selection=selectedTimeId
+                              required='true'}}
+                              <label class="radio-button-text align-text time_slots" for={{time.timestamp}}>
+                                {{display-time time.timestamp "HH:mm"}}
+                              </label>
+                            </div>
+                        {{/unless}}
+                      {{/each}}
+                    </div>
+                    {{#if timeSlotNotSelected}}
+                      <p align="center" class="no-time-slot-selected-error">
+                        {{t "order.goods_details.no_time_slot_selected_error"}}
+                      </p>
+                    {{/if}}
                   {{/if}}
                 {{/if}}
                 <div class="row">

@@ -14,7 +14,7 @@ export default Ember.Controller.extend({
 
   cancelOrderFlashMessage: Ember.observer("orderCancelled", 'triggerFlashMessage', function() {
     var previousRoute = this.get("previousRouteName");
-    if(this.get("orderCancelled") && (previousRoute === "order.transport_details" || previousRoute === "order.confirm")) {
+    if(this.get("orderCancelled") && (previousRoute === "order.schedule_details" || previousRoute === "order.confirm")) {
       this.get("flashMessage").show("order.flash_cancelled_message");
     }
   }),

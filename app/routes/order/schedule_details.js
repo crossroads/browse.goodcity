@@ -89,7 +89,7 @@ export default AuthorizeRoute.extend({
     let orderTransport = model.orderTransport;
     let availableDatesAndTime = model.availableDatesAndtime;
     let availableSlots = null;
-    let order = null;
+    let order = model.order;
     controller.set('isEditing', false);
     if (orderTransport){
       selectedId = orderTransport.get('transportType');
@@ -108,7 +108,7 @@ export default AuthorizeRoute.extend({
       this.setIsEditing(order, controller);
     }
     controller.set('selectedId', selectedId);
-    controller.set('selectedTimeId', selectedTime);
+    controller.set('selectedTimeId', selectedDate && selectedDate.format());
     controller.set('available_dates', availableDatesAndTime);
     controller.set('selectedDate', selectedDate);
     if(selectedSlot) {
@@ -134,6 +134,7 @@ export default AuthorizeRoute.extend({
       this.controllerFor('my_orders').set("selectedOrder", null);
     }
     this.controllerFor('application').set('showSidebar', false);
+    controller.set('showOrderSlotSelection', false);
   },
 
   deactivate(){

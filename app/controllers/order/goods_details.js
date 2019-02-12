@@ -49,7 +49,7 @@ export default Ember.Controller.extend(cancelOrder, {
       Ember.RSVP.all(promises).then(function(){
         loadingView.destroy();
       }).finally(() =>{
-        this.transitionToRoute('order.appointment_details', this.get("order.id"));
+        this.transitionToRoute('order.schedule_details', this.get("order.id"));
       });
     }
   }
