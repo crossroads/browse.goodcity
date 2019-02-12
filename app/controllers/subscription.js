@@ -156,8 +156,8 @@ export default Ember.Controller.extend({
     }
 
     var existingItem;
-    if (this.get('session.currentUser.id') != data.sender.user.id){
-      existingItem = this.store.peekRecord(type, item.id) || this.store.findRecord(type, item.id);
+    if (this.get('session.currentUser.id') !== data.sender.user.id.toString()){
+      existingItem = this.store.findRecord(type, item.id);
     } else {
       existingItem = this.store.peekRecord(type, item.id);
     }

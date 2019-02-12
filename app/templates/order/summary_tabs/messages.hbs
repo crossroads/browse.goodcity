@@ -38,14 +38,16 @@
       <div class="row message-base">
         <div class="small-12 columns">
           {{#validatable-form class="form-horizontal" onSubmit=(action 'sendMessage') as |form|}}
-          <div class="row ui">
-            <div class="small-9 large-10 medium-10 columns">
-              {{input value=body placeholder="Enter Message here !"}}
+            <div class="row ui">
+              <div class="small-9 large-10 medium-10 columns">
+                {{variable-height-textarea value=body name="body" required=true parentDiv="message-section"}}
+              </div>
+              <div class="small-3 large-2 medium-2 columns">
+                {{#online-button classNames="button" onClick=(action "sendMessage")}}
+                  Send
+                {{/online-button}}
+              </div>
             </div>
-            <div class="small-3 large-2 medium-2 columns">
-              <button {{action 'submit' target=form}} class="button">Send</button>
-            </div>
-          </div>
           {{/validatable-form}}
         </div>
       </div>
