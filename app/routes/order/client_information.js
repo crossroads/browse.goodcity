@@ -42,7 +42,7 @@ export default AuthorizeRoute.extend({
       controller.set('mobilePhone', phoneNumber);
       controller.set('identityNumber', beneficiary.get('identityNumber'));
     }
-    controller.set('isEditing', !order.get('isDraft'));
+    controller.set('isEditing', !model.order.get('isDraft'));
     controller.set('selectedId', selectedId);
   },
 
