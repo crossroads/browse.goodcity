@@ -1,7 +1,14 @@
-// .tab-content1{
-//   height: 498px;
-//   width: 80%
-// }
+.message-container{
+  max-height: 24rem;
+  overflow: scroll;
+  height: 24rem;
+}
+
+.message-container-expanded {
+  max-height: 22rem;
+  overflow: scroll;
+  height: 22rem;
+}
 
 .message_details {
   font-size: .7rem;
@@ -48,18 +55,6 @@ margin: 30px 0 30px;
   }
 }
 
-// .message-footer{
-//   height: 17em;
-// }
-
-// .message-textbar{
-//   position: fixed;
-//   bottom: 0;
-//   width: 73.6% !important;
-//   margin-bottom: 0px;
-//   margin-left: 1px !important;
-// }
-
 .message-form {
   padding-top: .1rem;
   padding-right: .2rem;
@@ -80,5 +75,14 @@ margin: 30px 0 30px;
     margin: 0;
     display: inline-block;
     margin-top: -1px;
+  }
+}
+
+.chat_note {
+  color: white;
+  margin-bottom: 0.5rem;
+  margin-left: 13em;
+  i {
+    color: #f34d4f;
   }
 }
