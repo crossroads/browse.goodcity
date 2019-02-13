@@ -38,7 +38,7 @@ export default AuthorizeRoute.extend({
     controller.set("previousRouteName", this.get("previousRouteName"));
     controller.toggleProperty("triggerFlashMessage");
     this.controllerFor('application').set('pageTitle', this.get('i18n').t("my_orders.my_orders"));
-    let selectedOrder = controller.get('selectedOrder')
+    let selectedOrder = controller.get('selectedOrder');
     this.controllerFor('application').set('hideHeaderBar', !!selectedOrder);
   },
 
