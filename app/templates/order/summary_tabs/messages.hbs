@@ -1,33 +1,33 @@
 <section class="message-section">
   <div class="row">
-    <div class="small-12 columns">
+    <div class="small-12 columns message-container {{if displayChatNote "message-container-expanded" "message-container"}}">
       {{#each groupedMessages as |messages|}}
-      <div class="small-12 columns day_seperator">
-        <span>{{display-messages-day messages.firstObject.createdDate 'Today'}}</span>
-      </div>
-      {{#each messages as |message|}}
-      {{#if message.isMessage}}
-      <div class="ellipsis {{message.state}} {{if message.myMessage 'my_message' 'received_message'}}" id={{message.id}}>
-        <div class='message_details'>
-          {{#if message.myMessage}}
-          You
-          {{else}}
-          <i class="user-icon">{{fa-icon 'user-circle' size="2x"}}</i>
-          {{t "full_name" firstName=message.sender.firstName lastName=message.sender.lastName}}
-          {{message.sender.roleInitials}}
-          {{/if}}
-          →
-          {{display-datetime message.createdAt format="HH:mm"}}
+        <div class="small-12 columns day_seperator">
+          <span>{{display-messages-day messages.firstObject.createdDate 'Today'}}</span>
         </div>
+        {{#each messages as |message|}}
+          {{#if message.isMessage}}
+            <div class="ellipsis {{message.state}} {{if message.myMessage 'my_message' 'received_message'}}" id={{message.id}}>
+              <div class='message_details'>
+                {{#if message.myMessage}}
+                You
+                {{else}}
+                <i class="user-icon">{{fa-icon 'user-circle' size="2x"}}</i>
+                {{t "full_name" firstName=message.sender.firstName lastName=message.sender.lastName}}
+                {{message.sender.roleInitials}}
+                {{/if}}
+                →
+                {{display-datetime message.createdAt format="HH:mm"}}
+              </div>
 
-        {{message.body}}
-      </div>
-      {{else}}
-      <div class="small-12 columns item_log">
-        {{display-datetime message.createdAt format="HH:mm"}} - {{message.displayMessage}}
-      </div>
-      {{/if}}
-      {{/each}}
+              {{message.body}}
+          </div>
+          {{else}}
+          <div class="small-12 columns item_log">
+            {{display-datetime message.createdAt format="HH:mm"}} - {{message.displayMessage}}
+          </div>
+          {{/if}}
+        {{/each}}
       {{/each}}
     </div>
   </div>
@@ -35,6 +35,14 @@
 <div class="message-footer">
   <div class="btm message-form">
     <div class="row message-textbar">
+      {{#if displayChatNote}}
+        <div class="row">
+          <div class="small-12 columns chat_note">
+            <i class="fa fa-info-circle"></i>
+            Chat about this order with our staff
+          </div>
+        </div>
+      {{/if}}
       <div class="row message-base">
         <div class="small-12 columns">
           {{#validatable-form class="form-horizontal" onSubmit=(action 'sendMessage') as |form|}}

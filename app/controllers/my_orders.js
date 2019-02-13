@@ -19,6 +19,11 @@ export default applicationController.extend({
   applicationController: Ember.inject.controller('application'),
   hideHeaderBar: Ember.computed.alias("applicationController.hideHeaderBar"),
   messageSortOptions: ['createdAt:asc'],
+  noMessage: Ember.computed.empty("selectedOrder.messages"),
+
+  displayChatNote: Ember.computed('noMessage', 'disabled', function () {
+    return this.get("noMessage") && !this.get("disabled");
+  }),
 
   sortedMessages: Ember.computed.sort("selectedOrder.messages", "messageSortOptions"),
 
