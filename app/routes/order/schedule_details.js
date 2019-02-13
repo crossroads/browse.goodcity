@@ -105,7 +105,7 @@ export default AuthorizeRoute.extend({
         availableSlots = calendarDates.filter( date => date.date === moment(selectedDate).format('YYYY-MM-DD'))[0];
         selectedSlot = availableSlots && availableSlots.slots.filter(slot => slot.timestamp.indexOf(orderTransport.get("timeslot")) >= 0)[0];
       }
-      this.setIsEditing(order, controller);
+      controller.set('isEditing', !order.get('isDraft'));
     }
     controller.set('selectedId', selectedId);
     controller.set('selectedTimeId', selectedDate && selectedDate.format());
@@ -113,14 +113,6 @@ export default AuthorizeRoute.extend({
     controller.set('selectedDate', selectedDate);
     if(selectedSlot) {
       controller.set("selectedTimeId", selectedSlot.timestamp);
-    }
-  },
-
-  setIsEditing(order, controller){
-    if(order.get('isDraft')){
-      controller.set('isEditing', false);
-    } else {
-      controller.set('isEditing', true);
     }
   },
 

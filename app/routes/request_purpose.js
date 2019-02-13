@@ -59,15 +59,7 @@ export default AuthorizeRoute.extend({
     controller.set('selectedDistrict', order.get('district'));
     controller.set('peopleCount', order.get("peopleHelped"));
     controller.set('description', order.get("purposeDescription"));
-    this.setIsEditing(order, controller);
-  },
-
-  setIsEditing(order, controller){
-    if(order.get('isDraft')){
-      controller.set('isEditing', false);
-    } else {
-      controller.set('isEditing', true);
-    }
+    controller.set('isEditing', !order.get('isDraft'));
   },
 
   setupController(controller, model, transition) {
