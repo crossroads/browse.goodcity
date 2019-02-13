@@ -81,22 +81,3 @@ test("delete orders_packages from orders in draft", function(assert){
 
   });
 });
-
-test("restricting transport details page to confirm page without userName and mobile", function(assert){
-  mockFindAll('order').returns({ json: {orders: [order.toJSON({includeId: true})], packages: [pkg.toJSON({includeId: true})], user: [user.toJSON({includeId: true})], orders_packages: [ordersPackage.toJSON({includeId: true})]}});
-  assert.expect(4);
-  visit('/order/'+ order.id + '/transport_details');
-  andThen(function(){
-    assert.equal(currentURL(), '/order/'+ order.id +'/transport_details');
-    click('#ggv');
-    andThen(function(){
-      assert.equal($('#name')[0].value, user.get('fullName'));
-      assert.equal($('#mobile')[0].value, user.get('mobile'));
-      click('#submit_pin');
-      andThen(function(){
-        assert.equal(currentURL(), '/order/'+ order.id +'/transport_details');
-      });
-    });
-  });
-});
-
