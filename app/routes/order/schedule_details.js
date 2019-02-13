@@ -16,14 +16,14 @@ export default AuthorizeRoute.extend({
     };
   },
 
-  getBookedSlot(orderTransportScheduledAt, orderTransport) {
+  makeBookedSlot(orderTransport) {
     return {
       id: null,
       isClosed: false,
       note: "",
       quota: 1,
       remaining: 1,
-      timestamp: orderTransportScheduledAt + "T" + orderTransport.get("timeslot") + ":00.000+08:00"
+      timestamp: moment.tz(orderTransport.get("scheduledAt"), 'Asia/Hong_Kong').format()
     };
   },
 
@@ -41,7 +41,7 @@ export default AuthorizeRoute.extend({
     let orderTransportScheduledAt = moment.tz(orderTransport.get("scheduledAt"), 'Asia/Hong_Kong').format("YYYY-MM-DD");
     let transportDate = this.filteredCalenderDatesWithOrderTransport(calendarDates, orderTransportScheduledAt);
     let remainingQuota = this.slotExitsWithNoQuota(calendarDates, orderTransportScheduledAt, orderTransport);
-    let bookedSlot = this.getBookedSlot(orderTransportScheduledAt, orderTransport);
+    let bookedSlot = this.makeBookedSlot(orderTransport);
     if(transportDate) {
       //If no slots are available then push single slot
       if(transportDate.isClosed) {

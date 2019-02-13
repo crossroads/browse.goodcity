@@ -13,11 +13,13 @@ export default AuthorizeRoute.extend({
     let previousRoutes  = this.router.router && this.router.router.currentHandlerInfos;
     let previousRoute   = previousRoutes && previousRoutes.pop();
     let isAppointment   = transition.queryParams.bookAppointment === 'true';
+    let editRequest     = transition.queryParams.editRequest === 'true';
 
     if(previousRoute && previousRoute.name) {
       this.set("previousRouteName", previousRoute.name);
     }
 
+    this.set('editRequest', editRequest);
     this.set('isBookAppointment', isAppointment);
 
     const orderId = transition.queryParams.orderId;

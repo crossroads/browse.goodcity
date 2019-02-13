@@ -24,14 +24,10 @@
       <ul class="list list-items">
         {{#each arrangedOrders as |order|}}
           <li {{action "setOrder" order}}>
-            {{#if order.isAppointmentDraft}} 
-              {{#link-to 'request_purpose' (query-params bookAppointment=true orderId=order.id)}}
+            {{#if order.isDraft}} 
+              {{#link-to 'request_purpose' (query-params bookAppointment=isAppointmentDraft orderId=order.id)}}
                 {{ partial 'order/order_block'}}
               {{/link-to}}
-            {{else if order.isOnlineOrderDraft }}
-               {{#link-to 'order_details' (query-params orderId=order.id editRequest=true)}}
-                  {{ partial 'order/order_block'}}
-               {{/link-to}}
             {{else}}
               {{ partial 'order/order_block'}}
             {{/if}}
