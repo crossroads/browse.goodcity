@@ -23,7 +23,6 @@ export default Model.extend({
   ordersPurposes:     hasMany('ordersPurpose', { async: false }),
   messages: hasMany('message', {async: true}),
   beneficiaryId: attr('string'),
-  beneficiaryId: attr('number'),
   bookingTypeId: attr('number'),
   beneficiary: belongsTo('beneficiary', { async: false }),
   peopleHelped: attr('number'),
