@@ -1,16 +1,17 @@
+
 <section class="message-section">
   <div class="row">
     <div class="small-12 columns {{if displayChatNote "message-container-expanded" "message-container"}}">
       {{#each groupedMessages as |messages|}}
         <div class="small-12 columns day_seperator">
-          <span>{{display-messages-day messages.firstObject.createdDate 'Today'}}</span>
+          <span>{{display-messages-day messages.firstObject.createdDate (t 'messages.day.today')}}</span>
         </div>
         {{#each messages as |message|}}
           {{#if message.isMessage}}
             <div class="ellipsis {{message.state}} {{if message.myMessage 'my_message' 'received_message'}}" id={{message.id}}>
               <div class='message_details'>
                 {{#if message.myMessage}}
-                You
+                  {{t 'messages.you'}}
                 {{else}}
                 <i class="user-icon">{{fa-icon 'user-circle' size="2x"}}</i>
                 {{t "full_name" firstName=message.sender.firstName lastName=message.sender.lastName}}
@@ -39,7 +40,7 @@
         <div class="row">
           <div class="small-12 columns chat_note">
             <i class="fa fa-info-circle"></i>
-            Chat about this order with our staff
+            {{t 'messages.chat_note'}}
           </div>
         </div>
       {{/if}}
@@ -52,7 +53,7 @@
               </div>
               <div class="small-3 large-2 medium-2 columns">
                 {{#online-button classNames="button" onClick=(action "sendMessage")}}
-                  Send
+                  {{t "messages.send"}}
                 {{/online-button}}
               </div>
             </div>

@@ -33,6 +33,16 @@ export default {
   "discard_changes": "放棄修正",
   "morning": "早安",
   "afternoon": "午安",
+  "messages": {
+    "you": "You",
+    "chat_note": "Chat about this order with our staff",
+    "send": "Send",
+    "day": {
+      "today": "Today",
+      "morning": "Morning",
+      "afternoon": "Afternoon"
+    }
+  },
 
   "banner": {
     "presented_by": "建立機構",
