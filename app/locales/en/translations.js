@@ -257,6 +257,7 @@ export default {
       "appointment": "Appointment",
       "goods_requested": "Goods Requested",
       "goods_ordered": "Goods Selected",
+      "not_applicable": "Not applicable",
       "request": {
         "request_purpose": "Request purpose",
         "purpose_of_goods": "Purpose of goods",
@@ -415,8 +416,8 @@ export default {
     "request_purpose": {
       "title": "Request Purpose",
       "purpose": "Purpose of Goods",
-      "for_organisation": "For organisation's own programs",
-      "for_client": "For a client/benificiary",
+      "for_organisation": "No - order for organisation's own programs",
+      "for_client": "Yes - order is for a client/benificiary",
       "people_count_info": "How many people will benefit from these items?",
       "district_label": "Where in Hong Kong will these goods be primarily used?",
       "district-label-info": "This assists us with our reporting.",

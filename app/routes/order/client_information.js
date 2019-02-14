@@ -21,7 +21,8 @@ export default AuthorizeRoute.extend({
 
     return Ember.RSVP.hash({
       order: order,
-      beneficiary: order.get('beneficiary')
+      beneficiary: order.get('beneficiary'),
+      purposes: this.store.peekAll('purpose')
     });
   },
 
@@ -40,7 +41,7 @@ export default AuthorizeRoute.extend({
       controller.set('lastName', beneficiary.get('lastName'));
       controller.set('mobilePhone', phoneNumber);
       controller.set('identityNumber', beneficiary.get('identityNumber'));
-    } 
+    }
     this.setIsEditing(model.order, controller);
     controller.set('selectedId', selectedId);
   },

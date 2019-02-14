@@ -17,8 +17,15 @@ export default Ember.Controller.extend(cancelOrder, {
   identityNumber: null,
   order: Ember.computed.alias("model.order"),
   beneficiary: Ember.computed.alias("model.beneficiary"),
+  purposes: Ember.computed.alias("model.purposes"),
 
   isHkIdSelected: Ember.computed.equal("selectedId", "hkId"),
+  isOrganisationSelected: Ember.computed.equal("clientInfoId", "organisation"),
+
+  clientInfoId: Ember.computed('order', function() {
+    let orderPurpose = this.get('order.ordersPurposes').get('firstObject');
+    return (orderPurpose && orderPurpose.get('purpose.identifier')) || 'organisation';
+  }),
 
   mobile: Ember.computed('mobilePhone', function(){
     return config.APP.HK_COUNTRY_CODE + this.get('mobilePhone');
@@ -57,34 +64,88 @@ export default Ember.Controller.extend(cancelOrder, {
     return this.get('selectedId') === 'hkId' ? 1 : 2;
   },
 
+  actionType(isOrganisation, beneficiaryId) {
+    let actionType;
+    if (isOrganisation && beneficiaryId) {
+      actionType = 'DELETE';
+    } else if (!isOrganisation && beneficiaryId) {
+      actionType = 'PUT';
+    } else if (!isOrganisation && !beneficiaryId) {
+      actionType = 'POST';
+    } else {
+      actionType = null;
+    }
+    return actionType;
+  },
+
   actions: {
-    saveClientDetails(){
-      var orderId = this.get('order.id');
-      var beneficiaryId = this.get('beneficiary.id');
+    saveClientDetails() {
+      let orderParams;
+      let clientInfo = this.get('clientInfoId');
+      let purposeId = this.get('purposes').filterBy('identifier', clientInfo).get('firstObject.id');
 
-      var url, actionType;
+      const isForOrganisation = clientInfo === 'organisation';
+      orderParams = isForOrganisation ? {
+          'purpose_ids': [purposeId],
+          'beneficiary_id': null
+        } : {
+          'purpose_ids': [purposeId]
+        };
 
-      if (beneficiaryId) {
-        url = "/beneficiaries/" + beneficiaryId;
-        actionType = "PUT";
-      } else {
-        url = "/beneficiaries";
-        actionType = "POST";
-      }
+      this.send('editOrder', orderParams, isForOrganisation);
+    },
 
-      var loadingView = getOwner(this).lookup('component:loading').append();
+    editOrder(orderParams, isOrganisation) {
+      let order = this.get('order');
+      let orderId = order.id;
+      let beneficiaryId = order.get('beneficiary.id');
+      let store = this.store;
 
-      new AjaxPromise(url, actionType, this.get('session.authToken'), { beneficiary: this.beneficiaryParams(), order_id: orderId })
+      let url = beneficiaryId ? "/beneficiaries/" + beneficiaryId : "/beneficiaries";
+
+      let actionType = this.actionType(isOrganisation, beneficiaryId);
+
+      let beneficiary = beneficiaryId && store.peekRecord('beneficiary', beneficiaryId);
+      let loadingView = getOwner(this).lookup('component:loading').append();
+
+      let beneficiaryParams = (["PUT", "POST"].indexOf(actionType) > -1) ?  { beneficiary: this.beneficiaryParams(), order_id: orderId } : {};
+      new AjaxPromise('/orders/' + orderId, 'PUT', this.get('session.authToken'), { order: orderParams })
         .then(data => {
-          this.get("store").pushPayload(data);
-          loadingView.destroy();
-          if(this.get("previousRouteName") === "my_orders") {
-            this.get("myOrders").set("selectedOrder", this.get("order"));
-            this.transitionToRoute('my_orders');
+          store.pushPayload(data);
+          if (actionType) {
+            new AjaxPromise(url, actionType, this.get('session.authToken'), beneficiaryParams)
+              .then((beneficiaryData) => {
+                if(beneficiary && actionType === "DELETE") {
+                  store.unloadRecord(beneficiary);
+                  this.send('redirectToGoodsDetails');
+                } else {
+                  store.pushPayload(beneficiaryData);
+                  this.send('redirectToGoodsDetails', true);
+                }
+              });
           } else {
-            this.transitionToRoute('order.goods_details', orderId, { queryParams: { fromClientInformation: true }});
+            this.send('redirectToGoodsDetails');
           }
+        })
+        .finally(() => {
+          loadingView.destroy();
         });
+    },
+
+    redirectToGoodsDetails(isClientInformation=false) {
+      let order = this.get("order");
+      let orderId = order.id;
+
+      if (this.get("previousRouteName") === "my_orders") {
+        this.get("myOrders").set("selectedOrder", order);
+        this.transitionToRoute('my_orders');
+      } else {
+        if (isClientInformation) {
+          this.transitionToRoute('order.goods_details', orderId, { queryParams: { fromClientInformation: true }});
+        } else {
+          this.transitionToRoute('order.goods_details', orderId);
+        }
+      }
     }
   }
 });
