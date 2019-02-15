@@ -41,27 +41,43 @@
                 </div>
                 <div class="row time_inputs id-type-radio-input" >
                   <div class=" custom_radio_buttons small-12 columns purpose col-width-appointment" for="For HKID">
-                    {{radio-button
-                    name="selectReason"
-                    id="self"
-                    value="self"
-                    selection=selectedId
-                    required='true'}}
-                    <label class="radio-button-text align-text self_vehicle" for="self">
-                      {{t 'order.appointment.self_vehicle'}}
-                    </label>
+                    <div class="columns small-1 radio-button">
+                      {{radio-button
+                      name="selectReason"
+                      id="self"
+                      value="self"
+                      selection=selectedId
+                      required='true'}}
+                    </div>
+                    <div class="columns small-11">
+                      <label class="radio-button-text align-text self_vehicle" for="self">
+                        {{#if order.isAppointment }}
+                          {{t 'order.appointment.self_vehicle'}}
+                        {{else}}
+                          {{t 'order.online_order.self_vehicle'}}
+                        {{/if}}
+                      </label>
+                    </div>
                   </div>
 
-                  <div class=" custom_radio_buttons small-12 columns purpose col-width-appointment end" for="For asyLum">
-                    {{radio-button
-                    name="selectReason"
-                    id="ggv"
-                    value="ggv"
-                    selection=selectedId
-                    required='true'}}
-                    <label class="radio-button-text align-text hire_vehicle" for="ggv">
-                      {{t 'order.appointment.hire_vehicle'}}
-                    </label>
+                  <div class="rows custom_radio_buttons small-12 columns purpose col-width-appointment end" for="For asyLum">
+                    <div class="columns small-1 radio-button">
+                      {{radio-button
+                      name="selectReason"
+                      id="ggv"
+                      value="ggv"
+                      selection=selectedId
+                      required='true'}}
+                    </div>
+                    <div class="columns small-11">
+                      <label class="radio-button-text align-text hire_vehicle" for="ggv">
+                        {{#if order.isAppointment }}
+                          {{t 'order.appointment.hire_vehicle'}}
+                        {{else}}
+                          {{t 'order.online_order.hire_vehicle'}}
+                        {{/if}}
+                      </label>
+                    </div>
                   </div>
                 </div>
                 <br>
@@ -71,7 +87,11 @@
                 </div>
 
                 <div class="small-12 columns id-confidential-text">
-                  {{t 'order.appointment.labor_info'}}
+                  {{#if order.isAppointment }}
+                    {{t 'order.appointment.labor_info'}}
+                  {{else}}
+                    {{t 'order.online_order.labor_info'}}
+                  {{/if}}
                 </div>
                 <div class="row time_inputs id-type-radio-input" >
                   <div class='checkbox custom_radio_buttons small-12 columns purpose col-width-appointment confirmation-checkbox'>

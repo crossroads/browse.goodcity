@@ -443,7 +443,10 @@ export default {
       "order_confirmation": "處理這指令前我們將會確定送貨或收貨日期.",
       "choose_date": "選擇有效的日期",
       "good_limit_dates": "我們不能保存貨品過於以下日期.",
-      "staff_contact": "處理這指令前我們的職員將會確定收貨或送貨時間."
+      "staff_contact": "處理這指令前我們的職員將會確定收貨或送貨時間.",
+      "self_vehicle": "Recipient will collect from Crossroads",
+      "hire_vehicle": "Recipient would like the goods sent in a hired truck (Recipient pays the driver)",
+      "labor_info": "Crossroads' volunteers will help load goods into the vehicle but <u>we cannot provide labour for unloading</u>. Our staff will contact you to discuss this an confirm any charges that may be involved if hired labour will be required for unloading."
     },
     "booking_success": {
       "success": "成功！",
@@ -486,7 +489,7 @@ export default {
         "transport": "運輸",
         "labour": "運輸工人",
         "labour_info": "客戶明白運輸工人的要求及提供運輸工人的需要.",
-        "appointment": "預約",
+        "time": "時間",
       },
       "submit_order": "傳送指令",
       "info": "請覆核以下資料及傳送。<br/>如閣下有需要改變資料，請按下‘回轉’",
