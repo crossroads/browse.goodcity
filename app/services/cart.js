@@ -30,6 +30,19 @@ const Service = ArrayProxy.extend({
     return allItems;
   }),
 
+  packageIds: computed('cartItems', function(){
+    let package_ids = [];
+    this.get("cartItems").forEach(record => {
+      if(record) {
+        let ids = record.get("isItem") ?
+          record.get("packages").map(pkg => pkg.get("id"))
+          : [ record.get("id") ];
+        package_ids = package_ids.concat(ids);
+      }
+    });
+    return package_ids;
+  }),
+
   currentCartItem(item) {
     let cartItem;
 

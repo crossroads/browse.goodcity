@@ -22,11 +22,11 @@ export default Ember.Service.extend({
     return this.get("allDrafts").filterBy('isAppointment', true).get("firstObject");
   }),
 
-  draftOrder: Ember.computed("allDrafts.@each.state", function(){
+  draftOrder: Ember.computed(function(){
     return this.get("allDrafts").filterBy('isAppointment', false).get("firstObject");
   }),
 
-  allDrafts: Ember.computed('allOrders', function () {
+  allDrafts: Ember.computed(function () {
     return this.get('allOrders').filterBy("state", "draft");
   }),
 

@@ -2,6 +2,15 @@
 
   .schedule_details {
 
+    .custom_radio_buttons {
+      label.radio-button-text {
+        margin-top: 0;
+      }
+      .radio-button {
+        line-height: 2rem;
+      }
+    }
+
     .online-order-timeslot-list-overlay {
       background-color: $dark-blue;
       position: absolute;

@@ -9,7 +9,10 @@ export default AuthorizeRoute.extend({
   session: Ember.inject.service(),
 
   beforeModel(transition) {
-    this._super(...arguments);
+    if (!this._super(...arguments)) {
+      return; // not authorized
+    }
+
     let previousRoutes  = this.router.router && this.router.router.currentHandlerInfos;
     let previousRoute   = previousRoutes && previousRoutes.pop();
     let isAppointment   = transition.queryParams.bookAppointment === 'true';

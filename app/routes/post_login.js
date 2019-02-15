@@ -6,6 +6,7 @@ export default Ember.Route.extend(preloadDataMixin, {
 
   cart: Ember.inject.service(),
   messageBox: Ember.inject.service(),
+  session:   Ember.inject.service(),
   isBookAppointment: false,
 
   beforeModel(params){
@@ -18,9 +19,8 @@ export default Ember.Route.extend(preloadDataMixin, {
 
   afterModel() {
     var ordersPackages = [];
-    var package_ids = [];
     // Merging Offline cart items with Order in draft state
-    var draftOrder = this.store.peekAll("order").filterBy("state", "draft").get("firstObject");
+    var draftOrder = this.get('session.draftOrder');
     if (draftOrder) {
       ordersPackages = draftOrder.get("ordersPackages");
     }
@@ -29,30 +29,22 @@ export default Ember.Route.extend(preloadDataMixin, {
         this.get('cart').pushItem(ordersPackage.get('package'));
       });
 
-      if (draftOrder) {
-        this.get("cart.cartItems").forEach(record => {
-          if(record) {
-            var ids = record.get("isItem") ? record.get("packages").getEach("id") : [record.get("id")];
-            package_ids = package_ids.concat(ids);
-          }
-        });
-
-        if (!package_ids || !package_ids.length) {
-          return this.redirectToTransitionOrDetails();
-        }
-
-        var orderParams = {
-          cart_package_ids: package_ids
-        };
-
-        new AjaxPromise(`/orders/${draftOrder.id}`, "PUT", this.get('session.authToken'), { order: orderParams })
-          .then(data => {
-            this.get("store").pushPayload(data);
-            this.redirectToTransitionOrDetails();
-          }).catch(xhr => {
-            this.get("messageBox").alert(xhr.responseJSON.errors);
-          });
+      let packageIds = this.get("cart.packageIds");
+      if (!packageIds.length) {
+        return this.redirectToTransitionOrDetails();
       }
+
+      var orderParams = {
+        cart_package_ids: packageIds
+      };
+
+      new AjaxPromise(`/orders/${draftOrder.id}`, "PUT", this.get('session.authToken'), { order: orderParams })
+        .then(data => {
+          this.get("store").pushPayload(data);
+          this.redirectToTransitionOrDetails();
+        }).catch(xhr => {
+          this.get("messageBox").alert(xhr.responseJSON.errors);
+        });
     } else {
       this.redirectToTransitionOrDetails();
     }

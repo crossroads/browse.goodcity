@@ -462,7 +462,10 @@ export default {
       "order_confirmation": "We will confirm delivery/collection date before processing order.",
       "choose_date": "Choose from available dates",
       "good_limit_dates": "We cannot reserve goods longer than the dates below.",
-      "staff_contact": "Our staff will confirm the collection/delivery time before processing the order."
+      "staff_contact": "Our staff will confirm the collection/delivery time before processing the order.",
+      "self_vehicle": "Recipient will collect from Crossroads",
+      "hire_vehicle": "Recipient would like the goods sent in a hired truck (Recipient pays the driver)",
+      "labor_info": "Crossroads' volunteers will help load goods into the vehicle but <u>we cannot provide labour for unloading</u>. Our staff will contact you to discuss this an confirm any charges that may be involved if hired labour will be required for unloading."
     },
     "booking_success": {
       "success": "Success!",
@@ -505,7 +508,7 @@ export default {
         "transport": "Transport",
         "labour": "Labour",
         "labour_info": "Client understands labour requirements and can supply labour if needed.",
-        "appointment": "Appointment",
+        "time": "Time",
       },
       "submit_order": "Submit order",
       "info": "Please review the information below and then submit.</br>If you need to change something, click 'back'.",
