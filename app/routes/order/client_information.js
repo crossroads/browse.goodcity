@@ -42,16 +42,8 @@ export default AuthorizeRoute.extend({
       controller.set('mobilePhone', phoneNumber);
       controller.set('identityNumber', beneficiary.get('identityNumber'));
     }
-    this.setIsEditing(model.order, controller);
+    controller.set('isEditing', !model.order.get('isDraft'));
     controller.set('selectedId', selectedId);
-  },
-
-  setIsEditing(order, controller){
-    if(order.get('isDraft')){
-      controller.set('isEditing', false);
-    } else {
-      controller.set('isEditing', true);
-    }
   },
 
   setupController(controller, model) {

@@ -16,14 +16,14 @@ export default AuthorizeRoute.extend({
     };
   },
 
-  getBookedSlot(orderTransportScheduledAt, orderTransport) {
+  makeBookedSlot(orderTransport) {
     return {
       id: null,
       isClosed: false,
       note: "",
       quota: 1,
       remaining: 1,
-      timestamp: orderTransportScheduledAt + "T" + orderTransport.get("timeslot") + ":00.000+08:00"
+      timestamp: moment.tz(orderTransport.get("scheduledAt"), 'Asia/Hong_Kong').format()
     };
   },
 
@@ -41,7 +41,7 @@ export default AuthorizeRoute.extend({
     let orderTransportScheduledAt = moment.tz(orderTransport.get("scheduledAt"), 'Asia/Hong_Kong').format("YYYY-MM-DD");
     let transportDate = this.filteredCalenderDatesWithOrderTransport(calendarDates, orderTransportScheduledAt);
     let remainingQuota = this.slotExitsWithNoQuota(calendarDates, orderTransportScheduledAt, orderTransport);
-    let bookedSlot = this.getBookedSlot(orderTransportScheduledAt, orderTransport);
+    let bookedSlot = this.makeBookedSlot(orderTransport);
     if(transportDate) {
       //If no slots are available then push single slot
       if(transportDate.isClosed) {
@@ -89,7 +89,7 @@ export default AuthorizeRoute.extend({
     let orderTransport = model.orderTransport;
     let availableDatesAndTime = model.availableDatesAndtime;
     let availableSlots = null;
-    let order = null;
+    let order = model.order;
     controller.set('isEditing', false);
     if (orderTransport){
       selectedId = orderTransport.get('transportType');
@@ -105,22 +105,14 @@ export default AuthorizeRoute.extend({
         availableSlots = calendarDates.filter( date => date.date === moment(selectedDate).format('YYYY-MM-DD'))[0];
         selectedSlot = availableSlots && availableSlots.slots.filter(slot => slot.timestamp.indexOf(orderTransport.get("timeslot")) >= 0)[0];
       }
-      this.setIsEditing(order, controller);
+      controller.set('isEditing', !order.get('isDraft'));
     }
     controller.set('selectedId', selectedId);
-    controller.set('selectedTimeId', selectedTime);
+    controller.set('selectedTimeId', selectedDate && selectedDate.format());
     controller.set('available_dates', availableDatesAndTime);
     controller.set('selectedDate', selectedDate);
     if(selectedSlot) {
       controller.set("selectedTimeId", selectedSlot.timestamp);
-    }
-  },
-
-  setIsEditing(order, controller){
-    if(order.get('isDraft')){
-      controller.set('isEditing', false);
-    } else {
-      controller.set('isEditing', true);
     }
   },
 
@@ -134,6 +126,7 @@ export default AuthorizeRoute.extend({
       this.controllerFor('my_orders').set("selectedOrder", null);
     }
     this.controllerFor('application').set('showSidebar', false);
+    controller.set('showOrderSlotSelection', false);
   },
 
   deactivate(){

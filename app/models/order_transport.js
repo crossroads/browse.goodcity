@@ -27,6 +27,12 @@ export default Model.extend({
     return moment(this.get('scheduledAt')).format("ddd LL");
   }),
 
+  isMorning: Ember.computed('scheduledAt', function () {
+    return moment.tz(this.get('scheduledAt'), 'Asia/Hong_Kong').hour() < 12;
+  }),
+
+  isAfternoon: Ember.computed.not('isMorning'),
+
   type: Ember.computed('transportType', function(){
     var type = this.get('transportType');
     if(type === "ggv"){
