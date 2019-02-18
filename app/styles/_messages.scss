@@ -2,29 +2,25 @@
   @media #{$large-only} {
     max-height: 24rem;
     height: 24rem;
+    overflow: scroll;
   }
   @media #{$small-only} {
-    max-height: 28rem;
-    height: 28rem;
+    min-height: 20rem;
   }
-  overflow: scroll;
-
 }
 
 .message-container-expanded {
   @media #{$large-only} {
     max-height: 22rem;
     height: 22rem;
+    overflow: scroll;
   }
   @media #{$small-only} {
-    max-height: 26rem;
-    height: 26rem;
+    min-height: 20rem;
   }
   @media #{$medium-only} {
-    max-height: 26rem;
-    height: 26rem;
+    min-height: 26rem;
   }
-  overflow: scroll;
 }
 
 .message_details {
@@ -103,15 +99,7 @@ margin: 30px 0 30px;
 .chat_note {
   color: white;
   margin-bottom: 0.5rem;
-  @media #{$small-only} {
-    margin-left: 3.1rem;
-  }
-  @media #{$large-only} {
-    margin-left: 13em;
-  }
-  @media #{$medium-only} {
-    margin-left: 9rem;
-  }
+  text-align: center;
   i {
     color: #f34d4f;
   }
