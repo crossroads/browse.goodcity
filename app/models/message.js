@@ -18,7 +18,7 @@ export default DS.Model.extend({
     defaultValue: 'read'
   }),
   sender: belongsTo('sender', {
-    async: true
+    async: false
   }),
   order: belongsTo('order', {
     async: false

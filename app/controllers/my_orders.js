@@ -259,7 +259,6 @@ export default applicationController.extend({
       Ember.$("textarea").trigger('blur');
       var values = this.getProperties("body");
       values.order = this.get('selectedOrder');
-      values.createdAt = new Date();
       values.isPrivate = false;
       values.sender = this.store.peekRecord("sender", this.get("session.currentUser.id"));
       this.createMessage(values);
