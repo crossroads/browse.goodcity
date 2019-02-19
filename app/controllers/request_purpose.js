@@ -27,6 +27,18 @@ export default Ember.Controller.extend(cancelOrder, {
     return this.store.peekAll('district');
   }),
 
+  getBookingTypeIdFor(identifier) {
+    return this.store.peekAll('booking_type').filterBy('identifier', identifier).get('firstObject.id');
+  },
+
+  getSelectedBookingTypeId() {
+    let order = this.get('order');
+    let bookingTypeId = order && order.get('bookingTypeId');
+    if (!bookingTypeId) {
+      bookingTypeId = this.getBookingTypeIdFor(this.get('bookAppointment') ? 'appointment' : 'online-order');
+    }
+    return bookingTypeId;
+  },
 
   actions: {
     clearDescription() {
@@ -53,7 +65,7 @@ export default Ember.Controller.extend(cancelOrder, {
         purpose_ids: purposeIds,
         people_helped: this.get('peopleCount'),
         district_id: this.get('selectedDistrict.id'),
-        booking_type_id: this.store.peekAll('booking_type').filterBy('identifier', 'appointment').get('firstObject.id')
+        booking_type_id: this.getSelectedBookingTypeId()
       };
 
       let order = this.get('model');
