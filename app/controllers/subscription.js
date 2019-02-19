@@ -120,8 +120,13 @@ export default Ember.Controller.extend({
     this.get("store").findAll("package");
   },
 
+  // @returns {promise} the record
+  async loadIfAbsent(modelName, id) {
+    return this.store.peekRecord(modelName, id) || this.store.findRecord(modelName, id);
+  },
+
   // each action below is an event in a channel
-  update_store: function(data, success) {
+  update_store: async function(data, success) {
     if(data["item"]["designation"]) {
       data["item"]["order"] = data["item"]["designation"];
       delete data["item"]["designation"];
@@ -155,12 +160,7 @@ export default Ember.Controller.extend({
       }
     }
 
-    var existingItem;
-    if (data.message_from_stock) {
-      existingItem = this.store.findRecord(type, item.id);
-    } else {
-      existingItem = this.store.peekRecord(type, item.id);
-    }
+    var existingItem = await this.loadIfAbsent(type, item.id);
 
     var hasNewItemSaving = this.store.peekAll(type).any(function(o) {
       return o.id === null && o.get("isSaving");
