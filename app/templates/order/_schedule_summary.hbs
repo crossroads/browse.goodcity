@@ -1,13 +1,13 @@
 <section class="main-section your-detail client-information large-10 large-offset-1 medium-10 medium-offset-1 small-12">
   <div class="row">
     <div class="small-12 columns type-of-id-text">
-      <h1 class="title"> {{t "order.confirm_booking.appointment_detail.title"}} </h1>
+      <h1 class="title"> {{t "order.confirm_booking.schedule_summary.title"}} </h1>
     </div>
   </div>
 
   <div class="row info">
     <div class="small-4 columns">
-      {{t "order.confirm_booking.appointment_detail.transport"}}
+      {{t "order.confirm_booking.schedule_summary.transport"}}
     </div>
     <div class="small-8 detail columns">
       {{order.appointmentTransport}}
@@ -16,19 +16,28 @@
 
   <div class="row info">
     <div class="small-4 columns">
-      {{t "order.confirm_booking.appointment_detail.labour"}}
+      {{t "order.confirm_booking.schedule_summary.labour"}}
     </div>
     <div class="small-8 detail columns">
-      {{t "order.confirm_booking.appointment_detail.labour_info"}}
+      {{t "order.confirm_booking.schedule_summary.labour_info"}}
     </div>
   </div>
 
   <div class="row info">
     <div class="small-4 columns">
-      {{t "order.confirm_booking.appointment_detail.appointment"}}
+      {{t "order.confirm_booking.schedule_summary.time"}}
     </div>
     <div class="small-8 detail columns">
-      {{order.appointmentTime}}
+      {{#if order.isAppointment}}
+        {{order.appointmentTime}}
+      {{else}}
+        {{order.appointmentDate}},
+        {{#if order.orderTransport.isMorning}}
+          {{t 'morning'}}
+        {{else}}
+          {{t 'afternoon'}}
+        {{/if}}
+      {{/if}}
     </div>
   </div>
 </section>

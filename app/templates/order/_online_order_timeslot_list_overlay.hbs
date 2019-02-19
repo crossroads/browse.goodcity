@@ -1,0 +1,21 @@
+<div class="online-order-timeslot-list-overlay">
+  <div class="header">
+    {{t "order.online_order.good_limit_dates"}} <br>
+    {{t "order.online_order.staff_contact"}}
+  </div>
+
+  {{#each onlineOrderPickupSlots as |slot|}}
+    <div class="row slot-list" {{action 'selectOnlineOrderSlot' slot}}>
+      <div class="small-6 columns date">
+        {{display-time slot.timestamp "dddd MMMM Do"}}
+      </div>
+      <div class="small-6 columns period">
+        {{#if slot.isMorning}}
+          {{t 'morning'}}
+        {{else}}
+          {{t 'afternoon'}}
+        {{/if}}
+      </div>
+    </div>
+  {{/each}}
+</div>

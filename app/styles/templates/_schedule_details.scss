@@ -1,0 +1,87 @@
+.checkout_pages {
+
+  .schedule_details {
+
+    .custom_radio_buttons {
+      label.radio-button-text {
+        margin-top: 0;
+      }
+      .radio-button {
+        line-height: 2rem;
+      }
+    }
+
+    .online-order-timeslot-list-overlay {
+      background-color: $dark-blue;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1000;
+
+      .header {
+        color: white;
+        padding: 2rem;
+        border-bottom: 1px solid white;
+        text-align: center;
+        font-size: 0.8rem;
+      }
+
+      .slot-list {
+        font-size: 0.8rem;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid $smokey-grey;
+        .date {
+          text-align: right;
+        }
+        .period {
+          text-align: left;
+          padding-left: 2rem;
+        }
+      }
+    }
+
+    .time_inputs {
+      .online-order-time-selection {
+        border: 1px solid;
+        padding: .4rem;
+        margin-top: 1rem;
+        height: 2.7rem;
+        padding-left: 2rem;
+        position: relative;
+
+        .icon {
+          position: absolute;
+          right: 1rem;
+          top: 0.5rem;
+        }
+
+        @media #{$small-only}{
+          span {
+            font-size: 0.65rem;
+          }
+        }
+      }
+    }
+
+    .appointment-date{
+      .calender_icon {
+        margin-right: 1.1rem;
+        font-size: 1.1rem;
+        display: inline;
+        color: #FFA3A3;
+        float: right;
+        margin-top: -2.68rem;
+      }
+      i.calendar_icon:before {
+        position: absolute;
+      }
+      .checkbox.form__control--error{
+        border-color: #f34d4f;
+        background: #fddbdc;
+      }
+    }
+  }
+}

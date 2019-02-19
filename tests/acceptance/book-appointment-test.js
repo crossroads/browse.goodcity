@@ -51,7 +51,7 @@ module('Acceptance | BookAppointment', {
     requestPurposeUrl = '/request_purpose';
     clientInfoUrl = `/order/${order.id}/client_information`;
     goodsDetailsUrl = `/order/${order.id}/goods_details`;
-    appointmentPageUrl = `/order/${order.id}/appointment_details`;
+    appointmentPageUrl = `/order/${order.id}/schedule_details`;
     confirmBookingUrl = `/order/${order.id}/confirm_booking`;
     bookingSuccessUrl = `/order/${order.id}/booking_success`;
   },

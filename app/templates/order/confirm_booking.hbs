@@ -8,7 +8,7 @@
         <section class="main-section new-user-section ui login_page large-10 large-offset-1 medium-10 medium-offset-1">
           <nav class="tab-bar">
             <section class="left-large inline-content">
-              {{fa-icon "angle-left"}} {{#link-to "order.appointment_details" order.id classNames="back"}}{{t "back"}}{{/link-to}}
+              {{fa-icon "angle-left"}} {{#link-to "order.schedule_details" order.id classNames="back"}}{{t "back"}}{{/link-to}}
             </section>
              <section class="middle tab-bar-section">
               <h1 class="title"> {{t "order.confirm_booking.title"}} </h1>
@@ -48,10 +48,12 @@
     {{/if}}
 
     {{!-- Goods details section --}}
-    {{partial "order/goods_detail"}}
+    {{#if order.isAppointment }}
+      {{partial "order/goods_detail"}}
+    {{/if}}
 
     {{!-- Appointment details section --}}
-    {{partial "order/appointment_detail"}}
+    {{partial "order/schedule_summary"}}
 
     <section class="main-section client-information large-10 large-offset-1 medium-10 medium-offset-1 small-12">
       <div class="row">
