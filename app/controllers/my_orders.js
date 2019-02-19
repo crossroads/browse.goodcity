@@ -260,6 +260,7 @@ export default applicationController.extend({
       var values = this.getProperties("body");
       values.order = this.get('selectedOrder');
       values.isPrivate = false;
+      values.createdAt = new Date();
       values.sender = this.store.peekRecord("sender", this.get("session.currentUser.id"));
       this.createMessage(values);
 
