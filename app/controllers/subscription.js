@@ -120,6 +120,7 @@ export default Ember.Controller.extend({
     this.get("store").findAll("package");
   },
 
+  /* jshint ignore:start */
   // @returns {promise} the record
   async loadIfAbsent(modelName, id) {
     return this.store.peekRecord(modelName, id) || this.store.findRecord(modelName, id);
@@ -211,4 +212,5 @@ export default Ember.Controller.extend({
     }
     run(success);
   }
+  /* jshint ignore:end */
 });
