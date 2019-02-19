@@ -12,6 +12,17 @@
   z-index: 100;
 }
 
+.tabs.tab-bar {
+  border-bottom: unset;
+  font-size: 150%;
+  z-index: 100;
+ }
+
+.tabs.tab-name {
+  border-bottom: 1px solid $light-blue;
+  z-index: 100;
+ }
+
 .liquid-container {
   overflow: visible;
   .liquid-child {

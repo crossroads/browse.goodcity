@@ -26,8 +26,11 @@ module.exports = function(defaults) {
       enabled: true
     },
     emberCliFontAwesome: {
-     useCss: true
-    }
+      useCss: true
+    },
+    'ember-cli-babel': {
+      includePolyfill: true
+    },
   });
 
   app.import('bower_components/foundation/js/foundation/foundation.js');
