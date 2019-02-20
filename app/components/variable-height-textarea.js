@@ -7,7 +7,7 @@ export default Ember.TextArea.extend({
 
   didInsertElement: function () {
     // scrolling down to bottom of page
-    var scrollToTopHeight = Ember.$(".message_container")[0].scrollHeight
+    var scrollToTopHeight = Ember.$(".message_container")[0].scrollHeight;
     Ember.$(".message_container").animate({
       scrollTop: scrollToTopHeight
     }, 50);
@@ -29,7 +29,7 @@ export default Ember.TextArea.extend({
             .height(textarea.scrollHeight - 15);
           // scroll to bottom if message typed
           if(_this.get('value') !== ""){
-            var scrollToTopHeight = Ember.$(".message_container")[0].scrollHeight
+            var scrollToTopHeight = Ember.$(".message_container")[0].scrollHeight;
             Ember.$(".message_container").animate({
               scrollTop: scrollToTopHeight
             }, 50);
