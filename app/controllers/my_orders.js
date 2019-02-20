@@ -36,7 +36,7 @@ export default applicationController.extend({
     var object, value;
 
     content.forEach(function (item) {
-      value = item.get ? item.get(key) : item[key];
+      value = item.get(key);
       object = result.findBy('value', value);
       if (!object) {
         object = {
@@ -265,9 +265,9 @@ export default applicationController.extend({
       this.createMessage(values);
 
       // Animate and scroll to bottom
-      Ember.$("body").animate({
-        scrollTop: Ember.$(document).height()
-      }, 1000);
+      Ember.$(".message_container").animate({
+        scrollTop: Ember.$(".message_container")[0].scrollHeight
+      }, 50);
     }
   }
 });

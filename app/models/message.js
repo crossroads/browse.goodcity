@@ -1,14 +1,11 @@
 import Ember from 'ember';
 import DS from 'ember-data';
-const {
-  getOwner
-} = Ember;
 
 var attr = DS.attr,
   belongsTo = DS.belongsTo;
 
 export default DS.Model.extend({
-
+  session: Ember.inject.service(),
   body: attr('string'),
   senderId: attr('number'),
   isPrivate: attr('boolean'),
@@ -25,8 +22,7 @@ export default DS.Model.extend({
   }),
 
   myMessage: Ember.computed(function () {
-    var session = getOwner(this).lookup("service:session");
-    return this.get("sender.id") === session.get("currentUser.id");
+    return this.get("sender.id") === this.get('session.currentUser.id');
   }),
 
   isMessage: Ember.computed('this', function () {

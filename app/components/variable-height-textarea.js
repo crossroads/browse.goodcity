@@ -5,6 +5,14 @@ export default Ember.TextArea.extend({
   attributeBindings: ["disabled"],
   disabled: false,
 
+  didInsertElement: function () {
+    // scrolling down to bottom of page
+    var scrollToTopHeight = Ember.$(".message_container")[0].scrollHeight
+    Ember.$(".message_container").animate({
+      scrollTop: scrollToTopHeight
+    }, 50);
+  },
+
   valueChanged: Ember.observer('value', function () {
     var _this = this;
     var textarea = _this.element;
@@ -19,17 +27,19 @@ export default Ember.TextArea.extend({
               'overflow-y': 'hidden'
             })
             .height(textarea.scrollHeight - 15);
-          // scrolling down to bottom of page
-          if (_this.get("value") !== "") {
-            window.scrollTo(0, document.body.scrollHeight);
+          // scroll to bottom if message typed
+          if(_this.get('value') !== ""){
+            var scrollToTopHeight = Ember.$(".message_container")[0].scrollHeight
+            Ember.$(".message_container").animate({
+              scrollTop: scrollToTopHeight
+            }, 50);
           }
         } else {
           Ember.$(textarea)
             .css({
               'height': 'auto',
               'overflow-y': 'auto'
-            })
-            .height(105);
+            });
         }
       });
     }
