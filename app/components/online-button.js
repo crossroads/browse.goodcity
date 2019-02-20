@@ -1,7 +1,6 @@
 import Ember from "ember";
 
 export default Ember.Component.extend(Ember.TargetActionSupport, {
-  tagName: "div",
   disabled: false,
 
   updateDisabled: null,

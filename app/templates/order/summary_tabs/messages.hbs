@@ -1,7 +1,7 @@
 
 <section class="message-section">
   <div class="row">
-    <div class="small-12 columns {{if displayChatNote "message-container-expanded" "message-container"}}">
+    <div class="small-12 columns {{if displayChatNote "message-container-expanded" "message_container"}}">
       {{#each groupedMessages as |messages|}}
         <div class="small-12 columns day_seperator">
           <span>{{display-messages-day messages.firstObject.createdDate (t 'messages.day.today')}}</span>
