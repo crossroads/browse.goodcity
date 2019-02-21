@@ -86,13 +86,13 @@ jobs:
       - run:
           name: rebuild node-sass
           command: npm rebuild node-sass
-      - run:
-          name: Start Ember test server
-          command: yarn run ember server --port 4202
-          background: true
-      - run:
-          name: Wait for Ember test server to start
-          command: dockerize -wait tcp://localhost:4202 -timeout 1m
+      # - run:
+      #     name: Start Ember test server
+      #     command: yarn run ember server --port 4202
+      #     background: true
+      # - run:
+      #     name: Wait for Ember test server to start
+      #     command: dockerize -wait tcp://localhost:4202 -timeout 1m
       - run:
           name: Run Ember tests
           command: COVERAGE=true yarn run test:ci
