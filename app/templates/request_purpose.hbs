@@ -12,7 +12,7 @@
                   {{fa-icon "angle-left"}}
                   {{#if (is-equal previousRouteName "my_orders")}}
                     {{#link-to 'my_orders' classNames="back"}}{{t "back"}}{{/link-to}}
-                  {{else if isOnlineOrderDraft }}
+                  {{else if model.isOnlineOrderDraft }}
                      {{#link-to "cart" classNames="back"}}{{t "back"}}{{/link-to}}
                   {{else}}
                     {{#link-to "home" classNames="back"}}{{t "back"}}{{/link-to}}
