@@ -1,55 +1,65 @@
-<div class="row header tab-bar">
-  <div class="columns small-2">
-    <i class="fa fa-lg fa-times-circle-o" aria-hidden="true" {{ action "setOrder" null }}></i>
-  </div>
-  <div class="columns small-8 strong">
-    {{ order.code }}
-  </div>
-  <div class="columns small-2 header-icon">
-    <div class="icon">
-      <i class="fa fa-lg fa-{{ order.stateIcon }}"></i>
+<div class="row my_orders">
+  <div class="small-12 columns content">
+    <div class="order-summary {{order.state}}">
+
+      <div class="row header tab-bar">
+        {{#link-to 'my_orders'}}
+          <div class="columns small-2 close-order-summary">
+            <i class="fa fa-lg fa-times-circle-o" aria-hidden="true"></i>
+          </div>
+        {{/link-to}}
+        <div class="columns small-8 strong">
+            {{ order.code }}
+        </div>
+        <div class="columns small-2 header-icon">
+            <div class="icon">
+            <i class="fa fa-lg fa-{{ order.stateIcon }}"></i>
+            </div>
+            <div class="sub-text">{{ t (concat 'my_orders.' order.state) }}</div>
+        </div>
+      </div>
+
+      {{partial 'orders/order_tabs'}}
+      <div class="tab-content">
+        <div class="goods-tab">
+        {{#if hasRequestedGoods}}
+        {{!-- REQUESTS --}}
+            <section class="details">
+            <div class="section-title">
+                {{ t "my_orders.details.goods_requested" }}
+            </div>
+
+            {{#each requestedGoods as |good|}}
+                <div class="detail-row row">
+                <div class="data-type">{{ good.category }}</div>
+                <div class="data">{{ good.text }}</div>
+                </div>
+            {{/each}}
+            </section>
+        {{/if}}
+
+        {{#if hasOrderedGoods}}
+            {{!-- ORDERS --}}
+            <section class="details">
+            <div class="section-title">
+                {{ t "my_orders.details.goods_ordered" }}
+            </div>
+
+            {{#each orderedGoods as |good|}}
+                <div class="row product-row">
+                <div class="columns small-4 image-container">
+                    <img src={{good.imageUrl}} />
+                </div>
+                <div class="columns small-8 text-container">
+                    <div class="text">{{ good.text }}</div>
+                    <div class="notes">{{ good.notes }}</div>
+                </div>
+                </div>
+            {{/each}}
+            </section>
+        {{/if}}
+        </div>
+      </div>
     </div>
-    <div class="sub-text">{{ t (concat 'my_orders.' order.state) }}</div>
   </div>
-</div>
-
-{{partial 'orders/order_tabs'}}
-
-<div class="goods-tab">
-  {{#if hasRequestedGoods}}
-  {{!-- REQUESTS --}}
-    <section class="details">
-      <div class="section-title">
-        {{ t "my_orders.details.goods_requested" }}
-      </div>
-
-      {{#each requestedGoods as |good|}}
-        <div class="detail-row row">
-          <div class="data-type">{{ good.category }}</div>
-          <div class="data">{{ good.text }}</div>
-        </div>
-      {{/each}}
-    </section>
-  {{/if}}
-
-  {{#if hasOrderedGoods}}
-    {{!-- ORDERS --}}
-    <section class="details">
-      <div class="section-title">
-        {{ t "my_orders.details.goods_ordered" }}
-      </div>
-
-      {{#each orderedGoods as |good|}}
-        <div class="row product-row">
-          <div class="columns small-4 image-container">
-            <img src={{good.imageUrl}} />
-          </div>
-          <div class="columns small-8 text-container">
-            <div class="text">{{ good.text }}</div>
-            <div class="notes">{{ good.notes }}</div>
-          </div>
-        </div>
-      {{/each}}
-    </section>
-  {{/if}}
 </div>

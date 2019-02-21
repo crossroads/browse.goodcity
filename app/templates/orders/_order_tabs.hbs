@@ -1,23 +1,17 @@
-<section class="main-section order_tabs">
-  <div class="row">
-    <div class="small-12 columns tab_row">
-      <dl class="tabs" data-tab>
-        {{!-- {{#if isBooking}} --}}
-          {{#link-to 'orders.booking' order.id tagName="dd" classNames="small-6 medium-6 columns selected text-center"}}
-            {{#link-to 'orders.booking' order.id}}
-                <i class="item-menu">{{fa-icon 'calendar'}}</i>
-                <div>Booking</div>
-            {{/link-to}}
-          {{/link-to}}
-        {{!-- {{else}} --}}
-          {{#link-to 'orders.goods' order.id tagName="dd" classNames="small-6 medium-6  columns text-center"}}
-            {{#link-to 'orders.goods' order.id}}
-                <i class="item-menu">{{fa-icon 'shopping-basket'}}</i>
-                <div>Goods</div>
-            {{/link-to}}
-          {{/link-to}}
-        {{!-- {{/if}} --}}
-      </dl>
-    </div>
-  </div>
-</section>
+<div class="row tabs tab-bar">
+  {{!-- {{#if isBooking}} --}}
+    {{#link-to 'orders.booking' order.id tagName="div" classNames="small-6 columns selected booking tab text-center"}}
+      {{#link-to 'orders.booking' order.id}}
+          <i class="item-menu">{{fa-icon 'calendar'}}</i>
+          Booking
+      {{/link-to}}
+    {{/link-to}}
+  {{!-- {{else}} --}}
+    {{#link-to 'orders.goods' order.id tagName="div" classNames="small-6  goods tab columns text-center"}}
+      {{#link-to 'orders.goods' order.id}}
+          <i class="item-menu">{{fa-icon 'shopping-basket'}}</i>
+          Goods
+      {{/link-to}}
+    {{/link-to}}
+  {{!-- {{/if}} --}}
+</div>
