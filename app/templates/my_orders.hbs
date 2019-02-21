@@ -3,11 +3,11 @@
     <div class="title show-for-medium-up">{{t "my_orders.my_orders"}}</div>
   {{/unless}}
   <div class="small-12 columns content">
-    {{#if (is-and selectedOrder (is-not selectedOrder.isDraft))}}
+    {{!-- {{#if (is-and selectedOrder (is-not selectedOrder.isDraft))}}
       <div class="order-summary {{selectedOrder.state}}">
         {{partial "order/summary"}}
       </div>
-    {{else}}
+    {{else}} --}}
       <div class="row">
         <div class="columns button-container small-6">
           {{#link-to "browse"}}
@@ -29,12 +29,14 @@
                 {{ partial 'order/order_block'}}
               {{/link-to}}
             {{else}}
-              {{ partial 'order/order_block'}}
+              {{#link-to "orders.detail" order.id}}
+                {{ partial 'order/order_block'}}
+              {{/link-to}}
             {{/if}}
           </li>
         {{/each}}
       </ul>
-    {{/if}}
+    {{!-- {{/if}} --}}
   </div>
 </div>
 
