@@ -10,17 +10,18 @@ var BookingTypes = {
   appointment: { id:2, identifier: 'appointment'}
 };
 
-module('Acceptance | BookAppointment - OnlineOrder', {
+module('Acceptance | Book appointment/order ', {
   beforeEach: function() {
+    $.mockjax.clear();
     App = startApp();
     user = make("user");
     organisation = make("organisation");
     pkg = make('package');
     purpose = make("purpose");
+    order = { id: 312, code: "L24489", state: "draft", created_by_id: user.id, organisation_id: organisation.id,
+      purpose_description: 'test test test', people_helped: "2", booking_type_id: BookingTypes.onlineOrder.id };
     ordersPackage = make("orders_package", { quantity: 1, state: "requested", package: pkg,
-      packageId: pkg.id, order: order});
-    order = make("order", { state: "draft", created_by_id: user.id, organisation_id: organisation.id,
-      purpose_description: 'test test test', people_helped: "2" });
+      packageId: pkg.id, orderId: order.id});
     gogo_van = make("gogovan_transport");
     user_profile = {"id": user.id,"first_name": user.get('firstName'), "last_name": user.get('lastName'),
     "mobile": user.get('mobile'), "user_role_ids": [1] };
@@ -37,8 +38,15 @@ module('Acceptance | BookAppointment - OnlineOrder', {
       $.mockjax({url:`/api/v1/orders/*`,
         type:'GET', status:200,
         responseText: {
-          order: order.toJSON({includeId: true}),
+          booking_types: _.values(BookingTypes),
+          order: order,
           goodcity_requests: [goodcityRequest]
+        }
+      }),
+      $.mockjax({url:`/api/v1/booking_type*`,
+        type:'GET', status:200,
+        responseText: {
+          booking_types: _.values(BookingTypes)
         }
       }),
       $.mockjax({url: "/api/v1/goodcity_request*", type: 'POST', status: 201,
@@ -47,10 +55,10 @@ module('Acceptance | BookAppointment - OnlineOrder', {
       $.mockjax({url: "/api/v1/available_*", type: 'GET', status: 200,
         responseText:["2018-06-14", "2018-06-15", "2018-06-16", "2018-06-19", "2018-06-20", "2018-06-21"]}),
       mockFindAll("gogovan_transport").returns({json: {gogovan_transports: [gogo_van.toJSON({includeId: true})]}}),
-      mockFindAll('order').returns({ json: {orders: [order.toJSON({includeId: true})],
+      mockFindAll('order').returns({ json: {orders: [order],
         packages: [pkg.toJSON({includeId: true})], orders_packages: [ordersPackage.toJSON({includeId: true})]}}),
       mockFindAll("booking_type").returns({json: {booking_types: _.values(BookingTypes)}}),
-      mockFindAll("purpose").returns({json: {booking_types: [purpose.toJSON({includeId: true})]}})
+      mockFindAll("purpose").returns({json: {purposes: [purpose.toJSON({includeId: true})]}})
     );
     let date = moment(new Date()).format('YYYY-MM-DD'); // jshint ignore:line
     let timestamp = moment(new Date()).format(); // jshint ignore:line
@@ -123,7 +131,7 @@ test("request purpose page on completely filled should not redirect to Goods det
   andThen(function(){
     mocks.push(
       $.mockjax({url: '/api/v1/order*', type: 'POST', status: 201,responseText: {
-        order: order.toJSON({includeId: true}),
+        order: order,
         orders_purposes: [orderPurpose1],
         user: user.toJSON({includeId: true})}
       })
@@ -171,7 +179,7 @@ test("request purpose page should not redirect if incomplete form", function(ass
 //   andThen(function(){
 //     mocks.push(
 //       $.mockjax({url: '/api/v1/order*', type: 'POST', status: 201,responseText: {
-//         order: order.toJSON({includeId: true}),
+//         order: order,
 //         orders_purposes: [orderPurpose2],
 //         user: user.toJSON({includeId: true})}
 //       })
@@ -190,7 +198,7 @@ test("Select HkID on client info should display form for hkid", function(assert)
   assert.expect(2);
   mocks.push(
     $.mockjax({url: '/api/v1/order*', type: 'GET', status: 201,responseText: {
-      order: order.toJSON({includeId: true}),
+      order: order,
       orders_purposes: [orderPurpose2],
       user: user.toJSON({includeId: true})}
     })
@@ -215,7 +223,7 @@ test("Select RBCL on client info should display form for rbcl", function(assert)
   assert.expect(3);
   mocks.push(
     $.mockjax({url: '/api/v1/order*', type: 'GET', status: 201,responseText: {
-      order: order.toJSON({includeId: true}),
+      order: order,
       orders_purposes: [orderPurpose2],
       user: user.toJSON({includeId: true})}
     })
@@ -247,7 +255,7 @@ test("Online order : Filled Up client info page, should redirect to schedule det
 
   mocks.push(
     $.mockjax({url: '/api/v1/order*', type: 'GET', status: 201,responseText: {
-        order: order.toJSON({includeId: true}),
+        order: order,
         orders_purposes: [orderPurpose2],
         user: user.toJSON({includeId: true}),
         goodcity_requests: []
@@ -276,7 +284,7 @@ test("Online order : Filled Up client info page, should redirect to schedule det
   andThen(function(){
     mocks.push(
       $.mockjax({url: '/api/v1/order*', type: 'PUT', status: 201,responseText: {
-        order: order.toJSON({includeId: true}),
+        order: order,
         orders_purposes: [orderPurpose2],
         user: user.toJSON({includeId: true})}
       }),
@@ -310,16 +318,8 @@ test("Appointment : Filled Up client info page, should redirect to goods details
   orderPurpose2 = {id: 1, purposes: [{id: 2}], order_id: order.id, designation_id: 1 };
   assert.expect(2);
 
-  let appointment = _.extend({}, order.toJSON({includeId: true}), { booking_type_id: BookingTypes.appointment.id });
-  mocks.push(
-    $.mockjax({url: '/api/v1/order*', type: 'GET', status: 201,responseText: {
-        order: appointment,
-        orders_purposes: [orderPurpose2],
-        user: user.toJSON({includeId: true}),
-        goodcity_requests: []
-      }
-    })
-  );
+  order.booking_type_id = BookingTypes.appointment.id;
+
   visit('/');
   andThen(function(){
     visit(clientInfoUrl);
@@ -342,7 +342,7 @@ test("Appointment : Filled Up client info page, should redirect to goods details
   andThen(function(){
     mocks.push(
       $.mockjax({url: '/api/v1/order*', type: 'PUT', status: 201,responseText: {
-        order: order.toJSON({includeId: true}),
+        orders: order,
         orders_purposes: [orderPurpose2],
         user: user.toJSON({includeId: true})}
       }),
@@ -377,7 +377,7 @@ test("Incomplete form submit client info page, should not redirect to goods deta
   assert.expect(2);
   mocks.push(
     $.mockjax({url: '/api/v1/order*', type: 'GET', status: 201,responseText: {
-      order: order.toJSON({includeId: true}),
+      order: order,
       orders_purposes: [orderPurpose2],
       user: user.toJSON({includeId: true})}
     })
@@ -392,7 +392,7 @@ test("Incomplete form submit client info page, should not redirect to goods deta
   andThen(function(){
     mocks.push(
       $.mockjax({url: '/api/v1/order*', type: 'PUT', status: 201,responseText: {
-        order: order.toJSON({includeId: true}),
+        order: order,
         orders_purposes: [orderPurpose2],
         user: user.toJSON({includeId: true})}
       }),
@@ -416,7 +416,7 @@ test("Goods Details Page on incomplete submit should not redirect to appointment
   assert.expect(2);
   mocks.push(
     $.mockjax({url: '/api/v1/order*', type: 'POST', status: 201,responseText: {
-          order: order.toJSON({includeId: true}),
+          order: order,
           orders_purposes: [orderPurpose1],
           user: user.toJSON({includeId: true})}
     })
@@ -439,7 +439,7 @@ test("Goods Details Page on incomplete submit should not redirect to appointment
 //   assert.expect(1);
 //   mocks.push(
 //     $.mockjax({url: '/api/v1/order*', type: 'POST', status: 201,responseText: {
-//           order: order.toJSON({includeId: true}),
+//           order: order,
 //           orders_purposes: [orderPurpose1],
 //           user: user.toJSON({includeId: true})}
 //     }),
@@ -496,7 +496,7 @@ test("Appointment Details Page on incomplete sumission should not redirect to or
   assert.expect(1);
   mocks.push(
   $.mockjax({url: '/api/v1/order*', type: 'POST', status: 201,responseText: {
-        order: order.toJSON({includeId: true}),
+        order: order,
         orders_purposes: [orderPurpose1],
         user: user.toJSON({includeId: true})}
   }),
@@ -521,9 +521,10 @@ test("Appointment Details Page on incomplete sumission should not redirect to or
 });
 
 test("confirm page on clicking submit should redirect to success page", function(assert){
+  order.booking_type_id = BookingTypes.appointment.id;
   mocks.push(
     $.mockjax({url: '/api/v1/order*', type: 'POST', status: 201,responseText: {
-        order: order.toJSON({includeId: true}),
+        order: order,
         orders_purposes: [orderPurpose1],
         user: user.toJSON({includeId: true})}
     }),
@@ -531,7 +532,7 @@ test("confirm page on clicking submit should redirect to success page", function
       order_transport: orderTransport
     }}),
     $.mockjax({url: '/api/v1/order*', type: 'PUT', status: 201,responseText: {
-      order: order.toJSON({includeId: true}),
+      order: order,
       orders_purposes: [orderPurpose1],
       user: user.toJSON({includeId: true})}
     })
