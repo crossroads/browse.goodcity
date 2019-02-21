@@ -96,10 +96,10 @@ jobs:
       - run:
           name: Run Ember tests
           command: yarn run test:ci
-      - persist_to_workspace:
-          root: .
-          paths:
-            - coverage*/lcov.info
+      # - persist_to_workspace:
+      #     root: .
+      #     paths:
+      #       - coverage*/lcov.info
 
   upload-coverage:
     <<: *defaults
