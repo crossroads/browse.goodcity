@@ -1,155 +1,164 @@
-<div class="row header tab-bar">
-  <div class="columns small-2">
-    <i class="fa fa-lg fa-times-circle-o" aria-hidden="true" {{ action "setOrder" null }}></i>
-  </div>
-  <div class="columns small-8 strong">
-    {{ order.code }}
-  </div>
-  <div class="columns small-2 header-icon">
-    <div class="icon">
-      <i class="fa fa-lg fa-{{ order.stateIcon }}"></i>
-    </div>
-    <div class="sub-text">{{ t (concat 'my_orders.' order.state) }}</div>
-  </div>
-</div>
-{{partial 'orders/order_tabs'}}
-<div class="booking-tab">
-
-  {{!-- FIRST SECTION: ORDER INFO/STATUS --}}
-  <section class="details">
-    <div class="row">
-      <div class="small-6 medium-6 large-6 columns section-title">
-        {{ t 'my_orders.details.beneficiary.appointment_details' }}
-      </div>
-      {{#if order.isEditAllowed}}
-        <div class="small-3 medium-3 large-3 columns">
-          <a {{action "cancelBookingPopUp" "appointment_details"}} class="button expand secondary cancel-booking">
-            {{t 'cancel'}}
-          </a>
+<div class="row my_orders">
+  {{#unless true}}
+    <div class="title show-for-medium-up">{{t "my_orders.my_orders"}}</div>
+  {{/unless}}
+  <div class="small-12 columns content">
+    <div class="order-summary {{order.state}}">
+      <div class="row header tab-bar">
+        <div class="columns small-2  close-order-summary">
+          <i class="fa fa-lg fa-times-circle-o" aria-hidden="true"></i>
         </div>
-        <div class="small-3 medium-3 large-3 columns">
-           <a {{action "redirectToEdit" "appointment_details"}} class="button expand edit-appointment-details">
-            {{t 'edit'}}
-          </a>
+        <div class="columns small-8 strong">
+          {{ order.code }}
         </div>
-      {{/if}}
-    </div>
-    {{!-- ORDER TYPE --}}
-    <div class="detail-row row">
-      <div class="data-type">{{ t "my_orders.details.type" }}</div>
-      <div class="data">
-        {{#if order.isAppointment}}
-          {{ t "my_orders.details.types.visit" }}
-        {{else}}
-          {{ t "my_orders.details.types.delivery" }}
-        {{/if}}
-      </div>
-    </div>
-
-    {{!-- TRANSPORT --}}
-    <div class="detail-row row">
-      <div class="data-type">{{ t "my_orders.details.transport" }}</div>
-      <div class="data">{{ t (concat "my_orders.details.transports." order.transportKey) }}</div>
-    </div>
-
-    {{!-- SCHEDULED DATE --}}
-    <div class="detail-row row">
-      <div class="data-type">{{ t "my_orders.details.appointment" }}</div>
-      <div class="data">{{ display-datetime order.orderTransport.scheduledAt format="dddd Do MMMM hh:mm a" }}</div>
-    </div>
-
-    {{!-- ORDER STATE --}}
-    <div class="row state-description">
-      <div class="state-container">
-        <div class="state-title">
-          <i class="fa fa-lg fa-{{ order.stateIcon }}"></i>
-          {{ t (concat "my_orders.details.state_titles." order.state) default=order.state }}
-        </div>
-        <div class="state-text">
-          {{ t (concat "my_orders.details.state_descriptions." order.state) }}
-        </div>
-      </div>
-    </div>
-  </section>
-
-  {{!-- SECOND SECTION: BENEFICIARY  --}}
-  {{#if order.beneficiary}}
-    <section class="details beneficiary">
-      <div class="row">
-        <div class="small-9 medium-9 large-9 columns section-title">
-          {{ t 'my_orders.details.beneficiary.client_information' }}
-        </div>
-        {{#if order.isEditAllowed}}
-          <div class="small-3 medium-3 large-3 columns section-title">
-            <a {{action "redirectToEdit" "client_information"}} class="button expand edit-appointment-details">
-              {{t 'edit'}}
-            </a>
+        <div class="columns small-2 header-icon">
+          <div class="icon">
+            <i class="fa fa-lg fa-{{ order.stateIcon }}"></i>
           </div>
-        {{/if}}
-      </div>
-      {{!-- ID TYPE --}}
-      <div class="detail-row row">
-        <div class="data-type">{{ t 'my_orders.details.beneficiary.id_type' }}</div>
-        <div class="data">{{ order.beneficiary.identityType.name }}</div>
-      </div>
-      {{!-- ID NO --}}
-      <div class="detail-row row">
-        <div class="data-type">{{ t 'my_orders.details.beneficiary.id_number' }}</div>
-        <div class="data">{{ order.beneficiary.identityNumber }}</div>
-      </div>
-      {{!-- NAME --}}
-      <div class="detail-row row">
-        <div class="data-type">{{ t 'my_orders.details.beneficiary.client_name' }}</div>
-        <div class="data">
-          {{ order.beneficiary.title }}
-          {{ order.beneficiary.firstName }}
-          {{ order.beneficiary.lastName }}
+          <div class="sub-text">{{ t (concat 'my_orders.' order.state) }}</div>
         </div>
       </div>
-      {{!-- MOBILE --}}
-      <div class="detail-row row">
-        <div class="data-type">{{ t 'my_orders.details.beneficiary.client_phone' }}</div>
-        <div class="data">{{ order.beneficiary.phoneNumber }}</div>
-      </div>
-    </section>
-  {{/if}}
+    </div>
+    {{partial 'orders/order_tabs'}}
+    <div class="booking-tab">
 
-  {{!-- THIRD SECTION: REQUEST INFO --}}
-  <section class="details purpose">
-    <div class="row">
-      <div class="small-9 medium-9 large-9 columns section-title">
-        {{ t 'my_orders.details.request.request_purpose' }}
-      </div>
-      {{#if order.isEditAllowed}}
-        <div class="small-3 medium-3 large-3 columns section-title">
-          <a {{action "editRequestPurpose"}} class="button expand edit-appointment-details">
-            {{t 'edit'}}
-          </a>
+      {{!-- FIRST SECTION: ORDER INFO/STATUS --}}
+      <section class="details">
+        <div class="row">
+          <div class="small-6 medium-6 large-6 columns section-title">
+            {{ t 'my_orders.details.beneficiary.appointment_details' }}
+          </div>
+          {{#if order.isEditAllowed}}
+            <div class="small-3 medium-3 large-3 columns">
+              <a {{action "cancelBookingPopUp" "appointment_details"}} class="button expand secondary cancel-booking">
+                {{t 'cancel'}}
+              </a>
+            </div>
+            <div class="small-3 medium-3 large-3 columns">
+              <a {{action "redirectToEdit" "appointment_details"}} class="button expand edit-appointment-details">
+                {{t 'edit'}}
+              </a>
+            </div>
+          {{/if}}
         </div>
+        {{!-- ORDER TYPE --}}
+        <div class="detail-row row">
+          <div class="data-type">{{ t "my_orders.details.type" }}</div>
+          <div class="data">
+            {{#if order.isAppointment}}
+              {{ t "my_orders.details.types.visit" }}
+            {{else}}
+              {{ t "my_orders.details.types.delivery" }}
+            {{/if}}
+          </div>
+        </div>
+
+        {{!-- TRANSPORT --}}
+        <div class="detail-row row">
+          <div class="data-type">{{ t "my_orders.details.transport" }}</div>
+          <div class="data">{{ t (concat "my_orders.details.transports." order.transportKey) }}</div>
+        </div>
+
+        {{!-- SCHEDULED DATE --}}
+        <div class="detail-row row">
+          <div class="data-type">{{ t "my_orders.details.appointment" }}</div>
+          <div class="data">{{ display-datetime order.orderTransport.scheduledAt format="dddd Do MMMM hh:mm a" }}</div>
+        </div>
+
+        {{!-- ORDER STATE --}}
+        <div class="row state-description">
+          <div class="state-container">
+            <div class="state-title">
+              <i class="fa fa-lg fa-{{ order.stateIcon }}"></i>
+              {{ t (concat "my_orders.details.state_titles." order.state) default=order.state }}
+            </div>
+            <div class="state-text">
+              {{ t (concat "my_orders.details.state_descriptions." order.state) }}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {{!-- SECOND SECTION: BENEFICIARY  --}}
+      {{#if order.beneficiary}}
+        <section class="details beneficiary">
+          <div class="row">
+            <div class="small-9 medium-9 large-9 columns section-title">
+              {{ t 'my_orders.details.beneficiary.client_information' }}
+            </div>
+            {{#if order.isEditAllowed}}
+              <div class="small-3 medium-3 large-3 columns section-title">
+                <a {{action "redirectToEdit" "client_information"}} class="button expand edit-appointment-details">
+                  {{t 'edit'}}
+                </a>
+              </div>
+            {{/if}}
+          </div>
+          {{!-- ID TYPE --}}
+          <div class="detail-row row">
+            <div class="data-type">{{ t 'my_orders.details.beneficiary.id_type' }}</div>
+            <div class="data">{{ order.beneficiary.identityType.name }}</div>
+          </div>
+          {{!-- ID NO --}}
+          <div class="detail-row row">
+            <div class="data-type">{{ t 'my_orders.details.beneficiary.id_number' }}</div>
+            <div class="data">{{ order.beneficiary.identityNumber }}</div>
+          </div>
+          {{!-- NAME --}}
+          <div class="detail-row row">
+            <div class="data-type">{{ t 'my_orders.details.beneficiary.client_name' }}</div>
+            <div class="data">
+              {{ order.beneficiary.title }}
+              {{ order.beneficiary.firstName }}
+              {{ order.beneficiary.lastName }}
+            </div>
+          </div>
+          {{!-- MOBILE --}}
+          <div class="detail-row row">
+            <div class="data-type">{{ t 'my_orders.details.beneficiary.client_phone' }}</div>
+            <div class="data">{{ order.beneficiary.phoneNumber }}</div>
+          </div>
+        </section>
       {{/if}}
+
+      {{!-- THIRD SECTION: REQUEST INFO --}}
+      <section class="details purpose">
+        <div class="row">
+          <div class="small-9 medium-9 large-9 columns section-title">
+            {{ t 'my_orders.details.request.request_purpose' }}
+          </div>
+          {{#if order.isEditAllowed}}
+            <div class="small-3 medium-3 large-3 columns section-title">
+              <a {{action "editRequestPurpose"}} class="button expand edit-appointment-details">
+                {{t 'edit'}}
+              </a>
+            </div>
+          {{/if}}
+        </div>
+        {{!-- Purpose --}}
+        <div class="detail-row row">
+          <div class="data-type">{{ t 'my_orders.details.request.purpose_of_goods' }}</div>
+          <div class="data">
+            <ul>
+              {{#each order.ordersPurposes as |orderPurpose|}}
+                <li>
+                  {{ orderPurpose.purpose.description }}
+                </li>
+              {{/each}}
+            </ul>
+          </div>
+        </div>
+        {{!-- Number benefiting --}}
+        <div class="detail-row row">
+          <div class="data-type">{{ t 'my_orders.details.request.number_benefiting' }}</div>
+          <div class="data">{{ order.peopleHelped }}</div>
+        </div>
+        {{!-- Description of needs --}}
+        <div class="detail-row row">
+          <div class="data-type">{{ t 'my_orders.details.request.description_of_needs' }}</div>
+          <div class="data">{{ selectedOrder.purposeDescription }}</div>
+        </div>
+      </section>
     </div>
-    {{!-- Purpose --}}
-    <div class="detail-row row">
-      <div class="data-type">{{ t 'my_orders.details.request.purpose_of_goods' }}</div>
-      <div class="data">
-        <ul>
-          {{#each order.ordersPurposes as |orderPurpose|}}
-            <li>
-              {{ orderPurpose.purpose.description }}
-            </li>
-          {{/each}}
-        </ul>
-      </div>
-    </div>
-    {{!-- Number benefiting --}}
-    <div class="detail-row row">
-      <div class="data-type">{{ t 'my_orders.details.request.number_benefiting' }}</div>
-      <div class="data">{{ order.peopleHelped }}</div>
-    </div>
-    {{!-- Description of needs --}}
-    <div class="detail-row row">
-      <div class="data-type">{{ t 'my_orders.details.request.description_of_needs' }}</div>
-      <div class="data">{{ selectedOrder.purposeDescription }}</div>
-    </div>
-  </section>
-</div>
+  </div>
+</div>>
