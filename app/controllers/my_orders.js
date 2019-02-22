@@ -1,7 +1,6 @@
 import applicationController from './application';
 import Ember from 'ember';
 import _ from 'lodash';
-import AjaxPromise from 'browse/utils/ajax-promise';
 
 export default applicationController.extend({
   sortProperties: ["createdAt:desc"],
@@ -16,7 +15,6 @@ export default applicationController.extend({
   showCancelBookingPopUp: false,
   cancellationReasonWarning: false,
   applicationController: Ember.inject.controller('application'),
-  hideHeaderBar: Ember.computed.alias("applicationController.hideHeaderBar"),
 
   fetchPackageImages(pkg) {
     return Ember.RSVP.all(

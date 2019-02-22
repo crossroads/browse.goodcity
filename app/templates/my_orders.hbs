@@ -1,7 +1,5 @@
 <div class="row my_orders">
-  {{#unless hideHeaderBar}}
-    <div class="title show-for-medium-up">{{t "my_orders.my_orders"}}</div>
-  {{/unless}}
+  <div class="title show-for-medium-up">{{t "my_orders.my_orders"}}</div>
   <div class="small-12 columns content">
     <div class="row">
       <div class="columns button-container small-6">
@@ -18,7 +16,7 @@
     </div>
     <ul class="list list-items">
       {{#each arrangedOrders as |order|}}
-          {{#if order.isDraft}} 
+          {{#if order.isDraft}}
             {{#link-to 'request_purpose' (query-params bookAppointment=isAppointmentDraft orderId=order.id)}}
               {{ partial 'order/order_block'}}
             {{/link-to}}
