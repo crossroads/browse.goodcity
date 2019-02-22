@@ -19,6 +19,7 @@ export default AuthorizeRoute.extend({
     var currentRoute = this.get("currentRouteName");
     if(currentRoute && currentRoute === "orders.detail") {
       this.transitionTo("orders.booking", model.order.id);
+      this.controllerFor("application").set('hideHeaderBar', true);
     }
   }
 });
