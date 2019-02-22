@@ -1,7 +1,8 @@
 import Ember from "ember";
+import detail from "./detail";
 import _ from 'lodash';
 
-export default Ember.Controller.extend({
+export default detail.extend({
   order: Ember.computed.alias('model.order'),
 
   getCategoryForCode: function (code) {
