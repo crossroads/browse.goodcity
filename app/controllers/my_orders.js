@@ -1,6 +1,7 @@
 import applicationController from './application';
 import Ember from 'ember';
 import _ from 'lodash';
+import AjaxPromise from 'browse/utils/ajax-promise';
 
 export default applicationController.extend({
   sortProperties: ["createdAt:desc"],
@@ -62,16 +63,6 @@ export default applicationController.extend({
   hasOrderedGoods: Ember.computed.notEmpty('orderedGoods'),
 
   submitted: false,
-  orderSummaryTabs: [
-    {
-      name: 'booking',
-      icon: 'calendar'
-    },
-    {
-      name: 'goods',
-      icon: 'shopping-basket'
-    }
-  ],
 
   submittedOrderFlashMessage: Ember.observer("submitted", 'triggerFlashMessage', function() {
     if(this.get("submitted") && (this.get("previousRouteName") === "order.confirm")) {
@@ -113,32 +104,6 @@ export default applicationController.extend({
         } else if(order.get("isCancelAllowed")) {
           this.cancelOrder(order);
         }
-      }
-    },
-
-    setOrder(order) {
-      if (!order) {
-        this.set('selectedOrder', null);
-        this.get('applicationController').set('hideHeaderBar', false);
-        return;
-      }
-      // Request the order to load dependant associations
-      this.showLoadingSpinner();
-      this.store.findRecord('order', order.get('id'), { reload: true, adapterOptions: { includePackages: 'false'} })
-        .then(record => this.fetchMissingImages(record).then(_.constant(record)))
-        .then(record => {
-          this.set('selectedOrder', record);
-          this.set('selectedOrderTab', this.orderSummaryTabs[0]);
-          this.get('applicationController').set('hideHeaderBar', true);
-        })
-        .catch(() => {
-          this.get("messageBox").alert();
-        })
-        .finally(() => this.hideLoadingSpinner());
-    },
-    selectTab(tab) {
-      if (tab !== this.get('selectedOrderTab')) {
-        this.set('selectedOrderTab', tab);
       }
     }
   }
