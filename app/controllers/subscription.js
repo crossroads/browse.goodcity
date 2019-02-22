@@ -163,12 +163,12 @@ export default Ember.Controller.extend({
       run(success);
       return;
     }
-
+    var cartContent, cartItem, packageId, itemInCart;
     if (type.toLowerCase() !== 'message'){
-      var cartContent = this.get('cart.content');
-      var packageId = data.item.package.id;
-      var cartItem = cartContent.filterBy("modelType", "package").filterBy("id", packageId.toString()).get("firstObject");
-      var itemInCart = this.store.peekRecord('package', data.item.package.id);
+      cartContent = this.get('cart.content');
+      packageId = data.item.package.id;
+      cartItem = cartContent.filterBy("modelType", "package").filterBy("id", packageId.toString()).get("firstObject");
+      itemInCart = this.store.peekRecord('package', data.item.package.id);
     }
     if (["create","update"].indexOf(data.operation) >= 0) {
       if (data.item.package && data.item.package.allow_web_publish === null) {

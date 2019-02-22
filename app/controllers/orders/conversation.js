@@ -1,6 +1,6 @@
-import Ember from 'ember';
 import config from '../../config/environment';
 import detail from './detail';
+import Ember from 'ember';
 
 export default detail.extend({
   isPrivate: false,

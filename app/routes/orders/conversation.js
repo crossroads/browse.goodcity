@@ -1,4 +1,5 @@
 import detail from './detail';
+import Ember from 'ember';
 
 export default detail.extend({
   model(params) {
