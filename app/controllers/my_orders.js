@@ -4,7 +4,6 @@ import Ember from 'ember';
 export default applicationController.extend({
   sortProperties: ["createdAt:desc"],
   arrangedOrders: Ember.computed.sort("model.orders", "sortProperties"),
-  selectedOrder: null,
   orders: Ember.computed.alias('model'),
   flashMessage: Ember.inject.service(),
   messageBox: Ember.inject.service(),

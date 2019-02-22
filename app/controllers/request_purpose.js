@@ -108,7 +108,6 @@ export default Ember.Controller.extend(cancelOrder, {
 
           loadingView.destroy();
           if(this.get("previousRouteName") === "my_orders" && this.get('editRequest')) {
-            this.get("myOrders").set("selectedOrder", this.get("store").peekRecord("order", orderId));
             this.transitionToRoute('my_orders');
           } else {
             this.transitionToRoute("order.client_information", orderId);

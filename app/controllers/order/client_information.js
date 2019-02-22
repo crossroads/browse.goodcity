@@ -132,20 +132,15 @@ export default Ember.Controller.extend(cancelOrder, {
         });
     },
 
-    redirectToGoodsDetails(isClientInformation=false) {
+    redirectToGoodsDetails() {
       let order = this.get("order");
       let orderId = order.id;
 
       if (this.get("previousRouteName") === "my_orders") {
-        this.get("myOrders").set("selectedOrder", order);
         this.transitionToRoute('my_orders');
       } else {
-        if (isClientInformation) {
-          this.transitionToRoute('order.goods_details', orderId, { queryParams: { fromClientInformation: true }});
-        } else {
-          let nextRoute = `order.${this.get('order.isAppointment') ? 'goods_details' : 'schedule_details'}`;
-          this.transitionToRoute(nextRoute, orderId, { queryParams: { fromClientInformation: true }});
-        }
+        let nextRoute = `order.${this.get('order.isAppointment') ? 'goods_details' : 'schedule_details'}`;
+        this.transitionToRoute(nextRoute, orderId, { queryParams: { fromClientInformation: true }});
       }
     }
   }

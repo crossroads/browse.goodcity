@@ -372,6 +372,7 @@ export default {
     "transport_details_pop_up": "Add items to your cart before submitting transport details.",
     "numbers_warning": "Please enter 4 digit number.",
     "transport_details": {
+      "title": "Transport Details",
       "transport_method": "Transport method: ",
       "collect_with_own_vehicle": "We will collect with our own vehicle(s)",
       "send_item_with_driver": "We would like the items sent (recipient pays the driver)"
@@ -446,7 +447,6 @@ export default {
       "remove": "Remove"
     },
     "appointment": {
-      "title": "Appointment Details",
       "transport": "Transport",
       "self_vehicle": "Client will bring private vehicle",
       "hire_vehicle": "Client needs information about hiring vehicle",
@@ -504,7 +504,7 @@ export default {
         "no_description": "No description provided",
       },
       "schedule_summary": {
-        "title": "Logistic Details",
+        "title": "Transport Details",
         "transport": "Transport",
         "labour": "Labour",
         "labour_info": "Client understands labour requirements and can supply labour if needed.",

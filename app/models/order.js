@@ -39,11 +39,11 @@ export default Model.extend({
   isCancelled: Ember.computed.equal("state", "cancelled"),
   i18n: Ember.inject.service(),
 
-  isAppointment: Ember.computed('bookingTypeId', function(){
+  isAppointment: Ember.computed('bookingType', function(){
     return this.get('bookingType.isAppointment');
   }),
 
-  isOnlineOrder: Ember.computed('bookingTypeId', function(){
+  isOnlineOrder: Ember.computed('bookingType', function(){
     return this.get('bookingType.isOnlineOrder');
   }),
 

@@ -354,6 +354,7 @@ export default {
     "transport_details_pop_up": "請在購物車中新增物資以提交運輸詳情。",
     "numbers_warning": "請輸入一個4位數字。",
     "transport_details": {
+      "title": "預約詳情",
       "transport_method": "運輸方式: ",
       "collect_with_own_vehicle": "我會自行安排運輸接收",
       "send_item_with_driver": "我會安排GoGoVan代為接收（服務使用者付費）"
@@ -427,7 +428,6 @@ export default {
       "remove": "移除"
     },
     "appointment": {
-      "title": "預約詳情",
       "transport": "運輸方式",
       "self_vehicle": "服務對象將自攜帶車輛",
       "hire_vehicle": "服務對象需要有關僱用車輛的信息",
