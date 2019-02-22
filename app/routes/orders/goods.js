@@ -2,9 +2,6 @@ import detail from './detail';
 
 export default detail.extend({
   setupController(controller, model){
-    // if(controller) {
-      this._super(controller, model);
-    //   controller.set('isActiveGoods', true);
-    // }
+    this._super(controller, model);
   }
 });
