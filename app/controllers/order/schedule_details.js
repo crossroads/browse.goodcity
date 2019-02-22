@@ -146,7 +146,6 @@ export default Ember.Controller.extend(cancelOrder, {
         this.get("store").pushPayload(data);
         loadingView.destroy();
         if(this.get("previousRouteName") === "my_orders") {
-          this.get("myOrders").set("selectedOrder", this.get("order"));
           this.transitionToRoute('my_orders');
         } else {
           this.transitionToRoute("order.confirm_booking", this.get("order.id"));

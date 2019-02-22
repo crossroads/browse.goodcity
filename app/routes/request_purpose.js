@@ -53,11 +53,6 @@ export default AuthorizeRoute.extend({
     if (ordersPurposes.get('length')){
       controller.set('selectedId', ordersPurposes.get('firstObject').get('purpose.identifier'));
     }
-    if (this.get("previousRouteName") === "my_orders" && !this.get('isBookAppointment')) {
-      this.controllerFor('my_orders').set("selectedOrder", order);
-    } else {
-      this.controllerFor('my_orders').set("selectedOrder", null);
-    }
 
     controller.set('selectedDistrict', order.get('district'));
     controller.set('peopleCount', order.get("peopleHelped"));
