@@ -26,7 +26,7 @@ export default AuthorizeRoute.extend({
     })
     .then((res) => {
       // Load dependant associations
-      return this.store.query('order_transport', { 
+      return this.store.query('order_transport', {
         order_ids: res.orders.map(o => o.id).join(',')
       }).then(_.constant(res));
     });
@@ -36,13 +36,5 @@ export default AuthorizeRoute.extend({
     this._super(controller, model);
     controller.set("previousRouteName", this.get("previousRouteName"));
     controller.toggleProperty("triggerFlashMessage");
-    this.controllerFor('application').set('pageTitle', this.get('i18n').t("my_orders.my_orders"));
-  },
-
-  resetController: function(controller, isExiting) {
-    this._super.apply(this, arguments);
-    if (isExiting) {
-      this.controllerFor('application').set("pageTitle", this.get('i18n').t("browse.title"));
-    }
   }
 });

@@ -6,7 +6,6 @@ import AjaxPromise from 'browse/utils/ajax-promise';
 export default applicationController.extend({
   isBooking: false,
   order: Ember.computed.alias('model.order'),
-  hideHeaderBar: Ember.computed.alias("applicationController.hideHeaderBar"),
   showCancelBookingPopUp: false,
 
   deleteOrder(order) {
