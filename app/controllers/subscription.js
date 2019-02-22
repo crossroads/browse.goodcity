@@ -163,42 +163,44 @@ export default Ember.Controller.extend({
       return;
     }
 
-    var cartContent = this.get('cart.content');
-    var packageId = data.item.package.id;
-    var cartItem = cartContent.filterBy("modelType", "package").filterBy("id", packageId.toString()).get("firstObject");
-    var itemInCart = this.store.peekRecord('package', data.item.package.id);
+    if (type.toLowerCase() !== 'message'){
+      var cartContent = this.get('cart.content');
+      var packageId = data.item.package.id;
+      var cartItem = cartContent.filterBy("modelType", "package").filterBy("id", packageId.toString()).get("firstObject");
+      var itemInCart = this.store.peekRecord('package', data.item.package.id);
 
-    if (["create","update"].indexOf(data.operation) >= 0) {
-      if(data.item.package.allow_web_publish === null) {
-        return false;
-      }
-      this.store.pushPayload(data.item);
-      var unDispatchedPkg = [];
-      if(cartContent) {
-        var pkge = this.store.peekRecord('package', data.item.package.id);
-        unDispatchedPkg = this.getUndispatchedPackages(pkge);
-        if(unDispatchedPkg.length === 1) {
-          this.updateCart(pkge, unDispatchedPkg);
+      if (["create","update"].indexOf(data.operation) >= 0) {
+        if(data.item.package.allow_web_publish === null) {
+          return false;
+        }
+        this.store.pushPayload(data.item);
+        var unDispatchedPkg = [];
+        if(cartContent) {
+          var pkge = this.store.peekRecord('package', data.item.package.id);
+          unDispatchedPkg = this.getUndispatchedPackages(pkge);
+          if(unDispatchedPkg.length === 1) {
+            this.updateCart(pkge, unDispatchedPkg);
+          }
+        }
+        if(cartItem) {
+          this.get("cart").pushItem(this.store.peekRecord("package", packageId).toCartItem());
+        }
+      } else if (existingItem) { //delete
+        this.store.unloadRecord(existingItem);
+        if(cartItem) {
+          this.addItemToCart(cartItem);
         }
       }
-      if(cartItem) {
-        this.get("cart").pushItem(this.store.peekRecord("package", packageId).toCartItem());
+      //checking if package is available in store and in cart
+      if(itemInCart && cartItem) {
+        //updating cart pkg availability accordingly
+        if((itemInCart.get("orderId") === null) && (itemInCart.get("allowWebPublish") || itemInCart._internalModel._data.allowWebPublish)) {
+          this.updateCartAvailability(1, cartItem);
+        } else {
+          this.updateCartAvailability(0, cartItem);
+        }
       }
-    } else if (existingItem) { //delete
-      this.store.unloadRecord(existingItem);
-      if(cartItem) {
-        this.addItemToCart(cartItem);
-      }
+      run(success);
     }
-    //checking if package is available in store and in cart
-    if(itemInCart && cartItem) {
-      //updating cart pkg availability accordingly
-      if((itemInCart.get("orderId") === null) && (itemInCart.get("allowWebPublish") || itemInCart._internalModel._data.allowWebPublish)) {
-        this.updateCartAvailability(1, cartItem);
-      } else {
-        this.updateCartAvailability(0, cartItem);
-      }
-    }
-    run(success);
   }
 });

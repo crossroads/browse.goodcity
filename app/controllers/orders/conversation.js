@@ -63,16 +63,16 @@ export default detail.extend({
     sendMessage() {
       Ember.$("textarea").trigger('blur');
       var values = this.getProperties("body");
-      values.designation = this.get('model');
+      values.order = this.get('order');
+      values.isPrivate = false;
       values.createdAt = new Date();
-      values.isPrivate = this.get('isPrivate');
-      values.sender = this.store.peekRecord("user", this.get("session.currentUser.id"));
+      values.sender = this.store.peekRecord("sender", this.get("session.currentUser.id"));
       this.createMessage(values);
 
       // Animate and scroll to bottom
-      Ember.$("body").animate({
-        scrollTop: Ember.$(document).height()
-      }, 1000);
+      Ember.$(".message_container").animate({
+        scrollTop: Ember.$(".message_container")[0].scrollHeight
+      }, 50);
     }
   }
 });
