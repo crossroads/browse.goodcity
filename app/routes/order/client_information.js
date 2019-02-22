@@ -50,11 +50,6 @@ export default AuthorizeRoute.extend({
     this._super(...arguments);
     this.setUpFormData(model, controller);
     controller.set("previousRouteName", this.get("previousRouteName"));
-    if(this.get("previousRouteName") === "my_orders") {
-      this.controllerFor('my_orders').set("selectedOrder", model.order);
-    } else {
-      this.controllerFor('my_orders').set("selectedOrder", null);
-    }
     this.controllerFor('application').set('showSidebar', false);
   },
 

@@ -1,22 +1,7 @@
 <div class="row my_orders">
   <div class="small-12 columns content">
     <div class="order-summary {{order.state}}">
-      <div class="row header tab-bar">
-        {{#link-to 'my_orders'}}
-          <div class="columns small-2  close-order-summary">
-            <i class="fa fa-lg fa-times-circle-o" aria-hidden="true"></i>
-          </div>
-        {{/link-to}}
-        <div class="columns small-8 strong">
-          {{ order.code }}
-        </div>
-        <div class="columns small-2 header-icon">
-          <div class="icon">
-            <i class="fa fa-lg fa-{{ order.stateIcon }}"></i>
-          </div>
-          <div class="sub-text">{{ t (concat 'my_orders.' order.state) }}</div>
-        </div>
-      </div>
+      {{partial 'orders/order_header'}}
       {{partial 'orders/order_tabs'}}
       <div class="tab-content">
         <div class="booking-tab">
@@ -155,7 +140,7 @@
             {{!-- Description of needs --}}
             <div class="detail-row row">
               <div class="data-type">{{ t 'my_orders.details.request.description_of_needs' }}</div>
-              <div class="data">{{ selectedOrder.purposeDescription }}</div>
+              <div class="data">{{ order.purposeDescription }}</div>
             </div>
           </section>
         </div>
@@ -166,7 +151,7 @@
 </div>
 {{#message-box  isVisible=showCancelBookingPopUp classNames="popupOverlay cancel-appointment"}}
 
-    {{#if (is-and selectedOrder selectedOrder.isDraft)}}
+    {{#if (is-and order order.isDraft)}}
       <p class="cancel-booking-warning">{{t "cancel_booking.draft_cancel_booking_warning"}}</p>
     {{else}}
       <p class="cancel-booking-warning">{{t "cancel_booking.cancel_booking_warning"}}</p>

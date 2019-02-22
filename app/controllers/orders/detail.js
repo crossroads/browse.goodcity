@@ -4,7 +4,6 @@ import AjaxPromise from 'browse/utils/ajax-promise';
 
 
 export default applicationController.extend({
-  isBooking: false,
   order: Ember.computed.alias('model.order'),
   showCancelBookingPopUp: false,
 

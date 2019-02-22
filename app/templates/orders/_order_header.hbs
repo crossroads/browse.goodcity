@@ -1,0 +1,16 @@
+<div class="row header tab-bar">
+  {{#link-to 'my_orders'}}
+    <div class="columns small-2 close-order-summary">
+      <i class="fa fa-lg fa-times-circle-o" aria-hidden="true"></i>
+    </div>
+  {{/link-to}}
+  <div class="columns small-8 strong">
+      {{ order.code }}
+  </div>
+  <div class="columns small-2 header-icon">
+    <div class="icon">
+      <i class="fa fa-lg fa-{{ order.stateIcon }}"></i>
+    </div>
+    <div class="sub-text">{{ t (concat 'my_orders.' order.state) }}</div>
+  </div>
+</div>
