@@ -140,15 +140,17 @@ export default Ember.Controller.extend(cancelOrder, {
 
     saveOrUpdateOrderTransport(url, actionType){
       var loadingView = getOwner(this).lookup('component:loading').append();
+      var previousRouteName = this.get("previousRouteName");
+      var orderId = this.get('order.id');
 
       new AjaxPromise(url, actionType, this.get('session.authToken'), { order_transport: this.orderTransportParams() })
       .then(data => {
         this.get("store").pushPayload(data);
         loadingView.destroy();
-        if(this.get("previousRouteName") === "my_orders") {
-          this.transitionToRoute('my_orders');
+        if(previousRouteName === "orders.booking") {
+          this.transitionToRoute(previousRouteName, orderId);
         } else {
-          this.transitionToRoute("order.confirm_booking", this.get("order.id"));
+          this.transitionToRoute("order.confirm_booking", orderId);
         }
       });
     }

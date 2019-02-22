@@ -135,9 +135,10 @@ export default Ember.Controller.extend(cancelOrder, {
     redirectToGoodsDetails() {
       let order = this.get("order");
       let orderId = order.id;
+      var previousRouteName = this.get("previousRouteName");
 
-      if (this.get("previousRouteName") === "my_orders") {
-        this.transitionToRoute('my_orders');
+      if(previousRouteName === "orders.booking") {
+        this.transitionToRoute(previousRouteName, orderId);
       } else {
         let nextRoute = `order.${this.get('order.isAppointment') ? 'goods_details' : 'schedule_details'}`;
         this.transitionToRoute(nextRoute, orderId, { queryParams: { fromClientInformation: true }});
