@@ -14,7 +14,7 @@ export default Ember.TextArea.extend({
     let messageContainer = Ember.$(".message_container")[0];
     if (messageContainer){
       var scrollToTopHeight = messageContainer.scrollHeight;
-      Ember.$(".message_container").animate({
+      messageContainer.animate({
         scrollTop: scrollToTopHeight
       }, 50);
     }

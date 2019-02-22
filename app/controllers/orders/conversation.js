@@ -65,9 +65,12 @@ export default detail.extend({
       this.createMessage(values);
 
       // Animate and scroll to bottom
-      Ember.$(".message_container").animate({
-        scrollTop: Ember.$(".message_container")[0].scrollHeight
-      }, 50);
+      let messageContainer = Ember.$(".message_container")[0]
+      if (messageContainer){
+        messageContainer.animate({
+          scrollTop: messageContainer.scrollHeight
+        }, 50);
+      }
     }
   }
 });
