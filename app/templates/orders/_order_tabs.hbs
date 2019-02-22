@@ -1,14 +1,26 @@
 <div class="row tabs tab-bar">
-  {{#link-to 'orders.booking' order.id tagName="div" classNames="small-6 columns booking tab text-center"}}
+  {{#link-to 'orders.booking' order.id tagName="div" classNames="small-4 columns booking tab text-center"}}
     {{#link-to 'orders.booking' order.id}}
         <i class="item-menu">{{fa-icon 'calendar'}}</i>
-        Booking
+        <div class="tab_name">
+          Booking
+        </div>
     {{/link-to}}
   {{/link-to}}
-  {{#link-to 'orders.goods' order.id tagName="div" classNames="small-6 goods tab columns text-center"}}
+  {{#link-to 'orders.goods' order.id tagName="div" classNames="small-4 goods tab columns text-center"}}
     {{#link-to 'orders.goods' order.id}}
         <i class="item-menu">{{fa-icon 'shopping-basket'}}</i>
-        Goods
+        <div class="tab-name">
+          Goods
+        </div>
+    {{/link-to}}
+  {{/link-to}}
+  {{#link-to 'orders.conversation' order.id tagName="div" classNames="small-4 conversation tab columns text-center"}}
+    {{#link-to 'orders.conversation' order.id}}
+      <i class="item-menu">{{fa-icon 'comment'}}</i>
+      <div class="tab-name">
+        Messages
+      </div>
     {{/link-to}}
   {{/link-to}}
 </div>

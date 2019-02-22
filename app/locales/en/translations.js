@@ -34,6 +34,18 @@ export default {
   "discard_changes": "Discard changes",
   "morning": "Morning",
   "afternoon": "Afternoon",
+  "full_name": "{{firstName}} {{lastName}}",
+
+  "messages": {
+    "you": "You",
+    "chat_note": "Chat about this order with our staff",
+    "send": "Send",
+    "day": {
+      "today": "Today",
+      "morning": "Morning",
+      "afternoon": "Afternoon"
+    }
+  },
 
   "banner": {
     "presented_by": "Presented by",

@@ -19,6 +19,7 @@ export default Model.extend({
   updatedAt:        attr('date'),
   detailType:       attr('string'),
   districtId:       attr('number'),
+  messages: hasMany('message', { async: true }),
   ordersPurposes:     hasMany('ordersPurpose', { async: false }),
   beneficiaryId: attr('string'),
   bookingTypeId: attr('number'),

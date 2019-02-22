@@ -7,7 +7,16 @@
 .cr-logo a {
   text-align: center;
 }
-.tab-bar {
+.tabs.tab-bar {
+  i {
+    font-size: 120%
+  }
+  border-bottom: unset;
+  font-size: 100%;
+  z-index: 100;
+}
+
+.tabs.tab-name {
   border-bottom: 1px solid $light-blue;
   z-index: 100;
 }
