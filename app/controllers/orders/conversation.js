@@ -1,21 +1,16 @@
+import Ember from 'ember';
 import config from '../../config/environment';
 import detail from './detail';
 
 export default detail.extend({
-  body: '',
   isPrivate: false,
-  backLinkPath: "",
   order: Ember.computed('model', function(){
     return this.get('model');
   }),
   isMobileApp: config.cordova.enabled,
-  itemIdforHistoryRoute: null,
-  organisationIdforHistoryRoute: null,
   i18n: Ember.inject.service(),
-  sortProperties: [
-    "createdAt: asc"
-  ],
-  model: null,
+  sortProperties: [ "createdAt: asc" ],
+
   noMessage: Ember.computed.empty("model.messages"),
 
   displayChatNote: Ember.computed('noMessage', 'disabled', function () {
@@ -63,7 +58,7 @@ export default detail.extend({
     sendMessage() {
       Ember.$("textarea").trigger('blur');
       var values = this.getProperties("body");
-      values.order = this.get('order');
+      values.order = this.get('model');
       values.isPrivate = false;
       values.createdAt = new Date();
       values.sender = this.store.peekRecord("sender", this.get("session.currentUser.id"));

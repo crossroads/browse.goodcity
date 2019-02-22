@@ -1,7 +1,7 @@
 .message_container {
   @media #{$large-only} {
-    max-height: 22.6rem;
-    height: 22.6rem;
+    max-height: 21.6rem;
+    height: 21.6rem;
     overflow: scroll;
   }
 
@@ -78,6 +78,12 @@
     color: #a3aab6;
     background: #002352;
   }
+}
+
+.btm{
+  height: 60px;
+  margin: 0 auto;
+  text-align: center;
 }
 
 .message-form {

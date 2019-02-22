@@ -11,10 +11,13 @@ export default Ember.TextArea.extend({
   },
 
   autoScroll: function () {
-    var scrollToTopHeight = Ember.$(".message_container")[0].scrollHeight;
-    Ember.$(".message_container").animate({
-      scrollTop: scrollToTopHeight
-    }, 50);
+    let messageContainer = Ember.$(".message_container")[0];
+    if (messageContainer){
+      var scrollToTopHeight = messageContainer.scrollHeight;
+      Ember.$(".message_container").animate({
+        scrollTop: scrollToTopHeight
+      }, 50);
+    }
   },
 
   handleReturnAndAutoScroll: function () {
