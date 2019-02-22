@@ -6,7 +6,22 @@ import AjaxPromise from 'browse/utils/ajax-promise';
 export default applicationController.extend({
   order: Ember.computed.alias('model.order'),
   showCancelBookingPopUp: false,
-
+  orderSummaryTabs: [{
+      routeName: 'booking',
+      displayName: 'Booking',
+      icon: 'calendar'
+    },
+    {
+      routeName: 'goods',
+      displayName: 'Goods',
+      icon: 'shopping-basket'
+    },
+    {
+      routeName: 'conversation',
+      displayName: 'Messages',
+      icon: 'comment-o'
+    }
+  ],
   deleteOrder(order) {
     var _this = this;
     this.showLoadingSpinner();

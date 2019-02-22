@@ -155,7 +155,7 @@ test("the summary booking tab is selected by default", function(assert) {
 
   click(Ember.$('.list-items .order_block')[0]);
   andThen(() => {
-    assert.equal(Ember.$('.order-summary .tabs .tab.booking.active').length, 1);
+    assert.equal(Ember.$('.order-summary .tabs .tab.booking.active').length, 2);
   });
 });
 
@@ -166,7 +166,7 @@ test("clicking on the goods tab selects it", function(assert) {
     click(Ember.$('.order-summary .tabs .tab.goods'));
   });
   andThen(() => {
-    assert.equal(Ember.$('.order-summary .tabs .tab.goods.active').length, 1);
+    assert.equal(Ember.$('.order-summary .tabs .tab.goods.active').length, 2);
   });
 });
 
@@ -177,7 +177,7 @@ test("on the good tabs, we can see the packages of the order listed", function(a
     click(Ember.$('.order-summary .tabs .tab.goods'));
   });
   andThen(() => {
-    assert.equal(Ember.$('.order-summary .tabs .tab.goods.active').length, 1);
+    assert.equal(Ember.$('.order-summary .tabs .tab.goods.active').length, 2);
     assert.equal(Ember.$('.goods-tab .product-row').length, 1);
     assert.equal(Ember.$('.goods-tab .product-row .text').text().trim(), "Category4");
     assert.equal(Ember.$('.goods-tab .product-row .notes').text().trim(), "example");
