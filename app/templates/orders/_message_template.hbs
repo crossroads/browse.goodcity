@@ -1,6 +1,6 @@
 <section class="message-section">
   <div class="row">
-    <div class="small-12 columns {{if displayChatNote "message-container-expanded" "message_container"}}">
+    <div class="small-12 columns">
       {{#each groupedMessages as |messages|}}
       <div class="small-12 columns day_seperator">
         <span>{{display-messages-day messages.firstObject.createdDate (t 'messages.day.today')}}</span>
@@ -21,11 +21,7 @@
           {{display-datetime message.createdAt format="HH:mm"}}
         </div>
 
-        {{message.body}}
-      </div>
-      {{else}}
-      <div class="small-12 columns item_log">
-        {{display-datetime message.createdAt format="HH:mm"}} - {{message.displayMessage}}
+        {{{apply-line-break message.body}}}
       </div>
       {{/if}}
       {{/each}}
@@ -39,7 +35,7 @@
       {{#if displayChatNote}}
       <div class="row">
         <div class="small-12 columns chat_note">
-          <i class="fa fa-info-circle"></i>
+          <i class="info-icon">{{fa-icon 'info-circle'}}</i>
           {{t 'messages.chat_note'}}
         </div>
       </div>
@@ -52,8 +48,8 @@
               {{variable-height-textarea value=body name="body" required=true parentDiv="message-section"}}
             </div>
             <div class="small-3 large-2 medium-2 columns">
-              {{#online-button classNames="button" onClick=(action "sendMessage")}}
-                {{t "messages.send"}}
+              {{#online-button classNames="button" onClick=(action "sendMessage") actionArgs=true}}
+              {{t 'messages.send'}}
               {{/online-button}}
             </div>
           </div>
@@ -63,3 +59,4 @@
     </div>
   </div>
 </div>
+

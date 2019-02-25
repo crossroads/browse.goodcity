@@ -5,18 +5,28 @@ export default Ember.TextArea.extend({
   attributeBindings: ["disabled"],
   disabled: false,
 
+   didDestroyElement: function () {
+     Ember.$('.liquid-container').css({
+       "position": "relative",
+       "-webkit-transform": "translateY(0)",
+       "-moz-transform": "translateY(0)",
+       "transform": "translateY(0)"
+     });
+   },
+
   didInsertElement: function () {
+    Ember.$('.liquid-container').css({
+      "position": "unset",
+      "-webkit-transform": "unset",
+      "-moz-transform": "unset",
+      "transform": "unset"
+    });
     // scrolling down to bottom of page
     this.autoScroll();
   },
 
   autoScroll: function () {
-    let messageContainer = Ember.$(".message_container")[0];
-    if (messageContainer){
-      Ember.$(".message_container")[0].animate({
-        scrollTop: messageContainer.scrollHeight
-      }, 50);
-    }
+    window.scrollTo(0, document.body.scrollHeight);
   },
 
   handleReturnAndAutoScroll: function () {
