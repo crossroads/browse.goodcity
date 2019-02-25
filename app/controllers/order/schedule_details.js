@@ -6,6 +6,8 @@ import cancelOrder from '../../mixins/cancel_order';
 const ONLINE_ORDER_HALF_DAY_SLOT_COUNT = 10;
 
 export default Ember.Controller.extend(cancelOrder, {
+  queryParams: ["prevPath"],
+  prevPath: null,
   showCancelBookingPopUp: false,
   order: Ember.computed.alias("model.order"),
   orderTransport: Ember.computed.alias('model.orderTransport'),
@@ -15,7 +17,6 @@ export default Ember.Controller.extend(cancelOrder, {
   selectedDate: null,
   timeSlotNotSelected: false,
   isEditing: false,
-  previousRouteName: null,
   showOrderSlotSelection: false,
 
   isAppointment: Ember.computed('order', function () {
@@ -140,7 +141,7 @@ export default Ember.Controller.extend(cancelOrder, {
 
     saveOrUpdateOrderTransport(url, actionType){
       var loadingView = getOwner(this).lookup('component:loading').append();
-      var previousRouteName = this.get("previousRouteName");
+      var previousRouteName = this.get("prevPath");
       var orderId = this.get('order.id');
 
       new AjaxPromise(url, actionType, this.get('session.authToken'), { order_transport: this.orderTransportParams() })

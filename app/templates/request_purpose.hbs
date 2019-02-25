@@ -10,8 +10,8 @@
               <nav class="tab-bar">
                 <section class="left-large inline-content">
                   {{fa-icon "angle-left"}}
-                  {{#if (is-equal previousRouteName (is-or 'orders.booking' 'orders.goods'))}}
-                    {{#link-to previousRouteName order.id classNames="back"}}{{t "back"}}{{/link-to}}
+                  {{#if (is-equal prevPath (is-or 'orders.booking' 'orders.goods'))}}
+                    {{#link-to prevPath order.id classNames="back"}}{{t "back"}}{{/link-to}}
                   {{else if (is-equal previousRouteName 'my_orders') }}
                      {{#link-to "my_orders" classNames="back"}}{{t "back"}}{{/link-to}}
                   {{else}}
@@ -96,10 +96,14 @@
                         <a {{action 'submit' target=form}} class="button expand" id="request-submit"> {{t 'save_changes'}} </a>
                       </div>
                       <div class="small-6 medium-6 large-6 columns">
-                        {{#if (is-equal previousRouteName "my_orders")}}
-                          {{#link-to 'my_orders' classNames="button expand request"}}
+                        {{#if (is-equal prevPath "orders.booking")}}
+                          {{#link-to 'orders.booking' order.id classNames="button expand request"}}
                             {{t 'discard_changes'}}
                           {{/link-to}}
+                        {{else if (is-equal previousRouteName 'my_orders') }}
+                          {{#link-to "my_orders" classNames="button expand request"}}
+                            {{t 'discard_changes'}}
+                        {{/link-to}}
                         {{else}}
                           {{#link-to 'home' classNames="button expand request"}}
                             {{t 'discard_changes'}}

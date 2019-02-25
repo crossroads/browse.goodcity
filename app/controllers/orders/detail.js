@@ -90,7 +90,7 @@ export default applicationController.extend({
   actions: {
     redirectToEdit(routeName) {
       let orderId = this.get("order.id");
-      this.transitionToRoute(`order.${routeName}`, orderId);
+      this.transitionToRoute(`order.${routeName}`, orderId, { queryParams: { prevPath: "orders.booking" } });
     },
 
     editRequestPurpose() {
@@ -100,7 +100,8 @@ export default applicationController.extend({
           queryParams: {
             orderId: orderId,
             bookAppointment: false,
-            editRequest: true
+            editRequest: true,
+            prevPath: 'orders.booking'
           }
         });
     },

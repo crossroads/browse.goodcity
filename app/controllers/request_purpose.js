@@ -8,9 +8,9 @@ export default Ember.Controller.extend(cancelOrder, {
   showCancelBookingPopUp: false,
   isMobileApp: config.cordova.enabled,
   myOrders: Ember.inject.controller(),
-  queryParams: ["orderId", "editRequest", "bookAppointment"],
+  queryParams: ["orderId", "editRequest", "bookAppointment", 'prevPath'],
+  prevPath: null,
   editRequest: null,
-  previousRouteName: null,
   orderId: null,
   isEditing: false,
   bookAppointment: false,
@@ -107,7 +107,7 @@ export default Ember.Controller.extend(cancelOrder, {
           let orderId = data.order.id;
 
           loadingView.destroy();
-          if(this.get("previousRouteName") === "orders.booking" && this.get('editRequest')) {
+          if(this.get("prevPath") === "orders.booking" && this.get('editRequest')) {
             this.transitionToRoute('orders.booking', orderId);
           } else {
             this.transitionToRoute("order.client_information", orderId);

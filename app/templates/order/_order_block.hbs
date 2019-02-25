@@ -1,45 +1,45 @@
 <div class="order_block">
-    <div class="row order_header">
-      <div class="small-4 medium-0 large-4 columns order_transport"> 
-        <i class="fa fa-lg fa-{{ order.transportIcon }}"></i> {{ order.transportLabel }}
-      </div>
-
-      <div class="small-3 columns order_code">
-        {{order.code}}
-      </div>
-
-      <div class="small-5 medium-9 large-5 columns order_state">
-        <div class="order_state_icon {{ order.state }}">
-          <i class="fa fa-{{ order.stateIcon }}"></i>
-        </div>
-        <div class="order_state_text"> {{ t (concat "my_orders." order.state) }} </div>
-      </div>
+  <div class="row order_header">
+    <div class="small-4 medium-0 large-4 columns order_transport"> 
+      <i class="fa fa-lg fa-{{ order.transportIcon }}"></i> {{ order.transportLabel }}
     </div>
-    <div class="row order_body">
-      <div class="arrow-right">
-        <i class="fa fa-chevron-right" aria-hidden="true"></i>
-      </div>
 
-      {{#if (is-and order.orderTransport order.orderTransport.scheduledAt)}}
-        <div class="row">
-          <div class="small-4 columns field">
-            {{ t "my_orders.due_date" }}
-          </div>
-          <div class="small-8 columns value schedule">
-            {{  display-datetime order.orderTransport.scheduledAt format="dddd Do MMMM hh:mm a" }}
-          </div>
-        </div>
-      {{/if}}
-
-      {{#if order.beneficiary}}
-        <div class="row">
-          <div class="small-4 columns field">
-            {{ t "my_orders.submitted_for_client" }}
-          </div>
-          <div class="small-8 columns value beneficiary">
-            {{order.beneficiary.title}} {{order.beneficiary.firstName}} {{order.beneficiary.lastName}}
-          </div>
-        </div>
-      {{/if}}
+    <div class="small-3 columns order_code">
+      {{order.code}}
     </div>
+
+    <div class="small-5 medium-9 large-5 columns order_state">
+      <div class="order_state_icon {{ order.state }}">
+        <i class="fa fa-{{ order.stateIcon }}"></i>
+      </div>
+      <div class="order_state_text"> {{ t (concat "my_orders." order.state) }} </div>
+    </div>
+  </div>
+  <div class="row order_body">
+    <div class="arrow-right">
+      <i class="fa fa-chevron-right" aria-hidden="true"></i>
+    </div>
+
+    {{#if (is-and order.orderTransport order.orderTransport.scheduledAt)}}
+      <div class="row">
+        <div class="small-4 columns field">
+          {{ t "my_orders.due_date" }}
+        </div>
+        <div class="small-8 columns value schedule">
+          {{  display-datetime order.orderTransport.scheduledAt format="dddd Do MMMM hh:mm a" }}
+        </div>
+      </div>
+    {{/if}}
+
+    {{#if order.beneficiary}}
+      <div class="row">
+        <div class="small-4 columns field">
+          {{ t "my_orders.submitted_for_client" }}
+        </div>
+        <div class="small-8 columns value beneficiary">
+          {{order.beneficiary.title}} {{order.beneficiary.firstName}} {{order.beneficiary.lastName}}
+        </div>
+      </div>
+    {{/if}}
+  </div>
 </div>

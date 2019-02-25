@@ -2,19 +2,6 @@ import Ember from 'ember';
 import AuthorizeRoute from './../authorize';
 
 export default AuthorizeRoute.extend({
-  previousRouteName: null,
-
-  beforeModel() {
-    this._super(...arguments);
-    var previousRoutes = this.router.router && this.router.router.currentHandlerInfos;
-    var previousRoute = previousRoutes && previousRoutes.pop();
-
-    if(previousRoute && previousRoute.name)
-    {
-      this.set("previousRouteName", previousRoute.name);
-    }
-  },
-
   model() {
     var orderId = this.paramsFor('order').order_id;
     var order = this.store.peekRecord('order', orderId) || this.store.findRecord('order', orderId);
@@ -49,7 +36,6 @@ export default AuthorizeRoute.extend({
   setupController(controller, model) {
     this._super(...arguments);
     this.setUpFormData(model, controller);
-    controller.set("previousRouteName", this.get("previousRouteName"));
     this.controllerFor('application').set('showSidebar', false);
   },
 
