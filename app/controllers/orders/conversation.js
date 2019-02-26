@@ -24,7 +24,7 @@ export default detail.extend({
     return this.groupBy(this.get("sortedMessages"), "createdDate");
   }),
 
-  autoScroll: function () {
+  autoScroll() {
     window.scrollTo(0, document.body.scrollHeight);
   },
 
