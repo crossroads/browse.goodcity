@@ -5,10 +5,11 @@ const { getOwner } = Ember;
 import cancelOrder from '../../mixins/cancel_order';
 
 export default Ember.Controller.extend(cancelOrder, {
+  queryParams: ["prevPath"],
+  prevPath: null,
   showCancelBookingPopUp: false,
   isMobileApp: config.cordova.enabled,
   myOrders: Ember.inject.controller(),
-  previousRouteName: null,
   firstName: null,
   lastName: null,
   mobilePhone: null,
@@ -135,7 +136,7 @@ export default Ember.Controller.extend(cancelOrder, {
     redirectToGoodsDetails() {
       let order = this.get("order");
       let orderId = order.id;
-      var previousRouteName = this.get("previousRouteName");
+      var previousRouteName = this.get("prevPath");
 
       if(previousRouteName === "orders.booking") {
         this.transitionToRoute(previousRouteName, orderId);

@@ -3,8 +3,6 @@ import AuthorizeRoute from './../authorize';
 import AjaxPromise from 'browse/utils/ajax-promise';
 
 export default AuthorizeRoute.extend({
-  previousRouteName: null,
-
   filteredCalenderDatesWithOrderTransport(calendarDates, orderTransportScheduledAt) {
     return calendarDates.filter(dateAndSlots => dateAndSlots.date === orderTransportScheduledAt)[0];
   },
@@ -61,17 +59,6 @@ export default AuthorizeRoute.extend({
     return calendarDates;
   },
 
-  beforeModel() {
-    this._super(...arguments);
-    var previousRoutes = this.router.router && this.router.router.currentHandlerInfos;
-    var previousRoute = previousRoutes && previousRoutes.pop();
-
-    if(previousRoute && previousRoute.name)
-    { 
-      this.set("previousRouteName", previousRoute.name);
-    }
-  },
-
   model() {
     var orderId = this.paramsFor('order').order_id;
     return Ember.RSVP.hash({
@@ -119,7 +106,6 @@ export default AuthorizeRoute.extend({
   setupController(controller, model) {
     this._super(...arguments);
     this.setUpFormData(model, controller);
-    controller.set("previousRouteName", this.get("previousRouteName"));
     this.controllerFor('application').set('showSidebar', false);
     controller.set('showOrderSlotSelection', false);
   },

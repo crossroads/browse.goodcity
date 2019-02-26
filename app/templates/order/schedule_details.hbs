@@ -15,8 +15,8 @@
           <nav class="tab-bar">
             <section class="left-large inline-content">
               {{fa-icon "angle-left"}}
-              {{#if (is-equal previousRouteName (is-or 'orders.booking' 'orders.goods'))}}
-                {{#link-to previousRouteName order.id classNames="back"}}{{t "back"}}{{/link-to}}
+              {{#if (is-equal prevPath (is-or 'orders.booking' 'orders.goods'))}}
+                {{#link-to prevPath order.id classNames="back"}}{{t "back"}}{{/link-to}}
               {{else if isAppointment }}
                 {{#link-to 'order.goods_details' order.id classNames="back"}}{{t "back"}}{{/link-to}}
               {{else}}
@@ -193,8 +193,8 @@
                       </a>
                     </div>
                     <div class="small-6 medium-6 large-6 columns">
-                      {{#if (is-equal previousRouteName "my_orders")}}
-                        {{#link-to 'my_orders' classNames="button expand appointment"}}
+                      {{#if (is-equal prevPath "orders.booking")}}
+                        {{#link-to 'orders.booking' order.id classNames="button expand appointment"}}
                           {{t 'discard_changes'}}
                         {{/link-to}}
                       {{else}}
