@@ -14,7 +14,27 @@ export default Ember.Route.extend(preloadDataMixin, {
   },
 
   model() {
-    return this.preloadData();
+    return this.preloadData()
+      .then((res) => {
+        let draftOrder = this.get('session.draftOrder');
+        if (!draftOrder) {
+          return res;
+        }
+
+        return Ember.RSVP.all(
+          draftOrder.get("ordersPackages").map(op => {
+            return this.loadIfAbsent('package', op.get('packageId'));
+          })
+        ).then(() => res);
+      });
+  },
+
+  loadIfAbsent(modelName, id) {
+    let cachedRecord = this.store.peekRecord(modelName, id);
+    if (cachedRecord) {
+      return Ember.RSVP.resolve(cachedRecord);
+    }
+    return this.store.findRecord(modelName, id);
   },
 
   afterModel() {

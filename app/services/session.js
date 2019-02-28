@@ -18,20 +18,20 @@ export default Ember.Service.extend({
     this.set("otpAuthKey", null);
   },
 
-  draftAppointment: Ember.computed("allDrafts.@each.state", function () {
+  draftAppointment: Ember.computed(function () {
     return this.get("allDrafts").filterBy('isAppointment', true).get("firstObject");
-  }),
+  }).volatile(),
 
   draftOrder: Ember.computed(function(){
     return this.get("allDrafts").filterBy('isAppointment', false).get("firstObject");
-  }),
+  }).volatile(),
 
   allDrafts: Ember.computed(function () {
     return this.get('allOrders').filterBy("state", "draft");
-  }),
+  }).volatile(),
 
   allOrders: Ember.computed(function() {
     return this.get("store").peekAll("order").sortBy('id');
-  })
+  }).volatile()
 
 });
