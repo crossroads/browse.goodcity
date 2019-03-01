@@ -109,9 +109,7 @@ export default Ember.Controller.extend({
   },
 
   batch: function(events, success) {
-    debugger
     events.forEach(function(args) {
-      debugger
       var event = args[0];
       if (this[event]){
         this[event].apply(this, args.slice(1));

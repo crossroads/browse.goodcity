@@ -3,6 +3,7 @@ import detail from './detail';
 import Ember from 'ember';
 
 export default detail.extend({
+  messagesUtil: Ember.inject.service("messages"),
   isPrivate: false,
   order: Ember.computed('model', function(){
     return this.get('model');
@@ -71,6 +72,11 @@ export default detail.extend({
 
       // Animate and scroll to bottom
       this.autoScroll();
+    },
+    markRead() {
+      this.get("sortedMessages")
+        .filterBy('state', 'unread')
+        .forEach(m => this.get("messagesUtil").markRead(m));
     }
   }
 });
