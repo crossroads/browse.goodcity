@@ -13,11 +13,8 @@ export default Ember.Controller.extend(cancelOrder, {
 
   isEmptyOrUnavailableOrder(order) {
     if(order) {
-      let orderItems = order.get('orderItems');
-      if(orderItems.length) {
-        return ((orderItems.getEach("allowWebPublish").indexOf(false) >= 0) || orderItems.getEach("allowWebPublish").indexOf(undefined) >= 0);
-      }
-      return true;
+      let cartItems = this.get("cart.content");
+      return cartItems.length ? false : true;
     }
     return true;
   },
