@@ -271,3 +271,17 @@
   text-decoration: underline;
   cursor: pointer;
 }
+
+.unread-message-count{
+  @media #{$small-only} {
+    margin-right: -5px;
+  }
+
+  @media #{$large-only} {
+    margin-right: -80px;
+  }
+
+  @media #{$medium-only} {
+    margin-right: -16px;
+  }
+}
