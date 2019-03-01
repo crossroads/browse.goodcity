@@ -63,13 +63,6 @@
   font-size: .9rem;
   position: relative;
   -webkit-border-radius: 10px;
-  @media #{$small-only} {
-    margin-left: 9%
-  }
-
-  @media #{$large-only} {
-    margin-left: 4%
-  }
 }
 
 .message-form {

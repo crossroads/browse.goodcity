@@ -95,24 +95,26 @@
   }
 }
 
-.unread {
-  position: absolute;
-  right: 1.5rem;
-  margin-top: -.3rem;
-  .unread_length {
-    line-height: 1.3rem;
-    width: 1.2rem;
-    height: 1.2rem;
-    font-size: .8rem;
-    display: block;
-    color: white;
-    text-transform: uppercase;
-    text-align: center;
-    border-radius: 50%;
-    background: #ee4c4e;
-    font-weight: 700;
-    margin-top: .2rem;
-    float: inherit;
+.cart{
+  &.unread {
+    position: absolute;
+    right: 1.5rem;
+    margin-top: -.3rem;
+    .unread_length {
+      line-height: 1.3rem;
+      width: 1.2rem;
+      height: 1.2rem;
+      font-size: .8rem;
+      display: block;
+      color: white;
+      text-transform: uppercase;
+      text-align: center;
+      border-radius: 50%;
+      background: #ee4c4e;
+      font-weight: 700;
+      margin-top: .2rem;
+      float: inherit;
+    }
   }
 }
 .right-small {
