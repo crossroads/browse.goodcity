@@ -18,8 +18,8 @@ module('Acceptance | Book appointment/order ', {
     organisation = make("organisation");
     pkg = make('package');
     purpose = make("purpose");
-    order = { id: 312, code: "L24489", state: "draft", created_by_id: user.id, organisation_id: organisation.id,
-      purpose_description: 'test test test', people_helped: "2", booking_type_id: BookingTypes.onlineOrder.id };
+    order = make("order", { code: "L24489", state: "draft", createdById: user.id, organisationId: organisation.id,
+      purposeDescription: 'test test test', peopleHelped: "2", bookingTypeId: BookingTypes.onlineOrder.id }).toJSON({ includeId: true });
     ordersPackage = make("orders_package", { quantity: 1, state: "requested", package: pkg,
       packageId: pkg.id, orderId: order.id});
     gogo_van = make("gogovan_transport");

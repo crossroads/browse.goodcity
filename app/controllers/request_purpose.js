@@ -63,14 +63,6 @@ export default Ember.Controller.extend(cancelOrder, {
       }
 
       let user = this.get('user');
-      let purposeIds = [];
-
-      if (this.get('selectedId') === 'organisation'){
-        purposeIds.push(1);
-      } else if (this.get('selectedId') === 'client'){
-        purposeIds.push(2);
-      }
-
       let user_organisation_id;
       if(user && user.get('organisationsUsers').length){
         user_organisation_id = user.get('organisationsUsers.firstObject.organisationId');
@@ -87,7 +79,7 @@ export default Ember.Controller.extend(cancelOrder, {
       let orderParams = {
         organisation_id: user_organisation_id,
         purpose_description: this.get('description'),
-        purpose_ids: purposeIds,
+        purpose_ids: [],
         people_helped: this.get('peopleCount'),
         district_id: this.get('selectedDistrict.id'),
         booking_type_id: this.getSelectedBookingTypeId(),
