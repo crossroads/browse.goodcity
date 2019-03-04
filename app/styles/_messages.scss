@@ -98,6 +98,9 @@
 }
 
 .message-textbar{
+  @media #{$xlarge-only} {
+    width: 50.5% !important;
+  }
   @media #{$small-only}{
     width: 100% !important;
   }
