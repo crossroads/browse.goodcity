@@ -44,10 +44,10 @@
         <div class="small-12 columns">
           {{#validatable-form class="form-horizontal" onSubmit=(action 'sendMessage') as |form|}}
           <div class="row ui">
-            <div class="small-9 large-10 medium-10 columns">
+            <div class="small-9 large-10 medium-9 columns">
               {{variable-height-textarea value=body name="body" required=true parentDiv="message-section"}}
             </div>
-            <div class="small-3 large-2 medium-2 columns">
+            <div class="small-3 large-2 medium-3 columns">
               {{#online-button classNames="button" onClick=(action "sendMessage") actionArgs=true}}
               {{t 'messages.send'}}
               {{/online-button}}
