@@ -39,7 +39,7 @@
     }
 
     .order_code  {
-      text-align: right;
+      text-align: center;
     }
     .order_transport, .order_code {
       color: white;
@@ -115,6 +115,10 @@
         opacity: 0.8;
       }
       .value {
+        &.beneficiary{
+          float: left;
+        }
+        text-align: center;
         color: white;
         padding-left: 0.5em;
         padding-right: 1rem;
