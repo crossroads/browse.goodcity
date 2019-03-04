@@ -11,7 +11,7 @@ export default {
   "okay": "確定",
   "show": "顯示",
   "date": "日期",
-  "edit": "Edit",
+  "edit": "修改",
   "time": "時間",
   "contact": "聯絡電話",
   "draft": "等待提交",
@@ -34,13 +34,13 @@ export default {
   "morning": "早安",
   "afternoon": "午安",
   "messages": {
-    "you": "You",
-    "chat_note": "Chat about this order with our staff",
-    "send": "Send",
+    "you": "閣下",
+    "chat_note": "有關這個指示請跟我們的職員聯絡",
+    "send": "傳送",
     "day": {
-      "today": "Today",
-      "morning": "Morning",
-      "afternoon": "Afternoon"
+      "today": "今天",
+      "morning": "早上",
+      "afternoon": "下午"
     }
   },
 
@@ -454,9 +454,9 @@ export default {
       "choose_date": "選擇有效的日期",
       "good_limit_dates": "我們不能保存貨品過於以下日期.",
       "staff_contact": "處理這指令前我們的職員將會確定收貨或送貨時間.",
-      "self_vehicle": "Recipient will collect from Crossroads",
-      "hire_vehicle": "Recipient would like the goods sent in a hired truck (Recipient pays the driver)",
-      "labor_info": "Crossroads' volunteers will help load goods into the vehicle but <u>we cannot provide labour for unloading</u>. Our staff will contact you to discuss this an confirm any charges that may be involved if hired labour will be required for unloading."
+      "self_vehicle": "接收者會從國際十字路會接收",
+      "hire_vehicle": "接收者會僱用貨車運貨（接收者會付款給貨車司機）",
+      "labor_info": "國際十字路會義工會幫忙上貨於車輛內,但不會幫忙落貨.我們的職員將會接觸閣下去討論及確定有關僱用工人去處理落貨的費用事宜."
     },
     "booking_success": {
       "success": "成功！",
