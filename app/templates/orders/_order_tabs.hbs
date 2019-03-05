@@ -1,4 +1,4 @@
-<div class="row tabs tab-bar">
+<div class="row tabs tab-bar my-orders-tab-bar">
   {{#each orderSummaryTabs as |tab|}}
     {{#link-to (concat 'orders.' tab.routeName) order.id tagName="div" classNames=(concat "tab columns small-4 " tab.routeName)}}
       {{#link-to (concat 'orders.' tab.routeName) order.id}}
