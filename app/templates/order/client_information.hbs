@@ -2,7 +2,7 @@
   {{scroll-to-bottom customClass="client-info-scroll-arrow"}}
 {{/if}}
 <div class="row">
-  <div class="large-8 columns large-offset-2 medium-offset-1 medium-10 small-12">
+  <div class="large-8 columns large-offset-2 medium-12 small-12">
     <div class="row checkout_pages">
       <div class="small-12 columns">
         <section class="main-section new-user-section ui login_page book_appointment_headers">
@@ -23,7 +23,7 @@
             </section>
           </nav>
         </section>
-        <section class="main-section client-information large-10 large-offset-1 small-10 small-offset-1 medium-10 medium-offset-1 columns">
+        <section class="main-section client-information large-10 large-offset-1 small-12 medium-12 columns">
           <div class="row time_inputs purpose" >
             <div class=" custom_radio_buttons small-12 columns purpose">
               {{radio-button
@@ -37,12 +37,12 @@
               </label>
             </div>
             <div class=" custom_radio_buttons small-12 columns purpose end">
-                {{radio-button
-                name="selectReason"
-                id="2"
-                value="client"
-                selection=clientInfoId
-                required='true'}}
+              {{radio-button
+              name="selectReason"
+              id="2"
+              value="client"
+              selection=clientInfoId
+              required='true'}}
               <label class="radio-button-text for-client align-text" for="2">
                 {{t 'order.request_purpose.for_client'}}
               </label>
@@ -138,7 +138,7 @@
                 <div class="small-12 columns id-confidential-text">
                   {{t 'order.client_information.phone_number_instruction'}} <br><br>
                 </div>
-                <div class="row hk-id">
+                <div class="hk-id">
                   {{#form-control}}
                     <div class="row client-name-inputs">
                       <div class="small-3 columns">
