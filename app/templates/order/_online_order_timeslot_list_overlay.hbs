@@ -5,17 +5,19 @@
   </div>
 
   {{#each onlineOrderPickupSlots as |slot|}}
-    <div class="row slot-list" {{action 'selectOnlineOrderSlot' slot}}>
-      <div class="small-6 columns date">
-        {{display-time slot.timestamp "dddd MMMM Do"}}
+    <a {{action 'selectOnlineOrderSlot' slot}}>
+      <div class="row slot-list">
+        <div class="small-6 columns date">
+          {{display-time slot.timestamp "dddd MMMM Do"}}
+        </div>
+        <div class="small-6 columns period">
+          {{#if slot.isMorning}}
+            {{t 'morning'}}
+          {{else}}
+            {{t 'afternoon'}}
+          {{/if}}
+        </div>
       </div>
-      <div class="small-6 columns period">
-        {{#if slot.isMorning}}
-          {{t 'morning'}}
-        {{else}}
-          {{t 'afternoon'}}
-        {{/if}}
-      </div>
-    </div>
+    </a>
   {{/each}}
 </div>
