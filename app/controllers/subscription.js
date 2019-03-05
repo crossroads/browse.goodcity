@@ -195,7 +195,7 @@ export default Ember.Controller.extend({
     //checking if package is available in store and in cart
     if(itemInCart && cartItem) {
       //updating cart pkg availability accordingly
-      if((itemInCart.get("orderId") === null) && (itemInCart.get("allowWebPublish") || itemInCart._internalModel._data.allowWebPublish)) {
+      if((itemInCart.get("orderId") === null) && (itemInCart.get("allowWebPublish") || (itemInCart._internalModel._data && itemInCart._internalModel._data.allowWebPublish))) {
         this.updateCartAvailability(1, cartItem);
       } else {
         this.updateCartAvailability(0, cartItem);
