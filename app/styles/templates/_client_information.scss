@@ -9,6 +9,24 @@
       font-size: 0.9rem;
     }
   }
+
+  .time_inputs {
+    margin-left: 0;
+    margin-right: 0;
+
+    .custom_radio_buttons {
+      @media #{$small-only} {
+        margin-left: -1%;
+      }
+
+      label {
+        @media #{$small-only} {
+          font-size: 0.7rem !important;
+        }
+      }
+    }
+  }
+
   .id-type-radio-input{
     .custom_radio_buttons {
       border: 1px solid;
@@ -35,6 +53,11 @@
   }
   .client-name-inputs{
     padding-right: 0.8rem;
+  }
+  #client-info-submit {
+    @media #{$small-only} {
+      margin-left: -1%;
+    }
   }
 }
 div .hk-id{
@@ -119,7 +142,7 @@ div .hk-id{
     text-decoration: underline;
   }
 }
- 
+
 .request-add-remove-section{
   .req-more-goods .add_more_request {
     cursor: pointer;

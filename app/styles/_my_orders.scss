@@ -97,6 +97,20 @@
         }
       }
 
+      .tabs.tab-name{
+        i {
+          font-size: 130%
+        }
+        border-bottom: 1px solid $light-blue;
+        font-size: 100%;
+        z-index: 100;
+      }
+
+      .tabs.tab-bar.my-orders-tab-bar{
+        border-bottom: unset;
+      }
+
+
       // ---- TAB DATA
       .tab-content {
 
