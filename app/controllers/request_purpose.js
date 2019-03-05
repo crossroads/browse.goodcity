@@ -68,6 +68,15 @@ export default Ember.Controller.extend(cancelOrder, {
         user_organisation_id = user.get('organisationsUsers.firstObject.organisationId');
       }
 
+      var orderParams = {
+        organisation_id: user_organisation_id,
+        purpose_description: this.get('description'),
+        purpose_ids: purposeIds,
+        people_helped: this.get('peopleCount'),
+        district_id: this.get('selectedDistrict.id'),
+        booking_type_id: this.getSelectedBookingTypeId()
+      };
+
       let order = this.get('model');
       let url = "/orders";
       let actionType = "POST";
