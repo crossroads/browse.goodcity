@@ -14,7 +14,10 @@ export default Ember.Controller.extend(cancelOrder, {
   isEmptyOrUnavailableOrder(order) {
     if(order) {
       let cartItems = this.get("cart.content");
-      return cartItems.length ? false : true;
+      if(cartItems.length === 0 || (cartItems.length && cartItems.filterBy('available', 0).length > 0) || order.get("ordersPackages.length") === 0) {
+        return true;
+      }
+      return false;
     }
     return true;
   },
