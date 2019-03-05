@@ -4,6 +4,12 @@
 
     .custom_radio_buttons {
       label.radio-button-text {
+        @media #{$large-only}{
+          font-size: 0.8rem;
+        }
+        @media #{$medium-only}{
+          font-size: 0.8rem;
+        }
         margin-top: 0;
       }
       .radio-button {
