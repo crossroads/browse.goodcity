@@ -26,7 +26,7 @@ export default Ember.Controller.extend(cancelOrder, {
   selectedDistrict: null,
 
   districts: Ember.computed(function(){
-    return this.store.peekAll('district');
+    return this.store.peekAll('district').sortBy("name");
   }),
 
   getBookingTypeIdFor(identifier) {
