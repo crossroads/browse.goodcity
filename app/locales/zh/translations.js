@@ -11,7 +11,7 @@ export default {
   "okay": "確定",
   "show": "顯示",
   "date": "日期",
-  "edit": "Edit",
+  "edit": "修改",
   "time": "時間",
   "contact": "聯絡電話",
   "draft": "等待提交",
@@ -29,8 +29,20 @@ export default {
   "no_search_results": "沒有搜尋結果",
   "cancel": "取消",
   "continue": "繼續",
-  "save_changes": "Save changes",
-  "discard_changes": "Discard changes",
+  "save_changes": "儲存修正",
+  "discard_changes": "放棄修正",
+  "morning": "早安",
+  "afternoon": "午安",
+  "messages": {
+    "you": "閣下",
+    "chat_note": "有關這個指示請跟我們的職員聯絡",
+    "send": "傳送",
+    "day": {
+      "today": "今天",
+      "morning": "早上",
+      "afternoon": "下午"
+    }
+  },
 
   "banner": {
     "presented_by": "建立機構",
@@ -140,7 +152,7 @@ export default {
   "login": {
     "hk_only" : "電話號碼（只限香港）",
     "login" : "登入",
-    "sms_pincode": "We SMS you pin code for secure access <br/> Been here before? Please use the same phone number",
+    "sms_pincode": "我們將用訊息傳遞閣下的個人號碼以作安全性進入。 <br/> 如果閣下曾用此途徑進入，請用同一電話號碼",
     "smscode": "獲取短訊驗證碼",
     "privacy": "我們不會使用分享你的資料，我們只會用於你的貨物申請",
     "policy": "隱私政策",
@@ -222,11 +234,11 @@ export default {
   },
 
   "cancel_booking": {
-    "title": "Cancel Booking",
-    "cancel_booking_warning": "Cancel this booking?",
-    "draft_cancel_booking_warning": "This will permanently remove all information associated with this booking.",
-    "cancel_booking_info": "This will cancel booking and all associated request for goods.",
-    "cancel_booking_reason_title": "Reason for canceling order"
+    "title": "取消預約",
+    "cancel_booking_warning": "取消今次預約",
+    "draft_cancel_booking_warning": "這將會永遠取消在今次預約內的所有資料.",
+    "cancel_booking_info": "這將會取消今次預約及其被需求貨品的有關要求.",
+    "cancel_booking_reason_title": "取消預約的原因"
   },
 
   "my_orders": {
@@ -254,6 +266,7 @@ export default {
       "appointment": "預約",
       "goods_requested": "已申請貨物",
       "goods_ordered": "貨物",
+      "not_applicable": "不适用的",
       "request": {
         "request_purpose": "申請目的",
         "purpose_of_goods": "貨物用途",
@@ -261,7 +274,7 @@ export default {
         "description_of_needs": "申請詳情"
       },
       "beneficiary": {
-        "appointment_details": "Appointment Details",
+        "appointment_details": "預約的資料",
         "client_information": "服務對象資料",
         "id_type": "所持身份證種類",
         "id_number": "身份證號碼",
@@ -288,7 +301,7 @@ export default {
         "processing": "我們的職員正在處理您的訂單。他們可能會與您聯絡已獲得更多信息。如果一切正常，他們將安排您的貨品發貨。",
         "awaiting_dispatch": "您的訂單已安排發貨。 一旦發貨，此頁面便會更新。 ",
         "closed": "此訂單已完成，所有貨物已成功發貨。如有任何其他申請，請提交另一訂單。",
-        "cancelled": ""
+        "cancelled": "取消"
       },
       "types": {
         "visit": "參觀貨倉",
@@ -351,6 +364,7 @@ export default {
     "transport_details_pop_up": "請在購物車中新增物資以提交運輸詳情。",
     "numbers_warning": "請輸入一個4位數字。",
     "transport_details": {
+      "title": "預約詳情",
       "transport_method": "運輸方式: ",
       "collect_with_own_vehicle": "我會自行安排運輸接收",
       "send_item_with_driver": "我會安排GoGoVan代為接收（服務使用者付費）"
@@ -424,7 +438,6 @@ export default {
       "remove": "移除"
     },
     "appointment": {
-      "title": "預約詳情",
       "transport": "運輸方式",
       "self_vehicle": "服務對象將自攜帶車輛",
       "hire_vehicle": "服務對象需要有關僱用車輛的信息",
@@ -433,6 +446,17 @@ export default {
       "labor_confirmation": "我確認理解搬運需要。",
       "date": " 預約日期",
       "time": "預約日"
+    },
+    "online_order": {
+      "preferred_date": "偏好的日期",
+      "goods_limit": "我們不能保存貨品多於幾天.",
+      "order_confirmation": "處理這指令前我們將會確定送貨或收貨日期.",
+      "choose_date": "選擇有效的日期",
+      "good_limit_dates": "我們不能保存貨品過於以下日期.",
+      "staff_contact": "處理這指令前我們的職員將會確定收貨或送貨時間.",
+      "self_vehicle": "接收者會從國際十字路會接收",
+      "hire_vehicle": "接收者會僱用貨車運貨（接收者會付款給貨車司機）",
+      "labor_info": "國際十字路會義工會幫忙上貨於車輛內,但不會幫忙落貨.我們的職員將會接觸閣下去討論及確定有關僱用工人去處理落貨的費用事宜."
     },
     "booking_success": {
       "success": "成功！",
@@ -446,39 +470,39 @@ export default {
     "confirm_booking": {
       "title": "確認",
       "your_details": {
-        "title": "Your Details",
-        "phone": "Phone",
-        "name": "Name",
-        "organisation": "Organisation",
-        "position": "Position",
-        "email": "Email",
+        "title": "閣下的資料",
+        "phone": "電話號碼",
+        "name": "姓名",
+        "organisation": "機構名稱",
+        "position": "職位",
+        "email": "電郵",
       },
       "request_purpose_detail": {
-        "title": "Request Purpose",
-        "purpose_of_goods": "Purpose of goods",
-        "number_benefiting": "Number benefiting",
-        "description_of_need": "Description of need",
+        "title": "要求的目的",
+        "purpose_of_goods": "需求貨品的目的",
+        "number_benefiting": "受惠數量",
+        "description_of_need": "需求描述",
       },
       "client_info_detail": {
-        "title": "Client Information",
-        "id_type": "Type of ID held",
-        "id_number": "ID Number",
-        "client_name": "Client's Name",
-        "client_phone": "Client's Phone",
+        "title": "客戶資料",
+        "id_type": "閣下身份証明類型",
+        "id_number": "身份証明號碼",
+        "client_name": "客戶姓名",
+        "client_phone": "客戶電話號碼",
       },
       "goods_detail": {
-        "title": "Goods Details",
-        "no_description": "No description provided",
+        "title": "貨品資料",
+        "no_description": "未有提供資料",
       },
-      "appointment_detail": {
-        "title": "Appointment Details",
-        "transport": "Transport",
-        "labour": "Labour",
-        "labour_info": "Client understands labour requirements and can supply labour if needed.",
-        "appointment": "Appointment",
+      "schedule_summary": {
+        "title": "預約資料",
+        "transport": "運輸",
+        "labour": "運輸工人",
+        "labour_info": "客戶明白運輸工人的要求及提供運輸工人的需要.",
+        "time": "時間",
       },
-      "submit_order": "Submit order",
-      "info": "Please review the information below and then submit.</br>If you need to change something, click 'back'.",
+      "submit_order": "傳送指令",
+      "info": "請覆核以下資料及傳送。<br/>如閣下有需要改變資料，請按下‘回轉’",
     }
   }
 };

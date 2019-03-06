@@ -5,7 +5,7 @@ import {make} from 'ember-data-factory-guy';
 import { mockFindAll } from 'ember-data-factory-guy';
 import FactoryGuy from 'ember-data-factory-guy';
 
-var App, pkgCategory1, pkgCategory2, subcategory1, pkgType, category_title, subcategory_title, empty_category_title, order, orders_package, gogo_van, bookingType;
+var App, pkgCategory1, pkgCategory2, subcategory1, pkgType, category_title, subcategory_title, empty_category_title, order, orders_package, gogo_van, bookingType, purpose;
 
 module('Acceptance | Browse Page', {
   beforeEach: function() {
@@ -18,9 +18,11 @@ module('Acceptance | Browse Page', {
     orders_package = make("orders_package");
     gogo_van = make("gogovan_transport");
     bookingType = make("booking_type");
+    purpose = make("purpose");
 
     mockFindAll("gogovan_transport").returns({json: {gogovan_transports: [gogo_van.toJSON({includeId: true})]}});
     mockFindAll("booking_type").returns({json: {booking_types: [bookingType.toJSON({includeId: true})]}});
+    mockFindAll("purpose").returns({json: {purposes: [purpose.toJSON({includeId: true})]}});
 
     var data = {"user_profile": [{"id": 2,"first_name": "David", "last_name": "Dara51", "mobile": "61111111", "user_role_ids": [1]}], "users": [{"id": 2,"first_name": "David", "last_name": "Dara51", "mobile": "61111111"}], "roles": [{"id": 4, "name": "Supervisor"}], "user_roles": [{"id": 1, "user_id": 2, "role_id": 4}]};
     $.mockjax({url:"/api/v1/auth/current_user_profil*",

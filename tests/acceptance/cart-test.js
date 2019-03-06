@@ -3,9 +3,9 @@ import { module, test } from 'qunit';
 import startApp from '../helpers/start-app';
 import {make} from 'ember-data-factory-guy';
 import { mockFindAll } from 'ember-data-factory-guy';
-import FactoryGuy from 'ember-data-factory-guy';
+// import FactoryGuy from 'ember-data-factory-guy';
 
-var App, pkgCategory, subcategory1, pkg, pkgType1, pkgType2, subcategory2, order, ordersPackage, gogo_van, order_purpose, user, bookingType;
+var App, pkgCategory, subcategory1, pkg, pkgType1, pkgType2, subcategory2, order, ordersPackage, gogo_van, order_purpose, user, bookingType, purpose;
 
 module('Acceptance | Cart Page', {
   beforeEach: function() {
@@ -23,9 +23,11 @@ module('Acceptance | Cart Page', {
     subcategory2 = make("package_category", {parentId: parseInt(pkgCategory.id), packageTypeCodes: pkgType2.get("code") });
     gogo_van = make("gogovan_transport");
     bookingType = make("booking_type");
+    purpose = make("purpose");
     $.mockjax({url: "/api/v1/available_*", type: 'GET', status: 200, responseText:["2018-06-14", "2018-06-15", "2018-06-16", "2018-06-19", "2018-06-20", "2018-06-21"]});
     mockFindAll("gogovan_transport").returns({json: {gogovan_transports: [gogo_van.toJSON({includeId: true})]}});
     mockFindAll("booking_type").returns({json: {booking_types: [bookingType.toJSON({includeId: true})]}});
+    mockFindAll("purpose").returns({json: {purposes: [purpose.toJSON({includeId: true})]}});
 
     var data = {"user_profile": [{"id": 2,"first_name": "David", "last_name": "Dara51", "mobile": "61111111", "user_role_ids": [1]}], "users": [{"id": 2,"first_name": "David", "last_name": "Dara51", "mobile": "61111111"}], "roles": [{"id": 4, "name": "Supervisor"}], "user_roles": [{"id": 1, "user_id": 2, "role_id": 4}]};
     $.mockjax({url:"/api/v1/auth/current_user_profil*",
@@ -41,7 +43,7 @@ module('Acceptance | Cart Page', {
 
 
 test("delete orders_packages from orders in draft", function(assert){
-  var store = FactoryGuy.store;
+  // var store = FactoryGuy.store;
   $.mockjax({url:"/api/v1/order*", type: 'POST', status: 200,responseText:{"order": order.toJSON({includeId: true}),"package": pkg.toJSON({includeId: true}), "orders_packages": [ordersPackage.toJSON({includeId: true})], "orders_purposes": [order_purpose.toJSON({includeId: true})]}});
   $.mockjax({url:"/api/v1/order*", type: 'PUT', status: 200,responseText:{"order": order.toJSON({includeId: true}),"package": pkg.toJSON({includeId: true}), "orders_packages": [ordersPackage.toJSON({includeId: true})], "orders_purposes": [order_purpose.toJSON({includeId: true})]}});
   $.mockjax({url: "/api/v1/orders_pac*", type: 'DELETE', status: 200, responseText:{ }});
@@ -55,20 +57,20 @@ test("delete orders_packages from orders in draft", function(assert){
       andThen(function(){
         click(".expand:last");
         andThen(function(){
-          assert.equal(currentURL(), "/order_details");
+          assert.equal(currentURL(), "/request_purpose");
 
-          click('input#1');
           andThen(function(){
-            $("#purpose_1").prop('checked', true);
             $("#description").val("Test");
-            click("#submit_pin");
+            $("#people-count").val("3");
+            click("#request-submit");
             andThen(function(){
               visit("/cart");
               andThen(function(){
                 assert.equal(currentURL(),"/cart");
+                assert.equal(find('.item-collection li').length, 1);
                 click(".item-collection li:first span");
                 andThen(function(){
-                  assert.equal(store.peekAll("orders_package").get("length"), 0);
+                  assert.equal(find('.item-collection li').length, 0);
                 });
               });
             });
@@ -79,22 +81,3 @@ test("delete orders_packages from orders in draft", function(assert){
 
   });
 });
-
-test("restricting transport details page to confirm page without userName and mobile", function(assert){
-  mockFindAll('order').returns({ json: {orders: [order.toJSON({includeId: true})], packages: [pkg.toJSON({includeId: true})], user: [user.toJSON({includeId: true})], orders_packages: [ordersPackage.toJSON({includeId: true})]}});
-  assert.expect(4);
-  visit('/order/'+ order.id + '/transport_details');
-  andThen(function(){
-    assert.equal(currentURL(), '/order/'+ order.id +'/transport_details');
-    click('#ggv');
-    andThen(function(){
-      assert.equal($('#name')[0].value, user.get('fullName'));
-      assert.equal($('#mobile')[0].value, user.get('mobile'));
-      click('#submit_pin');
-      andThen(function(){
-        assert.equal(currentURL(), '/order/'+ order.id +'/transport_details');
-      });
-    });
-  });
-});
-

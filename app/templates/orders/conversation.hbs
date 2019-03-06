@@ -1,0 +1,13 @@
+<div class="row my_orders">
+  <div class="small-12 columns content">
+    <div class="order-summary {{order.state}}">
+      {{partial 'orders/order_header'}}
+      {{partial 'orders/order_tabs'}}
+      <div class="tab-content-messaging">
+        <div class="messaging-tab">
+          {{partial 'orders/message_template'}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

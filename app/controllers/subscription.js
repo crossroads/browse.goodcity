@@ -156,20 +156,22 @@ export default Ember.Controller.extend({
     }
 
     var existingItem = this.store.peekRecord(type, item.id);
+
     var hasNewItemSaving = this.store.peekAll(type).any(function(o) { return o.id === null && o.get("isSaving"); });
     var existingItemIsSaving = existingItem && existingItem.get("isSaving");
     if (data.operation === "create" && hasNewItemSaving || existingItemIsSaving) {
       run(success);
       return;
     }
-
-    var cartContent = this.get('cart.content');
-    var packageId = data.item.package.id;
-    var cartItem = cartContent.filterBy("modelType", "package").filterBy("id", packageId.toString()).get("firstObject");
-    var itemInCart = this.store.peekRecord('package', data.item.package.id);
-
+    var cartContent, cartItem, packageId, itemInCart;
+    if (type.toLowerCase() !== 'message'){
+      cartContent = this.get('cart.content');
+      packageId = data.item.package.id;
+      cartItem = cartContent.filterBy("modelType", "package").filterBy("id", packageId.toString()).get("firstObject");
+      itemInCart = this.store.peekRecord('package', data.item.package.id);
+    }
     if (["create","update"].indexOf(data.operation) >= 0) {
-      if(data.item.package.allow_web_publish === null) {
+      if (data.item.package && data.item.package.allow_web_publish === null) {
         return false;
       }
       this.store.pushPayload(data.item);
@@ -193,7 +195,7 @@ export default Ember.Controller.extend({
     //checking if package is available in store and in cart
     if(itemInCart && cartItem) {
       //updating cart pkg availability accordingly
-      if((itemInCart.get("orderId") === null) && (itemInCart.get("allowWebPublish") || itemInCart._internalModel._data.allowWebPublish)) {
+      if((itemInCart.get("orderId") === null) && (itemInCart.get("allowWebPublish") || (itemInCart._internalModel._data && itemInCart._internalModel._data.allowWebPublish))) {
         this.updateCartAvailability(1, cartItem);
       } else {
         this.updateCartAvailability(0, cartItem);

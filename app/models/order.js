@@ -19,14 +19,16 @@ export default Model.extend({
   updatedAt:        attr('date'),
   detailType:       attr('string'),
   districtId:       attr('number'),
+  messages: hasMany('message', { async: false }),
   ordersPurposes:     hasMany('ordersPurpose', { async: false }),
-  beneficiaryId: attr('number'),
+  beneficiaryId: attr('string'),
   bookingTypeId: attr('number'),
   beneficiary: belongsTo('beneficiary', { async: false }),
   peopleHelped: attr('number'),
   goodcityRequests:   hasMany('goodcity_request', { async: false }),
   district: belongsTo('district', {async: false}),
   bookingType:   belongsTo('booking_type', { async: false }),
+  purposeIds: attr(),
 
   isGoodCityOrder: Ember.computed.equal('detailType', 'GoodCity'),
   isDraft: Ember.computed.equal("state", "draft"),
@@ -38,11 +40,11 @@ export default Model.extend({
   isCancelled: Ember.computed.equal("state", "cancelled"),
   i18n: Ember.inject.service(),
 
-  isAppointment: Ember.computed('bookingTypeId', function(){
+  isAppointment: Ember.computed('bookingType', function(){
     return this.get('bookingType.isAppointment');
   }),
 
-  isOnlineOrder: Ember.computed('bookingTypeId', function(){
+  isOnlineOrder: Ember.computed('bookingType', function(){
     return this.get('bookingType.isOnlineOrder');
   }),
 
@@ -101,13 +103,20 @@ export default Model.extend({
       i18n.t("order.appointment.self_vehicle") : i18n.t("order.appointment.hire_vehicle");
   }),
 
+  appointmentDate: Ember.computed("orderTransport", function() {
+    let orderTransport = this.get("orderTransport");
+    if (!orderTransport) {
+      return '';
+    }
+    return moment(orderTransport.get("scheduledAt")).format('dddd MMMM Do');
+  }),
+
   appointmentTime: Ember.computed("orderTransport", function() {
     let orderTransport = this.get("orderTransport");
-    if(orderTransport) {
-      return `${moment(orderTransport.get("scheduledAt")).format('dddd MMMM Do')}, ${orderTransport.get("timeslot")}`;
-    } else {
-      return "";
+    if (!orderTransport) {
+      return '';
     }
+    return `${this.get('appointmentDate')}, ${orderTransport.get("timeslot")}`;
   }),
 
   stateIcon: Ember.computed('state', function () {

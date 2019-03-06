@@ -58,7 +58,7 @@ module('Acceptance | My Orders Page', {
     order = make("order", { state: 'submitted', orderTransportId: order_transport.get('id'), orderTransport: order_transport, ordersPackages: [ orders_package ] });
     order_transport2 = make('order_transport');
     order2 = make("order", { orderTransportId: order_transport2.get('id'), orderTransport: order_transport2 });
-    
+
 
     $.mockjaxSettings.matchInRegistrationOrder = false;
 
@@ -71,7 +71,7 @@ module('Acceptance | My Orders Page', {
       mocks.push(
         $.mockjax({ url: `/api/v1/${modelName}*`, responseText: data })
       );
-      mockFindAll(modelName).returns({ 
+      mockFindAll(modelName).returns({
         json: data
       });
     };
@@ -79,10 +79,11 @@ module('Acceptance | My Orders Page', {
     doMock("beneficiary", beneficiaries);
     doMock("gogovan_transport", [ make("gogovan_transport").toJSON({includeId: true}) ]);
     doMock("booking_type", [ make("booking_type").toJSON({includeId: true})]);
+    doMock("purpose", [ make("purpose").toJSON({includeId: true})]);
     doMock('order_transport', [ order_transport.toJSON({includeId: true}), order_transport2.toJSON({includeId: true}) ]);
-    doMock('order', { 
-      orders: [ order.toJSON({includeId: true}), order2.toJSON({includeId: true}) ], 
-      packages: [ pkg.toJSON({includeId: true}) ], 
+    doMock('order', {
+      orders: [ order.toJSON({includeId: true}), order2.toJSON({includeId: true}) ],
+      packages: [ pkg.toJSON({includeId: true}) ],
       orders_packages: [ orders_package.toJSON({includeId: true}) ],
       order_transports: [ order_transport.toJSON({includeId: true}), order_transport2.toJSON({includeId: true}) ]
     });
@@ -120,7 +121,7 @@ module('Acceptance | My Orders Page', {
 test("should redirect to my orders page", function(assert) {
   assert.expect(2);
   visit("/my_orders");
-  
+
   andThen(function() {
     assert.equal(currentURL(), '/my_orders');
     assert.equal(Ember.$('.my_orders .title').text(), "My Orders");
@@ -154,15 +155,7 @@ test("the summary booking tab is selected by default", function(assert) {
 
   click(Ember.$('.list-items .order_block')[0]);
   andThen(() => {
-    assert.equal(Ember.$('.order-summary .tabs .tab.booking.selected').length, 1);
-  });
-});
-
-test("the summary goods tab is un-selected by default", function(assert) {
-  assert.expect(1);
-  click(Ember.$('.list-items .order_block')[0]);
-  andThen(() => {
-    assert.equal(Ember.$('.order-summary .tabs .tab.goods.dimmed').length, 1);
+    assert.equal(Ember.$('.order-summary .tabs .tab.booking.active').length, 2);
   });
 });
 
@@ -170,10 +163,10 @@ test("clicking on the goods tab selects it", function(assert) {
   assert.expect(1);
   click(Ember.$('.list-items .order_block')[0]);
   andThen(() => {
-    click(Ember.$('.order-summary .tabs .tab.goods.dimmed'));
+    click(Ember.$('.order-summary .tabs .tab.goods'));
   });
   andThen(() => {
-    assert.equal(Ember.$('.order-summary .tabs .tab.goods.selected').length, 1);
+    assert.equal(Ember.$('.order-summary .tabs .tab.goods.active').length, 2);
   });
 });
 
@@ -181,10 +174,10 @@ test("on the good tabs, we can see the packages of the order listed", function(a
   assert.expect(4);
   click(Ember.$('.list-items .order_block')[0]);
   andThen(() => {
-    click(Ember.$('.order-summary .tabs .tab.goods.dimmed'));
+    click(Ember.$('.order-summary .tabs .tab.goods'));
   });
   andThen(() => {
-    assert.equal(Ember.$('.order-summary .tabs .tab.goods.selected').length, 1);
+    assert.equal(Ember.$('.order-summary .tabs .tab.goods.active').length, 2);
     assert.equal(Ember.$('.goods-tab .product-row').length, 1);
     assert.equal(Ember.$('.goods-tab .product-row .text').text().trim(), "Category4");
     assert.equal(Ember.$('.goods-tab .product-row .notes').text().trim(), "example");

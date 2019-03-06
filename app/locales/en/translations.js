@@ -32,6 +32,20 @@ export default {
   "cancel": "Cancel",
   "save_changes": "Save changes",
   "discard_changes": "Discard changes",
+  "morning": "Morning",
+  "afternoon": "Afternoon",
+  "full_name": "{{firstName}} {{lastName}}",
+
+  "messages": {
+    "you": "You",
+    "chat_note": "Chat about this order with our staff",
+    "send": "Send",
+    "day": {
+      "today": "Today",
+      "morning": "Morning",
+      "afternoon": "Afternoon"
+    }
+  },
 
   "banner": {
     "presented_by": "Presented by",
@@ -257,6 +271,7 @@ export default {
       "appointment": "Appointment",
       "goods_requested": "Goods Requested",
       "goods_ordered": "Goods Selected",
+      "not_applicable": "Not applicable",
       "request": {
         "request_purpose": "Request purpose",
         "purpose_of_goods": "Purpose of goods",
@@ -369,6 +384,7 @@ export default {
     "transport_details_pop_up": "Add items to your cart before submitting transport details.",
     "numbers_warning": "Please enter 4 digit number.",
     "transport_details": {
+      "title": "Transport Details",
       "transport_method": "Transport method: ",
       "collect_with_own_vehicle": "We will collect with our own vehicle(s)",
       "send_item_with_driver": "We would like the items sent (recipient pays the driver)"
@@ -415,8 +431,8 @@ export default {
     "request_purpose": {
       "title": "Request Purpose",
       "purpose": "Purpose of Goods",
-      "for_organisation": "For organisation's own programs",
-      "for_client": "For a client/benificiary",
+      "for_organisation": "No - order for organisation's own programs",
+      "for_client": "Yes - order is for a client/benificiary",
       "people_count_info": "How many people will benefit from these items?",
       "district_label": "Where in Hong Kong will these goods be primarily used?",
       "district-label-info": "This assists us with our reporting.",
@@ -443,7 +459,6 @@ export default {
       "remove": "Remove"
     },
     "appointment": {
-      "title": "Appointment Details",
       "transport": "Transport",
       "self_vehicle": "Client will bring private vehicle",
       "hire_vehicle": "Client needs information about hiring vehicle",
@@ -452,6 +467,17 @@ export default {
       "labor_confirmation": "I confirm understanding of labor requirements.",
       "date": "Appointment Date",
       "time": "Appointment Time"
+    },
+    "online_order": {
+      "preferred_date": "Preferred date",
+      "goods_limit": "We cannot reserve goods more than a few days.",
+      "order_confirmation": "We will confirm delivery/collection date before processing order.",
+      "choose_date": "Choose from available dates",
+      "good_limit_dates": "We cannot reserve goods longer than the dates below.",
+      "staff_contact": "Our staff will confirm the collection/delivery time before processing the order.",
+      "self_vehicle": "Recipient will collect from Crossroads",
+      "hire_vehicle": "Recipient would like the goods sent in a hired truck (Recipient pays the driver)",
+      "labor_info": "Crossroads' volunteers will help load goods into the vehicle but <u>we cannot provide labour for unloading</u>. Our staff will contact you to discuss this an confirm any charges that may be involved if hired labour will be required for unloading."
     },
     "booking_success": {
       "success": "Success!",
@@ -489,12 +515,12 @@ export default {
         "title": "Goods Details",
         "no_description": "No description provided",
       },
-      "appointment_detail": {
-        "title": "Appointment Details",
+      "schedule_summary": {
+        "title": "Transport Details",
         "transport": "Transport",
         "labour": "Labour",
         "labour_info": "Client understands labour requirements and can supply labour if needed.",
-        "appointment": "Appointment",
+        "time": "Time",
       },
       "submit_order": "Submit order",
       "info": "Please review the information below and then submit.</br>If you need to change something, click 'back'.",

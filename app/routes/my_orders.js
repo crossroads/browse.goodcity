@@ -22,12 +22,11 @@ export default AuthorizeRoute.extend({
       organisation: this.store.peekAll('organisation').objectAt(0),
       user: this.store.peekAll('user').objectAt(0),
       orders: this.store.query('order', { shallow: true }),
-      packageCategories: this.store.peekAll('package_category'),
       beneficiaries: this.store.findAll('beneficiary', { reload: false }) // Will only return beneficiaries created by current user
     })
     .then((res) => {
       // Load dependant associations
-      return this.store.query('order_transport', { 
+      return this.store.query('order_transport', {
         order_ids: res.orders.map(o => o.id).join(',')
       }).then(_.constant(res));
     });
@@ -37,16 +36,14 @@ export default AuthorizeRoute.extend({
     this._super(controller, model);
     controller.set("previousRouteName", this.get("previousRouteName"));
     controller.toggleProperty("triggerFlashMessage");
+    this.controllerFor("application").set('hideHeaderBar', false);
     this.controllerFor('application').set('pageTitle', this.get('i18n').t("my_orders.my_orders"));
-    this.controllerFor('application').set('hideHeaderBar', !!controller.get('selectedOrder'));
   },
 
-  resetController: function(controller, isExiting) {
+  resetController: function (controller, isExiting) {
     this._super.apply(this, arguments);
     if (isExiting) {
-      controller.set('selectedOrder', null);
       this.controllerFor('application').set("pageTitle", this.get('i18n').t("browse.title"));
-      this.controllerFor('application').set('hideHeaderBar', false);
     }
   }
 });

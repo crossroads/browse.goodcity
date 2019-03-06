@@ -1,0 +1,19 @@
+<div class="row tabs tab-bar my-orders-tab-bar">
+  {{#each orderSummaryTabs as |tab|}}
+    {{#link-to (concat 'orders.' tab.routeName) order.id tagName="div" classNames=(concat "tab columns small-4 " tab.routeName)}}
+      {{#link-to (concat 'orders.' tab.routeName) order.id}}
+        <i class="fa fa-{{ tab.icon }}" aria-hidden="true"></i>
+      {{/link-to}}
+    {{/link-to}}
+  {{/each}}
+</div>
+
+<div class="row tabs tab-name">
+  {{#each orderSummaryTabs as |tab|}}
+    {{#link-to (concat 'orders.' tab.routeName) order.id tagName="div" classNames=(concat " tab columns active-tab small-4 " tab.routeName)}}
+      {{#link-to (concat 'orders.' tab.routeName) order.id}}
+        {{ tab.displayName }}
+      {{/link-to}}
+    {{/link-to}}
+  {{/each}}
+</div>

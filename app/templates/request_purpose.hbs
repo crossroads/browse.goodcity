@@ -10,8 +10,10 @@
               <nav class="tab-bar">
                 <section class="left-large inline-content">
                   {{fa-icon "angle-left"}}
-                  {{#if (is-equal previousRouteName "my_orders")}}
-                    {{#link-to 'my_orders' classNames="back"}}{{t "back"}}{{/link-to}}
+                  {{#if (is-equal prevPath (is-or 'orders.booking' 'orders.goods'))}}
+                    {{#link-to prevPath order.id classNames="back"}}{{t "back"}}{{/link-to}}
+                  {{else if (is-equal previousRouteName 'my_orders') }}
+                     {{#link-to "my_orders" classNames="back"}}{{t "back"}}{{/link-to}}
                   {{else}}
                     {{#link-to "home" classNames="back"}}{{t "back"}}{{/link-to}}
                   {{/if}}
@@ -37,34 +39,7 @@
                   errorClass='form__control--error'
                   buttonId='#request-submit'
                 }}
-                {{#validatable-form onSubmit=(action 'createOrderWithRequestPuropose') as |form|}}
-                  <div class="small-12 columns">
-                    {{t 'order.request_purpose.purpose'}}
-                  </div>
-                  <div class="row time_inputs purpose" >
-                    <div class=" custom_radio_buttons small-12 columns purpose">
-                      {{radio-button
-                      name="selectReason"
-                      id="1"
-                      value="organisation"
-                      selection=selectedId
-                      required='true'}}
-                      <label class="radio-button-text for-organisation align-text" for="1">
-                        {{t 'order.request_purpose.for_organisation'}}
-                      </label>
-                    </div>
-                    <div class=" custom_radio_buttons small-12 columns purpose end">
-                        {{radio-button
-                        name="selectReason"
-                        id="2"
-                        value="client"
-                        selection=selectedId
-                        required='true'}}
-                      <label class="radio-button-text for-client align-text" for="2">
-                        {{t 'order.request_purpose.for_client'}}
-                      </label>
-                    </div>
-                  </div>
+                {{#validatable-form onSubmit=(action 'createOrderWithRequestPurpose') as |form|}}
                   <div class="row people-count">
                     <div class="small-12 columns people-count-label">
                       {{t 'order.request_purpose.people_count_info'}}
@@ -118,10 +93,14 @@
                         <a {{action 'submit' target=form}} class="button expand" id="request-submit"> {{t 'save_changes'}} </a>
                       </div>
                       <div class="small-6 medium-6 large-6 columns">
-                        {{#if (is-equal previousRouteName "my_orders")}}
-                          {{#link-to 'my_orders' classNames="button expand request"}}
+                        {{#if (is-equal prevPath "orders.booking")}}
+                          {{#link-to 'orders.booking' order.id classNames="button expand request"}}
                             {{t 'discard_changes'}}
                           {{/link-to}}
+                        {{else if (is-equal previousRouteName 'my_orders') }}
+                          {{#link-to "my_orders" classNames="button expand request"}}
+                            {{t 'discard_changes'}}
+                        {{/link-to}}
                         {{else}}
                           {{#link-to 'home' classNames="button expand request"}}
                             {{t 'discard_changes'}}

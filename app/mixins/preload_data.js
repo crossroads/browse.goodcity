@@ -6,7 +6,7 @@ export default Ember.Mixin.create({
 
   preloadData: function() {
     var promises = [];
-    var retrieve = types => types.map(type => this.store.findAll(type));
+    var retrieve = types => types.map(type => this.store.findAll(type, { backgroundReload: false }));
 
     promises = retrieve(config.APP.PRELOAD_TYPES);
 

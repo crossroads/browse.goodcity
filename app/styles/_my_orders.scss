@@ -65,6 +65,9 @@
         .strong {
           font-family: $header-font-family;
         }
+        .close-order-summary{
+          cursor: pointer;
+        }
         .header-icon {
           padding-top: 0.2rem;
           padding-left: 0;
@@ -82,13 +85,31 @@
       .tabs .tab {
         text-align: center;
         opacity: 0.5;
-        &.selected {
+        cursor: pointer;
+        &.active {
           opacity: 1;
+          &.active-tab{
+            border-bottom: 3px solid #334f75;
+          }
         }
         .fa {
           margin-right: 0.5rem;
         }
       }
+
+      .tabs.tab-name{
+        i {
+          font-size: 130%
+        }
+        border-bottom: 1px solid $light-blue;
+        font-size: 100%;
+        z-index: 100;
+      }
+
+      .tabs.tab-bar.my-orders-tab-bar{
+        border-bottom: unset;
+      }
+
 
       // ---- TAB DATA
       .tab-content {
