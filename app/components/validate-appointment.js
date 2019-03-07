@@ -12,6 +12,7 @@ export default Ember.Component.extend({
 
     function validateForm(){
       Ember.$('.appointment').click(function(){
+        if(this.id === "discard-button") { return; }
         Ember.$.each(['.pickadate'], function(i, input){
           checkInput(Ember.$(input));
         });
