@@ -194,11 +194,11 @@
                     </div>
                     <div class="small-6 medium-6 large-6 columns">
                       {{#if (is-equal prevPath "orders.booking")}}
-                        {{#link-to 'orders.booking' order.id classNames="button expand appointment"}}
+                        {{#link-to 'orders.booking' order.id id="discard-button" classNames="button expand appointment"}}
                           {{t 'discard_changes'}}
                         {{/link-to}}
                       {{else}}
-                        {{#link-to 'order.goods_details' order.id classNames="button expand appointment"}}
+                        {{#link-to 'order.goods_details' order.id id="discard-button" classNames="button expand appointment"}}
                           {{t 'discard_changes'}}
                         {{/link-to}}
                       {{/if}}
