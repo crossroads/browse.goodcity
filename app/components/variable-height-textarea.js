@@ -3,7 +3,7 @@ import Ember from 'ember';
 export default Ember.TextArea.extend({
   tagName: "textarea",
   attributeBindings: ["disabled"],
-  classNames: 'message_textbar',
+  classNames: 'message-bar',
   disabled: false,
 
    didDestroyElement: function () {
@@ -48,7 +48,7 @@ export default Ember.TextArea.extend({
       .height(textarea.scrollHeight - 15);
     // scroll to bottom if message typed
     if (_this.get('value') !== "") {
-      Ember.$('.message_textbar').parent().removeClass('has-error');
+      Ember.$('.message-bar').parent().removeClass('has-error');
       _this.autoScroll();
     }
   },
