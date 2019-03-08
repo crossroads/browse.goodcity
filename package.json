@@ -19,6 +19,17 @@
     "test": "EMBER_CLI_CORDOVA=0 ember test --server",
     "test:ci": "EMBER_CLI_CORDOVA=0 ember-pretty-test"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,json,css,md}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
   "engines": {
     "node": ">= 6"
   },
@@ -80,7 +91,10 @@
     "liquid-fire": "~0.29.5",
     "loader.js": "^4.0.11",
     "morgan": "^1.7.0",
-    "node-sass": "^4.9.3"
+    "node-sass": "^4.9.3",
+    "husky": "^1.2.0",
+    "lint-staged": "^8.1.0",
+    "prettier": "1.15.3"
   },
   "dependencies": {
     "azure-api": "git://github.com/crossroads/azure-api.git#master",
