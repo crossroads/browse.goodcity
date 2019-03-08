@@ -14,6 +14,7 @@ export default Ember.Controller.extend({
   deviceId: Math.random().toString().substring(2),
   browse: Ember.inject.controller(),
   // logger: Ember.inject.service(),
+  messagesUtil: Ember.inject.service("messages"),
   status: {
     online: false
   },
@@ -122,6 +123,33 @@ export default Ember.Controller.extend({
     this.get("store").findAll("package");
   },
 
+  generateMessageUrl: function(data, type){
+    var router = this.get("target");
+    var messageRoute = this.get("messagesUtil").getRoute(data.item[type]);
+    var messageUrl = router.generate.apply(router, messageRoute);
+    return messageUrl.split("#").get("lastObject");
+  },
+
+  markReadAndScroll: function(message){
+    if (message && !message.get("isRead")) {
+      this.get("messagesUtil").markRead(message);
+
+      var scrollOffset;
+      if (Ember.$(".message-textbar").length > 0) {
+        scrollOffset = Ember.$(document).height();
+      }
+
+      var screenHeight = document.documentElement.clientHeight;
+      var pageHeight = document.documentElement.scrollHeight;
+
+      if (scrollOffset && pageHeight > screenHeight) {
+        Ember.run.later(this, function () {
+          window.scrollTo(0, scrollOffset);
+        });
+      }
+    }
+  },
+
   // each action below is an event in a channel
   update_store: function(data, success) {
     if(data["item"]["designation"]) {
@@ -203,6 +231,18 @@ export default Ember.Controller.extend({
         this.updateCartAvailability(0, cartItem);
       }
     }
+
+    // mark message read here
+    if (type === "message") {
+      var messageUrl = this.generateMessageUrl(data, type);
+      var currentUrl = window.location.href.split("#").get("lastObject");
+
+      if (currentUrl.indexOf(messageUrl) >= 0) {
+        var message = this.store.peekRecord("message", item.id);
+        this.markReadAndScroll(message);
+      }
+    }
+
     run(success);
   }
 });

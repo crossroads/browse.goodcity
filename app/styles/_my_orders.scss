@@ -97,6 +97,13 @@
         }
       }
 
+      .tabs.tab-icons{
+        margin-top: 0.6rem;
+        i {
+          font-size: 1.5rem;
+        }
+        z-index: 100;
+      }
       .tabs.tab-name{
         i {
           font-size: 130%
@@ -105,11 +112,6 @@
         font-size: 100%;
         z-index: 100;
       }
-
-      .tabs.tab-bar.my-orders-tab-bar{
-        border-bottom: unset;
-      }
-
 
       // ---- TAB DATA
       .tab-content {
@@ -270,4 +272,18 @@
 .inventory_redirect {
   text-decoration: underline;
   cursor: pointer;
+}
+
+.unread-message-count{
+  @media #{$small-only} {
+    margin-right: -5px;
+  }
+
+  @media #{$large-only} {
+    margin-right: -80px;
+  }
+
+  @media #{$medium-only} {
+    margin-right: -16px;
+  }
 }

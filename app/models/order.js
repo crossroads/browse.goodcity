@@ -175,4 +175,12 @@ export default Model.extend({
     }
   }),
 
+  // unread order messages
+  unreadMessagesCount: Ember.computed('messages.@each.state', function () {
+    return this.get('messages').filterBy('state', 'unread').length;
+  }),
+
+  hasUnreadMessages: Ember.computed('unreadMessagesCount', function () {
+    return this.get('unreadMessagesCount') > 0;
+  }),
 });

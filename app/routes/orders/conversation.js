@@ -19,6 +19,7 @@ export default detail.extend({
 
   setupController(controller, model) {
     controller.set("model", model.order);
+    controller.send('markRead');
     this.controllerFor("application").set('hideHeaderBar', true);
   }
 });
