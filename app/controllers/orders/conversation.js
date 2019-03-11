@@ -5,9 +5,7 @@ import Ember from "ember";
 export default detail.extend({
   messagesUtil: Ember.inject.service("messages"),
   isPrivate: false,
-  order: Ember.computed("model", function() {
-    return this.get("model");
-  }),
+  order: Ember.computed.alias("model"),
   isMobileApp: config.cordova.enabled,
   i18n: Ember.inject.service(),
   sortProperties: ["createdAt: asc"],
