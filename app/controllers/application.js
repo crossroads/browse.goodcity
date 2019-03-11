@@ -15,6 +15,11 @@ export default Ember.Controller.extend({
   showSidebar: true,
   moveSidebarToRight: true,
 
+  app_id: config.APP.ANDROID_APP_ID,
+  ios_app_id: config.APP.APPLE_APP_ID,
+  appTitle: config.APP.TITLE,
+  bannerImage: config.APP.BANNER_IMAGE,
+
   initSubscription: Ember.on("init", function() {
     this.get("subscription").wire();
   }),
@@ -235,6 +240,7 @@ export default Ember.Controller.extend({
 
     updateCartItemParams(pkgId) {
       let pkg = this.store.peekRecord("package", pkgId);
+<<<<<<< HEAD
       let item;
       if (!pkg) {
         item = this.store.peekRecord("item", pkgId);
@@ -250,6 +256,14 @@ export default Ember.Controller.extend({
       const route = item ? "item" : "package";
       const routeId = item ? item.id : pkgId;
       this.transitionToRoute(route, routeId, {
+=======
+      if (!pkg.isAvailable) {
+        return false;
+      }
+      let categoryId = pkg.get("allPackageCategories.firstObject.id");
+      let sortBy = "createdAt:desc";
+      this.transitionToRoute("package", pkgId, {
+>>>>>>> banner added
         queryParams: {
           categoryId: categoryId,
           sortBy: sortBy
