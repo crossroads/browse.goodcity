@@ -21,7 +21,7 @@ export default DS.Model.extend({
     async: false
   }),
 
-  myMessage: Ember.computed(function() {
+  myMessage: Ember.computed("sender", function() {
     return this.get("sender.id") === this.get("session.currentUser.id");
   }),
 
@@ -29,7 +29,7 @@ export default DS.Model.extend({
     return true;
   }),
 
-  createdDate: Ember.computed(function() {
+  createdDate: Ember.computed("createdAt", function() {
     return new Date(this.get("createdAt")).toDateString();
   }),
 
