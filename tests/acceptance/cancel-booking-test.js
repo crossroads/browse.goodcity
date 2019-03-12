@@ -1,45 +1,107 @@
-import Ember from 'ember';
-import { module, test } from 'qunit';
-import startApp from '../helpers/start-app';
-import { make, mockFindAll } from 'ember-data-factory-guy';
+import Ember from "ember";
+import { module, test } from "qunit";
+import startApp from "../helpers/start-app";
+import { make, mockFindAll } from "ember-data-factory-guy";
 
-var App, user, user1, organisation, organisationsUser, user_profile, gogo_van, order, pkg, ordersPackage, gcOrganisations, bookingType, purpose, role, userRole;
+var App,
+  user,
+  user1,
+  organisation,
+  organisationsUser,
+  user_profile,
+  gogo_van,
+  order,
+  pkg,
+  ordersPackage,
+  gcOrganisations,
+  bookingType,
+  purpose,
+  role,
+  userRole;
 
-module('Acceptance | Cancel booking', {
+module("Acceptance | Cancel booking", {
   beforeEach: function() {
     App = startApp();
     user = make("user");
     user1 = make("user");
     organisation = make("organisation");
-    pkg = make('package');
+    pkg = make("package");
     order = make("order", { state: "draft", created_by_id: user.id });
-    ordersPackage = make("orders_package", { quantity: 1, state: "requested", package: pkg, packageId: pkg.id, order: order});
+    ordersPackage = make("orders_package", {
+      quantity: 1,
+      state: "requested",
+      package: pkg,
+      packageId: pkg.id,
+      order: order
+    });
     gogo_van = make("gogovan_transport");
     bookingType = make("booking_type");
     purpose = make("purpose");
-    gcOrganisations = make("gc_organisation", {nameEn: "GCC club"});
+    gcOrganisations = make("gc_organisation", { nameEn: "GCC club" });
     role = make("role");
-    userRole = make("user_role", { userId: user.id, roleId: role.id, user: user, role: role });
+    userRole = make("user_role", {
+      userId: user.id,
+      roleId: role.id,
+      user: user,
+      role: role
+    });
 
-    $.mockjax({url: "/api/v1/available_*", type: 'GET', status: 200, responseText:["2018-06-14", "2018-06-15", "2018-06-16", "2018-06-19", "2018-06-20", "2018-06-21"]});
-    mockFindAll("gogovan_transport").returns({json: {gogovan_transports: [gogo_van.toJSON({includeId: true})]}});
-    mockFindAll("booking_type").returns({json: {booking_types: [bookingType.toJSON({includeId: true})]}});
-    mockFindAll("purpose").returns({json: {purposes: [purpose.toJSON({includeId: true})]}});
-    mockFindAll('order').returns({ json: {orders: [order.toJSON({includeId: true})], packages: [pkg.toJSON({includeId: true})], orders_packages: [ordersPackage.toJSON({includeId: true})]}});
-    user_profile = {"id": user.id,"first_name": user.get('firstName'), "last_name": user.get('lastName'), "mobile": user.get('mobile'), "user_role_ids": [userRole.get('id')] };
-    organisationsUser = make("organisations_user", {user: user, organisation: organisation});
-    $.mockjax({url:"/api/v1/auth/current_user_profil*",
-    responseText: {
-      user_profile: user_profile,
-      organisations: [organisation.toJSON({includeId: true})],
-      organisations_users: [organisationsUser.toJSON({includeId: true})]
-    }});
-    $.mockjax({url:"/api/v1/organisations_use*",
+    $.mockjax({
+      url: "/api/v1/available_*",
+      type: "GET",
+      status: 200,
+      responseText: [
+        "2018-06-14",
+        "2018-06-15",
+        "2018-06-16",
+        "2018-06-19",
+        "2018-06-20",
+        "2018-06-21"
+      ]
+    });
+    mockFindAll("gogovan_transport").returns({
+      json: { gogovan_transports: [gogo_van.toJSON({ includeId: true })] }
+    });
+    mockFindAll("booking_type").returns({
+      json: { booking_types: [bookingType.toJSON({ includeId: true })] }
+    });
+    mockFindAll("purpose").returns({
+      json: { purposes: [purpose.toJSON({ includeId: true })] }
+    });
+    mockFindAll("order").returns({
+      json: {
+        orders: [order.toJSON({ includeId: true })],
+        packages: [pkg.toJSON({ includeId: true })],
+        orders_packages: [ordersPackage.toJSON({ includeId: true })]
+      }
+    });
+    user_profile = {
+      id: user.id,
+      first_name: user.get("firstName"),
+      last_name: user.get("lastName"),
+      mobile: user.get("mobile"),
+      user_role_ids: [userRole.get("id")]
+    };
+    organisationsUser = make("organisations_user", {
+      user: user,
+      organisation: organisation
+    });
+    $.mockjax({
+      url: "/api/v1/auth/current_user_profil*",
+      responseText: {
+        user_profile: user_profile,
+        organisations: [organisation.toJSON({ includeId: true })],
+        organisations_users: [organisationsUser.toJSON({ includeId: true })]
+      }
+    });
+    $.mockjax({
+      url: "/api/v1/organisations_use*",
       responseText: {
         users: [user_profile],
-        organisations: [organisation.toJSON({includeId: true})],
-        organisations_users: [organisationsUser.toJSON({includeId: true})]
-      }});
+        organisations: [organisation.toJSON({ includeId: true })],
+        organisations_users: [organisationsUser.toJSON({ includeId: true })]
+      }
+    });
   },
 
   afterEach: function() {
@@ -48,55 +110,58 @@ module('Acceptance | Cancel booking', {
   }
 });
 
-test("Request purpose page redirects back to home page on clicking cancel if order doesn't exist", function(assert){
+test("Request purpose page redirects back to home page on clicking cancel if order doesn't exist", function(assert) {
   assert.expect(1);
-  visit('/request_purpose');
-  andThen(function(){
-    click('#cancel-booking-link');
+  visit("/request_purpose");
+  andThen(function() {
+    click("#cancel-booking-link");
   });
-  andThen(function(){
-    assert.equal(currentURL(), '/home');
+  andThen(function() {
+    assert.equal(currentURL(), "/home");
   });
 });
 
-test("Request purpose page deletes order if in draft state ", function(assert){
+test("Request purpose page deletes order if in draft state ", function(assert) {
   assert.expect(1);
   $.mockjax({
     url: "/api/v1/orde*",
-    type: 'DELETE',
+    type: "DELETE",
     status: 200,
     responseText: {}
   });
   visit(`request_purpose/?editRequest=true&orderId=${order.id}`);
-  andThen(function(){
-    click('#cancel-booking-link');
+  andThen(function() {
+    click("#cancel-booking-link");
   });
-  andThen(function(){
-    click('#messageBox div div:nth-child(2) a');
+  andThen(function() {
+    click("#messageBox div div:nth-child(2) a");
   });
-  andThen(function(){
-    assert.equal(currentURL(), '/home');
+  andThen(function() {
+    assert.equal(currentURL(), "/home");
   });
 });
 
-test("Request purpose changes order state to canceled if in any other state except draft", function(assert){
-  let submittedOrder = make("order", { state: "submitted", created_by_id: user.id });
+test("Request purpose changes order state to canceled if in any other state except draft", function(assert) {
+  let submittedOrder = make("order", {
+    state: "submitted",
+    created_by_id: user.id
+  });
   assert.expect(1);
   $.mockjax({
     url: "/api/v1/orde*",
-    type: 'PUT',
+    type: "PUT",
     status: 200,
     responseText: {}
   });
   visit(`request_purpose/?editRequest=true&orderId=${submittedOrder.id}`);
-  andThen(function(){
-    click('#cancel-booking-link');
+  andThen(function() {
+    click("#cancel-booking-link");
   });
-  andThen(function(){
-    fillIn(Ember.$('#messageBox textarea'), "test");
-    click('#messageBox div div:nth-child(2) a');
+  andThen(function() {
+    fillIn(Ember.$("#messageBox textarea"), "test");
+    click("#messageBox div div:nth-child(2) a");
   });
-  andThen(function(){
-    assert.equal(currentURL(), '/home');
+  andThen(function() {
+    assert.equal(currentURL(), "/home");
   });
 });

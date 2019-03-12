@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import Ember from "ember";
 import config from "../config/environment";
 
 export default Ember.Controller.extend({
@@ -6,24 +6,36 @@ export default Ember.Controller.extend({
   showCartDetailSidebar: false,
   packageCategoryReloaded: false,
   flashMessage: Ember.inject.service(),
-  queryParams: ['orderCancelled'],
+  queryParams: ["orderCancelled"],
   triggerFlashMessage: false,
   previousRouteName: null,
 
   orderCancelled: false,
 
-  cancelOrderFlashMessage: Ember.observer("orderCancelled", 'triggerFlashMessage', function() {
-    var previousRoute = this.get("previousRouteName");
-    if(this.get("orderCancelled") && (previousRoute === "order.schedule_details" || previousRoute === "order.confirm")) {
-      this.get("flashMessage").show("order.flash_cancelled_message");
+  cancelOrderFlashMessage: Ember.observer(
+    "orderCancelled",
+    "triggerFlashMessage",
+    function() {
+      var previousRoute = this.get("previousRouteName");
+      if (
+        this.get("orderCancelled") &&
+        (previousRoute === "order.schedule_details" ||
+          previousRoute === "order.confirm")
+      ) {
+        this.get("flashMessage").show("order.flash_cancelled_message");
+      }
     }
-  }),
+  ),
 
-  parentCategories: Ember.computed('model.[]', 'packageCategoryReloaded', function() {
-    var model = this.get("model");
-    model.forEach(packageCategory => {
-      packageCategory.toggleProperty("reloadPackageCategory");
-    });
-    return this.get('model').filterBy('parentId', null);
-  })
+  parentCategories: Ember.computed(
+    "model.[]",
+    "packageCategoryReloaded",
+    function() {
+      var model = this.get("model");
+      model.forEach(packageCategory => {
+        packageCategory.toggleProperty("reloadPackageCategory");
+      });
+      return this.get("model").filterBy("parentId", null);
+    }
+  )
 });

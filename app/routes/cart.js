@@ -1,8 +1,7 @@
-import Ember from 'ember';
+import Ember from "ember";
 
 export default Ember.Route.extend({
-
   beforeModel() {
-    this.set('cart.checkout', true);
+    this.set("cart.checkout", true);
   }
 });

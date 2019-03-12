@@ -6,7 +6,7 @@ import Ember from "ember";
 export default Ember.Helper.helper(function(value, params) {
   var parseDate = Date.parse(value);
 
-  if(parseDate) {
+  if (parseDate) {
     return moment(parseDate).format(params.format);
   } else {
     return "";

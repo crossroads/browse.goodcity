@@ -5,36 +5,38 @@ export default ObserveScreenResize.extend({
   cartscroll: Ember.inject.service(),
 
   observeScreen: function() {
-    this.get('cartscroll').resize();
+    this.get("cartscroll").resize();
 
-    if (!this.screenResized()){
-      Ember.$('.off-canvas-wrap').addClass('move-right').addClass('move-left');
-      Ember.$('.left-off-canvas-toggle').hide();
+    if (!this.screenResized()) {
+      Ember.$(".off-canvas-wrap")
+        .addClass("move-right")
+        .addClass("move-left");
+      Ember.$(".left-off-canvas-toggle").hide();
       this.OtherScreenOffCanvas();
-    }
-    else
-    {
-      Ember.$('.off-canvas-wrap').removeClass('move-right').removeClass('move-left');
-      Ember.$('.left-off-canvas-toggle').show();
+    } else {
+      Ember.$(".off-canvas-wrap")
+        .removeClass("move-right")
+        .removeClass("move-left");
+      Ember.$(".left-off-canvas-toggle").show();
       this.smallScreenOffCanvas();
     }
   },
-  smallScreenOffCanvas: function(){
+  smallScreenOffCanvas: function() {
     Ember.$(document).foundation({ offcanvas: { close_on_click: true } });
   },
-  OtherScreenOffCanvas: function(){
-    Ember.$(document).foundation({offcanvas: { close_on_click: false }});
+  OtherScreenOffCanvas: function() {
+    Ember.$(document).foundation({ offcanvas: { close_on_click: false } });
   },
 
   didInsertElement() {
-    this.get('cartscroll').resize();
-    if (!this.screenResized()){
+    this.get("cartscroll").resize();
+    if (!this.screenResized()) {
       this.OtherScreenOffCanvas();
-    }
-    else{
+    } else {
       this.smallScreenOffCanvas();
-      Ember.$('.off-canvas-wrap').removeClass('move-right').removeClass('move-left');
+      Ember.$(".off-canvas-wrap")
+        .removeClass("move-right")
+        .removeClass("move-left");
     }
   }
-
 });

@@ -1,13 +1,23 @@
-import Ember from 'ember';
-import config from '../config/environment';
+import Ember from "ember";
+import config from "../config/environment";
 
 var storageSupported = false;
-try { localStorage.test = 2; delete localStorage.test; storageSupported = true; }
-catch(err) { console.log(err); }
+try {
+  localStorage.test = 2;
+  delete localStorage.test;
+  storageSupported = true;
+} catch (err) {
+  console.log(err);
+}
 
 var cookiesSupported = false;
-try { Ember.$.cookie('test', 2); Ember.$.removeCookie('test'); cookiesSupported = true; }
-catch(err) { console.log(err); }
+try {
+  Ember.$.cookie("test", 2);
+  Ember.$.removeCookie("test");
+  cookiesSupported = true;
+} catch (err) {
+  console.log(err);
+}
 
 var localStorageProvider = {
   get(key) {
@@ -32,7 +42,11 @@ var cookieStorageProvider = {
     if (Ember.isNone(value)) {
       Ember.$.removeCookie(key);
     } else {
-      Ember.$.cookie(key, value, {expires:365, path:'/', secure:config.environment==='production'});
+      Ember.$.cookie(key, value, {
+        expires: 365,
+        path: "/",
+        secure: config.environment === "production"
+      });
     }
     return value;
   }
@@ -58,7 +72,7 @@ var memoryStorageProvider = {
   }
 };
 
-export default Ember.computed.localStorage = function() {
+export default (Ember.computed.localStorage = function() {
   if (storageSupported) {
     return Ember.computed(localStorageProvider);
   }
@@ -68,4 +82,4 @@ export default Ember.computed.localStorage = function() {
   }
 
   return Ember.computed(memoryStorageProvider);
-};
+});

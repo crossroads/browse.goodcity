@@ -1,14 +1,14 @@
-import FactoryGuy from 'ember-data-factory-guy';
+import FactoryGuy from "ember-data-factory-guy";
 
-FactoryGuy.define('purpose',{
+FactoryGuy.define("purpose", {
   sequences: {
     id: function(num) {
       return num + 100;
-    },
+    }
   },
   default: {
-    id:        FactoryGuy.generate('id'),
-    nameEn:   'organisation'
-  },
+    id: FactoryGuy.generate("id"),
+    nameEn: "organisation"
+  }
 });
 export default {};

@@ -8,10 +8,10 @@ export default Model.extend({
   identifier: attr("string"),
 
   isAppointment: Ember.computed("identifier", function() {
-    return this.get('identifier') === "appointment";
+    return this.get("identifier") === "appointment";
   }),
 
-  isOnlineOrder: Ember.computed('identifier', function(){
-    return this.get('identifier') === 'online-order';
+  isOnlineOrder: Ember.computed("identifier", function() {
+    return this.get("identifier") === "online-order";
   })
 });

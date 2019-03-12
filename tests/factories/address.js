@@ -1,17 +1,16 @@
-import FactoryGuy from 'ember-data-factory-guy';
+import FactoryGuy from "ember-data-factory-guy";
 
-FactoryGuy.define('address',{
+FactoryGuy.define("address", {
   sequences: {
     id: function() {
       return Math.floor(Math.random() * 100);
     }
   },
   default: {
-    id                      : FactoryGuy.generate('id'),
-    flat                    : "24",
-    building                : "Crossroads",
-    street                  : "Tai chung"
+    id: FactoryGuy.generate("id"),
+    flat: "24",
+    building: "Crossroads",
+    street: "Tai chung"
   }
 });
-export default { };
-
+export default {};

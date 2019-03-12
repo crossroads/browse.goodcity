@@ -1,3 +1,3 @@
-import detail from './detail';
+import detail from "./detail";
 
 export default detail.extend();

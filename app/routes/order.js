@@ -1,7 +1,7 @@
-import AuthorizeRoute from './authorize';
+import AuthorizeRoute from "./authorize";
 
 export default AuthorizeRoute.extend({
   model(params) {
-    return this.store.peekRecord('package', params["order_id"]);
+    return this.store.peekRecord("package", params["order_id"]);
   }
 });

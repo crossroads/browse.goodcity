@@ -1,10 +1,10 @@
-import Ember from 'ember';
+import Ember from "ember";
 
 export default Ember.Component.extend({
   loading: true,
 
   changedSrc: function() {
-    if(!this.is_cached(this.get("src"))) {
+    if (!this.is_cached(this.get("src"))) {
       this.set("loading", true);
     }
   }.observes("src"),

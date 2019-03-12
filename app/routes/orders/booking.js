@@ -1,7 +1,7 @@
-import detail from './detail';
+import detail from "./detail";
 
 export default detail.extend({
-  setupController(controller, model){
+  setupController(controller, model) {
     this._super(controller, model);
   }
 });

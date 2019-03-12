@@ -1,16 +1,33 @@
-import Ember from 'ember';
-import AuthorizeRoute from './../authorize';
-import AjaxPromise from 'browse/utils/ajax-promise';
+import Ember from "ember";
+import AuthorizeRoute from "./../authorize";
+import AjaxPromise from "browse/utils/ajax-promise";
 
 export default AuthorizeRoute.extend({
-  filteredCalenderDatesWithOrderTransport(calendarDates, orderTransportScheduledAt) {
-    return calendarDates.filter(dateAndSlots => dateAndSlots.date === orderTransportScheduledAt)[0];
+  filteredCalenderDatesWithOrderTransport(
+    calendarDates,
+    orderTransportScheduledAt
+  ) {
+    return calendarDates.filter(
+      dateAndSlots => dateAndSlots.date === orderTransportScheduledAt
+    )[0];
   },
 
-  slotExitsWithNoQuota(calendarDates, orderTransportScheduledAt, orderTransport) {
-    let filteredDates = this.filteredCalenderDatesWithOrderTransport(calendarDates, orderTransportScheduledAt);
+  slotExitsWithNoQuota(
+    calendarDates,
+    orderTransportScheduledAt,
+    orderTransport
+  ) {
+    let filteredDates = this.filteredCalenderDatesWithOrderTransport(
+      calendarDates,
+      orderTransportScheduledAt
+    );
     return function() {
-      return filteredDates.slots.filter(slot => slot.timestamp.indexOf(orderTransportScheduledAt + "T" + orderTransport.get("timeslot")) >= 0 );
+      return filteredDates.slots.filter(
+        slot =>
+          slot.timestamp.indexOf(
+            orderTransportScheduledAt + "T" + orderTransport.get("timeslot")
+          ) >= 0
+      );
     };
   },
 
@@ -21,7 +38,9 @@ export default AuthorizeRoute.extend({
       note: "",
       quota: 1,
       remaining: 1,
-      timestamp: moment.tz(orderTransport.get("scheduledAt"), 'Asia/Hong_Kong').format()
+      timestamp: moment
+        .tz(orderTransport.get("scheduledAt"), "Asia/Hong_Kong")
+        .format()
     };
   },
 
@@ -36,35 +55,75 @@ export default AuthorizeRoute.extend({
   //Checks if date is closed, slot is closed or available
   //Adds slot according to that
   addSelectedOrderTransportSlot(calendarDates, orderTransport) {
-    let orderTransportScheduledAt = moment.tz(orderTransport.get("scheduledAt"), 'Asia/Hong_Kong').format("YYYY-MM-DD");
-    let transportDate = this.filteredCalenderDatesWithOrderTransport(calendarDates, orderTransportScheduledAt);
-    let remainingQuota = this.slotExitsWithNoQuota(calendarDates, orderTransportScheduledAt, orderTransport);
+    let orderTransportScheduledAt = moment
+      .tz(orderTransport.get("scheduledAt"), "Asia/Hong_Kong")
+      .format("YYYY-MM-DD");
+    let transportDate = this.filteredCalenderDatesWithOrderTransport(
+      calendarDates,
+      orderTransportScheduledAt
+    );
+    let remainingQuota = this.slotExitsWithNoQuota(
+      calendarDates,
+      orderTransportScheduledAt,
+      orderTransport
+    );
     let bookedSlot = this.makeBookedSlot(orderTransport);
-    if(transportDate) {
+    if (transportDate) {
       //If no slots are available then push single slot
-      if(transportDate.isClosed) {
-        calendarDates.filter(dateAndSlots => dateAndSlots.date === orderTransportScheduledAt).isClosed = false; // jshint ignore:line
-        calendarDates.filter(dateAndSlots => dateAndSlots.date === orderTransportScheduledAt)[0].slots.unshift(bookedSlot); // jshint ignore:line
-      } else if (remainingQuota = remainingQuota()) {
+      if (transportDate.isClosed) {
+        calendarDates.filter(
+          dateAndSlots => dateAndSlots.date === orderTransportScheduledAt
+        ).isClosed = false; // jshint ignore:line
+        calendarDates
+          .filter(
+            dateAndSlots => dateAndSlots.date === orderTransportScheduledAt
+          )[0]
+          .slots.unshift(bookedSlot); // jshint ignore:line
+      } else if ((remainingQuota = remainingQuota())) {
         //If slot is available and remaining quota is 0 then push the slot
-        if(remainingQuota && remainingQuota.length && remainingQuota[0].remaining === 0) {
-          calendarDates.filter(dateAndSlots => dateAndSlots.date === orderTransportScheduledAt)[0].slots.unshift(bookedSlot); // jshint ignore:line
+        if (
+          remainingQuota &&
+          remainingQuota.length &&
+          remainingQuota[0].remaining === 0
+        ) {
+          calendarDates
+            .filter(
+              dateAndSlots => dateAndSlots.date === orderTransportScheduledAt
+            )[0]
+            .slots.unshift(bookedSlot); // jshint ignore:line
         }
       }
     } else {
       //If scheduled date is past today's date
-      let calendarDate = this.getCalenderDate(orderTransportScheduledAt, bookedSlot);
+      let calendarDate = this.getCalenderDate(
+        orderTransportScheduledAt,
+        bookedSlot
+      );
       calendarDates.unshift(calendarDate);
     }
     return calendarDates;
   },
 
   model() {
-    var orderId = this.paramsFor('order').order_id;
+    var orderId = this.paramsFor("order").order_id;
     return Ember.RSVP.hash({
-      availableDatesAndtime: new AjaxPromise("/appointment_slots/calendar", "GET", this.get('session.authToken'), {to: moment().add(120, 'days').format('YYYY-MM-DD')}),
-      order: this.store.peekRecord('order', orderId) || this.store.findRecord('order', orderId),
-      orderTransport: this.store.peekAll("orderTransport").filterBy("order.id", orderId).get("firstObject")
+      availableDatesAndtime: new AjaxPromise(
+        "/appointment_slots/calendar",
+        "GET",
+        this.get("session.authToken"),
+        {
+          to: moment()
+            .add(120, "days")
+            .format("YYYY-MM-DD")
+        }
+      ),
+      order:
+        this.store.peekRecord("order", orderId) ||
+        this.store.findRecord("order", orderId),
+      orderTransport: this.store
+        .peekAll("orderTransport")
+        .filterBy("order.id", orderId)
+        .get("firstObject")
     });
   },
 
@@ -77,28 +136,40 @@ export default AuthorizeRoute.extend({
     let availableDatesAndTime = model.availableDatesAndtime;
     let availableSlots = null;
     let order = model.order;
-    controller.set('isEditing', false);
-    if (orderTransport){
-      selectedId = orderTransport.get('transportType');
-      selectedTime = orderTransport.get('timeslot');
-      selectedDate = moment.tz(orderTransport.get("scheduledAt"), 'Asia/Hong_Kong');
+    controller.set("isEditing", false);
+    if (orderTransport) {
+      selectedId = orderTransport.get("transportType");
+      selectedTime = orderTransport.get("timeslot");
+      selectedDate = moment.tz(
+        orderTransport.get("scheduledAt"),
+        "Asia/Hong_Kong"
+      );
 
       //Logic for Show already selected slot/quota
       let calendarDates = availableDatesAndTime.appointment_calendar_dates;
-      calendarDates = this.addSelectedOrderTransportSlot(calendarDates, orderTransport);
+      calendarDates = this.addSelectedOrderTransportSlot(
+        calendarDates,
+        orderTransport
+      );
 
-      order = orderTransport.get('order');
-      if(selectedDate) {
-        availableSlots = calendarDates.filter( date => date.date === moment(selectedDate).format('YYYY-MM-DD'))[0];
-        selectedSlot = availableSlots && availableSlots.slots.filter(slot => slot.timestamp.indexOf(orderTransport.get("timeslot")) >= 0)[0];
+      order = orderTransport.get("order");
+      if (selectedDate) {
+        availableSlots = calendarDates.filter(
+          date => date.date === moment(selectedDate).format("YYYY-MM-DD")
+        )[0];
+        selectedSlot =
+          availableSlots &&
+          availableSlots.slots.filter(
+            slot => slot.timestamp.indexOf(orderTransport.get("timeslot")) >= 0
+          )[0];
       }
-      controller.set('isEditing', !order.get('isDraft'));
+      controller.set("isEditing", !order.get("isDraft"));
     }
-    controller.set('selectedId', selectedId);
-    controller.set('selectedTimeId', selectedDate && selectedDate.format());
-    controller.set('available_dates', availableDatesAndTime);
-    controller.set('selectedDate', selectedDate);
-    if(selectedSlot) {
+    controller.set("selectedId", selectedId);
+    controller.set("selectedTimeId", selectedDate && selectedDate.format());
+    controller.set("available_dates", availableDatesAndTime);
+    controller.set("selectedDate", selectedDate);
+    if (selectedSlot) {
       controller.set("selectedTimeId", selectedSlot.timestamp);
     }
   },
@@ -106,11 +177,11 @@ export default AuthorizeRoute.extend({
   setupController(controller, model) {
     this._super(...arguments);
     this.setUpFormData(model, controller);
-    this.controllerFor('application').set('showSidebar', false);
-    controller.set('showOrderSlotSelection', false);
+    this.controllerFor("application").set("showSidebar", false);
+    controller.set("showOrderSlotSelection", false);
   },
 
-  deactivate(){
-    this.controllerFor('application').set('showSidebar', true);
+  deactivate() {
+    this.controllerFor("application").set("showSidebar", true);
   }
 });

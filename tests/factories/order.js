@@ -1,7 +1,7 @@
-import FactoryGuy from 'ember-data-factory-guy';
-import './orders_package';
+import FactoryGuy from "ember-data-factory-guy";
+import "./orders_package";
 
-FactoryGuy.define('order', {
+FactoryGuy.define("order", {
   sequences: {
     id: function(num) {
       return num;
@@ -12,13 +12,13 @@ FactoryGuy.define('order', {
     }
   },
   default: {
-    id:               FactoryGuy.generate('id'),
-    code:             FactoryGuy.generate('code'),
-    purposeDescription:       'donation',
-    state:           'draft',
-    createdAt:        '12/07/2016',
-    updatedAt:        '12/07/2016',
-    orders_packages:     FactoryGuy.hasMany('orders_package'),
-    order_transport: FactoryGuy.belongsTo('order_transport')
+    id: FactoryGuy.generate("id"),
+    code: FactoryGuy.generate("code"),
+    purposeDescription: "donation",
+    state: "draft",
+    createdAt: "12/07/2016",
+    updatedAt: "12/07/2016",
+    orders_packages: FactoryGuy.hasMany("orders_package"),
+    order_transport: FactoryGuy.belongsTo("order_transport")
   }
 });

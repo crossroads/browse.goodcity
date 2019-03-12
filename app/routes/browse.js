@@ -1,4 +1,4 @@
-import PublicRoute from './browse_pages';
+import PublicRoute from "./browse_pages";
 
 export default PublicRoute.extend({
   previousRoute: false,
@@ -6,29 +6,32 @@ export default PublicRoute.extend({
 
   beforeModel() {
     this._super(...arguments);
-    var previousRoutes = this.router.router && this.router.router.currentHandlerInfos;
+    var previousRoutes =
+      this.router.router && this.router.router.currentHandlerInfos;
     var previousRoute = previousRoutes && previousRoutes.pop();
 
-    if(previousRoute && previousRoute.name)
-    {
+    if (previousRoute && previousRoute.name) {
       this.set("previousRouteName", previousRoute.name);
-      if(previousRoute.name === "cart") {
-        this.set('previousRoute', true);
+      if (previousRoute.name === "cart") {
+        this.set("previousRoute", true);
       }
     }
   },
 
   model() {
-    return this.store.peekAll('package_category');
+    return this.store.peekAll("package_category");
   },
 
-  setupController(controller, model){
-    if(this.get('previousRoute')) {
-      controller.set('showCartDetailSidebar', false);
+  setupController(controller, model) {
+    if (this.get("previousRoute")) {
+      controller.set("showCartDetailSidebar", false);
     }
-    controller.set('model', model);
+    controller.set("model", model);
     controller.set("previousRouteName", this.get("previousRouteName"));
     controller.toggleProperty("triggerFlashMessage");
-    this.controllerFor('application').set('pageTitle', this.get('i18n').t("browse.title"));
+    this.controllerFor("application").set(
+      "pageTitle",
+      this.get("i18n").t("browse.title")
+    );
   }
 });
