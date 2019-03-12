@@ -35,7 +35,6 @@
         </div>
       </div>
     </section>
-
     {{!-- User details section --}}
     {{partial "order/user_details"}}
 
@@ -50,6 +49,11 @@
     {{!-- Goods details section --}}
     {{#if order.isAppointment }}
       {{partial "order/goods_detail"}}
+    {{/if}}
+
+    {{!-- Orders Package section --}}
+    {{#if order.isOnlineOrder }}
+      {{partial "order/orders_package_detail"}}
     {{/if}}
 
     {{!-- Appointment details section --}}
