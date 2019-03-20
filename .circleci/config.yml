@@ -7,20 +7,20 @@ aliases:
         - image: circleci/node:carbon
       working_directory: ~/code
   - &restore-repo-cache
-      key: v2-browse-goodcity-{{ .Environment.CIRCLE_SHA1 }}
+      key: v1-goodcity-charity-{{ .Environment.CIRCLE_SHA1 }}
   - &restore-yarn-cache
       keys:
-        - v2-browse-goodcity-packages-{{ checksum "yarn.lock" }}
+        - v1-goodcity-charity-packages-{{ checksum "yarn.lock" }}
   - &save-yarn-cache
-      key: v2-browse-goodcity-packages-{{ checksum "yarn.lock" }}
+      key: v1-goodcity-charity-packages-{{ checksum "yarn.lock" }}
       paths:
         - node_modules
         - ~/.cache/yarn
   - &restore-ios-yarn-cache
       keys:
-        - v2-browse-goodcity-ios-yarn-packages-{{ checksum "yarn.lock" }}
+        - v1-goodcity-charity-ios-yarn-packages-{{ checksum "yarn.lock" }}
   - &save-ios-yarn-cache
-      key: v2-browse-goodcity-ios-yarn-packages-{{ checksum "yarn.lock" }}
+      key: v1-goodcity-charity-ios-yarn-packages-{{ checksum "yarn.lock" }}
       paths:
         - node_modules
         - ~/.cache/yarn
@@ -28,27 +28,27 @@ aliases:
     |
       yarn install --non-interactive --cache-folder ~/.cache/yarn --frozen-lockfile
   - &restore-bower-cache
-      key: v2-browse-goodcity-bower-{{ checksum "bower.json" }}
+      key: v1-goodcity-charity-bower-{{ checksum "bower.json" }}
   - &save-bower-cache
-      key: v2-browse-goodcity-bower-{{ checksum "bower.json" }}
+      key: v1-goodcity-charity-bower-{{ checksum "bower.json" }}
       paths:
         - bower_components
   - &restore-ios-bower-cache
-      key: v2-browse-goodcity-ios-bower-components-{{ checksum "bower.json" }}
+      key: v1-goodcity-charity-ios-bower-components-{{ checksum "bower.json" }}
   - &save-ios-bower-cache
-      key: v2-browse-goodcity-ios-bower-components-{{ checksum "bower.json" }}
+      key: v1-goodcity-charity-ios-bower-components-{{ checksum "bower.json" }}
       paths:
         - bower_components
   - &restore-bundle-cache
-      key: v2-browse-goodcity-bundle-{{ checksum "Gemfile.lock" }}
+      key: v1-goodcity-charity-bundle-{{ checksum "Gemfile.lock" }}
   - &save-bundle-cache
-      key: v2-browse-goodcity-bundle-{{ checksum "Gemfile.lock" }}
+      key: v1-goodcity-charity-bundle-{{ checksum "Gemfile.lock" }}
       paths:
         - vendor/bundle
   - &restore-ios-bundler-cache
-      key: v2-browse-goodcity-ios-bundle-{{ checksum "Gemfile.lock" }}
+      key: v1-goodcity-charity-ios-bundle-{{ checksum "Gemfile.lock" }}
   - &save-ios-bundler-cache
-      key: v2-browse-goodcity-ios-bundle-{{ checksum "Gemfile.lock" }}
+      key: v1-goodcity-charity-ios-bundle-{{ checksum "Gemfile.lock" }}
       paths:
         - vendor/bundle
 
@@ -58,7 +58,7 @@ jobs:
     steps:
       - checkout
       - save_cache:
-          key: v2-browse-goodcity-{{ .Environment.CIRCLE_SHA1 }}
+          key: v1-goodcity-charity-{{ .Environment.CIRCLE_SHA1 }}
           paths:
             - ~/code
 
