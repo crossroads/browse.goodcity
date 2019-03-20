@@ -66,7 +66,7 @@ export default {
   },
 
   browse: {
-    title: "GoodCity Charity"
+    title: "好人好巿 (慈善組織)"
   },
 
   home: {

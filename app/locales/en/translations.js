@@ -72,7 +72,7 @@ export default {
   },
 
   browse: {
-    title: "GoodCity Charity"
+    title: "Goodcity for charities"
   },
 
   home: {

@@ -173,7 +173,7 @@ def azure_file
 end
 
 def app_name
-  is_staging ? "S. GoodCity Charity" : "GoodCity Charity"
+  is_staging ? "S. Goodcity for charities" : "Goodcity for charities"
 end
 
 def app_id
