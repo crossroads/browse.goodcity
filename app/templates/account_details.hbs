@@ -135,6 +135,23 @@
                     {{/form-control}}
                   </div>
                   <div class="row">
+                    {{#form-control}}
+                    <div class="small-12 columns">
+                      <label class="form-label">Preferred Contact Number</label>
+                    </div>
+                    <div class="row">
+                      <div class="small-12 large-12 columns">
+                        {{numeric-input value=preferredContactNumber name="preferredContactNumber" id="preferred_contact" maxlength="8" pattern=".{8,}" autoFocus=true}}
+                      </div>
+                    </div>
+                    <div class='row'>
+                      <div class="small-12 columns input-error warning_empty">
+                        {{fa-icon "warning"}}&nbsp;&nbsp; Invalid contact number. Please enter 8 digits number.
+                      </div>
+                    </div>
+                    {{/form-control}}
+                  </div>
+                  <div class="row">
                     {{!-- <div class="save_button"><i class="fa fa-angle-double-down fa-2x"></i></div> --}}
                     <div class="small-12 medium-12 columns">
                       <button {{action 'submit' target=form}}
