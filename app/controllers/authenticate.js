@@ -15,8 +15,8 @@ export default Ember.Controller.extend({
   email: "",
 
   setMobileOrEmail() {
-    if (/\+852[569]\d{7}/.test(this.get("mobileOrEmail"))) {
-      this.set("mobile", this.get("mobileOrEmail"));
+    if (/^[569]\d{7}/.test(this.get("mobileOrEmail"))) {
+      this.set("mobile", "+852" + this.get("mobileOrEmail"));
     } else {
       this.set("email", this.get("mobileOrEmail"));
     }
@@ -37,21 +37,29 @@ export default Ember.Controller.extend({
         otp_auth_key: otp_auth_key
       })
         .then(function(data) {
-          _this.setProperties({ pin: null });
+          _this.setProperties({
+            pin: null
+          });
           _this.set("session.authToken", data.jwt_token);
           _this.set("session.otpAuthKey", null);
           _this.store.pushPayload(data.user);
-          _this.setProperties({ pin: null });
+          _this.setProperties({
+            pin: null
+          });
           _this.get("application").set("loggedInUser", true);
           _this.transitionToRoute("post_login", {
-            queryParams: { bookAppointment: bookAppointment }
+            queryParams: {
+              bookAppointment: bookAppointment
+            }
           });
         })
         .catch(function(jqXHR) {
           Ember.$("#pin")
             .closest("div")
             .addClass("error");
-          _this.setProperties({ pin: null });
+          _this.setProperties({
+            pin: null
+          });
           if (
             jqXHR.status === 422 &&
             jqXHR.responseJSON.errors &&
@@ -81,12 +89,18 @@ export default Ember.Controller.extend({
         }
       };
 
-      new AjaxPromise("/auth/signup", "POST", null, { user_auth: user_auth })
+      new AjaxPromise("/auth/signup", "POST", null, {
+        user_auth: user_auth
+      })
         .then(data => {
           this.set("session.otpAuthKey", data.otp_auth_key);
-          this.setProperties({ pin: null });
+          this.setProperties({
+            pin: null
+          });
           this.transitionToRoute("authenticate", {
-            queryParams: { bookAppointment: this.get("bookAppointment") }
+            queryParams: {
+              bookAppointment: this.get("bookAppointment")
+            }
           });
         })
         .catch(error => {
