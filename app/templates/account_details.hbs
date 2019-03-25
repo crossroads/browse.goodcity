@@ -102,7 +102,11 @@
                     <div class="small-12 columns">
                       <label class="form-label">{{t "account.email"}}</label>
                       <label class="form-label">{{t "account.work"}}</label>
+                      {{#if model.user.email}}
+                      {{input value=email value=model.user.email classNames="number_input center_align_placeholder" id="email" type="email" required='true' disabled='true'}}
+                      {{else}}
                       {{input value=email value=model.user.email classNames="number_input center_align_placeholder" id="email" type="email" required='true'}}
+                      {{/if}}
                     </div>
                     <div class="small-12 columns input-error warning_empty">
                       {{fa-icon "warning"}}&nbsp;&nbsp;{{t "account.email_warning"}}
