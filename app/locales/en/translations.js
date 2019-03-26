@@ -1,7 +1,6 @@
 export default {
   // "key.with.interpolation": "Text with {{anInterpolation}}"
-  offline_error:
-    "Unable to complete action, please check your internet connection.",
+  offline_error: "Unable to complete action, please check your internet connection.",
   "language.en": "English",
   "language.zh": "中文",
   "company.name": "Crossroads Foundation",
@@ -10,8 +9,7 @@ export default {
   must_login: "You must log in!",
   okay: "Okay",
   unexpected_error: "Something went wrong",
-  QuotaExceededError:
-    "Site may not work in Safari's <b>private mode.</b> Please try</br><ul><li><a href='http://www.apple.com/itunes/' style='color: black!important; background-color: #dee4eb !important;'>Downloading the iOS App</a></li><li>Using regular (not private) mode in Safari</li><li>Using Chrome's private browsing mode</li></ul>",
+  QuotaExceededError: "Site may not work in Safari's <b>private mode.</b> Please try</br><ul><li><a href='http://www.apple.com/itunes/' style='color: black!important; background-color: #dee4eb !important;'>Downloading the iOS App</a></li><li>Using regular (not private) mode in Safari</li><li>Using Chrome's private browsing mode</li></ul>",
   show: "Show",
   date: "Date",
   time: "Time",
@@ -23,12 +21,10 @@ export default {
   closed: "closed",
   cancelled: "cancelled",
   not_now: "Not Now",
-  not_found:
-    "Oooops, the location you're headed to doesn't seem to exist anymore. Sorry!",
+  not_found: "Oooops, the location you're headed to doesn't seem to exist anymore. Sorry!",
   awaiting_dispatch: "awaiting dispatch",
   dispatching: "dispatching",
-  items_not_available:
-    "One or many items in your cart are no longer available. Please remove those items from cart and then proceed.",
+  items_not_available: "One or many items in your cart are no longer available. Please remove those items from cart and then proceed.",
   unauthorized: "You are not authorized.",
   back: "Back",
   no_search_results: "No Search Results.",
@@ -76,19 +72,15 @@ export default {
   },
 
   home: {
-    introduction:
-      "Helping Hong Kong’s charities & Social Welfare agencies receive quality donated goods for their facilities and beneficiaries.",
+    introduction: "Helping Hong Kong’s charities & Social Welfare agencies receive quality donated goods for their facilities and beneficiaries.",
     faq_text: "Eligibility and frequently asked questions.",
     user_guide_title: "How it works",
     tap_button: "Tap the button below to get started",
     coming_soon: "coming soon",
     transport_options: "Transport options",
-    collection_transport_description:
-      "Collect using your own vehicle at a scheduled time",
-    van_transport_description:
-      "Have our team send items to you in a hired van at a scheduled time",
-    van_transport_note:
-      "NOTE: driver is paid by you or the client. We sadly cannot offer free delivery under normal circumstances.",
+    collection_transport_description: "Collect using your own vehicle at a scheduled time",
+    van_transport_description: "Have our team send items to you in a hired van at a scheduled time",
+    van_transport_note: "NOTE: driver is paid by you or the client. We sadly cannot offer free delivery under normal circumstances.",
 
     order_goods: {
       title: "Get immediate access to goods!",
@@ -128,8 +120,7 @@ export default {
       guide_step_2: "Describe the needs including specific types of good",
       guide_step_3: "Choose an appointment time",
       guide_step_4: "Our staff will contact you to confirm",
-      onsite_guide_intro:
-        "When you (or your client) arrives for the appointment:",
+      onsite_guide_intro: "When you (or your client) arrives for the appointment:",
       onsite_guide_step_1: "We will help you select items from available stock",
       onsite_guide_step_2: "We will help book a truck if you've requested this",
       onsite_guide_step_3: "Load the goods and take them to your location"
@@ -165,14 +156,12 @@ export default {
 
   login: {
     hk_only: "Mobile phone (Hong Kong only)",
-    sms_pincode:
-      "We SMS you pin code for secure access <br/> Been here before? Please use the same phone number",
+    sms_pincode: "We SMS you pin code for secure access <br/> Been here before? Please use the same phone number",
     login: "Login",
     smscode: "Get 4-digit SMS code",
-    privacy:
-      "We don't share your data. We only use it to complete your goods request(s). See our ",
+    privacy: "We don't share your data. We only use it to complete your goods request(s). See our ",
     policy: "Privacy Policy.",
-    mobile_warning: "Please provide a valid Hong Kong mobile number"
+    mobile_email_warning: "Please provide either a valid Hong Kong mobile number or a valid email address"
   },
 
   account: {
@@ -187,8 +176,7 @@ export default {
     email: "Email address",
     work: "Please use your work address",
     done: "Done",
-    contact_us:
-      "Can't find your organisation? Please contact us for assistance.",
+    contact_us: "Can't find your organisation? Please contact us for assistance.",
     organisation_warning: "You must select valid organisation to proceed",
     title_warning: "Add Title",
     first_name_warning: "Add First Name",
@@ -235,8 +223,7 @@ export default {
       longer_goods: "Goods longer than 6ft (183cm)",
       longer_goods_6ft: "longer than 6ft +$10",
       longer_goods_6ft_tall: "longer than 6ft &taller than 2ft(60cm) +$20",
-      extra_time_charge:
-        "Extra Time(15 minutes waiting time is included for you to load the van. Extra time incurs a charge.)",
+      extra_time_charge: "Extra Time(15 minutes waiting time is included for you to load the van. Extra time incurs a charge.)",
       date: "Date",
       time: "Time",
       am: "AM",
@@ -246,20 +233,16 @@ export default {
       learn_about_prices: "Learn more about price",
       best_price_estimate: "Best Price estimate",
       delivery_contact_person: "Delivery contact person",
-      booking_with_name:
-        "GoGoVan booking will be placed with this name and number.",
-      driver_call_to_confirm:
-        "Driver will call this contact to confirm details and liaise at drop-off time."
+      booking_with_name: "GoGoVan booking will be placed with this name and number.",
+      driver_call_to_confirm: "Driver will call this contact to confirm details and liaise at drop-off time."
     }
   },
 
   cancel_booking: {
     title: "Cancel Booking",
     cancel_booking_warning: "Cancel this booking?",
-    draft_cancel_booking_warning:
-      "This will permanently remove all information associated with this booking.",
-    cancel_booking_info:
-      "This will cancel booking and all associated request for goods.",
+    draft_cancel_booking_warning: "This will permanently remove all information associated with this booking.",
+    cancel_booking_info: "This will cancel booking and all associated request for goods.",
     cancel_booking_reason_title: "Reason for canceling order"
   },
 
@@ -363,20 +346,17 @@ export default {
     submit_request: "Submit Order",
     remove: "Remove",
     unavailable: "Sorry! This item is no longer available.",
-    notice:
-      "Delivery will be made one or two Crossroads operating days after you submit your order.",
+    notice: "Delivery will be made one or two Crossroads operating days after you submit your order.",
     empty_cart: "Your cart is empty.",
     find_items: "Find some items to request.",
-    unavailable_and_add_item_to_proceed:
-      "The items in your cart are no longer available. Please add more items in your cart before placing an order. Thank you!"
+    unavailable_and_add_item_to_proceed: "The items in your cart are no longer available. Please add more items in your cart before placing an order. Thank you!"
   },
 
   order: {
     flash_submit_message: "Order submitted successfully",
     flash_cancelled_message: "Order was cancelled",
     organisation: "Organisation",
-    order_delete_confirmation:
-      "This will delete all order information and cannot be undone.",
+    order_delete_confirmation: "This will delete all order information and cannot be undone.",
     representative: "Representative",
     purpose: "Purpose(s)",
     cancel_order: "Cancel Order",
@@ -394,24 +374,20 @@ export default {
     for_charity_sale: "For charity sale, bartering (any form of trade)",
     return_to_cart: "Return to cart",
     submit_this_order: "Submit this order",
-    limited_crossroads_opening_days_and_time:
-      "Limited to Crossroad's opening days/times.",
+    limited_crossroads_opening_days_and_time: "Limited to Crossroad's opening days/times.",
     continue_to_confirm_details: "Continue to confirm details",
     continue_to_transport_details: "Continue to transport details",
     hired_van: "Hired van delivery(GoGoVan)",
     self_vehicle: "Self vehicle",
-    order_detail_pop_up:
-      "Add items to your cart before submitting Order details.",
+    order_detail_pop_up: "Add items to your cart before submitting Order details.",
     transport_order_detail_pop_up: "You need to fill up Order details first",
-    transport_details_pop_up:
-      "Add items to your cart before submitting transport details.",
+    transport_details_pop_up: "Add items to your cart before submitting transport details.",
     numbers_warning: "Please enter 4 digit number.",
     transport_details: {
       title: "Transport Details",
       transport_method: "Transport method: ",
       collect_with_own_vehicle: "We will collect with our own vehicle(s)",
-      send_item_with_driver:
-        "We would like the items sent (recipient pays the driver)"
+      send_item_with_driver: "We would like the items sent (recipient pays the driver)"
     },
     vehicle: {
       collection_date_time: "Collection date / time",
@@ -442,8 +418,7 @@ export default {
       name_instruction: "As shown on identity document",
       name_warning: "You must enter your name here.",
       phone_number: "Clients contact phone number",
-      phone_number_instruction:
-        "We will use this number to confirm schedule and details.",
+      phone_number_instruction: "We will use this number to confirm schedule and details.",
       hk_id_instruction: {
         title: "Input the last 4 digits of the client's HKID",
         sub_title: "You do not need to include number in brackets"
@@ -470,8 +445,7 @@ export default {
     goods_details: {
       title: "Goods Details",
       info_1: "Please indicate type and quantity of each item needed.",
-      info_2:
-        "We regularly update the categories available based on the items we normally have in our stock. For unusual requirements not listed here please email",
+      info_2: "We regularly update the categories available based on the items we normally have in our stock. For unusual requirements not listed here please email",
       info_3: "and we will help if we can.",
       request_more: "Request more goods",
       type_label: "Goods type",
@@ -489,8 +463,7 @@ export default {
       self_vehicle: "Client will bring private vehicle",
       hire_vehicle: "Client needs information about hiring vehicle",
       confirm_labor: "Confirm understanding of labor requirements",
-      labor_info:
-        "If the request is too large for the client to carry alone, please advise them to bring their own labor to load at our end and unload at their end. Crossroads does not provide labor, and hired truck drivers do not provide loading services without charge.",
+      labor_info: "If the request is too large for the client to carry alone, please advise them to bring their own labor to load at our end and unload at their end. Crossroads does not provide labor, and hired truck drivers do not provide loading services without charge.",
       labor_confirmation: "I confirm understanding of labor requirements.",
       date: "Appointment Date",
       time: "Appointment Time"
@@ -498,27 +471,21 @@ export default {
     online_order: {
       preferred_date: "Preferred date",
       goods_limit: "We cannot reserve goods more than a few days.",
-      order_confirmation:
-        "We will confirm delivery/collection date before processing order.",
+      order_confirmation: "We will confirm delivery/collection date before processing order.",
       choose_date: "Choose from available dates",
       good_limit_dates: "We cannot reserve goods longer than the dates below.",
-      staff_contact:
-        "Our staff will confirm the collection/delivery time before processing the order.",
+      staff_contact: "Our staff will confirm the collection/delivery time before processing the order.",
       self_vehicle: "Recipient will collect from Crossroads",
-      hire_vehicle:
-        "Recipient would like the goods sent in a hired truck (Recipient pays the driver)",
-      labor_info:
-        "Crossroads' volunteers will help load goods into the vehicle but <u>we cannot provide labour for unloading</u>. Our staff will contact you to discuss this an confirm any charges that may be involved if hired labour will be required for unloading."
+      hire_vehicle: "Recipient would like the goods sent in a hired truck (Recipient pays the driver)",
+      labor_info: "Crossroads' volunteers will help load goods into the vehicle but <u>we cannot provide labour for unloading</u>. Our staff will contact you to discuss this an confirm any charges that may be involved if hired labour will be required for unloading."
     },
     booking_success: {
       success: "Success!",
       reference_number: "Reference Number",
       status: "Status",
       what_happen_after_booking: "What happens now?",
-      after_booking_info_1:
-        "Our staff will soon start checking the details and may contact you and/or beneficiery to clarify. If everything is okay then the order will be marked confirmed.",
-      after_booking_info_2:
-        "To see or modify your orders / appointments / preferences etc. visit your dashboard.",
+      after_booking_info_1: "Our staff will soon start checking the details and may contact you and/or beneficiery to clarify. If everything is okay then the order will be marked confirmed.",
+      after_booking_info_2: "To see or modify your orders / appointments / preferences etc. visit your dashboard.",
       visit_dashboard: "Go to your dashboard"
     },
     confirm_booking: {
@@ -552,13 +519,11 @@ export default {
         title: "Transport Details",
         transport: "Transport",
         labour: "Labour",
-        labour_info:
-          "Client understands labour requirements and can supply labour if needed.",
+        labour_info: "Client understands labour requirements and can supply labour if needed.",
         time: "Time"
       },
       submit_order: "Submit order",
-      info:
-        "Please review the information below and then submit.</br>If you need to change something, click 'back'."
+      info: "Please review the information below and then submit.</br>If you need to change something, click 'back'."
     }
   }
 };

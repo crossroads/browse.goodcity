@@ -141,12 +141,13 @@
                     </div>
                     <div class="row">
                       <div class="small-12 large-12 columns">
-                        {{numeric-input value=preferredContactNumber name="preferredContactNumber" id="preferred_contact" maxlength="8" pattern=".{8,}" autoFocus=true}}
+                        <label class="form-label">The contact number you would like us to reach you on.</label>
+                        {{numeric-input value=preferredContactNumber name="preferredContactNumber" id="preferred_contact" maxlength="8" pattern=".{8,}" autoFocus=true required='true'}}
                       </div>
                     </div>
                     <div class='row'>
                       <div class="small-12 columns input-error warning_empty">
-                        {{fa-icon "warning"}}&nbsp;&nbsp; Invalid contact number. Please enter 8 digits number.
+                        {{fa-icon "warning"}}&nbsp;&nbsp; You must provide a contact number
                       </div>
                     </div>
                     {{/form-control}}
