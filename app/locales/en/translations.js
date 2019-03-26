@@ -200,7 +200,7 @@ export default {
     no_sms: "Haven't received SMS code? Please wait a few minutes",
     please_wait: "Please wait...",
     resend: "Resend Code",
-    back_to_phone_number: "Back to phone number input"
+    back_to_phone_number: "Back to email/phone input"
   },
 
   _verification_pin: {

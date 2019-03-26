@@ -1,22 +1,22 @@
-import FactoryGuy from 'ember-data-factory-guy';
+import FactoryGuy from "ember-data-factory-guy";
 
-FactoryGuy.define('organisations_user', {
+FactoryGuy.define("organisations_user", {
   sequences: {
     id: function(num) {
       return num;
     },
     position: function(num) {
-      return 'position' + num;
+      return "position" + num;
     }
   },
 
   default: {
-    id: FactoryGuy.generate('id'),
-    position: FactoryGuy.generate('position'),
-    organisation:   FactoryGuy.belongsTo('organisation'),
-    user: FactoryGuy.belongsTo('user')
+    id: FactoryGuy.generate("id"),
+    position: FactoryGuy.generate("position"),
+    preferredContactNumber: "99999999",
+    organisation: FactoryGuy.belongsTo("organisation"),
+    user: FactoryGuy.belongsTo("user")
   }
 });
 
 export default {};
-

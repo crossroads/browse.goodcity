@@ -88,12 +88,19 @@ export default Ember.Controller.extend({
           address_type: null
         }
       };
-
-      new AjaxPromise("/auth/signup", "POST", null, {
-        user_auth: user_auth
-      })
+      new AjaxPromise(
+        "/auth/signup",
+        "POST",
+        _this.get("session.authToken"),
+        {
+          user_auth: user_auth
+        },
+        null,
+        _this.get("session.language")
+      )
         .then(data => {
           this.set("session.otpAuthKey", data.otp_auth_key);
+          this.set("session.loginPage", false);
           this.setProperties({
             pin: null
           });

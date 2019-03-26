@@ -195,7 +195,7 @@ export default {
     no_sms: "收不到短訊？",
     please_wait: "請稍候...",
     resend: "重新發送",
-    back_to_phone_number: "重新輸入電話號碼"
+    back_to_phone_number: "Back to email/phone input"
   },
 
   _verification_pin: {
