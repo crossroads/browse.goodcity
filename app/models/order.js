@@ -47,16 +47,13 @@ export default Model.extend({
     return this.get("bookingType.isOnlineOrder");
   }),
 
+  // only to show ordersPackages on confirmation screen
   orderItems: Ember.computed("ordersPackages.[]", function() {
     var items = [];
     this.get("ordersPackages").forEach(function(record) {
       if (record) {
         var pkg = record.get("package");
-        if (pkg && pkg.get("hasSiblingPackages")) {
-          items.push(pkg.get("item"));
-        } else {
-          items.push(pkg);
-        }
+        items.push(pkg);
       }
     });
     return items.uniq();
