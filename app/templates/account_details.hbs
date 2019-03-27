@@ -117,7 +117,7 @@
                   <div class="row">
                     {{#form-control}}
                     <div class="small-12 columns">
-                      <label class="form-label">Mobile Number</label>
+                      <label class="form-label">{{t 'account.mobile'}}</label>
                     </div>
                     <div class="row">
                       <div class="small-3 large-1 columns">
@@ -129,7 +129,7 @@
                     </div>
                     <div class='row'>
                       <div class="small-12 columns input-error warning_empty">
-                        {{fa-icon "warning"}}&nbsp;&nbsp; Invalid mobile number
+                        {{fa-icon "warning"}}&nbsp;&nbsp; {{t 'account.mobile_warning'}}
                       </div>
                     </div>
                     {{/form-control}}
@@ -137,17 +137,17 @@
                   <div class="row">
                     {{#form-control}}
                     <div class="small-12 columns">
-                      <label class="form-label">Preferred Contact Number</label>
+                      <label class="form-label">{{t 'account.preffered_contact_number'}}</label>
                     </div>
                     <div class="row">
                       <div class="small-12 large-12 columns">
-                        <label class="form-label">The contact number you would like us to reach you on.</label>
+                        <label class="form-label">{{t 'account.preffered_contact_label'}}</label>
                         {{numeric-input value=model.organisationsUser.preferredContactNumber name="preferredContactNumber" id="preferred_contact" maxlength="8" pattern=".{8,}" autoFocus=true required='true'}}
                       </div>
                     </div>
                     <div class='row'>
                       <div class="small-12 columns input-error warning_empty">
-                        {{fa-icon "warning"}}&nbsp;&nbsp; You must provide a contact number
+                        {{fa-icon "warning"}}&nbsp;&nbsp; {{t 'account.preffered_contact_warning'}}
                       </div>
                     </div>
                     {{/form-control}}

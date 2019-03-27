@@ -7,7 +7,8 @@ export default {
   ok: "確定",
   must_login: "請登入！",
   unexpected_error: "出錯了",
-  QuotaExceededError: "網站可能在瀏覽器的<b>私密瀏覽模式</b>下不能正常運作。請嘗試</br><ul><li><a href='http://www.apple.com/itunes/' style='color: black!important; background-color: #dee4eb !important;'>下載iOS 應用程式</a></li><li>使用瀏覽器的常規模式</li><li>使用Chrome 的私密瀏覽模式</li></ul>",
+  QuotaExceededError:
+    "網站可能在瀏覽器的<b>私密瀏覽模式</b>下不能正常運作。請嘗試</br><ul><li><a href='http://www.apple.com/itunes/' style='color: black!important; background-color: #dee4eb !important;'>下載iOS 應用程式</a></li><li>使用瀏覽器的常規模式</li><li>使用Chrome 的私密瀏覽模式</li></ul>",
   okay: "確定",
   show: "顯示",
   date: "日期",
@@ -69,15 +70,19 @@ export default {
   },
 
   home: {
-    introduction: "為香港的非牟利機構及社會福利組織或其服務對使用者提供優質的捐贈物品",
+    introduction:
+      "為香港的非牟利機構及社會福利組織或其服務對使用者提供優質的捐贈物品",
     faq_text: "受惠資格及常見問題",
     user_guide_title: "使用指南",
     tap_button: "立即開始",
     coming_soon: "即將面世",
     transport_options: "運輸選項",
-    collection_transport_description: "自行安排車輛於指定時間到國際十字路會提取物資",
-    van_transport_description: "國際十字路會安排租用貨車於指定時間將物資運送到受惠人或受惠機構地址",
-    van_transport_note: "請注意，貨車租用費需由受惠人或受惠機構承擔。除特殊情況外，我們一般不能提供免費運送物資服務。",
+    collection_transport_description:
+      "自行安排車輛於指定時間到國際十字路會提取物資",
+    van_transport_description:
+      "國際十字路會安排租用貨車於指定時間將物資運送到受惠人或受惠機構地址",
+    van_transport_note:
+      "請注意，貨車租用費需由受惠人或受惠機構承擔。除特殊情況外，我們一般不能提供免費運送物資服務。",
 
     order_goods: {
       title: "隨時瀏覽選取優質物資",
@@ -152,11 +157,12 @@ export default {
   login: {
     hk_only: "電話號碼（只限香港）",
     login: "登入",
-    sms_pincode: "我們將用訊息傳遞閣下的個人號碼以作安全性進入。 <br/> 如果閣下曾用此途徑進入，請用同一電話號碼",
+    sms_pincode:
+      "我們將用訊息傳遞閣下的個人號碼以作安全性進入。 <br/> 如果閣下曾用此途徑進入，請用同一電話號碼",
     smscode: "獲取短訊驗證碼",
     privacy: "我們不會使用分享你的資料，我們只會用於你的貨物申請",
     policy: "隱私政策",
-    mobile_email_warning: "Please provide either a valid Hong Kong mobile number or a valid email address"
+    mobile_email_warning: "請提供有效的香港流動電話號碼或有效的電郵地址"
   },
 
   account: {
@@ -169,6 +175,8 @@ export default {
     last: "姓",
     position: "職位",
     email: "電郵",
+    mobile: "流動電話號碼",
+    preffered_contact_number: "選取這聯絡號碼",
     work: "請使用工作地址",
     done: "完成",
     contact_us: "未能尋找你的機構？請聯絡我們尋求協助。",
@@ -177,7 +185,10 @@ export default {
     first_name_warning: "請輸入名字",
     last_name_warning: "請輸入姓氏",
     position_warning: "請輸入職位",
+    mobile_warning: "無效的流動電話號碼",
     email_warning: "請輸入有效的電子郵件地址",
+    preffered_contact_label: "請提供我們可聯絡您的電話號碼。",
+    preffered_contact_warning: "閣下需要提供聯絡號碼",
     user_info: "用戶資料不齊",
     user_title: {
       mr: "先生",
@@ -195,7 +206,7 @@ export default {
     no_sms: "收不到短訊？",
     please_wait: "請稍候...",
     resend: "重新發送",
-    back_to_phone_number: "Back to email/phone input"
+    back_to_phone_number: "返回電郵或電話輸入"
   },
 
   _verification_pin: {
@@ -218,7 +229,8 @@ export default {
       longer_goods: "貨物長於6尺（183厘米)",
       longer_goods_6ft: "貨物長於6尺（183厘米） +$10",
       longer_goods_6ft_tall: "貨物長於6尺（183厘米）和高於2尺（60厘米）+$20",
-      extra_time_charge: "附加時間（首15分鐘的上貨時間是免費的，超時會有額外收費。）",
+      extra_time_charge:
+        "附加時間（首15分鐘的上貨時間是免費的，超時會有額外收費。）",
       date: "日期",
       time: "時間",
       am: "上午",
@@ -298,9 +310,11 @@ export default {
         draft: "訂單並未提交。您仍然可以修改訂單。",
         submitted: "為了獲得更詳細資料，我們的職員可能會與你或受惠人聯絡。",
         dispatching: "貨物在運送途中。",
-        processing: "我們的職員正在處理您的訂單。他們可能會與您聯絡已獲得更多信息。如果一切正常，他們將安排您的貨品發貨。",
+        processing:
+          "我們的職員正在處理您的訂單。他們可能會與您聯絡已獲得更多信息。如果一切正常，他們將安排您的貨品發貨。",
         awaiting_dispatch: "您的訂單已安排發貨。 一旦發貨，此頁面便會更新。 ",
-        closed: "此訂單已完成，所有貨物已成功發貨。如有任何其他申請，請提交另一訂單。",
+        closed:
+          "此訂單已完成，所有貨物已成功發貨。如有任何其他申請，請提交另一訂單。",
         cancelled: "取消"
       },
       types: {
@@ -329,7 +343,8 @@ export default {
     notice: "成功申請的物資將於一至兩個十字路會工作天内送達。",
     empty_cart: "您的購物車是空的。",
     find_items: "尋找合適的物資。",
-    unavailable_and_add_item_to_proceed: "這件物資已不存在。下訂單前請在購物車中添加新的物資。"
+    unavailable_and_add_item_to_proceed:
+      "這件物資已不存在。下訂單前請在購物車中添加新的物資。"
   },
 
   order: {
@@ -425,7 +440,8 @@ export default {
     goods_details: {
       title: "貨物詳情",
       info_1: "請指出所需每件貨物的類型和數量。",
-      info_2: "我們會根據庫存常有的項目定期更新可用類別。 有關此處未列出的特殊類別要求，請發送電子郵件至local@crossroads.org.hk。我們會盡力提供幫助。",
+      info_2:
+        "我們會根據庫存常有的項目定期更新可用類別。 有關此處未列出的特殊類別要求，請發送電子郵件至local@crossroads.org.hk。我們會盡力提供幫助。",
       request_more: "申請更多貨物",
       type_label: "貨物類型",
       quantity_label: "數量",
@@ -442,7 +458,8 @@ export default {
       self_vehicle: "服務對象將自攜帶車輛",
       hire_vehicle: "服務對象需要有關僱用車輛的信息",
       confirm_labor: "確認理解搬運需要",
-      labor_info: "如果貨物太大而服務對象無法獨自搬運，請建議他們安排搬運卸載的人手。抱歉，國際十字路會不提供搬運，而僱用的貨車司機亦不提供免費的搬運服務。",
+      labor_info:
+        "如果貨物太大而服務對象無法獨自搬運，請建議他們安排搬運卸載的人手。抱歉，國際十字路會不提供搬運，而僱用的貨車司機亦不提供免費的搬運服務。",
       labor_confirmation: "我確認理解搬運需要。",
       date: " 預約日期",
       time: "預約日"
@@ -456,14 +473,16 @@ export default {
       staff_contact: "處理這指令前我們的職員將會確定收貨或送貨時間.",
       self_vehicle: "接收者會從國際十字路會接收",
       hire_vehicle: "接收者會僱用貨車運貨（接收者會付款給貨車司機）",
-      labor_info: "國際十字路會義工會幫忙上貨於車輛內,但不會幫忙落貨.我們的職員將會接觸閣下去討論及確定有關僱用工人去處理落貨的費用事宜."
+      labor_info:
+        "國際十字路會義工會幫忙上貨於車輛內,但不會幫忙落貨.我們的職員將會接觸閣下去討論及確定有關僱用工人去處理落貨的費用事宜."
     },
     booking_success: {
       success: "成功！",
       reference_number: "參考編號",
       status: "狀態",
       what_happen_after_booking: "現在發生了什麼事情？",
-      after_booking_info_1: "我們的職員正在處理您的訂單。他們可能會與您聯絡已獲得更多信息。如果一切正常，您的訂單將被標記為已確認。",
+      after_booking_info_1:
+        "我們的職員正在處理您的訂單。他們可能會與您聯絡已獲得更多信息。如果一切正常，您的訂單將被標記為已確認。",
       after_booking_info_2: "請到您的操控板查看或修改訂單/預約/偏好等",
       visit_dashboard: "進入您的操控板"
     },
