@@ -13,6 +13,7 @@ export default Ember.Controller.extend({
   organisationId: Ember.computed.alias("model.organisation.id"),
   organisationsUserId: Ember.computed.alias("model.organisationsUser.id"),
   position: "",
+  email: "",
   bookAppointment: false,
   preferredContactNumber: "",
   isMobileApp: config.cordova.enabled,
@@ -92,7 +93,8 @@ export default Ember.Controller.extend({
     var position = organisationsUserId
       ? this.get("model.organisationsUser.position")
       : this.get("position");
-    let preferredNumber = this.get("preferredContactNumber") || Ember.$('#preferred_contact').val();
+    let preferredNumber =
+      this.get("preferredContactNumber") || Ember.$("#preferred_contact").val();
     var title = this.get("selectedTitle.id");
     var params = {
       organisation_id: this.get("organisationId"),
