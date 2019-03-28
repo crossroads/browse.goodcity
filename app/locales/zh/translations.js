@@ -162,7 +162,7 @@ export default {
     smscode: "獲取短訊驗證碼",
     privacy: "我們不會使用分享你的資料，我們只會用於你的貨物申請",
     policy: "隱私政策",
-    mobile_warning: "請提供有效的香港電話號碼"
+    mobile_email_warning: "請提供有效的香港流動電話號碼或有效的電郵地址"
   },
 
   account: {
@@ -175,6 +175,8 @@ export default {
     last: "姓",
     position: "職位",
     email: "電郵",
+    mobile: "流動電話號碼",
+    preffered_contact_number: "選取這聯絡號碼",
     work: "請使用工作地址",
     done: "完成",
     contact_us: "未能尋找你的機構？請聯絡我們尋求協助。",
@@ -183,7 +185,10 @@ export default {
     first_name_warning: "請輸入名字",
     last_name_warning: "請輸入姓氏",
     position_warning: "請輸入職位",
+    mobile_warning: "無效的流動電話號碼",
     email_warning: "請輸入有效的電子郵件地址",
+    preffered_contact_label: "請提供我們可聯絡您的電話號碼。",
+    preffered_contact_warning: "閣下需要提供聯絡號碼",
     user_info: "用戶資料不齊",
     user_title: {
       mr: "先生",
@@ -201,7 +206,7 @@ export default {
     no_sms: "收不到短訊？",
     please_wait: "請稍候...",
     resend: "重新發送",
-    back_to_phone_number: "重新輸入電話號碼"
+    back_to_phone_number: "返回電郵或電話輸入"
   },
 
   _verification_pin: {

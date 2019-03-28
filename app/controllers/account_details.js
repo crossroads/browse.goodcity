@@ -14,6 +14,7 @@ export default Ember.Controller.extend({
   organisationsUserId: Ember.computed.alias("model.organisationsUser.id"),
   position: "",
   bookAppointment: false,
+  preferredContactNumber: "",
   isMobileApp: config.cordova.enabled,
 
   userTitle: Ember.computed("model", function() {
@@ -22,13 +23,22 @@ export default Ember.Controller.extend({
 
     if (userTitle) {
       let filteredUserTitle = titles.filter(title => userTitle === title.id);
-      return { name: filteredUserTitle[0].name.string, id: userTitle };
+      return {
+        name: filteredUserTitle[0].name.string,
+        id: userTitle
+      };
     }
-    return { name: titles.get("firstObject.name").string, id: "Mr" };
+    return {
+      name: titles.get("firstObject.name").string,
+      id: "Mr"
+    };
   }),
 
   selectedTitle: Ember.computed("userTitle", function() {
-    return { name: this.get("userTitle.name"), id: this.get("userTitle.id") };
+    return {
+      name: this.get("userTitle.name"),
+      id: this.get("userTitle.id")
+    };
   }),
 
   titles: Ember.computed(function() {
@@ -39,10 +49,22 @@ export default Ember.Controller.extend({
     let ms = translation.t("account.user_title.ms");
 
     return [
-      { name: mr, id: "Mr" },
-      { name: mrs, id: "Mrs" },
-      { name: miss, id: "Miss" },
-      { name: ms, id: "Ms" }
+      {
+        name: mr,
+        id: "Mr"
+      },
+      {
+        name: mrs,
+        id: "Mrs"
+      },
+      {
+        name: miss,
+        id: "Miss"
+      },
+      {
+        name: ms,
+        id: "Ms"
+      }
     ];
   }),
 
@@ -74,6 +96,7 @@ export default Ember.Controller.extend({
     var params = {
       organisation_id: this.get("organisationId"),
       position: position,
+      preferred_contact_number: this.get("preferredContactNumber"),
       user_attributes: {
         first_name: user.get("firstName"),
         last_name: user.get("lastName"),

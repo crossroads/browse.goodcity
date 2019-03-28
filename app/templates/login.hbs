@@ -13,45 +13,45 @@
       </nav>
 
       {{#unless cart.isEmpty}}
-        {{small-cart-toggle-view}}
+      {{small-cart-toggle-view}}
       {{/unless}}
 
       {{#validatable-form onSubmit=(action 'resendPin') as |form|}}
-        <div class="row">
-          <div class="small-12 columns">
-            <div class="mobile center_align">
-              <div class="row">
-                <div class="small-12 columns">
-                  <label class="form-label">{{t "login.hk_only"}}</label>
-                </div>
-                <div class="small-12 columns">
-                  <label class="form-label">{{t "login.sms_pincode"}}</label>
-                </div>
-              </div>
-
-              <div class="row">
-                {{#form-control}}
-                  <div class="small-12 medium-8 columns">
-                    <span class="prefix">+852</span>
-                    {{numeric-input classNames="number_input" value=mobilePhone name="mobilePhone" id="mobile" maxlength="8" required=true pattern=".{8,}" autoFocus=true}}
-                    <div class="small-12 columns input-error warning_empty login">
-                      {{fa-icon "warning"}}&nbsp;&nbsp;{{t "login.mobile_warning"}}
-                    </div>
-                  </div>
-                {{/form-control}}
-              </div>
-
-              <div class="row collapse">
-                <div class="small-12 medium-8 columns">
-                  <button id="getsmscode" class="button expand expand_button" {{action 'submit' target=form}}>{{t "login.smscode"}}</button>
-                </div>
+      <div class="row">
+        <div class="small-12 columns">
+          <div class="mobile center_align">
+            <div class="row">
+              <div class="small-12 columns">
+                <label class="form-label">{{t "login.hk_only"}}</label>
               </div>
               <div class="small-12 columns">
-                <label class="form-label">{{t "login.privacy"}}<a href="">{{t "login.policy"}}</a></label>
+                <label class="form-label">{{t "login.sms_pincode"}}</label>
               </div>
+            </div>
+
+            <div class="row">
+              {{#form-control}}
+              <div class="small-12 medium-8 columns">
+                {{input value=mobileOrEmail classNames="number_input center_align_placeholder" id="mobile" type=text pattern="^([569]\d{7})|([^@\s]+@[^@\s]+)$" required='true'}}
+                <div class="small-12 columns input-error warning_empty login">
+                  {{fa-icon "warning"}}&nbsp;&nbsp;{{t "login.mobile_email_warning"}}
+                </div>
+              </div>
+              {{/form-control}}
+            </div>
+
+            <div class="row collapse">
+              <div class="small-12 medium-8 columns">
+                <button id="getsmscode" class="button expand expand_button"
+                  {{action 'submit' target=form}}>{{t "login.smscode"}}</button>
+              </div>
+            </div>
+            <div class="small-12 columns">
+              <label class="form-label">{{t "login.privacy"}}<a href="">{{t "login.policy"}}</a></label>
             </div>
           </div>
         </div>
+      </div>
       {{/validatable-form}}
 
     </section>

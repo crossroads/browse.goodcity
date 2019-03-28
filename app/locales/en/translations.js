@@ -172,7 +172,8 @@ export default {
     privacy:
       "We don't share your data. We only use it to complete your goods request(s). See our ",
     policy: "Privacy Policy.",
-    mobile_warning: "Please provide a valid Hong Kong mobile number"
+    mobile_email_warning:
+      "Please provide either a valid Hong Kong mobile number or a valid email address"
   },
 
   account: {
@@ -185,6 +186,8 @@ export default {
     last: "Your Family Name",
     position: "Position",
     email: "Email address",
+    mobile: "Mobile Number",
+    preffered_contact_number: "Preferred Contact Number",
     work: "Please use your work address",
     done: "Done",
     contact_us:
@@ -195,6 +198,10 @@ export default {
     last_name_warning: "Add Last Name",
     position_warning: "Add Position",
     email_warning: "Add valid E-mail",
+    mobile_warning: "Invalid mobile number",
+    preffered_contact_label:
+      "The contact number you would like us to reach you on.",
+    preffered_contact_warning: "You must provide a contact number",
     user_info: "User Information is incomplete",
     user_title: {
       mr: "Mr",
@@ -212,7 +219,7 @@ export default {
     no_sms: "Haven't received SMS code? Please wait a few minutes",
     please_wait: "Please wait...",
     resend: "Resend Code",
-    back_to_phone_number: "Back to phone number input"
+    back_to_phone_number: "Back to email/phone input"
   },
 
   _verification_pin: {
