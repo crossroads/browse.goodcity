@@ -125,7 +125,7 @@
                       </div>
                       <div class="small-9 large-11 columns">
                         {{#if model.user.mobile}}
-                        {{numeric-input value=model.user.mobile name="mobilePhone" id="mobile" maxlength="8" pattern="^.{8}$" autoFocus=true}}
+                        {{numeric-input value=model.user.mobileWithoutCountryCode name="mobilePhone" id="mobile" maxlength="8" pattern="^.{8}$" autoFocus=true}}
                         {{else}}
                         {{numeric-input value=mobilePhone name="mobilePhone" id="mobile" maxlength="8" pattern="^.{8}$" autoFocus=true}}
                         {{/if}}
