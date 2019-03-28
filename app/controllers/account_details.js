@@ -103,7 +103,7 @@ export default Ember.Controller.extend({
       user_attributes: {
         first_name: user.get("firstName"),
         last_name: user.get("lastName"),
-        mobile: "+852" + user.get("mobile"),
+        mobile: user.get("mobile"),
         email: user.get("email"),
         title: title
       }
