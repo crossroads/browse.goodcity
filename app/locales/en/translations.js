@@ -164,9 +164,9 @@ export default {
   },
 
   login: {
-    hk_only: "Mobile phone (Hong Kong only)",
-    sms_pincode:
-      "We SMS you pin code for secure access <br/> Been here before? Please use the same phone number",
+    hk_mobile_or_email_only: "Mobile phone (Hong Kong only)/ Email Address",
+    sms_email_pincode:
+      "We SMS/EMAIL you pin code for secure access. Been here before? Please use the same phone number or email address.",
     login: "Login",
     smscode: "Get 4-digit SMS code",
     privacy:
