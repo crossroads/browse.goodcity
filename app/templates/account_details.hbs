@@ -142,7 +142,11 @@
                     <div class="row">
                       <div class="small-12 large-12 columns">
                         <label class="form-label">{{t 'account.preffered_contact_label'}}</label>
-                        {{numeric-input value=model.organisationsUser.preferredContactNumber name="preferredContactNumber" id="preferred_contact" maxlength="8" pattern=".{8,}" autoFocus=true required='true'}}
+                        {{#if (is-and model.organisationsUser model.organisationsUser.preferredContactNumber)}}
+                          {{numeric-input value=model.organisationsUser.preferredContactNumber name="preferredContactNumber" id="preferred_contact" maxlength="8" pattern=".{8,}" autoFocus=true required='true'}}
+                        {{else}}
+                          {{numeric-input value="" name="preferredContactNumber" id="preferred_contact" maxlength="8" pattern=".{8,}" autoFocus=true required='true'}}
+                        {{/if}}
                       </div>
                     </div>
                     <div class='row'>
