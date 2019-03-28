@@ -58,6 +58,7 @@ function pluralize(name) {
 }
 
 module("Acceptance | My Orders Page", {
+  needs: ["service:subscription"],
   beforeEach: function() {
     App = startApp();
     pkgType = make("package_type_with_packages");
@@ -168,6 +169,7 @@ test("should redirect to my orders page", function(assert) {
   andThen(function() {
     assert.equal(currentURL(), "/my_orders");
     assert.equal(currentPath(), "my_orders");
+    assert.equal(Ember.$(".my_orders .title").text(), "My Orders");
   });
 });
 

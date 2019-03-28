@@ -20,6 +20,7 @@ var App,
   userRole;
 
 module("Acceptance | Account Details Page", {
+  needs: ["service:subscription"],
   beforeEach: function() {
     App = startApp();
     user = make("user");
@@ -275,7 +276,6 @@ test("After saving user details user gets redirected to browse page", function(a
   });
 
   visit("/account_details");
-
   andThen(function() {
     click(".expand_button");
   });
