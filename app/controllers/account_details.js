@@ -92,11 +92,12 @@ export default Ember.Controller.extend({
     var position = organisationsUserId
       ? this.get("model.organisationsUser.position")
       : this.get("position");
+    let preferredNumber = this.get("preferredContactNumber") || Ember.$('#preferred_contact').val();
     var title = this.get("selectedTitle.id");
     var params = {
       organisation_id: this.get("organisationId"),
       position: position,
-      preferred_contact_number: this.get("preferredContactNumber"),
+      preferred_contact_number: preferredNumber,
       user_attributes: {
         first_name: user.get("firstName"),
         last_name: user.get("lastName"),
