@@ -10,6 +10,7 @@ const Service = ArrayProxy.extend({
   subscription: Ember.inject.service(),
 
   init() {
+    this._super(...arguments);
     this.get("subscription").on("change:package", this, this.onPackageUpdate);
   },
 
