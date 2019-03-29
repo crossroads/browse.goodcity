@@ -5,7 +5,7 @@ import config from "../config/environment";
 
 export default Ember.Controller.extend({
   showCancelBookingPopUp: false,
-  queryParams: ["orgId", "bookAppointment"],
+  queryParams: ["orgId", "bookAppointment", "onlineOrder"],
 
   authenticate: Ember.inject.controller(),
   messageBox: Ember.inject.service(),
@@ -15,6 +15,7 @@ export default Ember.Controller.extend({
   position: "",
   email: "",
   bookAppointment: false,
+  onlineOrder: false,
   preferredContactNumber: "",
   isMobileApp: config.cordova.enabled,
 
@@ -70,6 +71,7 @@ export default Ember.Controller.extend({
   }),
 
   redirectToTransitionOrBrowse(bookAppointment) {
+    let onlineOrder = this.get("onlineOrder");
     var attemptedTransition = this.get("authenticate").get(
       "attemptedTransition"
     );
@@ -77,6 +79,12 @@ export default Ember.Controller.extend({
       this.transitionToRoute("request_purpose", {
         queryParams: {
           bookAppointment: true
+        }
+      });
+    } else if (onlineOrder) {
+      this.transitionToRoute("request_purpose", {
+        queryParams: {
+          bookAppointment: false
         }
       });
     } else if (attemptedTransition) {

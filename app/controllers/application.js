@@ -62,6 +62,46 @@ export default Ember.Controller.extend({
     UNLOAD_MODELS.forEach(model => this.store.unloadAll(model));
   },
 
+  accountDetailsComplete() {
+    const user = this.get("session.currentUser");
+    if (!user) {
+      return false;
+    }
+
+    const organisationsUser = user.get("organisationsUsers.firstObject");
+    const organisation =
+      organisationsUser && organisationsUser.get("organisation");
+    const hasInfoAndCharityRole =
+      user.get("isInfoComplete") && user.hasRole("Charity");
+    const hasCompleteOrganisationUserInfo =
+      organisationsUser && organisationsUser.get("isInfoComplete");
+
+    return (
+      hasInfoAndCharityRole && organisation && hasCompleteOrganisationUserInfo
+    );
+  },
+
+  submitCart() {
+    this.set("showCartDetailSidebar", false);
+    var cartHasItems = this.get("cart.cartItems").length;
+    if (cartHasItems > 0) {
+      this.get("cart").set("checkout", true);
+      this.transitionToRoute("request_purpose", {
+        queryParams: {
+          bookAppointment: false
+        }
+      });
+    } else {
+      this.get("messageBox").alert(
+        this.get("i18n").t("cart_content.unavailable_and_add_item_to_proceed"),
+        () => {
+          this.get("cart").clearItems();
+          this.set("displayCart", false);
+        }
+      );
+    }
+  },
+
   actions: {
     cancelOrderPopUp(orderId) {
       this.get("messageBox").custom(
@@ -161,23 +201,16 @@ export default Ember.Controller.extend({
     },
 
     checkout() {
-      this.set("showCartDetailSidebar", false);
-      var cartHasItems = this.get("cart.cartItems").length;
-      if (cartHasItems > 0) {
-        this.get("cart").set("checkout", true);
-        this.transitionToRoute("request_purpose", {
-          queryParams: { bookAppointment: false }
-        });
+      if (this.accountDetailsComplete()) {
+        this.submitCart();
       } else {
-        this.get("messageBox").alert(
-          this.get("i18n").t(
-            "cart_content.unavailable_and_add_item_to_proceed"
-          ),
-          () => {
-            this.get("cart").clearItems();
-            this.set("displayCart", false);
+        this.set("showCartDetailSidebar", false);
+        this.transitionToRoute("account_details", {
+          queryParams: {
+            onlineOrder: true,
+            bookAppointment: false
           }
-        );
+        });
       }
     },
 
