@@ -4,7 +4,7 @@
   }
 }
 
-.warning_empty{
+.warning_empty {
   padding-left: 1rem !important;
   padding-top: .4rem !important;
   padding-bottom: .1rem;
@@ -16,14 +16,14 @@
 }
 
 input:-webkit-autofill {
-    -webkit-box-shadow: 0 0 0 30px #002352 inset;
+  -webkit-box-shadow: 0 0 0 30px #002352 inset;
 }
 
 input:-webkit-autofill {
-    -webkit-text-fill-color: white !important;
+  -webkit-text-fill-color: white !important;
 }
 
-.number_input{
+.number_input {
   background: #002352;
   color: white !important;
   border: 1px solid;
@@ -54,17 +54,22 @@ input:-webkit-autofill {
     padding: 2rem 1.5rem 2rem 2rem;
     background-color: #1A3964;
     font-size: 0.9rem;
-    width: 95%!important;
+    width: 95% !important;
+
     @media #{$small-only} {
-      margin:0 0 0 0.4rem !important;
+      margin: 0 0 0 0.4rem !important;
       font-size: 0.8rem;
       padding: 1.5rem 0.5rem 1.5rem 1.5rem;
-      width: 93.5%!important;
+      width: 93.5% !important;
     }
-    .detail{
-      .name, div {
+
+    .detail {
+
+      .name,
+      div {
         cursor: default;
       }
+
       .name {
         padding-bottom: .5rem;
         font-weight: bold;
@@ -76,6 +81,7 @@ input:-webkit-autofill {
   .tab-bar {
     width: 96.5% !important;
     margin-top: 3rem;
+
     @media #{$small-only} {
       margin-top: 1rem;
     }
@@ -119,7 +125,7 @@ input:-webkit-autofill {
     }
   }
 
-  .remove-text{
+  .remove-text {
     position: absolute;
     right: 4%;
     font-size: 1rem;
@@ -128,6 +134,7 @@ input:-webkit-autofill {
     color: black;
   }
 }
+
 .order_button {
   width: 99% !important;
 
@@ -172,12 +179,8 @@ input:-webkit-autofill {
   }
 
   input {
-    &#mobile {
-      padding-left: 4rem;
-    }
-
     font-size: 1rem;
-    color: black;
+    color: white;
   }
 
   label.form-label {
@@ -199,9 +202,10 @@ input:-webkit-autofill {
   }
 }
 
-.center_align{
-    margin-left: 20%;
-    @media #{$small-only} {
+.center_align {
+  margin-left: 20%;
+
+  @media #{$small-only} {
     margin-left: 0%;
     width: 96.5% !important;
   }

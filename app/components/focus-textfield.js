@@ -2,15 +2,19 @@ import Ember from "ember";
 
 export default Ember.TextField.extend({
   tagName: "input",
-  type:    "text",
+  type: "text",
   maxlength: "25",
-  attributeBindings: [ "name", "id", "value", 'placeholder'],
+  attributeBindings: ["name", "id", "value", "placeholder"],
 
   triggerAutofocus: Ember.observer("value", function() {
-    if (this.get('value').length === 0) {
+    if (this.get("value").length === 0) {
       this.$().focus();
     }
   }),
+
+  didInsertElement() {
+    this.$().focus();
+  },
 
   scrollToStart() {
     Ember.$(".fixed_search_header").addClass("absolute");
@@ -20,8 +24,8 @@ export default Ember.TextField.extend({
     document.body.scrollTop = document.documentElement.scrollTop = 0;
   },
 
-  focusOut(){
-    if(this.get("hasFixedInputHeader")) {
+  focusOut() {
+    if (this.get("hasFixedInputHeader")) {
       Ember.$(".fixed_search_header").removeClass("absolute");
       Ember.$(".footer").removeClass("absolute_footer");
       Ember.$(".search").removeClass("no-padding");
@@ -29,8 +33,8 @@ export default Ember.TextField.extend({
   },
 
   willDestroyElement() {
-    if(this.get("hasFixedInputHeader")) {
-      this.element.addEventListener('touchstart', this.scrollToStart);
+    if (this.get("hasFixedInputHeader")) {
+      this.element.addEventListener("touchstart", this.scrollToStart);
     }
   }
 });

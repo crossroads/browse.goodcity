@@ -22,18 +22,22 @@
     display: none;
     padding-bottom: 0.25rem !important;
     width: 98.7%;
+    float: left !important;
 
     @media #{$small-only} {
       font-size: 0.65rem;
       margin-left: 0.3rem;
       width: 98%;
-      float: left !important;
     }
 
     @media #{$medium-only} {
-      float: left !important;
       width: 98% !important;
       margin-left: 0.25rem;
+    }
+
+    @media #{$large-only} {
+      width: 98.3%;
+      margin-left: 0.6rem;
     }
   }
 
