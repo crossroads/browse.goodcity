@@ -16,7 +16,9 @@
         <br>
         <div class="row time_inputs id-type-radio-input" >
           <div class=" custom_radio_buttons small-12 columns booking-success" align="center" for="For HKID">
-            {{model.code}}
+            <div class="booking-success-state">
+              {{model.code}}
+            </div>
           </div>
         </div>
 
@@ -27,10 +29,10 @@
 
         <div class="row time_inputs id-type-radio-input" >
           <div class=" custom_radio_buttons small-12 columns booking-success success-submit" align="center" for="For HKID">
-            <span>
-              <span><i class="fa fa-envelope-o" aria-hidden="true"></i></span>
-              <span submit-state>{{model.state}}</span>
-            </span>
+            <div class="booking-success-state">
+              <span><i class="fa fa-envelope" aria-hidden="true"></i></span>
+              <span class="submit-state">{{model.state}}</span>
+            </div>
           </div>
         </div>
 
