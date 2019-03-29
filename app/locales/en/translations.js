@@ -449,6 +449,7 @@ export default {
       name_instruction: "As shown on identity document",
       name_warning: "You must enter your name here.",
       phone_number: "Clients contact phone number",
+      for_client: "Is this order place on behalf of a client ?",
       phone_number_instruction:
         "We will use this number to confirm schedule and details.",
       hk_id_instruction: {
