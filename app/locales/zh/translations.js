@@ -413,7 +413,7 @@ export default {
       name_instruction: "在身份證明文件中顯示",
       name_warning: "您必須在此輸入您的名稱。",
       phone_number: "服務對象的聯絡電話號碼",
-      for_client: "Is this order place on behalf of a client ?",
+      for_client: "Is this order bieng placed on behalf of a client?",
       phone_number_instruction: "我們將會用此號碼確認行程和資料。",
       hk_id_instruction: {
         title: "請輸入服務對象香港身份證最後的四個數字。",
