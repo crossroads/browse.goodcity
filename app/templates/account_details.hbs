@@ -103,7 +103,11 @@
                       <label class="form-label">{{t "account.email"}}</label>
                       <label class="form-label">{{t "account.work"}}</label>
                       {{#if model.user.email}}
-                      {{input value=email value=model.user.email classNames="number_input center_align_placeholder" id="email" type="email" required='true' disabled='true'}}
+                        <div>{{model.user.email}}
+                          <span class="verified_icon">
+                            {{fa-icon (if model.user.isEmailVerified "check-circle-o" "")}}<span class="verified_text">verified</span>
+                          </span>
+                        </div>
                       {{else}}
                       {{input value=email value=email classNames="number_input center_align_placeholder" id="email" type="email" required='true'}}
                       {{/if}}
@@ -120,16 +124,21 @@
                       <label class="form-label">{{t 'account.mobile'}}</label>
                     </div>
                     <div class="row">
-                      <div class="small-2 large-1 columns">
-                        <span class="prefix">+852</span>
-                      </div>
-                      <div class="small-10 large-11 columns">
-                        {{#if model.user.mobile}}
-                        {{numeric-input value=model.user.mobileWithoutCountryCode name="mobilePhone" id="mobile" maxlength="8" pattern="^.{8}$" autoFocus=true}}
-                        {{else}}
-                        {{numeric-input value=mobilePhone name="mobilePhone" id="mobile" maxlength="8" pattern="^.{8}$" autoFocus=true}}
-                        {{/if}}
-                      </div>
+                      {{#if model.user.mobile}}
+                        <div class="small-10 large-11 columns">
+                          {{model.user.mobile}}
+                          <span class="verified_icon">
+                            {{fa-icon (if model.user.isMobileVerified "check-circle-o" "")}}<span class="verified_text">verified</span>
+                          </span>
+                        </div>
+                      {{else}}
+                        <div class="small-2 large-1 columns">
+                          <span class="prefix">+852</span>
+                        </div>
+                        <div class="small-10 large-11 columns">
+                          {{numeric-input value=mobilePhone name="mobilePhone" id="mobile" maxlength="8" pattern="^.{8}$" autoFocus=true}}
+                        </div>
+                      {{/if}}
                     </div>
                     <div class='row'>
                       <div class="small-12 columns input-error warning_empty">
