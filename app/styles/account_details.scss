@@ -246,9 +246,9 @@
 }
 
 .verified_icon{
-  margin-left: 5%;
+  float: left !important;
   .verified_text {
     margin: 5%;
-    font-size: 0.7em;
+    font-size: 0.8em;
   }
 }

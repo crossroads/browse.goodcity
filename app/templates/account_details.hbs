@@ -103,10 +103,18 @@
                       <label class="form-label">{{t "account.email"}}</label>
                       <label class="form-label">{{t "account.work"}}</label>
                       {{#if model.user.email}}
-                        <div>{{model.user.email}}
-                          <span class="verified_icon">
-                            {{fa-icon (if model.user.isEmailVerified "check-circle-o" "")}}<span class="verified_text">verified</span>
-                          </span>
+                        <div class="row">
+                          <div class="small-5 columns email-disabled">
+                            {{model.user.email}}
+                          </div>
+                          {{#if model.user.isEmailVerified}}
+                            <div class="small-3 columns verified_icon">
+                              <span>
+                                {{fa-icon "check-circle-o"}}
+                                <span class="verified_text">verified</span>
+                              </span>
+                            </div>
+                          {{/if}}
                         </div>
                       {{else}}
                       {{input value=email value=email classNames="number_input center_align_placeholder" id="email" type="email" required='true'}}
@@ -125,12 +133,17 @@
                     </div>
                     <div class="row">
                       {{#if model.user.mobile}}
-                        <div class="small-10 large-11 columns">
+                        <div class="small-5 columns mobile-disabled">
                           {{model.user.mobile}}
-                          <span class="verified_icon">
-                            {{fa-icon (if model.user.isMobileVerified "check-circle-o" "")}}<span class="verified_text">verified</span>
-                          </span>
                         </div>
+                        {{#if model.user.isMobileVerified}}
+                          <div class="small-3 columns verified_icon">
+                            <span>
+                              {{fa-icon "check-circle-o"}}
+                              <span class="verified_text">verified</span>
+                            </span>
+                          </div>
+                        {{/if}}
                       {{else}}
                         <div class="small-2 large-1 columns">
                           <span class="prefix">+852</span>
