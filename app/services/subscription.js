@@ -194,14 +194,12 @@ export default Ember.Service.extend(Ember.Evented, {
     return false;
   },
 
-  async applyUpdateStrategy(record, type, sender) {
+  applyUpdateStrategy(record, type, sender) {
     const store = this.get("store");
     const { strategy } = this.getStrategy(type);
-
-    const fns = _.flatten([strategy]);
-    for (let fn of fns) {
-      await fn(store, type, record, sender);
-    }
+    const tasks = _.flatten([strategy]);
+    const promises = tasks.map(fn => fn(store, type, record, sender));
+    return Ember.RSVP.all(promises);
   },
 
   // -----------
@@ -236,17 +234,18 @@ export default Ember.Service.extend(Ember.Evented, {
     this.get("store").findAll("item");
   },
 
-  async update_store(data, success) {
+  update_store(data, success) {
     if (this.isUnhandled(data)) {
       return false;
     }
 
     let { record, operation, deviceId, type, sender } = this.parseData(data);
+    let task = Ember.RSVP.resolve(true);
 
     switch (operation) {
       case "create":
       case "update":
-        await this.applyUpdateStrategy(record, type, sender);
+        task = this.applyUpdateStrategy(record, type, sender);
         break;
       case "delete":
         let existingItem = this.get("store").peekRecord(type, record.id);
@@ -258,8 +257,11 @@ export default Ember.Service.extend(Ember.Evented, {
         console.error(`[Subscription] Unsupported operation '${operation}'`);
         return false;
     }
-    this.trigger(`change:${type}`, { type, operation, record });
-    run(success);
+
+    task.then(() => {
+      this.trigger(`change:${type}`, { type, operation, record });
+      run(success);
+    });
     return true;
   }
 });
