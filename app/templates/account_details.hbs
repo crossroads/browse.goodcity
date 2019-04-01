@@ -116,23 +116,26 @@
                         </div>
                         {{/if}}
                       </div>
-                      {{else}}
-                      {{input value=email value=email classNames="number_input center_align_placeholder" id="email" type="email" required='true'}}
                       {{/if}}
                     </div>
-                    <div class="small-12 columns input-error warning_empty">
-                      {{fa-icon "warning"}}&nbsp;&nbsp;{{t "account.email_warning"}}
-                    </div>
-                    {{/form-control}}
+                    {{else}}
+                    {{input value=email value=email classNames="number_input center_align_placeholder" id="email" type="email" required='true'}}
+                    {{/if}}
                   </div>
-                  <br>
+                  <div class="small-12 columns input-error warning_empty">
+                    {{fa-icon "warning"}}&nbsp;&nbsp;{{t "account.email_warning"}}
+                  </div>
+                  {{/form-control}}
+                </div>
+                <br>
+                <div class="row">
+                  {{#form-control}}
+                  <div class="large-12 medium-12 small-12 columns">
+                    <label class="form-label">{{t 'account.mobile'}}</label>
+                  </div>
                   <div class="row">
-                    {{#form-control}}
-                    <div class="large-12 medium-12 small-12 columns">
-                      <label class="form-label">{{t 'account.mobile'}}</label>
-                    </div>
-                    <div class="row">
-                      {{#if model.user.mobile}}
+                    {{#if model.user.mobile}}
+                    <div class="small-5 columns mobile-disabled">
                       {{model.user.mobile}}
                     </div>
                     {{#if model.user.isMobileVerified}}
@@ -148,53 +151,69 @@
                       <span class="prefix">+852</span>
                     </div>
                     <div class="small-10 large-11 columns">
-                      {{#if model.user.mobile}}
-                      {{numeric-input value=model.user.mobileWithoutCountryCode name="mobilePhone" id="mobile" maxlength="8" pattern="^.{8}$" autoFocus=true}}
-                      {{else}}
                       {{numeric-input value=mobilePhone name="mobilePhone" id="mobile" maxlength="8" pattern="^.{8}$" autoFocus=true}}
-                      {{/if}}
                     </div>
                     {{/if}}
                   </div>
-                  <div class='row'>
-                    <div class="small-12 columns input-error warning_empty">
-                      {{fa-icon "warning"}}&nbsp;&nbsp; {{t 'account.mobile_warning'}}
-                    </div>
+                  {{#if model.user.isMobileVerified}}
+                  <div class="small-3 columns verified_icon">
+                    <span>
+                      {{fa-icon "check-circle-o"}}
+                      <span class="verified_text">verified</span>
+                    </span>
                   </div>
-                  {{/form-control}}
-                </div>
-                <div class="row">
-                  {{#form-control}}
-                  <div class="small-12 columns">
-                    <label class="form-label">{{t 'account.preffered_contact_number'}}</label>
+                  {{/if}}
+                  {{else}}
+                  <div class="small-2 large-1 columns">
+                    <span class="prefix">+852</span>
                   </div>
-                  <div class="small-12 large-12 columns">
-                    <label class="form-label">{{t 'account.preffered_contact_label'}}</label>
-                    {{#if (is-and model.organisationsUser model.organisationsUser.preferredContactNumber)}}
-                    {{numeric-input value=model.organisationsUser.preferredContactNumber name="preferredContactNumber" id="preferred_contact" maxlength="8" pattern=".{8,}" autoFocus=true required='true'}}
+                  <div class="small-10 large-11 columns">
+                    {{#if model.user.mobile}}
+                    {{numeric-input value=model.user.mobileWithoutCountryCode name="mobilePhone" id="mobile" maxlength="8" pattern="^.{8}$" autoFocus=true}}
                     {{else}}
-                    {{numeric-input value="" name="preferredContactNumber" id="preferred_contact" maxlength="8" pattern=".{8,}" autoFocus=true required='true'}}
+                    {{numeric-input value=mobilePhone name="mobilePhone" id="mobile" maxlength="8" pattern="^.{8}$" autoFocus=true}}
                     {{/if}}
                   </div>
-                  <div class="large-12 medium-12 small-12 columns input-error warning_empty">
-                    {{fa-icon "warning"}}&nbsp;&nbsp; {{t 'account.preffered_contact_warning'}}
-                  </div>
-                  {{/form-control}}
+                  {{/if}}
                 </div>
-                <div class="row">
-                  {{!-- <div class="save_button"><i class="fa fa-angle-double-down fa-2x"></i></div> --}}
-                  <div class="small-12 medium-12 columns">
-                    <button {{action 'submit' target=form}}
-                      class="button expand expand_button">{{t "continue"}}</button>
+                <div class='row'>
+                  <div class="small-12 columns input-error warning_empty">
+                    {{fa-icon "warning"}}&nbsp;&nbsp; {{t 'account.mobile_warning'}}
                   </div>
                 </div>
-                {{/validatable-form}}
+                {{/form-control}}
               </div>
+              <div class="row">
+                {{#form-control}}
+                <div class="small-12 columns">
+                  <label class="form-label">{{t 'account.preffered_contact_number'}}</label>
+                </div>
+                <div class="small-12 large-12 columns">
+                  <label class="form-label">{{t 'account.preffered_contact_label'}}</label>
+                  {{#if (is-and model.organisationsUser model.organisationsUser.preferredContactNumber)}}
+                  {{numeric-input value=model.organisationsUser.preferredContactNumber name="preferredContactNumber" id="preferred_contact" maxlength="8" pattern=".{8,}" autoFocus=true required='true'}}
+                  {{else}}
+                  {{numeric-input value="" name="preferredContactNumber" id="preferred_contact" maxlength="8" pattern=".{8,}" autoFocus=true required='true'}}
+                  {{/if}}
+                </div>
+                <div class="large-12 medium-12 small-12 columns input-error warning_empty">
+                  {{fa-icon "warning"}}&nbsp;&nbsp; {{t 'account.preffered_contact_warning'}}
+                </div>
+                {{/form-control}}
+              </div>
+              <div class="row">
+                {{!-- <div class="save_button"><i class="fa fa-angle-double-down fa-2x"></i></div> --}}
+                <div class="small-12 medium-12 columns">
+                  <button {{action 'submit' target=form}} class="button expand expand_button">{{t "continue"}}</button>
+                </div>
+              </div>
+              {{/validatable-form}}
             </div>
         </div>
-        </section>
       </div>
+      </section>
     </div>
   </div>
+</div>
 </div>
 </div>
