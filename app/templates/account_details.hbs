@@ -103,7 +103,19 @@
                       <label class="form-label">{{t "account.email"}}</label>
                       <label class="form-label">{{t "account.work"}}</label>
                       {{#if model.user.email}}
-                      {{input value=email value=model.user.email classNames="number_input center_align_placeholder" id="email" type="email" required='true' disabled='true'}}
+                        <div class="row">
+                          <div class="small-5 columns email-disabled">
+                            {{model.user.email}}
+                          </div>
+                          {{#if model.user.isEmailVerified}}
+                            <div class="small-3 columns verified_icon">
+                              <span>
+                                {{fa-icon "check-circle-o"}}
+                                <span class="verified_text">verified</span>
+                              </span>
+                            </div>
+                          {{/if}}
+                        </div>
                       {{else}}
                       {{input value=email value=email classNames="number_input center_align_placeholder" id="email" type="email" required='true'}}
                       {{/if}}
@@ -120,16 +132,26 @@
                       <label class="form-label">{{t 'account.mobile'}}</label>
                     </div>
                     <div class="row">
-                      <div class="small-2 large-1 columns">
-                        <span class="prefix">+852</span>
-                      </div>
-                      <div class="small-10 large-11 columns">
-                        {{#if model.user.mobile}}
-                        {{numeric-input value=model.user.mobileWithoutCountryCode name="mobilePhone" id="mobile" maxlength="8" pattern="^.{8}$" autoFocus=true}}
-                        {{else}}
-                        {{numeric-input value=mobilePhone name="mobilePhone" id="mobile" maxlength="8" pattern="^.{8}$" autoFocus=true}}
+                      {{#if model.user.mobile}}
+                        <div class="small-5 columns mobile-disabled">
+                          {{model.user.mobile}}
+                        </div>
+                        {{#if model.user.isMobileVerified}}
+                          <div class="small-3 columns verified_icon">
+                            <span>
+                              {{fa-icon "check-circle-o"}}
+                              <span class="verified_text">verified</span>
+                            </span>
+                          </div>
                         {{/if}}
-                      </div>
+                      {{else}}
+                        <div class="small-2 large-1 columns">
+                          <span class="prefix">+852</span>
+                        </div>
+                        <div class="small-10 large-11 columns">
+                          {{numeric-input value=mobilePhone name="mobilePhone" id="mobile" maxlength="8" pattern="^.{8}$" autoFocus=true}}
+                        </div>
+                      {{/if}}
                     </div>
                     <div class='row'>
                       <div class="small-12 columns input-error warning_empty">

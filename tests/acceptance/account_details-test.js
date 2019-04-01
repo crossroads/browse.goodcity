@@ -155,7 +155,7 @@ test("Account details page displays all user and organisation user details", fun
     assert.equal(currentURL(), "/account_details");
     assert.equal($("#firstName").val(), user.get("firstName"));
     assert.equal($("#lastName").val(), user.get("lastName"));
-    assert.equal($("#email").val(), user.get("email"));
+    assert.equal($(".email-disabled")[0].innerText, user.get("email"));
     assert.equal($("#organisation_details").val(), organisation.get("nameEn"));
     assert.equal($("#position").val(), organisationsUser.get("position"));
   });
