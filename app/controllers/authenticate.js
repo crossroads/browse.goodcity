@@ -14,6 +14,14 @@ export default Ember.Controller.extend({
   mobile: "",
   email: "",
 
+  pinFor: Ember.computed("email", "mobile", function() {
+    if (this.get("email")) {
+      return "email";
+    } else if (this.get("mobile")) {
+      return "mobile";
+    }
+  }),
+
   setMobileOrEmail() {
     if (/^[569]\d{7}/.test(this.get("mobileOrEmail"))) {
       this.set("mobile", "+852" + this.get("mobileOrEmail"));
@@ -26,6 +34,7 @@ export default Ember.Controller.extend({
     authenticateUser(bookAppointment) {
       Ember.$(".auth_error").hide();
       var pin = this.get("pin");
+      var pin_for = this.get("pinFor");
       var otp_auth_key = this.get("session.otpAuthKey");
       var _this = this;
 
@@ -34,7 +43,8 @@ export default Ember.Controller.extend({
         .append();
       new AjaxPromise("/auth/verify", "POST", null, {
         pin: pin,
-        otp_auth_key: otp_auth_key
+        otp_auth_key: otp_auth_key,
+        pin_for: pin_for
       })
         .then(function(data) {
           _this.setProperties({
