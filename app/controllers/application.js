@@ -201,9 +201,7 @@ export default Ember.Controller.extend({
     },
 
     checkout() {
-      if (this.accountDetailsComplete()) {
-        this.submitCart();
-      } else {
+      if (!this.accountDetailsComplete() && this.get("hasCartItems")) {
         this.set("showCartDetailSidebar", false);
         this.transitionToRoute("account_details", {
           queryParams: {
@@ -211,6 +209,8 @@ export default Ember.Controller.extend({
             bookAppointment: false
           }
         });
+      } else {
+        this.submitCart();
       }
     },
 
