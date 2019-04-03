@@ -4,6 +4,108 @@
 
   <div class="small-12 columns content">
     <div class="row my_acccount">
+      {{#unless cart.isEmpty}}
+      {{small-cart-toggle-view}}
+      {{/unless}}
+      <div class="row">
+        <div class="small-12 large-10 large-offset-1 medium-10 medium-offset-1 columns">
+          <div class="mobile">
+            <div class="row">
+              <div class="small-12 columns">
+                My account Details
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              {{#if model.organisation}}
+                <div class="small-12 columns" id="organisation_id">
+                  <div class='row'>
+                    <div class="small-4 columns">
+                      {{t "account.organisation"}}:
+                    </div>
+                    <div class="small-8 columns">
+                      {{model.organisation.nameEn}}
+                    </div>
+                  </div>
+                </div>
+              {{/if}}
+            </div>
+            <br>
+            <div class="row">
+              <div class="small-2 columns user_title">
+                Name:
+              </div>
+              <div class="small-10 columns">
+                {{model.user.firstName}} {{model.user.lastName}}
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="small-3 columns">{{t "account.position"}}:</div>
+              <div class="small-9 columns">
+                {{#if model.organisationsUser}}
+                  {{model.organisationsUser.position}}
+                {{/if}}
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="small-3 columns">
+                {{t 'account.email'}}:
+              </div>
+              <div class="small-9 columns">
+                {{#if model.user.email}}
+                  <div class="row">
+                    <div class="small-5 columns email-disabled">
+                      {{model.user.email}}
+                    </div>
+                    {{#if model.user.isEmailVerified}}
+                    <div class="small-3 columns verified_icon">
+                      <span>
+                        {{fa-icon "check-circle-o"}}
+                        <span class="verified_text">verified</span>
+                      </span>
+                    </div>
+                    {{/if}}
+                  </div>
+                {{/if}}
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="small-3 columns">
+                {{t 'account.mobile'}}:
+              </div>
+              <div class="row">
+                {{#if model.user.mobile}}
+                <div class="small-5 columns mobile-disabled">
+                  {{model.user.mobile}}
+                </div>
+                  {{#if model.user.isMobileVerified}}
+                  <div class="small-3 columns verified_icon">
+                    <span>
+                      {{fa-icon "check-circle-o"}}
+                      <span class="verified_text">verified</span>
+                    </span>
+                  </div>
+                  {{/if}}
+                {{/if}}
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="small-5 columns">
+                {{t 'account.preffered_contact_number'}}:
+              </div>
+              <div class="small-7 large-7 columns">
+                {{#if (is-and model.organisationsUser model.organisationsUser.preferredContactNumber)}}
+                  {{model.organisationsUser.preferredContactNumber}}
+                {{/if}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
