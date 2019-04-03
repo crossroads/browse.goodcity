@@ -1,0 +1,57 @@
+.my_dashboard {
+
+  @media #{$large-up} {
+    &.row {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+  }
+
+  .title {
+    font-weight: bold;
+    font-size: 1rem;
+    color: white;
+    text-align: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid #334f75;
+  }
+
+  .tabs .tab {
+    text-align: center;
+    opacity: 0.5;
+    cursor: pointer;
+
+    &.active {
+      opacity: 1;
+
+      &.active-tab {
+        border-bottom: 3px solid #334f75;
+      }
+    }
+
+    .fa {
+      margin-right: 0.5rem;
+    }
+  }
+
+  .tabs.tab-icons {
+    margin-top: 0.6rem;
+
+    i {
+      font-size: 1.5rem;
+    }
+
+    z-index: 100;
+  }
+
+  .tabs.tab-name {
+    i {
+      font-size: 130%
+    }
+
+    border-bottom: 1px solid $light-blue;
+    font-size: 100%;
+    z-index: 100;
+  }
+
+}

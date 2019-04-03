@@ -1,0 +1,39 @@
+<div class="row tabs tab-icons">
+  {{#link-to 'home' tagName="div" classNames="small-4 columns updates tab text-center"}}
+    {{#link-to 'home'}}
+      <i class="dashboard-menu">{{fa-icon 'bell-o'}}</i>
+    {{/link-to}}
+  {{/link-to}}
+
+  {{#link-to 'my_orders' tagName="div" classNames="small-4 orders tab columns text-center"}}
+    {{#link-to 'my_orders' }}
+      <i class="dashboard-menu">{{fa-icon 'calendar'}}</i>
+    {{/link-to}}
+  {{/link-to}}
+
+  {{#link-to 'account_details' tagName="div" classNames="small-4 account tab columns text-center"}}
+    {{#link-to 'account_details' }}
+      <i class="dashboard-menu">{{fa-icon 'vcard'}}</i>
+    {{/link-to}}
+  {{/link-to}}
+</div>
+
+<div class="row tabs tab-name active-tab">
+  {{#link-to 'home' tagName="div" classNames="small-4 columns updates active-tab tab text-center"}}
+    {{#link-to 'home'}}
+      Updates
+    {{/link-to}}
+  {{/link-to}}
+
+  {{#link-to 'my_orders' tagName="div" classNames="small-4 orders tab active-tab columns text-center"}}
+    {{#link-to 'my_orders'}}
+      Orders
+    {{/link-to}}
+  {{/link-to}}
+
+  {{#link-to 'account_details' tagName="div" classNames="small-4 account active-tab tab columns text-center"}}
+    {{#link-to 'account_details'}}
+      Account
+    {{/link-to}}
+  {{/link-to}}
+</div>

@@ -62,6 +62,7 @@ export default {
       home: "Home",
       browse: "Browse",
       myorders: "My Orders",
+      myDashboard: "My Dashboard",
       faq: "Faq",
       about: "About",
       terms: "Terms",
@@ -268,6 +269,10 @@ export default {
     cancel_booking_info:
       "This will cancel booking and all associated request for goods.",
     cancel_booking_reason_title: "Reason for canceling order"
+  },
+
+  my_dashboard: {
+    my_dashboard: "My Dashboard"
   },
 
   my_orders: {

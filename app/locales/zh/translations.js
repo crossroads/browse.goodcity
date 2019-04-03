@@ -56,6 +56,7 @@ export default {
       home: "主頁",
       browse: "瀏覽",
       myorders: "我的訂單",
+      myDashboard: "My Dashboard",
       faq: "常問問題",
       about: "關於我們",
       terms: "條款",
