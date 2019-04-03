@@ -1,6 +1,6 @@
 <div class="row tabs tab-icons">
-  {{#link-to 'home' tagName="div" classNames="small-4 columns updates tab text-center"}}
-    {{#link-to 'home'}}
+  {{#link-to 'my_updates' tagName="div" classNames="small-4 orders tab columns text-center"}}
+    {{#link-to 'my_updates' }}
       <i class="dashboard-menu">{{fa-icon 'bell-o'}}</i>
     {{/link-to}}
   {{/link-to}}
@@ -11,16 +11,18 @@
     {{/link-to}}
   {{/link-to}}
 
-  {{#link-to 'account_details' tagName="div" classNames="small-4 account tab columns text-center"}}
-    {{#link-to 'account_details' }}
+  {{#link-to 'my_account' tagName="div" classNames="small-4 account tab columns text-center"}}
+    {{#link-to 'my_account' }}
       <i class="dashboard-menu">{{fa-icon 'vcard'}}</i>
     {{/link-to}}
   {{/link-to}}
 </div>
 
 <div class="row tabs tab-name active-tab">
-  {{#link-to 'home' tagName="div" classNames="small-4 columns updates active-tab tab text-center"}}
-    {{#link-to 'home'}}
+  <div class="small-4 columns updates tab text-center">
+  </div>
+  {{#link-to 'my_updates' tagName="div" classNames="small-4 orders tab active-tab columns text-center"}}
+    {{#link-to 'my_updates' }}
       Updates
     {{/link-to}}
   {{/link-to}}
@@ -31,8 +33,8 @@
     {{/link-to}}
   {{/link-to}}
 
-  {{#link-to 'account_details' tagName="div" classNames="small-4 account active-tab tab columns text-center"}}
-    {{#link-to 'account_details'}}
+  {{#link-to 'my_account' tagName="div" classNames="small-4 account active-tab tab columns text-center"}}
+    {{#link-to 'my_account'}}
       Account
     {{/link-to}}
   {{/link-to}}
