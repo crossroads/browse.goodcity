@@ -39,7 +39,7 @@ export default AuthorizeRoute.extend({
     this.controllerFor("application").set("hideHeaderBar", false);
     this.controllerFor("application").set(
       "pageTitle",
-      this.get("i18n").t("my_dashboard.my_dashboard")
+      this.get("i18n").t("my_dashboard.title")
     );
   },
 

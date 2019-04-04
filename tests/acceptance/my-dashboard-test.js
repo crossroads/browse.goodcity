@@ -217,7 +217,6 @@ test("should redirect to my_dashboard page", function(assert) {
   andThen(function() {
     click(Ember.$(".my_dashboard"));
     andThen(function() {
-      debugger;
       assert.equal(currentURL(), "/my_orders");
       assert.equal(Ember.$(".my_dashboard .title").text(), "My Dashboard");
     });
