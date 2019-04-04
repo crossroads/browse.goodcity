@@ -53,16 +53,16 @@
                 <div class="small-9 columns data">
                   {{#if model.user.email}}
                     <div class="row">
-                      <div class="small-5 columns">
+                      <div class="small-12 medium-12 large-5 columns">
                         {{model.user.email}}
                       </div>
                       {{#if model.user.isEmailVerified}}
-                      <div class="small-3 columns verified_icon">
-                        <span>
-                          {{fa-icon "check-circle-o"}}
-                          <span class="verified_text">{{t 'my_dashboard.account.verified_text'}}</span>
-                        </span>
-                      </div>
+                        <div class="small-3 medium-3 large-3 columns verified_icon">
+                          <div>
+                            {{fa-icon "check-circle-o"}}
+                            <span class="verified_text">{{t 'my_dashboard.account.verified_text'}}</span>
+                          </div>
+                        </div>
                       {{/if}}
                     </div>
                   {{/if}}
@@ -75,16 +75,16 @@
                 <div class="small-9 columns data">
                   <div class="row">
                     {{#if model.user.mobile}}
-                    <div class="small-5 columns">
+                    <div class="small-12 medium-12 large-5 columns">
                       {{model.user.mobile}}
                     </div>
                       {{#if model.user.isMobileVerified}}
-                      <div class="small-3 columns verified_icon">
-                        <span>
-                          {{fa-icon "check-circle-o"}}
-                          <span class="verified_text">{{t 'my_dashboard.account.verified_text'}}</span>
-                        </span>
-                      </div>
+                        <div class="small-3 medium-3 large-3 columns verified_icon">
+                          <div>
+                            {{fa-icon "check-circle-o"}}
+                            <span class="verified_text">{{t 'my_dashboard.account.verified_text'}}</span>
+                          </div>
+                        </div>
                       {{/if}}
                     {{/if}}
                   </div>
