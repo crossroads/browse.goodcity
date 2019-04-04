@@ -62,7 +62,6 @@ export default {
       home: "Home",
       browse: "Browse",
       myorders: "My Orders",
-      myDashboard: "My Dashboard",
       faq: "Faq",
       about: "About",
       terms: "Terms",
@@ -272,7 +271,15 @@ export default {
   },
 
   my_dashboard: {
-    my_dashboard: "My Dashboard"
+    title: "My Dashboard",
+    updates: "Updates",
+    orders: "Orders",
+    account: {
+      account_text: "Account",
+      name: "Name",
+      account_details: "Account Details",
+      verified_text: "verified"
+    }
   },
 
   my_orders: {

@@ -56,7 +56,6 @@ export default {
       home: "主頁",
       browse: "瀏覽",
       myorders: "我的訂單",
-      myDashboard: "My Dashboard",
       faq: "常問問題",
       about: "關於我們",
       terms: "條款",
@@ -252,6 +251,18 @@ export default {
     draft_cancel_booking_warning: "這將會永遠取消在今次預約內的所有資料.",
     cancel_booking_info: "這將會取消今次預約及其被需求貨品的有關要求.",
     cancel_booking_reason_title: "取消預約的原因"
+  },
+
+  my_dashboard: {
+    title: "My Dashboard",
+    updates: "Updates",
+    orders: "Orders",
+    account: {
+      account_text: "Account",
+      name: "Name",
+      account_details: "Account Details",
+      verified_text: "verified"
+    }
   },
 
   my_orders: {

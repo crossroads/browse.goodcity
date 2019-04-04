@@ -1,20 +1,14 @@
 <div class="row tabs tab-icons">
   {{#link-to 'my_updates' tagName="div" classNames="small-4 updates tab columns text-center"}}
-    {{#link-to 'my_updates' }}
-      <i class="dashboard-menu">{{fa-icon 'bell-o'}}</i>
-    {{/link-to}}
+    <i class="dashboard-menu">{{fa-icon 'bell-o'}}</i>
   {{/link-to}}
 
   {{#link-to 'my_orders' tagName="div" classNames="small-4 orders tab columns text-center"}}
-    {{#link-to 'my_orders' }}
-      <i class="dashboard-menu">{{fa-icon 'calendar'}}</i>
-    {{/link-to}}
+    <i class="dashboard-menu">{{fa-icon 'calendar'}}</i>
   {{/link-to}}
 
   {{#link-to 'my_account' tagName="div" classNames="small-4 account tab columns text-center"}}
-    {{#link-to 'my_account' }}
-      <i class="dashboard-menu">{{fa-icon 'vcard'}}</i>
-    {{/link-to}}
+    <i class="dashboard-menu">{{fa-icon 'vcard'}}</i>
   {{/link-to}}
 </div>
 
@@ -22,20 +16,14 @@
   <div class="small-4 columns updates tab text-center">
   </div>
   {{#link-to 'my_updates' tagName="div" classNames="small-4 updates tab active-tab columns text-center"}}
-    {{#link-to 'my_updates' }}
-      Updates
-    {{/link-to}}
+    {{t 'my_dashboard.updates'}}
   {{/link-to}}
 
   {{#link-to 'my_orders' tagName="div" classNames="small-4 orders tab active-tab columns text-center"}}
-    {{#link-to 'my_orders'}}
-      Orders
-    {{/link-to}}
+    {{t 'my_dashboard.orders'}}
   {{/link-to}}
 
   {{#link-to 'my_account' tagName="div" classNames="small-4 account active-tab tab columns text-center"}}
-    {{#link-to 'my_account'}}
-      Account
-    {{/link-to}}
+    {{t 'my_dashboard.account.account_text'}}
   {{/link-to}}
 </div>

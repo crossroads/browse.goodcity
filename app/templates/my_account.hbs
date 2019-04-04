@@ -1,5 +1,5 @@
 <div class="row my_dashboard">
-  <div class="title show-for-medium-up">{{t "my_dashboard.my_dashboard"}}</div>
+  <div class="title show-for-medium-up">{{t "my_dashboard.title"}}</div>
   {{partial 'my_dashboard/my_dashboard_tabs'}}
 
   <div class="small-12 columns">
@@ -13,7 +13,7 @@
             <div class="mobile">
               <div class="row">
                 <div class="small-12 medium-12 large-12 columns section-title">
-                  Account Details
+                  {{t 'my_dashboard.account.account_details'}}
                 </div>
               </div>
               <div class="detail-row row">
@@ -32,7 +32,7 @@
               </div>
               <div class="detail-row row">
                 <div class="small-3 columns data-type">
-                  Name
+                  {{t 'my_dashboard.account.name'}}
                 </div>
                 <div class="small-9 columns data">
                   {{model.user.firstName}} {{model.user.lastName}}
@@ -60,7 +60,7 @@
                       <div class="small-3 columns verified_icon">
                         <span>
                           {{fa-icon "check-circle-o"}}
-                          <span class="verified_text">verified</span>
+                          <span class="verified_text">{{t 'my_dashboard.account.verified_text'}}</span>
                         </span>
                       </div>
                       {{/if}}
@@ -82,7 +82,7 @@
                       <div class="small-3 columns verified_icon">
                         <span>
                           {{fa-icon "check-circle-o"}}
-                          <span class="verified_text">verified</span>
+                          <span class="verified_text">{{t 'my_dashboard.account.verified_text'}}</span>
                         </span>
                       </div>
                       {{/if}}

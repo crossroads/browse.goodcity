@@ -21,28 +21,28 @@
 <aside class="left-off-canvas-menu menu-list">
   <ul class="off-canvas-list menu">
     <li>
-      {{#link-to "home" class="menu-1"}}
+      {{#link-to "home" class="menu-1 home"}}
         <i class="fa fa-home"></i>
         <div>{{t "application.sidebar.home"}}</div>
       {{/link-to}}
     </li>
 
      <li>
-      {{#link-to "browse" class="menu-2"}}
+      {{#link-to "browse" class="menu-2 browse"}}
         <i class="fa fa-folder-open"></i>
         <div>{{t "application.sidebar.browse"}}</div>
       {{/link-to}}
     </li>
 
     <li>
-      {{#link-to "my_orders" class="menu-3"}}
+      {{#link-to "my_orders" class="menu-3 my_dashboard"}}
         <i class="fa fa-th-large"></i>
-        <div>{{t "application.sidebar.myDashboard"}}</div>
+        <div>{{t "my_dashboard.title"}}</div>
       {{/link-to}}
     </li>
 
     <li>
-      {{#link-to "about" class="menu-4"}}
+      {{#link-to "about" class="menu-4 about"}}
         <i class="fa fa-question"></i>
         <div>{{t "application.sidebar.about"}}</div>
       {{/link-to}}
@@ -56,7 +56,7 @@
       </li>
     {{else}}
       <li>
-        {{#link-to "login" class="menu-5"}}
+        {{#link-to "login" class="menu-5 login"}}
           <i class="fa fa-sign-out"></i>
           <div>{{t "application.sidebar.login"}}</div>
         {{/link-to}}
