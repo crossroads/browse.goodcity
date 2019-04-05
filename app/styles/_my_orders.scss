@@ -1,23 +1,5 @@
-.my_orders {
-
-  @media #{$large-up} {
-    &.row {
-      max-width: 800px;
-      margin: 0 auto;
-    }
-  }
-
-  .title {
-    font-weight: bold;
-    font-size: 1rem;
-    color: white;
-    text-align: center;
-    margin: 1rem;
-  }
-
+.my_orders{
   .content {
-    margin: 0 auto;
-
     // ---- ACTION BUTTONS ('Browse goods', 'Book appointment')
     .button-container {
       text-align: center;
@@ -218,11 +200,7 @@
               }
             }
           }
-
         }
-
-
-
       }
     }
   }

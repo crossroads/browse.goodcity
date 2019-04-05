@@ -1,31 +1,35 @@
-<div class="row my_orders">
-  <div class="title show-for-medium-up">{{t "my_orders.my_orders"}}</div>
-  <div class="small-12 columns content">
-    <div class="row">
-      <div class="columns button-container small-6">
-        {{#link-to "browse"}}
-          <div class="button light">
-            {{t 'home.order_goods.action'}}
-            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-          </div>
-        {{/link-to}}
+<div class="row my_dashboard">
+  <div class="title show-for-medium-up">{{t "my_dashboard.title"}}</div>
+  {{partial 'my_dashboard/my_dashboard_tabs'}}
+
+  <div class="small-12 columns my_orders">
+    <div class="content">
+      <div class="row">
+        <div class="columns button-container small-6">
+          {{#link-to "browse"}}
+            <div class="button light">
+              {{t 'home.order_goods.action'}}
+              <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+            </div>
+          {{/link-to}}
+        </div>
+        <div class="columns button-container small-6">
+          {{book-appointment buttonStyle='light'}}
+        </div>
       </div>
-      <div class="columns button-container small-6">
-        {{book-appointment buttonStyle='light'}}
-      </div>
+      <ul class="list list-items">
+        {{#each arrangedOrders as |order|}}
+            {{#if order.isDraft}}
+              {{#link-to 'request_purpose' (query-params bookAppointment=isAppointmentDraft orderId=order.id)}}
+                {{ partial 'order/order_block'}}
+              {{/link-to}}
+            {{else}}
+              {{#link-to "orders.detail" order.id}}
+                {{ partial 'order/order_block'}}
+              {{/link-to}}
+            {{/if}}
+        {{/each}}
+      </ul>
     </div>
-    <ul class="list list-items">
-      {{#each arrangedOrders as |order|}}
-          {{#if order.isDraft}}
-            {{#link-to 'request_purpose' (query-params bookAppointment=isAppointmentDraft orderId=order.id)}}
-              {{ partial 'order/order_block'}}
-            {{/link-to}}
-          {{else}}
-            {{#link-to "orders.detail" order.id}}
-              {{ partial 'order/order_block'}}
-            {{/link-to}}
-          {{/if}}
-      {{/each}}
-    </ul>
   </div>
 </div>

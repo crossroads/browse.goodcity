@@ -270,6 +270,18 @@ export default {
     cancel_booking_reason_title: "Reason for canceling order"
   },
 
+  my_dashboard: {
+    title: "My Dashboard",
+    updates: "Updates",
+    orders: "Orders",
+    account: {
+      account_text: "Account",
+      name: "Name",
+      account_details: "Account Details",
+      verified_text: "verified"
+    }
+  },
+
   my_orders: {
     my_orders: "My Orders",
     processing: "Processing",

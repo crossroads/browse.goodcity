@@ -253,6 +253,18 @@ export default {
     cancel_booking_reason_title: "取消預約的原因"
   },
 
+  my_dashboard: {
+    title: "My Dashboard",
+    updates: "Updates",
+    orders: "Orders",
+    account: {
+      account_text: "Account",
+      name: "Name",
+      account_details: "Account Details",
+      verified_text: "verified"
+    }
+  },
+
   my_orders: {
     my_orders: "我的訂單",
     processing: "處理中",
