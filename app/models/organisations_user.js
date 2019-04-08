@@ -16,16 +16,15 @@ export default Model.extend({
   }),
 
   hasPosition: Ember.computed("position", function() {
-    return this.get("position") && this.get("position").length !== 0;
+    var position = this.get("position");
+    return position && position.length;
   }),
 
   hasPreferredContactNumber: Ember.computed(
     "preferredContactNumber",
     function() {
-      return (
-        this.get("preferredContactNumber") &&
-        this.get("preferredContactNumber").length !== 0
-      );
+      var preferredContactNumber = this.get("preferredContactNumber");
+      return preferredContactNumber && preferredContactNumber.length;
     }
   ),
 
