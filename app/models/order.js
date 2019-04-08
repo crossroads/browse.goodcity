@@ -23,7 +23,7 @@ export default Model.extend({
   ordersPurposes: hasMany("ordersPurpose", { async: false }),
   beneficiaryId: attr("string"),
   bookingTypeId: attr("number"),
-  beneficiary: belongsTo("beneficiary", { async: false }),
+  beneficiary: belongsTo("beneficiary", { async: true }),
   peopleHelped: attr("number"),
   goodcityRequests: hasMany("goodcity_request", { async: false }),
   district: belongsTo("district", { async: false }),

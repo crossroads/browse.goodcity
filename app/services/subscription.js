@@ -250,7 +250,7 @@ export default Ember.Service.extend(Ember.Evented, {
       case "delete":
         let existingItem = this.get("store").peekRecord(type, record.id);
         if (existingItem) {
-          store.unloadRecord(existingItem);
+          this.get("store").unloadRecord(existingItem);
         }
         break;
       default:
