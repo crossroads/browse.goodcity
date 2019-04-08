@@ -6,6 +6,7 @@ import { make, mockFindAll } from "ember-data-factory-guy";
 
 var App,
   order,
+  appointment,
   gogo_van,
   user,
   user_profile,
@@ -22,6 +23,7 @@ var App,
   purpose,
   requestPurposeUrl,
   goodsDetailsUrl,
+  appointmentGoodsDetailsUrl,
   scheduleDetailsUrl,
   appointmentPageUrl,
   clientInfoUrl,
@@ -50,6 +52,24 @@ module("Acceptance | Book appointment/order ", {
       purposeDescription: "test test test",
       peopleHelped: "2",
       bookingTypeId: BookingTypes.onlineOrder.id
+    }).toJSON({ includeId: true });
+    order = make("order", {
+      code: "L24489",
+      state: "draft",
+      createdById: user.id,
+      organisationId: organisation.id,
+      purposeDescription: "test test test",
+      peopleHelped: "2",
+      bookingTypeId: BookingTypes.onlineOrder.id
+    }).toJSON({ includeId: true });
+    appointment = make("order", {
+      code: "P98989",
+      state: "draft",
+      createdById: user.id,
+      organisationId: organisation.id,
+      purposeDescription: "wow, much spec, very test",
+      peopleHelped: "23",
+      bookingTypeId: BookingTypes.appointment.id
     }).toJSON({ includeId: true });
     ordersPackage = make("orders_package", {
       quantity: 1,
@@ -91,12 +111,12 @@ module("Acceptance | Book appointment/order ", {
     $.mockjaxSettings.matchInRegistrationOrder = false;
     mocks.push(
       $.mockjax({
-        url: `/api/v1/orders/*`,
+        url: `/api/v1/order*`,
         type: "GET",
         status: 200,
         responseText: {
           booking_types: _.values(BookingTypes),
-          order: order,
+          orders: [order, appointment],
           goodcity_requests: [goodcityRequest]
         }
       }),
@@ -168,8 +188,9 @@ module("Acceptance | Book appointment/order ", {
     requestPurposeUrl = "/request_purpose";
     clientInfoUrl = `/order/${order.id}/client_information`;
     goodsDetailsUrl = `/order/${order.id}/goods_details`;
+    appointmentGoodsDetailsUrl = `/order/${appointment.id}/goods_details`;
     scheduleDetailsUrl = `/order/${order.id}/schedule_details`;
-    appointmentPageUrl = `/order/${order.id}/schedule_details`;
+    appointmentPageUrl = `/order/${appointment.id}/schedule_details`;
     confirmBookingUrl = `/order/${order.id}/confirm_booking`;
     bookingSuccessUrl = `/order/${order.id}/booking_success`;
   },
@@ -675,7 +696,7 @@ test("Goods Details Page on incomplete submit should not redirect to appointment
       type: "POST",
       status: 201,
       responseText: {
-        order: order,
+        order: appointment,
         orders_purposes: [orderPurpose1],
         user: user.toJSON({ includeId: true })
       }
@@ -683,13 +704,13 @@ test("Goods Details Page on incomplete submit should not redirect to appointment
   );
   visit("/");
   andThen(function() {
-    visit(goodsDetailsUrl);
+    visit(appointmentGoodsDetailsUrl);
   });
   andThen(function() {
     click("#goods-details-submit");
   });
   andThen(function() {
-    assert.equal(currentURL(), goodsDetailsUrl);
+    assert.equal(currentURL(), appointmentGoodsDetailsUrl);
     assert.equal(
       Ember.$(".title")
         .text()

@@ -110,6 +110,9 @@ module("Acceptance | My Orders Page", {
       order_transport.toJSON({ includeId: true }),
       order_transport2.toJSON({ includeId: true })
     ]);
+    doMock("goodcity_request", {
+      goodcity_requests: []
+    });
     doMock("order", {
       orders: [
         order.toJSON({ includeId: true }),
@@ -169,7 +172,6 @@ test("should redirect to my orders page", function(assert) {
   andThen(function() {
     assert.equal(currentURL(), "/my_orders");
     assert.equal(currentPath(), "my_orders");
-    assert.equal(Ember.$(".my_orders .title").text(), "My Orders");
   });
 });
 
