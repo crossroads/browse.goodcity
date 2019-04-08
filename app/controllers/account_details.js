@@ -125,10 +125,9 @@ export default Ember.Controller.extend({
     return params;
   },
 
-  mobileParam() {
-    var user = this.get("user");
-    var mobile = user.length && user.get("mobile");
-    if (mobile && mobile.length !== 0) {
+  mobileParam(user) {
+    var mobile = user && user.get("mobile");
+    if (mobile && mobile.length) {
       return mobile;
     } else {
       return "+852" + this.get("mobilePhone");
