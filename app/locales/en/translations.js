@@ -549,7 +549,8 @@ export default {
         name: "Name",
         organisation: "Organisation",
         position: "Position",
-        email: "Email"
+        email: "Email",
+        preferred_contact_number: "Preferred Contact Number"
       },
       request_purpose_detail: {
         title: "Request Purpose",

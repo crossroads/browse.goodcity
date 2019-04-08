@@ -507,7 +507,8 @@ export default {
         name: "姓名",
         organisation: "機構名稱",
         position: "職位",
-        email: "電郵"
+        email: "電郵",
+        preferred_contact_number: "選取這聯絡號碼"
       },
       request_purpose_detail: {
         title: "要求的目的",

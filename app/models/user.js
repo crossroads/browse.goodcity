@@ -41,6 +41,13 @@ export default Addressable.extend({
     return organisationsUser ? organisationsUser.get("position") : "";
   }),
 
+  preferredContactNumber: Ember.computed("organisationsUsers.[]", function() {
+    let organisationsUser = this.get("organisationsUsers.firstObject");
+    return organisationsUser
+      ? organisationsUser.get("preferredContactNumber")
+      : "";
+  }),
+
   organisationName: Ember.computed("organisationsUsers.[]", function() {
     let organisation = this.get("organisationsUsers.firstObject.organisation");
     let language = JSON.parse(window.localStorage.getItem("language"));
