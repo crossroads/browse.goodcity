@@ -12,11 +12,13 @@ export default Ember.Controller.extend({
   i18n: Ember.inject.service(),
   organisationId: Ember.computed.alias("model.organisation.id"),
   organisationsUserId: Ember.computed.alias("model.organisationsUser.id"),
+  user: Ember.computed.alias("model.user"),
   position: "",
   email: "",
   bookAppointment: false,
   onlineOrder: false,
   preferredContactNumber: "",
+  mobilePhone: "",
   isMobileApp: config.cordova.enabled,
 
   userTitle: Ember.computed("model", function() {
@@ -97,7 +99,7 @@ export default Ember.Controller.extend({
 
   organisationsUserParams() {
     var organisationsUserId = this.get("organisationsUserId");
-    var user = this.get("model.user");
+    var user = this.get("user");
     var position = organisationsUserId
       ? this.get("model.organisationsUser.position")
       : this.get("position");
@@ -111,7 +113,7 @@ export default Ember.Controller.extend({
       user_attributes: {
         first_name: user.get("firstName"),
         last_name: user.get("lastName"),
-        mobile: user.get("mobile"),
+        mobile: this.mobileParam(user),
         email: user.get("email"),
         title: title
       }
@@ -121,6 +123,15 @@ export default Ember.Controller.extend({
     }
 
     return params;
+  },
+
+  mobileParam(user) {
+    var mobile = user && user.get("mobile");
+    if (mobile && mobile.length) {
+      return mobile;
+    } else {
+      return "+852" + this.get("mobilePhone");
+    }
   },
 
   actions: {

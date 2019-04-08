@@ -15,7 +15,24 @@ export default Model.extend({
     async: false
   }),
 
-  isInfoComplete: Ember.computed("position", function() {
-    return this.get("position") && this.get("position").length !== 0;
-  })
+  hasPosition: Ember.computed("position", function() {
+    var position = this.get("position");
+    return position && position.length;
+  }),
+
+  hasPreferredContactNumber: Ember.computed(
+    "preferredContactNumber",
+    function() {
+      var preferredContactNumber = this.get("preferredContactNumber");
+      return preferredContactNumber && preferredContactNumber.length;
+    }
+  ),
+
+  isInfoComplete: Ember.computed(
+    "hasPosition",
+    "hasPreferredContactNumber",
+    function() {
+      return this.get("hasPosition") && this.get("hasPreferredContactNumber");
+    }
+  )
 });
