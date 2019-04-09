@@ -240,21 +240,3 @@ test("should redirect to my_account page", function(assert) {
     });
   });
 });
-
-test("should redirect to my_updates page", function(assert) {
-  assert.expect(3);
-  visit("/");
-  andThen(function() {
-    click(Ember.$(".my_dashboard"));
-    andThen(function() {
-      assert.equal(currentURL(), "/my_orders");
-      assert.equal(Ember.$(".my_dashboard .title").text(), "My Dashboard");
-      andThen(function() {
-        click(Ember.$(".updates.tab"));
-        andThen(function() {
-          assert.equal(currentURL(), "/my_updates");
-        });
-      });
-    });
-  });
-});

@@ -5,15 +5,15 @@
   <div class="small-12 columns my_orders">
     <div class="content">
       <div class="row">
-        <div class="columns button-container small-6">
+        <div class="columns browse button-container small-5 large-6 medium-5">
           {{#link-to "browse"}}
-            <div class="button light">
+            <div class="browse-button button light">
               {{t 'home.order_goods.action'}}
               <i class="fa fa-shopping-cart" aria-hidden="true"></i>
             </div>
           {{/link-to}}
         </div>
-        <div class="columns button-container small-6">
+        <div class="columns booking button-container small-5 large-6 medium-5">
           {{book-appointment buttonStyle='light'}}
         </div>
       </div>

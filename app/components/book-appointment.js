@@ -1,6 +1,10 @@
 import Ember from "ember";
 
 export default Ember.Component.extend({
+  isMyOrdersRoute: Ember.computed("router", function() {
+    return this.get("router").currentPath === "my_orders";
+  }),
+
   isDetailsComplete() {
     const user = this.get("session.currentUser");
     if (!user) {

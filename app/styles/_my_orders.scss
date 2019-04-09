@@ -1,11 +1,32 @@
 .my_orders{
   .content {
     // ---- ACTION BUTTONS ('Browse goods', 'Book appointment')
+    .booking.button-container{
+      @media #{$small-only} {
+        margin-right: 2%;
+      }
+    }
+    .browse.button-container{
+      @media #{$small-only} {
+        margin-left: 2%;
+      }
+    }
+
     .button-container {
       text-align: center;
       .button {
-        width: 80%;
-        font-size: 0.8em;
+        @media #{$small-only} {
+          width: 100%;
+          font-size: 0.6em;
+        }
+        @media #{$medium-only} {
+          width: 100%;
+          font-size: 0.6em;
+        }
+        @media #{$large-only}{
+          width: 80%;
+          font-size: 0.8em;
+        }
         margin-top: 1.25rem;
         margin-bottom: 1.25rem;
         .fa {
@@ -66,10 +87,8 @@
       // ---- TABS (BOOKING/GOODS/...)
       .tabs .tab {
         text-align: center;
-        opacity: 0.5;
         cursor: pointer;
         &.active {
-          opacity: 1;
           &.active-tab{
             border-bottom: 3px solid #334f75;
           }

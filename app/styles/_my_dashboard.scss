@@ -19,12 +19,9 @@
   .tabs .tab {
     text-align: center;
     color: white;
-    opacity: 0.5;
     cursor: pointer;
 
     &.active {
-      opacity: 1;
-
       &.active-tab {
         border-bottom: 3px solid #334f75;
       }
