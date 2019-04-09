@@ -1,7 +1,7 @@
 {{#if session.isLoggedIn}}
   <div class="button book-appointment {{if buttonStyle buttonStyle 'small action' }}" {{action "redirectAsPerUserDetails"}}>
-    {{t (if isMyOrdersRoute "home.visit.new_appointment" "home.visit.action")}}
     <i class="fa fa-calendar"></i>
+    {{t (if isMyOrdersRoute "home.visit.new_appointment" "home.visit.action")}}
   </div>
 {{else}}
   {{#link-to "login" (query-params bookAppointment=true)}}
