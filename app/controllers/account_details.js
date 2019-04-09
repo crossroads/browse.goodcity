@@ -114,7 +114,7 @@ export default Ember.Controller.extend({
         first_name: user.get("firstName"),
         last_name: user.get("lastName"),
         mobile: this.mobileParam(user),
-        email: user.get("email"),
+        email: this.emailParam(user),
         title: title
       }
     };
@@ -132,6 +132,11 @@ export default Ember.Controller.extend({
     } else {
       return "+852" + this.get("mobilePhone");
     }
+  },
+
+  emailParam(user) {
+    var email = user && user.get("emaail");
+    return email && email.length ? email : this.get("email");
   },
 
   actions: {
