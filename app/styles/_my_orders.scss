@@ -84,20 +84,6 @@
         }
       }
 
-      // ---- TABS (BOOKING/GOODS/...)
-      .tabs .tab {
-        text-align: center;
-        cursor: pointer;
-        &.active {
-          &.active-tab{
-            border-bottom: 3px solid #334f75;
-          }
-        }
-        .fa {
-          margin-right: 0.5rem;
-        }
-      }
-
       .tabs.tab-icons{
         margin-top: 0.6rem;
         i {

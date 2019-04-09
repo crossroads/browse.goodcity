@@ -18,10 +18,14 @@
 
   .tabs .tab {
     text-align: center;
-    color: white;
     cursor: pointer;
-
+    .item-menu{
+      color: #a3aab6;
+    }
     &.active {
+      .item-menu {
+        color: white;
+      }
       &.active-tab {
         border-bottom: 3px solid #334f75;
       }
