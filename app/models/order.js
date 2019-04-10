@@ -97,15 +97,15 @@ export default Model.extend({
     }
   ),
 
-  clientIdNumber: Ember.computed("beneficiary", function() {
+  clientIdNumber: Ember.computed("beneficiary.identityNumber", function() {
     return this.get("beneficiary.identityNumber");
   }),
 
-  clientName: Ember.computed("beneficiary", function() {
+  clientName: Ember.computed("beneficiary.fullName", function() {
     return this.get("beneficiary.fullName");
   }),
 
-  clientPhone: Ember.computed("beneficiary", function() {
+  clientPhone: Ember.computed("beneficiary.phoneNumber", function() {
     return this.get("beneficiary.phoneNumber");
   }),
 
