@@ -15,14 +15,8 @@
     .button-container {
       text-align: center;
       .button {
-        @media #{$small-only} {
-          width: 100%;
-          font-size: 0.6em;
-        }
-        @media #{$medium-only} {
-          width: 100%;
-          font-size: 0.6em;
-        }
+        width: 100%;
+        font-size: 0.6em;
         @media #{$large-only}{
           width: 80%;
           font-size: 0.8em;

@@ -3,8 +3,9 @@ import accountDetails from "./account_details";
 export default accountDetails.extend({
   setupController(controller, model, transition) {
     this._super(...arguments);
-    this.controllerFor("application").set("showSidebar", true);
-    this.controllerFor("application").set(
+    let applicationController = this.controllerFor("application");
+    applicationController.set("showSidebar", true);
+    applicationController.set(
       "pageTitle",
       this.get("i18n").t("my_dashboard.title")
     );
