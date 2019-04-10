@@ -58,6 +58,7 @@ function pluralize(name) {
 }
 
 module("Acceptance | My Orders Page", {
+  needs: ["service:subscription"],
   beforeEach: function() {
     App = startApp();
     pkgType = make("package_type_with_packages");
@@ -71,12 +72,12 @@ module("Acceptance | My Orders Page", {
     order_transport = make("order_transport", {
       scheduledAt: new Date(2018, 10, 19, 16, 0)
     });
-    order = make("order", {
-      state: "submitted",
-      orderTransportId: order_transport.get("id"),
-      orderTransport: order_transport,
-      ordersPackages: [orders_package]
-    });
+    order = orders_package.get("order");
+    order.set("orderTransportId", order_transport.get("id"));
+    order.set("orderTransport", order_transport);
+    order.set("ordersPackages", [orders_package]);
+    order.set("state", "submitted");
+    order.save();
     order_transport2 = make("order_transport");
     order2 = make("order", {
       orderTransportId: order_transport2.get("id"),
@@ -109,6 +110,9 @@ module("Acceptance | My Orders Page", {
       order_transport.toJSON({ includeId: true }),
       order_transport2.toJSON({ includeId: true })
     ]);
+    doMock("goodcity_request", {
+      goodcity_requests: []
+    });
     doMock("order", {
       orders: [
         order.toJSON({ includeId: true }),

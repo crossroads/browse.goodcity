@@ -4,15 +4,23 @@ import Ember from "ember";
 export default AuthorizeRoute.extend({
   currentRouteName: null,
 
+  loadIfAbsent(modelName, id) {
+    let store = this.get("store");
+    let cachedRecord = store.peekRecord(modelName, id);
+    if (cachedRecord) {
+      return Ember.RSVP.resolve(cachedRecord);
+    }
+    return store.findRecord(modelName, id, { reload: true });
+  },
+
   beforeModel() {
     this.set("currentRouteName", this.routeName);
   },
+
   model(params) {
     return Ember.RSVP.hash({
       packageCategories: this.store.peekAll("package_category"),
-      order:
-        this.store.peekRecord("order", params.order_id) ||
-        this.store.findRecord("order", params.order_id, { reload: true })
+      order: this.loadIfAbsent("order", params.order_id)
     });
   },
 

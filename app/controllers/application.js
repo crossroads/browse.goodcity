@@ -7,7 +7,7 @@ const { getOwner } = Ember;
 export default Ember.Controller.extend({
   isMobileApp: config.cordova.enabled,
   appVersion: config.APP.VERSION,
-  subscription: Ember.inject.controller(),
+  subscription: Ember.inject.service(),
   messageBox: Ember.inject.service(),
   loggedInUser: false,
   i18n: Ember.inject.service(),
@@ -15,7 +15,7 @@ export default Ember.Controller.extend({
   moveSidebarToRight: true,
 
   initSubscription: Ember.on("init", function() {
-    this.get("subscription").send("wire");
+    this.get("subscription").wire();
   }),
 
   displayCart: false,
@@ -140,6 +140,7 @@ export default Ember.Controller.extend({
     },
 
     logMeOut() {
+      this.get("subscription").unwire();
       this.session.clear(); // this should be first since it updates isLoggedIn status
       this.unloadModels();
       this.toggleProperty("loggedInUser");
