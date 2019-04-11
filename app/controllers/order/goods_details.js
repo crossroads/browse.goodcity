@@ -14,12 +14,13 @@ export default Ember.Controller.extend(cancelOrder, {
   qty: null,
   otherDetails: "",
   sortProperties: ["id"],
-  sortedGcRequests: Ember.computed("gcRequests.[]", function() {
-    return this.get("gcRequests");
-  }),
+  sortedGcRequests: Ember.computed.sort(
+    "order.goodcityRequests",
+    "sortProperties"
+  ),
 
-  hasNoGcRequests: Ember.computed("model.goodcityRequests", function() {
-    return !this.get("model.goodcityRequests").length;
+  hasNoGcRequests: Ember.computed("order.goodcityRequests", function() {
+    return !this.get("order.goodcityRequests").length;
   }),
 
   actions: {

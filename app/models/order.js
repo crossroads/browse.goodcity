@@ -97,17 +97,11 @@ export default Model.extend({
     }
   ),
 
-  clientIdNumber: Ember.computed("beneficiary", function() {
-    return this.get("beneficiary.identityNumber");
-  }),
+  clientIdNumber: Ember.computed.alias("beneficiary.identityNumber"),
 
-  clientName: Ember.computed("beneficiary", function() {
-    return this.get("beneficiary.fullName");
-  }),
+  clientName: Ember.computed.alias("beneficiary.fullName"),
 
-  clientPhone: Ember.computed("beneficiary", function() {
-    return this.get("beneficiary.phoneNumber");
-  }),
+  clientPhone: Ember.computed.alias("beneficiary.phoneNumber"),
 
   appointmentTransport: Ember.computed(
     "orderTransport.transportType",
