@@ -14,12 +14,9 @@ export default Ember.Controller.extend(cancelOrder, {
   qty: null,
   otherDetails: "",
   sortProperties: ["id"],
-  sortedGcRequests: Ember.computed(
+  sortedGcRequests: Ember.computed.sort(
     "order.goodcityRequests",
-    "sortProperties",
-    function() {
-      return this.get("order.goodcityRequests");
-    }
+    "sortProperties"
   ),
 
   hasNoGcRequests: Ember.computed("order.goodcityRequests", function() {
