@@ -135,7 +135,7 @@ export default Ember.Controller.extend({
   },
 
   emailParam(user) {
-    var email = user && user.get("emaail");
+    var email = user && user.get("email");
     return email && email.length ? email : this.get("email");
   },
 
