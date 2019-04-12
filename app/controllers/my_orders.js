@@ -16,7 +16,7 @@ export default applicationController.extend({
   isMyOrdersRoute: Ember.computed(
     "applicationController.currentPath",
     function() {
-      return this.get("applicationController.currentPath");
+      return this.get("applicationController.currentPath") === "my_orders";
     }
   ),
 

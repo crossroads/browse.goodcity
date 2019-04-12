@@ -277,7 +277,7 @@ export default {
     account: {
       account_text: "Account",
       name: "Name",
-      account_details: "Account Details",
+      your_details: "Your Details",
       verified_text: "verified"
     }
   },
