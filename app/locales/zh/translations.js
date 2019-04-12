@@ -113,6 +113,7 @@ export default {
       title: "親臨國際十字路會",
       subtitle: "親臨本會挑選物資",
       action: "預約時間",
+      new_appointment: "New Appointment",
       guide_intro: `
         如果您代表任何在香港特別行政區註冊的非牟利機構或是香港政府屬下社會福利機構，您可以申請預約時間親臨本會挑選物資。以下是申請程序:
       `,
