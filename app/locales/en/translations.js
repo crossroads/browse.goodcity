@@ -119,6 +119,7 @@ export default {
       title: "Visit our distribution center",
       subtitle: "Choose goods in-person.",
       action: "Book appointment",
+      new_appointment: "New Appointment",
       guide_intro: `
         If you represent a Hong Kong non-profit or social welfare or social welfare organisation
         you can book an appointment for yourself or your client to select goods from our Tuen Mun
@@ -272,12 +273,11 @@ export default {
 
   my_dashboard: {
     title: "My Dashboard",
-    updates: "Updates",
     orders: "Orders",
     account: {
       account_text: "Account",
       name: "Name",
-      account_details: "Account Details",
+      your_details: "Your Details",
       verified_text: "verified"
     }
   },

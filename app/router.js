@@ -22,7 +22,6 @@ Router.map(function() {
 
   this.route("my_orders");
   this.route("my_account");
-  this.route("my_updates");
 
   this.route("orders", function() {
     this.route("detail", { path: "/:order_id" });

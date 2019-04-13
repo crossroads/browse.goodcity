@@ -18,13 +18,14 @@
 
   .tabs .tab {
     text-align: center;
-    color: white;
-    opacity: 0.5;
     cursor: pointer;
-
+    .item-menu{
+      color: #a3aab6;
+    }
     &.active {
-      opacity: 1;
-
+      .item-menu {
+        color: white;
+      }
       &.active-tab {
         border-bottom: 3px solid #334f75;
       }
