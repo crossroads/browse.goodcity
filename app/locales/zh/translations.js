@@ -425,6 +425,7 @@ export default {
       name_instruction: "在身份證明文件中顯示",
       name_warning: "您必須在此輸入您的名稱。",
       phone_number: "服務對象的聯絡電話號碼",
+      mobile_warning: "Please enter a valid HK number.",
       for_client: "Is this order bieng placed on behalf of a client?",
       phone_number_instruction: "我們將會用此號碼確認行程和資料。",
       hk_id_instruction: {
