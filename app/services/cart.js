@@ -17,7 +17,13 @@ const Service = ArrayProxy.extend({
   onPackageUpdate({ record, operation }) {
     let packageId = record.id.toString();
     let pkg = this.get("store").peekRecord("package", packageId);
-    let cartItem = this.get("cart.content")
+    let cartContent = this.get("cart.content");
+
+    if (!cartContent) {
+      return;
+    }
+
+    let cartItem = cartContent
       .filterBy("modelType", "package")
       .findBy("id", packageId);
 

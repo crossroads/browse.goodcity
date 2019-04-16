@@ -88,7 +88,9 @@ export default Ember.Controller.extend({
       this.get("cart").set("checkout", true);
       this.transitionToRoute("request_purpose", {
         queryParams: {
-          bookAppointment: false
+          onlineOrder: true,
+          bookAppointment: false,
+          orderId: null
         }
       });
     } else {
