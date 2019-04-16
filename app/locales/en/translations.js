@@ -582,5 +582,165 @@ export default {
       info:
         "Please review the information below and then submit.</br>If you need to change something, click 'back'."
     }
+  },
+  terms: {
+    title: "Terms and Conditions",
+    info:
+      'GoodCity.hk is part of the Crossroads Foundation network. By using the GoodCity.hk website http://www.goodcity.hk ("GoodCity Website") you are agreeing to be bound by these terms of use between you and the Crossroads Foundation and its affiliates ("Crossroads", "us", "we" and "our").',
+    agreement: {
+      title: "Your Agreement",
+      terms_of_use:
+        "You agree to use the GoodCity Website in accordance with these terms of use.",
+      use_authority:
+        "You agree to use the GoodCity Website only for your personal use. If you are using the GoodCity Website on behalf of a company, partnership, association, government or other organisation, you represent and warrant that you are authorised to do so and that you are authorised to bind your organisation to these terms of use.",
+      lawful_use:
+        "You agree to use the GoodCity Website only for lawful purposes.",
+      security:
+        "You agree not to take any action that might compromise the security of the GoodCity Website, render the GoodCity Website inaccessible to others or otherwise cause damage to the GoodCity Website or its content.",
+      access_attempt:
+        "You agree not to attempt to access any parts of the GoodCity Website that are not intended for you;",
+      website_rights:
+        "You agree not to use the GoodCity Website in any manner that might interfere with the rights of third parties."
+    },
+    changes: {
+      title: "Changes to these Terms of Use",
+      info:
+        "We may from time to time issue, revise or add specific instructions, policies and terms applicable to your use of the GoodCity Website and these instructions, policies and terms form part of these terms of use. Please read the GoodCity Website terms of use carefully and come back to review them from time to time. By continuing to use the GoodCity Website after any amendment to the terms of use you are agreeing to these terms of use as amended.",
+      contact_us:
+        "If you have any questions about the GoodCity Website terms of use, please contact us at"
+    },
+    account: {
+      title: "Account Details",
+      info:
+        "Your GoodCity account name remains our property and we can reclaim and reuse the account name once your account is terminated or deactivated for whatever reason by either you or us. You are responsible for safeguarding any passwords used to access your account and the GoodCity Website. You will promptly notify us at privacy@crossroads.org.hk if you believe that your password or account has been compromised."
+    },
+    privacy: {
+      title: "Privacy Policy",
+      info:
+        "Your privacy is very important to us. We have prepared a Personal Information Collection Statement (PICS) which outlines our policies and practices with respect to the personal data you may be asked to provide when registering to receive items through GoodCity.HK.",
+      pics: "The PICS is available to view",
+      privacy_link: "The full Crossroads privacy policy is available to view",
+      use:
+        "These policies are incorporated into and form part of these GoodCity Website terms of use.",
+      here: "here"
+    },
+    intellectual: {
+      title: "Intellectual Property",
+      info:
+        "All intellectual property rights in the GoodCity Website (including any future updates, upgrades and new versions) and any connected or related applications, systems and services shall continue to belong to us and our licensors. You have no right to use our intellectual property rights except to the extent expressly permitted by us. In particular, you have no right to use our trade marks or product names, logos, domain names or other distinctive brand features without our prior written consent.",
+      grant:
+        "We grant you a personal, non-exclusive, non-sublicensable, non-transferrable, royalty-free and revocable licence to use the GoodCity Website only in accordance with these terms of use.",
+      unauthorised_access:
+        "You may not copy, modify, reverse engineer or extract any information, source codes or underlying HTML from the GoodCity Website or any connected or related applications, systems or services, except to the extent that we may not prohibit you from doing so under applicable law or you have our prior written consent to do so. You will not use the GoodCity Website in conjunction with any application or other technology that attempts to do any of the foregoing or which otherwise causes the GoodCity Website to operate in an unauthorised manner."
+    },
+
+    content: {
+      title: "Your Content",
+      info:
+        "When you submit, upload, transmit or display any photographs, data, information, media or other content in connection with your use of the GoodCity Website (“Your ontent”), you understand and agree tha:",
+      responsible:
+        "You will continue to own and be responsible for Your Content.",
+      no_sell: "We will not sell Your Content to any third party.",
+      privacy_policy:
+        "Our use of Your Content will be subject to our Privacy Policy.",
+      right_to_use:
+        "You are giving us and our affiliate companies the right to use Your Content (with no fees or charges payable by us to you) to provide our services and for the purposes of promoting, developing and trying to improve our services, including new services that we may provide in the future.",
+      share:
+        "We may share Your Content with third parties that we work with to help provide, promote, develop and improve our services, but these third parties (other than our affiliate companies) will not make any separate use of Your Content for their own purposes (i.e. for any purposes that are not related to our services) and",
+      suggestions:
+        "Any comments or suggestions you may provide regarding the GoodCity Website are entirely voluntary and we will be free to use such comments and suggestions in our discretion without any obligation to you."
+    },
+    warranty: {
+      title: "Warranty and Disclaimer",
+      info:
+        "We warrant that we will provide the GoodCity Website and the services relating to it using reasonable care and skill. However, apart from this warranty, we make no representation or warranty and give no undertaking in relation to our services, our software or any content submitted, transmitted or displayed by our services, including any representation, warranty or undertaking that the GoodCity Website or any software, content or information provided to you by it will be secure or error-free or that the GoodCity Website will be compatible with your device or any software operating on it or fit for a particular purpose. The GoodCity Website is provided on an “as is” and “as available” basis."
+    },
+    liability: {
+      title: "Liability",
+      info:
+        "The total aggregate liability of us and our affiliated companies in connection with the GoodCity Website, arising out of any circumstances, shall be limited to USD100.",
+      exclude:
+        "Nothing in these terms of use shall limit or exclude any liability for any loss arising from death or personal injury caused by negligence, for fraudulent misrepresentation or for any other liability, to the extent that any such liability cannot be limited or excluded by law.",
+      indemnify_us:
+        "You agree to indemnify us and hold us harmless against any liability or loss incurred by us arising in connection with your breach of these terms of use."
+    },
+    policy_to_children: {
+      title: "Our Policy Towards Children",
+      info:
+        "The GoodCity Website is not intended for use by children. Unfortunately, we cannot always determine the age of users to our site. Please do not use the GoodCity Website if you are under 18 years of age."
+    },
+    general: {
+      title: "General",
+      info:
+        "These GoodCity Website terms of use are the entire agreement between you and us in relation to the GoodCity Website. You agree that you will have no claim against us for any statement which is not explicitly set out in these terms of use. No delay in enforcing any provision of these terms of use shall be construed to be a waiver of any rights under that provision. Any rights and obligations under these terms of use which by their nature should survive, including but not limited to any obligations in relation to the liability of the respective parties, will remain in effect after termination or expiration of these terms of use.",
+      hk_law:
+        "These terms of use and any dispute or claim arising out of or in connection with them shall be governed by the laws of the Hong Kong Special Administrative Region. All legal proceedings arising out or in connection with these terms of use shall be non-exclusively brought in the courts of the Hong Kong Special Administrative Region.",
+      language:
+        "Where there is any inconsistency between the English and any other language versions of these terms of use, the English language version will prevail."
+    },
+    contact: {
+      title: "Contact Us",
+      info:
+        "If you have any questions or concerns regarding the GoodCity Website or these terms of use please contact us at"
+    }
+  },
+  pics: {
+    title: "Personal Information",
+    confidentiality:
+      'Crossroads Foundation is committed to protecting the confidentiality and security of the personal data that we collect in the course of our activities, including through the GoodCity.HK website at www.goodcity.hk ("we", "us", "our", "Crossroads" and "GoodCity.HK")',
+    ask_to_access:
+      "This Personal Information Collection Statement (PICS) outlines our policies and practices with respect to the personal data you may be asked to provide when you register to receive items through GoodCity.HK. Our full privacy policy is available to view",
+    here: "here",
+    change_privacy_policy:
+      "We pledge to comply with the requirements of the Personal Data (Privacy) Ordinance in Hong Kong. We may change this PICS or our privacy policy from time to time by updating and re-posting them here. Your continued use of GoodCity.HK will mean that you accept these changes.",
+    child:
+      "If you are under 18 years old, please ask your parents or guardian before using GoodCity.HK.",
+    commitement_to_you: "Our Commitment to You",
+    use_purposely:
+      "We only use the personal data that you provide to us for the purpose for which it is collected or a directly related purpose;",
+    will_not_sell_dara:
+      "We will not sell or pass your personal data to any other organisation without your knowledge (or consent, as required);",
+    unsubscribe:
+      "We will always give you the opportunity to unsubscribe from our communications;",
+    questions:
+      "We take our obligations under the law seriously and want to hear from you if you have any questions or concerns;",
+    personal_data_collected: "Personal Data Collected",
+    provide_data_to_use_services:
+      "When you register with GoodCity.HK we may ask you to provide the following personal data. Please note that it is mandatory for you to provide certain categories of personal data as specified at the time of collection. Without this data we may not be able to provide you with our products and services:",
+    contact_details: "your name, address, email, phone and fax numbers;",
+    gender_and_dob: "your gender and date of birth;",
+    financial_information:
+      "financial information such as credit card information (if you make a payment to us) and bank account details (if we are making payment to you by direct debit);",
+    personal_identifier:
+      "a personal identifier such as passport or other official document or case number. Save in exceptional circumstances, we will not collect or retain HKID card numbers;",
+    responses_to_feedback: "your responses to surveys or feedback.",
+    purpose_and_use: "Purpose and Use",
+    will_use_data_for_following:
+      "We may use the personal data that you provide to us for the following purposes and purposes directly related to them:",
+    new_or_any_invitation:
+      "at your request, or subject to your consent having been given, to deliver news, updates and invitations on our activities, programs, products, research and upcoming events;",
+    respond_to_your_questions: "to respond to your enquiries or suggestions;",
+    to_process_feedback:
+      "to process feedback and to follow up with you on your enquiries;",
+    requested_by_govt_or_legal_claim:
+      "as permitted or required by law or regulation, or as requested by government authorities or to establish or exercise our legal rights or defend against legal claims;",
+    deliver_items_to_you:
+      "to deliver items to you and facilitate your requests;",
+    improve_services:
+      "to improve our services, activities, products and content and for statistical and other analysis to help us improve our effectiveness;",
+    prevent_crime:
+      "to prevent or detect a crime or possible criminal activity.",
+    third_parties: "Third Parties",
+    third_party_organisations:
+      "We may retain other organisations and individuals to perform functions on our behalf, such as our logistics partner GoGoVan. Such third parties may be provided with access to such of your personal data as needed to perform their functions, but we do not authorise them to use that data for any other purpose. Those third parties may be located outside Hong Kong. Our policy is to select reputable service providers who have the technical competence and organisational measures to meet our needs and who have a good track record on data protection.",
+    social_welfare_dept:
+      "If you have been referred by an organisation (such as the Social Welfare Department or another organisation), we may need to discuss your case with them and accordingly there will be a disclosure or transfer of your personal data as part of this process.",
+    crossroads_network: "Crossroads Network",
+    use_data_in_crossroads_network:
+      'Crossroads operates on a global basis. We have offices in Hong Kong and the United Kingdom. We refer to this as the "Crossroads Network". We may disclose, share and transfer your personal data within the Crossroads Network for the purposes set forth in this PICS. We require those in the Crossroads Network to adhere to the procedures of data security and confidentiality as set out in this PICS and our privacy policy.',
+    correction_of_data: "Access and Correction of Personal Data",
+    right_to_review_and_correct:
+      "You have the right to review and correct personal data given to us. If the process of reviewing or correcting your personal data incurs any costs, we may charge you a reasonable fee to do this. Should you wish to review or correct personal data or if you have any questions regarding this PICS or our privacy policy please contact us at privacy@crossroads.org.hk",
+    last_updated: "The statement was last updated in August 2014."
   }
 };
