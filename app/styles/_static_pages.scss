@@ -1,5 +1,10 @@
-.faq_list {
+.terms-title, .privacy-title{
+  @media #{$small-only} {
+   display: none;
+ }
+}
 
+.faq_list {
   p,
   li {
     @media #{$small-only} {
