@@ -1,15 +1,14 @@
-import accountDetails from "./account_details";
+import Ember from "ember";
 
-export default accountDetails.extend({
+export default Ember.Route.extend({
   setupController(controller, model, transition) {
     this._super(...arguments);
     let applicationController = this.controllerFor("application");
     applicationController.set("showSidebar", true);
-    let pageTitle =
-      transition.targetName === "terms"
-        ? this.get("i18n").t("terms.title")
-        : this.get("i18n").t("pics.title");
-    applicationController.set("pageTitle", pageTitle);
+    applicationController.set(
+      "pageTitle",
+      this.get("i18n").t(transition.targetName + ".title")
+    );
   },
 
   resetController: function(controller, isExiting) {

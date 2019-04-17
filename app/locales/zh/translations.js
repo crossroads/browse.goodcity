@@ -633,7 +633,7 @@ export default {
       info: "假如閣下對好人好市網站或這些使用條款有任何問題或疑問，請聯絡我們"
     }
   },
-  pics: {
+  privacy: {
     title: "個人資料",
     confidentiality:
       "十字路會全力保護在活動中，包括從好人好市的網站www.goodcity.hk（「我們」、「我們的」、「十字路會」」及「好人好市.HK」）上收集的個人資料，確保不會外洩。",

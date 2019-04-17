@@ -685,7 +685,7 @@ export default {
         "If you have any questions or concerns regarding the GoodCity Website or these terms of use please contact us at"
     }
   },
-  pics: {
+  privacy: {
     title: "Personal Information",
     confidentiality:
       'Crossroads Foundation is committed to protecting the confidentiality and security of the personal data that we collect in the course of our activities, including through the GoodCity.HK website at www.goodcity.hk ("we", "us", "our", "Crossroads" and "GoodCity.HK")',
