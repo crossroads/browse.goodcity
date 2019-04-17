@@ -827,9 +827,11 @@ export default {
       answer6:
         "No. But if you are a company offering a volume of goods outside Hong Kong you can use another service we developed called",
       global_hand: "Global Hand.",
+
       answer7: {
         hk:
           "Hong Kong is uniquely positioned to have the world’s most efficient system for charitable goods donation: high population density, small distances, penetration of smart-phones, relative wealth, well organised charitable sector and a climate of growing social awareness.",
+
         crossroads:
           "The Crossroads Foundation has been facilitating donated goods in Hong Kong since 1995 and has developed numerous complex online services (e.g. business.un.org) making it an organisation uniquely placed to realise this opportunity."
       }
