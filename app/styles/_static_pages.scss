@@ -5,6 +5,7 @@
 }
 
 .faq_list {
+  padding: 1em;
   p,
   li {
     @media #{$small-only} {

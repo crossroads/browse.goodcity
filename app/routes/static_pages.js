@@ -7,7 +7,7 @@ export default Ember.Route.extend({
     applicationController.set("showSidebar", true);
     applicationController.set(
       "pageTitle",
-      this.get("i18n").t(transition.targetName + ".title")
+      this.get("i18n").t(`${transition.targetName}.title`)
     );
   },
 

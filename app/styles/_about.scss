@@ -7,12 +7,13 @@
   position: relative;
   color: white;
   text-align: center;
-  padding: 0.9rem;
+  padding: 1em;
   border-bottom: 1px solid #334f75;
 
   // Content
   .section_subtitle{
     text-align: center;
+    padding-bottom: 3%;
     @media #{small-only}{
       width: 100%;
     }
@@ -24,19 +25,19 @@
   .section_title, .section_subtitle{
     font-family: $header-font-family;
     font-weight: bold;
-    font-size: 120%;
+    font-size: 1.3em;
   }
   .section_subtitle {
-    font-size: 110%;
+    font-size: 1.1em;
   }
 
   .section_text {
     text-align: left;
-    padding-left: 2rem;
-    padding-right: 0.5rem;
-    margin: 0 auto;
-    margin-bottom: 1rem;
-    margin-top: 1rem;
+    @media #{$large-only}{
+      padding-left: 2rem;
+      padding-right: 0.5rem;
+    }
+    margin: 1em auto;
     max-width: 30rem;
 
     .step {
@@ -68,7 +69,7 @@
       margin-top: 1rem;
       font-size: 0.7em;
       .fa {
-        margin-left: 10px;
+        margin-right: 10px;
       }
     }
 
