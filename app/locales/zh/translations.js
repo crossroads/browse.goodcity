@@ -74,6 +74,21 @@ export default {
     introduction:
       "為香港的非牟利機構及社會福利組織或其服務對使用者提供優質的捐贈物品",
     faq_text: "受惠資格及常見問題",
+    order_goods: {
+      title: "隨時瀏覽選取優質物資",
+      subtitle: "隨時瀏覽，安排運送。",
+      action: "瀏覽物資"
+    },
+    visit: {
+      title: "親臨國際十字路會",
+      subtitle: "親臨本會挑選物資",
+      action: "預約時間",
+      new_appointment: "New Appointment"
+    }
+  },
+
+  about: {
+    title: "About",
     user_guide_title: "使用指南",
     tap_button: "立即開始",
     coming_soon: "即將面世",
@@ -87,7 +102,6 @@ export default {
 
     order_goods: {
       title: "隨時瀏覽選取優質物資",
-      subtitle: "隨時瀏覽，安排運送。",
       action: "瀏覽物資",
       step_1: {
         desc: "於網上瀏覽一系列可供選取物資"
@@ -112,7 +126,6 @@ export default {
 
     visit: {
       title: "親臨國際十字路會",
-      subtitle: "親臨本會挑選物資",
       action: "預約時間",
       new_appointment: "New Appointment",
       guide_intro: `
@@ -686,5 +699,78 @@ export default {
     right_to_review_and_correct:
       "您有權利閱覽及更改您所提供的個人資料。假如閱覽或更新的過程中產生任何費用，我們或會向您收取合理的費用。假如您希望閱覽或更新個人資料，或有任何關於此PICS或我們的私隱政策的疑問，歡迎隨時聯絡我們，電郵為：privacy@crossroads.org.hk",
     last_updated: "本聲明最後更新日期為2014年8月。"
+  },
+
+  faq: {
+    title: "常見問題",
+    description: "「妥當配物資，快捷助我城」為好人好市之目標。",
+    questions: {
+      question1: "好人好市接收甚麼類型的物資？",
+      question2: "審查員根據甚麼標準接收物資？",
+      question3: "有哪幾種貨運方法？",
+      question4: "我可以邀請別人使用好人好市應用程式嗎？",
+      question5: "甚麼人受惠於這些物資呢？",
+      question6: "身在在海外也可以捐出物資嗎？",
+      question7: "為何選址香港？"
+    },
+
+    answers: {
+      answer1: {
+        good_condition:
+          "我們重視物資的狀況是否良好，以示對慈善團體及受惠人士的尊重。",
+        useful:
+          "使用好人好市，只需幾分鐘的審查，您就能知道您捐出的物資是否能夠幫助別人。常見的物資有傢俱、家庭用品、電腦、電器等。"
+      },
+
+      answer2: {
+        review:
+          "我們的審查員會考慮當時的供求情況，並考慮不同物資可能帶來的限制，例如是否符合品質要求、大小限制、安全標準，運輸會否有困難，是否符合當地電壓、兼容、設計的要求等。",
+        messaging:
+          "審查員會透過好人好市應用程式裏的通訊功能，查詢有關捐贈物資的資料。這樣，您就不用填寫複雜冗長的表格。大部分的情況中，只要有相片及簡短的描述就足夠了。",
+        supervisors:
+          "審查員亦能夠即時知會專業的管理員，他們大多擁有五年或以上在香港處理捐贈物資的經驗。他們處理過很多罕見的物資捐獻，例如是商業用披薩烤箱、十萬件全新西裝、大量假花裝飾等。面對這些古怪又實用的物資，他們非常清楚該如何處理。"
+      },
+      answer3: {
+        gogovan:
+          "<b>租用貨車，快捷妥當：</b> 通過我們的應用程式，您能夠預約貨車，這是運送物資的最快方法。您直接付款給司機。",
+        drop_off:
+          "<b>親自運送：</b> 通過我們的應用程式，您能夠預約時間，將物資親自送到我們位於屯門的辦公室。"
+      },
+      answer4:
+        "社工及慈善機構員工能使用好人好市的特別版網站和手機程式，目前只有受邀機構和人士可以使用特別版程式，但我們希望最終能夠開放給香港所有的註冊社工及慈善機構使用。",
+
+      answer5: {
+        title: "我們幫助不同社群的需要：",
+        community: "社區/文化團體",
+        drug: "濫藥更新人士",
+        education: "教育機構",
+        elderly: "長者",
+        environmental: "環保團體",
+        families: "有需要的家庭",
+        medical_n_hospitals: "醫護診所及醫院",
+        orphanages: "孤兒院",
+        special_needs: "特殊需要人士",
+        risk: "高危人士",
+        rehabilitation: "復康服務",
+        service_orgs: "服務機構",
+        social_enterprise: "社會企業",
+        sports: "殘疾人士體育計劃",
+        suicide_prevention: "防止自殺服務",
+        domestic_workers: "家傭",
+        new_arrivals: "新移民",
+        women: "婦女",
+        vocational_training: "職業培訓計劃",
+        animals_welfare: "動物福利"
+      },
+      answer6:
+        "不可以。但如果您以公司身份從海外捐出大量物資，您就能夠使用我們的另一服務：",
+      global_hand: "環球援手",
+      answer7: {
+        hk:
+          "香港的地理位置非常獨特，非常適合處理慈善物資捐獻，是全世界最有效率的地方，因為：人口密度高，相對富裕，智能電話極普及，慈善工作井然有序，公民意識亦逐漸成型。"
+      },
+      crossroads:
+        "十字路會自1995年開始於香港處理各界捐贈的物資，至今發展出各種網上服務（如business.un.org）。這讓我們成為一個獨特的機構，擔當着十字路口的角色，聯繫捐贈物資的供求。"
+    }
   }
 };

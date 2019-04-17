@@ -80,6 +80,21 @@ export default {
     introduction:
       "Helping Hong Kong’s charities & Social Welfare agencies receive quality donated goods for their facilities and beneficiaries.",
     faq_text: "Eligibility and frequently asked questions.",
+    order_goods: {
+      title: "Get immediate access to goods!",
+      subtitle: "Instant access. Have items delivered.",
+      action: "Browse goods"
+    },
+    visit: {
+      title: "Visit our distribution center",
+      subtitle: "Choose goods in-person.",
+      action: "Book appointment",
+      new_appointment: "New Appointment"
+    }
+  },
+
+  about: {
+    title: "About",
     user_guide_title: "How it works",
     tap_button: "Tap the button below to get started",
     coming_soon: "coming soon",
@@ -93,7 +108,6 @@ export default {
 
     order_goods: {
       title: "Get immediate access to goods!",
-      subtitle: "Instant access. Have items delivered.",
       action: "Browse goods",
       step_1: {
         desc: "Browse a selection of available goods online"
@@ -118,7 +132,6 @@ export default {
 
     visit: {
       title: "Visit our distribution center",
-      subtitle: "Choose goods in-person.",
       action: "Book appointment",
       new_appointment: "New Appointment",
       guide_intro: `
@@ -743,5 +756,83 @@ export default {
     right_to_review_and_correct:
       "You have the right to review and correct personal data given to us. If the process of reviewing or correcting your personal data incurs any costs, we may charge you a reasonable fee to do this. Should you wish to review or correct personal data or if you have any questions regarding this PICS or our privacy policy please contact us at privacy@crossroads.org.hk",
     last_updated: "The statement was last updated in August 2014."
+  },
+
+  faq: {
+    title: "FAQs",
+    description:
+      "GoodCity.HK aims to be the world's most efficient city-wide service for charitable goods donations.",
+    questions: {
+      question1: "What kinds of items can be donated?",
+      question2: "How do reviewers decide what to accept?",
+      question3: "What transport options are available?",
+      question4: "How are requests for goods made?",
+      question5: "Who is helped by these goods?",
+      question6: "Can I donate goods from outside Hong Kong?",
+      question7: "Why Hong Kong?"
+    },
+
+    answers: {
+      answer1: {
+        good_condition:
+          "Items in good condition that could be a respectful gift to a charity or disadvantaged recipient.",
+        useful:
+          "With GoodCity.HK you can find out if your item(s) are helpful just by taking a photo and waiting a few moments for review. Typical donations are of furniture, household goods, computers, electrical items and much more."
+      },
+
+      answer2: {
+        review:
+          "Our reviewers see real-time supply and demand scores for every type of item. They combine this with considerations that vary for different kinds of items: quality requirements, size constraints, hazardous items, logistically difficult items, voltage, compatibility, parts and so on.",
+
+        messaging:
+          "Reviewers can ask you questions via the app's messaging features. This means we can avoid asking you to fill in complicated forms. For most items, your photos and brief notes will be enough.",
+
+        supervisors:
+          "Reviewers also have live access to expert supervisors. Our supervisors have typically been facilitating donated goods in Hong Kong for at least five years. They know how to evaluate unusual offers: like a commercial pizza oven, 100,000 new business suits, boxes of fake flowers and all manner of weird and wonderful things."
+      },
+
+      answer3: {
+        gogovan:
+          "<b>Fast commercial van hire:</b> from within our app you can book a truck. This is the fastest method and you pay the driver directly.",
+        drop_off:
+          "<b>Deliver yourself:</b> through the app you can book a time to drop the items at our Tuen Mun facility yourself."
+      },
+      answer4:
+        "Social workers and charity staff have access to a specialised website and mobile app. Currently this is by invitation only but it will ultimately be expanded to all registered social workers and charitable organisations in Hong Kong.",
+
+      answer5: {
+        title: "We serve a range of need:",
+        community: "Community/cultural groups",
+        drug: "Drug rehabilitation",
+        education: "Educational institutions",
+        elderly: "Elderly persons",
+        environmental: "Environmental care",
+        families: "Families in need",
+        medical_n_hospitals: "Medical clinics & hospitals",
+        orphanages: "Orphanages",
+        special_needs: "People with special needs",
+        risk: "People at risk",
+        rehabilitation: "Rehabilitation services",
+        service_orgs: "Service organisations",
+        social_enterprise: "Social enterprise",
+        sports: "Sports programmes for the disadvantaged",
+        suicide_prevention: "Suicide prevention services",
+        domestic_workers: "Support for domestic workers",
+        new_arrivals: "Support for new arrivals",
+        women: "Support for women",
+        vocational_training: "Vocational training programmes",
+        animals_welfare: "Welfare of animals"
+      },
+
+      answer6:
+        "No. But if you are a company offering a volume of goods outside Hong Kong you can use another service we developed called",
+      global_hand: "Global Hand.",
+      answer7: {
+        hk:
+          "Hong Kong is uniquely positioned to have the world’s most efficient system for charitable goods donation: high population density, small distances, penetration of smart-phones, relative wealth, well organised charitable sector and a climate of growing social awareness.",
+        crossroads:
+          "The Crossroads Foundation has been facilitating donated goods in Hong Kong since 1995 and has developed numerous complex online services (e.g. business.un.org) making it an organisation uniquely placed to realise this opportunity."
+      }
+    }
   }
 };
