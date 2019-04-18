@@ -1,6 +1,7 @@
 import Ember from "ember";
 
 export default Ember.Component.extend({
+  // dont remove this commented code, will need this later.
   // didDestroyElement() {
   //   let liquidContainer = Ember.$(".liquid-container");
   //   if (liquidContainer) {

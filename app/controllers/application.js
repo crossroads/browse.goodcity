@@ -10,6 +10,7 @@ export default Ember.Controller.extend({
   subscription: Ember.inject.service(),
   messageBox: Ember.inject.service(),
   loggedInUser: false,
+  isHomePage: false,
   i18n: Ember.inject.service(),
   showSidebar: true,
   moveSidebarToRight: true,
@@ -46,6 +47,21 @@ export default Ember.Controller.extend({
         "confirm_booking",
         "booking_success"
       ]);
+    }
+  ),
+
+  addMoveLeft: Ember.computed(
+    "isHomePage",
+    "hasCartItems",
+    "showOffCanvas",
+    "isMobileApp",
+    function() {
+      return (
+        this.get("showOffCanvas") &&
+        !this.get("isMobileApp") &&
+        this.get("hasCartItems") &&
+        !this.get("isHomePage")
+      );
     }
   ),
 

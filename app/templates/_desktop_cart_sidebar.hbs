@@ -1,24 +1,26 @@
-<aside class="right-off-canvas-menu menu-list cart-items">
-  <ul class="off-canvas-list menu cart-content-images">
-    <li class="cart-controls">
-      {{partial 'cart_truck_icon'}}
-      <div {{action 'displayCart'}} class="show_cart_link">{{t "show"}}</div>
-    </li>
+{{#unless isHomePage}}
+  <aside class="right-off-canvas-menu menu-list cart-items">
+      <ul class="off-canvas-list menu cart-content-images">
+        <li class="cart-controls">
+          {{partial 'cart_truck_icon'}}
+          <div {{action 'displayCart'}} class="show_cart_link">{{t "show"}}</div>
+        </li>
 
-    <div class="item-collection">
-      {{#each cart.content as |record|}}
+        <div class="item-collection">
+          {{#each cart.content as |record|}}
 
-        {{#if record.available}}
-          <li {{action "showCartItem" record.id record.modelType}}>
-            <img class="thumb-image" src="{{record.thumbImageUrl}}" />
-          </li>
-        {{else}}
-          <li>
-            <img class="thumb-image grayed-image" src="{{record.thumbImageUrl}}" />
-          </li>
-        {{/if}}
+            {{#if record.available}}
+              <li {{action "showCartItem" record.id record.modelType}}>
+                <img class="thumb-image" src="{{record.thumbImageUrl}}" />
+              </li>
+            {{else}}
+              <li>
+                <img class="thumb-image grayed-image" src="{{record.thumbImageUrl}}" />
+              </li>
+            {{/if}}
 
-      {{/each}}
-    </div>
-  </ul>
-</aside>
+          {{/each}}
+        </div>
+      </ul>
+  </aside>
+{{/unless}}

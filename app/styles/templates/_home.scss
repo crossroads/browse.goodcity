@@ -1,13 +1,46 @@
 .home_page {
+  .introduction{
+    margin-top: 10px;
+  }
+  .cart-icon{
+    @media #{$small-only} {
+      display: none;
+    }
+    @media #{$medium-only} {
+      display: none;
+    }
+  }
+  .cart {
+    &.unread {
+      position: absolute;
+      right: 0.8rem;
+
+      .unread_length {
+        line-height: 1.3rem;
+        width: 1.2rem;
+        height: 1.2rem;
+        font-size: .8rem;
+        display: block;
+        color: white;
+        text-transform: uppercase;
+        text-align: center;
+        border-radius: 50%;
+        background: #ee4c4e;
+        font-weight: 700;
+        margin-top: -.1rem;
+        float: inherit;
+      }
+    }
+  }
   #video-overlay {
-    opacity: 0.5;
+    opacity: 0.7;
     z-index: 1;
     position: absolute;
     left: 0;
-    margin-left: -7%;
+    margin-left: -8%;
     top: 0;
     @media #{$large-only} {
-      width: 120%;
+      width: 140%;
       height: 100%;
     }
     @media #{$xlarge-only} {
@@ -18,15 +51,28 @@
       width: 150%;
       height: 100%;
     }
-    background-color: #002450;
+    background-color: #1a1d21;
   }
   #video-background{
     position: absolute;
     bottom: 0px;
-    right: 0px;
+    left: -7.4em;
     min-width: 100%;
     min-height: 100%;
-    width: auto;
+    @media #{$large-only} {
+      width: auto;
+      height: auto;
+    }
+
+    @media #{$xlarge-only} {
+      width: 150%;
+      height: 100%;
+    }
+
+    @media #{$xxlarge-only} {
+      width: 180%;
+      height: 100%;
+    }
     height: auto;
     overflow: hidden;
     z-index: -1;
@@ -47,21 +93,24 @@
       width: 100%
     }
     @media #{$large-only} {
-      width: 80%;
-      margin-left: 5em;
+      width: 90%;
+      margin-left: 2em;
     }
     h1 {
-      margin: 1em 0;
       @media #{$small-only}{
+        margin: 1em 0;
         font-size: 2em;
       }
       @media #{$large-only}{
+        margin: 0.5em 0;
         font-size: 4em;
       }
       @media #{$xlarge-only} {
+        margin: 0.5em 0;
         font-size: 3em;
       }
       @media #{$xxlarge-only} {
+        margin: 0.5em 0;
         font-size: 4em;
       }
     }
