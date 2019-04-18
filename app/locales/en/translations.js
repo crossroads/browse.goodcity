@@ -223,7 +223,7 @@ export default {
   },
 
   _verification_pin: {
-    input_code: "Input 4-digit SMS code",
+    input_code: "Input 4-digit code",
     send_code: "We just send a code to",
     auth_error: "Sorry! Please enter the correct pin."
   },
