@@ -232,7 +232,7 @@ export default {
   },
 
   _resend: {
-    no_sms: "Haven't received SMS code? Please wait a few minutes",
+    no_sms: "Haven't received the code? Please wait a few minutes",
     please_wait: "Please wait...",
     resend: "Resend Code",
     back_to_phone_number: "Back to email/phone input"
