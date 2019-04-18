@@ -1,0 +1,41 @@
+.static_page_title {
+  @media #{$small-only} {
+   display: none;
+ }
+}
+
+.faq_list {
+  padding: 1em;
+  p,
+  li {
+    @media #{$small-only} {
+      font-size: 0.8rem;
+      line-height: 1.4rem;
+      margin-bottom: 0.7rem;
+      margin-top: 0.7rem;
+    }
+    @media #{$large-only} {
+      margin-left: 4em;
+      max-width: 80%;
+      font-size: 1rem;
+      line-height: 1.4;
+      margin-bottom: 1.25rem;
+      text-rendering: optimizeLegibility;
+    }
+  }
+
+  p b {
+    color: $white;
+  }
+  .question_list {
+    margin-left: 0.5rem;
+
+    li {
+      list-style: none;
+
+      a {
+        text-decoration: underline;
+      }
+    }
+  }
+}

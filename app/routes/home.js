@@ -1,3 +1,18 @@
-import PublicRoute from './browse_pages';
+import PublicRoute from "./browse_pages";
 
-export default PublicRoute.extend({});
+export default PublicRoute.extend({
+  setupController(controller, model) {
+    this._super(...arguments);
+    let applicationController = this.controllerFor("application");
+    controller.set("cartLength", applicationController.get("cartLength"));
+    controller.set("hasCartItems", applicationController.get("hasCartItems"));
+    applicationController.set("isHomePage", true);
+  },
+
+  resetController: function(controller, isExiting) {
+    this._super.apply(this, arguments);
+    if (isExiting) {
+      this.controllerFor("application").set("isHomePage", false);
+    }
+  }
+});
