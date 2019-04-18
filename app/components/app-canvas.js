@@ -9,8 +9,8 @@ export default ObserveScreenResize.extend({
 
   observeScreen: function() {
     this.get("cartscroll").resize();
-    let offCanvasWrap = Ember.$(".off-canvas-wrap");
     if (!this.screenResized()) {
+      let offCanvasWrap = Ember.$(".off-canvas-wrap");
       offCanvasWrap.addClass("move-right");
       if (!this.get("isHomePage")) {
         offCanvasWrap.addClass("move-left");

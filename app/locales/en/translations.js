@@ -80,6 +80,7 @@ export default {
     introduction:
       "Helping Hong Kong’s charities & Social Welfare agencies receive quality donated goods for their facilities and beneficiaries.",
     faq_text: "Eligibility and frequently asked questions.",
+    learn_more: "Learn More",
     order_goods: {
       title: "Get immediate access to goods!",
       subtitle: "Instant access. Have items delivered.",

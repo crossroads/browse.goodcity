@@ -1,19 +1,23 @@
 .home_page {
   .introduction{
-    margin-top: 10px;
+    @media #{$large-only}{
+      margin-top: 10px;
+    }
   }
   .cart-icon{
     @media #{$small-only} {
-      display: none;
-    }
-    @media #{$medium-only} {
       display: none;
     }
   }
   .cart {
     &.unread {
       position: absolute;
-      right: 0.8rem;
+      @media #{$large-only} {
+        right: 20%;
+      }
+      @media #{$medium-only} {
+        right: 2%;
+      }
 
       .unread_length {
         line-height: 1.3rem;

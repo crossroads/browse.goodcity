@@ -74,6 +74,7 @@ export default {
     introduction:
       "為香港的非牟利機構及社會福利組織或其服務對使用者提供優質的捐贈物品",
     faq_text: "受惠資格及常見問題",
+    learn_more: "了解更多",
     order_goods: {
       title: "隨時瀏覽選取優質物資",
       subtitle: "隨時瀏覽，安排運送。",
@@ -83,12 +84,12 @@ export default {
       title: "親臨國際十字路會",
       subtitle: "親臨本會挑選物資",
       action: "預約時間",
-      new_appointment: "New Appointment"
+      new_appointment: "新的預約"
     }
   },
 
   about: {
-    title: "About",
+    title: "關於",
     user_guide_title: "使用指南",
     tap_button: "立即開始",
     coming_soon: "即將面世",
@@ -127,7 +128,7 @@ export default {
     visit: {
       title: "親臨國際十字路會",
       action: "預約時間",
-      new_appointment: "New Appointment",
+      new_appointment: "新的預約",
       guide_intro: `
         如果您代表任何在香港特別行政區註冊的非牟利機構或是香港政府屬下社會福利機構，您可以申請預約時間親臨本會挑選物資。以下是申請程序:
       `,
@@ -269,13 +270,13 @@ export default {
   },
 
   my_dashboard: {
-    title: "My Dashboard",
-    orders: "Orders",
+    title: "我的控制頁",
+    orders: "訂單",
     account: {
-      account_text: "Account",
-      name: "Name",
-      your_details: "Your Details",
-      verified_text: "verified"
+      account_text: "帳戶",
+      name: "名稱",
+      your_details: "你的資料",
+      verified_text: "已認證"
     }
   },
 
