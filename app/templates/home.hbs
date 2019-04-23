@@ -4,51 +4,59 @@
 
 <div class="home_page">
   <div class="scroller">
-    <img src="/assets/images/gc_homepage.jpg" id="image-background" class="show-for-large-up" />
-    <div class="show-for-large-up" id="image-overlay"></div>
+    <div class="show-for-large-up">
+      <img src="/assets/images/gc_homepage.jpg" id="image-background" />
+      <div id="image-overlay"></div>
+    </div>
     <!-- Introduction -->
     <div class="content">
-        <div class="row home_section small light">
-          <div class="small-11 columns introduction">
-            {{ t "home.introduction" }}
-            {{#link-to "faq"}}
-              {{ t "home.faq_text" }}
+      <div class="row home_section small light">
+        <div class="small-11 columns introduction">
+          {{ t "home.introduction" }}
+          {{#link-to "faq"}}
+            {{ t "home.faq_text" }}
+          {{/link-to}}
+        </div>
+        {{#if hasCartItems}}
+          <div class="cart-icon small-1 columns">
+            {{#link-to "cart"}}
+              {{partial 'cart_truck_icon'}}
             {{/link-to}}
           </div>
-          {{#if hasCartItems}}
-            <div class="cart-icon small-1 columns">
-              {{#link-to "cart"}}
-                {{partial 'cart_truck_icon'}}
-              {{/link-to}}
-            </div>
-          {{/if}}
-        </div>
-        <div class="intro-text">
+        {{/if}}
+      </div>
+      <div class="row">
+        <div class="small-12 columns intro-text">
           <h1>GoodCity For Charities<br><em class="chinese" lang="zh-hant">好人好巿 (慈善組織)</em></h1>
         </div>
-        <div class="row button_container">
-          <!-- Browse button -->
-          <div class="columns home_section large-6">
-            <div class="section_title"> {{ t "home.order_goods.title" }} </div>
-            <div class="section_subtitle small"> <i class="fa fa-check"></i> {{ t "home.order_goods.subtitle" }} {{#link-to "about"}}{{t 'home.learn_more'}}{{/link-to}} </div>
-            {{#link-to "browse"}}
-              <div class="button small action">
-                <i class="fa fa-shopping-cart"></i> {{ t "home.order_goods.action" }}
-              </div>
-            {{/link-to}}
-          </div>
-
-          <!-- Visit button -->
-          <div class="columns home_section large-6">
-            <div class="section_title"> {{ t "home.visit.title" }} </div>
-            <div class="section_subtitle small">
-              <div><i class="fa fa-check"></i> {{ t "home.visit.subtitle" }} {{#link-to "about"}}{{t 'home.learn_more'}}{{/link-to}} </div>
+      </div>
+      <div class="row button_container">
+        <!-- Browse button -->
+        <div class="columns home_section large-6">
+          <div class="section_title"> {{ t "home.order_goods.title" }} </div>
+          <div class="section_subtitle small"> <i class="fa fa-check"></i> {{ t "home.order_goods.subtitle" }} {{#link-to "about"}}{{t 'home.learn_more'}}{{/link-to}} </div>
+          {{#link-to "browse"}}
+            <div class="button small action">
+              <i class="fa fa-shopping-cart"></i> {{ t "home.order_goods.action" }}
             </div>
-            {{book-appointment}}
-          </div>
+          {{/link-to}}
         </div>
-      {{ logo-banner device="desktop" }}
-      {{ logo-banner device="mobile" }}
+
+        <!-- Visit button -->
+        <div class="columns home_section large-6">
+          <div class="section_title"> {{ t "home.visit.title" }} </div>
+          <div class="section_subtitle small">
+            <div><i class="fa fa-check"></i> {{ t "home.visit.subtitle" }} {{#link-to "about"}}{{t 'home.learn_more'}}{{/link-to}} </div>
+          </div>
+          {{book-appointment}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="small-12 columns">
+          {{ logo-banner device="desktop" }}
+          {{ logo-banner device="mobile" }}
+        </div>
+      </div>
     </div>
   </div>
 </div>
