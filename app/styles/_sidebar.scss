@@ -119,7 +119,7 @@ $sidebar-width: 7.8rem;
 .off-canvas-wrap {
   @media only screen and (min-width: 71.063em) and (max-width: 120em){
     margin-left: 4rem;
-    width: 94.5%;
+    width: 100%;
   }
   @media only screen and (max-width: 71em) and (min-width: 64.0625em){
     margin-left: 2.5rem;
@@ -175,7 +175,7 @@ $sidebar-width: 7.8rem;
     -ms-transform: none;
     -o-transform: none;
     transform: none;
-    margin-left: $sidebar-width;
+    margin-left: 5.8rem;
   }
   .exit-off-canvas {
     background: rgba(0, 35, 89, 0.2);
