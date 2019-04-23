@@ -33,6 +33,7 @@ export default Ember.Service.extend(Ember.Evented, {
   socket: null,
   lastOnline: Date.now(),
   deviceTtl: 0,
+  hooks: { before: {}, after: {} },
   deviceId: Ember.computed.alias("session.deviceId"),
   status: {
     online: false
@@ -145,6 +146,18 @@ export default Ember.Service.extend(Ember.Evented, {
     }
   },
 
+  before(operation, type, func) {
+    const key = `${operation}:${type}`;
+    this.hooks.before[key] = this.hooks.before[key] || [];
+    this.hooks.before[key].push(func);
+  },
+
+  runBeforeHooks(operation, type, data) {
+    const key = `${operation}:${type}`;
+    const hooks = this.hooks.before[key] || [];
+    _.each(hooks, h => h(data));
+  },
+
   // -----------
   // Helpers
   // -----------
@@ -174,7 +187,7 @@ export default Ember.Service.extend(Ember.Evented, {
   },
 
   isUnhandled(data) {
-    let { operation, deviceId, rawType, type } = this.parseData(data);
+    let { operation, deviceId, rawType, type } = data;
 
     if (deviceId == this.get("deviceId")) {
       return true; // Change initiated by us
@@ -235,11 +248,19 @@ export default Ember.Service.extend(Ember.Evented, {
   },
 
   update_store(data, success) {
-    if (this.isUnhandled(data)) {
+    const parsedData = this.parseData(data);
+    if (this.isUnhandled(parsedData)) {
       return false;
     }
 
-    let { record, operation, deviceId, type, sender } = this.parseData(data);
+    let { operation, type } = parsedData;
+
+    this.runBeforeHooks(operation, type, parsedData);
+    this.applyChanges(parsedData, success);
+  },
+
+  applyChanges(data, success) {
+    let { record, operation, type, sender } = data;
     let task = Ember.RSVP.resolve(true);
 
     switch (operation) {
