@@ -143,6 +143,10 @@ module.exports = function(environment) {
       "https://api.cloudinary.com"
     ].join(" ");
 
+    ENV.googleAnalytics = {
+      webPropertyId: "UA-62978462-6"
+    };
+
     if ((process.env.staging || process.env.STAGING) === "true") {
       ENV.staging = true;
       ENV.APP.API_HOST_URL = "https://api-staging.goodcity.hk";
@@ -159,6 +163,10 @@ module.exports = function(environment) {
         "wss://socket-staging.goodcity.hk:81",
         "https://api.cloudinary.com"
       ].join(" ");
+
+      ENV.googleAnalytics = {
+        webPropertyId: "UA-62978462-7"
+      };
     }
   }
 
