@@ -1,0 +1,35 @@
+.my_account{
+  padding-left: 1em;
+  .section-title {
+    color: white;
+    font-family: $header-font-family;
+  }
+
+  // ---- PAIRS OF LABELS AND TEXT
+  section {
+    &:not(:last-child) {
+      border-bottom: 1px solid white;
+    }
+
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+
+    &.details {
+      .detail-row {
+        font-size: 0.9rem;
+        margin: 0.5rem 0;
+
+        .data-type {
+          @extend .columns;
+          @extend .small-4;
+        }
+
+        .data {
+          @extend .columns;
+          @extend .small-8;
+          color: white;
+        }
+      }
+    }
+  }
+}

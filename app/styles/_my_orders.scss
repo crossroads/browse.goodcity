@@ -1,29 +1,26 @@
-.my_orders {
-
-  @media #{$large-up} {
-    &.row {
-      max-width: 800px;
-      margin: 0 auto;
-    }
-  }
-
-  .title {
-    font-weight: bold;
-    font-size: 1rem;
-    color: white;
-    text-align: center;
-    margin: 1rem;
-  }
-
+.my_orders{
   .content {
-    margin: 0 auto;
-
     // ---- ACTION BUTTONS ('Browse goods', 'Book appointment')
+    .booking.button-container{
+      @media #{$small-only} {
+        margin-right: 2%;
+      }
+    }
+    .browse.button-container{
+      @media #{$small-only} {
+        margin-left: 2%;
+      }
+    }
+
     .button-container {
       text-align: center;
       .button {
-        width: 80%;
-        font-size: 0.8em;
+        width: 100%;
+        font-size: 0.6em;
+        @media #{$large-only}{
+          width: 80%;
+          font-size: 0.8em;
+        }
         margin-top: 1.25rem;
         margin-bottom: 1.25rem;
         .fa {
@@ -78,22 +75,6 @@
             font-size: 0.6rem;
             line-height: 0.6rem;
           }
-        }
-      }
-
-      // ---- TABS (BOOKING/GOODS/...)
-      .tabs .tab {
-        text-align: center;
-        opacity: 0.5;
-        cursor: pointer;
-        &.active {
-          opacity: 1;
-          &.active-tab{
-            border-bottom: 3px solid #334f75;
-          }
-        }
-        .fa {
-          margin-right: 0.5rem;
         }
       }
 
@@ -218,11 +199,7 @@
               }
             }
           }
-
         }
-
-
-
       }
     }
   }

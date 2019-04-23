@@ -11,6 +11,7 @@ export default Ember.Controller.extend({
   bookAppointment: false,
   pin: "",
   mobileOrEmail: "",
+  loginParam: Ember.computed.localStorage(),
   mobile: "",
   email: "",
 
@@ -23,7 +24,7 @@ export default Ember.Controller.extend({
   }),
 
   setMobileOrEmail() {
-    if (/^[569]\d{7}/.test(this.get("mobileOrEmail"))) {
+    if (/^[456789]\d{7}/.test(this.get("mobileOrEmail"))) {
       this.set("mobile", "+852" + this.get("mobileOrEmail"));
     } else {
       this.set("email", this.get("mobileOrEmail"));
@@ -86,6 +87,7 @@ export default Ember.Controller.extend({
       this.setMobileOrEmail();
       var mobile = this.get("mobile");
       var email = this.get("email");
+      this.set("loginParam", mobile || email);
       var loadingView = getOwner(this)
         .lookup("component:loading")
         .append();

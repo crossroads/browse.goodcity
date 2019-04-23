@@ -1,0 +1,19 @@
+<div class="row tabs tab-icons">
+  {{#link-to 'my_orders' tagName="div" classNames="small-6 orders tab columns text-center"}}
+    <i class="dashboard-menu item-menu">{{fa-icon 'shopping-cart'}}</i>
+  {{/link-to}}
+
+  {{#link-to 'my_account' tagName="div" classNames="small-6 account tab columns text-center"}}
+    <i class="dashboard-menu item-menu">{{fa-icon 'vcard'}}</i>
+  {{/link-to}}
+</div>
+
+<div class="row tabs tab-name active-tab">
+  {{#link-to 'my_orders' tagName="div" classNames="small-6 orders tab active-tab columns text-center item-menu"}}
+    {{t 'my_dashboard.orders'}}
+  {{/link-to}}
+
+  {{#link-to 'my_account' tagName="div" classNames="small-6 account active-tab tab columns text-center item-menu"}}
+    {{t 'my_dashboard.account.account_text'}}
+  {{/link-to}}
+</div>

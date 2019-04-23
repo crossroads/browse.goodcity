@@ -32,7 +32,7 @@
             <div class="row">
               {{#form-control}}
               <div class="small-12 medium-8 columns">
-                {{input value=mobileOrEmail classNames="number_input center_align_placeholder" id="mobile" type=text pattern="^([569]\d{7})|([^@\s]+@[^@\s]+)$" required='true'}}
+                {{input value=mobileOrEmail classNames="number_input center_align_placeholder" id="mobile" type=text pattern="^([456789]\d{7})|([^@\s]+@[^@\s]+)$" required='true'}}
                 <div class="small-12 columns input-error warning_empty login">
                   {{fa-icon "warning"}}&nbsp;&nbsp;{{t "login.mobile_email_warning"}}
                 </div>
