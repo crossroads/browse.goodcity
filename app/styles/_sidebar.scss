@@ -175,7 +175,7 @@ $sidebar-width: 7.8rem;
     -ms-transform: none;
     -o-transform: none;
     transform: none;
-    margin-left: 5.8rem;
+    margin-left: $sidebar-width;
   }
   .exit-off-canvas {
     background: rgba(0, 35, 89, 0.2);
