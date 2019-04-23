@@ -11,14 +11,14 @@
     <!-- Introduction -->
     <div class="content">
       <div class="row home_section small light">
-        <div class="small-11 columns introduction">
+        <div class="small-10 columns introduction">
           {{ t "home.introduction" }}
           {{#link-to "faq"}}
             {{ t "home.faq_text" }}
           {{/link-to}}
         </div>
         {{#if hasCartItems}}
-          <div class="cart-icon small-1 columns">
+          <div class="cart-icon small-2 columns">
             {{#link-to "cart"}}
               {{partial 'cart_truck_icon'}}
             {{/link-to}}
