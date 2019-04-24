@@ -1,4 +1,5 @@
 {{#unless isMobileApp}}
+<div class="banner">
   {{smart-banner
     appIdAndroid = app_id
     appIdIOS = ios_app_id
@@ -8,6 +9,7 @@
     title = appTitle
     description = 'Crossroads'
   }}
+</div>
 {{/unless}}
 {{#if cart.checkout}}
   {{outlet}}
