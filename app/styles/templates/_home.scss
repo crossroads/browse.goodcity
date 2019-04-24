@@ -135,9 +135,25 @@
   }
 
   .scroller {
-    height: 100vh;
     overflow-y: auto;
     overflow-x: hidden;
+
+    @media #{$small-only} {
+      height: 93vh;
+      padding-bottom: 8rem;
+    }
+
+    @media #{$medium-up} {
+      height: 120vh;
+      .button_container {
+        border-bottom: 1px solid;
+
+        .home_section {
+          border-bottom: none;
+        }
+      }
+    }
+
     .home_section {
       z-index: 2;
       position: relative;
