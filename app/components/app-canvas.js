@@ -12,7 +12,10 @@ export default ObserveScreenResize.extend({
     if (!this.screenResized()) {
       let offCanvasWrap = Ember.$(".off-canvas-wrap");
       offCanvasWrap.addClass("move-right");
-      if (!this.get("isHomePage")) {
+      if (this.get("isHomePage")) {
+        offCanvasWrap.addClass("home-page");
+      } else {
+        offCanvasWrap.removeClass("home-page");
         offCanvasWrap.addClass("move-left");
       }
       Ember.$(".left-off-canvas-toggle").hide();

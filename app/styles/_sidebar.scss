@@ -119,7 +119,10 @@ $sidebar-width: 7.8rem;
 .off-canvas-wrap {
   @media only screen and (min-width: 71.063em) and (max-width: 120em){
     margin-left: 4rem;
-    width: 100%;
+    width: 92%;
+    &.home-page{
+      width: 100%;
+    }
   }
   @media only screen and (max-width: 71em) and (min-width: 64.0625em){
     margin-left: 2.5rem;
