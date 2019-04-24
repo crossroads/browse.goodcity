@@ -10,6 +10,8 @@ export default Addressable.extend({
   createdAt: attr("date"),
   email: attr("string"),
   title: attr("string"),
+  isEmailVerified: attr("boolean"),
+  isMobileVerified: attr("boolean"),
 
   organisations: hasMany("organisation", {
     async: false
@@ -37,6 +39,13 @@ export default Addressable.extend({
   positionInOrganisation: Ember.computed("organisationsUsers.[]", function() {
     let organisationsUser = this.get("organisationsUsers.firstObject");
     return organisationsUser ? organisationsUser.get("position") : "";
+  }),
+
+  preferredContactNumber: Ember.computed("organisationsUsers.[]", function() {
+    let organisationsUser = this.get("organisationsUsers.firstObject");
+    return organisationsUser
+      ? organisationsUser.get("preferredContactNumber")
+      : "";
   }),
 
   organisationName: Ember.computed("organisationsUsers.[]", function() {
