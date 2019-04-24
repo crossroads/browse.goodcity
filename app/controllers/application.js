@@ -15,6 +15,12 @@ export default Ember.Controller.extend({
   showSidebar: true,
   moveSidebarToRight: true,
 
+  app_id: config.APP.ANDROID_APP_ID,
+  ios_app_id: config.APP.APPLE_APP_ID,
+  appTitle: config.APP.TITLE,
+  bannerImage: config.APP.BANNER_IMAGE,
+  bannerReopenDays: config.BANNER_REOPEN_DAYS,
+
   initSubscription: Ember.on("init", function() {
     this.get("subscription").wire();
   }),

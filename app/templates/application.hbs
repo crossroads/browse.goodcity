@@ -1,3 +1,16 @@
+{{#unless isMobileApp}}
+<div class="banner">
+  {{smart-banner
+    appIdAndroid = app_id
+    appIdIOS = ios_app_id
+    showAfterClose=bannerReopenDays
+    showAfterVisit=bannerReopenDays
+    iconUrl = bannerImage
+    title = appTitle
+    description = 'Crossroads'
+  }}
+</div>
+{{/unless}}
 {{#if cart.checkout}}
   {{outlet}}
 {{else}}

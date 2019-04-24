@@ -5721,6 +5721,13 @@ ember-form-validator@1.0.5:
     ember-cli-babel "^6.3.0"
     ember-cli-sass "5.5.2"
 
+ember-getowner-polyfill@1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/ember-getowner-polyfill/-/ember-getowner-polyfill-1.0.1.tgz#f60a31d25d642461dac4b4746184afaf7f5084ae"
+  integrity sha1-9gox0l1kJGHaxLR0YYSvr39QhK4=
+  dependencies:
+    ember-cli-babel "^5.1.5"
+
 ember-getowner-polyfill@^2.0.1, ember-getowner-polyfill@^2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/ember-getowner-polyfill/-/ember-getowner-polyfill-2.2.0.tgz#38e7dccbcac69d5ec694000329ec0b2be651d2b2"
@@ -5868,6 +5875,15 @@ ember-scroll-to@0.6.4:
   dependencies:
     ember-cli-babel "^5.1.6"
     ember-cli-htmlbars "^1.0.3"
+
+ember-smart-banner@0.1.3:
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/ember-smart-banner/-/ember-smart-banner-0.1.3.tgz#7102486f1940f8854e3dde2075bbb2a769bd5ff0"
+  integrity sha1-cQJIbxlA+IVOPd4gdbuyp2m9X/A=
+  dependencies:
+    ember-cli-babel "^5.1.6"
+    ember-cli-htmlbars "^1.0.3"
+    ember-getowner-polyfill "1.0.1"
 
 ember-test-helpers@^0.5.32:
   version "0.5.34"

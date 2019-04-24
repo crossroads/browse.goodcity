@@ -73,7 +73,12 @@ module.exports = function(environment) {
       ],
 
       SHA: process.env.APP_SHA || "00000000",
-      VERSION: pkgJson.version
+      VERSION: pkgJson.version,
+      ANDROID_APP_ID: "hk.goodcity.browse",
+      APPLE_APP_ID: "1160648653",
+      TITLE: "GoodCity for Charities",
+      BANNER_IMAGE: "/assets/images/browse.png",
+      BANNER_REOPEN_DAYS: 3
     },
 
     i18n: {

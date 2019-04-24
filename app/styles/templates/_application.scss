@@ -73,3 +73,9 @@
     width: 25rem;
   }
 }
+
+.banner {
+  .ember-smart-banner--inner {
+    position: inherit;
+  }
+}

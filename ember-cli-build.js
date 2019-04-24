@@ -16,6 +16,7 @@ module.exports = function(defaults) {
     },
     fingerprint: {
       extensions: ["js", "css", "png", "jpg", "gif", "map"],
+      exclude: ["images/browse.png"],
       enabled: webRelease
     },
     gzip: {
