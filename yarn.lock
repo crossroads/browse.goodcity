@@ -5044,7 +5044,7 @@ ember-cli-babel@^5.0.0, ember-cli-babel@^5.1.3, ember-cli-babel@^5.1.5, ember-cl
     ember-cli-version-checker "^1.0.2"
     resolve "^1.1.2"
 
-ember-cli-babel@^6.0.0, ember-cli-babel@^6.0.0-beta.7, ember-cli-babel@^6.1.0, ember-cli-babel@^6.11.0, ember-cli-babel@^6.16.0, ember-cli-babel@^6.3.0, ember-cli-babel@^6.6.0, ember-cli-babel@^6.8.0, ember-cli-babel@^6.8.1, ember-cli-babel@^6.8.2:
+ember-cli-babel@^6.0.0, ember-cli-babel@^6.0.0-beta.4, ember-cli-babel@^6.0.0-beta.7, ember-cli-babel@^6.1.0, ember-cli-babel@^6.11.0, ember-cli-babel@^6.16.0, ember-cli-babel@^6.3.0, ember-cli-babel@^6.6.0, ember-cli-babel@^6.8.0, ember-cli-babel@^6.8.1, ember-cli-babel@^6.8.2:
   version "6.18.0"
   resolved "https://registry.yarnpkg.com/ember-cli-babel/-/ember-cli-babel-6.18.0.tgz#3f6435fd275172edeff2b634ee7b29ce74318957"
   dependencies:
@@ -5658,6 +5658,15 @@ ember-computed-decorators@0.2.2:
   dependencies:
     ember-cli-babel "^5.1.5"
 
+ember-concurrency@0.8.27:
+  version "0.8.27"
+  resolved "https://registry.yarnpkg.com/ember-concurrency/-/ember-concurrency-0.8.27.tgz#6dd1b9928cf5d13d5ae9c8cd3d5869f6ff81a9a9"
+  integrity sha512-2IujJ0Y79a+sHvEOPhUtZ7Ga8HDrwjbQqO7aZ88b0KCsXPro7birQFB508njQSQ0mxrsR9qzDv/KS5V67Cy5dA==
+  dependencies:
+    babel-core "^6.24.1"
+    ember-cli-babel "^6.8.2"
+    ember-maybe-import-regenerator "^0.1.5"
+
 ember-copy@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/ember-copy/-/ember-copy-1.0.0.tgz#426554ba6cf65920f31d24d0a3ca2cb1be16e4aa"
@@ -5817,6 +5826,16 @@ ember-lodash@4.19.1:
     "@mike-north/js-lib-semantic-release-config" "1.0.0"
     semantic-release "^15.9.12"
     travis-deploy-once "^5.0.9"
+
+ember-maybe-import-regenerator@^0.1.5:
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/ember-maybe-import-regenerator/-/ember-maybe-import-regenerator-0.1.6.tgz#35d41828afa6d6a59bc0da3ce47f34c573d776ca"
+  integrity sha1-NdQYKK+m1qWbwNo85H80xXPXdso=
+  dependencies:
+    broccoli-funnel "^1.0.1"
+    broccoli-merge-trees "^1.0.0"
+    ember-cli-babel "^6.0.0-beta.4"
+    regenerator-runtime "^0.9.5"
 
 ember-offline@1.0.0:
   version "1.0.0"
@@ -11920,6 +11939,11 @@ regenerator-runtime@^0.11.0:
 regenerator-runtime@^0.12.0:
   version "0.12.1"
   resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.12.1.tgz#fa1a71544764c036f8c49b13a08b2594c9f8a0de"
+
+regenerator-runtime@^0.9.5:
+  version "0.9.6"
+  resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.9.6.tgz#d33eb95d0d2001a4be39659707c51b0cb71ce029"
+  integrity sha1-0z65XQ0gAaS+OWWXB8UbDLcc4Ck=
 
 regenerator-transform@^0.10.0:
   version "0.10.1"

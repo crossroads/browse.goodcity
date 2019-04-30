@@ -3,6 +3,7 @@ import config from "../../config/environment";
 import AjaxPromise from "browse/utils/ajax-promise";
 const { getOwner } = Ember;
 import cancelOrder from "../../mixins/cancel_order";
+import { task } from "ember-concurrency";
 
 export default Ember.Controller.extend(cancelOrder, {
   queryParams: ["prevPath"],
@@ -83,6 +84,55 @@ export default Ember.Controller.extend(cancelOrder, {
     return actionType;
   },
 
+  editOrder: task(function*(orderParams, isOrganisation) {
+    let order = this.get("order");
+    let orderId = order.id;
+    let beneficiaryId = order.get("beneficiary.id");
+    let store = this.store;
+    let beneficiaryResponse;
+    let url = beneficiaryId
+      ? "/beneficiaries/" + beneficiaryId
+      : "/beneficiaries";
+    let actionType = this.actionType(isOrganisation, beneficiaryId);
+    let beneficiary =
+      beneficiaryId && store.peekRecord("beneficiary", beneficiaryId);
+    let beneficiaryParams =
+      ["PUT", "POST"].indexOf(actionType) > -1
+        ? { beneficiary: this.beneficiaryParams(), order_id: orderId }
+        : {};
+    let loadingView = getOwner(this)
+      .lookup("component:loading")
+      .append();
+
+    if (actionType) {
+      beneficiaryResponse = yield new AjaxPromise(
+        url,
+        actionType,
+        this.get("session.authToken"),
+        beneficiaryParams
+      );
+      orderParams["beneficiary_id"] = beneficiaryResponse.beneficiary
+        ? beneficiaryResponse.beneficiary.id
+        : null;
+    }
+
+    let orderResponse = yield new AjaxPromise(
+      "/orders/" + orderId,
+      "PUT",
+      this.get("session.authToken"),
+      { order: orderParams }
+    );
+    store.pushPayload(orderResponse);
+
+    if (beneficiary && actionType === "DELETE") {
+      store.unloadRecord(beneficiary);
+    } else {
+      store.pushPayload(beneficiaryResponse);
+    }
+    this.send("redirectToGoodsDetails");
+    loadingView.destroy();
+  }),
+
   actions: {
     saveClientDetails() {
       let orderParams;
@@ -101,59 +151,8 @@ export default Ember.Controller.extend(cancelOrder, {
             purpose_ids: [purposeId]
           };
 
-      this.send("editOrder", orderParams, isForOrganisation);
+      this.get("editOrder").perform(orderParams, isForOrganisation);
     },
-
-    /* jshint ignore:start */
-    async editOrder(orderParams, isOrganisation) {
-      let order = this.get("order");
-      let orderId = order.id;
-      let beneficiaryId = order.get("beneficiary.id");
-      let store = this.store;
-      let beneficiaryResponse;
-      let url = beneficiaryId
-        ? "/beneficiaries/" + beneficiaryId
-        : "/beneficiaries";
-      let actionType = this.actionType(isOrganisation, beneficiaryId);
-      let beneficiary =
-        beneficiaryId && store.peekRecord("beneficiary", beneficiaryId);
-      let beneficiaryParams =
-        ["PUT", "POST"].indexOf(actionType) > -1
-          ? { beneficiary: this.beneficiaryParams(), order_id: orderId }
-          : {};
-      let loadingView = getOwner(this)
-        .lookup("component:loading")
-        .append();
-
-      if (actionType) {
-        beneficiaryResponse = await new AjaxPromise(
-          url,
-          actionType,
-          this.get("session.authToken"),
-          beneficiaryParams
-        );
-        orderParams["beneficiary_id"] = beneficiaryResponse.beneficiary
-          ? beneficiaryResponse.beneficiary.id
-          : null;
-      }
-
-      let orderResponse = await new AjaxPromise(
-        "/orders/" + orderId,
-        "PUT",
-        this.get("session.authToken"),
-        { order: orderParams }
-      );
-      store.pushPayload(orderResponse);
-
-      if (beneficiary && actionType === "DELETE") {
-        store.unloadRecord(beneficiary);
-      } else {
-        store.pushPayload(beneficiaryResponse);
-      }
-      this.send("redirectToGoodsDetails");
-      loadingView.destroy();
-    },
-    /* jshint ignore:end */
 
     redirectToGoodsDetails() {
       let order = this.get("order");
