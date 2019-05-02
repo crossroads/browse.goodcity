@@ -1,12 +1,12 @@
-import Ember from 'ember';
+import Ember from "ember";
 
 export default Ember.Controller.extend({
   queryParams: ["page"],
-  page:        1,
-  perPage:     12,
+  page: 1,
+  perPage: 12,
   selectedCategoryId: null,
   sortedItems: Ember.computed.sort("categoryObj.items", "selectedSort"),
-  currentCategoryId: Ember.computed.alias('categoryObj.id'),
+  currentCategoryId: Ember.computed.alias("categoryObj.id"),
 
   selectedSort: Ember.computed({
     get() {
@@ -17,19 +17,26 @@ export default Ember.Controller.extend({
     }
   }),
 
-  sortOptions: Ember.computed(function(){
+  navigateToPageTop: Ember.observer("page", function() {
+    window.scrollTo(0, 0);
+  }),
+
+  sortOptions: Ember.computed(function() {
     return [
-      { name: this.get('i18n').t('category.sort.newfirst'), id: ["createdAt:desc"] },
-      { name: this.get('i18n').t('category.sort.oldfirst'), id: ["createdAt"] }
+      {
+        name: this.get("i18n").t("category.sort.newfirst"),
+        id: ["createdAt:desc"]
+      },
+      { name: this.get("i18n").t("category.sort.oldfirst"), id: ["createdAt"] }
     ];
   }),
 
-  categoryObj: Ember.computed('selectedCategoryId', 'model', function() {
+  categoryObj: Ember.computed("selectedCategoryId", "model", function() {
     this.set("page", 1);
-    var selectedCategoryId = this.get('selectedCategoryId.id');
-    return selectedCategoryId ?
-      this.store.peekRecord('package_category', selectedCategoryId) :
-      this.get('model');
+    var selectedCategoryId = this.get("selectedCategoryId.id");
+    return selectedCategoryId
+      ? this.store.peekRecord("package_category", selectedCategoryId)
+      : this.get("model");
   }),
 
   selectCategories: Ember.computed("model", function() {

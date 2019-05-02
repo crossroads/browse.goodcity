@@ -4,6 +4,7 @@ import attr from "ember-data/attr";
 import { belongsTo, hasMany } from "ember-data/relationships";
 
 export default Model.extend({
+  store: Ember.inject.service(),
   code: attr("string"),
   state: attr("string"),
   purposeDescription: attr("string"),
@@ -22,7 +23,7 @@ export default Model.extend({
   ordersPurposes: hasMany("ordersPurpose", { async: false }),
   beneficiaryId: attr("string"),
   bookingTypeId: attr("number"),
-  beneficiary: belongsTo("beneficiary", { async: false }),
+  beneficiary: belongsTo("beneficiary", { async: true }),
   peopleHelped: attr("number"),
   goodcityRequests: hasMany("goodcity_request", { async: false }),
   district: belongsTo("district", { async: false }),
@@ -96,17 +97,11 @@ export default Model.extend({
     }
   ),
 
-  clientIdNumber: Ember.computed("beneficiary", function() {
-    return this.get("beneficiary.identityNumber");
-  }),
+  clientIdNumber: Ember.computed.alias("beneficiary.identityNumber"),
 
-  clientName: Ember.computed("beneficiary", function() {
-    return this.get("beneficiary.fullName");
-  }),
+  clientName: Ember.computed.alias("beneficiary.fullName"),
 
-  clientPhone: Ember.computed("beneficiary", function() {
-    return this.get("beneficiary.phoneNumber");
-  }),
+  clientPhone: Ember.computed.alias("beneficiary.phoneNumber"),
 
   appointmentTransport: Ember.computed(
     "orderTransport.transportType",
@@ -185,6 +180,14 @@ export default Model.extend({
   }),
 
   transportKey: Ember.computed("orderTransport.transportType", function() {
+    const transportId = this.get("orderTransportId");
+    if (
+      !transportId ||
+      !this.get("store").peekRecord("order_transport", transportId)
+    ) {
+      return "unknown_transport";
+    }
+
     const transportType = this.get("orderTransport.transportType");
     switch (transportType) {
       case "ggv":

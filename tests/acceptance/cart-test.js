@@ -21,6 +21,7 @@ var App,
   purpose;
 
 module("Acceptance | Cart Page", {
+  needs: ["service:subscription"],
   beforeEach: function() {
     window.localStorage.authToken =
       '"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo2LCJpYXQiOjE1MTg3NzI4MjcsImlzcyI6Ikdvb2RDaXR5SEsiLCJleHAiOjE1MTk5ODI0Mjd9.WdsVvss9khm81WNScV5r6DiIwo8CQfHM1c4ON2IACes"';
@@ -88,7 +89,9 @@ module("Acceptance | Cart Page", {
           user_role_ids: [1]
         }
       ],
-      users: [user.toJSON({ includeId: true })],
+      users: [
+        { id: 2, first_name: "David", last_name: "Dara51", mobile: "61111111" }
+      ],
       roles: [
         {
           id: 4,
@@ -161,6 +164,7 @@ test("delete orders_packages from orders in draft", function(assert) {
     status: 200,
     responseText: {}
   });
+
   visit(
     "/item/" + pkg.id + "?categoryId=" + pkgCategory.id + "&sortBy=createdAt"
   );

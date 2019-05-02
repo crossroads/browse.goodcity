@@ -25,6 +25,10 @@
 @import "scroll_icon_settings";
 @import "confirm_booking";
 @import "messages";
+@import "my_dashboard";
+@import "my_account";
+@import "static_pages";
+@import "about";
 
 @import "templates/home";
 @import "templates/loading";
@@ -37,5 +41,6 @@
 @import "templates/schedule_details";
 @import "components/logo-banner";
 @import "components/add-request";
+@import "components/go_to_top_button";
 @import "components/select-appointment-date";
 @import "ember_offline";

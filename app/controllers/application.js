@@ -7,15 +7,22 @@ const { getOwner } = Ember;
 export default Ember.Controller.extend({
   isMobileApp: config.cordova.enabled,
   appVersion: config.APP.VERSION,
-  subscription: Ember.inject.controller(),
+  subscription: Ember.inject.service(),
   messageBox: Ember.inject.service(),
   loggedInUser: false,
+  isHomePage: false,
   i18n: Ember.inject.service(),
   showSidebar: true,
   moveSidebarToRight: true,
 
+  app_id: config.APP.ANDROID_APP_ID,
+  ios_app_id: config.APP.APPLE_APP_ID,
+  appTitle: config.APP.TITLE,
+  bannerImage: config.APP.BANNER_IMAGE,
+  bannerReopenDays: config.BANNER_REOPEN_DAYS,
+
   initSubscription: Ember.on("init", function() {
-    this.get("subscription").send("wire");
+    this.get("subscription").wire();
   }),
 
   displayCart: false,
@@ -46,6 +53,21 @@ export default Ember.Controller.extend({
         "confirm_booking",
         "booking_success"
       ]);
+    }
+  ),
+
+  addMoveLeft: Ember.computed(
+    "isHomePage",
+    "hasCartItems",
+    "showOffCanvas",
+    "isMobileApp",
+    function() {
+      return (
+        this.get("showOffCanvas") &&
+        !this.get("isMobileApp") &&
+        this.get("hasCartItems") &&
+        !this.get("isHomePage")
+      );
     }
   ),
 
@@ -88,7 +110,9 @@ export default Ember.Controller.extend({
       this.get("cart").set("checkout", true);
       this.transitionToRoute("request_purpose", {
         queryParams: {
-          bookAppointment: false
+          onlineOrder: true,
+          bookAppointment: false,
+          orderId: null
         }
       });
     } else {
@@ -140,6 +164,7 @@ export default Ember.Controller.extend({
     },
 
     logMeOut() {
+      this.get("subscription").unwire();
       this.session.clear(); // this should be first since it updates isLoggedIn status
       this.unloadModels();
       this.toggleProperty("loggedInUser");
@@ -201,9 +226,7 @@ export default Ember.Controller.extend({
     },
 
     checkout() {
-      if (this.accountDetailsComplete()) {
-        this.submitCart();
-      } else {
+      if (!this.accountDetailsComplete() && this.get("hasCartItems")) {
         this.set("showCartDetailSidebar", false);
         this.transitionToRoute("account_details", {
           queryParams: {
@@ -211,6 +234,8 @@ export default Ember.Controller.extend({
             bookAppointment: false
           }
         });
+      } else {
+        this.submitCart();
       }
     },
 

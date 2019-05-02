@@ -20,6 +20,7 @@ var App,
   purpose;
 
 module("Acceptance | Browse Page", {
+  needs: ["service:subscription"],
   beforeEach: function() {
     App = startApp();
     pkgType = make("package_type_with_packages");

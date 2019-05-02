@@ -1,3 +1,16 @@
+{{#unless isMobileApp}}
+<div class="banner">
+  {{smart-banner
+    appIdAndroid = app_id
+    appIdIOS = ios_app_id
+    showAfterClose=bannerReopenDays
+    showAfterVisit=bannerReopenDays
+    iconUrl = bannerImage
+    title = appTitle
+    description = 'Crossroads'
+  }}
+</div>
+{{/unless}}
 {{#if cart.checkout}}
   {{outlet}}
 {{else}}
@@ -5,7 +18,7 @@
   {{#app-canvas}}
     <div class="row application-layout">
       <div class="large-12 medium-12 columns collapse no-padding" id="content">
-        <div class="{{if (is-and showOffCanvas moveSidebarToRight)'off-canvas-wrap move-right' ''}} {{if (is-and showOffCanvas (is-and (is-not isMobileApp) hasCartItems)) 'move-left' ''}}" data-offcanvas>
+        <div class="{{if (is-and showOffCanvas moveSidebarToRight)'off-canvas-wrap move-right' ''}} {{if addMoveLeft 'move-left' ''}} {{if isHomePage "home-page" ""}}" data-offcanvas>
           <div class="inner-wrap">
             {{#if showSidebar}}
               {{partial "sidebar"}}

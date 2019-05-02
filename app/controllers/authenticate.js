@@ -24,7 +24,7 @@ export default Ember.Controller.extend({
   }),
 
   setMobileOrEmail() {
-    if (/^[569]\d{7}/.test(this.get("mobileOrEmail"))) {
+    if (/^[456789]\d{7}/.test(this.get("mobileOrEmail"))) {
       this.set("mobile", "+852" + this.get("mobileOrEmail"));
     } else {
       this.set("email", this.get("mobileOrEmail"));
