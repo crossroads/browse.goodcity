@@ -7,11 +7,11 @@
 }
 
 .new-user-section {
-  .user_title select{
+  .user_title select {
     width: 100%;
   }
 
-  .user_title select{
+  .user_title select {
     width: 100%;
   }
 
@@ -51,6 +51,7 @@
 
   .row {
     margin-top: 0.5rem !important;
+
     @media #{$small-only} {
       margin-right: 0rem !important;
     }
@@ -74,6 +75,7 @@
         .fa {
           margin-left: 0.5rem;
         }
+
         margin-left: 0.1rem;
       }
 
@@ -92,6 +94,7 @@
 
     .value.height input {
       width: 97%;
+
       @media #{$small-only} {
         width: 93%;
       }
@@ -117,7 +120,8 @@
     }
   }
 
-  input, select {
+  input,
+  select {
     padding: 0 0.5rem;
     background: #002352 !important;
     border: 1px solid white !important;
@@ -135,7 +139,7 @@
     padding-right: 1.5rem;
   }
 
-  .remove-text{
+  .remove-text {
     position: absolute;
     right: 3%;
     font-size: 1rem;
@@ -144,7 +148,9 @@
   }
 
   .image-box-row {
-    input, .input-error {
+
+    input,
+    .input-error {
       width: 89%;
     }
   }
@@ -214,7 +220,8 @@
       color: $tabbar-menu-icon-color !important;
     }
   }
-  .mobile .dialing-code label{
+
+  .mobile .dialing-code label {
     @media #{$small-only} {
       font-size: 0.59rem;
     }
@@ -239,17 +246,18 @@
     font-weight: 600;
   }
 
-  .search_organisation, #organisation_details {
+  .search_organisation,
+  #organisation_details {
     text-decoration: none;
     cursor: pointer;
   }
 }
 
-.verified_icon{
+.verified_icon {
   float: left !important;
+
   .verified_text {
-    margin-left: 5%;
+    margin: 5%;
     font-size: 0.8em;
   }
 }
-
