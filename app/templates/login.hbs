@@ -47,7 +47,9 @@
               </div>
             </div>
             <div class="small-12 columns">
-              <label class="form-label">{{t "login.privacy"}}<a href="">{{t "login.policy"}}</a></label>
+              <label class="form-label">
+                {{t "login.privacy"}}{{#link-to "privacy"}}{{t "login.policy"}}{{/link-to}}
+              </label>
             </div>
           </div>
         </div>
