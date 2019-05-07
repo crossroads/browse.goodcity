@@ -77,6 +77,12 @@
     overflow: hidden;
     z-index: -1;
     height: 100%;
+
+    @media #{$medium-only} {
+      width: 200%;
+      left: -55%;
+    }
+
     @media #{$large-only} {
       width: 106%;
     }
