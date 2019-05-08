@@ -25,7 +25,7 @@ export default Ember.Controller.extend({
     this.get("subscription").wire();
   }),
 
-  isAndroidMobile: Ember.computed("isMobileApp", function() {
+  isAndroidBrowser: Ember.computed("isMobileApp", function() {
     return /Android/i.test(navigator.userAgent) && !this.get("isMobileApp");
   }),
 
