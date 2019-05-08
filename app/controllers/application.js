@@ -25,6 +25,10 @@ export default Ember.Controller.extend({
     this.get("subscription").wire();
   }),
 
+  isAndroidBrowser: Ember.computed("isMobileApp", function() {
+    return /Android/i.test(navigator.userAgent) && !this.get("isMobileApp");
+  }),
+
   displayCart: false,
   showCartDetailSidebar: false,
   cartscroll: Ember.inject.service(),
