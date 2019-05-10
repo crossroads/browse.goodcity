@@ -18,7 +18,7 @@
   </nav>
 {{/unless}}
 
-<aside class="left-off-canvas-menu menu-list">
+<aside class="left-off-canvas-menu menu-list {{if isAndroidBrowser "move-bottom" ""}}">
   <ul class="off-canvas-list menu">
     <li>
       {{#link-to "home" class="menu-1 home"}}

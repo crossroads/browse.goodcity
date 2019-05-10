@@ -131,6 +131,10 @@ export default Ember.Controller.extend({
   },
 
   actions: {
+    moveSidebarUp() {
+      $(".left-off-canvas-menu").removeClass("sidebar-banner-margin");
+    },
+
     cancelOrderPopUp(orderId) {
       this.get("messageBox").custom(
         this.get("i18n").t("order.order_delete_confirmation"),
