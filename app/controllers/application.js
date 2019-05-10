@@ -25,6 +25,10 @@ export default Ember.Controller.extend({
     this.get("subscription").wire();
   }),
 
+  isAndroidBrowser: Ember.computed("isMobileApp", function() {
+    return /Android/i.test(navigator.userAgent) && !this.get("isMobileApp");
+  }),
+
   displayCart: false,
   showCartDetailSidebar: false,
   cartscroll: Ember.inject.service(),
@@ -127,6 +131,10 @@ export default Ember.Controller.extend({
   },
 
   actions: {
+    moveSidebarUp() {
+      $(".left-off-canvas-menu").removeClass("move-bottom");
+    },
+
     cancelOrderPopUp(orderId) {
       this.get("messageBox").custom(
         this.get("i18n").t("order.order_delete_confirmation"),
