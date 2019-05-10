@@ -132,7 +132,7 @@ export default Ember.Controller.extend({
 
   actions: {
     moveSidebarUp() {
-      $(".left-off-canvas-menu").removeClass("sidebar-banner-margin");
+      $(".left-off-canvas-menu").removeClass("move-bottom");
     },
 
     cancelOrderPopUp(orderId) {
