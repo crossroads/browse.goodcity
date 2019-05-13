@@ -1,18 +1,16 @@
 import Ember from "ember";
 
 export default Ember.Route.extend({
-  previousRouteName: null,
   backLink: null,
-  previousURL: null,
 
   beforeModel() {
-    this.set("previousRouteName", null);
     var previousRoutes = this.router.router.currentHandlerInfos;
     var previousRoute = previousRoutes && previousRoutes.pop();
     if (previousRoute && this.isPreviousRouteStatic(previousRoute.name)) {
-      this.set("previousRouteName", "home");
+      this.set("backLink", "home");
+    } else {
+      this.set("backLink", this.get("router").currentURL);
     }
-    this.set("previousURL", this.get("router").currentURL);
   },
 
   setupController(controller, model, transition) {
@@ -28,12 +26,13 @@ export default Ember.Route.extend({
   resetController: function(controller, isExiting) {
     this._super.apply(this, arguments);
     if (isExiting) {
+      this.set("backLink", null);
       let applicationController = this.controllerFor("application");
+      applicationController.set("hideHeaderBar", false);
       applicationController.set(
         "pageTitle",
         this.get("i18n").t("browse.title")
       );
-      applicationController.set("hideHeaderBar", false);
     }
   },
 
@@ -43,11 +42,11 @@ export default Ember.Route.extend({
 
   actions: {
     back: function() {
-      let prevPathName = this.get("previousRouteName");
-      if (prevPathName) {
-        this.transitionTo(prevPathName);
+      let backLink = this.get("backLink");
+      if (backLink) {
+        this.transitionTo(backLink);
       } else {
-        this.transitionTo(this.get("previousURL"));
+        window.history.back(); // equivalent to window.history.go(-1)
       }
     }
   }
