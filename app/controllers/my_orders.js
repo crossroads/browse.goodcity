@@ -48,5 +48,40 @@ export default applicationController.extend({
         this.get("flashMessage").show("order.flash_submit_message");
       }
     }
-  )
+  ),
+
+  preloadOrder(order) {
+    this.startLoading();
+    return this.get("store")
+      .findRecord("order", order.get("id"), { reload: true })
+      .catch(e => {
+        this.stopLoading();
+        return Ember.RSVP.reject(e);
+      })
+      .then(res => {
+        this.stopLoading();
+        return res;
+      });
+  },
+
+  actions: {
+    viewOrder(order) {
+      const id = order.get("id");
+      this.preloadOrder(order).then(() => {
+        this.transitionToRoute("orders.detail", id);
+      });
+    },
+
+    editOrder(order) {
+      const id = order.get("id");
+      this.preloadOrder(order).then(() => {
+        this.transitionToRoute("request_purpose", {
+          queryParams: {
+            bookAppointment: this.get("isAppointmentDraft"),
+            orderId: id
+          }
+        });
+      });
+    }
+  }
 });

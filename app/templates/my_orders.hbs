@@ -20,13 +20,13 @@
       <ul class="list list-items">
         {{#each arrangedOrders as |order|}}
             {{#if order.isDraft}}
-              {{#link-to 'request_purpose' (query-params bookAppointment=isAppointmentDraft orderId=order.id)}}
+              <div {{ action 'editOrder' order}}>
                 {{ partial 'order/order_block'}}
-              {{/link-to}}
+              </div>
             {{else}}
-              {{#link-to "orders.detail" order.id}}
+              <div {{ action 'viewOrder' order}}>
                 {{ partial 'order/order_block'}}
-              {{/link-to}}
+              </div>
             {{/if}}
         {{/each}}
       </ul>

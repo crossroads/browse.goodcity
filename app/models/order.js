@@ -20,7 +20,7 @@ export default Model.extend({
   detailType: attr("string"),
   districtId: attr("number"),
   messages: hasMany("message", { async: false }),
-  ordersPurposes: hasMany("ordersPurpose", { async: false }),
+  ordersPurposes: hasMany("orders_purpose", { async: false }),
   beneficiaryId: attr("string"),
   bookingTypeId: attr("number"),
   beneficiary: belongsTo("beneficiary", { async: true }),
@@ -28,7 +28,6 @@ export default Model.extend({
   goodcityRequests: hasMany("goodcity_request", { async: false }),
   district: belongsTo("district", { async: false }),
   bookingType: belongsTo("booking_type", { async: false }),
-  purposeIds: attr(),
 
   isGoodCityOrder: Ember.computed.equal("detailType", "GoodCity"),
   isDraft: Ember.computed.equal("state", "draft"),

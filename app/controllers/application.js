@@ -1,5 +1,5 @@
 import Ember from "ember";
-import containsAny from "../utils/helpers";
+import { containsAny } from "../utils/helpers";
 import config from "../config/environment";
 import AjaxPromise from "browse/utils/ajax-promise";
 const { getOwner } = Ember;
@@ -21,8 +21,9 @@ export default Ember.Controller.extend({
   bannerImage: config.APP.BANNER_IMAGE,
   bannerReopenDays: config.BANNER_REOPEN_DAYS,
 
-  initSubscription: Ember.on("init", function() {
+  initializer: Ember.on("init", function() {
     this.get("subscription").wire();
+    this.loadingCounter = 0;
   }),
 
   displayCart: false,
@@ -70,6 +71,30 @@ export default Ember.Controller.extend({
       );
     }
   ),
+
+  startLoading() {
+    this.loadingCounter++;
+    this.updateLoadingSpinner();
+  },
+
+  stopLoading() {
+    if (this.loadingCounter === 0) {
+      return;
+    }
+    this.loadingCounter--;
+    this.updateLoadingSpinner();
+  },
+
+  updateLoadingSpinner() {
+    if (this.loadingCounter === 0 && this.loadingView) {
+      this.loadingView.destroy();
+      this.loadingView = null;
+    } else if (this.loadingCounter && !this.loadingView) {
+      this.loadingView = getOwner(this)
+        .lookup("component:loading")
+        .append();
+    }
+  },
 
   unloadModels() {
     var UNLOAD_MODELS = [
@@ -141,26 +166,25 @@ export default Ember.Controller.extend({
     cancelOrder(orderId) {
       var _this = this;
       var order = _this.store.peekRecord("order", parseInt(orderId));
-      var loadingView = getOwner(this)
-        .lookup("component:loading")
-        .append();
+      this.startLoading();
       new AjaxPromise(
         "/orders/" + orderId,
         "DELETE",
         _this.get("session.authToken")
-      ).then(data => {
-        _this.get("cart").clearItems();
-        if (order) {
-          _this.store.unloadRecord(order);
-        }
-        _this.store.pushPayload(data);
-        loadingView.destroy();
-        _this.transitionToRoute("index", {
-          queryParams: {
-            orderCancelled: true
+      )
+        .then(data => {
+          _this.get("cart").clearItems();
+          if (order) {
+            _this.store.unloadRecord(order);
           }
-        });
-      });
+          _this.store.pushPayload(data);
+          _this.transitionToRoute("index", {
+            queryParams: {
+              orderCancelled: true
+            }
+          });
+        })
+        .finally(() => this.stopLoading());
     },
 
     logMeOut() {
@@ -202,24 +226,23 @@ export default Ember.Controller.extend({
         .filterBy("packageId", itemId);
       if (this.get("draftOrder") && ordersPackages.length) {
         let orderPackageId = ordersPackages.get("firstObject.id");
-        var loadingView = getOwner(this)
-          .lookup("component:loading")
-          .append();
+        this.startLoading();
         new AjaxPromise(
           `/orders_packages/${orderPackageId}`,
           "DELETE",
           this.get("session.authToken")
-        ).then(() => {
-          this.get("cart").removeItem(item);
-          var ordersPackage = this.store.peekRecord(
-            "orders_package",
-            orderPackageId
-          );
-          if (ordersPackage) {
-            this.store.unloadRecord(ordersPackage);
-          }
-          loadingView.destroy();
-        });
+        )
+          .then(() => {
+            this.get("cart").removeItem(item);
+            var ordersPackage = this.store.peekRecord(
+              "orders_package",
+              orderPackageId
+            );
+            if (ordersPackage) {
+              this.store.unloadRecord(ordersPackage);
+            }
+          })
+          .finally(() => this.stopLoading());
       } else {
         this.get("cart").removeItem(item);
       }
