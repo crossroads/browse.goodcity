@@ -50,6 +50,7 @@ export default Ember.Controller.extend({
       let url = window.location.pathname;
       return !containsAny(url, [
         "request_purpose",
+        "account_details",
         "schedule_details",
         "goods_details",
         "client_information",
