@@ -173,12 +173,18 @@ export default {
   login: {
     hk_mobile_or_email_only: "流動電話號碼（只局限於香港）/電郵地址",
     login: "登入",
+    welcome_text: "Welcome!",
+    get_started: "Get started here",
+    input_mobile_email:
+      "Please input your email address or mobile phone number",
     sms_email_pincode:
       "我們會發訊息或電郵通知閣下的驗證碼以便安全性登入。曾登入過嗎？請使用相同的電話號碼或電郵地址。",
     smscode: "獲取短訊驗證碼",
-    privacy: "我們不會使用分享你的資料，我們只會用於你的貨物申請",
+    privacy:
+      "We don't share your data. We only use it to complete your request(s). See our ",
     policy: "隱私政策",
-    mobile_email_warning: "請提供有效的香港流動電話號碼或有效的電郵地址"
+    mobile_email_warning:
+      "Please provide a valid email or a valid Hong Kong mobile number"
   },
 
   account: {
@@ -192,6 +198,7 @@ export default {
     position: "職位",
     email: "電郵",
     mobile: "流動電話號碼",
+    mobile_label: "Allows you to request SMS updates from goodcity.",
     preffered_contact_number: "選取這聯絡號碼",
     work: "請使用工作地址",
     done: "完成",
@@ -220,15 +227,19 @@ export default {
 
   _resend: {
     no_sms: "收不到短訊？",
-    please_wait: "請稍候...",
-    resend: "重新發送",
-    back_to_phone_number: "返回電郵或電話輸入"
+    email_correct: "Is {{email}} correct?  ",
+    phone_correct: "Is {{phone}} correct?  ",
+    go_back: "Go back to input page",
+    check_junk: "Check your junk email folder",
+    not_working:
+      "Still not working? Email <a href='mailto:contact@goodcity.hk'>contact@goodcity.hk</a> for help.",
+    resend: "重新發送"
   },
 
   _verification_pin: {
-    input_code: "輸入四位數短訊驗證碼",
-    send_code: "我們把認證碼發送到",
-    auth_error: "對不起！請輸入正確的驗證碼。"
+    send_code: "We sent a pin to",
+    input_code: "Input the code for secure access",
+    auth_error: "Sorry! Please enter the correct pin."
   },
 
   gogovan: {

@@ -73,7 +73,8 @@ export default Ember.Route.extend(preloadDataMixin, {
       this.redirectToTransitionOrDetails();
     }
     // remove loginParam
-    localStorage.setItem("loginParam", null);
+    localStorage.removeItem("loginParam");
+    localStorage.removeItem("loginParamEmail");
   },
 
   redirectToTransitionOrDetails() {
