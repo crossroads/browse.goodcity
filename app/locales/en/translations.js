@@ -243,7 +243,7 @@ export default {
     go_back: "Go back to input page",
     check_junk: "Check your junk email folder",
     not_working:
-      "Still not working? Email <a href='mailto:contact@goodcity.hk'>contact@goodcity.hk</a> for help.",
+      "Still not working? Email <a class='auth_links' href='mailto:contact@goodcity.hk'>contact@goodcity.hk</a> for help.",
     resend: "Resend Code"
   },
 

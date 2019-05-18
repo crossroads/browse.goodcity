@@ -213,6 +213,10 @@ input:-webkit-autofill {
     color: inherit;
     font-size: initial;
   }
+
+  .auth_links {
+    font-size: unset !important;
+  }
 }
 
 .center_align {
