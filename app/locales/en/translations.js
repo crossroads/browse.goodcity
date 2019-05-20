@@ -184,12 +184,16 @@ export default {
     sms_email_pincode:
       "We SMS/EMAIL you pin code for secure access. Been here before? Please use the same phone number or email address.",
     login: "Login",
+    welcome_text: "Welcome!",
+    get_started: "Get started here",
+    input_mobile_email:
+      "Please input your email address or mobile phone number",
     smscode: "Get 4-digit SMS code",
     privacy:
-      "We don't share your data. We only use it to complete your goods request(s). See our ",
+      "We don't share your data. We only use it to complete your request(s). See our ",
     policy: "Privacy Policy.",
     mobile_email_warning:
-      "Please provide either a valid Hong Kong mobile number or a valid email address"
+      "Please provide a valid email or a valid Hong Kong mobile number"
   },
 
   account: {
@@ -202,13 +206,14 @@ export default {
     last: "Your Family Name",
     position: "Position",
     email: "Email address",
-    mobile: "Mobile Number",
+    mobile: "Mobile Number (Optional)",
+    mobile_label: "Allows you to request SMS updates from goodcity.",
     preffered_contact_number: "Preferred Contact Number",
     work: "Please use your work address",
     done: "Done",
     contact_us:
       "Can't find your organisation? Please contact us for assistance.",
-    organisation_warning: "You must select valid organisation to proceed",
+    organisation_warning: "You must select a valid organisation to proceed",
     title_warning: "Add Title",
     first_name_warning: "Add First Name",
     last_name_warning: "Add Last Name",
@@ -232,15 +237,19 @@ export default {
   },
 
   _resend: {
-    no_sms: "Haven't received the code? Please wait a few minutes",
-    please_wait: "Please wait...",
-    resend: "Resend Code",
-    back_to_phone_number: "Back to email/phone input"
+    no_sms: "Haven't received your pin code?",
+    email_correct: "Is {{email}} correct?  ",
+    phone_correct: "Is {{phone}} correct?  ",
+    go_back: "Go back to input page",
+    check_junk: "Check your junk email folder",
+    not_working:
+      "Still not working? Email <a class='auth_links' href='mailto:contact@goodcity.hk'>contact@goodcity.hk</a> for help.",
+    resend: "Resend Code"
   },
 
   _verification_pin: {
-    input_code: "Input 4-digit code",
-    send_code: "We just send a code to",
+    send_code: "We sent a pin to",
+    input_code: "Input the code for secure access",
     auth_error: "Sorry! Please enter the correct pin."
   },
 
@@ -414,13 +423,13 @@ export default {
     representative: "Representative",
     purpose: "Purpose(s)",
     cancel_order: "Cancel Order",
-    login: "Log in",
-    register: "Register",
     goodcity_order: "GoodCity Order",
     cart: "Cart",
     order_details: "Order details",
     transport_detail: "Transport details",
     confirm: "Confirm",
+    login: "Login",
+    register: "Register",
     tick_any: "Tick any that apply",
     select_purpose: "Please select purpose from list.",
     for_our_charity: "For our charity (facilities / programs etc.)",

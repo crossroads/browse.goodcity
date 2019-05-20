@@ -194,6 +194,14 @@ input:-webkit-autofill {
     color: #DFE5EC;
   }
 
+  label {
+    &.title-label {
+      font-size: 0.9em !important;
+      color: #FFF !important;
+      font-weight: bolder !important;
+    }
+  }
+
   .expand_button {
     margin-top: 4rem;
     padding: 1rem;
@@ -204,6 +212,10 @@ input:-webkit-autofill {
     text-decoration: underline;
     color: inherit;
     font-size: initial;
+  }
+
+  .auth_links {
+    font-size: unset !important;
   }
 }
 
