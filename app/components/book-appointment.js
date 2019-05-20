@@ -24,7 +24,12 @@ export default Ember.Component.extend({
     redirectAsPerUserDetails() {
       if (this.isDetailsComplete()) {
         this.get("router").transitionTo("request_purpose", {
-          queryParams: { bookAppointment: true, orderId: null }
+          queryParams: {
+            bookAppointment: true,
+            orderId: null,
+            prevPath: null,
+            editRequest: null
+          }
         });
       } else {
         this.get("router").transitionTo("account_details", {

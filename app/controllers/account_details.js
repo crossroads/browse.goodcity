@@ -80,7 +80,8 @@ export default Ember.Controller.extend({
     if (bookAppointment) {
       this.transitionToRoute("request_purpose", {
         queryParams: {
-          bookAppointment: true
+          bookAppointment: true,
+          prevPath: "account_details"
         }
       });
     } else if (onlineOrder) {
