@@ -195,6 +195,7 @@ export default {
     preffered_contact_number: "選取這聯絡號碼",
     work: "請使用工作地址",
     done: "完成",
+    back: "Back",
     contact_us: "未能尋找你的機構？請聯絡我們尋求協助。",
     organisation_warning: "你必須選擇有效的機構以繼續",
     title_warning: "請輸入稱謂",

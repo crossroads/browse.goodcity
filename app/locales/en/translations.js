@@ -206,6 +206,7 @@ export default {
     preffered_contact_number: "Preferred Contact Number",
     work: "Please use your work address",
     done: "Done",
+    back: "Back",
     contact_us:
       "Can't find your organisation? Please contact us for assistance.",
     organisation_warning: "You must select valid organisation to proceed",
