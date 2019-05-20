@@ -2,13 +2,17 @@
   <div class="small-12 large-offset-2 large-8">
     <div class="row fixed_search_header search-box ui organisations_search">
       <div class="row">
-        <div class="small-2 medium-2 large-2 columns">
-          <div class="done">{{t "account.done"}}</div>
+        <div class="small-2 medium-2 large-1 columns back_button">
+          {{#link-to 'account_details' class="back_icon"}}
+            {{fa-icon 'angle-left'}}
+            <span class="organisation_back"> {{t "account.back"}}</span>
+          {{/link-to}}
         </div>
-        <div class="small-8 small-offset-1 large-offset-1 large-8 medium-8 columns">
+        <div class="small-10 large-10 medium-10 columns">
           {{input
             name="searchText"
             id="searchText"
+            placeholder= "Search Organisation"
             value=searchText
             disabled=false}}
 
@@ -16,7 +20,7 @@
             <i class="fa fa-times-circle" {{action "clearSearch"}}></i>
           {{/if}}
         </div>
-        <div class="large-1 columns"></div>
+        <div class=" large-1 columns"></div>
       </div>
       <div class="row">
         <div class="small-12 medium-12 columns">

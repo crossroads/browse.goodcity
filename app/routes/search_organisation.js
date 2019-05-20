@@ -1,4 +1,7 @@
-import AuthorizeRoute from './authorize';
+import AuthorizeRoute from "./authorize";
 
-export default AuthorizeRoute.extend({});
-
+export default AuthorizeRoute.extend({
+  setupController() {
+    this.controllerFor("application").set("showSidebar", false);
+  }
+});
