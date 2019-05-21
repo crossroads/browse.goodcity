@@ -194,7 +194,7 @@ export default {
     last: "姓",
     position: "職位",
     email: "電郵",
-    mobile: "流動電話號碼",
+    mobile: "流動電話號碼 (非必須)",
     mobile_label: "允許您申請來自好人好巿的短訊更新",
     preffered_contact_number: "選取這聯絡號碼",
     work: "請使用工作地址",
