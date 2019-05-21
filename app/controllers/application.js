@@ -48,7 +48,7 @@ export default Ember.Controller.extend({
     "showSidebar",
     "moveSidebarToRight",
     function() {
-      let url = window.location.pathname;
+      let url = window.location.href;
       return !containsAny(url, [
         "request_purpose",
         "account_details",
