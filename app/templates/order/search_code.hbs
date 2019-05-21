@@ -1,53 +1,55 @@
-<div class="large-8 columns large-offset-2 medium-offset-1 medium-10 small-12">
-  <div class="row fixed_search_header search-box ui items-search">
-    <div class="small-3 columns back_button">
-      <a {{action "cancelSearch"}} class="back">
-        <i class="fa fa-angle-left back_icon" aria-hidden="true"></i>
-        <span class="back_text">
-          {{#if inlineDescription}}
-            {{t 'cancel'}}
-          {{else}}
-            {{t 'back'}}
-          {{/if}}
-        </span>
-      </a>
-    </div>
+<div class="search-code">
+  <div class="large-8 columns large-offset-2 medium-offset-1 medium-10 small-12">
+    <div class="row fixed_search_header search-box ui items-search">
+      <div class="small-3 columns back_button">
+        <a {{action "cancelSearch"}} class="back-link">
+          <i class="fa fa-angle-left back_icon" aria-hidden="true"></i>
+          <span class="back_text">
+            {{#if inlineDescription}}
+              {{t 'cancel'}}
+            {{else}}
+              {{t 'back'}}
+            {{/if}}
+          </span>
+        </a>
+      </div>
 
-    <div class="small-9 columns">
-      {{focus-textfield
-        name="searchText"
-        id="searchText"
-        placeholder="code"
-        value=searchText }}
+      <div class="small-9 columns">
+        {{focus-textfield
+          name="searchText"
+          id="searchText"
+          placeholder="code"
+          value=searchText }}
 
-      {{#if hasSearchText}}
-        <i class="fa fa-times-circle" {{action "clearSearch"}}></i>
-      {{/if}}
-    </div>
-  </div>
-
-  <section class="main-section orders_search_result">
-    <div class="row search">
-      <div class="small-12 columns">
-        {{#if isLoading}}
-          <div class="loading_screen">
-            {{partial 'loading'}}
-          </div>
-        {{else}}
-          {{#if filteredResults}}
-            <ul class="list list-activity list-offer-items codes_results">
-              {{#each filteredResults as |type|}}
-                <li {{action "assignItemLabel" type}}>
-                  <div class="package_name">{{type.name}}</div>
-                  <div>{{type.otherTerms}}</div>
-                </li>
-              {{/each}}
-            </ul>
-          {{else if hasFilter}}
-            <div class='no_result'> {{t 'no_search_results'}} </div>
-          {{/if}}
+        {{#if hasSearchText}}
+          <i class="fa fa-times-circle" {{action "clearSearch"}}></i>
         {{/if}}
       </div>
     </div>
-  </section>
+
+    <section class="main-section orders_search_result">
+      <div class="row search">
+        <div class="small-12 columns">
+          {{#if isLoading}}
+            <div class="loading_screen">
+              {{partial 'loading'}}
+            </div>
+          {{else}}
+            {{#if filteredResults}}
+              <ul class="list list-activity list-offer-items codes_results">
+                {{#each filteredResults as |type|}}
+                  <li {{action "assignItemLabel" type}}>
+                    <div class="package_name">{{type.name}}</div>
+                    <div>{{type.otherTerms}}</div>
+                  </li>
+                {{/each}}
+              </ul>
+            {{else if hasFilter}}
+              <div class='no_result'> {{t 'no_search_results'}} </div>
+            {{/if}}
+          {{/if}}
+        </div>
+      </div>
+    </section>
+  </div>
 </div>
