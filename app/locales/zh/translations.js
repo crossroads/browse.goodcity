@@ -179,7 +179,7 @@ export default {
       "Please input your email address or mobile phone number",
     sms_email_pincode:
       "我們會發訊息或電郵通知閣下的驗證碼以便安全性登入。曾登入過嗎？請使用相同的電話號碼或電郵地址。",
-    smscode: "獲取短訊驗證碼",
+    continue: "繼續",
     privacy:
       "We don't share your data. We only use it to complete your request(s). See our ",
     policy: "隱私政策",
