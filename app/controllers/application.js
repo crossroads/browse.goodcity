@@ -30,6 +30,10 @@ export default Ember.Controller.extend({
     return /Android/i.test(navigator.userAgent) && !this.get("isMobileApp");
   }),
 
+  isAndroidBrowser: Ember.computed("isMobileApp", function() {
+    return /Android/i.test(navigator.userAgent) && !this.get("isMobileApp");
+  }),
+
   displayCart: false,
   showCartDetailSidebar: false,
   cartscroll: Ember.inject.service(),
