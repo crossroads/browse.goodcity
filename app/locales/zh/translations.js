@@ -173,18 +173,15 @@ export default {
   login: {
     hk_mobile_or_email_only: "流動電話號碼（只局限於香港）/電郵地址",
     login: "登入",
-    welcome_text: "Welcome!",
-    get_started: "Get started here",
-    input_mobile_email:
-      "Please input your email address or mobile phone number",
+    welcome_text: "歡迎",
+    get_started: "在此開始",
+    input_mobile_email: "請提供您的電郵地址或手機號碼",
     sms_email_pincode:
       "我們會發訊息或電郵通知閣下的驗證碼以便安全性登入。曾登入過嗎？請使用相同的電話號碼或電郵地址。",
     continue: "繼續",
-    privacy:
-      "We don't share your data. We only use it to complete your request(s). See our ",
+    privacy: "我們不會公開或分享您的資料。我們只會使用以完成您的申請。請看 ",
     policy: "隱私政策",
-    mobile_email_warning:
-      "Please provide a valid email or a valid Hong Kong mobile number"
+    mobile_email_warning: "請提供正確的電郵或香港手機號碼"
   },
 
   account: {
@@ -198,7 +195,7 @@ export default {
     position: "職位",
     email: "電郵",
     mobile: "流動電話號碼",
-    mobile_label: "Allows you to request SMS updates from goodcity.",
+    mobile_label: "允許您申請來自好人好巿的短訊更新",
     preffered_contact_number: "選取這聯絡號碼",
     work: "請使用工作地址",
     done: "完成",
@@ -228,19 +225,19 @@ export default {
 
   _resend: {
     no_sms: "收不到短訊？",
-    email_correct: "Is {{email}} correct?  ",
-    phone_correct: "Is {{phone}} correct?  ",
-    go_back: "Go back to input page",
-    check_junk: "Check your junk email folder",
+    email_correct: "{{email}} 是否正確? ",
+    phone_correct: "{{phone}} 是否正確? ",
+    go_back: "返回輸入頁",
+    check_junk: "請檢查您的垃圾郵箱",
     not_working:
-      "Still not working? Email <a class='auth_links' href='mailto:contact@goodcity.hk'>contact@goodcity.hk</a> for help.",
+      "仍然未能繼續 ? 請聯絡 <a class='auth_links' href='mailto:contact@goodcity.hk'>contact@goodcity.hk</a> 尋求協助.",
     resend: "重新發送"
   },
 
   _verification_pin: {
-    send_code: "We sent a pin to",
-    input_code: "Input the code for secure access",
-    auth_error: "Sorry! Please enter the correct pin."
+    send_code: "我們已發送單次密碼至",
+    input_code: "請輸入密碼以保安檢查",
+    auth_error: "抱歉! 請輸入正確密碼"
   },
 
   gogovan: {
