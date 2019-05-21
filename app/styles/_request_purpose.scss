@@ -199,6 +199,14 @@
   }
 }
 
+.back-button {
+  cursor: pointer;
+}
+
+.cancel-section{
+  margin-right: unset;
+}
+
 .district-select {
   #district-select-dropdown{
     @media #{$small-only}{
