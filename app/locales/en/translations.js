@@ -188,7 +188,7 @@ export default {
     get_started: "Get started here",
     input_mobile_email:
       "Please input your email address or mobile phone number",
-    smscode: "Get 4-digit SMS code",
+    continue: "Continue",
     privacy:
       "We don't share your data. We only use it to complete your request(s). See our ",
     policy: "Privacy Policy.",
