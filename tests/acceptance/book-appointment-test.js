@@ -219,7 +219,7 @@ test("should redirect to login page if user not logged in", function(assert) {
       Ember.$(".title")
         .text()
         .trim(),
-      "Log in/Register"
+      "Welcome!"
     );
   });
 });

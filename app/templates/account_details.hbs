@@ -2,7 +2,7 @@
 {{scroll-to-bottom customClass="account-detail-info-scroll-arrow"}}
 {{/if}}
 <div class="row">
-  <div class="large-10 columns large-offset-1 medium-offset-1 medium-10 small-12">
+  <div class="large-8 columns large-offset-2 medium-offset-1 medium-10 small-12">
     <div class="row checkout_pages">
       <div class="small-12 medium-12 large-12 columns">
         <div class="row">
@@ -24,10 +24,10 @@
                 <div class="mobile">
                   <div class="row">
                     <div class="small-12 columns">
-                      <label class="form-label">{{t "account.welcome"}}</label>
+                      <label class="form-label title-label">{{t "account.welcome"}}</label>
                     </div>
                     <div class="small-12 columns">
-                      <label class="form-label">{{t "account.contact_details"}}</label>
+                      <label class="form-label title-label">{{t "account.contact_details"}}</label>
                     </div>
                   </div>
 
@@ -38,12 +38,12 @@
                     {{#form-control}}
                     {{#if model.organisation}}
                     <div class="small-12 columns" id="organisation_id" {{action "goToSearchOrg"}}>
-                      <label class="form-label">{{t "account.organisation"}}</label>
+                      <label class="form-label title-label">{{t "account.organisation"}}</label>
                       {{input type="text" id = "organisation_details" classNames="number_input center_align_placeholder" required='true' value=model.organisation.nameEn disabled=true}}
                     </div>
                     {{else}}
                     <div class="small-12 columns" {{action "goToSearchOrg"}}>
-                      <label class="form-label">{{t "account.organisation"}}</label>
+                      <label class="form-label title-label">{{t "account.organisation"}}</label>
                       {{input type="text" id = "organisation_details" classNames="number_input center_align_placeholder" required='true' }}
                     </div>
                     {{/if}}
@@ -57,7 +57,7 @@
                   <div class="row">
                     {{#form-control}}
                     <div class="small-2 columns user_title">
-                      <label class="form-label">{{t "account.title"}}</label>
+                      <label class="form-label title-label">{{t "account.title"}}</label>
                       {{select-list
                             content=titles
                             on-change=(action (mut selectedTitle))
@@ -68,11 +68,11 @@
                             idNames='title' }}
                     </div>
                     <div class="small-5 columns">
-                      <label class="form-label">{{t "account.first"}}</label>
+                      <label class="form-label title-label">{{t "account.first"}}</label>
                       {{input type="text" value=model.user.firstName id="firstName" classNames="number_input center_align_placeholder" required='true'}}
                     </div>
                     <div class="small-5 columns">
-                      <label class="form-label">{{t "account.last"}}</label>
+                      <label class="form-label title-label">{{t "account.last"}}</label>
                       {{input type="text" value=model.user.lastName id="lastName" classNames="number_input center_align_placeholder" required='true'}}
                     </div>
                     <div class="small-12 columns input-error warning_empty">
@@ -84,7 +84,7 @@
                   <div class="row">
                     {{#form-control}}
                     <div class="small-12 columns">
-                      <label class="form-label">{{t "account.position"}}</label>
+                      <label class="form-label title-label">{{t "account.position"}}</label>
                       {{#if model.organisationsUser}}
                       {{input type="text" value=model.organisationsUser.position id="position" classNames="number_input center_align_placeholder" required='true' autoFocus=true}}
                       {{else}}
@@ -100,7 +100,7 @@
                   <div class="row">
                     {{#form-control}}
                     <div class="small-12 columns">
-                      <label class="form-label">{{t "account.email"}}</label>
+                      <label class="form-label title-label">{{t "account.email"}}</label>
                       <label class="form-label">{{t "account.work"}}</label>
                       {{#if model.user.email}}
                       <div class="row">
@@ -110,7 +110,7 @@
                         {{#if model.user.isEmailVerified}}
                         <div class="small-3 columns verified_icon">
                           <span>
-                            {{fa-icon "check-circle-o"}}
+                            {{fa-icon "check-circle"}}
                             <span class="verified_text">{{t 'my_dashboard.account.verified_text'}}</span>
                           </span>
                         </div>
@@ -129,7 +129,8 @@
                   <div class="row">
                     {{#form-control}}
                     <div class="large-12 medium-12 small-12 columns">
-                      <label class="form-label">{{t 'account.mobile'}}</label>
+                      <label class="form-label title-label">{{t 'account.mobile'}}</label>
+                      <label class="form-label">{{t 'account.mobile_label'}}</label>
                     </div>
                     <div class="row">
                       {{#if model.user.mobile}}
@@ -139,7 +140,7 @@
                       {{#if model.user.isMobileVerified}}
                       <div class="small-3 columns verified_icon">
                         <span>
-                          {{fa-icon "check-circle-o"}}
+                          {{fa-icon "check-circle"}}
                           <span class="verified_text">{{t 'my_dashboard.account.verified_text'}}</span>
                         </span>
                       </div>
@@ -167,7 +168,7 @@
                   <div class="row">
                     {{#form-control}}
                     <div class="small-12 columns">
-                      <label class="form-label">{{t 'account.preffered_contact_number'}}</label>
+                      <label class="form-label title-label">{{t 'account.preffered_contact_number'}}</label>
                     </div>
                     <div class="small-12 large-12 columns">
                       <label class="form-label">{{t 'account.preffered_contact_label'}}</label>

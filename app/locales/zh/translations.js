@@ -173,12 +173,15 @@ export default {
   login: {
     hk_mobile_or_email_only: "流動電話號碼（只局限於香港）/電郵地址",
     login: "登入",
+    welcome_text: "歡迎",
+    get_started: "在此開始",
+    input_mobile_email: "請提供您的電郵地址或手機號碼",
     sms_email_pincode:
       "我們會發訊息或電郵通知閣下的驗證碼以便安全性登入。曾登入過嗎？請使用相同的電話號碼或電郵地址。",
-    smscode: "獲取短訊驗證碼",
-    privacy: "我們不會使用分享你的資料，我們只會用於你的貨物申請",
+    continue: "繼續",
+    privacy: "我們不會公開或分享您的資料。我們只會使用以完成您的申請。請看 ",
     policy: "隱私政策",
-    mobile_email_warning: "請提供有效的香港流動電話號碼或有效的電郵地址"
+    mobile_email_warning: "請提供正確的電郵或香港手機號碼"
   },
 
   account: {
@@ -191,10 +194,12 @@ export default {
     last: "姓",
     position: "職位",
     email: "電郵",
-    mobile: "流動電話號碼",
+    mobile: "流動電話號碼 (非必須)",
+    mobile_label: "允許您申請來自好人好巿的短訊更新",
     preffered_contact_number: "選取這聯絡號碼",
     work: "請使用工作地址",
     done: "完成",
+    back: "Back",
     contact_us: "未能尋找你的機構？請聯絡我們尋求協助。",
     organisation_warning: "你必須選擇有效的機構以繼續",
     title_warning: "請輸入稱謂",
@@ -220,15 +225,19 @@ export default {
 
   _resend: {
     no_sms: "收不到短訊？",
-    please_wait: "請稍候...",
-    resend: "重新發送",
-    back_to_phone_number: "返回電郵或電話輸入"
+    email_correct: "{{email}} 是否正確? ",
+    phone_correct: "{{phone}} 是否正確? ",
+    go_back: "返回輸入頁",
+    check_junk: "請檢查您的垃圾郵箱",
+    not_working:
+      "仍然未能繼續 ? 請聯絡 <a class='auth_links' href='mailto:contact@goodcity.hk'>contact@goodcity.hk</a> 尋求協助.",
+    resend: "重新發送"
   },
 
   _verification_pin: {
-    input_code: "輸入四位數短訊驗證碼",
-    send_code: "我們把認證碼發送到",
-    auth_error: "對不起！請輸入正確的驗證碼。"
+    send_code: "我們已發送單次密碼至",
+    input_code: "請輸入密碼以保安檢查",
+    auth_error: "抱歉! 請輸入正確密碼"
   },
 
   gogovan: {

@@ -8,7 +8,7 @@
         </section>
 
         <section class="middle tab-bar-section">
-          <h1 class="title">{{t "order.login"}}/{{t "order.register"}}</h1>
+          <h1 class="title">{{t "login.welcome_text"}}</h1>
         </section>
       </nav>
 
@@ -18,14 +18,14 @@
 
       {{#validatable-form onSubmit=(action 'resendPin') as |form|}}
       <div class="row">
-        <div class="small-12 columns">
+        <div class="small-12 large-11 columns">
           <div class="mobile center_align">
             <div class="row">
               <div class="small-12 columns">
-                <label class="form-label">{{t "login.hk_mobile_or_email_only"}}</label>
+                <label class="form-label title-label">{{t "login.get_started"}}</label>
               </div>
               <div class="small-12 columns">
-                <label class="form-label">{{t "login.sms_email_pincode"}}</label>
+                <label class="form-label">{{t "login.input_mobile_email"}}</label>
               </div>
             </div>
 
@@ -43,11 +43,13 @@
             <div class="row collapse">
               <div class="small-12 medium-8 columns">
                 <button id="getsmscode" class="button expand expand_button"
-                  {{action 'submit' target=form}}>{{t "login.smscode"}}</button>
+                  {{action 'submit' target=form}}>{{t "login.continue"}}</button>
               </div>
             </div>
             <div class="small-12 columns">
-              <label class="form-label">{{t "login.privacy"}}<a href="">{{t "login.policy"}}</a></label>
+              <label class="form-label">
+                {{t "login.privacy"}}{{#link-to "privacy" classNames="auth_links"}}{{t "login.policy"}}{{/link-to}}
+              </label>
             </div>
           </div>
         </div>

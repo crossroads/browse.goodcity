@@ -12,6 +12,7 @@ export default Ember.Controller.extend({
   pin: "",
   mobileOrEmail: "",
   loginParam: Ember.computed.localStorage(),
+  loginParamEmail: Ember.computed.localStorage(),
   mobile: "",
   email: "",
 
@@ -88,6 +89,7 @@ export default Ember.Controller.extend({
       var mobile = this.get("mobile");
       var email = this.get("email");
       this.set("loginParam", mobile || email);
+      this.set("loginParamEmail", email ? true : false);
       var loadingView = getOwner(this)
         .lookup("component:loading")
         .append();

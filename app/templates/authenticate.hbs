@@ -17,8 +17,8 @@
           {{#validatable-form onSubmit=(action 'authenticateUser' bookAppointment) as |form|}}
             <div class="row">
               <div class="small-12 columns">
+                <label class="form-label title-label">{{t "_verification_pin.send_code"}} <span class="sent_code_to">{{loginParam}}</span></label>
                 <label class="form-label">{{t "_verification_pin.input_code"}}</label>
-                <label class="form-label">{{t "_verification_pin.send_code"}} <span class="sent_code_to">{{loginParam}}</span></label>
               </div>
             </div>
 
@@ -37,10 +37,30 @@
 
           <div class="row">
             <div class="small-12 columns">
-              <label class="form-label">{{t "_resend.no_sms"}}</label>
+              <label class="form-label">{{t "_resend.no_sms"}} <a href="#" class="auth_links" {{action "resendPin" }} id="resend-pin">{{t "_resend.resend"}}</a></label>
+
+              <ul>
+                {{#if loginParamEmail}}
+                  <li>
+                    <label class="form-label">
+                      {{t '_resend.email_correct' email=loginParam}}
+                      {{#link-to 'login' classNames="auth_links"}}{{t "_resend.go_back"}}{{/link-to}}
+                    </label>
+                  </li>
+                  <li><label class="form-label">{{t '_resend.check_junk'}}</label></li>
+                {{else}}
+                  <li>
+                    <label class="form-label">
+                      {{t '_resend.phone_correct' phone=loginParam}}
+                      {{#link-to 'login' classNames="auth_links"}}{{t "_resend.go_back"}}{{/link-to}}
+                    </label>
+                  </li>
+                {{/if}}
+                <li><label class="form-label">{{t '_resend.not_working'}}</label></li>
+              </ul>
               <br>
-              <a href="#" {{action "resendPin" }} id="resend-pin">{{t "_resend.resend"}}</a>
-              <div class="right">{{#link-to 'login'}}{{t "_resend.back_to_phone_number"}}{{/link-to}}</div>
+
+
             </div>
           </div>
         </div>

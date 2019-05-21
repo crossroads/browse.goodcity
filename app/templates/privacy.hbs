@@ -1,6 +1,16 @@
-<h1 style="text-align:center" class="static_page_title"> {{t "privacy.title"}} </h1>
 <div class="inner-wrap">
   <section class="main-section privacy faq_list">
+    <nav class="tab-bar">
+      <section class="left-large">
+        <div class="back-button" {{action 'back'}}>
+          {{fa-icon "angle-left"}} {{t "back"}}
+        </div>
+      </section>
+      <section class="middle tab-bar-section">
+        <h1 class="title">{{t "privacy.title"}}</h1>
+      </section>
+    </nav>
+    <br />
     <div class="row">
       <div class="small-12 columns">
         <p>{{t "privacy.confidentiality"}}</p>
