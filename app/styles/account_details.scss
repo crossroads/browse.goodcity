@@ -253,10 +253,17 @@
   }
 }
 
-.verified_icon {
-  margin-left: 10%;
-  float: left !important;
 
+.account_details{
+  .verified_icon {
+    @media #{$small-only} {
+      margin-left: 10%;
+    }
+  }
+}
+
+.verified_icon{
+  float: left !important;
   .verified_text {
     margin: 5%;
     font-size: 0.8em;
