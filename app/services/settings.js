@@ -3,8 +3,15 @@ import _ from "lodash";
 import "../computed/local-storage";
 
 const NOT_EMPTY = val => val && val.length > 0;
+const TO_STRING = val => String(val);
 const TO_NUMBER = val => Number(val);
 const IS_NUMBER = val => !isNaN(TO_NUMBER(val));
+const TO_BOOL = val => {
+  if (_.isString(val)) {
+    return /^true$/i.test(val);
+  }
+  return Boolean(val);
+};
 
 export default Ember.Service.extend({
   store: Ember.inject.service(),
@@ -33,8 +40,15 @@ export default Ember.Service.extend({
 
   // ---- Access methods
 
+  readBoolean(key) {
+    return this.__readValue(key, {
+      parser: TO_BOOL
+    });
+  },
+
   readString(key) {
     return this.__readValue(key, {
+      parser: TO_STRING,
       validator: NOT_EMPTY
     });
   },
@@ -79,6 +93,6 @@ export default Ember.Service.extend({
     if (val && this.__validate(val, validator)) {
       return parser(val);
     }
-    return defaults[key];
+    return parser(defaults[key]);
   }
 });
