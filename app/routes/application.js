@@ -159,6 +159,7 @@ export default Ember.Route.extend(preloadDataMixin, {
     loading() {
       if (this.loadingView) {
         this.loadingView.destroy();
+        this.loadingView = null;
       }
       if (!this.loadingView) {
         this.loadingView = Ember.getOwner(this)
