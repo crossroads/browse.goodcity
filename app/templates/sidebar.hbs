@@ -10,6 +10,12 @@
       <h1>{{pageTitle}}</h1>
     </section>
 
+    {{#if isBrowsePage}}
+      <section class="right-small" style="margin-right: 8%; font-weight: 900;">
+        <i aria-hidden="true" class="fa fa-search"></i>
+      </section>
+    {{/if}}
+
     {{#if hasCartItems}}
       <section class="right-small" {{action 'displayCart'}}>
         {{partial 'cart_truck_icon'}}

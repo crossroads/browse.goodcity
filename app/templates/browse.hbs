@@ -1,9 +1,18 @@
 <nav class="tab-bar hide-for-small">
   <section class='main-section'>
-    <h1 class="title">{{t "browse.title"}}</h1>
+    <h1 class="browse-title" align="center">{{t "browse.title"}}</h1>
   </section>
 </nav>
 <section class="main-section">
+  <div class="row home_section show-for-small small light">
+    <div class="small-12 columns">
+      <label class="form-label browse-label">
+        <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+        {{t 'browse.intro_text'}}
+        {{#link-to "faq"}} {{ t "browse.faq" }} {{/link-to}}
+      </label>
+    </div>
+  </div>
   <div class="row">
     <div class="small-12 columns">
       <ul class="small-block-grid-3 large-block-grid-5 xxlarge-block-grid-6 list">

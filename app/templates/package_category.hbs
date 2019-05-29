@@ -1,32 +1,30 @@
 <nav class="tab-bar category_page">
   <section class='main-section ui'>
     <h1 class="title hide-for-small">{{model.name}}</h1>
-
-    <div class="filter-container">
-      {{#if model.isParent}}
-        <div class="filter">
-          <div class="filter-label">
-            {{t "category.filter"}}:
-          </div>
-          <div class="filter-list">
-            {{select-list class="package-category" content=selectCategories on-change=(action (mut selectedCategoryId)) prompt=(t "category.all")}}
-          </div>
-        </div>
-      {{/if}}
-
-      <div class="filter">
-        <div class="filter-label">
-          {{t "category.sort.title"}}:
-        </div>
-        <div class="filter-list">
-          {{select-list class="package-category" content=sortOptions on-change=(action (mut selectedSort)) }}
-        </div>
-      </div>
-    </div>
-
+    <nav class="breadcrumbs">
+      {{#link-to 'browse'}}All Goods{{/link-to}}
+      {{#link-to 'package_category' model.id classNames="current"}}{{model.name}}{{/link-to}}
+      {{select-list class="package-category" content=selectCategories on-change=(action (mut selectedCategoryId)) prompt="Filter these results"}}
+    </nav>
   </section>
 </nav>
 
 <section class="main-section category-items-list">
+  <div class="filter-container1">
+    <div class="filter2">
+      <div class="filter-label1">
+        {{t "category.sort.title"}}:
+      </div>
+      <div class="filter-list">
+        {{select-list class="package-category" content=sortOptions on-change=(action (mut selectedSort)) }}
+      </div>
+    </div>
+  </div>
   {{paginated-items content=sortedItems page=page perPage=perPage query=query sortBy=selectedSort category=currentCategoryId}}
 </section>
+
+<style>
+  .filter-container1{
+    float: right;
+  }
+</style>
