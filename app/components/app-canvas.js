@@ -3,47 +3,44 @@ import ObserveScreenResize from "./observe-screen-resize";
 
 export default ObserveScreenResize.extend({
   cartscroll: Ember.inject.service(),
-  isHomePage: Ember.computed("router", function() {
-    return this.get("router").currentPath === "home";
-  }),
+  isHomePage: Ember.computed(function() {
+    return Ember.getOwner(this)
+      .lookup("controller:application")
+      .get("isHomePage");
+  }).volatile(),
 
-  observeScreen: function() {
-    this.get("cartscroll").resize();
-    if (!this.screenResized()) {
-      let offCanvasWrap = Ember.$(".off-canvas-wrap");
-      offCanvasWrap.addClass("move-right");
-      if (this.get("isHomePage")) {
-        offCanvasWrap.addClass("home-page");
-      } else {
-        offCanvasWrap.removeClass("home-page");
-        offCanvasWrap.addClass("move-left");
-      }
-      Ember.$(".left-off-canvas-toggle").hide();
-      this.OtherScreenOffCanvas();
-    } else {
-      Ember.$(".off-canvas-wrap")
-        .removeClass("move-right")
-        .removeClass("move-left");
+  onScreenResized() {
+    if (this.get("isSmallScreen")) {
       Ember.$(".left-off-canvas-toggle").show();
-      this.smallScreenOffCanvas();
+      this.closeSideBars();
+      this.applySmallScreenSettings();
+    } else {
+      Ember.$(".left-off-canvas-toggle").hide();
+      this.showSideBar();
+      this.applyDesktopScreenSettings();
     }
+    this.get("cartscroll").resize();
   },
-  smallScreenOffCanvas: function() {
+
+  closeSideBars() {
+    Ember.$(".off-canvas-wrap")
+      .removeClass("move-right")
+      .removeClass("move-left");
+  },
+
+  showSideBar() {
+    Ember.$(".off-canvas-wrap").addClass("move-right");
+  },
+
+  applySmallScreenSettings: function() {
     Ember.$(document).foundation({ offcanvas: { close_on_click: true } });
   },
-  OtherScreenOffCanvas: function() {
+
+  applyDesktopScreenSettings: function() {
     Ember.$(document).foundation({ offcanvas: { close_on_click: false } });
   },
 
   didInsertElement() {
-    this.get("cartscroll").resize();
-    if (!this.screenResized()) {
-      this.OtherScreenOffCanvas();
-    } else {
-      this.smallScreenOffCanvas();
-      Ember.$(".off-canvas-wrap")
-        .removeClass("move-right")
-        .removeClass("move-left");
-    }
+    this.onScreenResized();
   }
 });
