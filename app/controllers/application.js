@@ -33,7 +33,7 @@ export default Ember.Controller.extend({
     return /Android/i.test(navigator.userAgent) && !this.get("isMobileApp");
   }),
 
-  isBrowsePage: Ember.computed("currentPath", function() {
+  showSearchIcon: Ember.computed("currentPath", function() {
     return ["browse", "package_category"].indexOf(this.get("currentPath")) >= 0;
   }),
 

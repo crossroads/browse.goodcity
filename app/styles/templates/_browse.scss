@@ -4,6 +4,13 @@
   border-bottom: 1px solid #334f75;
 }
 
+.search_icon {
+  float: right;
+  @media #{$small-only} {
+    display: none;
+  }
+}
+
 .list {
   margin: 0;
   padding: 0;

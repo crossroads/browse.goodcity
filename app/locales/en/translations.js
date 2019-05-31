@@ -160,9 +160,9 @@ export default {
     filter: "Filter Items",
     all: "All",
     sort: {
-      title: "Sort by",
-      newfirst: "Newest first",
-      oldfirst: "Oldest first"
+      title: "Sort",
+      newfirst: "most recent first",
+      oldfirst: "oldest first"
     }
   },
 
