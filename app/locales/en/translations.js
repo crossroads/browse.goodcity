@@ -193,7 +193,7 @@ export default {
       "We don't share your data. We only use it to complete your request(s). See our ",
     policy: "Privacy Policy.",
     mobile_email_warning:
-      "Please provide a valid email or a valid Hong Kong mobile number"
+      "Please provide email or a valid Hong Kong mobile number"
   },
 
   account: {
