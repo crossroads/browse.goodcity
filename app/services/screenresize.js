@@ -29,5 +29,12 @@ export default Ember.Service.extend({
       matchMedia(MEDIA_QUERIES.MEDIUM).matches &&
       !matchMedia(MEDIA_QUERIES.LARGE).matches
     );
+  }),
+
+  isWideScreen: Ember.computed(function() {
+    return (
+      matchMedia(MEDIA_QUERIES.MEDIUM).matches ||
+      matchMedia(MEDIA_QUERIES.LARGE).matches
+    );
   })
 });
