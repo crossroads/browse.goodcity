@@ -8,10 +8,12 @@ export default Ember.Controller.extend({
   isMobileApp: config.cordova.enabled,
   appVersion: config.APP.VERSION,
   subscription: Ember.inject.service(),
+  screenresize: Ember.inject.service(),
   messageBox: Ember.inject.service(),
   loggedInUser: false,
   i18n: Ember.inject.service(),
   showSidebar: true,
+  isWideScreen: Ember.computed.alias("screenresize.isWideScreen"),
   isHomePage: Ember.computed("currentPath", function() {
     return this.get("currentPath") === "home";
   }),

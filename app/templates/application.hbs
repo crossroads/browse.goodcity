@@ -19,7 +19,7 @@
   {{#app-canvas}}
     <div class="row application-layout">
       <div class="large-12 medium-12 columns collapse no-padding" id="content">
-        <div class="off-canvas-wrap {{if addMoveLeft 'move-left' ''}} {{if isHomePage "home-page" ""}}" data-offcanvas>
+        <div class="off-canvas-wrap {{if (is-and showOffCanvas isWideScreen) 'move-right' ''}} {{if addMoveLeft 'move-left' ''}} {{if isHomePage "home-page" ""}}" data-offcanvas>
           <div class="inner-wrap">
             {{#if showSidebar}}
               {{partial "sidebar"}}
