@@ -1,14 +1,28 @@
 import Ember from "ember";
 
 export default Ember.Component.extend({
-  screenResized: function() {
-    return matchMedia(Foundation.media_queries.small).matches &&
-      !matchMedia(Foundation.media_queries.medium).matches;
+  screenresize: Ember.inject.service(),
+
+  isSmallScreen: Ember.computed.alias("screenresize.isSmallScreen"),
+  isMediumScreen: Ember.computed.alias("screenresize.isMediumScreen"),
+
+  onScreenResized() {
+    throw "Method not implemented";
   },
 
-  initComonent: function() {
-    var updateScreen = Ember.run.bind(this, this.observeScreen);
-    window.addEventListener("resize", updateScreen);
-  }.on("init")
+  init: function() {
+    this._super(...arguments);
+    this.__updateScreen = () => {
+      if (this.isDestroyed || this.isDestroying) {
+        return;
+      }
+      this.onScreenResized();
+    };
+    window.addEventListener("resize", this.__updateScreen);
+  },
 
+  willDestroyElement() {
+    this._super(...arguments);
+    window.removeEventListener("resize", this.__updateScreen);
+  }
 });
