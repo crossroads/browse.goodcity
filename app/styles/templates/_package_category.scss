@@ -3,9 +3,6 @@
     color: white !important;
     font-weight: bolder !important;
   }
-  .underline-link{
-    text-decoration: underline;
-  }
   .sort{
     .title{
       padding-top: 7px;
@@ -105,4 +102,8 @@
   @media #{$small-only} {
     padding-left: 0rem;
   }
+}
+
+.underline-link {
+  text-decoration: underline;
 }
