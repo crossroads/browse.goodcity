@@ -10,6 +10,12 @@
       <h1>{{pageTitle}}</h1>
     </section>
 
+    {{#if showSearchIcon}}
+      <section class="right-small {{if hasCartItems 'cart-icon-with-search' 'search-icon'}}" align="center">
+        <i aria-hidden="true" class="fa fa-search"></i>
+      </section>
+    {{/if}}
+
     {{#if hasCartItems}}
       <section class="right-small" {{action 'displayCart'}}>
         {{partial 'cart_truck_icon'}}

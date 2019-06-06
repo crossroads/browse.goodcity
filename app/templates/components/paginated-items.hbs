@@ -1,26 +1,14 @@
-<ul class="large-block-grid-6 small-block-grid-1 medium-block-grid-3 list items_list xxlarge-block-grid-4">
+<ul class="large-block-grid-6 small-block-grid-2 medium-block-grid-3 list items_list xxlarge-block-grid-4">
   {{#each pagedContent key="@index" as |item|}}
     <li>
       {{#if item.isItem}}
         {{#link-to 'item' item.id (query-params sortBy=sortBy categoryId=category) }}
-          {{cloudinary-image-tag src=item.displayImageUrl}}
-          <div class="item_desc">
-            <li class="ellipsis two-line-ellipsis">
-              {{item.packageType.name}}
-            </li>
-          </div>
+          {{cloudinary-image-tag src=item.displayImageUrl item=item displayItemName=true}}
         {{/link-to}}
       {{else}}
-
         {{#link-to 'package' item.id (query-params sortBy=sortBy categoryId=category) }}
-          {{cloudinary-image-tag src=item.displayImageUrl}}
-          <div class="item_desc">
-            <li class="ellipsis two-line-ellipsis">
-              {{item.packageType.name}}
-            </li>
-          </div>
+          {{cloudinary-image-tag src=item.displayImageUrl item=item displayItemName=true}}
         {{/link-to}}
-
       {{/if}}
     </li>
   {{/each}}

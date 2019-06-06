@@ -67,7 +67,10 @@ export default {
   },
 
   browse: {
-    title: "好人好巿 (慈善組織)"
+    title: "好人好巿 (慈善組織)",
+    browse_title: "瀏覧貨品",
+    intro_text: "歡迎已在港註冊的慈善及社福團體下單",
+    faq: "資格"
   },
 
   home: {
@@ -147,9 +150,9 @@ export default {
     filter: "過濾項",
     all: "所有",
     sort: {
-      title: "排序方式",
-      newfirst: "新的排前",
-      oldfirst: "舊的排前"
+      title: "Sort",
+      newfirst: "最近放在最先",
+      oldfirst: "最舊放在最先"
     }
   },
 
