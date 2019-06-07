@@ -1,0 +1,66 @@
+<div class="goods_search">
+  <div class="row">
+    <div class="small-12 large-offset-2 large-8">
+      <div class="row fixed_search_header search-box ui">
+        <div class="row">
+          <div class="small-2 medium-2 large-1 columns back_button">
+            <div class="back_icon" {{action "back"}}>
+              {{fa-icon 'angle-left'}}
+              <span class="package_back"> {{t "account.back"}}</span>
+            </div>
+          </div>
+          <div class="small-10 large-10 medium-10 columns">
+            {{input
+              name="searchText"
+              id="searchText"
+              placeholder= (t "search_goods.placeholder")
+              value=searchText
+              disabled=false}}
+
+            {{#if hasSearchText}}
+              <i class="fa fa-times-circle" {{action "clearSearch"}}></i>
+            {{/if}}
+          </div>
+          <div class=" large-1 columns"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <section class="main-section package_search_result">
+    <div class="row search">
+      <div class="small-12 medium-12 large-offset-2 large-8 columns">
+        {{#if isLoading}}
+          <div class="loading_screen">
+            {{partial 'loading'}}
+          </div>
+        {{else}}
+          {{#if filteredResults}}
+            <ul class="list list-activity">
+              {{#each filteredResults as |package|}}
+              <li class="goods_search">
+                <div class="row" {{action "selectItem" package}}>
+                  <div class="small-12 large-12 columns">
+                    {{package.name}}
+                  </div>
+                </div>
+              </li>
+              {{/each}}
+            </ul>
+
+            {{#infinity-loader infinityModel= filteredResults}}
+            {{/infinity-loader}}
+
+          {{else if hasNoResults}}
+            <div class='no_result'>{{t "no_search_results"}}</div>
+          {{else}}
+            <div class="row">
+              <div class="small-12 medium-12 columns" align="center">
+                <label class="form-label search_info">{{t "search_goods.search_info"}}</label>
+              </div>
+            </div>
+          {{/if}}
+        {{/if}}
+      </div>
+    </div>
+  </section>
+</div>

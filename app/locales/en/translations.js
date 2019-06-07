@@ -198,7 +198,13 @@ export default {
       "We don't share your data. We only use it to complete your request(s). See our ",
     policy: "Privacy Policy.",
     mobile_email_warning:
-      "Please provide email or a valid Hong Kong mobile number"
+      "Please provide a valid email or a valid Hong Kong mobile number"
+  },
+
+  search_goods: {
+    contact_us: "Can't find required goods? Please contact us for assistance.",
+    placeholder: "Search Goods",
+    search_info: "You can search for goods. E.g.'table' or 'stroller'"
   },
 
   account: {
