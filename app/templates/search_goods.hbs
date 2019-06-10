@@ -3,25 +3,29 @@
     <div class="small-12 large-offset-2 large-8">
       <div class="row fixed_search_header search-box ui">
         <div class="row">
-          <div class="small-2 medium-2 large-1 columns back_button">
+          <div class="small-2 medium-1 large-1 columns back_button">
             <div class="back_icon" {{action "back"}}>
               {{fa-icon 'angle-left'}}
               <span class="package_back"> {{t "account.back"}}</span>
             </div>
           </div>
           <div class="small-10 large-10 medium-10 columns">
-            {{input
+            {{focus-textfield
               name="searchText"
               id="searchText"
               placeholder= (t "search_goods.placeholder")
-              value=searchText
-              disabled=false}}
+              value=searchText }}
 
             {{#if hasSearchText}}
               <i class="fa fa-times-circle" {{action "clearSearch"}}></i>
             {{/if}}
           </div>
-          <div class=" large-1 columns"></div>
+          <div class=" large-1 medium-1 columns"></div>
+          <div class="row">
+            <div class="small-12 medium-12 columns">
+              <label class="form-label search_info">{{t "search_goods.search_info"}}</label>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -34,30 +38,24 @@
             {{partial 'loading'}}
           </div>
         {{else}}
-          {{#if filteredResults}}
-            <ul class="list list-activity">
-              {{#each filteredResults as |package|}}
-              <li class="goods_search">
-                <div class="row" {{action "selectItem" package}}>
-                  <div class="small-12 large-12 columns">
-                    {{package.name}}
-                  </div>
-                </div>
-              </li>
-              {{/each}}
-            </ul>
-
-            {{#infinity-loader infinityModel= filteredResults}}
-            {{/infinity-loader}}
-
-          {{else if hasNoResults}}
-            <div class='no_result'>{{t "no_search_results"}}</div>
-          {{else}}
-            <div class="row">
-              <div class="small-12 medium-12 columns" align="center">
-                <label class="form-label search_info">{{t "search_goods.search_info"}}</label>
-              </div>
-            </div>
+          {{#if displayResults}}
+            {{#infinite-list height="75vh" loadMore=(action "loadMoreGoods") as |items| }}
+              <ul class="list list-activity">
+                {{#if items.length}}
+                  {{#each items as |package|}}
+                    <li class="goods_search">
+                      <div class="row" {{action "selectItem" package}}>
+                        <div class="small-12 large-12 columns">
+                          {{package.notes}}
+                        </div>
+                      </div>
+                    </li>
+                  {{/each}}
+                {{else}}
+                  <div class='no_result'>{{t "no_search_results"}}</div>
+                {{/if}}
+              </ul>
+            {{/infinite-list}}
           {{/if}}
         {{/if}}
       </div>

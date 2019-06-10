@@ -1,48 +1,59 @@
 import Ember from "ember";
 import searchModule from "./search_module";
+import _ from "lodash";
 
 export default searchModule.extend({
   minSearchTextLength: 2,
-  searchModelName: "package_type",
+  filteredResults: [],
+  displayResults: false,
+
   onSearchTextChange: Ember.observer("searchText", function() {
-    if (this.get("searchText").length) {
-      Ember.run.debounce(this, this.applyFilter, 500);
-    } else {
-      this.set("filteredResults", []);
-    }
-  }),
-
-  applyFilter() {
-    var searchText = this.get("searchText");
-    if (searchText.length > this.get("minSearchTextLength")) {
-      this.set("isLoading", true);
-      this.set("hasNoResults", false);
-      if (this.get("unloadAll")) {
-        this.get("store").unloadAll();
-      }
-
-      this.infinityModel(
-        "package_type",
-        {
-          startingPage: 1,
-          perPage: 25,
-          modelPath: "filteredResults"
-        },
-        {
-          searchText: "searchText"
-        }
-      )
-        .then(data => {
-          debugger;
-          // if (this.get("searchText") === data.meta.search) {
-          this.set("filteredResults", data);
-          this.store.pushPayload(data);
-          this.set("hasNoResults", data.get("length") === 0);
-          // }
-        })
-        .finally(() => this.set("isLoading", false));
+    if (this.get("searchText").length > this.get("minSearchTextLength")) {
+      this.reloadResults();
     }
     this.set("filteredResults", []);
+  }),
+
+  reloadResults() {
+    this.hideResults();
+    Ember.run.debounce(this, this.showResults, 500);
+  },
+
+  hideResults() {
+    Ember.run(() => {
+      this.set("displayResults", false);
+    });
+  },
+
+  showResults() {
+    Ember.run(() => {
+      this.set("displayResults", true);
+    });
+  },
+
+  getFilterQuery() {
+    return {
+      state: "in_stock,published"
+    };
+  },
+
+  getSearchQuery() {
+    return {
+      searchText: this.get("searchText"),
+      browseSearch: true
+    };
+  },
+
+  getPaginationQuery(pageNo) {
+    return {
+      per_page: 25,
+      page: pageNo
+    };
+  },
+
+  trimQuery(query) {
+    // Remove any undefined values
+    return _.pickBy(query, _.identity);
   },
 
   actions: {
@@ -52,13 +63,30 @@ export default searchModule.extend({
       this.transitionToRoute("app_menu_list");
     },
 
+    selectItem(item) {
+      if (item) {
+        this.transitionToRoute("package", item.id, {
+          queryParams: {
+            categoryId: item.get("allPackageCategories.firstObject.id")
+          }
+        });
+      }
+    },
+
     back() {
       window.history.back();
     },
 
-    selectItem(item) {
-      debugger;
-      console.log("item selected");
+    loadMoreGoods(pageNo) {
+      const params = this.trimQuery(
+        _.merge(
+          {},
+          this.getFilterQuery(),
+          this.getSearchQuery(),
+          this.getPaginationQuery(pageNo)
+        )
+      );
+      return this.get("store").query("package", params);
     }
   }
 });

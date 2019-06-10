@@ -6,9 +6,12 @@
     display: flex;
   }
   .search_info{
-    margin-top: 5em;
-    font-size: 0.8em;
-    color: #fff;
+    margin-left: 5%;
+    color: black;
+    font-size: 0.8rem;
+    @media #{$small-only} {
+      font-size: 0.6rem;
+    }
   }
 }
 .search-box {
@@ -61,6 +64,9 @@
     font-size: 0.9rem;
     cursor: pointer;
     margin-left: 15%;
+    @media #{$small-only} {
+      margin-top: 20%;
+    }
   }
 
   .back_button {
