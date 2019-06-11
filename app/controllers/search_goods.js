@@ -30,12 +30,6 @@ export default Ember.Controller.extend({
     });
   },
 
-  getFilterQuery() {
-    return {
-      state: "in_stock,published"
-    };
-  },
-
   getSearchQuery() {
     return {
       searchText: this.get("searchText")
@@ -77,12 +71,7 @@ export default Ember.Controller.extend({
 
     loadMoreGoods(pageNo) {
       const params = this.trimQuery(
-        _.merge(
-          {},
-          this.getFilterQuery(),
-          this.getSearchQuery(),
-          this.getPaginationQuery(pageNo)
-        )
+        _.merge({}, this.getSearchQuery(), this.getPaginationQuery(pageNo))
       );
       return this.get("store").query("package", params);
     }
