@@ -12,9 +12,9 @@
       </div>
 
       <div class="large-4 medium-4 small-12 columns item-page">
-        {{#link-to 'package_category' categoryObj class="no-avatar left show-for-small item-remove-icon"}}
+        <div class="no-avatar left show-for-small item-remove-icon" {{action 'back'}}>
           <i class="fa fa-2x fa-times remove-icon"></i>
-        {{/link-to}}
+        </div>
 
         <ul class="text-right pagination right">
           <li class="arrow prev enabled-arrow" {{action "setDirectionAndRender" "moveRight" on="click"}}>
