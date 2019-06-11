@@ -9,17 +9,19 @@
         {{#link-to 'browse' classNames="underline-link"}}All Goods{{/link-to}}
         {{#link-to 'package_category' model.id classNames="current"}}{{model.name}}{{/link-to}}
         {{select-list class="category_select" content=selectCategories on-change=(action (mut selectedCategoryId)) prompt="All Results"}}
+        <i class="fa fa-caret-down category_select"></i>
       </nav>
     </section>
   </nav>
 
   <section class="main-section category-items-list">
     <div class="row sort">
-      <div class="small-2 small-offset-6 columns large-1 large-offset-9 title" align="right">
-        {{t "category.sort.title"}} <i class="fa fa-sort-amount-desc" aria-hidden="true"></i>
+      <div class="small-2 medium-1 medium-offset-7 small-offset-5 columns large-1 large-offset-9 title" align="right">
+        {{t "category.sort.title"}}
       </div>
       <div class="small-4 large-2 columns dropdown" align="left">
         {{ select-list class="package-category" content=sortOptions on-change=(action (mut selectedSort)) }}
+        <i class="fa fa-sort-amount-desc dropdown" aria-hidden="true"></i>
       </div>
     </div>
 

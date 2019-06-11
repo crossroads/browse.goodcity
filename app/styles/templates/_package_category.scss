@@ -18,6 +18,31 @@
     }
     display: inline-flex;
   }
+  .category_select.fa {
+    position: absolute;
+    margin-left: -1.5vw;
+    font-size: 0.8rem;
+    z-index: -1;
+    cursor: pointer;
+  }
+
+  .dropdown{
+    position: absolute;
+    right: 0%;
+    @media #{$small-only} {
+      right: 22px;
+    }
+  }
+  .fa.dropdown{
+    z-index: -1;
+    position: absolute;
+    top: 26%;
+    right: 28%;
+    @media #{$small-only} {
+      right: 0%;
+    }
+  }
+
   select {
     -webkit-appearance: unset !important;
     background-color: unset;
@@ -27,6 +52,7 @@
     height: unset;
     padding: unset;
     border: unset;
+    cursor: pointer;
   }
 }
 .tab-bar.category_page {
