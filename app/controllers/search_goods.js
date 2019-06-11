@@ -1,8 +1,7 @@
 import Ember from "ember";
-import searchModule from "./search_module";
 import _ from "lodash";
 
-export default searchModule.extend({
+export default Ember.Controller.extend({
   minSearchTextLength: 2,
   filteredResults: [],
   displayResults: false,
@@ -39,8 +38,7 @@ export default searchModule.extend({
 
   getSearchQuery() {
     return {
-      searchText: this.get("searchText"),
-      browseSearch: true
+      searchText: this.get("searchText")
     };
   },
 
