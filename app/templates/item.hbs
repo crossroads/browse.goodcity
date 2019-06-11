@@ -5,8 +5,10 @@
   <section class='main-section'>
     <div class="row">
       <div class="large-8 medium-8 small-12 columns hide-for-small package_catogory_header">
-          {{#link-to 'package_category' categoryObj.id class="package_category_link"}}{{categoryObj.name}}{{/link-to}}
+        <div class="package_back_button" {{action 'back'}}>
+          <span class="package_category_link">{{categoryObj.name}}</span>
           <span class="package-type">\ {{item.packageType.name}}</span>
+        </div>
       </div>
 
       <div class="large-4 medium-4 small-12 columns item-page">
