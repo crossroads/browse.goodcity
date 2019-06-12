@@ -31,7 +31,7 @@ export default Ember.Controller.extend(cancelOrder, {
   isAppointment: Ember.computed("order", function() {
     return this.get("order.isAppointment");
   }),
-
+    
   timeSlots: Ember.computed("selectedDate", function() {
     let selectedDate = this.get("selectedDate");
     if (selectedDate) {
@@ -64,7 +64,8 @@ export default Ember.Controller.extend(cancelOrder, {
     const morningOf = d => atHour(d, 10);
     const afternoonOf = d => atHour(d, 14);
 
-    for (let date of availableDates) {
+    for (let date of 
+        ) {
       let slots = date.slots;
       let allowMorning = false;
       let allowAfternoon = false;
