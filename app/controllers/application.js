@@ -8,12 +8,15 @@ export default Ember.Controller.extend({
   isMobileApp: config.cordova.enabled,
   appVersion: config.APP.VERSION,
   subscription: Ember.inject.service(),
+  screenresize: Ember.inject.service(),
   messageBox: Ember.inject.service(),
   loggedInUser: false,
-  isHomePage: false,
   i18n: Ember.inject.service(),
   showSidebar: true,
-  moveSidebarToRight: true,
+  isWideScreen: Ember.computed.alias("screenresize.isWideScreen"),
+  isHomePage: Ember.computed("currentPath", function() {
+    return this.get("currentPath") === "home";
+  }),
 
   app_id: config.APP.ANDROID_APP_ID,
   ios_app_id: config.APP.APPLE_APP_ID,
@@ -30,8 +33,8 @@ export default Ember.Controller.extend({
     return /Android/i.test(navigator.userAgent) && !this.get("isMobileApp");
   }),
 
-  isAndroidBrowser: Ember.computed("isMobileApp", function() {
-    return /Android/i.test(navigator.userAgent) && !this.get("isMobileApp");
+  showSearchIcon: Ember.computed("currentPath", function() {
+    return ["browse", "package_category"].indexOf(this.get("currentPath")) >= 0;
   }),
 
   displayCart: false,
@@ -48,23 +51,19 @@ export default Ember.Controller.extend({
     return !!this.session.get("authToken");
   }),
 
-  showOffCanvas: Ember.computed(
-    "showSidebar",
-    "moveSidebarToRight",
-    function() {
-      let url = window.location.href;
-      return !containsAny(url, [
-        "request_purpose",
-        "account_details",
-        "schedule_details",
-        "goods_details",
-        "client_information",
-        "search_code",
-        "confirm_booking",
-        "booking_success"
-      ]);
-    }
-  ),
+  showOffCanvas: Ember.computed("showSidebar", function() {
+    let url = window.location.href;
+    return !containsAny(url, [
+      "request_purpose",
+      "account_details",
+      "schedule_details",
+      "goods_details",
+      "client_information",
+      "search_code",
+      "confirm_booking",
+      "booking_success"
+    ]);
+  }),
 
   addMoveLeft: Ember.computed(
     "isHomePage",

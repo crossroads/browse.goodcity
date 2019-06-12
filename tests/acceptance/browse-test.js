@@ -87,7 +87,6 @@ module("Acceptance | Browse Page", {
 test("should redirect browse page", function(assert) {
   visit("/browse").then(function() {
     assert.equal(currentURL(), "/browse");
-    assert.equal(Ember.$("h1.title").text(), "Goodcity for charities");
     assert.equal(Ember.$(".main-section li").length, 3);
   });
 });

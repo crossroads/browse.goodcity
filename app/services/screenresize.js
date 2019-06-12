@@ -1,29 +1,40 @@
-import Ember from 'ember';
-import '../computed/local-storage';
+import Ember from "ember";
+import "../computed/local-storage";
+
+const MEDIA_QUERIES = {
+  SMALL: Foundation.media_queries.small,
+  MEDIUM: Foundation.media_queries.medium,
+  LARGE: Foundation.media_queries.large
+};
 
 export default Ember.Service.extend({
-  isSmallScreen: false,
-  isMediumScreen: false,
-
-  screenResized: function() {
-    return matchMedia(Foundation.media_queries.small).matches &&
-      !matchMedia(Foundation.media_queries.medium).matches;
+  init() {
+    this._super(...arguments);
+    window.addEventListener("resize", () => {
+      this.notifyPropertyChange("isSmallScreen");
+      this.notifyPropertyChange("isMediumScreen");
+    });
   },
 
-  screenResizedMedium: function() {
-    return matchMedia(Foundation.media_queries.small).matches &&
-      matchMedia(Foundation.media_queries.medium).matches && !matchMedia(Foundation.media_queries.large).matches;
-  },
+  isSmallScreen: Ember.computed(function() {
+    return (
+      matchMedia(MEDIA_QUERIES.SMALL).matches &&
+      !matchMedia(MEDIA_QUERIES.MEDIUM).matches
+    );
+  }),
 
-  observeScreen: function() {
-    this.set("isSmallScreen", this.screenResized());
-    this.set("isMediumScreen", this.screenResizedMedium());
-  },
+  isMediumScreen: Ember.computed(function() {
+    return (
+      matchMedia(MEDIA_QUERIES.SMALL).matches &&
+      matchMedia(MEDIA_QUERIES.MEDIUM).matches &&
+      !matchMedia(MEDIA_QUERIES.LARGE).matches
+    );
+  }),
 
-  initComponent: function() {
-    this.observeScreen();
-    var updateScreen = Ember.run.bind(this, this.observeScreen);
-    window.addEventListener("resize", updateScreen);
-  }.on("init")
-
+  isWideScreen: Ember.computed(function() {
+    return (
+      matchMedia(MEDIA_QUERIES.MEDIUM).matches ||
+      matchMedia(MEDIA_QUERIES.LARGE).matches
+    );
+  })
 });

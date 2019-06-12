@@ -31,7 +31,7 @@ export default PublicRoute.extend({
     controller.toggleProperty("triggerFlashMessage");
     this.controllerFor("application").set(
       "pageTitle",
-      this.get("i18n").t("browse.title")
+      this.get("i18n").t("browse.browse_title")
     );
     controller.on();
   },

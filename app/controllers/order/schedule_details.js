@@ -12,12 +12,21 @@ export default Ember.Controller.extend(cancelOrder, {
   order: Ember.computed.alias("model.order"),
   orderTransport: Ember.computed.alias("model.orderTransport"),
   myOrders: Ember.inject.controller(),
+  settings: Ember.inject.service(),
   selectedId: null,
   selectedTimeId: null,
   selectedDate: null,
   timeSlotNotSelected: false,
   isEditing: false,
   showOrderSlotSelection: false,
+
+  bookingMargin: Ember.computed(function() {
+    // To allow time to prepare orders, we set a saftety margin
+    // of days in which clients cannot book anything.
+    return this.get("settings").readNumber(
+      "browse.online_order.timeslots.booking_margin"
+    );
+  }),
 
   isAppointment: Ember.computed("order", function() {
     return this.get("order.isAppointment");
@@ -36,8 +45,10 @@ export default Ember.Controller.extend(cancelOrder, {
   }),
 
   onlineOrderPickupSlots: Ember.computed("available_dates", function() {
-    let availableDates = this.get("available_dates").appointment_calendar_dates;
     let results = [];
+    let availableDates = this.get(
+      "available_dates"
+    ).appointment_calendar_dates.slice(this.get("bookingMargin"));
 
     const atHour = (d, h) => {
       d = new Date(d);

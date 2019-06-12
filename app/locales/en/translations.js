@@ -73,7 +73,11 @@ export default {
   },
 
   browse: {
-    title: "Goodcity for charities"
+    title: "Goodcity for charities",
+    browse_title: "Browse Goods",
+    intro_text:
+      "Registered charities & social welfare organisations in Hongkong are welcome to place an order.",
+    faq: "Eligibility"
   },
 
   home: {
@@ -156,9 +160,9 @@ export default {
     filter: "Filter Items",
     all: "All",
     sort: {
-      title: "Sort by",
-      newfirst: "Newest first",
-      oldfirst: "Oldest first"
+      title: "Sort",
+      newfirst: "most recent first",
+      oldfirst: "oldest first"
     }
   },
 
@@ -193,7 +197,7 @@ export default {
       "We don't share your data. We only use it to complete your request(s). See our ",
     policy: "Privacy Policy.",
     mobile_email_warning:
-      "Please provide a valid email or a valid Hong Kong mobile number"
+      "Please provide email or a valid Hong Kong mobile number"
   },
 
   account: {

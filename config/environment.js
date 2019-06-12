@@ -64,7 +64,8 @@ module.exports = function(environment) {
         "territory",
         "package_category",
         "donor_condition",
-        "package"
+        "package",
+        "goodcity_setting"
       ],
       PRELOAD_AUTHORIZED_TYPES: [
         "gogovan_transport",

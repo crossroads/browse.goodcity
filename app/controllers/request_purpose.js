@@ -49,7 +49,7 @@ export default Ember.Controller.extend(cancelOrder, {
 
   isOnlineOrder() {
     return (
-      this.getSelectedBookingTypeId() ===
+      this.getSelectedBookingTypeId() ==
       this.getBookingTypeIdFor("online-order")
     );
   },
