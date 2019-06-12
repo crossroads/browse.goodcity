@@ -191,6 +191,8 @@ export default {
   search_goods: {
     contact_us: "Can't find required goods? Please contact us for assistance.",
     placeholder: "Search Goods",
+    title: "Search Results",
+    done: "Done",
     search_info: "You can search for goods. E.g.'table' or 'stroller'"
   },
 

@@ -1,12 +1,12 @@
 <div class="goods_search">
   <div class="row">
-    <div class="small-12 large-offset-2 large-8">
+    <div class="small-12 large-offset-1 large-10">
       <div class="row fixed_search_header search-box ui">
         <div class="row">
           <div class="small-2 medium-1 large-1 columns back_button">
             <div class="back_icon" {{action "back"}}>
               {{fa-icon 'angle-left'}}
-              <span class="package_back"> {{t "account.back"}}</span>
+              <span class="package_back"> {{t "search_goods.done"}}</span>
             </div>
           </div>
           <div class="small-10 large-10 medium-10 columns">
@@ -30,17 +30,18 @@
       </div>
     </div>
   </div>
-  <section class="main-section package_search_result">
+  <section class="package_search_result">
     <div class="row search">
-      <div class="small-12 medium-12 large-offset-2 large-8 columns">
+      <div class="small-12 medium-12 large-offset-1 large-10 columns">
         {{#if displayResults}}
           {{#infinite-list height="75vh" loadMore=(action "loadMoreGoods") as |items| }}
-            <ul class="list list-activity">
+            <ul class="large-block-grid-5 small-block-grid-2 medium-block-grid-3 list-image items_list xxlarge-block-grid-4">
+              <label class="search_results title">{{t 'search_goods.title'}}</label>
               {{#each items as |package|}}
-                <li class="goods_search">
+                <li class="goods_search list">
                   <div class="row" {{action "selectItem" package}}>
                     <div class="small-12 large-12 columns">
-                      {{package.notes}}
+                      {{cloudinary-image-tag src=package.displayImageUrl item=package displayItemName=package.notes}}
                     </div>
                   </div>
                 </li>

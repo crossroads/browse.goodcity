@@ -1,7 +1,7 @@
-import Ember from "ember";
+import BrowseController from "./browse";
 import _ from "lodash";
 
-export default Ember.Controller.extend({
+export default BrowseController.extend({
   minSearchTextLength: 2,
   filteredResults: [],
   displayResults: false,

@@ -1,6 +1,6 @@
-import AuthorizeRoute from "./authorize";
+import PublicRoute from "./browse_pages";
 
-export default AuthorizeRoute.extend({
+export default PublicRoute.extend({
   setupController(controller, model, transition) {
     this._super(...arguments);
     let applicationController = this.controllerFor("application");
