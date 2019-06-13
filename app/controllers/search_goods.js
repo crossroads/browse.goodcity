@@ -73,7 +73,7 @@ export default BrowseController.extend({
       const params = this.trimQuery(
         _.merge({}, this.getSearchQuery(), this.getPaginationQuery(pageNo))
       );
-      return this.get("store").query("package", params);
+      return this.store.query("package", params);
     }
   }
 });

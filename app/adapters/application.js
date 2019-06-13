@@ -19,7 +19,10 @@ export default ActiveModelAdapter.extend({
   }),
 
   buildURL: function(modelName, id, snapshot, requestType) {
-    if (modelName === "package" && requestType === "findAll") {
+    if (
+      modelName === "package" &&
+      ["findAll", "query"].indexOf(requestType >= 0)
+    ) {
       return (
         config.APP.API_HOST_URL +
         "/" +
