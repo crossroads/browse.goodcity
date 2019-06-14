@@ -74,6 +74,8 @@ export default {
 
   browse: {
     title: "Goodcity for charities",
+    all_goods: "All Goods",
+    filter_results: "Filter these results",
     browse_title: "Browse Goods",
     intro_text:
       "Registered charities & social welfare organisations in Hongkong are welcome to place an order.",
