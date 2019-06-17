@@ -5,7 +5,6 @@ export default {
   "company.name": "國際十字路會",
   by: "了解",
   ok: "確定",
-  must_login: "請登入！",
   unexpected_error: "出錯了",
   QuotaExceededError:
     "網站可能在瀏覽器的<b>私密瀏覽模式</b>下不能正常運作。請嘗試</br><ul><li><a href='http://www.apple.com/itunes/' style='color: black!important; background-color: #dee4eb !important;'>下載iOS 應用程式</a></li><li>使用瀏覽器的常規模式</li><li>使用Chrome 的私密瀏覽模式</li></ul>",
