@@ -8,7 +8,6 @@ export default {
   by: "By",
   ok: "OK",
   go_to_top: "Go to top",
-  must_login: "You must log in!",
   okay: "Okay",
   unexpected_error: "Something went wrong",
   QuotaExceededError:
