@@ -10,7 +10,6 @@ export default Ember.Route.extend(preloadDataMixin, {
   i18n: Ember.inject.service(),
   previousRoute: null,
   isErrPopUpAlreadyShown: false,
-  isMustLoginAlreadyShown: false,
 
   unlessIncludesCurrentPath() {
     var currentPath = window.location.href;
@@ -30,12 +29,7 @@ export default Ember.Route.extend(preloadDataMixin, {
     var storageHandler = function(object) {
       var currentPath = window.location.href;
       var authToken = window.localStorage.getItem("authToken");
-      if (
-        !authToken &&
-        !object.get("isMustLoginAlreadyShown") &&
-        object.unlessIncludesCurrentPath()
-      ) {
-        object.set("isMustLoginAlreadyShown", true);
+      if (!authToken && object.unlessIncludesCurrentPath()) {
         object.session.clear();
         object.store.unloadAll();
         object.transitionTo("/login");
