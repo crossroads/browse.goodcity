@@ -37,11 +37,11 @@
           {{#infinite-list height="75vh" loadMore=(action "loadMoreGoods") as |items| }}
             <ul class="large-block-grid-5 small-block-grid-2 medium-block-grid-3 list-image items_list xxlarge-block-grid-4">
               <label class="search_results title">{{t 'search_goods.title'}}</label>
-              {{#each items as |package|}}
+              {{#each items as |item|}}
                 <li class="goods_search list">
-                  <div class="row" {{action "selectItem" package}}>
+                  <div class="row" {{action "selectItem" item}}>
                     <div class="small-12 large-12 columns">
-                      {{cloudinary-image-tag src=package.displayImageUrl item=package displayItemName=package.notes}}
+                      {{cloudinary-image-tag src=item.displayImageUrl item=item}}
                     </div>
                   </div>
                 </li>
