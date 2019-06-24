@@ -53,6 +53,11 @@ module("Acceptance | Account Details Page", {
     });
 
     $.mockjax({
+      url: "/api/v1/cart_item*",
+      responseText: []
+    });
+
+    $.mockjax({
       url: "/api/v1/available_*",
       type: "GET",
       status: 200,

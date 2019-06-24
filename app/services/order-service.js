@@ -31,12 +31,13 @@ export default ApiService.extend({
    * @param {string} transition - The transition to apply
    * @return {Object} the json response
    */
-  async applyStateTransition(orderOrId, transition, props = {}) {
+  applyStateTransition(orderOrId, transition, props = {}) {
     const url = ORDER_URL(orderOrId) + "/transition";
-    const data = await this.PUT(url, _.extend({ transition }, props));
 
-    this.get("store").pushPayload(data);
-    return data;
+    return this.PUT(url, _.extend({ transition }, props)).then(data => {
+      this.get("store").pushPayload(data);
+      return data;
+    });
   },
 
   /**
@@ -68,16 +69,16 @@ export default ApiService.extend({
    *
    * @param {Order|string} order - The order or its ID
    */
-  async deleteOrder(order) {
+  deleteOrder(order) {
     const url = ORDER_URL(order);
     const store = this.get("store");
 
-    await this.DELETE(url);
-
-    const localRecord = store.peekRecord("order", ID(order));
-    if (localRecord) {
-      store.unloadRecord(localRecord);
-    }
+    return this.DELETE(url).then(() => {
+      const localRecord = store.peekRecord("order", ID(order));
+      if (localRecord) {
+        store.unloadRecord(localRecord);
+      }
+    });
   },
 
   /**
@@ -87,12 +88,13 @@ export default ApiService.extend({
    * @param {boolean} options.shallow=false - Query options
    * @return {Order[]} all the user's orders
    */
-  async loadAll(opts = {}) {
+  loadAll(opts = {}) {
     const { shallow = false } = opts;
     const store = this.get("store");
 
-    await store.query("order", { shallow });
-    return store.peekAll("order");
+    return store.query("order", { shallow }).then(() => {
+      return store.peekAll("order");
+    });
   },
 
   /**
@@ -115,12 +117,13 @@ export default ApiService.extend({
    * @param {boolean} options.appointment - Whether we're looking for an appointment
    * @return {Order} the editable draft order or appointment
    */
-  async getLastDraft({ appointment }) {
-    const orders = await this.loadAll({ shallow: true });
-    return orders
-      .filterBy("state", "draft")
-      .filterBy("isAppointment", appointment)
-      .sortBy("createdAt:desc")
-      .get("firstObject");
+  getLastDraft({ appointment }) {
+    return this.loadAll({ shallow: true }).then(orders => {
+      return orders
+        .filterBy("state", "draft")
+        .filterBy("isAppointment", appointment)
+        .sortBy("createdAt:desc")
+        .get("firstObject");
+    });
   }
 });

@@ -11,7 +11,6 @@ export default Ember.Controller.extend({
   screenresize: Ember.inject.service(),
   messageBox: Ember.inject.service(),
   cart: Ember.inject.service(),
-  loggedInUser: false,
   i18n: Ember.inject.service(),
   showSidebar: true,
   isWideScreen: Ember.computed.alias("screenresize.isWideScreen"),
@@ -45,9 +44,8 @@ export default Ember.Controller.extend({
   hasCartItems: Ember.computed.alias("cart.isNotEmpty"),
   cartLength: Ember.computed.alias("cart.counter"),
 
-  isUserLoggedIn: Ember.computed("loggedInUser", function() {
-    this.toggleProperty("loggedInUser");
-    return !!this.session.get("authToken");
+  isUserLoggedIn: Ember.computed("session.authToken", function() {
+    return !!this.get("session.authToken");
   }),
 
   showOffCanvas: Ember.computed("showSidebar", function() {
@@ -200,7 +198,6 @@ export default Ember.Controller.extend({
       this.get("subscription").unwire();
       this.session.clear(); // this should be first since it updates isLoggedIn status
       this.unloadModels();
-      this.toggleProperty("loggedInUser");
       this.transitionToRoute("browse");
     },
 

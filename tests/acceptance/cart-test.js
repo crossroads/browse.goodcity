@@ -18,7 +18,8 @@ var App,
   order_purpose,
   user,
   bookingType,
-  purpose;
+  purpose,
+  mocks;
 
 module("Acceptance | Cart Page", {
   needs: ["service:subscription"],
@@ -26,6 +27,7 @@ module("Acceptance | Cart Page", {
     window.localStorage.authToken =
       '"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo2LCJpYXQiOjE1MTg3NzI4MjcsImlzcyI6Ikdvb2RDaXR5SEsiLCJleHAiOjE1MTk5ODI0Mjd9.WdsVvss9khm81WNScV5r6DiIwo8CQfHM1c4ON2IACes"';
     App = startApp();
+    mocks = [];
     pkgType1 = make("package_type_with_packages");
     pkgType2 = make("package_type_with_packages");
     pkgCategory = make("parent_package_category");
@@ -56,19 +58,22 @@ module("Acceptance | Cart Page", {
     gogo_van = make("gogovan_transport");
     bookingType = make("booking_type");
     purpose = make("purpose");
-    $.mockjax({
-      url: "/api/v1/available_*",
-      type: "GET",
-      status: 200,
-      responseText: [
-        "2018-06-14",
-        "2018-06-15",
-        "2018-06-16",
-        "2018-06-19",
-        "2018-06-20",
-        "2018-06-21"
-      ]
-    });
+    mocks.push(
+      $.mockjax({ url: "/api/v1/cart_item*", type: "GET", responseText: [] }),
+      $.mockjax({
+        url: "/api/v1/available_*",
+        type: "GET",
+        status: 200,
+        responseText: [
+          "2018-06-14",
+          "2018-06-15",
+          "2018-06-16",
+          "2018-06-19",
+          "2018-06-20",
+          "2018-06-21"
+        ]
+      })
+    );
     mockFindAll("gogovan_transport").returns({
       json: { gogovan_transports: [gogo_van.toJSON({ includeId: true })] }
     });
@@ -118,7 +123,12 @@ module("Acceptance | Cart Page", {
       organisations_user: [organisationsUser.toJSON({ includeId: true })]
     };
 
-    $.mockjax({ url: "/api/v1/auth/current_user_profil*", responseText: data });
+    mocks.push(
+      $.mockjax({
+        url: "/api/v1/auth/current_user_profil*",
+        responseText: data
+      })
+    );
 
     mockFindAll("order").returns({
       json: {
@@ -130,40 +140,64 @@ module("Acceptance | Cart Page", {
   },
 
   afterEach: function() {
+    // Clear our ajax mocks
+    $.mockjaxSettings.matchInRegistrationOrder = true;
+    mocks.forEach($.mockjax.clear);
+
     Ember.run(App, App.destroy);
   }
 });
 
-test("delete orders_packages from orders in draft", function(assert) {
-  // var store = FactoryGuy.store;
-  $.mockjax({
-    url: "/api/v1/order*",
-    type: "POST",
-    status: 200,
-    responseText: {
-      order: order.toJSON({ includeId: true }),
-      package: pkg.toJSON({ includeId: true }),
-      orders_packages: [ordersPackage.toJSON({ includeId: true })],
-      orders_purposes: [order_purpose.toJSON({ includeId: true })]
-    }
-  });
-  $.mockjax({
-    url: "/api/v1/order*",
-    type: "PUT",
-    status: 200,
-    responseText: {
-      order: order.toJSON({ includeId: true }),
-      package: pkg.toJSON({ includeId: true }),
-      orders_packages: [ordersPackage.toJSON({ includeId: true })],
-      orders_purposes: [order_purpose.toJSON({ includeId: true })]
-    }
-  });
-  $.mockjax({
-    url: "/api/v1/orders_pac*",
-    type: "DELETE",
-    status: 200,
-    responseText: {}
-  });
+test("Request and remove items from the cloud cart", function(assert) {
+  let cartItemCreated = false;
+  let cartItemDeleted = false;
+  mocks.push(
+    $.mockjax({
+      url: "/api/v1/order*",
+      type: "POST",
+      status: 200,
+      responseText: {
+        order: order.toJSON({ includeId: true }),
+        orders_purposes: [order_purpose.toJSON({ includeId: true })]
+      }
+    }),
+    $.mockjax({
+      url: "/api/v1/cart_item*",
+      type: "POST",
+      status: 200,
+      onAfterComplete: () => {
+        cartItemCreated = true;
+      },
+      response: function(req) {
+        this.responseText = {
+          cart_item: {
+            id: 1,
+            package_id: pkg.get("id"),
+            user_id: user.get("id"),
+            is_available: true
+          }
+        };
+      }
+    }),
+    $.mockjax({
+      url: "/api/v1/cart_item*",
+      type: "DELETE",
+      status: 200,
+      onAfterComplete: () => {
+        cartItemDeleted = true;
+      },
+      responseText: {}
+    }),
+    $.mockjax({
+      url: "/api/v1/order*",
+      type: "PUT",
+      status: 200,
+      responseText: {
+        order: order.toJSON({ includeId: true }),
+        orders_purposes: [order_purpose.toJSON({ includeId: true })]
+      }
+    })
+  );
 
   visit(
     "/item/" + pkg.id + "?categoryId=" + pkgCategory.id + "&sortBy=createdAt"
@@ -177,26 +211,12 @@ test("delete orders_packages from orders in draft", function(assert) {
     andThen(function() {
       visit("/cart");
       andThen(function() {
-        click(".expand:last");
+        assert.equal(cartItemCreated, true);
+        assert.equal(find(".item-collection li").length, 1);
+        click(".item-collection li:first span");
         andThen(function() {
-          assert.equal(currentURL(), "/request_purpose");
-
-          andThen(function() {
-            $("#description").val("Test");
-            $("#people-count").val("3");
-            click("#request-submit");
-            andThen(function() {
-              visit("/cart");
-              andThen(function() {
-                assert.equal(currentURL(), "/cart");
-                assert.equal(find(".item-collection li").length, 1);
-                click(".item-collection li:first span");
-                andThen(function() {
-                  assert.equal(find(".item-collection li").length, 0);
-                });
-              });
-            });
-          });
+          assert.equal(find(".item-collection li").length, 0);
+          assert.equal(cartItemDeleted, true);
         });
       });
     });

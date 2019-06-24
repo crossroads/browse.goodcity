@@ -31,6 +31,8 @@ module("Acceptance | Item Page", {
   beforeEach: function() {
     this.application = startApp();
 
+    mocks = [];
+
     pkgType1 = FactoryGuy.make("package_type");
     item_with_packages = FactoryGuy.make("received_item");
     next_item = FactoryGuy.make("received_item");
@@ -117,6 +119,7 @@ module("Acceptance | Item Page", {
         orders_packages: [ordersPackage.toJSON({ includeId: true })]
       }
     });
+    $.mockjax({ url: "/api/v1/cart_item*", type: "GET", responseText: [] });
     $.mockjax({
       url: "/api/v1/auth/current_user_profil*",
       responseText: {
@@ -127,6 +130,7 @@ module("Acceptance | Item Page", {
   },
 
   afterEach: function() {
+    $.mockjax.clear();
     Ember.run(this.application, "destroy");
   }
 });

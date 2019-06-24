@@ -4,12 +4,16 @@ import { make } from "ember-data-factory-guy";
 import { mockFindAll } from "ember-data-factory-guy";
 import startApp from "../helpers/start-app";
 
-var App, bookingType;
+var App, bookingType, mocks;
 
 module("Acceptance | Home Page", {
   needs: ["service:subscription"],
   beforeEach: function() {
     App = startApp();
+    mocks = [];
+    mocks.push(
+      $.mockjax({ url: "/api/v1/cart_item*", type: "GET", responseText: [] })
+    );
     window.localStorage.authToken = "";
     bookingType = make("booking_type");
     mockFindAll("booking_type").returns({
@@ -18,6 +22,10 @@ module("Acceptance | Home Page", {
   },
 
   afterEach: function() {
+    // Clear our ajax mocks
+    $.mockjaxSettings.matchInRegistrationOrder = true;
+    mocks.forEach($.mockjax.clear);
+
     Ember.run(App, App.destroy);
   }
 });

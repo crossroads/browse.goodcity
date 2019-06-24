@@ -111,6 +111,10 @@ module("Acceptance | Book appointment/order ", {
     $.mockjaxSettings.matchInRegistrationOrder = false;
     mocks.push(
       $.mockjax({
+        url: "/api/v1/cart_item*",
+        responseText: []
+      }),
+      $.mockjax({
         url: `/api/v1/order*`,
         type: "GET",
         status: 200,

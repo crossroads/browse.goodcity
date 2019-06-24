@@ -178,7 +178,6 @@ export default Ember.Route.extend(preloadDataMixin, {
 
   setupController(controller, model) {
     controller.set("model", model);
-    controller.set("loggedInUser", true);
     controller.set("pageTitle", this.get("i18n").t("browse.title"));
   }
 });

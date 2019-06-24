@@ -17,12 +17,14 @@ var App,
   bookingType,
   purpose,
   role,
-  userRole;
+  userRole,
+  mocks;
 
 module("Acceptance | Cancel booking", {
   needs: ["service:subscription"],
   beforeEach: function() {
     App = startApp();
+    mocks = [];
     user = make("user");
     user1 = make("user");
     organisation = make("organisation");
@@ -47,19 +49,22 @@ module("Acceptance | Cancel booking", {
       role: role
     });
 
-    $.mockjax({
-      url: "/api/v1/available_*",
-      type: "GET",
-      status: 200,
-      responseText: [
-        "2018-06-14",
-        "2018-06-15",
-        "2018-06-16",
-        "2018-06-19",
-        "2018-06-20",
-        "2018-06-21"
-      ]
-    });
+    mocks.push(
+      $.mockjax({ url: "/api/v1/cart_item*", responseText: [] }),
+      $.mockjax({
+        url: "/api/v1/available_*",
+        type: "GET",
+        status: 200,
+        responseText: [
+          "2018-06-14",
+          "2018-06-15",
+          "2018-06-16",
+          "2018-06-19",
+          "2018-06-20",
+          "2018-06-21"
+        ]
+      })
+    );
     mockFindAll("gogovan_transport").returns({
       json: { gogovan_transports: [gogo_van.toJSON({ includeId: true })] }
     });
@@ -87,26 +92,31 @@ module("Acceptance | Cancel booking", {
       user: user,
       organisation: organisation
     });
-    $.mockjax({
-      url: "/api/v1/auth/current_user_profil*",
-      responseText: {
-        user_profile: user_profile,
-        organisations: [organisation.toJSON({ includeId: true })],
-        organisations_users: [organisationsUser.toJSON({ includeId: true })]
-      }
-    });
-    $.mockjax({
-      url: "/api/v1/organisations_use*",
-      responseText: {
-        users: [user_profile],
-        organisations: [organisation.toJSON({ includeId: true })],
-        organisations_users: [organisationsUser.toJSON({ includeId: true })]
-      }
-    });
+    mocks.push(
+      $.mockjax({
+        url: "/api/v1/auth/current_user_profil*",
+        responseText: {
+          user_profile: user_profile,
+          organisations: [organisation.toJSON({ includeId: true })],
+          organisations_users: [organisationsUser.toJSON({ includeId: true })]
+        }
+      }),
+      $.mockjax({
+        url: "/api/v1/organisations_use*",
+        responseText: {
+          users: [user_profile],
+          organisations: [organisation.toJSON({ includeId: true })],
+          organisations_users: [organisationsUser.toJSON({ includeId: true })]
+        }
+      })
+    );
   },
 
   afterEach: function() {
-    $.mockjax.clear();
+    // Clear our ajax mocks
+    $.mockjaxSettings.matchInRegistrationOrder = true;
+    mocks.forEach($.mockjax.clear);
+
     Ember.run(App, App.destroy);
   }
 });
@@ -124,12 +134,14 @@ test("Request purpose page redirects back to home page on clicking cancel if ord
 
 test("Request purpose page deletes order if in draft state ", function(assert) {
   assert.expect(1);
-  $.mockjax({
-    url: "/api/v1/orde*",
-    type: "DELETE",
-    status: 200,
-    responseText: {}
-  });
+  mocks.push(
+    $.mockjax({
+      url: "/api/v1/orde*",
+      type: "DELETE",
+      status: 200,
+      responseText: {}
+    })
+  );
   visit(`request_purpose/?editRequest=true&orderId=${order.id}`);
   andThen(function() {
     click("#cancel-booking-link");
@@ -148,12 +160,14 @@ test("Request purpose changes order state to canceled if in any other state exce
     created_by_id: user.id
   });
   assert.expect(1);
-  $.mockjax({
-    url: "/api/v1/orde*",
-    type: "PUT",
-    status: 200,
-    responseText: {}
-  });
+  mocks.push(
+    $.mockjax({
+      url: "/api/v1/orde*",
+      type: "PUT",
+      status: 200,
+      responseText: {}
+    })
+  );
   visit(`request_purpose/?editRequest=true&orderId=${submittedOrder.id}`);
   andThen(function() {
     click("#cancel-booking-link");

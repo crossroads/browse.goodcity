@@ -10,11 +10,14 @@ export default Ember.Mixin.create({
       .lookup("component:loading")
       .append();
 
-    return this.get("orderService")
+    this.get("orderService")
       .deleteOrder(order)
       .then(() => {
         this.set("showCancelBookingPopUp", false);
         this.transitionToRoute("home");
+      })
+      .catch(e => {
+        this.get("messageBox").alert();
       })
       .finally(() => {
         loadingView.destroy();
@@ -42,6 +45,9 @@ export default Ember.Mixin.create({
       .then(() => {
         this.set("showCancelBookingPopUp", false);
         this.transitionToRoute("home");
+      })
+      .catch(e => {
+        this.get("messageBox").alert();
       })
       .finally(() => {
         loadingView.destroy();
