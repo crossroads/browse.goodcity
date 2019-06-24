@@ -42,7 +42,7 @@ export default Ember.Controller.extend({
   cartscroll: Ember.inject.service(),
 
   hasCartItems: Ember.computed.alias("cart.isNotEmpty"),
-  cartLength: Ember.computed.alias("cart.counter"),
+  cartLength: Ember.computed.alias("cart.groupedPackages.length"),
 
   isUserLoggedIn: Ember.computed("session.authToken", function() {
     return !!this.get("session.authToken");
@@ -213,19 +213,8 @@ export default Ember.Controller.extend({
       );
     },
 
-    showCartItem(itemId, type) {
-      var item = this.get("store").peekRecord(type, itemId);
-      if (item) {
-        this.transitionToRoute(type, itemId, {
-          queryParams: {
-            categoryId: item.get("allPackageCategories.firstObject.id")
-          }
-        });
-      }
-    },
-
-    removeCartItem(cartItem) {
-      return this.get("cart").removeCartItem(cartItem);
+    removeFromCart(record) {
+      return this.get("cart").remove(record);
     },
 
     checkout() {
@@ -242,22 +231,13 @@ export default Ember.Controller.extend({
       }
     },
 
-    updateCartItemParams(cartItem) {
-      //@TOFIX
-      let pkg = cartItem.get("package");
-      // if (!pkg) {
-      //   item = this.store.peekRecord("item", pkgId);
-      //   pkg = item ? item.get("packages.firstObject") : null;
-      // }
-
-      // if ((item && !item.isAvailable) || !pkg.isAvailable) {
-      //   return false;
-      // }
-
-      let categoryId = pkg.get("allPackageCategories.firstObject.id");
+    showItemDetails(record) {
+      let isItem = record.get("isItem");
+      let categoryId = record.get("allPackageCategories.firstObject.id");
       let sortBy = "createdAt:desc";
-      const route = "package"; // item ? "item" : "package";
-      const routeId = pkg.id; // item ? item.id : pkgId;
+
+      const route = isItem ? "item" : "package";
+      const routeId = record.get("id");
       this.transitionToRoute(route, routeId, {
         queryParams: {
           categoryId: categoryId,
@@ -267,6 +247,7 @@ export default Ember.Controller.extend({
       this.set("displayCart", false);
       this.set("showCartDetailSidebar", false);
     },
+
     openCart() {
       this.transitionToRoute("cart");
     }

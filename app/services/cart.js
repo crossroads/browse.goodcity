@@ -1,5 +1,6 @@
 import Ember from "ember";
 import ApiService from "./api-base-service";
+import _ from "lodash";
 
 /**
  *
@@ -23,8 +24,8 @@ export default ApiService.extend({
     return this.get("store").peekAll("cart_item");
   }),
 
-  packageIds: Ember.computed("cartItems.[]", function() {
-    return this.get("cartItems").mapBy("packageId");
+  packages: Ember.computed("cartItems.[]", function() {
+    return this.get("cartItems").mapBy("package");
   }),
 
   offlineCartItems: Ember.computed(
@@ -259,6 +260,23 @@ export default ApiService.extend({
   },
 
   /**
+   * Returns true if the package or item is both in the cart and available
+   */
+  isAvailable(pkgOrItem) {
+    if (!this.contains(pkgOrItem)) {
+      return false;
+    }
+
+    let packages = pkgOrItem.get("isItem")
+      ? pkgOrItem.get("packages").toArray()
+      : [pkgOrItem];
+
+    return _.every(packages, pkg => {
+      return this.getCartItemForPackage(pkg).get("isAvailable");
+    });
+  },
+
+  /**
    * If an offline item already exists in the user cart, clear it
    */
   clearDuplicates() {
@@ -272,5 +290,46 @@ export default ApiService.extend({
         this.notifyPropertyChange("cartItems");
       }
     });
-  }
+  },
+
+  __buildSiblingGroups() {},
+
+  groupedPackages: Ember.computed(
+    "cartItems.[]",
+    "cartItems.@each.isAvailable",
+    function() {
+      let res = [];
+      let itemsRef = {};
+
+      this.get("packages").filter(pkg => {
+        // Single packages
+        if (!pkg.get("hasSiblingPackages")) {
+          res.push(pkg);
+          return;
+        }
+
+        // Items
+        const item = pkg.get("item");
+        const itemId = item.get("id");
+
+        if (itemsRef[itemId]) {
+          return; // Already processed
+        }
+
+        if (this.isAvailable(item)) {
+          // We mark this item as in cart and available
+          itemsRef[itemId] = item;
+          res.push(item);
+          return;
+        }
+
+        res.push(pkg); // We store the package a singleton
+      });
+
+      return _.map(res, record => {
+        const isAvailable = this.isAvailable(record);
+        return { record, isAvailable };
+      });
+    }
+  )
 });

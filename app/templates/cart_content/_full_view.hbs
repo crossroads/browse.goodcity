@@ -19,27 +19,27 @@
 <div class="row item-collection">
   <div class="small-12 columns">
 
-    {{#each cart.cartItems as |cartItem|}}
+    {{#each cart.groupedPackages as |row|}}
         <li>
           <div class="row">
-            <div class="small-3 columns cart-redirect-link {{if (is-not cartItem.isAvailable) disabled}}" {{action 'updateCartItemParams' cartItem}}>
+            <div class="small-3 columns cart-redirect-link {{if (is-not row.isAvailable) disabled}}" {{action 'showItemDetails' row.record}}>
               <!-- Thumbnail -->
               <img 
-                class="thumb-image {{unless cartItem.isAvailable 'grayed-image'}}"
-                src="{{cartItem.package.favouriteImage.cartImageUrl}}" />
+                class="thumb-image {{unless row.isAvailable 'grayed-image'}}"
+                src="{{row.record.favouriteImage.cartImageUrl}}" />
             </div>
 
-            <div class="small-6 columns cart-redirect-link {{if (is-not cartItem.isAvailable) disabled}}" {{action 'updateCartItemParams' cartItem}}>
+            <div class="small-6 columns cart-redirect-link {{if (is-not row.isAvailable) disabled}}" {{action 'showItemDetails' row.record}}>
               <!-- Title -->
-              {{cartItem.package.packageType.name}}
+              {{row.record.packageType.name}}
 
               <!-- Availability -->
-              {{#unless cartItem.isAvailable}}
+              {{#unless row.isAvailable}}
                 <div class="unavailable">{{t "cart_content.unavailable"}}</div>
               {{/unless}}
             </div>
 
-            <div class="small-3 columns remove_link" {{action 'removeCartItem' cartItem}}>
+            <div class="small-3 columns remove_link" {{action 'removeFromCart' row.record}}>
               <i class="fa fa-times" aria-hidden="true"></i>
               <span>{{t "cart_content.remove"}}</span>
             </div>
