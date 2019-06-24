@@ -31,8 +31,6 @@ module("Acceptance | Item Page", {
   beforeEach: function() {
     this.application = startApp();
 
-    mocks = [];
-
     pkgType1 = FactoryGuy.make("package_type");
     item_with_packages = FactoryGuy.make("received_item");
     next_item = FactoryGuy.make("received_item");

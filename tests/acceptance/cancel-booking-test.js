@@ -24,12 +24,20 @@ module("Acceptance | Cancel booking", {
   needs: ["service:subscription"],
   beforeEach: function() {
     App = startApp();
+    $.mockjaxSettings.matchInRegistrationOrder = false;
+    $.mockjax.clear();
+
     mocks = [];
     user = make("user");
     user1 = make("user");
     organisation = make("organisation");
     pkg = make("package");
-    order = make("order", { state: "draft", created_by_id: user.id });
+    bookingType = make("booking_type");
+    order = make("order", {
+      state: "draft",
+      created_by_id: user.id,
+      booking_type_id: bookingType.get("id")
+    });
     ordersPackage = make("orders_package", {
       quantity: 1,
       state: "requested",
@@ -38,7 +46,6 @@ module("Acceptance | Cancel booking", {
       order: order
     });
     gogo_van = make("gogovan_transport");
-    bookingType = make("booking_type");
     purpose = make("purpose");
     gcOrganisations = make("gc_organisation", { nameEn: "GCC club" });
     role = make("role");
@@ -51,6 +58,10 @@ module("Acceptance | Cancel booking", {
 
     mocks.push(
       $.mockjax({ url: "/api/v1/cart_item*", responseText: [] }),
+      $.mockjax({
+        url: "/api/v1/booking_type*",
+        responseText: [bookingType.toJSON({ includeId: true })]
+      }),
       $.mockjax({
         url: "/api/v1/available_*",
         type: "GET",
@@ -78,6 +89,7 @@ module("Acceptance | Cancel booking", {
       json: {
         orders: [order.toJSON({ includeId: true })],
         packages: [pkg.toJSON({ includeId: true })],
+        booking_types: [bookingType.toJSON({ includeId: true })],
         orders_packages: [ordersPackage.toJSON({ includeId: true })]
       }
     });
