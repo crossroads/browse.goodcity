@@ -1,6 +1,7 @@
 import Ember from "ember";
 import config from "../config/environment";
 import preloadDataMixin from "../mixins/preload_data";
+import _ from "lodash";
 
 const { getOwner } = Ember;
 
@@ -56,7 +57,6 @@ export default Ember.Route.extend(preloadDataMixin, {
     } catch (e) {
       this.get("messageBox").alert(this.get("i18n").t("QuotaExceededError"));
     }
-    localStorage.removeItem("test");
 
     let language = this.get("session.language") || config.i18n.defaultLocale;
     if (transition.queryParams.ln) {
@@ -92,16 +92,26 @@ export default Ember.Route.extend(preloadDataMixin, {
     }
   },
 
+  getErrorMessage(reason) {
+    const error =
+      _.get(reason, "responseJSON.errors[0]") ||
+      _.get(reason, "responseJSON.error") ||
+      _.get(reason, "errors[0]") ||
+      _.get(reason, "error");
+
+    if (error && _.isString(error)) {
+      return error;
+    }
+    return this.get("i18n").t("unexpected_error");
+  },
+
   showSomethingWentWrong(reason) {
     this.get("logger").error(reason);
     if (!this.get("isErrPopUpAlreadyShown")) {
       this.set("isErrPopUpAlreadyShown", true);
-      this.get("messageBox").alert(
-        this.get("i18n").t("unexpected_error"),
-        () => {
-          this.set("isErrPopUpAlreadyShown", false);
-        }
-      );
+      this.get("messageBox").alert(this.getErrorMessage(reason), () => {
+        this.set("isErrPopUpAlreadyShown", false);
+      });
     }
   },
 

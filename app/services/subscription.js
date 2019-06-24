@@ -12,7 +12,7 @@ const ALL_OPERATIONS = ["create", "update", "delete"];
 
 const UPDATE_STRATEGY = {
   RELOAD: (store, type, record) => {
-    return store.findRecord(type, record.id);
+    return store.findRecord(type, record.id, { reload: true });
   },
   MERGE: (store, type, record) => {
     store.pushPayload({ [type]: record });
@@ -29,6 +29,7 @@ const UPDATE_STRATEGY = {
 export default Ember.Service.extend(Ember.Evented, {
   messagesUtil: Ember.inject.service("messages"),
   session: Ember.inject.service(),
+  logger: Ember.inject.service(),
   store: Ember.inject.service(),
   socket: null,
   lastOnline: Date.now(),
@@ -244,7 +245,7 @@ export default Ember.Service.extend(Ember.Evented, {
   },
 
   resync: function() {
-    this.get("store").findAll("item");
+    this.get("store").findAll("package");
   },
 
   update_store(data, success) {
@@ -279,10 +280,12 @@ export default Ember.Service.extend(Ember.Evented, {
         return false;
     }
 
-    task.then(() => {
-      this.trigger(`change:${type}`, { type, operation, record });
-      run(success);
-    });
+    task
+      .then(() => {
+        this.trigger(`change:${type}`, { type, operation, record });
+        run(success);
+      })
+      .catch(e => this.get("logger").error(e));
     return true;
   }
 });

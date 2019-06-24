@@ -94,7 +94,7 @@
           {{/each}}
 
           {{#if presentInCart}}
-            <button class="request-item" {{action 'removeItem' item}}> {{t "item.remove_item"}} </button>
+            <button class="request-item" {{action 'removeFromCart' item}}> {{t "item.remove_item"}} </button>
           {{else}}
             <button class="request-item" {{action 'requestItem' item}}> {{t "item.request_item"}} </button>
           {{/if}}

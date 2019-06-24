@@ -1,179 +1,276 @@
 import Ember from "ember";
-import "../computed/local-storage";
+import ApiService from "./api-base-service";
 
-const { get, getOwner, ArrayProxy, computed, observer } = Ember;
-
-const Service = ArrayProxy.extend({
-  localStorage: true,
-  checkout: Ember.computed.localStorage(),
+/**
+ *
+ * Service to interact with cloud cart
+ * Records are all of the cart_item type
+ *
+ */
+export default ApiService.extend({
   store: Ember.inject.service(),
-  subscription: Ember.inject.service(),
+  session: Ember.inject.service(),
 
   init() {
     this._super(...arguments);
-    this.get("subscription").on("change:package", this, this.onPackageUpdate);
+    this.get("session").addObserver("authToken", this.onUserChange.bind(this));
+    this.onUserChange();
   },
 
-  onPackageUpdate({ record, operation }) {
-    let packageId = record.id.toString();
-    let pkg = this.get("store").peekRecord("package", packageId);
-    let cartContent = this.get("cart.content");
+  // ---- Properties
 
-    if (!cartContent) {
-      return;
-    }
-
-    let cartItem = cartContent
-      .filterBy("modelType", "package")
-      .findBy("id", packageId);
-
-    if (!cartItem) {
-      return; // this package is not in our cart
-    }
-
-    if (operation == "delete") {
-      return this.setItemAvailability(cartItem, false);
-    }
-
-    if (!pkg.get("isAvailable")) {
-      // Update our cart if a package has been dispatched
-      let undispatchedPkgs = pkg.get("item.undispatchedPackages");
-      if (undispatchedPkgs.length) {
-        this.removeItem(pkg.get("item"));
-        undispatchedPkgs
-          .map(p => p.toCartItem())
-          .forEach(ci => this.pushItem(ci));
-      } else {
-        this.setItemAvailability(cartItem, false); // none left
-      }
-    }
-  },
-
-  setItemAvailability(cartItem, available) {
-    Ember.set(cartItem, "available", available);
-    this.pushItem(cartItem);
-  },
-
-  content: computed(function() {
-    return JSON.parse(window.localStorage.getItem("cart") || "[]");
+  cartItems: Ember.computed(function() {
+    return this.get("store").peekAll("cart_item");
   }),
 
-  cartItems: computed("[]", "@each.available", function() {
-    var content = this.get("content");
-    var allItems = [];
-    content.forEach(record => {
-      if (record.available) {
-        allItems.push(
-          this.get("store").peekRecord(record.modelType, record.id)
-        );
-      }
-    });
-    return allItems;
+  packageIds: Ember.computed("cartItems.[]", function() {
+    return this.get("cartItems").mapBy("packageId");
   }),
 
-  packageIds: computed("cartItems", function() {
-    let package_ids = [];
-    this.get("cartItems").forEach(record => {
-      if (record) {
-        let ids = record.get("isItem")
-          ? record.get("packages").map(pkg => pkg.get("id"))
-          : [record.get("id")];
-        package_ids = package_ids.concat(ids);
-      }
-    });
-    return package_ids;
+  offlineCartItems: Ember.computed(
+    "cartItems.[]",
+    "cartItems.@each.id",
+    function() {
+      return this.get("cartItems").filter(it => !it.get("id"));
+    }
+  ),
+
+  availableCartItems: Ember.computed(
+    "cartItems.[]",
+    "cartItems.@each.isAvailable",
+    function() {
+      return this.get("cartItems").filterBy("isAvailable", true);
+    }
+  ),
+
+  unavailableCartItems: Ember.computed(
+    "cartItems.[]",
+    "cartItems.@each.isAvailable",
+    function() {
+      return this.get("cartItems").filterBy("isAvailable", false);
+    }
+  ),
+
+  canCheckout: Ember.computed("availableCartItems.[]", function() {
+    return this.get("availableCartItems.length") > 0;
   }),
 
-  currentCartItem(item) {
-    let cartItem;
+  isLoggedIn: Ember.computed.alias("session.authToken"),
+  isEmpty: Ember.computed.empty("cartItems"),
+  isNotEmpty: Ember.computed.not("isEmpty"),
+  counter: Ember.computed.alias("cartItems.length"),
+  user: Ember.computed.alias("session.currentUser"),
+  userId: Ember.computed.alias("user.id"),
 
-    if (item && item.toCartItem) {
-      cartItem = item.toCartItem();
+  // ---- Hooks
+
+  onUserChange() {
+    const loggedIn = this.get("session.authToken");
+    if (loggedIn) {
+      this.onLogin();
     } else {
-      cartItem = getOwner(this)
-        ._lookupFactory("model:cart-item")
-        .create();
-      cartItem.setProperties((item && item.toJSON && item.toJSON()) || item);
+      this.onLogout();
     }
-    return cartItem;
   },
 
-  hasCartItem(item) {
-    let cartItem = this.currentCartItem(item);
-    return this.findBy("guid", get(cartItem, "guid"));
-  },
-
-  pushItem(item) {
-    let cartItem = this.currentCartItem(item);
-    let foundCartItem = this.findBy("guid", get(cartItem, "guid"));
-    if (foundCartItem) {
-      this.removeItem(foundCartItem);
-    }
-    this.pushObject(cartItem);
-  },
-
-  cartItemProperties: [
-    "guid",
-    "id",
-    "modelType",
-    "name",
-    "imageUrl",
-    "thumbImageUrl",
-    "available"
-  ],
-
-  payload() {
-    return this.map(item => {
-      return (
-        (item.getProperties && item.getProperties(this.cartItemProperties)) ||
-        item
-      );
+  /**
+   * When the user logs in we
+   *    - fetch the user's cart items
+   *    - push any record he/she might have added as a guest before
+   *   logging in
+   */
+  onLogin() {
+    this.populate().then(() => {
+      this.persistLocalRecords();
     });
   },
 
-  findItem(item) {
-    //If item is unpublished/designated(no longer available in ember-data in case of refresh)
-    //then item argument contains id of an Item which is string
-    //Above statement is only true in case of "removeItem" action in application controller
-    if (typeof item === "string") {
-      return this.findBy("id", item);
-    }
-    return item;
+  /**
+   * When logging out, we clear the local data
+   */
+  onLogout() {
+    this.get("store")
+      .peekAll("cart_item")
+      .forEach(record => this.get("store").unloadRecord(record));
   },
 
+  // ---- Control methods
+
+  /**
+   * Checkout the cart and fill the order
+   */
+  checkoutOrder(order) {
+    return this.POST(`/cart_items/checkout`, {
+      order_id: order.get("id")
+    }).then(data => {
+      this.get("store").pushPayload(data);
+      return this.refresh();
+    });
+  },
+
+  /**
+   * Fetches the user's cart items from the api
+   */
+  populate() {
+    if (!this.get("isLoggedIn")) {
+      return Ember.RSVP.resolve();
+    }
+    return this.get("store").findAll("cart_item", { reload: true });
+  },
+
+  /**
+   * Clears the local data and re-fetches the data
+   */
+  refresh() {
+    this.get("store").unloadAll("cart_item");
+    return this.populate();
+  },
+
+  /**
+   * Cart items that were added as guest are pushed to the db
+   */
+  persistLocalRecords() {
+    if (!this.get("isLoggedIn")) {
+      return Ember.RSVP.resolve();
+    }
+
+    this.clearDuplicates();
+
+    return Ember.RSVP.all(
+      this.get("offlineCartItems").map(it => {
+        it.set("user", this.get("user"));
+        it.set("userId", this.get("userId"));
+        return it.save();
+      })
+    );
+  },
+
+  add(pkgOrItem) {
+    if (pkgOrItem.get("isItem")) {
+      return this.addItem(pkgOrItem);
+    }
+    return this.addPackage(pkgOrItem);
+  },
+
+  /**
+   * Adds the packages of the item to the cloud cart.
+   * If the user is not logged in, will only save it locally
+   */
+  addItem(item) {
+    return Ember.RSVP.all(
+      item.get("packages").map(pkg => this.addPackage(pkg))
+    );
+  },
+
+  /**
+   * Adds a package to the cloud cart.
+   * If the user is not logged in, will only save it locally
+   */
+  addPackage(pkg) {
+    let record = this.get("store").createRecord("cart_item", {
+      packageId: pkg.get("id"),
+      package: pkg,
+      isAvailable: pkg.get("isAvailable")
+    });
+
+    this.notifyPropertyChange("cartItems");
+
+    if (!this.get("isLoggedIn")) {
+      // Will be persisted when the user logs in
+      return Ember.RSVP.resolve();
+    }
+
+    record.set("user", this.get("user"));
+    record.set("userId", this.get("userId"));
+    return record.save();
+  },
+
+  remove(pkgOrItem) {
+    if (pkgOrItem.get("isItem")) {
+      return this.removeItem(pkgOrItem);
+    }
+    return this.removePackage(pkgOrItem);
+  },
+
+  /**
+   * Removes the packages of the item from the cart
+   * The changes are local only if the user is not logged in
+   */
   removeItem(item) {
-    item = this.findItem(item);
-    let cartItem = this.currentCartItem(item);
-    let foundCartItem = this.findBy("guid", get(cartItem, "guid"));
-    if (foundCartItem) {
-      this.removeObject(foundCartItem);
-    }
+    return Ember.RSVP.all(
+      item.get("packages").map(pkg => this.removePackage(pkg))
+    );
   },
 
-  clearItems() {
-    this.clear();
+  /**
+   * Remove the cart item of the specified package
+   * The changes are local only if the user is not logged in
+   */
+  removePackage(pkg) {
+    let cartItem = this.getCartItemForPackage(pkg);
+    if (!cartItem) {
+      return Ember.computed.resolve();
+    }
+    return this.removeCartItem(cartItem);
   },
 
-  total: computed("@each.total", function() {
-    return this.reduce(function(total, item) {
-      return total + get(item, "total");
-    }, 0);
-  }),
+  /**
+   * Remove a cart item from the cart
+   * The changes are local only if the user is not logged in
+   */
+  removeCartItem(cartItem) {
+    cartItem.deleteRecord();
 
-  isEmpty: computed.empty("content"),
-  isNotEmpty: computed.not("isEmpty"),
-
-  counter: computed.alias("length"),
-
-  _dumpToLocalStorage: observer("[]", function() {
-    if (this.localStorage) {
-      window.localStorage.setItem("cart", JSON.stringify(this.payload()));
+    if (!this.get("isLoggedIn")) {
+      return Ember.RSVP.resolve();
     }
-  })
-});
+    return cartItem.save();
+  },
 
-Service.reopenClass({
-  isServiceFactory: true
-});
+  /**
+   * Returns the cart item associated with the package
+   */
+  getCartItemForPackage(pkg) {
+    return this.get("cartItems").findBy("packageId", pkg.id);
+  },
 
-export default Service;
+  /**
+   * Returns true if the package or item is already in the cart
+   */
+  contains(pkgOrItem) {
+    if (pkgOrItem.get("isItem")) {
+      return this.containsItem(pkgOrItem);
+    }
+    return this.containsPackage(pkgOrItem);
+  },
+
+  /**
+   * Returns true if the package is already in the cart
+   */
+  containsPackage(pkg) {
+    return !!this.getCartItemForPackage(pkg);
+  },
+
+  /**
+   * Returns true if all of the item's packages are in the cart
+   */
+  containsItem(item) {
+    return item.get("packages").every(pkg => this.containsPackage(pkg));
+  },
+
+  /**
+   * If an offline item already exists in the user cart, clear it
+   */
+  clearDuplicates() {
+    this.get("offlineCartItems").forEach(it => {
+      const existingItem = this.get("cartItems").find(ci => {
+        return ci.get("id") && ci.get("packageId") === it.get("packageId");
+      });
+
+      if (existingItem) {
+        it.deleteRecord();
+        this.notifyPropertyChange("cartItems");
+      }
+    });
+  }
+});

@@ -1,30 +1,12 @@
-import Ember from 'ember';
+import Ember from "ember";
+import Model from "ember-data/model";
+import attr from "ember-data/attr";
+import { belongsTo } from "ember-data/relationships";
 
-const {
-  get,
-  computed,
-  Object: EmberObject
-} = Ember;
-
-export default EmberObject.extend({
-
-  modelType: "",
-  name: "",
-  imageUrl: "",
-  thumbImageUrl: "",
-  available: true,
-
-  guidProps: ['modelType', 'id'],
-
-  guid: computed('guidProps', function() {
-    let guidVal = get(this, 'guidProps').sort().map((prop) => {
-      return get(this, prop);
-    }).join('-');
-
-    return guidVal;
-  }),
-
-  toCartItem() {
-    return this;
-  }
+export default Model.extend({
+  userId: attr("string"),
+  user: belongsTo("user", { async: false }),
+  packageId: attr("string"),
+  package: belongsTo("package", { async: false }),
+  isAvailable: attr("boolean")
 });

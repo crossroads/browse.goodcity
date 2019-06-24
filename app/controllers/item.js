@@ -21,44 +21,13 @@ export default Ember.Controller.extend({
 
   direction: null,
 
-  hasQuantityAndIsAvailable: Ember.observer(
-    "item.isAvailable",
-    "item.packages.@each.orderId",
-    "item.isUnavailableAndDesignated",
-    function() {
-      var currentPath = this.get("target").currentPath;
-      var item = this.get("item");
-      var isItemUnavailable = this.get("item.isUnavailableAndDesignated");
-      if (
-        (currentPath === "item" || currentPath === "package_category") &&
-        isItemUnavailable &&
-        isItemUnavailable !== null &&
-        !this.get("itemNotAvailableShown")
-      ) {
-        this.set("itemNotAvailableShown", true);
-        if (this.get("cart").hasCartItem(item)) {
-          this.get("cart").removeItem(item);
-        }
-        this.get("messageBox").alert(
-          this.get("i18n").t("cart_content.unavailable"),
-          () => {
-            item.get("packages").forEach(pkg => this.store.unloadRecord(pkg));
-            this.set("itemNotAvailableShown", false);
-            this.transitionToRoute("/browse");
-          }
-        );
-      }
-    }
-  ),
-
-  hasDraftOrder: Ember.computed.alias("session.draftOrder"),
   isOrderFulfilmentUser: Ember.computed(function() {
     let user = this.get("session.currentUser");
     return user.hasRole("Order fulfilment");
   }),
 
   presentInCart: Ember.computed("item", "cart.counter", function() {
-    return this.get("cart").hasCartItem(this.get("item"));
+    return this.get("cart").contains(this.get("item"));
   }),
 
   allPackages: Ember.computed("item.packages.@each.isAvailable", function() {
@@ -148,7 +117,7 @@ export default Ember.Controller.extend({
     },
 
     requestItem(item) {
-      this.get("cart").pushItem(item);
+      this.get("cart").add(item);
       Ember.run.later(
         this,
         function() {
@@ -158,8 +127,8 @@ export default Ember.Controller.extend({
       );
     },
 
-    removeItem(item) {
-      this.get("cart").removeItem(item);
+    removeFromCart(pkgOrItem) {
+      this.get("cart").remove(pkgOrItem);
     },
 
     back() {

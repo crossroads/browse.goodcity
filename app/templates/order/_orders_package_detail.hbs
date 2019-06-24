@@ -5,13 +5,16 @@
     </div>
   </div>
 
-  {{#each order.orderItems as |package|}}
-    <div class="row info">
+  {{#each cart.cartItems as |cartItem|}}
+    <div class="row info cart-item-info {{unless cartItem.isAvailable "unavailable" }}">
       <div class="small-4 columns">
-        <img class="thumb-image" src="{{package.displayImageUrl}}" />
+        <img class="thumb-image" src="{{cartItem.package.displayImageUrl}}" />
       </div>
       <div class="small-8 detail columns">
-        {{package.packageName}}
+        <div class="package-name">{{cartItem.package.packageName}}</div>
+        {{#unless cartItem.isAvailable}}
+          <div class="unavailable">{{t "cart_content.unavailable"}}</div>
+        {{/unless}}
       </div>
     </div>
     <hr>

@@ -13,18 +13,7 @@ export default Ember.Route.extend(preloadDataMixin, {
   },
 
   model() {
-    return this.preloadData().then(res => {
-      let draftOrder = this.get("session.draftOrder");
-      if (!draftOrder) {
-        return res;
-      }
-
-      return Ember.RSVP.all(
-        draftOrder.get("ordersPackages").map(op => {
-          return this.loadIfAbsent("package", op.get("packageId"));
-        })
-      ).then(() => res);
-    });
+    return this.preloadData();
   },
 
   loadIfAbsent(modelName, id) {
@@ -36,43 +25,7 @@ export default Ember.Route.extend(preloadDataMixin, {
   },
 
   afterModel() {
-    var ordersPackages = [];
-    // Merging Offline cart items with Order in draft state
-    var draftOrder = this.get("session.draftOrder");
-    if (draftOrder) {
-      ordersPackages = draftOrder.get("ordersPackages");
-    }
-    if (draftOrder && ordersPackages.length) {
-      ordersPackages.forEach(ordersPackage => {
-        this.get("cart").pushItem(ordersPackage.get("package"));
-      });
-
-      let packageIds = this.get("cart.packageIds");
-      if (!packageIds.length) {
-        return this.redirectToTransitionOrDetails();
-      }
-
-      var orderParams = {
-        cart_package_ids: packageIds
-      };
-
-      new AjaxPromise(
-        `/orders/${draftOrder.id}`,
-        "PUT",
-        this.get("session.authToken"),
-        { order: orderParams }
-      )
-        .then(data => {
-          this.get("store").pushPayload(data);
-          this.redirectToTransitionOrDetails();
-        })
-        .catch(xhr => {
-          this.get("messageBox").alert(xhr.responseJSON.errors);
-        });
-    } else {
-      this.redirectToTransitionOrDetails();
-    }
-    // remove loginParam
+    this.redirectToTransitionOrDetails();
     localStorage.removeItem("loginParam");
     localStorage.removeItem("loginParamEmail");
   },

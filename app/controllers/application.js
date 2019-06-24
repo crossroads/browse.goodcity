@@ -10,6 +10,7 @@ export default Ember.Controller.extend({
   subscription: Ember.inject.service(),
   screenresize: Ember.inject.service(),
   messageBox: Ember.inject.service(),
+  cart: Ember.inject.service(),
   loggedInUser: false,
   i18n: Ember.inject.service(),
   showSidebar: true,
@@ -43,8 +44,6 @@ export default Ember.Controller.extend({
 
   hasCartItems: Ember.computed.alias("cart.isNotEmpty"),
   cartLength: Ember.computed.alias("cart.counter"),
-
-  draftOrder: Ember.computed.alias("session.draftOrder"),
 
   isUserLoggedIn: Ember.computed("loggedInUser", function() {
     this.toggleProperty("loggedInUser");
@@ -140,25 +139,22 @@ export default Ember.Controller.extend({
 
   submitCart() {
     this.set("showCartDetailSidebar", false);
-    var cartHasItems = this.get("cart.cartItems").length;
-    if (cartHasItems > 0) {
-      this.get("cart").set("checkout", true);
-      this.transitionToRoute("request_purpose", {
-        queryParams: {
-          onlineOrder: true,
-          bookAppointment: false,
-          orderId: null
-        }
-      });
-    } else {
-      this.get("messageBox").alert(
+    if (!this.get("cart.canCheckout")) {
+      return this.get("messageBox").alert(
         this.get("i18n").t("cart_content.unavailable_and_add_item_to_proceed"),
         () => {
-          this.get("cart").clearItems();
           this.set("displayCart", false);
         }
       );
     }
+
+    this.transitionToRoute("request_purpose", {
+      queryParams: {
+        onlineOrder: true,
+        bookAppointment: false,
+        orderId: null
+      }
+    });
   },
 
   actions: {
@@ -187,7 +183,6 @@ export default Ember.Controller.extend({
         _this.get("session.authToken")
       )
         .then(data => {
-          _this.get("cart").clearItems();
           if (order) {
             _this.store.unloadRecord(order);
           }
@@ -206,7 +201,6 @@ export default Ember.Controller.extend({
       this.session.clear(); // this should be first since it updates isLoggedIn status
       this.unloadModels();
       this.toggleProperty("loggedInUser");
-      this.get("cart").clearItems();
       this.transitionToRoute("browse");
     },
 
@@ -233,33 +227,8 @@ export default Ember.Controller.extend({
       }
     },
 
-    removeItem(itemId, type) {
-      var item = this.get("store").peekRecord(type, itemId) || itemId;
-      var ordersPackages = this.store
-        .peekAll("orders_package")
-        .filterBy("packageId", itemId);
-      if (this.get("draftOrder") && ordersPackages.length) {
-        let orderPackageId = ordersPackages.get("firstObject.id");
-        this.startLoading();
-        new AjaxPromise(
-          `/orders_packages/${orderPackageId}`,
-          "DELETE",
-          this.get("session.authToken")
-        )
-          .then(() => {
-            this.get("cart").removeItem(item);
-            var ordersPackage = this.store.peekRecord(
-              "orders_package",
-              orderPackageId
-            );
-            if (ordersPackage) {
-              this.store.unloadRecord(ordersPackage);
-            }
-          })
-          .finally(() => this.stopLoading());
-      } else {
-        this.get("cart").removeItem(item);
-      }
+    removeCartItem(cartItem) {
+      return this.get("cart").removeCartItem(cartItem);
     },
 
     checkout() {
@@ -276,22 +245,22 @@ export default Ember.Controller.extend({
       }
     },
 
-    updateCartItemParams(pkgId) {
-      let pkg = this.store.peekRecord("package", pkgId);
-      let item;
-      if (!pkg) {
-        item = this.store.peekRecord("item", pkgId);
-        pkg = item ? item.get("packages.firstObject") : null;
-      }
+    updateCartItemParams(cartItem) {
+      //@TOFIX
+      let pkg = cartItem.get("package");
+      // if (!pkg) {
+      //   item = this.store.peekRecord("item", pkgId);
+      //   pkg = item ? item.get("packages.firstObject") : null;
+      // }
 
-      if ((item && !item.isAvailable) || !pkg.isAvailable) {
-        return false;
-      }
+      // if ((item && !item.isAvailable) || !pkg.isAvailable) {
+      //   return false;
+      // }
 
       let categoryId = pkg.get("allPackageCategories.firstObject.id");
       let sortBy = "createdAt:desc";
-      const route = item ? "item" : "package";
-      const routeId = item ? item.id : pkgId;
+      const route = "package"; // item ? "item" : "package";
+      const routeId = pkg.id; // item ? item.id : pkgId;
       this.transitionToRoute(route, routeId, {
         queryParams: {
           categoryId: categoryId,

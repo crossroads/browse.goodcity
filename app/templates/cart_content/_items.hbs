@@ -1,13 +1,13 @@
-{{#each cart.content as |record|}}
+{{#each cart.cartItems as |cartItem|}}
   <li>
     <div class="row">
-      <div class="large-3 medium-3 columns cart-redirect-link {{if (is-not record.available) disabled}}" {{action 'updateCartItemParams' record.id}}>
-          <img class="thumb-image {{unless record.available 'grayed-image'}}" src="{{record.imageUrl}}" />
+      <div class="large-3 medium-3 columns cart-redirect-link {{if (is-not cartItem.isAvailable) disabled}}" {{action 'updateCartItemParams' cartItem}}>
+          <img class="thumb-image {{unless cartItem.isAvailable 'grayed-image'}}" src="{{cartItem.imageUrl}}" />
       </div>
 
-      <div class="large-9 medium-9 columns cart-redirect-link {{if (is-not record.available) disabled}}" {{action 'updateCartItemParams' record.id}}>
-          {{record.name}}
-        {{#unless record.available}}
+      <div class="large-9 medium-9 columns cart-redirect-link {{if (is-not cartItem.isAvailable) disabled}}" {{action 'updateCartItemParams' cartItem}}>
+          {{cartItem.name}}
+        {{#unless cartItem.isAvailable}}
           <div class="unavailable">{{t "cart_content.unavailable"}}</div>
         {{/unless}}
       </div>

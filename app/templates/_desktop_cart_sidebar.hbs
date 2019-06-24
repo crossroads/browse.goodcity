@@ -7,9 +7,9 @@
         </li>
 
         <div class="item-collection">
-          {{#each cart.content as |record|}}
+          {{#each cart.cartItems as |record|}}
 
-            {{#if record.available}}
+            {{#if record.isAvailable}}
               <li {{action "showCartItem" record.id record.modelType}}>
                 <img class="thumb-image" src="{{record.thumbImageUrl}}" />
               </li>
