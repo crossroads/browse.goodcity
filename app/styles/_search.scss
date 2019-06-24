@@ -1,3 +1,16 @@
+.image-tabs{
+  .item-package-category {
+    cursor: pointer;
+    font-size: 0.9em !important;
+    text-decoration: underline;
+  }
+
+  .item-notes {
+    font-size: 0.8em !important;
+    font-weight: unset !important;
+  }
+}
+
 .goods_search {
   .main_section{
     padding: 0 0.3em !important;

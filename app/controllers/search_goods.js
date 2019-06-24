@@ -3,14 +3,16 @@ import _ from "lodash";
 
 export default BrowseController.extend({
   minSearchTextLength: 2,
-  filteredResults: [],
   displayResults: false,
+  hasSearchText: Ember.computed("searchText", function() {
+    return Ember.$.trim(this.get("searchText")).length;
+  }),
 
   onSearchTextChange: Ember.observer("searchText", function() {
     if (this.get("searchText").length > this.get("minSearchTextLength")) {
-      this.reloadResults();
+      return this.reloadResults();
     }
-    this.set("filteredResults", []);
+    this.set("displayResults", false);
   }),
 
   reloadResults() {
@@ -49,10 +51,16 @@ export default BrowseController.extend({
   },
 
   actions: {
+    clearSearch(isCancelled) {
+      this.set("searchText", "");
+      if (!isCancelled) {
+        Ember.$("#searchText").focus();
+      }
+    },
+
     cancelSearch() {
       Ember.$("#searchText").blur();
       this.send("clearSearch", true);
-      this.transitionToRoute("app_menu_list");
     },
 
     selectItem(item) {
@@ -73,7 +81,10 @@ export default BrowseController.extend({
       const params = this.trimQuery(
         _.merge({}, this.getSearchQuery(), this.getPaginationQuery(pageNo))
       );
-      return this.store.query("package", params);
+      if (this.get("searchText").length > this.get("minSearchTextLength")) {
+        return this.store.query("package", params);
+      }
+      this.hideResults();
     }
   }
 });
