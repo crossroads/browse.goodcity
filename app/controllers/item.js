@@ -127,10 +127,6 @@ export default Ember.Controller.extend({
       );
     },
 
-    removeFromCart(pkgOrItem) {
-      this.get("cart").remove(pkgOrItem);
-    },
-
     back() {
       window.history.back();
     }

@@ -1,4 +1,5 @@
 import Ember from "ember";
+import _ from "lodash";
 import cancelOrderMixin from "../../mixins/cancel_order";
 import asyncTasksMixin from "../../mixins/async_tasks";
 
@@ -23,13 +24,15 @@ export default Ember.Controller.extend(cancelOrderMixin, asyncTasksMixin, {
   },
 
   actions: {
+    browseMore() {
+      this.transitionToRoute("browse");
+    },
+
     confirmBooking() {
       let order = this.get("order");
 
       if (this.badCart()) {
-        return this.i18nAlert("items_not_available", () => {
-          this.transitionToRoute("cart");
-        });
+        return this.i18nAlert("items_not_available", _.noop);
       }
 
       this.submitOrder(order).then(() => {

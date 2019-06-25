@@ -19,6 +19,10 @@
       width: 100%;
       margin-left: 0rem !important;
     }
+
+    &.show-error {
+      display: block !important;
+    }
   }
 
   .form__control.form__control--error .input-error {

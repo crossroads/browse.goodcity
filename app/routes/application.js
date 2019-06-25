@@ -1,12 +1,12 @@
 import Ember from "ember";
 import config from "../config/environment";
-import preloadDataMixin from "../mixins/preload_data";
 import _ from "lodash";
 
 const { getOwner } = Ember;
 
-export default Ember.Route.extend(preloadDataMixin, {
+export default Ember.Route.extend({
   logger: Ember.inject.service(),
+  preloadService: Ember.inject.service(),
   messageBox: Ember.inject.service(),
   i18n: Ember.inject.service(),
   previousRoute: null,
@@ -71,7 +71,7 @@ export default Ember.Route.extend(preloadDataMixin, {
       }
       this.handleError(error);
     };
-    return this.preloadData();
+    return this.get("preloadService").preloadData();
   },
 
   renderTemplate() {

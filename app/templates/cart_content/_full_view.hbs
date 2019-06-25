@@ -35,11 +35,11 @@
 
               <!-- Availability -->
               {{#unless row.isAvailable}}
-                <div class="unavailable">{{t "cart_content.unavailable"}}</div>
+                <div class="unavailable red-warning">{{t "cart_content.unavailable"}}</div>
               {{/unless}}
             </div>
 
-            <div class="small-3 columns remove_link" {{action 'removeFromCart' row.record}}>
+            <div class="small-3 columns remove_link" {{action 'remove' row.record target=cart}}>
               <i class="fa fa-times" aria-hidden="true"></i>
               <span>{{t "cart_content.remove"}}</span>
             </div>

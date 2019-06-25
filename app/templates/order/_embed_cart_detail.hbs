@@ -1,0 +1,27 @@
+<section class="main-section your-detail client-information large-10 large-offset-1 medium-10 medium-offset-1 small-12">
+  <div class="row">
+    <div class="small-12 columns type-of-id-text">
+      <h1 class="title"> {{t "order.confirm_booking.goods_detail.title"}} </h1>
+    </div>
+  </div>
+
+  {{#each cart.groupedPackages as |row|}}
+    <div class="row info cart-item-info {{unless row.isAvailable "unavailable" }}">
+      <div class="small-4 columns">
+        <img class="thumb-image" src="{{row.record.displayImageUrl}}" />
+      </div>
+      <div class="small-8 detail columns">
+        <div class="package-name">{{row.record.packageType.name}}</div>
+        {{#unless row.isAvailable}}
+          <div class="unavailable red-warning">{{t "cart_content.unavailable"}}</div>
+        {{/unless}}
+        <a {{action cart.remove row.record target=cart}}> {{t 'item.remove_item' }}</a>
+      </div>
+    </div>
+    <hr>
+  {{/each}}
+
+  <div class="row request_more_link">
+    <a {{action 'browseMore'}}>{{t 'order.goods_details.request_more' }}</a>
+  </div>
+</section>

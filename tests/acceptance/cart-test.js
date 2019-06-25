@@ -8,7 +8,11 @@ import { mockFindAll } from "ember-data-factory-guy";
 var App,
   pkgCategory,
   subcategory1,
+  item,
+  itemPkg1,
+  itemPkg2,
   pkg,
+  pkg2,
   pkgType1,
   pkgType2,
   subcategory2,
@@ -24,6 +28,7 @@ var App,
 module("Acceptance | Cart Page", {
   needs: ["service:subscription"],
   beforeEach: function() {
+    $.mockjaxSettings.matchInRegistrationOrder = false;
     window.localStorage.authToken =
       '"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo2LCJpYXQiOjE1MTg3NzI4MjcsImlzcyI6Ikdvb2RDaXR5SEsiLCJleHAiOjE1MTk5ODI0Mjd9.WdsVvss9khm81WNScV5r6DiIwo8CQfHM1c4ON2IACes"';
     App = startApp();
@@ -39,6 +44,10 @@ module("Acceptance | Cart Page", {
     });
     order = make("order", { state: "draft", created_by_id: user.id });
     pkg = make("package");
+    pkg2 = make("package");
+    item = make("item");
+    itemPkg1 = make("package", { item: item, itemId: item.get("id") });
+    itemPkg2 = make("package", { item: item, itemId: item.get("id") });
     ordersPackage = make("orders_package", {
       quantity: 1,
       state: "requested",
@@ -59,7 +68,37 @@ module("Acceptance | Cart Page", {
     bookingType = make("booking_type");
     purpose = make("purpose");
     mocks.push(
-      $.mockjax({ url: "/api/v1/cart_item*", type: "GET", responseText: [] }),
+      $.mockjax({
+        url: "/api/v1/cart_item*",
+        type: "GET",
+        responseText: {
+          packages: [
+            itemPkg1.toJSON({ includeId: true }),
+            itemPkg2.toJSON({ includeId: true }),
+            pkg.toJSON({ includeId: true })
+          ],
+          cart_items: [
+            {
+              id: 1,
+              package_id: itemPkg1.get("id"),
+              user_id: user.get("id"),
+              is_available: true
+            },
+            {
+              id: 2,
+              package_id: itemPkg2.get("id"),
+              user_id: user.get("id"),
+              is_available: true
+            },
+            {
+              id: 3,
+              package_id: pkg.get("id"),
+              user_id: user.get("id"),
+              is_available: true
+            }
+          ]
+        }
+      }),
       $.mockjax({
         url: "/api/v1/available_*",
         type: "GET",
@@ -137,6 +176,8 @@ module("Acceptance | Cart Page", {
         orders_packages: [ordersPackage.toJSON({ includeId: true })]
       }
     });
+
+    visit("/");
   },
 
   afterEach: function() {
@@ -171,8 +212,8 @@ test("Request and remove items from the cloud cart", function(assert) {
       response: function(req) {
         this.responseText = {
           cart_item: {
-            id: 1,
-            package_id: pkg.get("id"),
+            id: 999,
+            package_id: pkg2.get("id"),
             user_id: user.get("id"),
             is_available: true
           }
@@ -200,24 +241,63 @@ test("Request and remove items from the cloud cart", function(assert) {
   );
 
   visit(
-    "/item/" + pkg.id + "?categoryId=" + pkgCategory.id + "&sortBy=createdAt"
+    "/item/" + pkg2.id + "?categoryId=" + pkgCategory.id + "&sortBy=createdAt"
   );
   andThen(function() {
     assert.equal(
       currentURL(),
-      "/item/" + pkg.id + "?categoryId=" + pkgCategory.id + "&sortBy=createdAt"
+      "/item/" + pkg2.id + "?categoryId=" + pkgCategory.id + "&sortBy=createdAt"
     );
     $(".request-item").click();
     andThen(function() {
       visit("/cart");
       andThen(function() {
         assert.equal(cartItemCreated, true);
-        assert.equal(find(".item-collection li").length, 1);
+        assert.equal(find(".item-collection li").length, 3);
         click(".item-collection li:first span");
         andThen(function() {
-          assert.equal(find(".item-collection li").length, 0);
+          assert.equal(find(".item-collection li").length, 2);
           assert.equal(cartItemDeleted, true);
         });
+      });
+    });
+  });
+});
+
+test("Packages are grouped as items", function(assert) {
+  const cart = App.__container__.lookup("service:cart");
+  const store = App.__container__.lookup("service:store");
+
+  visit("/cart");
+  andThen(function() {
+    assert.equal(find(".item-collection li").length, 2);
+    const groups = cart.get("groupedPackages");
+    assert.equal(groups.length, 2);
+    assert.equal(groups[0].record.get("id"), item.get("id"));
+    assert.equal(groups[1].record.get("id"), pkg.get("id"));
+
+    const cartItem = store
+      .peekAll("cart_item")
+      .findBy("packageId", itemPkg1.get("id"));
+
+    cartItem.set("isAvailable", false);
+
+    andThen(function() {
+      const updatedGroups = cart.get("groupedPackages");
+      assert.equal(updatedGroups.length, 3);
+      assert.equal(updatedGroups[0].record.get("id"), itemPkg1.get("id"));
+      assert.equal(updatedGroups[0].isAvailable, false);
+      assert.equal(updatedGroups[1].record.get("id"), itemPkg2.get("id"));
+      assert.equal(updatedGroups[2].record.get("id"), pkg.get("id"));
+
+      Ember.run.scheduleOnce("afterRender", () => {
+        assert.equal(find(".item-collection li").length, 3);
+        assert.equal(
+          find(".item-collection li:first .unavailable")
+            .text()
+            .trim(),
+          "Sorry! This item is no longer available."
+        );
       });
     });
   });

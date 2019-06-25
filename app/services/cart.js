@@ -11,11 +11,16 @@ import _ from "lodash";
 export default ApiService.extend({
   store: Ember.inject.service(),
   session: Ember.inject.service(),
+  localStorage: Ember.inject.service(),
+  preloadService: Ember.inject.service(),
 
   init() {
     this._super(...arguments);
     this.get("session").addObserver("authToken", this.onUserChange.bind(this));
     this.onUserChange();
+    this.get("preloadService").one("data", () => {
+      this.restoreGuestItems();
+    });
   },
 
   // ---- Properties
@@ -52,8 +57,12 @@ export default ApiService.extend({
     }
   ),
 
-  canCheckout: Ember.computed("availableCartItems.[]", function() {
-    return this.get("availableCartItems.length") > 0;
+  canCheckout: Ember.computed("availableCartItems.length", function() {
+    const availableItemCount = this.get("availableCartItems.length");
+    return (
+      availableItemCount > 0 &&
+      availableItemCount === this.get("cartItems.length")
+    );
   }),
 
   isLoggedIn: Ember.computed.alias("session.authToken"),
@@ -143,7 +152,10 @@ export default ApiService.extend({
         it.set("userId", this.get("userId"));
         return it.save();
       })
-    );
+    ).then(res => {
+      this.forgetGuestItems();
+      return res;
+    });
   },
 
   add(pkgOrItem) {
@@ -178,6 +190,7 @@ export default ApiService.extend({
 
     if (!this.get("isLoggedIn")) {
       // Will be persisted when the user logs in
+      this.rememberGuestItems();
       return Ember.RSVP.resolve();
     }
 
@@ -292,8 +305,21 @@ export default ApiService.extend({
     });
   },
 
-  __buildSiblingGroups() {},
-
+  /**
+   * If a package is in the cart, as well as all it's siblings
+   * It will appear as an 'item' (if they are available)
+   *
+   * This property groups them as such
+   *
+   * e.g
+   *  [
+   *    ...
+   *    {
+   *       record: <the package or item>
+   *       isAvailabel: <availability>
+   *    }
+   *  ]
+   */
   groupedPackages: Ember.computed(
     "cartItems.[]",
     "cartItems.@each.isAvailable",
@@ -331,5 +357,26 @@ export default ApiService.extend({
         return { record, isAvailable };
       });
     }
-  )
+  ),
+
+  // --- Helpers
+
+  rememberGuestItems() {
+    const refs = this.get("offlineCartItems").mapBy("packageId");
+    this.get("localStorage").write("offlineCart", refs);
+  },
+
+  forgetGuestItems() {
+    this.get("localStorage").remove("offlineCart");
+  },
+
+  restoreGuestItems() {
+    const pkgIds = this.get("localStorage").read("offlineCart", []);
+
+    pkgIds
+      .map(id => this.get("store").peekRecord("package", id))
+      .filter(_.identity)
+      .reject(pkg => this.contains(pkg))
+      .forEach(pkg => this.add(pkg));
+  }
 });

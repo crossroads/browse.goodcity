@@ -24,7 +24,7 @@ export default {
   not_found: "對不起，您想要的物資已不存在。",
   awaiting_dispatch: "等待派送",
   dispatching: "派送中",
-  items_not_available: "您的購物車内有已不存在的物資，請刪除該物資以繼續。",
+  items_not_available: "您的購物車内有已不存在的物資",
   unauthorized: "您沒有此權限。",
   back: "返回",
   no_search_results: "沒有搜尋結果",

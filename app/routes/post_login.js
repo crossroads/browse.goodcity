@@ -1,10 +1,10 @@
 import Ember from "ember";
-import preloadDataMixin from "../mixins/preload_data";
 import AjaxPromise from "browse/utils/ajax-promise";
 
-export default Ember.Route.extend(preloadDataMixin, {
+export default Ember.Route.extend({
   cart: Ember.inject.service(),
   messageBox: Ember.inject.service(),
+  preloadService: Ember.inject.service(),
   session: Ember.inject.service(),
   isBookAppointment: false,
 
@@ -13,7 +13,7 @@ export default Ember.Route.extend(preloadDataMixin, {
   },
 
   model() {
-    return this.preloadData();
+    return this.get("preloadService").preloadData();
   },
 
   loadIfAbsent(modelName, id) {

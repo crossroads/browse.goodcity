@@ -1,5 +1,5 @@
 {{#each cart.groupedPackages as |row|}}
-  <li>
+  <li class="no-bullet">
     <div class="row">
       <div class="large-3 medium-3 columns cart-redirect-link {{if (is-not row.isAvailable) disabled}}" {{action 'showItemDetails' row.record}}>
           <img class="thumb-image {{unless row.isAvailable 'grayed-image'}}" src="{{row.record.favouriteImage.cartImageUrl}}" />

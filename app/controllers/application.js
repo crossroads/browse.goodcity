@@ -2,9 +2,11 @@ import Ember from "ember";
 import { containsAny } from "../utils/helpers";
 import config from "../config/environment";
 import AjaxPromise from "browse/utils/ajax-promise";
+import cancelOrderMixin from "../mixins/cancel_order";
+import _ from "lodash";
 const { getOwner } = Ember;
 
-export default Ember.Controller.extend({
+export default Ember.Controller.extend(cancelOrderMixin, {
   isMobileApp: config.cordova.enabled,
   appVersion: config.APP.VERSION,
   subscription: Ember.inject.service(),
@@ -139,10 +141,8 @@ export default Ember.Controller.extend({
     this.set("showCartDetailSidebar", false);
     if (!this.get("cart.canCheckout")) {
       return this.get("messageBox").alert(
-        this.get("i18n").t("cart_content.unavailable_and_add_item_to_proceed"),
-        () => {
-          this.set("displayCart", false);
-        }
+        this.get("i18n").t("items_not_available"),
+        _.noop
       );
     }
 
@@ -211,10 +211,6 @@ export default Ember.Controller.extend({
         },
         0
       );
-    },
-
-    removeFromCart(record) {
-      return this.get("cart").remove(record);
     },
 
     checkout() {
