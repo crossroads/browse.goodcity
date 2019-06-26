@@ -118,25 +118,6 @@ export default Ember.Controller.extend(cancelOrderMixin, {
     UNLOAD_MODELS.forEach(model => this.store.unloadAll(model));
   },
 
-  accountDetailsComplete() {
-    const user = this.get("session.currentUser");
-    if (!user) {
-      return false;
-    }
-
-    const organisationsUser = user.get("organisationsUsers.firstObject");
-    const organisation =
-      organisationsUser && organisationsUser.get("organisation");
-    const hasInfoAndCharityRole =
-      user.get("isInfoComplete") && user.hasRole("Charity");
-    const hasCompleteOrganisationUserInfo =
-      organisationsUser && organisationsUser.get("isInfoComplete");
-
-    return (
-      hasInfoAndCharityRole && organisation && hasCompleteOrganisationUserInfo
-    );
-  },
-
   submitCart() {
     this.set("showCartDetailSidebar", false);
     if (!this.get("cart.canCheckout")) {
@@ -160,40 +141,6 @@ export default Ember.Controller.extend(cancelOrderMixin, {
       $(".left-off-canvas-menu").removeClass("move-bottom");
     },
 
-    cancelOrderPopUp(orderId) {
-      this.get("messageBox").custom(
-        this.get("i18n").t("order.order_delete_confirmation"),
-        this.get("i18n").t("order.cancel_order"),
-        () => {
-          this.send("cancelOrder", orderId);
-        },
-        this.get("i18n").t("not_now")
-      );
-    },
-
-    cancelOrder(orderId) {
-      var _this = this;
-      var order = _this.store.peekRecord("order", parseInt(orderId));
-      this.startLoading();
-      new AjaxPromise(
-        "/orders/" + orderId,
-        "DELETE",
-        _this.get("session.authToken")
-      )
-        .then(data => {
-          if (order) {
-            _this.store.unloadRecord(order);
-          }
-          _this.store.pushPayload(data);
-          _this.transitionToRoute("index", {
-            queryParams: {
-              orderCancelled: true
-            }
-          });
-        })
-        .finally(() => this.stopLoading());
-    },
-
     logMeOut() {
       this.get("subscription").unwire();
       this.session.clear(); // this should be first since it updates isLoggedIn status
@@ -214,7 +161,8 @@ export default Ember.Controller.extend(cancelOrderMixin, {
     },
 
     checkout() {
-      if (!this.accountDetailsComplete() && this.get("hasCartItems")) {
+      const accountComplete = this.get("session").accountDetailsComplete();
+      if (!accountComplete && this.get("hasCartItems")) {
         this.set("showCartDetailSidebar", false);
         this.transitionToRoute("account_details", {
           queryParams: {

@@ -22,5 +22,11 @@ export default AuthorizeRoute.extend({
       this.transitionTo("orders.booking", model.order.id);
       this.controllerFor("application").set("hideHeaderBar", true);
     }
+  },
+
+  resetController(controller, isExiting) {
+    if (isExiting) {
+      this.controllerFor("application").set("hideHeaderBar", false);
+    }
   }
 });

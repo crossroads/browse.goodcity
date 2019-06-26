@@ -70,8 +70,7 @@ module.exports = function(environment) {
       PRELOAD_AUTHORIZED_TYPES: [
         "gogovan_transport",
         "booking_type",
-        "purpose",
-        "order"
+        "purpose"
       ],
 
       SHA: process.env.APP_SHA || "00000000",

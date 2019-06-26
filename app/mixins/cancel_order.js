@@ -63,8 +63,8 @@ export default Ember.Mixin.create({
       this.set("showCancelBookingPopUp", false);
     },
 
-    cancelOrder() {
-      let order = this.get("order");
+    cancelOrder(order) {
+      order = order || this.get("order");
       if (order) {
         if (order.get("isDraft")) {
           this.deleteOrder(order);
