@@ -9,34 +9,13 @@ export default Ember.Mixin.create({
   __tasksCount: 0,
   __loadingView: null,
 
-  __showLoadingSpinner() {
-    if (Ember.testing) {
-      return;
-    }
-    if (!this.__loadingView) {
-      this.__loadingView = Ember.getOwner(this)
-        .lookup("component:loading")
-        .append();
-    }
-  },
-
-  __hideLoadingSpinner() {
-    if (Ember.testing) {
-      return;
-    }
-    if (this.__loadingView) {
-      this.__loadingView.destroy();
-      this.__loadingView = null;
-    }
-  },
-
   __incrementTaskCount(val = 1) {
     this.__tasksCount += val;
     if (this.__tasksCount > 0) {
-      this.__showLoadingSpinner();
+      this.showLoadingSpinner();
     } else {
       this.__tasksCount = 0;
-      this.__hideLoadingSpinner();
+      this.hideLoadingSpinner();
     }
   },
 
@@ -53,6 +32,27 @@ export default Ember.Mixin.create({
         this.__incrementTaskCount(-1);
         return Ember.RSVP.reject(err);
       });
+  },
+
+  showLoadingSpinner() {
+    if (Ember.testing) {
+      return;
+    }
+    if (!this.__loadingView) {
+      this.__loadingView = Ember.getOwner(this)
+        .lookup("component:loading")
+        .append();
+    }
+  },
+
+  hideLoadingSpinner() {
+    if (Ember.testing) {
+      return;
+    }
+    if (this.__loadingView) {
+      this.__loadingView.destroy();
+      this.__loadingView = null;
+    }
   },
 
   i18nAlert(key, cb) {

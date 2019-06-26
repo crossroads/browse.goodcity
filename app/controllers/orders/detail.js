@@ -1,9 +1,9 @@
 import Ember from "ember";
 import applicationController from "./../application";
 import AjaxPromise from "browse/utils/ajax-promise";
-import cancelOrder from "../../mixins/cancel_order";
+import cancelOrderMixin from "../../mixins/cancel_order";
 
-export default applicationController.extend(cancelOrder, {
+export default applicationController.extend(cancelOrderMixin, {
   order: Ember.computed.alias("model.order"),
   showCancelBookingPopUp: false,
   unreadMessageCount: Ember.computed("order", function() {
@@ -12,27 +12,6 @@ export default applicationController.extend(cancelOrder, {
   hasUnreadMessages: Ember.computed("order", function() {
     return this.get("order.hasUnreadMessages");
   }),
-
-  showLoadingSpinner() {
-    if (Ember.testing) {
-      return;
-    }
-    if (!this.loadingView) {
-      this.loadingView = Ember.getOwner(this)
-        .lookup("component:loading")
-        .append();
-    }
-  },
-
-  hideLoadingSpinner() {
-    if (Ember.testing) {
-      return;
-    }
-    if (this.loadingView) {
-      this.loadingView.destroy();
-      this.loadingView = null;
-    }
-  },
 
   actions: {
     redirectToEdit(routeName) {

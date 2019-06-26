@@ -4,6 +4,7 @@ import AjaxPromise from "browse/utils/ajax-promise";
 export default Ember.Route.extend({
   cart: Ember.inject.service(),
   messageBox: Ember.inject.service(),
+  session: Ember.inject.service(),
   preloadService: Ember.inject.service(),
   session: Ember.inject.service(),
   isBookAppointment: false,
@@ -31,7 +32,7 @@ export default Ember.Route.extend({
   },
 
   redirectToTransitionOrDetails() {
-    if (this.isDetailsComplete()) {
+    if (this.get("session").accountDetailsComplete()) {
       var attemptedTransition = this.controllerFor("login").get(
         "attemptedTransition"
       );
@@ -47,22 +48,5 @@ export default Ember.Route.extend({
     } else {
       this.transitionTo("account_details");
     }
-  },
-
-  isDetailsComplete() {
-    const user = this.get("session.currentUser");
-    if (!user) {
-      return false;
-    }
-
-    const organisationsUser = user.get("organisationsUsers.firstObject");
-    const organisation =
-      organisationsUser && organisationsUser.get("organisation");
-    const userInfoComplete =
-      user.get("isInfoComplete") && user.hasRole("Charity");
-    const organisationUserComplete =
-      organisationsUser && organisationsUser.get("isInfoComplete");
-
-    return userInfoComplete && organisation && organisationUserComplete;
   }
 });
