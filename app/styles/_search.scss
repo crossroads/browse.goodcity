@@ -12,6 +12,16 @@
 }
 
 .goods_search {
+  .infinite-list-container::-webkit-scrollbar {
+    width: 0 !important
+  }
+  .infinite-list-container::-webkit-scrollbar {
+    display: none;
+  }
+  .infinite-list-container{
+    -ms-overflow-style: none; // IE 10+
+    scrollbar-width: none;
+  }
   .main_section{
     padding: 0 0.3em !important;
   }
