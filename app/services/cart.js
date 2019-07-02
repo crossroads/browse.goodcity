@@ -5,7 +5,7 @@ import _ from "lodash";
 /**
  *
  * Service to interact with cloud cart
- * Records are all of the cart_item type
+ * Records are all of the requested_package type
  *
  */
 export default ApiService.extend({
@@ -26,7 +26,7 @@ export default ApiService.extend({
   // ---- Properties
 
   cartItems: Ember.computed(function() {
-    return this.get("store").peekAll("cart_item");
+    return this.get("store").peekAll("requested_package");
   }),
 
   packages: Ember.computed("cartItems.[]", function() {
@@ -100,7 +100,7 @@ export default ApiService.extend({
    */
   onLogout() {
     this.get("store")
-      .peekAll("cart_item")
+      .peekAll("requested_package")
       .forEach(record => this.get("store").unloadRecord(record));
   },
 
@@ -110,7 +110,7 @@ export default ApiService.extend({
    * Checkout the cart and fill the order
    */
   checkoutOrder(order) {
-    return this.POST(`/cart_items/checkout`, {
+    return this.POST(`/requested_packages/checkout`, {
       order_id: order.get("id")
     }).then(data => {
       this.get("store").pushPayload(data);
@@ -125,14 +125,14 @@ export default ApiService.extend({
     if (!this.get("isLoggedIn")) {
       return Ember.RSVP.resolve();
     }
-    return this.get("store").findAll("cart_item", { reload: true });
+    return this.get("store").findAll("requested_package", { reload: true });
   },
 
   /**
    * Clears the local data and re-fetches the data
    */
   refresh() {
-    this.get("store").unloadAll("cart_item");
+    this.get("store").unloadAll("requested_package");
     return this.populate();
   },
 
@@ -180,7 +180,7 @@ export default ApiService.extend({
    * If the user is not logged in, will only save it locally
    */
   addPackage(pkg) {
-    let record = this.get("store").createRecord("cart_item", {
+    let record = this.get("store").createRecord("requested_package", {
       packageId: pkg.get("id"),
       package: pkg,
       isAvailable: pkg.get("isAvailable")

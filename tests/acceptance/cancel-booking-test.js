@@ -57,7 +57,7 @@ module("Acceptance | Cancel booking", {
     });
 
     mocks.push(
-      $.mockjax({ url: "/api/v1/cart_item*", responseText: [] }),
+      $.mockjax({ url: "/api/v1/requested_package*", responseText: [] }),
       $.mockjax({
         url: "/api/v1/booking_type*",
         responseText: [bookingType.toJSON({ includeId: true })]

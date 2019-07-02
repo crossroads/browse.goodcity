@@ -12,7 +12,11 @@ module("Acceptance | Home Page", {
     App = startApp();
     mocks = [];
     mocks.push(
-      $.mockjax({ url: "/api/v1/cart_item*", type: "GET", responseText: [] })
+      $.mockjax({
+        url: "/api/v1/requested_package*",
+        type: "GET",
+        responseText: []
+      })
     );
     window.localStorage.authToken = "";
     bookingType = make("booking_type");

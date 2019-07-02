@@ -70,7 +70,7 @@ module("Acceptance | Browse Page", {
         url: "/api/v1/auth/current_user_profil*",
         responseText: data
       }),
-      $.mockjax({ url: "/api/v1/cart_item*", responseText: [] })
+      $.mockjax({ url: "/api/v1/requested_package*", responseText: [] })
     );
 
     mockFindAll("order").returns({

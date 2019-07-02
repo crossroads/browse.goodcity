@@ -173,7 +173,11 @@ module("Acceptance | My Dashboard", {
     });
 
     mocks.push(
-      $.mockjax({ url: "/api/v1/cart_item*", type: "GET", responseText: [] }),
+      $.mockjax({
+        url: "/api/v1/requested_package*",
+        type: "GET",
+        responseText: []
+      }),
       $.mockjax({
         url: "/api/v1/auth/current_user_profil*",
         responseText: userProfile

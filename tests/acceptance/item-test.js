@@ -117,7 +117,11 @@ module("Acceptance | Item Page", {
         orders_packages: [ordersPackage.toJSON({ includeId: true })]
       }
     });
-    $.mockjax({ url: "/api/v1/cart_item*", type: "GET", responseText: [] });
+    $.mockjax({
+      url: "/api/v1/requested_package*",
+      type: "GET",
+      responseText: []
+    });
     $.mockjax({
       url: "/api/v1/auth/current_user_profil*",
       responseText: {

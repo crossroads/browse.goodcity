@@ -69,7 +69,7 @@ module("Acceptance | Cart Page", {
     purpose = make("purpose");
     mocks.push(
       $.mockjax({
-        url: "/api/v1/cart_item*",
+        url: "/api/v1/requested_package*",
         type: "GET",
         responseText: {
           packages: [
@@ -77,7 +77,7 @@ module("Acceptance | Cart Page", {
             itemPkg2.toJSON({ includeId: true }),
             pkg.toJSON({ includeId: true })
           ],
-          cart_items: [
+          requested_packages: [
             {
               id: 1,
               package_id: itemPkg1.get("id"),
@@ -203,7 +203,7 @@ test("Request and remove items from the cloud cart", function(assert) {
       }
     }),
     $.mockjax({
-      url: "/api/v1/cart_item*",
+      url: "/api/v1/requested_package*",
       type: "POST",
       status: 200,
       onAfterComplete: () => {
@@ -211,7 +211,7 @@ test("Request and remove items from the cloud cart", function(assert) {
       },
       response: function(req) {
         this.responseText = {
-          cart_item: {
+          requested_package: {
             id: 999,
             package_id: pkg2.get("id"),
             user_id: user.get("id"),
@@ -221,7 +221,7 @@ test("Request and remove items from the cloud cart", function(assert) {
       }
     }),
     $.mockjax({
-      url: "/api/v1/cart_item*",
+      url: "/api/v1/requested_package*",
       type: "DELETE",
       status: 200,
       onAfterComplete: () => {
@@ -277,7 +277,7 @@ test("Packages are grouped as items", function(assert) {
     assert.equal(groups[1].record.get("id"), pkg.get("id"));
 
     const cartItem = store
-      .peekAll("cart_item")
+      .peekAll("requested_package")
       .findBy("packageId", itemPkg1.get("id"));
 
     cartItem.set("isAvailable", false);

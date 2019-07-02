@@ -56,7 +56,11 @@ module("Acceptance: Login", {
       user_role_ids: [user_role.id]
     };
 
-    $.mockjax({ url: "/api/v1/cart_item*", type: "GET", responseText: [] });
+    $.mockjax({
+      url: "/api/v1/requested_package*",
+      type: "GET",
+      responseText: []
+    });
 
     $.mockjax({
       url: "/api/v1/auth/current_user_profil*",
