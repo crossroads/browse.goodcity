@@ -3,11 +3,11 @@
     <li>
       {{#if item.isItem}}
         {{#link-to 'item' item.id (query-params sortBy=sortBy categoryId=category) }}
-          {{cloudinary-image-tag src=item.displayImageUrl item=item displayItemName=item.packageType.name}}
+          {{cloudinary-image-tag src=item.displayImageUrl item=item displayItemName=item.packageType.name displayItemOverlay=true}}
         {{/link-to}}
       {{else}}
         {{#link-to 'package' item.id (query-params sortBy=sortBy categoryId=category) }}
-          {{cloudinary-image-tag src=item.displayImageUrl item=item displayItemName=item.packageType.name}}
+          {{cloudinary-image-tag src=item.displayImageUrl item=item displayItemName=item.packageType.name displayItemOverlay=true}}
         {{/link-to}}
       {{/if}}
     </li>
