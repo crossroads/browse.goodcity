@@ -2,11 +2,10 @@
   <nav class="tab-bar category_page">
     <section class='main-section ui'>
       <h1 class="title hide-for-small">{{model.name}}</h1>
-      <section class="search_icon right-small">
-        {{#link-to "search_goods"}}
-          <i aria-hidden="true" class="fa fa-search"></i>
-        {{/link-to}}
-      </section>
+      {{!-- commented temporarily to hide search icon from live app until search feature is available --}}
+      {{!-- <section class="search_icon right-small">
+        <i aria-hidden="true" class="fa fa-search"></i>
+      </section> --}}
       <nav class="breadcrumbs">
         {{#link-to 'browse' classNames="underline-link"}}{{t 'browse.all_goods'}}{{/link-to}}
         {{#link-to 'package_category' model.id classNames="current"}}{{model.name}}{{/link-to}}

@@ -5,6 +5,7 @@ export default {
   "company.name": "國際十字路會",
   by: "了解",
   ok: "確定",
+  must_login: "請登入！",
   unexpected_error: "出錯了",
   QuotaExceededError:
     "網站可能在瀏覽器的<b>私密瀏覽模式</b>下不能正常運作。請嘗試</br><ul><li><a href='http://www.apple.com/itunes/' style='color: black!important; background-color: #dee4eb !important;'>下載iOS 應用程式</a></li><li>使用瀏覽器的常規模式</li><li>使用Chrome 的私密瀏覽模式</li></ul>",
@@ -186,14 +187,6 @@ export default {
     privacy: "我們不會公開或分享您的資料。我們只會使用以完成您的申請。請看 ",
     policy: "隱私政策",
     mobile_email_warning: "請提供正確的電郵或香港手機號碼"
-  },
-
-  search_goods: {
-    contact_us: "Can't find required goods? Please contact us for assistance.",
-    placeholder: "Search Goods",
-    title: "Search Results",
-    done: "Done",
-    search_info: "You can search for goods. E.g.'table' or 'stroller'"
   },
 
   account: {

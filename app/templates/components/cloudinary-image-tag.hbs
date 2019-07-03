@@ -2,17 +2,11 @@
   <img src="/assets/images/image-loading.gif" class="cl-loading-img {{unless loading 'hidden'}}"/>
   <img src="{{src}}" class="cl-item-image {{if loading 'hidden'}} {{if isSmallScreen 'profile'}}"/>
 
-  {{#if displayItemOverlay}}
+  {{#if displayItemName}}
     <div class="image-item-overlay">
       <div class="item_desc">
         <li class="ellipsis two-line-ellipsis">
-          <span class="item-package-category">
-            {{item.packageType.name}}
-          </span>
-          :
-          <span class="item-notes">
-            {{item.notes}}
-          </span>
+          {{item.packageType.name}}
         </li>
       </div>
     </div>
