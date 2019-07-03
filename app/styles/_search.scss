@@ -1,66 +1,3 @@
-.image-tabs{
-  .item-package-category {
-    cursor: pointer;
-    font-size: 0.9em !important;
-    text-decoration: underline;
-  }
-
-  .item-notes {
-    font-size: 0.8em !important;
-    font-weight: unset !important;
-  }
-}
-
-.goods_search {
-  .infinite-list-container::-webkit-scrollbar {
-    width: 0 !important
-  }
-  .infinite-list-container::-webkit-scrollbar {
-    display: none;
-  }
-  .infinite-list-container{
-    -ms-overflow-style: none; // IE 10+
-    scrollbar-width: none;
-  }
-  .main_section{
-    padding: 0 0.3em !important;
-  }
-  .back_button {
-    margin-top: 2% !important;
-  }
-  .back_icon{
-    display: flex;
-  }
-  .search_info{
-    margin-left: 5%;
-    color: black;
-    font-size: 0.8rem;
-    @media #{$small-only} {
-      font-size: 0.6rem;
-    }
-  }
-}
-
-.goods_search{
-  .list-image{
-    padding: 1em 1em;
-  }
-  .image-item-overlay {
-    position: absolute;
-    background: #002352;
-    display: block;
-    opacity: 0.7;
-    width: 100%;
-    bottom: 0;
-    height: 40%;
-
-    .item_desc {
-      color: #fff;
-      font-size: 0.9em;
-      padding: 1em 0;
-    }
-  }
-}
 .search-box {
   position: relative;
   padding: 0;
@@ -105,17 +42,6 @@
     text-decoration: none;
   }
 
-  .package_back {
-    text-decoration: none;
-    color: #000;
-    font-size: 0.9rem;
-    cursor: pointer;
-    margin-left: 15%;
-    @media #{$small-only} {
-      margin-top: 20%;
-    }
-  }
-
   .back_button {
     margin-top: 1.5%;
     i {
@@ -132,7 +58,7 @@
 
     @media #{$small-only} {
       margin-left: -10%;
-      font-size: 0.7rem;
+      font-size: 0.6rem;
     }
   }
 
@@ -193,6 +119,7 @@
       padding: 0.2rem 0;
     }
   }
+
   .org_search{
     color: #E2E6EB;
     margin-left: -2%;
@@ -206,33 +133,17 @@
 
   @media #{$medium-up} {
     -webkit-transform: translate(-50%, 0);
-    transform: translate(-50%, 0);
     left: 50%;
   }
 }
-.search-code,
-.goods_search {
+.search-code {
   .back-link {
     text-decoration: none;
-    padding-top: 0.8rem;
+    padding-top: 0.9rem;
     color: #000 !important;
     cursor: pointer;
     font-size: 0.9rem;
     padding-left: 1.5rem;
-
-    @media #{$small-only} {
-      margin-left: -10%;
-      font-size: 0.7rem;
-    }
-  }
-  li {
-    border-bottom: unset !important;
-  }
-  .title {
-    margin-top: 0.8em;
-    margin-left: 0.3em;
-    font-size: 1em;
-    color: white;
   }
 }
 

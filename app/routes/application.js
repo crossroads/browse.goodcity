@@ -10,6 +10,7 @@ export default Ember.Route.extend(preloadDataMixin, {
   i18n: Ember.inject.service(),
   previousRoute: null,
   isErrPopUpAlreadyShown: false,
+  isMustLoginAlreadyShown: false,
 
   unlessIncludesCurrentPath() {
     var currentPath = window.location.href;
@@ -29,10 +30,19 @@ export default Ember.Route.extend(preloadDataMixin, {
     var storageHandler = function(object) {
       var currentPath = window.location.href;
       var authToken = window.localStorage.getItem("authToken");
-      if (!authToken && object.unlessIncludesCurrentPath()) {
-        object.session.clear();
-        object.store.unloadAll();
-        object.transitionTo("/login");
+      if (
+        !authToken &&
+        !object.get("isMustLoginAlreadyShown") &&
+        object.unlessIncludesCurrentPath()
+      ) {
+        object.set("isMustLoginAlreadyShown", true);
+        object
+          .get("messageBox")
+          .alert(object.get("i18n").t("must_login"), () => {
+            object.session.clear();
+            object.store.unloadAll();
+            object.transitionTo("/login");
+          });
       } else if (
         authToken &&
         (currentPath.indexOf("login") >= 0 ||
@@ -82,13 +92,15 @@ export default Ember.Route.extend(preloadDataMixin, {
     });
   },
 
-  redirectToLogin() {
+  showLoginError() {
     if (this.session.get("isLoggedIn")) {
       this.session.clear();
       this.store.unloadAll();
       var loginController = this.controllerFor("login");
       loginController.set("attemptedTransition", this.get("previousRoute"));
-      this.transitionTo("login");
+      this.get("messageBox").alert(this.get("i18n").t("must_login"), () =>
+        this.transitionTo("login")
+      );
     }
   },
 
@@ -134,7 +146,7 @@ export default Ember.Route.extend(preloadDataMixin, {
       } else if (reason.name === "NotFoundError" && reason.code === 8) {
         return false;
       } else if (status === 401) {
-        this.redirectToLogin();
+        this.showLoginError();
       } else {
         this.showSomethingWentWrong(reason);
       }

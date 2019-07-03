@@ -26,7 +26,6 @@ Router.map(function() {
   this.route("post_login");
   this.route("authenticate");
   this.route("search_organisation");
-  this.route("search_goods");
 
   this.route("my_orders");
   this.route("my_account");

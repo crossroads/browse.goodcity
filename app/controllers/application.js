@@ -33,9 +33,10 @@ export default Ember.Controller.extend({
     return /Android/i.test(navigator.userAgent) && !this.get("isMobileApp");
   }),
 
-  showSearchIcon: Ember.computed("currentPath", function() {
-    return ["browse", "package_category"].indexOf(this.get("currentPath")) >= 0;
-  }),
+  // commented temporarily to hide search icon from live app until search feature is available
+  // showSearchIcon: Ember.computed("currentPath", function() {
+  //   return ["browse", "package_category"].indexOf(this.get("currentPath")) >= 0;
+  // }),
 
   displayCart: false,
   showCartDetailSidebar: false,
@@ -55,8 +56,6 @@ export default Ember.Controller.extend({
     let url = window.location.href;
     return !containsAny(url, [
       "request_purpose",
-      "search_goods",
-      "search_organisation",
       "account_details",
       "schedule_details",
       "goods_details",
