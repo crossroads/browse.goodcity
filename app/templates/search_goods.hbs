@@ -34,7 +34,7 @@
     <div class="row">
       <div class="small-12 medium-12 large-offset-1 large-10 columns">
         {{#if displayResults}}
-          {{#infinite-list height="75vh" loadMore=(action "loadMoreGoods") as |items| }}
+          {{#infinite-list height="80vh" loadMore=(action "loadMoreGoods") as |items| }}
             <ul class="large-block-grid-5 small-block-grid-2 medium-block-grid-3 list-image items_list xxlarge-block-grid-4">
               <label class="search_results title">{{t 'search_goods.title'}}</label>
               {{#each items as |item|}}
