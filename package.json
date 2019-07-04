@@ -18,7 +18,9 @@
     "start:staging": "cross-env EMBER_CLI_CORDOVA=0 STAGING=true ember server --environment production --port 4202 --live-reload-port 35731",
     "build": "cross-env EMBER_CLI_CORDOVA=0 ember build",
     "test": "cross-env EMBER_CLI_CORDOVA=0 ember test --server",
-    "test:ci": "cross-env EMBER_CLI_CORDOVA=0 ember-pretty-test"
+    "test:ci": "cross-env EMBER_CLI_CORDOVA=0 ember-pretty-test",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "husky": {
     "hooks": {
@@ -112,6 +114,8 @@
     "cordova-update-config": "^1.0.2",
     "jquery": "^3.2.0",
     "phantomjs-prebuilt": "^2.1.14",
-    "yarn": "^1.9.2"
-  }
+    "yarn": "^1.9.2",
+    "snyk": "^1.189.0"
+  },
+  "snyk": true
 }
