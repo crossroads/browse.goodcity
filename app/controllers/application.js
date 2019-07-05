@@ -51,7 +51,7 @@ export default Ember.Controller.extend({
     return !!this.session.get("authToken");
   }),
 
-  showOffCanvas: Ember.computed("showSidebar", function() {
+  showOffCanvas: Ember.computed("showSidebar", "currentPath", function() {
     let url = window.location.href;
     return !containsAny(url, [
       "request_purpose",
