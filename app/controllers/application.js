@@ -55,7 +55,6 @@ export default Ember.Controller.extend({
     let url = window.location.href;
     return !containsAny(url, [
       "request_purpose",
-      "search_goods",
       "search_organisation",
       "account_details",
       "schedule_details",
