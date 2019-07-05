@@ -6,7 +6,6 @@ export default PublicRoute.extend({
     let applicationController = this.controllerFor("application");
     controller.set("cartLength", applicationController.get("cartLength"));
     controller.set("hasCartItems", applicationController.get("hasCartItems"));
-    applicationController.set("showSidebar", true);
   },
 
   resetController: function(controller, isExiting) {
