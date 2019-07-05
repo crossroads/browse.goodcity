@@ -3,10 +3,12 @@ import ObserveScreenResize from "./observe-screen-resize";
 
 export default ObserveScreenResize.extend({
   cartscroll: Ember.inject.service(),
+  application: Ember.computed(function() {
+    return Ember.getOwner(this).lookup("controller:application");
+  }),
+
   isHomePage: Ember.computed(function() {
-    return Ember.getOwner(this)
-      .lookup("controller:application")
-      .get("isHomePage");
+    return this.get("application.isHomePage");
   }).volatile(),
 
   onScreenResized() {
@@ -16,7 +18,9 @@ export default ObserveScreenResize.extend({
       this.applySmallScreenSettings();
     } else {
       Ember.$(".left-off-canvas-toggle").hide();
-      this.showSideBar();
+      if (this.get("application.showOffCanvas")) {
+        this.showSideBar();
+      }
       this.applyDesktopScreenSettings();
     }
     this.get("cartscroll").resize();
