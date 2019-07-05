@@ -8,7 +8,6 @@ export default {
   by: "By",
   ok: "OK",
   go_to_top: "Go to top",
-  must_login: "You must log in!",
   okay: "Okay",
   unexpected_error: "Something went wrong",
   QuotaExceededError:
@@ -199,7 +198,15 @@ export default {
       "We don't share your data. We only use it to complete your request(s). See our ",
     policy: "Privacy Policy.",
     mobile_email_warning:
-      "Please provide email or a valid Hong Kong mobile number"
+      "Please provide a valid email or a valid Hong Kong mobile number"
+  },
+
+  search_goods: {
+    contact_us: "Can't find required goods? Please contact us for assistance.",
+    placeholder: "Search Goods",
+    title: "Search Results",
+    done: "Done",
+    search_info: "You can search for goods. E.g.'table' or 'stroller'"
   },
 
   account: {
