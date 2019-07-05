@@ -223,6 +223,7 @@
 
   &.item-remove-icon{
     margin-top: 1.5rem;
+    cursor: pointer;
 
     .remove-icon {
       @media #{$small-only} {

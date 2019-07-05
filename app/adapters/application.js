@@ -16,17 +16,5 @@ export default ActiveModelAdapter.extend({
       "X-GOODCITY-APP-SHA": config.APP.SHA,
       "X-GOODCITY-DEVICE-ID": this.get("session.deviceId")
     };
-  }),
-
-  buildURL: function(modelName, id, snapshot, requestType) {
-    if (modelName === "package" && requestType === "findAll") {
-      return (
-        config.APP.API_HOST_URL +
-        "/" +
-        config.APP.NAMESPACE +
-        "/browse/fetch_packages"
-      );
-    }
-    return this._super.apply(this, arguments);
-  }
+  })
 });

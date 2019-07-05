@@ -33,10 +33,9 @@ export default Ember.Controller.extend({
     return /Android/i.test(navigator.userAgent) && !this.get("isMobileApp");
   }),
 
-  // commented temporarily to hide search icon from live app until search feature is available
-  // showSearchIcon: Ember.computed("currentPath", function() {
-  //   return ["browse", "package_category"].indexOf(this.get("currentPath")) >= 0;
-  // }),
+  showSearchIcon: Ember.computed("currentPath", function() {
+    return ["browse", "package_category"].indexOf(this.get("currentPath")) >= 0;
+  }),
 
   displayCart: false,
   showCartDetailSidebar: false,

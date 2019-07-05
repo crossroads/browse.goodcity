@@ -6,11 +6,14 @@
     label {
       cursor: default;
     }
+    .title{
+      cursor: default;
+    }
   }
 }
 
 .sent_code_to{
-  margin-left: 0.5em;
+  margin-left: 0.3125em;
   font-weight: bold;
 }
 
@@ -39,7 +42,7 @@ input:-webkit-autofill {
   border: 1px solid;
 }
 
-.login {
+.warning_empty.login {
   width: 100% !important;
   margin-left: .28rem !important;
 

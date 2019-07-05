@@ -78,14 +78,15 @@ $sidebar-width: 7.8rem;
       bottom: 0;
       position: absolute;
       padding-bottom: 2rem;
-      font-size: 0.6rem;
       text-align: center;
-      width: 100%;;
+      font-size: 0.6rem;
+      width: 100%;
 
       .line {
         margin-bottom: 0.8rem;
+        padding: 5px;
         display: flex;
-        justify-content: space-evenly;
+        justify-content: center;
 
         a {
           text-decoration: underline;
@@ -93,6 +94,7 @@ $sidebar-width: 7.8rem;
           color: #a3aab6;
           display: inline;
           padding: 0;
+          margin: 0 0.4rem;
 
           &:hover {
             background-color: transparent;
