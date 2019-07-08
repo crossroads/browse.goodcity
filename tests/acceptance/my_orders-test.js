@@ -128,21 +128,20 @@ module("Acceptance | My Orders Page", {
 
     mocks.push(
       $.mockjax({
+        url: "/api/v1/requested_package*",
+        type: "GET",
+        responseText: []
+      }),
+      $.mockjax({
         url: "/api/v1/auth/current_user_profil*",
         responseText: userProfile
-      })
-    );
-
-    mocks.push(
+      }),
       $.mockjax({
         url: `/api/v1/orders/${order.get("id")}`,
         responseText: {
           order: order.toJSON({ includeId: true })
         }
-      })
-    );
-
-    mocks.push(
+      }),
       $.mockjax({
         url: /\/api\/v1\/images\/\d/,
         responseText: {

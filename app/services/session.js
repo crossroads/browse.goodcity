@@ -1,7 +1,8 @@
 import Ember from "ember";
+import ApiService from "./api-base-service";
 import "../computed/local-storage";
 
-export default Ember.Service.extend({
+export default ApiService.extend({
   authToken: Ember.computed.localStorage(),
   otpAuthKey: Ember.computed.localStorage(),
   isLoggedIn: Ember.computed.notEmpty("authToken"),
@@ -11,35 +12,45 @@ export default Ember.Service.extend({
     .toString()
     .substring(2),
 
+  loadUserProfile() {
+    return this.GET("/auth/current_user_profile").then(data => {
+      this.get("store").pushPayload(data);
+      this.get("store").pushPayload({ user: data.user_profile });
+      this.notifyPropertyChange("currentUser");
+      return data;
+    });
+  },
+
+  accountDetailsComplete() {
+    const user = this.get("currentUser");
+    if (!user) {
+      return false;
+    }
+
+    const organisationsUser = user.get("organisationsUsers.firstObject");
+    const organisation =
+      organisationsUser && organisationsUser.get("organisation");
+    const hasInfoAndCharityRole =
+      user.get("isInfoComplete") && user.hasRole("Charity");
+    const hasCompleteOrganisationUserInfo =
+      organisationsUser && organisationsUser.get("isInfoComplete");
+
+    return (
+      hasInfoAndCharityRole && organisation && hasCompleteOrganisationUserInfo
+    );
+  },
+
   currentUser: Ember.computed(function() {
     var store = this.get("store");
-    return store.peekAll("user").get("firstObject") || null;
+    return (
+      this.get("store")
+        .peekAll("user")
+        .get("firstObject") || null
+    );
   }).volatile(),
 
   clear() {
     this.set("authToken", null);
     this.set("otpAuthKey", null);
-  },
-
-  draftAppointment: Ember.computed(function() {
-    return this.get("allDrafts")
-      .filterBy("isAppointment", true)
-      .get("firstObject");
-  }).volatile(),
-
-  draftOrder: Ember.computed(function() {
-    return this.get("allDrafts")
-      .filterBy("isAppointment", false)
-      .get("firstObject");
-  }).volatile(),
-
-  allDrafts: Ember.computed(function() {
-    return this.get("allOrders").filterBy("state", "draft");
-  }).volatile(),
-
-  allOrders: Ember.computed(function() {
-    return this.get("store")
-      .peekAll("order")
-      .sortBy("id");
-  }).volatile()
+  }
 });

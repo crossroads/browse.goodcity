@@ -1,52 +1,52 @@
 import Ember from "ember";
-import config from '../../config/environment';
-import AjaxPromise from 'browse/utils/ajax-promise';
-const { getOwner } = Ember;
-import cancelOrder from '../../mixins/cancel_order';
+import _ from "lodash";
+import cancelOrderMixin from "../../mixins/cancel_order";
+import asyncTasksMixin from "../../mixins/async_tasks";
 
-export default Ember.Controller.extend(cancelOrder, {
+export default Ember.Controller.extend(cancelOrderMixin, asyncTasksMixin, {
   showCancelBookingPopUp: false,
-  isMobileApp: config.cordova.enabled,
   messageBox: Ember.inject.service(),
-  order: Ember.computed.alias("model"),
+  orderService: Ember.inject.service(),
   cart: Ember.inject.service(),
+  order: Ember.computed.alias("model"),
 
-  isEmptyOrUnavailableOrder(order) {
-    if(order) {
-      let cartItems = this.get("cart.content");
-      if(cartItems.length === 0 || (cartItems.length && cartItems.filterBy('available', 0).length > 0) || order.get("ordersPackages.length") === 0) {
-        return true;
-      }
-      return false;
-    }
-    return true;
+  submitOrder(order) {
+    return this.runTask(
+      order.get("isOnlineOrder")
+        ? this.get("cart").checkoutOrder(order)
+        : this.get("orderService").submitOrder(order)
+    );
   },
 
-	actions: {
-		confirmBooking(){
-      let order = this.get('order');
+  badCart() {
+    let order = this.get("order");
+    return order.get("isOnlineOrder") && !this.get("cart.canCheckout");
+  },
 
-      if(order.get('isOnlineOrder') && this.isEmptyOrUnavailableOrder(order)) {
-        this.get("messageBox").alert(this.get('i18n').t('items_not_available'), () => {
-          this.transitionToRoute("cart");
-        });
-        return false;
+  emptyCart() {
+    let order = this.get("order");
+    return order.get("isOnlineOrder") && this.get("cart.isEmpty");
+  },
+
+  actions: {
+    browseMore() {
+      this.transitionToRoute("browse");
+    },
+
+    confirmBooking() {
+      let order = this.get("order");
+
+      if (this.emptyCart()) {
+        return this.i18nAlert("cart_content.empty_cart", _.noop);
       }
 
-			let loadingView = getOwner(this).lookup('component:loading').append();
-      let orderParams = {
-        state_event: "submit"
-      };
+      if (this.badCart()) {
+        return this.i18nAlert("items_not_available", _.noop);
+      }
 
-      new AjaxPromise(`/orders/${order.get('id')}`, "PUT", this.get('session.authToken'), { order: orderParams })
-        .then(data => {
-          this.get("store").pushPayload(data);
-          loadingView.destroy();
-          if (order.get('isOnlineOrder')) {
-            this.get('cart').clearItems();
-          }
-          this.transitionToRoute('order.booking_success', this.get("order.id"));
-        });
-		}
-	}
+      this.submitOrder(order).then(() => {
+        this.transitionToRoute("order.booking_success", this.get("order.id"));
+      });
+    }
+  }
 });

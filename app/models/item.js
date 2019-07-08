@@ -105,18 +105,5 @@ export default Model.extend(cloudinaryImage, {
     function() {
       return this.get("packages").filter(pkg => pkg.get("stockitSentOn"));
     }
-  ),
-
-  toCartItem() {
-    let CartItem = getOwner(this)._lookupFactory("model:cart-item");
-
-    return CartItem.create({
-      id: Ember.get(this, "id"),
-      modelType: "item",
-      name: Ember.get(this, "packageType.name"),
-      imageUrl: Ember.get(this, "favouriteImage.cartImageUrl"),
-      thumbImageUrl: Ember.get(this, "favouriteImage.thumbImageUrl"),
-      available: Ember.get(this, "isAvailable")
-    });
-  }
+  )
 });

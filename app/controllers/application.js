@@ -2,15 +2,17 @@ import Ember from "ember";
 import { containsAny } from "../utils/helpers";
 import config from "../config/environment";
 import AjaxPromise from "browse/utils/ajax-promise";
+import cancelOrderMixin from "../mixins/cancel_order";
+import _ from "lodash";
 const { getOwner } = Ember;
 
-export default Ember.Controller.extend({
+export default Ember.Controller.extend(cancelOrderMixin, {
   isMobileApp: config.cordova.enabled,
   appVersion: config.APP.VERSION,
   subscription: Ember.inject.service(),
   screenresize: Ember.inject.service(),
   messageBox: Ember.inject.service(),
-  loggedInUser: false,
+  cart: Ember.inject.service(),
   i18n: Ember.inject.service(),
   showSidebar: true,
   isWideScreen: Ember.computed.alias("screenresize.isWideScreen"),
@@ -42,13 +44,10 @@ export default Ember.Controller.extend({
   cartscroll: Ember.inject.service(),
 
   hasCartItems: Ember.computed.alias("cart.isNotEmpty"),
-  cartLength: Ember.computed.alias("cart.counter"),
+  cartLength: Ember.computed.alias("cart.groupedPackages.length"),
 
-  draftOrder: Ember.computed.alias("session.draftOrder"),
-
-  isUserLoggedIn: Ember.computed("loggedInUser", function() {
-    this.toggleProperty("loggedInUser");
-    return !!this.session.get("authToken");
+  isUserLoggedIn: Ember.computed("session.authToken", function() {
+    return !!this.get("session.authToken");
   }),
 
   showOffCanvas: Ember.computed("showSidebar", "currentPath", function() {
@@ -118,46 +117,22 @@ export default Ember.Controller.extend({
     UNLOAD_MODELS.forEach(model => this.store.unloadAll(model));
   },
 
-  accountDetailsComplete() {
-    const user = this.get("session.currentUser");
-    if (!user) {
-      return false;
-    }
-
-    const organisationsUser = user.get("organisationsUsers.firstObject");
-    const organisation =
-      organisationsUser && organisationsUser.get("organisation");
-    const hasInfoAndCharityRole =
-      user.get("isInfoComplete") && user.hasRole("Charity");
-    const hasCompleteOrganisationUserInfo =
-      organisationsUser && organisationsUser.get("isInfoComplete");
-
-    return (
-      hasInfoAndCharityRole && organisation && hasCompleteOrganisationUserInfo
-    );
-  },
-
   submitCart() {
     this.set("showCartDetailSidebar", false);
-    var cartHasItems = this.get("cart.cartItems").length;
-    if (cartHasItems > 0) {
-      this.get("cart").set("checkout", true);
-      this.transitionToRoute("request_purpose", {
-        queryParams: {
-          onlineOrder: true,
-          bookAppointment: false,
-          orderId: null
-        }
-      });
-    } else {
-      this.get("messageBox").alert(
-        this.get("i18n").t("cart_content.unavailable_and_add_item_to_proceed"),
-        () => {
-          this.get("cart").clearItems();
-          this.set("displayCart", false);
-        }
+    if (!this.get("cart.canCheckout")) {
+      return this.get("messageBox").alert(
+        this.get("i18n").t("items_not_available"),
+        _.noop
       );
     }
+
+    this.transitionToRoute("request_purpose", {
+      queryParams: {
+        onlineOrder: true,
+        bookAppointment: false,
+        orderId: null
+      }
+    });
   },
 
   actions: {
@@ -165,47 +140,10 @@ export default Ember.Controller.extend({
       $(".left-off-canvas-menu").removeClass("move-bottom");
     },
 
-    cancelOrderPopUp(orderId) {
-      this.get("messageBox").custom(
-        this.get("i18n").t("order.order_delete_confirmation"),
-        this.get("i18n").t("order.cancel_order"),
-        () => {
-          this.send("cancelOrder", orderId);
-        },
-        this.get("i18n").t("not_now")
-      );
-    },
-
-    cancelOrder(orderId) {
-      var _this = this;
-      var order = _this.store.peekRecord("order", parseInt(orderId));
-      this.startLoading();
-      new AjaxPromise(
-        "/orders/" + orderId,
-        "DELETE",
-        _this.get("session.authToken")
-      )
-        .then(data => {
-          _this.get("cart").clearItems();
-          if (order) {
-            _this.store.unloadRecord(order);
-          }
-          _this.store.pushPayload(data);
-          _this.transitionToRoute("index", {
-            queryParams: {
-              orderCancelled: true
-            }
-          });
-        })
-        .finally(() => this.stopLoading());
-    },
-
     logMeOut() {
       this.get("subscription").unwire();
       this.session.clear(); // this should be first since it updates isLoggedIn status
       this.unloadModels();
-      this.toggleProperty("loggedInUser");
-      this.get("cart").clearItems();
       this.transitionToRoute("browse");
     },
 
@@ -221,48 +159,9 @@ export default Ember.Controller.extend({
       );
     },
 
-    showCartItem(itemId, type) {
-      var item = this.get("store").peekRecord(type, itemId);
-      if (item) {
-        this.transitionToRoute(type, itemId, {
-          queryParams: {
-            categoryId: item.get("allPackageCategories.firstObject.id")
-          }
-        });
-      }
-    },
-
-    removeItem(itemId, type) {
-      var item = this.get("store").peekRecord(type, itemId) || itemId;
-      var ordersPackages = this.store
-        .peekAll("orders_package")
-        .filterBy("packageId", itemId);
-      if (this.get("draftOrder") && ordersPackages.length) {
-        let orderPackageId = ordersPackages.get("firstObject.id");
-        this.startLoading();
-        new AjaxPromise(
-          `/orders_packages/${orderPackageId}`,
-          "DELETE",
-          this.get("session.authToken")
-        )
-          .then(() => {
-            this.get("cart").removeItem(item);
-            var ordersPackage = this.store.peekRecord(
-              "orders_package",
-              orderPackageId
-            );
-            if (ordersPackage) {
-              this.store.unloadRecord(ordersPackage);
-            }
-          })
-          .finally(() => this.stopLoading());
-      } else {
-        this.get("cart").removeItem(item);
-      }
-    },
-
     checkout() {
-      if (!this.accountDetailsComplete() && this.get("hasCartItems")) {
+      const accountComplete = this.get("session").accountDetailsComplete();
+      if (!accountComplete && this.get("hasCartItems")) {
         this.set("showCartDetailSidebar", false);
         this.transitionToRoute("account_details", {
           queryParams: {
@@ -275,22 +174,13 @@ export default Ember.Controller.extend({
       }
     },
 
-    updateCartItemParams(pkgId) {
-      let pkg = this.store.peekRecord("package", pkgId);
-      let item;
-      if (!pkg) {
-        item = this.store.peekRecord("item", pkgId);
-        pkg = item ? item.get("packages.firstObject") : null;
-      }
-
-      if ((item && !item.isAvailable) || !pkg.isAvailable) {
-        return false;
-      }
-
-      let categoryId = pkg.get("allPackageCategories.firstObject.id");
+    showItemDetails(record) {
+      let isItem = record.get("isItem");
+      let categoryId = record.get("allPackageCategories.firstObject.id");
       let sortBy = "createdAt:desc";
-      const route = item ? "item" : "package";
-      const routeId = item ? item.id : pkgId;
+
+      const route = isItem ? "item" : "package";
+      const routeId = record.get("id");
       this.transitionToRoute(route, routeId, {
         queryParams: {
           categoryId: categoryId,
@@ -300,6 +190,7 @@ export default Ember.Controller.extend({
       this.set("displayCart", false);
       this.set("showCartDetailSidebar", false);
     },
+
     openCart() {
       this.transitionToRoute("cart");
     }
