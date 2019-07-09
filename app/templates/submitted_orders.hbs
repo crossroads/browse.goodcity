@@ -1,0 +1,60 @@
+<div class="row">
+  <div class="large-8 columns large-offset-2 medium-12 small-12">
+    <div class="row checkout_pages">
+      <div class="small-12 medium-12 large-12 columns">
+        <div class="row">
+          <section class="main-section new-user-section ui login_page">
+            <nav class="tab-bar">
+              <section class="left-large">
+                {{#link-to "home" classNames="back"}}{{fa-icon "angle-left"}} {{t "back"}}{{/link-to}}
+              </section>
+              <section class="middle tab-bar-section">
+                <h1 class="title">Submit Order</h1>
+              </section>
+            </nav>
+
+            {{#unless cart.isEmpty}}
+            {{small-cart-toggle-view}}
+            {{/unless}}
+          </section>
+        </div>
+
+        <section class="main-section client-information large-10 large-offset-1 small-12 medium-12 columns">
+          <div class="submit-title">Please select from the Following Options</div>
+          <div class="row time_inputs purpose order-selection" >
+            <div class="custom_radio_buttons small-12 columns order-select">
+              <label class="radio-button-text new-order-label align-text">
+                Create New Orders from these Items
+              </label>
+              {{radio-button
+              name="selectReason"
+              id= order.id
+              value="new_order"
+              selection=orderId
+              required='true'}}
+            </div>
+            {{#each model as |order|}}
+              <div class="custom_radio_buttons small-12 columns end" style="min-height: 5rem;">
+                {{radio-button
+                name="selectReason"
+                id= order.id
+                value= order.id
+                selection=orderId
+                required='true'}}
+                <label class="radio-button-text for-organisation align-text order-label">
+                  <div>Add these items to <b>{{order.code}}</b></div>
+                  <div>State: {{order.state}}</div>
+                  {{!-- <div>Due Date: {{order.createdAt}}</div> --}}
+                  <div>Client Name: {{session.currentUser.fullName}}</div>
+                </label>
+              </div>
+            {{/each}}
+          </div>
+            <div class="small-12 medium-12 columns">
+              <button class="button expand expand_button" {{action 'mergePackage'}}>{{t "continue"}}</button>
+            </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>

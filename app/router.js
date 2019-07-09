@@ -23,6 +23,7 @@ Router.map(function() {
 
   this.route("login");
   this.route("account_details");
+  this.route("submitted_orders");
   this.route("post_login");
   this.route("authenticate");
   this.route("search_organisation");

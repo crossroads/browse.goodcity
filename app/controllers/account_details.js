@@ -85,11 +85,7 @@ export default Ember.Controller.extend({
         }
       });
     } else if (onlineOrder) {
-      this.transitionToRoute("request_purpose", {
-        queryParams: {
-          bookAppointment: false
-        }
-      });
+      this.transitionToRoute("submitted_orders");
     } else if (attemptedTransition) {
       this.set("attemptedTransition", null);
       attemptedTransition.retry();
