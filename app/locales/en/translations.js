@@ -206,7 +206,8 @@ export default {
     placeholder: "Search Goods",
     title: "Search Results",
     done: "Done",
-    search_info: "You can search for goods. E.g.'table' or 'stroller'"
+    search_info: "You can search for goods. E.g.'table' or 'stroller'",
+    back: "< Back to search"
   },
 
   account: {
