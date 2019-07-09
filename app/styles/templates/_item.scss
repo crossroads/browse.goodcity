@@ -79,15 +79,17 @@
   }
   .item_categories{
     margin-bottom: 1rem;
-    a{
+    .category_link {
+      display: inline-block;
+      cursor: pointer;
       @media #{$small-only} {
         color: #dfefec;
       }
     }
-    a span{
+    .underline_text {
       border-bottom: 1px solid #a3aab6;
     }
-    a:not(:last-of-type):after{
+    .category_link:not(:last-of-type):after {
       content: ", "
     }
   }

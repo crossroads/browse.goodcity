@@ -9,7 +9,7 @@
   </div>
   {{!-- level 2 of breadcrumb--}}
   {{select-list
-    class= (if isCategorySelected "underline-link current category_select" " category_select")
+    class= (if isCategorySelected "current category_select" " category_select")
     idNames="category_select"
     content=selectCategories
     on-change=(action (mut selectedCategoryId))
