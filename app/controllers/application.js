@@ -4,6 +4,7 @@ import config from "../config/environment";
 import AjaxPromise from "browse/utils/ajax-promise";
 import cancelOrderMixin from "../mixins/cancel_order";
 import _ from "lodash";
+import { task } from "ember-concurrency";
 const { getOwner } = Ember;
 
 export default Ember.Controller.extend(cancelOrderMixin, {
@@ -12,6 +13,7 @@ export default Ember.Controller.extend(cancelOrderMixin, {
   subscription: Ember.inject.service(),
   screenresize: Ember.inject.service(),
   messageBox: Ember.inject.service(),
+  orderService: Ember.inject.service(),
   cart: Ember.inject.service(),
   i18n: Ember.inject.service(),
   showSidebar: true,
@@ -117,7 +119,7 @@ export default Ember.Controller.extend(cancelOrderMixin, {
     UNLOAD_MODELS.forEach(model => this.store.unloadAll(model));
   },
 
-  submitCart() {
+  submitCart: task(function*() {
     this.set("showCartDetailSidebar", false);
     if (!this.get("cart.canCheckout")) {
       return this.get("messageBox").alert(
@@ -125,15 +127,31 @@ export default Ember.Controller.extend(cancelOrderMixin, {
         _.noop
       );
     }
-
-    this.transitionToRoute("request_purpose", {
-      queryParams: {
-        onlineOrder: true,
-        bookAppointment: false,
-        orderId: null
-      }
-    });
-  },
+    const onlineOrders = yield this.get(
+      "orderService"
+    ).getAllOnlineOrOfflineOrder({ appointment: false });
+    const draftOrders = onlineOrders.filterBy("state", "draft");
+    const onlineOrdersStates = onlineOrders.getEach("state");
+    const hasCompletedOrder =
+      onlineOrdersStates.includes("processing") ||
+      onlineOrdersStates.includes("submitted");
+    const hasMultipleDraftOrder =
+      onlineOrdersStates.includes("draft").length > 1;
+    if (hasCompletedOrder || hasMultipleDraftOrder) {
+      this.transitionToRoute("submitted_orders");
+    } else {
+      const orderId = draftOrders.length
+        ? draftOrders.get("firstObject.id")
+        : null;
+      this.transitionToRoute("request_purpose", {
+        queryParams: {
+          onlineOrder: true,
+          bookAppointment: false,
+          orderId: orderId
+        }
+      });
+    }
+  }),
 
   actions: {
     moveSidebarUp() {
@@ -170,7 +188,7 @@ export default Ember.Controller.extend(cancelOrderMixin, {
           }
         });
       } else {
-        this.submitCart();
+        this.get("submitCart").perform();
       }
     },
 

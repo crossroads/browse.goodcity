@@ -125,5 +125,13 @@ export default ApiService.extend({
         .sortBy("createdAt:desc")
         .get("firstObject");
     });
+  },
+
+  getAllOnlineOrOfflineOrder({ appointment }) {
+    return this.loadAll({ shallow: true }).then(orders => {
+      return orders
+        .filterBy("isAppointment", appointment)
+        .sortBy("createdAt:desc");
+    });
   }
 });
