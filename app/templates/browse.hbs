@@ -33,7 +33,7 @@
             </div>
             <ul class="list subcategories hide-for-small">
               {{#each category.childCategories as |childCategory|}}
-                <div class="custom_a" {{action "viewChildCategoryItems" childCategory}}>
+                <div class="custom_a" {{action "setChildCategory" childCategory}}>
                   <li>{{childCategory.name}} ({{childCategory.items.length}})</li>
                 </div>
               {{/each}}

@@ -128,10 +128,12 @@ export default Ember.Controller.extend({
       );
     },
 
-    viewChildCategory(category) {
-      let parentId = category.get("parentId");
-      let id = parentId ? parentId : category.id;
-      this.transitionToRoute("package_category", id);
+    setChildCategory(category) {
+      const parentId = category.get("parentId");
+      this.transitionToRoute(
+        "package_category",
+        parentId ? parentId : category.id
+      );
       if (parentId) {
         this.get("packageCategory").set("selectedCategoryId", category);
       }

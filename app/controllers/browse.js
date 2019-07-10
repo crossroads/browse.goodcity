@@ -53,7 +53,7 @@ export default Ember.Controller.extend({
     }
   ),
   actions: {
-    viewChildCategoryItems(childCategory) {
+    setChildCategory(childCategory) {
       let parentId = childCategory.get("parentId");
       this.transitionToRoute("package_category", parentId);
       this.get("packageCategory").set("selectedCategoryId", childCategory);

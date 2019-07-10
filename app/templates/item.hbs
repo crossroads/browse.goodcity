@@ -101,7 +101,7 @@
 
           <div class="item_details item_categories">
             {{#each item.allPackageCategories key="@index" as |category|}}
-              <div class="category_link" {{action "viewChildCategory" category}}>
+              <div class="category_link" {{action "setChildCategory" category}}>
                 <span class="underline_text">{{category.name}}</span>
               </div>
             {{/each}}

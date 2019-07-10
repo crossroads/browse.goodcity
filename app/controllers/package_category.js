@@ -33,18 +33,14 @@ export default Ember.Controller.extend({
     ];
   }),
 
-  isCategorySelected: Ember.computed("selectedCategoryId", function() {
-    return !!this.get("selectedCategoryId.id");
-  }),
+  isCategorySelected: Ember.computed.bool("selectedCategoryId.id"),
 
   categoryObj: Ember.computed("selectedCategoryId", "model", function() {
     this.set("page", 1);
     var selectedCategoryId = this.get("selectedCategoryId.id");
-    if (selectedCategoryId) {
-      return this.store.peekRecord("package_category", selectedCategoryId);
-    } else {
-      return this.get("model");
-    }
+    return selectedCategoryId
+      ? this.store.peekRecord("package_category", selectedCategoryId)
+      : this.get("model");
   }),
 
   selectCategories: Ember.computed("model", function() {
