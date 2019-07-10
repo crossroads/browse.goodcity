@@ -43,9 +43,6 @@ export default Ember.Controller.extend({
     if (selectedCategoryId) {
       return this.store.peekRecord("package_category", selectedCategoryId);
     } else {
-      if (Ember.$("#category_select").length) {
-        Ember.$("#category_select")[0].value = "";
-      }
       return this.get("model");
     }
   }),
