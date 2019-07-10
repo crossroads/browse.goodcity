@@ -11,6 +11,7 @@
   {{select-list
     class= (if isCategorySelected "current category_select" " category_select")
     idNames="category_select"
+    selectedValue=selectedCategoryId
     content=selectCategories
     on-change=(action (mut selectedCategoryId))
     prompt=(t 'browse.filter_results')
