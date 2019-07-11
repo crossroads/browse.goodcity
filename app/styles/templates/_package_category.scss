@@ -1,6 +1,9 @@
 .current{
-  #category_select{
+  select#category_select{
     color: #fff;
+    option{
+      color: black;
+    }
   }
 }
 .category_page{
