@@ -5,6 +5,7 @@ export default Ember.Controller.extend({
   messageBox: Ember.inject.service(),
   application: Ember.inject.controller(),
   queryParams: ["categoryId", "sortBy"],
+  prevPath: null,
   categoryId: null,
   cart: Ember.inject.service(),
   sortBy: "createdAt",
@@ -39,6 +40,14 @@ export default Ember.Controller.extend({
 
   categoryObj: Ember.computed("categoryId", function() {
     return this.store.peekRecord("package_category", this.get("categoryId"));
+  }),
+
+  linkDisplayName: Ember.computed("prevPath", function() {
+    let prevPath = this.get("prevPath");
+    if (prevPath === "search_goods") {
+      return this.get("i18n").t("search_goods.back");
+    }
+    return this.get("categoryObj.name");
   }),
 
   selectedSort: Ember.computed("sortBy", function() {

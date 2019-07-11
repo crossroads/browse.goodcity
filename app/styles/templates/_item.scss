@@ -41,7 +41,6 @@
     }
     img {
       display: block;
-      padding-bottom: 1rem;
       @media #{$small-only}{
         padding-bottom: 0;
       }

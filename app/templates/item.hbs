@@ -6,7 +6,7 @@
     <div class="row">
       <div class="large-8 medium-8 small-12 columns hide-for-small package_catogory_header">
         <div class="package_back_button">
-          <span class="package_category_link" {{action 'back'}}>{{categoryObj.name}}</span>
+          <span class="package_category_link" {{action 'back'}}>{{linkDisplayName}}</span>
           <span class="package-type">\ {{item.packageType.name}}</span>
         </div>
       </div>
@@ -101,7 +101,11 @@
 
           <div class="item_details item_categories">
             {{#each item.allPackageCategories key="@index" as |category|}}
-              {{#link-to 'package_category' category class="category_link"}}<span class="underline_text">{{category.name}}</span>{{/link-to}}
+              {{#link-to 'package_category' (if category.parentCategory category.parentCategory category) class="category_link"}}
+                <span class="underline_text">
+                  {{category.name}}
+                </span>
+              {{/link-to}}
             {{/each}}
           </div>
         </div>
