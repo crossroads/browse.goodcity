@@ -1,6 +1,6 @@
 .current{
   #category_select{
-    color: #fff !important;
+    color: #fff;
   }
 }
 .category_page{
@@ -105,6 +105,7 @@
 
 .package-category{
   select {
+    color: #fff;
     @media #{$small-only} {
       max-width: 7rem;
     }
