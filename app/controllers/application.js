@@ -127,22 +127,19 @@ export default Ember.Controller.extend(cancelOrderMixin, {
         _.noop
       );
     }
-    const onlineOrders = yield this.get(
+    const hasCompletedOrMultipleDraftOrder = yield this.get(
       "orderService"
-    ).getAllOnlineOrOfflineOrder({ appointment: false });
-    const draftOrders = onlineOrders.filterBy("state", "draft");
-    const onlineOrdersStates = onlineOrders.getEach("state");
-    const hasCompletedOrder =
-      onlineOrdersStates.includes("processing") ||
-      onlineOrdersStates.includes("submitted");
-    const hasMultipleDraftOrder =
-      onlineOrdersStates.includes("draft").length > 1;
-    if (hasCompletedOrder || hasMultipleDraftOrder) {
+    ).hasCompletedOrMultipleDraftOrder();
+    if (hasCompletedOrMultipleDraftOrder) {
       this.transitionToRoute("submitted_orders");
     } else {
-      const orderId = draftOrders.length
-        ? draftOrders.get("firstObject.id")
-        : null;
+      let lastDraftOrder = yield this.get("orderService").getLastDraft({
+        appointment: false
+      });
+      const orderId =
+        lastDraftOrder && lastDraftOrder.length
+          ? lastDraftOrder.get("id")
+          : null;
       this.transitionToRoute("request_purpose", {
         queryParams: {
           onlineOrder: true,

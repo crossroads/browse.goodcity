@@ -2,6 +2,7 @@ import Ember from "ember";
 import AjaxPromise from "browse/utils/ajax-promise";
 const { getOwner } = Ember;
 import config from "../config/environment";
+import { task } from "ember-concurrency";
 
 export default Ember.Controller.extend({
   showCancelBookingPopUp: false,
@@ -9,6 +10,7 @@ export default Ember.Controller.extend({
 
   authenticate: Ember.inject.controller(),
   messageBox: Ember.inject.service(),
+  orderService: Ember.inject.service(),
   i18n: Ember.inject.service(),
   organisationId: Ember.computed.alias("model.organisation.id"),
   organisationsUserId: Ember.computed.alias("model.organisationsUser.id"),
@@ -72,7 +74,7 @@ export default Ember.Controller.extend({
     ];
   }),
 
-  redirectToTransitionOrBrowse(bookAppointment) {
+  redirectToTransitionOrBrowse: task(function*(bookAppointment) {
     let onlineOrder = this.get("onlineOrder");
     var attemptedTransition = this.get("authenticate").get(
       "attemptedTransition"
@@ -85,14 +87,34 @@ export default Ember.Controller.extend({
         }
       });
     } else if (onlineOrder) {
-      this.transitionToRoute("submitted_orders");
+      const hasCompletedOrMultipleDraftOrder = yield this.get(
+        "orderService"
+      ).hasCompletedOrMultipleDraftOrder();
+      if (hasCompletedOrMultipleDraftOrder) {
+        this.transitionToRoute("submitted_orders");
+      } else {
+        let lastDraftOrder = yield this.get("orderService").getLastDraft({
+          appointment: false
+        });
+        const orderId =
+          lastDraftOrder && lastDraftOrder.length
+            ? lastDraftOrder.get("id")
+            : null;
+        this.transitionToRoute("request_purpose", {
+          queryParams: {
+            onlineOrder: true,
+            bookAppointment: false,
+            orderId: orderId
+          }
+        });
+      }
     } else if (attemptedTransition) {
       this.set("attemptedTransition", null);
       attemptedTransition.retry();
     } else {
       this.transitionToRoute("browse");
     }
-  },
+  }),
 
   organisationsUserParams() {
     var organisationsUserId = this.get("organisationsUserId");
@@ -170,7 +192,7 @@ export default Ember.Controller.extend({
               this.store.findRecord("user_role", id);
             });
           }
-          this.redirectToTransitionOrBrowse(bookAppointment);
+          this.get("redirectToTransitionOrBrowse").perform(bookAppointment);
         })
         .catch(xhr => {
           this.get("messageBox").alert(xhr.responseJSON.errors);

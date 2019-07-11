@@ -25,7 +25,7 @@ export default Ember.Mixin.create({
   },
 
   cancelOrder(order) {
-    const div = Ember.$(`#cancel-appointment-reason${order.id}`);
+    const div = Ember.$(`.cancel-appointment-reason${order.id}`);
     const cancellationReason = div.val().trim();
 
     this.set("cancellationReasonWarning", !cancellationReason);

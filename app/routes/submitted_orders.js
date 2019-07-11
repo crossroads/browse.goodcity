@@ -5,7 +5,11 @@ export default AuthorizeRoute.extend({
   orderService: Ember.inject.service(),
 
   model() {
-    return this.get("orderService").loadAll({ shallow: true });
+    return this.get("orderService")
+      .loadAll({ shallow: true })
+      .then(orders => {
+        return orders.filter(this.isPackageSubmittableOrder);
+      });
   },
 
   setupController(controller, model) {
@@ -15,5 +19,10 @@ export default AuthorizeRoute.extend({
 
   deactivate() {
     this.controllerFor("application").set("showSidebar", true);
+  },
+
+  isPackageSubmittableOrder(order) {
+    const orderState = order.get("state");
+    return ["draft", "submitted", "processing"].includes(orderState);
   }
 });
