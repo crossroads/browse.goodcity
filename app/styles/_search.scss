@@ -12,6 +12,11 @@
 }
 
 .goods_search {
+  #searchText::-ms-clear{
+    display: none;
+    width: 0;
+    height:0;
+  }
   .infinite-list-container::-webkit-scrollbar {
     width: 0 !important
   }
@@ -26,15 +31,27 @@
     padding: 0 0.3em !important;
   }
   .back_button {
-    margin-top: 2% !important;
-  }
-  .back_icon{
-    display: flex;
+    @media #{$large-only} {
+      margin-top: 1.5% !important;
+    }
+    @media #{$medium-only} {
+      margin-top: 1.5% !important;
+    }
+    @media #{$xlarge-only} {
+      margin-top: 1% !important;
+    }
+    @media #{$xxlarge-only} {
+      margin-top: 1% !important;
+    }
+    .back_icon{
+      display: flex;
+    }
   }
   .search_info{
     margin-left: 5%;
     color: black;
     font-size: 0.8rem;
+    cursor: default;
     @media #{$small-only} {
       font-size: 0.6rem;
     }
@@ -94,7 +111,7 @@
     cursor: pointer;
 
     @media #{$small-only} {
-      font-size: 1.2rem;
+      font-size: 1rem;
       padding: 0.5rem 0.3rem 0.5rem;
       top: 0.41rem;
     }
@@ -113,6 +130,8 @@
     margin-left: 15%;
     @media #{$small-only} {
       margin-top: 20%;
+      margin-left: unset;
+      font-size: 0.7em;
     }
   }
 

@@ -10,6 +10,8 @@ var App,
   gogo_van,
   user,
   user_profile,
+  user_roles,
+  roles,
   orderPurpose1,
   orderPurpose2,
   organisation,
@@ -86,6 +88,8 @@ module("Acceptance | Book appointment/order ", {
       mobile: user.get("mobile"),
       user_role_ids: [1]
     };
+    user_roles = [{ id: 1, role_id: 5, user_id: user.id }];
+    roles = [{ id: 5, name: "Supervisor" }];
     benificiary = {
       created_by_id: user.id,
       first_name: "Test",
@@ -140,7 +144,7 @@ module("Acceptance | Book appointment/order ", {
       }),
       $.mockjax({
         url: "/api/v1/auth/current_user_profil*",
-        responseText: user_profile
+        responseText: { user_profile, roles, user_roles }
       }),
       $.mockjax({
         url: "/api/v1/available_*",
