@@ -3,6 +3,7 @@ import config from "../config/environment";
 
 export default Ember.Controller.extend({
   isMobileApp: config.cordova.enabled,
+  packageCategory: Ember.inject.controller(),
   showCartDetailSidebar: false,
   packageCategoryReloaded: false,
   flashMessage: Ember.inject.service(),
@@ -50,5 +51,12 @@ export default Ember.Controller.extend({
       });
       return this.get("model").filterBy("parentId", null);
     }
-  )
+  ),
+  actions: {
+    setChildCategory(childCategory) {
+      let parentId = childCategory.get("parentId");
+      this.transitionToRoute("package_category", parentId);
+      this.get("packageCategory").set("selectedCategoryId", childCategory);
+    }
+  }
 });

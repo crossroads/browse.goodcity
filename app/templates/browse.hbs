@@ -33,9 +33,9 @@
             </div>
             <ul class="list subcategories hide-for-small">
               {{#each category.childCategories as |childCategory|}}
-                {{#link-to 'package_category' childCategory.id class="custom_a"}}
+                <div class="custom_a" {{action "setChildCategory" childCategory}}>
                   <li>{{childCategory.name}} ({{childCategory.items.length}})</li>
-                {{/link-to}}
+                </div>
               {{/each}}
             </ul>
           </li>

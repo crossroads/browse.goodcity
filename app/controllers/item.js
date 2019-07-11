@@ -4,6 +4,7 @@ import config from "../config/environment";
 export default Ember.Controller.extend({
   messageBox: Ember.inject.service(),
   application: Ember.inject.controller(),
+  packageCategory: Ember.inject.controller(),
   queryParams: ["categoryId", "sortBy"],
   prevPath: null,
   categoryId: null,
@@ -134,6 +135,17 @@ export default Ember.Controller.extend({
         },
         50
       );
+    },
+
+    setChildCategory(category) {
+      const parentId = category.get("parentId");
+      this.transitionToRoute(
+        "package_category",
+        parentId ? parentId : category.id
+      );
+      if (parentId) {
+        this.get("packageCategory").set("selectedCategoryId", category);
+      }
     },
 
     back() {

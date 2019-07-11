@@ -101,11 +101,9 @@
 
           <div class="item_details item_categories">
             {{#each item.allPackageCategories key="@index" as |category|}}
-              {{#link-to 'package_category' (if category.parentCategory category.parentCategory category) class="category_link"}}
-                <span class="underline_text">
-                  {{category.name}}
-                </span>
-              {{/link-to}}
+              <div class="category_link" {{action "setChildCategory" category}}>
+                <span class="underline_text">{{category.name}}</span>
+              </div>
             {{/each}}
           </div>
         </div>
