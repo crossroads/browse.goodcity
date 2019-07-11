@@ -124,15 +124,13 @@ module("Acceptance | Cart Page", {
     });
 
     var data = {
-      user_profile: [
-        {
-          id: 2,
-          first_name: "David",
-          last_name: "Dara51",
-          mobile: "61111111",
-          user_role_ids: [1]
-        }
-      ],
+      user_profile: {
+        id: 2,
+        first_name: "David",
+        last_name: "Dara51",
+        mobile: "61111111",
+        user_role_ids: [1]
+      },
       users: [
         { id: 2, first_name: "David", last_name: "Dara51", mobile: "61111111" }
       ],
