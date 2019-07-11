@@ -16,7 +16,7 @@ export default ApiService.extend({
     return this.GET("/auth/current_user_profile").then(data => {
       this.get("store").pushPayload(data);
       this.get("store").pushPayload({ user: data.user_profile });
-      this.notifyPropertyChange("currentUser");
+      this.set("currentUserId", data.user_profile.id);
       return data;
     });
   },
@@ -40,16 +40,17 @@ export default ApiService.extend({
     );
   },
 
-  currentUser: Ember.computed(function() {
-    var store = this.get("store");
-    return (
-      this.get("store")
-        .peekAll("user")
-        .get("firstObject") || null
-    );
-  }).volatile(),
+  currentUserId: null,
+
+  currentUser: Ember.computed("currentUserId", function() {
+    if (!this.get("authToken") || !this.get("currentUserId")) {
+      return null;
+    }
+    return this.get("store").peekRecord("user", this.get("currentUserId"));
+  }),
 
   clear() {
+    this.set("currentUserId", null);
     this.set("authToken", null);
     this.set("otpAuthKey", null);
   }

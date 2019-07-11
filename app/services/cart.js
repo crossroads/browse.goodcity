@@ -16,7 +16,10 @@ export default ApiService.extend({
 
   init() {
     this._super(...arguments);
-    this.get("session").addObserver("authToken", this.onUserChange.bind(this));
+    this.get("session").addObserver(
+      "currentUser",
+      this.onUserChange.bind(this)
+    );
     this.onUserChange();
     this.get("preloadService").one("data", () => {
       this.restoreGuestItems();
@@ -75,7 +78,7 @@ export default ApiService.extend({
   // ---- Hooks
 
   onUserChange() {
-    const loggedIn = this.get("session.authToken");
+    const loggedIn = this.get("user");
     if (loggedIn) {
       this.onLogin();
     } else {
