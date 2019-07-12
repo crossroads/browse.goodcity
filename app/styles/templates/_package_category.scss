@@ -6,6 +6,15 @@
     }
   }
 }
+.package-category{
+  select {
+    color: #fff;
+
+    option {
+      color: black;
+    }
+  }
+}
 .category_page{
   .current{
     color: white !important;
