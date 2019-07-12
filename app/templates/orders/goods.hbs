@@ -5,42 +5,55 @@
       {{partial 'orders/order_tabs'}}
       <div class="tab-content">
         <div class="goods-tab">
-        {{#if hasRequestedGoods}}
-        {{!-- REQUESTS --}}
-            <section class="details">
-            <div class="section-title">
-                {{ t "my_orders.details.goods_requested" }}
-            </div>
+	        {{#if hasRequestedGoods}}
+	        	{{!-- REQUESTS --}}
+	          <section class="details">
+	            <div class="section-title">
+	              {{ t "my_orders.details.goods_requested" }}
+	            </div>
 
-            {{#each requestedGoods as |good|}}
-                <div class="detail-row row">
-                <div class="data-type">{{ good.category }}</div>
-                <div class="data">{{ good.text }}</div>
-                </div>
-            {{/each}}
-            </section>
-        {{/if}}
+	            {{#each requestedGoods as |good|}}
+	              <div class="detail-row row">
+		              <div class="data-type">{{ good.category }}</div>
+		              <div class="data">{{ good.text }}</div>
+	              </div>
+	            {{/each}}
+	          </section>
+	        {{/if}}
 
-        {{#if hasOrderedGoods}}
-            {{!-- ORDERS --}}
-            <section class="details">
-            <div class="section-title">
-                {{ t "my_orders.details.goods_ordered" }}
-            </div>
-
-            {{#each orderedGoods as |good|}}
-                <div class="row product-row">
-                <div class="columns small-4 image-container">
-                    <img src={{good.imageUrl}} />
-                </div>
-                <div class="columns small-8 text-container">
-                    <div class="text">{{ good.text }}</div>
-                    <div class="notes">{{ good.notes }}</div>
-                </div>
-                </div>
-            {{/each}}
-            </section>
-        {{/if}}
+	        {{#if hasOrderedGoods}}
+	          {{!-- ORDERS --}}
+	          <section class="details">
+	          	<div class="update-order-block">
+		          	<div class="small-12 columns updated-order-message">
+		             	{{fa-icon "warning"}}&nbsp;&nbsp;The content of this order were successfully updated.
+		            </div>
+			          <div class="section-title">
+		              {{ t "my_orders.details.goods_ordered" }}
+		            </div>
+		            <div class="browse-link">
+		            	{{fa-icon "shopping-basket"}}
+		            	{{#link-to 'home'}}
+		            		Browse items to add to this order
+		            	{{/link-to}}
+		            </div>
+		            <em class="update-note">
+		            	Note: Once the order is confirmed you must contact our team to modify the items requested.
+		            </em>
+							</div>
+	            {{#each orderedGoods as |good|}}
+	              <div class="row product-row">
+	                <div class="columns small-4 image-container">
+	                  <img src={{good.imageUrl}} />
+	                </div>
+	                <div class="columns small-8 text-container">
+	                  <div class="text">{{ good.text }}</div>
+	                  <div class="notes">{{ good.notes }}</div>
+	                </div>
+	              </div>
+	            {{/each}}
+	          </section>
+	        {{/if}}
         </div>
       </div>
     </div>
