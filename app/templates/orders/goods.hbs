@@ -25,15 +25,17 @@
 	          {{!-- ORDERS --}}
 	          <section class="details">
 	          	<div class="update-order-block">
-		          	<div class="small-12 columns updated-order-message">
-		             	{{fa-icon "warning"}}&nbsp;&nbsp;The content of this order were successfully updated.
-		            </div>
+	          		{{#if showUpdateMessage}}
+			          	<div class="small-12 columns updated-order-message fade-out">
+			             	{{fa-icon "warning"}}&nbsp;&nbsp;The content of this order were successfully updated.
+			            </div>
+			          {{/if}}
 			          <div class="section-title">
 		              {{ t "my_orders.details.goods_ordered" }}
 		            </div>
 		            <div class="browse-link">
 		            	{{fa-icon "shopping-basket"}}
-		            	{{#link-to 'home'}}
+		            	{{#link-to 'browse'}}
 		            		Browse items to add to this order
 		            	{{/link-to}}
 		            </div>

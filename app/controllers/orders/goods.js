@@ -4,6 +4,7 @@ import _ from "lodash";
 
 export default detail.extend({
   order: Ember.computed.alias("model.order"),
+  showUpdateMessage: false,
 
   getCategoryForCode: function(code) {
     const categories = this.get("model.packageCategories");

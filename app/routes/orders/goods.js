@@ -1,6 +1,16 @@
 import detail from "./detail";
 
 export default detail.extend({
+  showMessage: false,
+
+  beforeModel(transition) {
+    const previousRoutes = this.router.router.currentHandlerInfos;
+    const previousRoute = previousRoutes && previousRoutes.pop().name;
+    if (previousRoute === "submitted_orders") {
+      this.set("showMessage", true);
+    }
+  },
+
   loadPackagesOf(order) {
     return this.get("store")
       .query("orders_package", {
@@ -23,5 +33,12 @@ export default detail.extend({
       data.packages = this.loadPackagesOf(data.order);
       return Ember.RSVP.hash(data);
     });
+  },
+
+  setupController(controller, model) {
+    this._super(controller, model);
+    if (this.get("showMessage")) {
+      controller.set("showUpdateMessage", true);
+    }
   }
 });
