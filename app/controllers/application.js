@@ -161,17 +161,19 @@ export default Ember.Controller.extend(cancelOrderMixin, {
 
     checkout() {
       const accountComplete = this.get("session").accountDetailsComplete();
-      if (!accountComplete && this.get("hasCartItems")) {
+      const loggedIn = this.get("session.isLoggedIn");
+
+      if (loggedIn && !accountComplete && this.get("hasCartItems")) {
         this.set("showCartDetailSidebar", false);
-        this.transitionToRoute("account_details", {
+        return this.transitionToRoute("account_details", {
           queryParams: {
             onlineOrder: true,
             bookAppointment: false
           }
         });
-      } else {
-        this.submitCart();
       }
+
+      this.submitCart();
     },
 
     showItemDetails(record) {
