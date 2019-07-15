@@ -4,7 +4,6 @@ import config from "../config/environment";
 import AjaxPromise from "browse/utils/ajax-promise";
 import cancelOrderMixin from "../mixins/cancel_order";
 import _ from "lodash";
-import { task } from "ember-concurrency";
 const { getOwner } = Ember;
 
 export default Ember.Controller.extend(cancelOrderMixin, {
@@ -119,7 +118,7 @@ export default Ember.Controller.extend(cancelOrderMixin, {
     UNLOAD_MODELS.forEach(model => this.store.unloadAll(model));
   },
 
-  submitCart: task(function*() {
+  submitCart() {
     this.set("showCartDetailSidebar", false);
     if (!this.get("cart.canCheckout")) {
       return this.get("messageBox").alert(
@@ -127,28 +126,8 @@ export default Ember.Controller.extend(cancelOrderMixin, {
         _.noop
       );
     }
-    const hasCompletedOrMultipleDraftOrder = yield this.get(
-      "orderService"
-    ).hasCompletedOrMultipleDraftOrder();
-    if (hasCompletedOrMultipleDraftOrder) {
-      this.transitionToRoute("submitted_orders");
-    } else {
-      let lastDraftOrder = yield this.get("orderService").getLastDraft({
-        appointment: false
-      });
-      const orderId =
-        lastDraftOrder && lastDraftOrder.length
-          ? lastDraftOrder.get("id")
-          : null;
-      this.transitionToRoute("request_purpose", {
-        queryParams: {
-          onlineOrder: true,
-          bookAppointment: false,
-          orderId: orderId
-        }
-      });
-    }
-  }),
+    this.transitionToRoute("submitted_orders");
+  },
 
   actions: {
     moveSidebarUp() {
@@ -185,7 +164,7 @@ export default Ember.Controller.extend(cancelOrderMixin, {
           }
         });
       } else {
-        this.get("submitCart").perform();
+        this.submitCart();
       }
     },
 

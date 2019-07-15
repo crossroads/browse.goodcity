@@ -23,7 +23,6 @@ function ORDER_URL(order) {
  */
 export default ApiService.extend({
   store: Ember.inject.service(),
-  routing: Ember.inject.service("-routing"),
 
   /**
    * Transitions an order to a state
@@ -135,14 +134,12 @@ export default ApiService.extend({
     });
   },
 
-  hasCompletedOrMultipleDraftOrder() {
+  hasSubmittedOrders() {
     return this.getAllOnlineOrAppointmentOrder({ appointment: false }).then(
       orders => {
-        const hasCompletedOrder =
+        const hasSubmittedOrder =
           orders.filter(this.isOrderSubmittedOrProcessed).length > 0;
-        const hasMultipleDraftOrder =
-          orders.filterBy("state", "draft").length > 1;
-        return hasCompletedOrder || hasMultipleDraftOrder;
+        return hasSubmittedOrder;
       }
     );
   },

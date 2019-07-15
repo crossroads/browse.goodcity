@@ -1,8 +1,7 @@
 import Ember from "ember";
 import AjaxPromise from "browse/utils/ajax-promise";
-const { getOwner } = Ember;
 import config from "../config/environment";
-import { task } from "ember-concurrency";
+const { getOwner } = Ember;
 
 export default Ember.Controller.extend({
   showCancelBookingPopUp: false,
@@ -74,7 +73,7 @@ export default Ember.Controller.extend({
     ];
   }),
 
-  redirectToTransitionOrBrowse: task(function*(bookAppointment) {
+  redirectToTransitionOrBrowse(bookAppointment) {
     let onlineOrder = this.get("onlineOrder");
     var attemptedTransition = this.get("authenticate").get(
       "attemptedTransition"
@@ -87,34 +86,14 @@ export default Ember.Controller.extend({
         }
       });
     } else if (onlineOrder) {
-      const hasCompletedOrMultipleDraftOrder = yield this.get(
-        "orderService"
-      ).hasCompletedOrMultipleDraftOrder();
-      if (hasCompletedOrMultipleDraftOrder) {
-        this.transitionToRoute("submitted_orders");
-      } else {
-        let lastDraftOrder = yield this.get("orderService").getLastDraft({
-          appointment: false
-        });
-        const orderId =
-          lastDraftOrder && lastDraftOrder.length
-            ? lastDraftOrder.get("id")
-            : null;
-        this.transitionToRoute("request_purpose", {
-          queryParams: {
-            onlineOrder: true,
-            bookAppointment: false,
-            orderId: orderId
-          }
-        });
-      }
+      this.transitionToRoute("submitted_orders");
     } else if (attemptedTransition) {
       this.set("attemptedTransition", null);
       attemptedTransition.retry();
     } else {
       this.transitionToRoute("browse");
     }
-  }),
+  },
 
   organisationsUserParams() {
     var organisationsUserId = this.get("organisationsUserId");
@@ -192,7 +171,7 @@ export default Ember.Controller.extend({
               this.store.findRecord("user_role", id);
             });
           }
-          this.get("redirectToTransitionOrBrowse").perform(bookAppointment);
+          this.redirectToTransitionOrBrowse(bookAppointment);
         })
         .catch(xhr => {
           this.get("messageBox").alert(xhr.responseJSON.errors);

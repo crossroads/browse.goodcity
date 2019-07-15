@@ -1,6 +1,5 @@
 import Ember from "ember";
 import asyncTasksMixin from "../mixins/async_tasks";
-import { task } from "ember-concurrency";
 import _ from "lodash";
 
 export default Ember.Controller.extend(asyncTasksMixin, {
@@ -16,27 +15,23 @@ export default Ember.Controller.extend(asyncTasksMixin, {
     return this.get("cart.isEmpty");
   },
 
-  checkoutCart: task(function*() {
+  async checkoutCart() {
     const orderId = this.get("orderId");
-    const order = yield this.store.peekRecord("order", orderId);
+    const order = this.store.peekRecord("order", orderId);
     if (this.emptyCart()) {
       return this.i18nAlert("cart_content.empty_cart", _.noop);
     }
     if (this.badCart()) {
       return this.i18nAlert("items_not_available", _.noop);
     }
-    try {
-      yield this.runTask(this.get("cart").checkoutOrder(order));
-    } catch (error) {
-      throw error;
-    }
+    await this.runTask(this.get("cart").checkoutOrder(order));
     this.transitionToRoute("orders.goods", orderId);
-  }),
+  },
 
   actions: {
     mergePackage() {
       if (this.get("orderId")) {
-        this.get("checkoutCart").perform();
+        this.checkoutCart();
       } else {
         this.transitionToRoute("request_purpose", {
           queryParams: {
