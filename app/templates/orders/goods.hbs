@@ -27,7 +27,7 @@
 	          	<div class="update-order-block">
 	          		{{#if showUpdateMessage}}
 			          	<div class="small-12 columns updated-order-message fade-out">
-			             	{{fa-icon "warning"}}&nbsp;&nbsp;The content of this order were successfully updated.
+			             	{{fa-icon "warning"}}<span class="fade-out-message">{{ t "my_orders.details.update_message" }}</span>
 			            </div>
 			          {{/if}}
 			          <div class="section-title">
@@ -36,11 +36,11 @@
 		            <div class="browse-link">
 		            	{{fa-icon "shopping-basket"}}
 		            	{{#link-to 'browse'}}
-		            		Browse items to add to this order
+		            		{{ t "my_orders.details.link_to_browse" }}
 		            	{{/link-to}}
 		            </div>
 		            <em class="update-note">
-		            	Note: Once the order is confirmed you must contact our team to modify the items requested.
+		            	{{ t "my_orders.details.note" }}
 		            </em>
 							</div>
 	            {{#each orderedGoods as |good|}}

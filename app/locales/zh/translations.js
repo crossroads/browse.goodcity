@@ -65,6 +65,17 @@ export default {
     }
   },
 
+  submitted_orders: {
+    submit_order: "Submit Order",
+    select_option: "Please select from the Following Options",
+    create_new: "Create New Orders from these Items",
+    state: "State",
+    due_date: "Due Date",
+    client_name: "Client Name",
+    add_items: "Add these items to <b>{{code}}</b>",
+    not_confirmed: "not confirmed"
+  },
+
   browse: {
     title: "好人好巿 (慈善組織)",
     browse_title: "瀏覧貨品",
@@ -321,6 +332,10 @@ export default {
       unknown_transport: "其他"
     },
     details: {
+      note:
+        "Note: Once the order is confirmed you must contact our team to modify the items requested.",
+      link_to_browse: "Browse items to add to this order",
+      update_message: "The content of this order were successfully updated.",
       type: "輸入",
       transport: "交通",
       appointment: "預約",

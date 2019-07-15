@@ -37,7 +37,27 @@
       height: 1.2rem !important;
       vertical-align: middle;
       margin-left: 2%!important;
-      margin-top: -10% !important
+      margin-top: -18% !important;
+
+      @media #{$small-only} {
+        margin-top: -25% !important;
+      }
+
+    }
+
+    .order-selection-panel {
+      min-height: 7rem;
+      @media #{$large-only} {
+        height: 7.5rem;
+      }
+    }
+
+    #new_order {
+      margin-top: -9% !important;
+    }
+
+    .order-fields {
+      margin-top: 5%;
     }
 
     .new-order-label {

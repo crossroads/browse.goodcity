@@ -9,7 +9,7 @@
                 {{#link-to "home" classNames="back"}}{{fa-icon "angle-left"}} {{t "back"}}{{/link-to}}
               </section>
               <section class="middle tab-bar-section">
-                <h1 class="title">Submit Order</h1>
+                <h1 class="title">{{ t "submitted_orders.submit_order" }}</h1>
               </section>
             </nav>
 
@@ -19,12 +19,12 @@
           </section>
         </div>
 
-        <section class="main-section client-information large-10 large-offset-1 small-12 medium-12 columns">
-          <div class="submit-title">Please select from the Following Options</div>
+        <section class="main-section client-information large-12 small-12 medium-12 columns">
+          <div class="submit-title">{{ t "submitted_orders.select_option" }}</div>
           <div class="row time_inputs purpose order-selection" >
             <div class="custom_radio_buttons small-12 columns order-select">
               <label class="radio-button-text new-order-label align-text">
-                Create New Orders from these Items
+                {{ t "submitted_orders.create_new" }}
               </label>
               {{radio-button
               name="selectReason"
@@ -34,7 +34,7 @@
               required='true'}}
             </div>
             {{#each model as |order|}}
-              <div class="custom_radio_buttons small-12 columns end" style="min-height: 5rem;">
+              <div class="custom_radio_buttons small-12 columns end order-selection-panel">
                 {{radio-button
                 name="selectReason"
                 id= order.id
@@ -42,10 +42,17 @@
                 selection=orderId
                 required='true'}}
                 <label class="radio-button-text for-organisation align-text order-label">
-                  <div>Add these items to <b>{{order.code}}</b></div>
-                  <div>State: {{order.state}}</div>
-                  {{!-- <div>Due Date: {{order.createdAt}}</div> --}}
-                  <div>Client Name: {{session.currentUser.fullName}}</div>
+                  <div>{{t 'submitted_orders.add_items' code=order.code}}</div>
+                  <div class="order-fields">{{t 'submitted_orders.state'}}: {{order.state}} ({{t 'submitted_orders.not_confirmed'}})</div>
+                  <div class="order-fields">{{t 'submitted_orders.due_date'}}:
+                    {{order.appointmentDate}},
+                    {{#if order.orderTransport.isMorning}}
+                      {{t 'morning'}}
+                    {{else}}
+                      {{t 'afternoon'}}
+                    {{/if}}
+                  </div>
+                  <div class="order-fields">{{t 'submitted_orders.client_name'}}: {{session.currentUser.fullName}}</div>
                 </label>
               </div>
             {{/each}}
