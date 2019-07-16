@@ -112,6 +112,6 @@
     "cordova-update-config": "^1.0.2",
     "jquery": "^3.2.0",
     "phantomjs-prebuilt": "^2.1.14",
-    "yarn": "^1.9.2"
+    "yarn": "^1.17.3"
   }
 }
