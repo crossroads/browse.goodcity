@@ -12,6 +12,7 @@ export default Ember.Controller.extend(cancelOrderMixin, {
   subscription: Ember.inject.service(),
   screenresize: Ember.inject.service(),
   messageBox: Ember.inject.service(),
+  orderService: Ember.inject.service(),
   cart: Ember.inject.service(),
   i18n: Ember.inject.service(),
   showSidebar: true,
@@ -125,14 +126,7 @@ export default Ember.Controller.extend(cancelOrderMixin, {
         _.noop
       );
     }
-
-    this.transitionToRoute("request_purpose", {
-      queryParams: {
-        onlineOrder: true,
-        bookAppointment: false,
-        orderId: null
-      }
-    });
+    this.transitionToRoute("submitted_order_selection");
   },
 
   actions: {

@@ -27,6 +27,51 @@
     }
   }
 
+  .continue-submit-order {
+    margin-left: -1%;
+  }
+
+  .order-selection {
+    input[type=radio] {
+      width: 1.2rem !important;
+      height: 1.2rem !important;
+      vertical-align: middle;
+      margin-left: 2%!important;
+      margin-top: -18% !important;
+
+      @media #{$small-only} {
+        margin-top: -25% !important;
+      }
+
+    }
+
+    .order-selection-panel {
+      min-height: 7rem;
+      @media #{$large-only} {
+        height: 7.5rem;
+      }
+    }
+
+    #new_order {
+      margin-top: -9% !important;
+    }
+
+    .order-fields {
+      margin-top: 5%;
+    }
+
+    .new-order-label {
+      margin-left: 12%;
+      color: white;
+      font-weight: lighter;
+    }
+
+    .order-label {
+      color: white;
+      margin-left: 3%;
+    }
+  }
+
   .id-type-radio-input{
     .custom_radio_buttons {
       border: 1px solid;

@@ -5,7 +5,7 @@
     <p class="cancel-booking-warning">{{t "cancel_booking.cancel_booking_warning"}}</p>
     <p>{{t "cancel_booking.cancel_booking_info"}}</p>
     <p>{{t "cancel_booking.cancel_booking_reason_title"}}</p>
-    {{auto-resize-textarea data-autoresize=true name="cancellation-reason" required="required" pattern=".*\S.*" id=(concat "cancel-appointment-reason" order.id)}}
+    {{auto-resize-textarea data-autoresize=true name="cancellation-reason" required="required" pattern=".*\S.*" class=(concat "cancel-appointment-reasons" order.id)}}
   {{/if}}
     <div class="row cancel-appointment-buttons">
       <div class="small-6 medium-6 large-6 columns">
