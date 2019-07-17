@@ -26,7 +26,7 @@ export default AuthorizeRoute.extend({
 
   model() {
     return this.get("orderService")
-      .loadAll({ shallow: true })
+      .fetchOrdersOfType({ appointment: false })
       .then(orders => {
         return orders.filter(this.isPackageSubmittableOrder);
       });
