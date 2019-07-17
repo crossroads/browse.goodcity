@@ -23,17 +23,5 @@ export default detail.extend({
       data.packages = this.loadPackagesOf(data.order);
       return Ember.RSVP.hash(data);
     });
-  },
-
-  setupController(controller, model) {
-    this._super(controller, model);
-    const isRecentlyUpdated = model.packages.some(
-      this.recentUpdatedPackageCheck
-    );
-    controller.set("showUpdateMessage", isRecentlyUpdated);
-  },
-
-  recentUpdatedPackageCheck(pkg) {
-    return moment().diff(pkg.get("updatedAt"), "minutes") <= 5;
   }
 });

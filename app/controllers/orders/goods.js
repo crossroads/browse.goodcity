@@ -4,7 +4,6 @@ import _ from "lodash";
 
 export default detail.extend({
   order: Ember.computed.alias("model.order"),
-  showUpdateMessage: false,
 
   getCategoryForCode: function(code) {
     const categories = this.get("model.packageCategories");
@@ -12,6 +11,20 @@ export default detail.extend({
       _.includes(c.get("packageTypeCodes"), code)
     );
     return category && category.get("name");
+  },
+
+  showUpdateMessage: Ember.computed(
+    "model.order.ordersPackages.[]",
+    function() {
+      const isRecentlyUpdated = this.get("model.order.ordersPackages")
+        .toArray()
+        .some(this.recentUpdatedPackageCheck);
+      return isRecentlyUpdated;
+    }
+  ),
+
+  recentUpdatedPackageCheck(pkg) {
+    return moment().diff(pkg.get("createdAt"), "minutes") <= 5;
   },
 
   hasRequestedGoods: Ember.computed.notEmpty("requestedGoods"),
