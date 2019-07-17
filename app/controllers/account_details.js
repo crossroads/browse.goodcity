@@ -86,7 +86,7 @@ export default Ember.Controller.extend({
         }
       });
     } else if (onlineOrder) {
-      this.transitionToRoute("submitted_orders");
+      this.transitionToRoute("submitted_order_selection");
     } else if (attemptedTransition) {
       this.set("attemptedTransition", null);
       attemptedTransition.retry();

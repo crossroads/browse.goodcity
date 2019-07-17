@@ -13,10 +13,7 @@ export default AuthorizeRoute.extend({
       let lastDraftOrder = await this.get("orderService").getLastDraft({
         appointment: false
       });
-      const orderId =
-        lastDraftOrder && lastDraftOrder.length
-          ? lastDraftOrder.get("id")
-          : null;
+      const orderId = lastDraftOrder ? lastDraftOrder.get("id") : null;
       this.transitionTo("request_purpose", {
         queryParams: {
           onlineOrder: true,

@@ -126,7 +126,7 @@ export default Ember.Controller.extend(cancelOrderMixin, {
         _.noop
       );
     }
-    this.transitionToRoute("submitted_orders");
+    this.transitionToRoute("submitted_order_selection");
   },
 
   actions: {

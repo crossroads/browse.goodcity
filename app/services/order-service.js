@@ -118,30 +118,25 @@ export default ApiService.extend({
    * @return {Order} the editable draft order or appointment
    */
   getLastDraft({ appointment }) {
-    return this.getAllOnlineOrAppointmentOrder({ appointment: false }).then(
-      orders => {
-        return orders
-          .filterBy("state", "draft")
-          .sortBy("createdAt:desc")
-          .get("firstObject");
-      }
-    );
+    return this.fetchOrdersOfType({ appointment: false }).then(orders => {
+      return orders
+        .filterBy("state", "draft")
+        .sortBy("createdAt:desc")
+        .get("firstObject");
+    });
   },
 
-  getAllOnlineOrAppointmentOrder({ appointment }) {
+  fetchOrdersOfType({ appointment }) {
     return this.loadAll({ shallow: true }).then(orders => {
       return orders.filterBy("isAppointment", appointment);
     });
   },
 
   hasSubmittedOrders() {
-    return this.getAllOnlineOrAppointmentOrder({ appointment: false }).then(
-      orders => {
-        const hasSubmittedOrder =
-          orders.filter(this.isOrderSubmittedOrProcessed).length > 0;
-        return hasSubmittedOrder;
-      }
-    );
+    return this.fetchOrdersOfType({ appointment: false }).then(orders => {
+      const hasSubmittedOrder = orders.some(this.isOrderSubmittedOrProcessed);
+      return hasSubmittedOrder;
+    });
   },
 
   isOrderSubmittedOrProcessed(order) {

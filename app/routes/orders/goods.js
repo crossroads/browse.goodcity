@@ -1,16 +1,6 @@
 import detail from "./detail";
 
 export default detail.extend({
-  showMessage: false,
-
-  beforeModel(transition) {
-    const previousRoutes = this.router.router.currentHandlerInfos;
-    const previousRoute = previousRoutes && previousRoutes.pop().name;
-    if (previousRoute === "submitted_orders") {
-      this.set("showMessage", true);
-    }
-  },
-
   loadPackagesOf(order) {
     return this.get("store")
       .query("orders_package", {
@@ -37,8 +27,13 @@ export default detail.extend({
 
   setupController(controller, model) {
     this._super(controller, model);
-    if (this.get("showMessage")) {
-      controller.set("showUpdateMessage", true);
-    }
+    const isRecentlyUpdated = model.packages.some(
+      this.recentUpdatedPackageCheck
+    );
+    controller.set("showUpdateMessage", isRecentlyUpdated);
+  },
+
+  recentUpdatedPackageCheck(pkg) {
+    return moment().diff(pkg.get("updatedAt"), "minutes") <= 5;
   }
 });
