@@ -10,6 +10,7 @@ export default {
   go_to_top: "Go to top",
   okay: "Okay",
   unexpected_error: "Something went wrong",
+  not_allowed_error: "You are not allowed to perform this action.",
   QuotaExceededError:
     "Site may not work in Safari's <b>private mode.</b> Please try</br><ul><li><a href='http://www.apple.com/itunes/' style='color: black!important; background-color: #dee4eb !important;'>Downloading the iOS App</a></li><li>Using regular (not private) mode in Safari</li><li>Using Chrome's private browsing mode</li></ul>",
   show: "Show",
