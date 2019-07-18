@@ -102,15 +102,18 @@ export default Ember.Route.extend({
     if (error && _.isString(error)) {
       return error;
     }
-    return this.get("i18n").t("unexpected_error");
+    return reason.errors[0].status == 403
+      ? this.get("i18n").t("not_allowed_error")
+      : this.get("i18n").t("unexpected_error");
   },
 
-  showSomethingWentWrong(reason) {
+  showErrorPopup(reason) {
     this.get("logger").error(reason);
     if (!this.get("isErrPopUpAlreadyShown")) {
       this.set("isErrPopUpAlreadyShown", true);
       this.get("messageBox").alert(this.getErrorMessage(reason), () => {
         this.set("isErrPopUpAlreadyShown", false);
+        this.transitionTo("/");
       });
     }
   },
@@ -145,8 +148,10 @@ export default Ember.Route.extend({
         return false;
       } else if (status === 401) {
         this.redirectToLogin();
+      } else if (status === 403) {
+        this.showErrorPopup(reason);
       } else {
-        this.showSomethingWentWrong(reason);
+        this.showErrorPopup(reason);
       }
     } catch (err) {
       console.log(err);
