@@ -479,7 +479,7 @@ export default {
       name_warning: "您必須在此輸入您的名稱。",
       phone_number: "服務對象的聯絡電話號碼",
       mobile_warning: "Please enter a valid HK number.",
-      for_client: "Is this order bieng placed on behalf of a client?",
+      for_client: "此訂單是給予機構自用還是服務對象使用?",
       phone_number_instruction: "我們將會用此號碼確認行程和資料。",
       hk_id_instruction: {
         title: "請輸入服務對象香港身份證最後的四個數字。",
