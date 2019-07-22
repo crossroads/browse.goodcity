@@ -8,6 +8,7 @@ export default Ember.Controller.extend({
   queryParams: ["categoryId", "sortBy"],
   prevPath: null,
   categoryId: null,
+  showPrevNextButtons: null,
   cart: Ember.inject.service(),
   sortBy: "createdAt",
   item: Ember.computed.alias("model"),
@@ -46,8 +47,10 @@ export default Ember.Controller.extend({
   linkDisplayName: Ember.computed("prevPath", "categoryObj", function() {
     let prevPath = this.get("prevPath");
     if (prevPath === "search_goods") {
+      this.set("showPrevNextButtons", false);
       return this.get("i18n").t("search_goods.back");
     }
+    this.set("showPrevNextButtons", true);
     return this.get("categoryObj.name");
   }),
 
@@ -77,6 +80,17 @@ export default Ember.Controller.extend({
       return value;
     }
   }),
+
+  setAndRedirectToCategory(category) {
+    const parentId = category.get("parentId");
+    this.transitionToRoute(
+      "package_category",
+      parentId ? parentId : category.id
+    );
+    if (parentId) {
+      this.get("packageCategory").set("selectedCategoryId", category);
+    }
+  },
 
   actions: {
     showPreview(image) {
@@ -138,24 +152,15 @@ export default Ember.Controller.extend({
     },
 
     setChildCategory(category) {
-      const parentId = category.get("parentId");
-      this.transitionToRoute(
-        "package_category",
-        parentId ? parentId : category.id
-      );
-      if (parentId) {
-        this.get("packageCategory").set("selectedCategoryId", category);
-      } else {
-        this.get("packageCategory").set("selectedCategoryId", null);
-      }
+      this.setAndRedirectToCategory(category);
     },
 
     back() {
-      this.get("packageCategory").set(
-        "selectedCategoryId",
-        this.get("categoryObj")
-      );
-      window.history.back();
+      let prevPath = this.get("prevPath");
+      if (prevPath === "search_goods") {
+        return this.transitionToRoute("search_goods");
+      }
+      this.setAndRedirectToCategory(this.get("categoryObj"));
     }
   }
 });

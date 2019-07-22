@@ -16,21 +16,23 @@
           <i class="fa fa-2x fa-times remove-icon"></i>
         </div>
 
-        <ul class="text-right pagination right">
-          <li class="arrow prev enabled-arrow" {{action "setDirectionAndRender" "moveRight" on="click"}}>
-            <a disabled="{{noPreviousItem}}" class="no-avatar">
-              <i class="fa fa-arrow-left"></i>
-              <span class="hide-for-small {{if hasCartItems 'narrow' ''}}">{{t "itemdetail.previous"}}</span>
-            </a>
-          </li>
+        {{#if showPrevNextButtons}}
+          <ul class="text-right pagination right">
+            <li class="arrow prev enabled-arrow" {{action "setDirectionAndRender" "moveRight" on="click"}}>
+              <a disabled="{{noPreviousItem}}" class="no-avatar">
+                <i class="fa fa-arrow-left"></i>
+                <span class="hide-for-small {{if hasCartItems 'narrow' ''}}">{{t "itemdetail.previous"}}</span>
+              </a>
+            </li>
 
-          <li class="arrow next enabled-arrow" {{action "setDirectionAndRender" "moveLeft" on="click"}}>
-            <a disabled="{{noNextItem}}" class="no-avatar">
-              <span class="hide-for-small {{if hasCartItems 'narrow' ''}}">{{t "itemdetail.next"}}</span>
-              <i class="fa fa-arrow-right"></i>
-            </a>
-          </li>
-        </ul>
+            <li class="arrow next enabled-arrow" {{action "setDirectionAndRender" "moveLeft" on="click"}}>
+              <a disabled="{{noNextItem}}" class="no-avatar">
+                <span class="hide-for-small {{if hasCartItems 'narrow' ''}}">{{t "itemdetail.next"}}</span>
+                <i class="fa fa-arrow-right"></i>
+              </a>
+            </li>
+          </ul>
+        {{/if}}
 
       </div>
     </div>
