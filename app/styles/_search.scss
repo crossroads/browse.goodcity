@@ -12,6 +12,9 @@
 }
 
 .goods_search {
+  .search_results.title{
+    cursor: default;
+  }
   #searchText::-ms-clear{
     display: none;
     width: 0;
@@ -229,6 +232,13 @@
     left: 50%;
   }
 }
+
+.goods_search.list{
+  .item{
+    cursor: pointer;
+  }
+}
+
 .search-code,
 .goods_search {
   .back-link {

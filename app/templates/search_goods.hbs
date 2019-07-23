@@ -40,7 +40,7 @@
               {{#each items as |item|}}
                 <li class="goods_search list">
                   <div class="row" {{action "selectItem" item}}>
-                    <div class="small-12 large-12 columns">
+                    <div class="small-12 large-12 columns item">
                       {{cloudinary-image-tag src=item.displayImageUrl item=item displayItemOverlay=true}}
                     </div>
                   </div>
