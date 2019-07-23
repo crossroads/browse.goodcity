@@ -357,7 +357,7 @@ export default {
       note:
         "Note: Once the order is confirmed you must contact our team to modify the items requested.",
       link_to_browse: "Browse items to add to this order",
-      update_message: "The content of this order were successfully updated.",
+      update_message: "The content of this order has been updated.",
       type: "Type",
       transport: "Transport",
       appointment: "Appointment",

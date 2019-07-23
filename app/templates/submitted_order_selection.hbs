@@ -1,12 +1,12 @@
 <div class="row">
-  <div class="large-8 columns large-offset-2 medium-12 small-12">
+  <div class="large-10 columns large-offset-1 medium-12 small-12">
     <div class="row checkout_pages">
       <div class="small-12 medium-12 large-12 columns">
         <div class="row">
           <section class="main-section new-user-section ui login_page">
             <nav class="tab-bar">
               <section class="left-large">
-                {{#link-to "home" classNames="back"}}{{fa-icon "angle-left"}} {{t "back"}}{{/link-to}}
+                <div class="back-button" {{action "goBack"}}>{{fa-icon "angle-left"}} {{t "back"}}</div>
               </section>
               <section class="middle tab-bar-section">
                 <h1 class="title">{{ t "submitted_orders.submit_order" }}</h1>

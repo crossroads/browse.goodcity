@@ -31,6 +31,10 @@
     margin-left: -1%;
   }
 
+  .back-button {
+    cursor: pointer;
+  }
+
   .order-selection {
     input[type=radio] {
       width: 1.2rem !important;
@@ -46,9 +50,9 @@
     }
 
     .order-selection-panel {
-      min-height: 7rem;
+      min-height: 8rem;
       @media #{$large-only} {
-        height: 7.5rem;
+        height: 8.5rem;
       }
     }
 
@@ -58,6 +62,7 @@
 
     .order-fields {
       margin-top: 5%;
+      padding-bottom: 1%;
     }
 
     .new-order-label {
