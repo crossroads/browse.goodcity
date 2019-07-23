@@ -5,6 +5,10 @@ export default AuthorizeRoute.extend({
   orderService: Ember.inject.service(),
 
   async beforeModel() {
+    if (!this._super(...arguments)) {
+      return; // not logged in
+    }
+
     const hasSubmittedOrders = await this.get(
       "orderService"
     ).hasSubmittedOrders();
