@@ -54,6 +54,10 @@ export default Ember.Controller.extend({
     return this.get("categoryObj.name");
   }),
 
+  showPrevNextButtons: Ember.computed("prevPath", function() {
+    return this.get("prevPath") !== "search_goods";
+  }),
+
   selectedSort: Ember.computed("sortBy", function() {
     return [this.get("sortBy")];
   }),
