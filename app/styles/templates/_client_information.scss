@@ -41,10 +41,13 @@
       height: 1.2rem !important;
       vertical-align: middle;
       margin-left: 2%!important;
-      margin-top: -18% !important;
+      margin-top: -16% !important;
 
       @media #{$small-only} {
         margin-top: -25% !important;
+      }
+      @media #{$medium-only} {
+        margin-top: -33% !important;
       }
 
     }
@@ -57,7 +60,13 @@
     }
 
     #new_order {
-      margin-top: -9% !important;
+      margin-top: -7% !important;
+      @media #{$small-only} {
+        margin-top: -10% !important;
+      }
+      @media #{$medium-only} {
+        margin-top: -14% !important;
+      }
     }
 
     .order-fields {
