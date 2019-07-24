@@ -8,23 +8,7 @@
 
   {{#if showCartSummary}}
     <div class="small-12 columns cart-section small-cart-view">
-      {{#each cart.cartItems as |record|}}
-        <li>
-          <div class="row">
-            <div class="small-3 columns">
-              <img class="thumb-image {{unless record.isAvailable 'grayed-image'}}" src="{{record.imageUrl}}" />
-            </div>
-
-            <div class="small-9 columns">
-              {{record.name}}
-
-              {{#unless record.isAvailable}}
-                <div class="unavailable">{{t "cart_content.unavailable"}}</div>
-              {{/unless}}
-            </div>
-          </div>
-        </li>
-      {{/each}}
+      {{partial "cart_content/items"}}
     </div>
   {{/if}}
 {{/if}}

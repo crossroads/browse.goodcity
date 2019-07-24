@@ -6,7 +6,6 @@
   <div class="large-8 columns large-offset-2 medium-offset-1 medium-10 small-12">
     <div class="row checkout_pages">
       <div class="small-12 schedule_details">
-
         {{#if showOrderSlotSelection }}
           {{partial "order/online_order_timeslot_list_overlay" }}
         {{/if}}
@@ -36,6 +35,10 @@
           {{#validate-appointment}}
             {{#validatable-form onSubmit=(action 'saveTransportDetails') as |form|}}
               <section class="main-section client-information large-10 large-offset-1 medium-12 columns appointment-date small-12">
+                {{#unless cart.isEmpty}}
+                  {{small-cart-toggle-view}}
+                {{/unless}}
+
                 <div class="small-12 columns type-of-id-text">
                   {{t 'order.appointment.transport'}}
                 </div>

@@ -40,7 +40,6 @@ export default Ember.Controller.extend(cancelOrderMixin, {
     return ["browse", "package_category"].indexOf(this.get("currentPath")) >= 0;
   }),
 
-  displayCart: false,
   showCartDetailSidebar: false,
   cartscroll: Ember.inject.service(),
 
@@ -141,9 +140,12 @@ export default Ember.Controller.extend(cancelOrderMixin, {
       this.transitionToRoute("browse");
     },
 
+    hideCart() {
+      this.set("showCartDetailSidebar", false);
+    },
+
     displayCart() {
       this.set("showCartDetailSidebar", true);
-      this.toggleProperty("displayCart");
       Ember.run.later(
         this,
         function() {
@@ -183,7 +185,6 @@ export default Ember.Controller.extend(cancelOrderMixin, {
           sortBy: sortBy
         }
       });
-      this.set("displayCart", false);
       this.set("showCartDetailSidebar", false);
     },
 
