@@ -1,12 +1,12 @@
 import Ember from "ember";
 
 export default Ember.Component.extend({
-  showCartSummary: false,
-  allowClick: false,
+  cart: Ember.inject.service(),
 
-  application: Ember.computed(function() {
-    return Ember.getOwner(this).lookup("controller:application");
-  }),
+  // Set to true to enable navigation to the details
+  // Usage: {{small-cart-toggle-view allowClick=true}}
+  allowClick: false,
+  showCartSummary: false,
 
   actions: {
     toggleCartSummary() {
@@ -16,7 +16,7 @@ export default Ember.Component.extend({
       if (!this.get("allowClick")) {
         return;
       }
-      this.get("application").send("showItemDetails", item);
+      this.get("cart").navigateToItemDetails(item);
     }
   }
 });

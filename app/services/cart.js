@@ -308,6 +308,21 @@ export default ApiService.extend({
     });
   },
 
+  navigateToItemDetails(record) {
+    let isItem = record.get("isItem");
+    let categoryId = record.get("allPackageCategories.firstObject.id");
+    let sortBy = "createdAt:desc";
+
+    const route = isItem ? "item" : "package";
+    const routeId = record.get("id");
+    this.get("router").transitionTo(route, routeId, {
+      queryParams: {
+        categoryId: categoryId,
+        sortBy: sortBy
+      }
+    });
+  },
+
   /**
    * If a package is in the cart, as well as all it's siblings
    * It will appear as an 'item' (if they are available)

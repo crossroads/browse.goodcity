@@ -173,18 +173,7 @@ export default Ember.Controller.extend(cancelOrderMixin, {
     },
 
     showItemDetails(record) {
-      let isItem = record.get("isItem");
-      let categoryId = record.get("allPackageCategories.firstObject.id");
-      let sortBy = "createdAt:desc";
-
-      const route = isItem ? "item" : "package";
-      const routeId = record.get("id");
-      this.transitionToRoute(route, routeId, {
-        queryParams: {
-          categoryId: categoryId,
-          sortBy: sortBy
-        }
-      });
+      this.get("cart").navigateToItemDetails(record);
       this.set("showCartDetailSidebar", false);
     },
 
