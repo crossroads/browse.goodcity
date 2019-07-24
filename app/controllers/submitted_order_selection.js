@@ -41,6 +41,10 @@ export default Ember.Controller.extend(asyncTasksMixin, {
           }
         });
       }
+    },
+
+    goBack() {
+      history.back();
     }
   }
 });
