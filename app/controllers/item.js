@@ -8,7 +8,6 @@ export default Ember.Controller.extend({
   queryParams: ["categoryId", "sortBy"],
   prevPath: null,
   categoryId: null,
-  showPrevNextButtons: null,
   cart: Ember.inject.service(),
   sortBy: "createdAt",
   item: Ember.computed.alias("model"),
@@ -47,10 +46,8 @@ export default Ember.Controller.extend({
   linkDisplayName: Ember.computed("prevPath", "categoryObj", function() {
     let prevPath = this.get("prevPath");
     if (prevPath === "search_goods") {
-      this.set("showPrevNextButtons", false);
       return this.get("i18n").t("search_goods.back");
     }
-    this.set("showPrevNextButtons", true);
     return this.get("categoryObj.name");
   }),
 
