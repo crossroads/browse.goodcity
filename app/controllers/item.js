@@ -145,6 +145,8 @@ export default Ember.Controller.extend({
       );
       if (parentId) {
         this.get("packageCategory").set("selectedCategoryId", category);
+      } else {
+        this.get("packageCategory").set("selectedCategoryId", null);
       }
     },
 
