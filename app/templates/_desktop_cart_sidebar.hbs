@@ -7,15 +7,15 @@
         </li>
 
         <div class="item-collection">
-          {{#each cart.content as |record|}}
+          {{#each cart.groupedPackages as |row|}}
 
-            {{#if record.available}}
-              <li {{action "showCartItem" record.id record.modelType}}>
-                <img class="thumb-image" src="{{record.thumbImageUrl}}" />
+            {{#if row.isAvailable}}
+              <li {{action "showItemDetails" row.record}}>
+                <img class="thumb-image" src="{{row.record.favouriteImage.cartImageUrl}}" />
               </li>
             {{else}}
               <li>
-                <img class="thumb-image grayed-image" src="{{record.thumbImageUrl}}" />
+                <img class="thumb-image grayed-image" src="{{row.record.favouriteImage.cartImageUrl}}" />
               </li>
             {{/if}}
 

@@ -42,12 +42,12 @@ export default Model.extend(cloudinaryImage, {
   isDispatched: Ember.computed.bool("stockitSentOn"),
 
   isAvailable: Ember.computed("isDispatched", "allowWebPublish", function() {
-    return (
+    return Boolean(
       !this.get("isDispatched") &&
-      (this.get("allowWebPublish") ||
-        (this._internalModel._data &&
-          this._internalModel._data.allowWebPublish)) &&
-      this.get("quantity")
+        (this.get("allowWebPublish") ||
+          (this._internalModel._data &&
+            this._internalModel._data.allowWebPublish)) &&
+        this.get("quantity")
     );
   }),
 
@@ -136,18 +136,5 @@ export default Model.extend(cloudinaryImage, {
     return (
       this.get("image.previewImageUrl") || this.generateUrl(265, 265, true)
     );
-  }),
-
-  toCartItem() {
-    let CartItem = getOwner(this)._lookupFactory("model:cart-item");
-
-    return CartItem.create({
-      id: Ember.get(this, "id"),
-      modelType: "package",
-      name: Ember.get(this, "packageType.name"),
-      imageUrl: Ember.get(this, "favouriteImage.cartImageUrl"),
-      thumbImageUrl: Ember.get(this, "favouriteImage.thumbImageUrl"),
-      available: Ember.get(this, "isAvailable")
-    });
-  }
+  })
 });

@@ -1,0 +1,22 @@
+<nav class="breadcrumbs">
+  {{!-- all goods --}}
+  <div class="underline-link" {{action 'clearFiltersAndRedirectToBrowse'}}>
+    {{t 'browse.all_goods'}}
+  </div>
+  {{!-- level 1 of breadcrumb --}}
+  <div {{action (mut selectedCategoryId)}}>
+    <span class="category_name {{if isCategorySelected "underline-link" "current"}}">
+      {{if currentCategory.isParent currentCategory.name currentCategory.parentCategory.name}}
+    </span>
+  </div>
+  {{!-- level 2 of breadcrumb--}}
+  {{select-list
+    class= (if isCategorySelected "current category_select" " category_select")
+    idNames="category_select"
+    selectedValue=selectedCategoryId
+    content=selectCategories
+    on-change=(action (mut selectedCategoryId))
+    prompt=(t 'browse.filter_results')
+    showDropdownIcon=true
+  }}
+</nav>

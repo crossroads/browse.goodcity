@@ -6,6 +6,7 @@ export default {
   by: "了解",
   ok: "確定",
   unexpected_error: "出錯了",
+  not_allowed_error: "You are not allowed to perform this action.",
   QuotaExceededError:
     "網站可能在瀏覽器的<b>私密瀏覽模式</b>下不能正常運作。請嘗試</br><ul><li><a href='http://www.apple.com/itunes/' style='color: black!important; background-color: #dee4eb !important;'>下載iOS 應用程式</a></li><li>使用瀏覽器的常規模式</li><li>使用Chrome 的私密瀏覽模式</li></ul>",
   okay: "確定",
@@ -24,7 +25,7 @@ export default {
   not_found: "對不起，您想要的物資已不存在。",
   awaiting_dispatch: "等待派送",
   dispatching: "派送中",
-  items_not_available: "您的購物車内有已不存在的物資，請刪除該物資以繼續。",
+  items_not_available: "您的購物車内有已不存在的物資",
   unauthorized: "您沒有此權限。",
   back: "返回",
   no_search_results: "沒有搜尋結果",
@@ -63,6 +64,17 @@ export default {
       version: "版本",
       login: "登入"
     }
+  },
+
+  submitted_orders: {
+    submit_order: "Submit Order",
+    select_option: "Please select from the Following Options",
+    create_new: "Create New Orders from these Items",
+    state: "State",
+    due_date: "Due Date",
+    client_name: "Client Name",
+    add_items: "Add these items to <b>{{code}}</b>",
+    not_confirmed: "not confirmed"
   },
 
   browse: {
@@ -193,7 +205,8 @@ export default {
     placeholder: "Search Goods",
     title: "Search Results",
     done: "Done",
-    search_info: "You can search for goods. E.g.'table' or 'stroller'"
+    search_info: "You can search for goods. E.g.'table' or 'stroller'",
+    back: "< Back to search"
   },
 
   account: {
@@ -321,6 +334,10 @@ export default {
       unknown_transport: "其他"
     },
     details: {
+      note:
+        "Note: Once the order is confirmed you must contact our team to modify the items requested.",
+      link_to_browse: "Browse items to add to this order",
+      update_message: "The content of this order has been updated.",
       type: "輸入",
       transport: "交通",
       appointment: "預約",
@@ -462,7 +479,7 @@ export default {
       name_warning: "您必須在此輸入您的名稱。",
       phone_number: "服務對象的聯絡電話號碼",
       mobile_warning: "Please enter a valid HK number.",
-      for_client: "Is this order bieng placed on behalf of a client?",
+      for_client: "此訂單是給予機構自用還是服務對象使用?",
       phone_number_instruction: "我們將會用此號碼確認行程和資料。",
       hk_id_instruction: {
         title: "請輸入服務對象香港身份證最後的四個數字。",

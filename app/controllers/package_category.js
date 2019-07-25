@@ -7,6 +7,8 @@ export default Ember.Controller.extend({
   selectedCategoryId: null,
   sortedItems: Ember.computed.sort("categoryObj.items", "selectedSort"),
   currentCategoryId: Ember.computed.alias("categoryObj.id"),
+  currentCategoryName: Ember.computed.alias("categoryObj.name"),
+  currentCategory: Ember.computed.alias("categoryObj"),
 
   selectedSort: Ember.computed({
     get() {
@@ -31,6 +33,8 @@ export default Ember.Controller.extend({
     ];
   }),
 
+  isCategorySelected: Ember.computed.bool("selectedCategoryId.id"),
+
   categoryObj: Ember.computed("selectedCategoryId", "model", function() {
     this.set("page", 1);
     var selectedCategoryId = this.get("selectedCategoryId.id");
@@ -44,5 +48,12 @@ export default Ember.Controller.extend({
       name: c.get("nameItemsCount"),
       id: c.get("id")
     }));
-  })
+  }),
+
+  actions: {
+    clearFiltersAndRedirectToBrowse() {
+      this.set("selectedCategoryId", null);
+      this.transitionToRoute("browse");
+    }
+  }
 });

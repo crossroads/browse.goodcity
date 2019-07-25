@@ -1,3 +1,20 @@
+.current{
+  select#category_select{
+    color: #fff;
+    option{
+      color: black;
+    }
+  }
+}
+.package-category{
+  select {
+    color: #fff;
+
+    option {
+      color: black;
+    }
+  }
+}
 .category_page{
   .current{
     color: white !important;
@@ -18,9 +35,7 @@
     }
     display: inline-flex;
   }
-  .category_select.fa {
-    position: absolute;
-    margin-left: -1.5vw;
+  .dropdown-icon{
     font-size: 0.8rem;
     z-index: -1;
     cursor: pointer;
@@ -77,6 +92,11 @@
   .current{
     color: #fff;
     font-weight: 900;
+    font-size: 0.7em;
+  }
+
+  .category_name{
+    font-size: unset !important;
   }
 
   .breadcrumbs>* {
@@ -97,6 +117,7 @@
 
 .package-category{
   select {
+    color: #fff;
     @media #{$small-only} {
       max-width: 7rem;
     }
@@ -131,4 +152,5 @@
 
 .underline-link {
   text-decoration: underline;
+  cursor: pointer;
 }

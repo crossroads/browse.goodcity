@@ -1,3 +1,35 @@
+.confirm-booking-page {
+
+  .cart-item-info {
+    &.unavailable {
+      img {
+        opacity: 0.5;
+      }
+      .package-name {
+        text-decoration: line-through;
+      }
+    }
+  }
+
+  a {
+    color: #a3aab6;
+    text-decoration: underline;
+  }
+
+  .red-warning {
+    background: #ED4C4E;
+    color: white;
+    padding: 0.2rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .request_more_link {
+    text-align: center;
+  }
+}
+
+
 .your-detail {
   .detail {
     color: white;
@@ -17,8 +49,4 @@
   .thumb-image {
     height: 5.5rem;
   }
-}
-
-.booking-success-state {
-  font-size: 150%;
 }

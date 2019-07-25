@@ -19,10 +19,11 @@ dl, ol, ul{
   line-height: 1.5rem;
 }
 ul{
-  a.custom_a {
+  .custom_a {
     color: $medium-blue;
     text-decoration: underline;
     li{
+      cursor: pointer;
       color: $medium-blue;
       padding: 0.3rem 0;
     }

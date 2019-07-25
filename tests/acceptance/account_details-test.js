@@ -53,6 +53,11 @@ module("Acceptance | Account Details Page", {
     });
 
     $.mockjax({
+      url: "/api/v1/requested_package*",
+      responseText: []
+    });
+
+    $.mockjax({
       url: "/api/v1/available_*",
       type: "GET",
       status: 200,
@@ -171,6 +176,7 @@ test("After saving user details user gets redirected to browse page", function(a
   $.mockjax({
     url: "/api/v1/auth/current_user_profil*",
     responseText: {
+      user_profile,
       user: user_profile,
       organisations: [
         organisation.toJSON({
@@ -188,7 +194,7 @@ test("After saving user details user gets redirected to browse page", function(a
   $.mockjax({
     url: "/api/v1/organisations_use*",
     responseText: {
-      users: [user_profile],
+      users: user_profile,
       organisations: [
         organisation.toJSON({
           includeId: true

@@ -19,20 +19,27 @@
 <div class="row item-collection">
   <div class="small-12 columns">
 
-    {{#each cart.content as |record|}}
+    {{#each cart.groupedPackages as |row|}}
         <li>
-          <div class="row" {{action 'updateCartItemParams' record.id}}>
-            <div class="small-3 columns cart-redirect-link {{if (is-not record.available) disabled}}" {{action 'updateCartItemParams' record.id}}>
-              <img class="thumb-image {{unless record.available 'grayed-image'}}" src="{{record.imageUrl}}" />
+          <div class="row">
+            <div class="small-3 columns cart-redirect-link {{if (is-not row.isAvailable) disabled}}" {{action 'showItemDetails' row.record}}>
+              <!-- Thumbnail -->
+              <img 
+                class="thumb-image {{unless row.isAvailable 'grayed-image'}}"
+                src="{{row.record.favouriteImage.cartImageUrl}}" />
             </div>
 
-            <div class="small-6 columns cart-redirect-link {{if (is-not record.available) disabled}}" {{action 'updateCartItemParams' record.id}}>
-              {{record.name}}
-              {{#unless record.available}}
-                <div class="unavailable">{{t "cart_content.unavailable"}}</div>
+            <div class="small-6 columns cart-redirect-link {{if (is-not row.isAvailable) disabled}}" {{action 'showItemDetails' row.record}}>
+              <!-- Title -->
+              {{row.record.packageType.name}}
+
+              <!-- Availability -->
+              {{#unless row.isAvailable}}
+                <div class="unavailable red-warning">{{t "cart_content.unavailable"}}</div>
               {{/unless}}
             </div>
-            <div class="small-3 columns remove_link" {{action 'removeItem' record.id record.modelType}}>
+
+            <div class="small-3 columns remove_link" {{action 'remove' row.record target=cart}}>
               <i class="fa fa-times" aria-hidden="true"></i>
               <span>{{t "cart_content.remove"}}</span>
             </div>

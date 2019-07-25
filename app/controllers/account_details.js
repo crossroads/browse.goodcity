@@ -1,7 +1,7 @@
 import Ember from "ember";
 import AjaxPromise from "browse/utils/ajax-promise";
-const { getOwner } = Ember;
 import config from "../config/environment";
+const { getOwner } = Ember;
 
 export default Ember.Controller.extend({
   showCancelBookingPopUp: false,
@@ -9,6 +9,7 @@ export default Ember.Controller.extend({
 
   authenticate: Ember.inject.controller(),
   messageBox: Ember.inject.service(),
+  orderService: Ember.inject.service(),
   i18n: Ember.inject.service(),
   organisationId: Ember.computed.alias("model.organisation.id"),
   organisationsUserId: Ember.computed.alias("model.organisationsUser.id"),
@@ -85,11 +86,7 @@ export default Ember.Controller.extend({
         }
       });
     } else if (onlineOrder) {
-      this.transitionToRoute("request_purpose", {
-        queryParams: {
-          bookAppointment: false
-        }
-      });
+      this.transitionToRoute("submitted_order_selection");
     } else if (attemptedTransition) {
       this.set("attemptedTransition", null);
       attemptedTransition.retry();

@@ -17,12 +17,14 @@ var App,
   orders_package,
   gogo_van,
   bookingType,
-  purpose;
+  purpose,
+  mocks;
 
 module("Acceptance | Browse Page", {
   needs: ["service:subscription"],
   beforeEach: function() {
     App = startApp();
+    mocks = [];
     pkgType = make("package_type_with_packages");
     pkgCategory1 = make("parent_package_category");
     subcategory1 = make("package_category", {
@@ -62,7 +64,14 @@ module("Acceptance | Browse Page", {
       roles: [{ id: 4, name: "Supervisor" }],
       user_roles: [{ id: 1, user_id: 2, role_id: 4 }]
     };
-    $.mockjax({ url: "/api/v1/auth/current_user_profil*", responseText: data });
+
+    mocks.push(
+      $.mockjax({
+        url: "/api/v1/auth/current_user_profil*",
+        responseText: data
+      }),
+      $.mockjax({ url: "/api/v1/requested_package*", responseText: [] })
+    );
 
     mockFindAll("order").returns({
       json: {
@@ -80,6 +89,9 @@ module("Acceptance | Browse Page", {
   },
 
   afterEach: function() {
+    // Clear our ajax mocks
+    $.mockjaxSettings.matchInRegistrationOrder = true;
+    mocks.forEach($.mockjax.clear);
     Ember.run(App, App.destroy);
   }
 });

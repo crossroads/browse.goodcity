@@ -4,15 +4,6 @@ import Ember from "ember";
 export default AuthorizeRoute.extend({
   currentRouteName: null,
 
-  loadIfAbsent(modelName, id) {
-    let store = this.get("store");
-    let cachedRecord = store.peekRecord(modelName, id);
-    if (cachedRecord) {
-      return Ember.RSVP.resolve(cachedRecord);
-    }
-    return store.findRecord(modelName, id, { reload: true });
-  },
-
   beforeModel() {
     this.set("currentRouteName", this.routeName);
   },

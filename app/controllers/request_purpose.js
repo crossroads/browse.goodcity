@@ -99,10 +99,6 @@ export default Ember.Controller.extend(cancelOrder, {
         state: order ? order.get("state") : "draft"
       };
 
-      if (this.isOnlineOrder()) {
-        orderParams.cart_package_ids = this.get("cart.packageIds");
-      }
-
       let loadingView = getOwner(this)
         .lookup("component:loading")
         .append();

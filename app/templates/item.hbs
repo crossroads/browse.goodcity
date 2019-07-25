@@ -6,7 +6,7 @@
     <div class="row">
       <div class="large-8 medium-8 small-12 columns hide-for-small package_catogory_header">
         <div class="package_back_button">
-          <span class="package_category_link" {{action 'back'}}>{{categoryObj.name}}</span>
+          <span class="package_category_link" {{action 'back'}}>{{linkDisplayName}}</span>
           <span class="package-type">\ {{item.packageType.name}}</span>
         </div>
       </div>
@@ -94,14 +94,16 @@
           {{/each}}
 
           {{#if presentInCart}}
-            <button class="request-item" {{action 'removeItem' item}}> {{t "item.remove_item"}} </button>
+            <button class="request-item" {{action 'remove' item target=cart}}> {{t "item.remove_item"}} </button>
           {{else}}
-            <button class="request-item" {{action 'requestItem' item}}> {{t "item.request_item"}} </button>
+            <button class="request-item" {{action 'add' item target=cart}}> {{t "item.request_item"}} </button>
           {{/if}}
 
           <div class="item_details item_categories">
             {{#each item.allPackageCategories key="@index" as |category|}}
-              {{#link-to 'package_category' category class="category_link"}}<span class="underline_text">{{category.name}}</span>{{/link-to}}
+              <div class="category_link" {{action "setChildCategory" category}}>
+                <span class="underline_text">{{category.name}}</span>
+              </div>
             {{/each}}
           </div>
         </div>

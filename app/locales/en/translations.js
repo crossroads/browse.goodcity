@@ -10,6 +10,7 @@ export default {
   go_to_top: "Go to top",
   okay: "Okay",
   unexpected_error: "Something went wrong",
+  not_allowed_error: "You are not allowed to perform this action.",
   QuotaExceededError:
     "Site may not work in Safari's <b>private mode.</b> Please try</br><ul><li><a href='http://www.apple.com/itunes/' style='color: black!important; background-color: #dee4eb !important;'>Downloading the iOS App</a></li><li>Using regular (not private) mode in Safari</li><li>Using Chrome's private browsing mode</li></ul>",
   show: "Show",
@@ -28,7 +29,7 @@ export default {
   awaiting_dispatch: "awaiting dispatch",
   dispatching: "dispatching",
   items_not_available:
-    "One or many items in your cart are no longer available. Please remove those items from cart and then proceed.",
+    "Some of the items in your cart are no longer available.",
   unauthorized: "You are not authorized.",
   back: "Back",
   no_search_results: "No Search Results.",
@@ -69,6 +70,17 @@ export default {
       version: "Version",
       login: "Login"
     }
+  },
+
+  submitted_orders: {
+    submit_order: "Submit Order",
+    select_option: "Please select from the Following Options",
+    create_new: "Create New Orders from these Items",
+    state: "State",
+    due_date: "Due Date",
+    client_name: "Client Name",
+    add_items: "Add these items to <b>{{code}}</b>",
+    not_confirmed: "not confirmed"
   },
 
   browse: {
@@ -206,7 +218,8 @@ export default {
     placeholder: "Search Goods",
     title: "Search Results",
     done: "Done",
-    search_info: "You can search for goods. E.g.'table' or 'stroller'"
+    search_info: "You can search for goods. E.g.'table' or 'stroller'",
+    back: "< Back to search"
   },
 
   account: {
@@ -332,6 +345,7 @@ export default {
     cancelled: "Cancelled",
     dispatching: "Dispatching",
     closed: "Closed",
+
     order_transports: {
       gogovan_transport: "Send by van",
       collection_transport: "Collection",
@@ -340,6 +354,10 @@ export default {
       unknown_transport: "Other"
     },
     details: {
+      note:
+        "Note: Once the order is confirmed you must contact our team to modify the items requested.",
+      link_to_browse: "Browse items to add to this order",
+      update_message: "The content of this order has been updated.",
       type: "Type",
       transport: "Transport",
       appointment: "Appointment",
@@ -500,7 +518,7 @@ export default {
       name_warning: "You must enter your name here.",
       phone_number: "Clients contact phone number",
       mobile_warning: "Please enter a valid HK number.",
-      for_client: "Is this order bieng placed on behalf of a client?",
+      for_client: "Is this order being placed on behalf of a client?",
       phone_number_instruction:
         "We will use this number to confirm schedule and details.",
       hk_id_instruction: {

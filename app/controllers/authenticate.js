@@ -58,7 +58,6 @@ export default Ember.Controller.extend({
           _this.setProperties({
             pin: null
           });
-          _this.get("application").set("loggedInUser", true);
           _this.transitionToRoute("post_login", {
             queryParams: {
               bookAppointment: bookAppointment

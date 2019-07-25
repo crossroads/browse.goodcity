@@ -4,7 +4,9 @@ import config from "../config/environment";
 export default Ember.Controller.extend({
   messageBox: Ember.inject.service(),
   application: Ember.inject.controller(),
+  packageCategory: Ember.inject.controller(),
   queryParams: ["categoryId", "sortBy"],
+  prevPath: null,
   categoryId: null,
   cart: Ember.inject.service(),
   sortBy: "createdAt",
@@ -21,44 +23,13 @@ export default Ember.Controller.extend({
 
   direction: null,
 
-  hasQuantityAndIsAvailable: Ember.observer(
-    "item.isAvailable",
-    "item.packages.@each.orderId",
-    "item.isUnavailableAndDesignated",
-    function() {
-      var currentPath = this.get("target").currentPath;
-      var item = this.get("item");
-      var isItemUnavailable = this.get("item.isUnavailableAndDesignated");
-      if (
-        (currentPath === "item" || currentPath === "package_category") &&
-        isItemUnavailable &&
-        isItemUnavailable !== null &&
-        !this.get("itemNotAvailableShown")
-      ) {
-        this.set("itemNotAvailableShown", true);
-        if (this.get("cart").hasCartItem(item)) {
-          this.get("cart").removeItem(item);
-        }
-        this.get("messageBox").alert(
-          this.get("i18n").t("cart_content.unavailable"),
-          () => {
-            item.get("packages").forEach(pkg => this.store.unloadRecord(pkg));
-            this.set("itemNotAvailableShown", false);
-            this.transitionToRoute("/browse");
-          }
-        );
-      }
-    }
-  ),
-
-  hasDraftOrder: Ember.computed.alias("session.draftOrder"),
   isOrderFulfilmentUser: Ember.computed(function() {
     let user = this.get("session.currentUser");
     return user.hasRole("Order fulfilment");
   }),
 
   presentInCart: Ember.computed("item", "cart.counter", function() {
-    return this.get("cart").hasCartItem(this.get("item"));
+    return this.get("cart").contains(this.get("item"));
   }),
 
   allPackages: Ember.computed("item.packages.@each.isAvailable", function() {
@@ -70,6 +41,14 @@ export default Ember.Controller.extend({
 
   categoryObj: Ember.computed("categoryId", function() {
     return this.store.peekRecord("package_category", this.get("categoryId"));
+  }),
+
+  linkDisplayName: Ember.computed("prevPath", function() {
+    let prevPath = this.get("prevPath");
+    if (prevPath === "search_goods") {
+      return this.get("i18n").t("search_goods.back");
+    }
+    return this.get("categoryObj.name");
   }),
 
   selectedSort: Ember.computed("sortBy", function() {
@@ -148,7 +127,7 @@ export default Ember.Controller.extend({
     },
 
     requestItem(item) {
-      this.get("cart").pushItem(item);
+      this.get("cart").add(item);
       Ember.run.later(
         this,
         function() {
@@ -158,8 +137,17 @@ export default Ember.Controller.extend({
       );
     },
 
-    removeItem(item) {
-      this.get("cart").removeItem(item);
+    setChildCategory(category) {
+      const parentId = category.get("parentId");
+      this.transitionToRoute(
+        "package_category",
+        parentId ? parentId : category.id
+      );
+      if (parentId) {
+        this.get("packageCategory").set("selectedCategoryId", category);
+      } else {
+        this.get("packageCategory").set("selectedCategoryId", null);
+      }
     },
 
     back() {

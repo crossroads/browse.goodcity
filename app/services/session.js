@@ -1,7 +1,8 @@
 import Ember from "ember";
+import ApiService from "./api-base-service";
 import "../computed/local-storage";
 
-export default Ember.Service.extend({
+export default ApiService.extend({
   authToken: Ember.computed.localStorage(),
   otpAuthKey: Ember.computed.localStorage(),
   isLoggedIn: Ember.computed.notEmpty("authToken"),
@@ -11,35 +12,46 @@ export default Ember.Service.extend({
     .toString()
     .substring(2),
 
-  currentUser: Ember.computed(function() {
-    var store = this.get("store");
-    return store.peekAll("user").get("firstObject") || null;
-  }).volatile(),
-
-  clear() {
-    this.set("authToken", null);
-    this.set("otpAuthKey", null);
+  loadUserProfile() {
+    return this.GET("/auth/current_user_profile").then(data => {
+      this.get("store").pushPayload(data);
+      this.get("store").pushPayload({ user: data.user_profile });
+      this.set("currentUserId", data.user_profile.id);
+      return data;
+    });
   },
 
-  draftAppointment: Ember.computed(function() {
-    return this.get("allDrafts")
-      .filterBy("isAppointment", true)
-      .get("firstObject");
-  }).volatile(),
+  accountDetailsComplete() {
+    const user = this.get("currentUser");
+    if (!user) {
+      return false;
+    }
 
-  draftOrder: Ember.computed(function() {
-    return this.get("allDrafts")
-      .filterBy("isAppointment", false)
-      .get("firstObject");
-  }).volatile(),
+    const organisationsUser = user.get("organisationsUsers.firstObject");
+    const organisation =
+      organisationsUser && organisationsUser.get("organisation");
+    const hasInfoAndCharityRole =
+      user.get("isInfoComplete") && user.hasRole("Charity");
+    const hasCompleteOrganisationUserInfo =
+      organisationsUser && organisationsUser.get("isInfoComplete");
 
-  allDrafts: Ember.computed(function() {
-    return this.get("allOrders").filterBy("state", "draft");
-  }).volatile(),
+    return (
+      hasInfoAndCharityRole && organisation && hasCompleteOrganisationUserInfo
+    );
+  },
 
-  allOrders: Ember.computed(function() {
-    return this.get("store")
-      .peekAll("order")
-      .sortBy("id");
-  }).volatile()
+  currentUserId: null,
+
+  currentUser: Ember.computed("currentUserId", function() {
+    if (!this.get("authToken") || !this.get("currentUserId")) {
+      return null;
+    }
+    return this.get("store").peekRecord("user", this.get("currentUserId"));
+  }),
+
+  clear() {
+    this.set("currentUserId", null);
+    this.set("authToken", null);
+    this.set("otpAuthKey", null);
+  }
 });

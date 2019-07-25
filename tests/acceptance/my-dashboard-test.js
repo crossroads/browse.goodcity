@@ -17,15 +17,13 @@ var App,
 let mocks;
 
 var userProfile = {
-  user_profile: [
-    {
-      id: 2,
-      first_name: "David",
-      last_name: "Dara51",
-      mobile: "61111111",
-      user_role_ids: [1]
-    }
-  ],
+  user_profile: {
+    id: 2,
+    first_name: "David",
+    last_name: "Dara51",
+    mobile: "61111111",
+    user_role_ids: [1]
+  },
   users: [
     {
       id: 2,
@@ -174,12 +172,14 @@ module("Acceptance | My Dashboard", {
 
     mocks.push(
       $.mockjax({
+        url: "/api/v1/requested_package*",
+        type: "GET",
+        responseText: []
+      }),
+      $.mockjax({
         url: "/api/v1/auth/current_user_profil*",
         responseText: userProfile
-      })
-    );
-
-    mocks.push(
+      }),
       $.mockjax({
         url: `/api/v1/orders/${order.get("id")}`,
         responseText: {
@@ -187,10 +187,7 @@ module("Acceptance | My Dashboard", {
             includeId: true
           })
         }
-      })
-    );
-
-    mocks.push(
+      }),
       $.mockjax({
         url: /\/api\/v1\/images\/\d/,
         responseText: {

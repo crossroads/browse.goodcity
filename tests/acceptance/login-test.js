@@ -57,6 +57,12 @@ module("Acceptance: Login", {
     };
 
     $.mockjax({
+      url: "/api/v1/requested_package*",
+      type: "GET",
+      responseText: []
+    });
+
+    $.mockjax({
       url: "/api/v1/auth/current_user_profil*",
       responseText: {
         user_profile: user_profile,
