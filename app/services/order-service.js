@@ -118,7 +118,7 @@ export default ApiService.extend({
    * @return {Order} the editable draft order or appointment
    */
   getLastDraft({ appointment }) {
-    return this.fetchOrdersOfType({ appointment: false }).then(orders => {
+    return this.fetchOrdersOfType({ appointment }).then(orders => {
       return orders
         .filterBy("state", "draft")
         .sortBy("createdAt:desc")
