@@ -1,13 +1,13 @@
 {{#each cart.groupedPackages as |row|}}
   <li class="no-bullet">
     <div class="row">
-      <div class="large-3 medium-3 columns cart-redirect-link {{if (is-not row.isAvailable) disabled}}" {{action 'showItemDetails' row.record}}>
+      <div class="small-3 columns cart-redirect-link {{if (is-not row.isAvailable) disabled}}" {{action 'showItemDetails' row.record}}>
           <img class="thumb-image {{unless row.isAvailable 'grayed-image'}}" src="{{row.record.favouriteImage.cartImageUrl}}" />
       </div>
 
-      <div class="large-9 medium-9 columns cart-redirect-link {{if (is-not row.isAvailable) disabled}}" {{action 'showItemDetails' row.record}}>
+      <div class="small-9 columns cart-redirect-link {{if (is-not row.isAvailable) disabled}}" {{action 'showItemDetails' row.record}}>
         {{row.record.packageType.name}}
-        
+
         {{#unless row.isAvailable}}
           <div class="unavailable">{{t "cart_content.unavailable"}}</div>
         {{/unless}}

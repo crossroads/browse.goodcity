@@ -102,7 +102,7 @@ export default Ember.Route.extend({
     if (error && _.isString(error)) {
       return error;
     }
-    return reason.errors[0].status == 403
+    return _.get(reason, "errors[0].status") == 403
       ? this.get("i18n").t("not_allowed_error")
       : this.get("i18n").t("unexpected_error");
   },
