@@ -151,6 +151,10 @@ export default Ember.Controller.extend({
     },
 
     back() {
+      this.get("packageCategory").set(
+        "selectedCategoryId",
+        this.get("categoryObj")
+      );
       window.history.back();
     }
   }
