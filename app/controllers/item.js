@@ -43,7 +43,7 @@ export default Ember.Controller.extend({
     return this.store.peekRecord("package_category", this.get("categoryId"));
   }),
 
-  linkDisplayName: Ember.computed("prevPath", function() {
+  linkDisplayName: Ember.computed("prevPath", "categoryObj", function() {
     let prevPath = this.get("prevPath");
     if (prevPath === "search_goods") {
       return this.get("i18n").t("search_goods.back");
