@@ -48,12 +48,5 @@ export default Ember.Controller.extend({
       name: c.get("nameItemsCount"),
       id: c.get("id")
     }));
-  }),
-
-  actions: {
-    clearFiltersAndRedirectToBrowse() {
-      this.set("selectedCategoryId", null);
-      this.transitionToRoute("browse");
-    }
-  }
+  })
 });
