@@ -33,7 +33,7 @@
               selection=orderId
               required='true'}}
             </div>
-            {{#each model as |order|}}
+            {{#each submittableOrders as |order|}}
               <div class="custom_radio_buttons small-12 columns end order-selection-panel">
                 {{radio-button
                 name="selectReason"
