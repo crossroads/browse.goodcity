@@ -16,14 +16,7 @@ export default Ember.Controller.extend(asyncTasksMixin, {
   },
 
   submittableOrders: Ember.computed("model.@each.state", function() {
-    let submittableOrders = this.get("model").filter(
-      this.isPackageSubmittableOrder
-    );
-    if (submittableOrders.length) {
-      return submittableOrders;
-    } else {
-      this.redirectToRequestPurpose();
-    }
+    return this.get("model").filter(this.isPackageSubmittableOrder);
   }),
 
   redirectToRequestPurpose() {
