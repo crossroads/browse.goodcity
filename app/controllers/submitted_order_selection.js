@@ -31,7 +31,7 @@ export default Ember.Controller.extend(asyncTasksMixin, {
 
   isPackageSubmittableOrder(order) {
     const orderState = order.get("state");
-    return ["submitted", "processing"].includes(orderState);
+    return ["submitted", "processing"].indexOf(orderState) >= 0;
   },
 
   async checkoutCart() {
