@@ -84,13 +84,13 @@ export default Ember.Controller.extend({
 
   setAndRedirectToCategory(category) {
     const parentId = category.get("parentId");
+    if (parentId) {
+      this.get("packageCategory").set("selectedCategoryId", category);
+    }
     this.transitionToRoute(
       "package_category",
       parentId ? parentId : category.id
     );
-    if (parentId) {
-      this.get("packageCategory").set("selectedCategoryId", category);
-    }
   },
 
   actions: {
