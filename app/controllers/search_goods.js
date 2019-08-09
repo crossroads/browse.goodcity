@@ -74,7 +74,7 @@ export default BrowseController.extend({
     },
 
     back() {
-      window.history.back();
+      this.transitionToRoute("browse");
     },
 
     loadMoreGoods(pageNo) {

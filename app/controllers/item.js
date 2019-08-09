@@ -51,6 +51,10 @@ export default Ember.Controller.extend({
     return this.get("categoryObj.name");
   }),
 
+  showPrevNextButtons: Ember.computed("prevPath", function() {
+    return this.get("prevPath") !== "search_goods";
+  }),
+
   selectedSort: Ember.computed("sortBy", function() {
     return [this.get("sortBy")];
   }),
@@ -77,6 +81,17 @@ export default Ember.Controller.extend({
       return value;
     }
   }),
+
+  setAndRedirectToCategory(category) {
+    const parentId = category.get("parentId");
+    if (parentId) {
+      this.get("packageCategory").set("selectedCategoryId", category);
+    }
+    this.transitionToRoute(
+      "package_category",
+      parentId ? parentId : category.id
+    );
+  },
 
   actions: {
     showPreview(image) {
@@ -138,24 +153,15 @@ export default Ember.Controller.extend({
     },
 
     setChildCategory(category) {
-      const parentId = category.get("parentId");
-      this.transitionToRoute(
-        "package_category",
-        parentId ? parentId : category.id
-      );
-      if (parentId) {
-        this.get("packageCategory").set("selectedCategoryId", category);
-      } else {
-        this.get("packageCategory").set("selectedCategoryId", null);
-      }
+      this.setAndRedirectToCategory(category);
     },
 
     back() {
-      this.get("packageCategory").set(
-        "selectedCategoryId",
-        this.get("categoryObj")
-      );
-      window.history.back();
+      let prevPath = this.get("prevPath");
+      if (prevPath === "search_goods") {
+        return this.transitionToRoute("search_goods");
+      }
+      this.setAndRedirectToCategory(this.get("categoryObj"));
     }
   }
 });
