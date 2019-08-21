@@ -15,6 +15,25 @@ export default Ember.Controller.extend(asyncTasksMixin, {
     return this.get("cart.isEmpty");
   },
 
+  submittableOrders: Ember.computed("model.@each.state", function() {
+    return this.get("model").filter(this.isPackageSubmittableOrder);
+  }),
+
+  redirectToRequestPurpose() {
+    this.transitionToRoute("request_purpose", {
+      queryParams: {
+        onlineOrder: true,
+        bookAppointment: false,
+        orderId: null
+      }
+    });
+  },
+
+  isPackageSubmittableOrder(order) {
+    const orderState = order.get("state");
+    return ["submitted", "processing"].indexOf(orderState) >= 0;
+  },
+
   async checkoutCart() {
     const orderId = this.get("orderId");
     const order = this.store.peekRecord("order", orderId);
@@ -33,13 +52,7 @@ export default Ember.Controller.extend(asyncTasksMixin, {
       if (this.get("orderId")) {
         this.checkoutCart();
       } else {
-        this.transitionToRoute("request_purpose", {
-          queryParams: {
-            onlineOrder: true,
-            bookAppointment: false,
-            orderId: null
-          }
-        });
+        this.redirectToRequestPurpose();
       }
     },
 

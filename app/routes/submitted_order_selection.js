@@ -29,11 +29,7 @@ export default AuthorizeRoute.extend({
   },
 
   model() {
-    return this.get("orderService")
-      .fetchOrdersOfType({ appointment: false })
-      .then(orders => {
-        return orders.filter(this.isPackageSubmittableOrder);
-      });
+    return this.get("orderService").fetchOrdersOfType({ appointment: false });
   },
 
   setupController(controller, model) {
@@ -46,10 +42,5 @@ export default AuthorizeRoute.extend({
     if (isExiting) {
       this.controllerFor("application").set("showSidebar", true);
     }
-  },
-
-  isPackageSubmittableOrder(order) {
-    const orderState = order.get("state");
-    return ["submitted", "processing"].includes(orderState);
   }
 });

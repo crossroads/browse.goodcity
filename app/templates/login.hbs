@@ -13,7 +13,7 @@
       </nav>
 
       {{#unless cart.isEmpty}}
-      {{small-cart-toggle-view}}
+        {{small-cart-toggle-view}}
       {{/unless}}
 
       {{#validatable-form onSubmit=(action 'resendPin') as |form|}}

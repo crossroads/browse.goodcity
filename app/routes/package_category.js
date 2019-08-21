@@ -12,5 +12,8 @@ export default PublicRoute.extend({
       this.controllerFor("application").set("pageTitle", model.get("name"));
     }
     controller.set("selectedSort", ["createdAt:desc"]);
+  },
+  resetController(controller) {
+    controller.set("selectedCategoryId", null);
   }
 });

@@ -32,6 +32,9 @@
             </section>
             <div class="row inner-section">
               <section class="main-section request-purpose medium-10 medium-offset-1 large-10 large-offset-1 small-10 small-offset-1 columns">
+                {{#unless cart.isEmpty}}
+                  {{small-cart-toggle-view}}
+                {{/unless}}
                 {{validate-inputs
                   elementCssIdentifiersArrayJson='["#people-count", "#description", ".district-selector select"]'
                   errorClass='form__control--error'

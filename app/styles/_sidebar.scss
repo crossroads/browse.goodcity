@@ -242,6 +242,7 @@ $sidebar-width: 7.8rem;
 
 .right-off-canvas-menu.menu-list {
   background-color: black;
+  z-index: 1003;
 
   i {
     font-size: 1.5rem;
