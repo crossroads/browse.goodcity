@@ -19,7 +19,7 @@ export default Ember.Controller.extend(cancelOrder, {
     "sortProperties"
   ),
 
-  hasNoGcRequests: Ember.computed("order.goodcityRequests", function() {
+  hasNoGcRequests: Ember.computed("order.goodcityRequests.[]", function() {
     return !this.get("order.goodcityRequests").length;
   }),
 
