@@ -49,18 +49,6 @@ module.exports = function(defaults) {
   app.import("bower_components/lightgallery/src/css/lg-transitions.css");
   app.import("bower_components/lightgallery/src/js/lightgallery.js");
   app.import("bower_components/lightgallery/src/js/lg-zoom.js");
-  app.import("bower_components/lightgallery/src/fonts/lg.eot", {
-    destDir: "fonts"
-  });
-  app.import("bower_components/lightgallery/src/fonts/lg.svg", {
-    destDir: "fonts"
-  });
-  app.import("bower_components/lightgallery/src/fonts/lg.ttf", {
-    destDir: "fonts"
-  });
-  app.import("bower_components/lightgallery/src/fonts/lg.woff", {
-    destDir: "fonts"
-  });
   app.import("bower_components/lightgallery/src/img/loading.gif", {
     destDir: "/img"
   });
