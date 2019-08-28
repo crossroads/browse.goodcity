@@ -4,65 +4,66 @@
 <div class="row">
   <div class="large-8 columns large-offset-2 medium-offset-1 medium-10 small-12">
     <div class="row checkout_pages">
-        <div class="small-12 columns">
-          <div class="row">
-            <section class="main-section new-user-section ui login_page book_appointment_headers">
-              <nav class="tab-bar">
-                <section class="left-large back-button inline-content">
-                  <div class="back-button" {{action 'back'}}>
-                    {{fa-icon "angle-left"}}
-                    {{t "back"}}
-                  </div>
-                </section>
-                 <section class="middle tab-bar-section">
-                  <h1 class="title"> {{t 'order.request_purpose.title'}} </h1>
-                </section>
-                <section class="right-large inline-content right-align cancel-section">
-                  {{#if order}}
-                    <div {{action "cancelBookingPopUp"}} id="cancel-booking-link">
-                        {{t "cancel"}}
-                    </div>
-                  {{else}}
-                    {{#link-to "home" id="cancel-booking-link" tagName="div"}}
-                      {{t "cancel"}}
-                    {{/link-to}}
-                  {{/if}}
-                </section>
-              </nav>
-            </section>
-            <div class="row inner-section">
-              <section class="main-section request-purpose medium-10 medium-offset-1 large-10 large-offset-1 small-10 small-offset-1 columns">
-                {{#unless cart.isEmpty}}
-                  {{small-cart-toggle-view}}
-                {{/unless}}
-                {{validate-inputs
+      <div class="small-12 columns">
+        <div class="row">
+          <section class="main-section new-user-section ui login_page book_appointment_headers">
+            <nav class="tab-bar">
+              <section class="left-large back-button inline-content">
+                <div class="back-button" {{action 'back'}}>
+                  {{fa-icon "angle-left"}}
+                  {{t "back"}}
+                </div>
+              </section>
+              <section class="middle tab-bar-section">
+                <h1 class="title"> {{t 'order.request_purpose.title'}} </h1>
+              </section>
+              <section class="right-large inline-content right-align cancel-section">
+                {{#if order}}
+                <div {{action "cancelBookingPopUp"}} id="cancel-booking-link">
+                  {{t "cancel"}}
+                </div>
+                {{else}}
+                {{#link-to "home" id="cancel-booking-link" tagName="div"}}
+                {{t "cancel"}}
+                {{/link-to}}
+                {{/if}}
+              </section>
+            </nav>
+          </section>
+          <div class="row inner-section">
+            <section
+              class="main-section request-purpose medium-10 medium-offset-1 large-10 large-offset-1 small-10 small-offset-1 columns">
+              {{#unless cart.isEmpty}}
+              {{small-cart-toggle-view}}
+              {{/unless}}
+              {{validate-inputs
                   elementCssIdentifiersArrayJson='["#people-count", "#description", ".district-selector select"]'
                   errorClass='form__control--error'
                   buttonId='#request-submit'
                 }}
-                {{#validatable-form onSubmit=(action 'createOrderWithRequestPurpose') as |form|}}
-                  <div class="row people-count">
-                    <div class="small-12 columns people-count-label">
-                      {{t 'order.request_purpose.people_count_info'}}
-                    </div>
-                    <div class="people-count-input">
-                      {{#form-control}}
-                        {{input type='number' value=peopleCount required='true' id="people-count"}}
-                        <div class='input-error'> {{t 'order.request_purpose.people_count_warning'}} </div>
-                      {{/form-control}}
-                    </div>
+              {{#validatable-form onSubmit=(action 'createOrderWithRequestPurpose') as |form|}}
+              <div class="row people-count">
+                <div class="small-12 columns people-count-label">
+                  {{t 'order.request_purpose.people_count_info'}}
+                </div>
+                <div class="people-count-input">
+                  {{#form-control}}
+                  {{input type='number' value=peopleCount required='true' id="people-count"}}
+                  <div class='input-error'> {{t 'order.request_purpose.people_count_warning'}} </div>
+                  {{/form-control}}
+                </div>
+              </div>
+              <div class="row district-select">
+                <div class="large-12 small-12 medium-12 columns">
+                  <br />
+                  <div class="small-12 columns district-label">
+                    {{t 'order.request_purpose.district_label'}}
                   </div>
-                  <div class="row district-select">
-                    <div class="large-12 small-12 medium-12 columns">
-                      <br />
-                      <div class="small-12 columns district-label">
-                        {{t 'order.request_purpose.district_label'}}
-                      </div>
-                      <div class="small-12 columns district-label-info">
-                        {{t 'order.request_purpose.district-label-info'}}
-                      </div>
-                      {{#form-control}}
-                        {{select-list
+                  <div class="small-12 columns district-label-info">
+                    {{t 'order.request_purpose.district-label-info'}}
+                  </div>
+                  {{#form-control}}
+                  {{select-list
                           content=districts
                           on-change=(action (mut selectedDistrict))
                           selectedValue=selectedDistrict
@@ -72,51 +73,52 @@
                           required=true
                           classNames='district-selector'
                           idNames='district-select-dropdown'}}
-                      {{/form-control}}
-                    </div>
-                  </div>
-                  <div class="row description-of-need">
-                    <div class="small-12 columns description">
-                      {{t 'order.request_purpose.need_description'}}
-                    </div>
-                    <div class="small-12 columns reason-of-need">
-                      {{t 'order.request_purpose.need_description_info'}}
-                    </div>
-                    {{#form-control}}
-                      <i class="fa fa-times-circle remove-text" aria-hidden="true" {{action "clearDescription"}}></i>
-                      {{auto-resize-textarea data-autoresize=true name="description" value=description required="required" pattern=".*\S.*" id="description"}}
-                      <div class='input-error'> {{t 'order.request_purpose.description_warning'}} </div>
-                    {{/form-control}}
-                  </div>
-                  <div class="row">
-                    {{#if isEditing}}
-                      <div class="small-6 medium-6 large-6 columns">
-                        <a {{action 'submit' target=form}} class="button expand" id="request-submit"> {{t 'save_changes'}} </a>
-                      </div>
-                      <div class="small-6 medium-6 large-6 columns">
-                        {{#if (is-equal prevPath "orders.booking")}}
-                          {{#link-to 'orders.booking' order.id classNames="button expand request"}}
-                            {{t 'discard_changes'}}
-                          {{/link-to}}
-                        {{else if (is-equal previousRouteName 'my_orders') }}
-                          {{#link-to "my_orders" classNames="button expand request"}}
-                            {{t 'discard_changes'}}
-                        {{/link-to}}
-                        {{else}}
-                          {{#link-to 'home' classNames="button expand request"}}
-                            {{t 'discard_changes'}}
-                          {{/link-to}}
-                        {{/if}}
-                      </div>
-                    {{else}}
-                      <div class="small-12 columns">
-                        <a {{action 'submit' target=form}} class="button expand" id="request-submit"> {{t 'continue'}} </a>
-                      </div>
-                    {{/if}}
-                  </div>
-                {{/validatable-form}}
+                  {{/form-control}}
+                </div>
+              </div>
+              <div class="row description-of-need">
+                <div class="small-12 columns description">
+                  {{t 'order.request_purpose.need_description'}}
+                </div>
+                <div class="small-12 columns reason-of-need">
+                  {{t 'order.request_purpose.need_description_info'}}
+                </div>
+                {{#form-control}}
+                <i class="remove-text" aria-hidden="true" {{action "clearDescription"}}>{{fa-icon 'times-circle'}}</i>
+                {{auto-resize-textarea data-autoresize=true name="description" value=description required="required" pattern=".*\S.*" id="description"}}
+                <div class='input-error'> {{t 'order.request_purpose.description_warning'}} </div>
+                {{/form-control}}
+              </div>
+              <div class="row">
+                {{#if isEditing}}
+                <div class="small-6 medium-6 large-6 columns">
+                  <a {{action 'submit' target=form}} class="button expand" id="request-submit"> {{t 'save_changes'}}
+                  </a>
+                </div>
+                <div class="small-6 medium-6 large-6 columns">
+                  {{#if (is-equal prevPath "orders.booking")}}
+                  {{#link-to 'orders.booking' order.id classNames="button expand request"}}
+                  {{t 'discard_changes'}}
+                  {{/link-to}}
+                  {{else if (is-equal previousRouteName 'my_orders') }}
+                  {{#link-to "my_orders" classNames="button expand request"}}
+                  {{t 'discard_changes'}}
+                  {{/link-to}}
+                  {{else}}
+                  {{#link-to 'home' classNames="button expand request"}}
+                  {{t 'discard_changes'}}
+                  {{/link-to}}
+                  {{/if}}
+                </div>
+                {{else}}
+                <div class="small-12 columns">
+                  <a {{action 'submit' target=form}} class="button expand" id="request-submit"> {{t 'continue'}} </a>
+                </div>
+                {{/if}}
+              </div>
+              {{/validatable-form}}
             </section>
-            </div>
+          </div>
         </div>
       </div>
     </div>

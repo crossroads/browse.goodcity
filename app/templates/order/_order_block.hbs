@@ -17,35 +17,35 @@
   </div>
   <div class="row order_body">
     <div class="arrow-right">
-      <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      <i>{{fa-icon 'chevron-right'}}</i>
     </div>
 
     {{#if (is-and order.orderTransport order.orderTransport.scheduledAt)}}
-      <div class="row">
-        <div class="small-3 columns field">
-          {{ t "my_orders.due_date" }}
-        </div>
-        <div class="small-6 columns value schedule">
-          {{  display-datetime order.orderTransport.scheduledAt format="dddd Do MMMM hh:mm a" }}
-        </div>
-        <div class="small-3 columns unread-message-count">
-          {{#if order.hasUnreadMessages}}
-            {{partial 'orders/unread_message_bubble'}}
-            {{fa-icon 'comments-o' size="2x"}}
-          {{/if}}
-        </div>
+    <div class="row">
+      <div class="small-3 columns field">
+        {{ t "my_orders.due_date" }}
       </div>
+      <div class="small-6 columns value schedule">
+        {{  display-datetime order.orderTransport.scheduledAt format="dddd Do MMMM hh:mm a" }}
+      </div>
+      <div class="small-3 columns unread-message-count">
+        {{#if order.hasUnreadMessages}}
+        {{partial 'orders/unread_message_bubble'}}
+        {{fa-icon 'comments-o' size="2x"}}
+        {{/if}}
+      </div>
+    </div>
     {{/if}}
 
     {{#if order.beneficiary}}
-      <div class="row">
-        <div class="small-4 columns field">
-          {{ t "my_orders.submitted_for_client" }}
-        </div>
-        <div class="small-4 columns value beneficiary">
-          {{order.beneficiary.title}} {{order.beneficiary.firstName}} {{order.beneficiary.lastName}}
-        </div>
+    <div class="row">
+      <div class="small-4 columns field">
+        {{ t "my_orders.submitted_for_client" }}
       </div>
+      <div class="small-4 columns value beneficiary">
+        {{order.beneficiary.title}} {{order.beneficiary.firstName}} {{order.beneficiary.lastName}}
+      </div>
+    </div>
     {{/if}}
   </div>
 </div>

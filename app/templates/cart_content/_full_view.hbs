@@ -1,6 +1,6 @@
 <div class="cart-controls">
   <p id="messageBoxText">
-    <i class="fa fa-truck" aria-hidden="true"></i> {{t "cart_content.your_request"}}
+    <i>{{fa-icon 'truck'}}</i> {{t "cart_content.your_request"}}
   </p>
   <div class="row">
     <div class="small-6 columns">
@@ -15,40 +15,41 @@
     </div>
   </div>
 </div>
-
 <div class="row item-collection">
   <div class="small-12 columns">
 
     {{#each cart.groupedPackages as |row|}}
-        <li>
-          <div class="row">
-            <div class="small-3 columns cart-redirect-link {{if (is-not row.isAvailable) disabled}}" {{action 'showItemDetails' row.record}}>
-              <!-- Thumbnail -->
-              <img 
-                class="thumb-image {{unless row.isAvailable 'grayed-image'}}"
-                src="{{row.record.favouriteImage.cartImageUrl}}" />
-            </div>
+    <li>
+      <div class="row">
+        <div class="small-3 columns cart-redirect-link {{if (is-not row.isAvailable) disabled}}"
+          {{action 'showItemDetails' row.record}}>
+          <!-- Thumbnail -->
+          <img class="thumb-image {{unless row.isAvailable 'grayed-image'}}"
+            src="{{row.record.favouriteImage.cartImageUrl}}" />
+        </div>
 
-            <div class="small-6 columns cart-redirect-link {{if (is-not row.isAvailable) disabled}}" {{action 'showItemDetails' row.record}}>
-              <!-- Title -->
-              {{row.record.packageType.name}}
+        <div class="small-6 columns cart-redirect-link {{if (is-not row.isAvailable) disabled}}"
+          {{action 'showItemDetails' row.record}}>
+          <!-- Title -->
+          {{row.record.packageType.name}}
 
-              <!-- Availability -->
-              {{#unless row.isAvailable}}
-                <div class="unavailable red-warning">{{t "cart_content.unavailable"}}</div>
-              {{/unless}}
-            </div>
+          <!-- Availability -->
+          {{#unless row.isAvailable}}
+          <div class="unavailable red-warning">{{t "cart_content.unavailable"}}</div>
+          {{/unless}}
+        </div>
 
-            <div class="small-3 columns remove_link" {{action 'remove' row.record target=cart}}>
-              <i class="fa fa-times" aria-hidden="true"></i>
-              <span>{{t "cart_content.remove"}}</span>
-            </div>
-          </div>
-        </li>
-      {{else}}
-      <div align="center" class="cart-message-box">
-        <p>{{t "cart_content.empty_cart"}}<b><a {{action 'displayCart'}} class="empty-cart-message">{{t "cart_content.find_items"}}</a></b></p>
+        <div class="small-3 columns remove_link" {{action 'remove' row.record target=cart}}>
+          <i>{{fa-icon 'times'}}</i>
+          <span>{{t "cart_content.remove"}}</span>
+        </div>
       </div>
+    </li>
+    {{else}}
+    <div align="center" class="cart-message-box">
+      <p>{{t "cart_content.empty_cart"}}<b><a {{action 'displayCart'}}
+            class="empty-cart-message">{{t "cart_content.find_items"}}</a></b></p>
+    </div>
     {{/each}}
 
   </div>

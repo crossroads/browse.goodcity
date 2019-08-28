@@ -4,8 +4,8 @@
       <div class="row">
         <div class="small-2 medium-2 large-1 columns back_button">
           {{#link-to 'account_details' class="back_icon"}}
-            {{fa-icon 'angle-left'}}
-            <span class="organisation_back"> {{t "account.back"}}</span>
+          {{fa-icon 'angle-left'}}
+          <span class="organisation_back"> {{t "account.back"}}</span>
           {{/link-to}}
         </div>
         <div class="small-10 large-10 medium-10 columns">
@@ -17,7 +17,7 @@
             disabled=false}}
 
           {{#if hasSearchText}}
-            <i class="fa fa-times-circle" {{action "clearSearch"}}></i>
+          <i {{action "clearSearch"}}>{{fa-icon 'times-circle'}}</i>
           {{/if}}
         </div>
         <div class=" large-1 columns"></div>
@@ -34,34 +34,33 @@
   <div class="row search">
     <div class="small-12 medium-12 large-offset-2 large-8 columns">
       {{#if isLoading}}
-        <div class="loading_screen">
-          {{partial 'loading'}}
-        </div>
+      <div class="loading_screen">
+        {{partial 'loading'}}
+      </div>
       {{else}}
-        {{#if filteredResults}}
-          <ul class="list list-activity">
-            {{#each filteredResults as |organisation|}}
-              <li class="org_search">
-                <div class="row" {{action "selectOrganisation" organisation}}>
-                  <div class="small-12 large-12 columns">
-                    {{organisation.nameEn}}
-                  </div>
-                  <div class="small-12 large-12 columns">
-                    {{organisation.nameZhTw}}
-                  </div>
-                </div>
-              </li>
-            {{/each}}
-          </ul>
+      {{#if filteredResults}}
+      <ul class="list list-activity">
+        {{#each filteredResults as |organisation|}}
+        <li class="org_search">
+          <div class="row" {{action "selectOrganisation" organisation}}>
+            <div class="small-12 large-12 columns">
+              {{organisation.nameEn}}
+            </div>
+            <div class="small-12 large-12 columns">
+              {{organisation.nameZhTw}}
+            </div>
+          </div>
+        </li>
+        {{/each}}
+      </ul>
 
-          {{#infinity-loader infinityModel= filteredResults}}
-          {{/infinity-loader}}
+      {{#infinity-loader infinityModel= filteredResults}}
+      {{/infinity-loader}}
 
-        {{else if hasNoResults}}
-          <div class='no_result'>{{t "no_search_results"}}</div>
-        {{/if}}
+      {{else if hasNoResults}}
+      <div class='no_result'>{{t "no_search_results"}}</div>
+      {{/if}}
       {{/if}}
     </div>
   </div>
 </section>
-

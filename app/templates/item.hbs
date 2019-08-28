@@ -1,6 +1,6 @@
 <nav class="tab-bar item-controls show-for-small tab-bar-placeholder">
 </nav>
-
+{{debugger}}
 <nav class="tab-bar item-controls">
   <section class='main-section'>
     <div class="row">
@@ -13,25 +13,25 @@
 
       <div class="large-4 medium-4 small-12 columns item-page">
         <div class="no-avatar left show-for-small item-remove-icon" {{action 'back'}}>
-          <i class="fa fa-2x fa-times remove-icon"></i>
+          <i class="remove-icon">{{fa-icon 'times'}}</i>
         </div>
 
         {{#if showPrevNextButtons}}
-          <ul class="text-right pagination right">
-            <li class="arrow prev enabled-arrow" {{action "setDirectionAndRender" "moveRight" on="click"}}>
-              <a disabled="{{noPreviousItem}}" class="no-avatar">
-                <i class="fa fa-arrow-left"></i>
-                <span class="hide-for-small {{if hasCartItems 'narrow' ''}}">{{t "itemdetail.previous"}}</span>
-              </a>
-            </li>
+        <ul class="text-right pagination right">
+          <li class="arrow prev enabled-arrow" {{action "setDirectionAndRender" "moveRight" on="click"}}>
+            <a disabled="{{noPreviousItem}}" class="no-avatar">
+              <i>{{fa-icon 'arrow-left'}}</i>
+              <span class="hide-for-small {{if hasCartItems 'narrow' ''}}">{{t "itemdetail.previous"}}</span>
+            </a>
+          </li>
 
-            <li class="arrow next enabled-arrow" {{action "setDirectionAndRender" "moveLeft" on="click"}}>
-              <a disabled="{{noNextItem}}" class="no-avatar">
-                <span class="hide-for-small {{if hasCartItems 'narrow' ''}}">{{t "itemdetail.next"}}</span>
-                <i class="fa fa-arrow-right"></i>
-              </a>
-            </li>
-          </ul>
+          <li class="arrow next enabled-arrow" {{action "setDirectionAndRender" "moveLeft" on="click"}}>
+            <a disabled="{{noNextItem}}" class="no-avatar">
+              <span class="hide-for-small {{if hasCartItems 'narrow' ''}}">{{t "itemdetail.next"}}</span>
+              <i>{{fa-icon 'arrow-right'}}</i>
+            </a>
+          </li>
+        </ul>
         {{/if}}
 
       </div>
@@ -42,76 +42,77 @@
 <section class="main-section view-item {{direction}}">
   {{#liquid-bind item as |item| }}
 
-    <div class="row complete_item_view">
-      <div class="large-4 medium-4 small-12 columns images-section right">
-        {{!-- IMAGES SECTION --}}
-        {{image-preview item=item previewUrl=previewUrl smallScreenPreviewUrl=smallScreenPreviewUrl}}
+  <div class="row complete_item_view">
+    <div class="large-4 medium-4 small-12 columns images-section right">
+      {{!-- IMAGES SECTION --}}
+      {{image-preview item=item previewUrl=previewUrl smallScreenPreviewUrl=smallScreenPreviewUrl}}
 
-        <div class="row hide-for-small" >
-          {{#if hideThumbnails}}
-            {{#each item.sortedImages key="@index" as |image|}}
-              <img class="thumb-image {{if (is-equal previewUrl image.previewImageUrl) 'thumb'}}" src="{{image.thumbImageUrl}}" {{action "showPreview" image on="click"}} />
-            {{/each}}
-          {{/if}}
-        </div>
-
-        {{!--  --}}
+      <div class="row hide-for-small">
+        {{#if hideThumbnails}}
+        {{#each item.sortedImages key="@index" as |image|}}
+        <img class="thumb-image {{if (is-equal previewUrl image.previewImageUrl) 'thumb'}}"
+          src="{{image.thumbImageUrl}}" {{action "showPreview" image on="click"}} />
+        {{/each}}
+        {{/if}}
       </div>
 
-      <div class="large-8 medium-8 small-12 columns">
-        <nav class='tab-bar show-for-small item_category'>
-          <h1>
-            <section class="item_type">
-              {{item.packageType.name}}
-            </section>
-          </h1>
-        </nav>
-
-        {{!--  --}}
-
-        <div class="all-items main-section">
-          <div class="item_details">
-            {{t "itemdetail.condition"}}: {{item.donorCondition.name}}
-          </div>
-
-          {{#each allPackages key="@index" as |package|}}
-            <div class="item_name">{{package.notes}}</div>
-            <p>
-              {{#if session.isLoggedIn}}
-                {{#if isOrderFulfilmentUser }}
-                  <div class="item_details" {{ action 'goToStockItem' package.id }}>
-                    {{t "itemdetail.inventory_number"}}: <span class="inventory_redirect">{{package.inventoryNumber}}</span>
-                  </div>
-                {{/if}}
-              {{/if}}
-              <div class="item_details">
-                {{t "itemdetail.quantity"}}: {{package.quantity}}
-              </div>
-              <div class="item_details">
-                {{#if package.dimensions}}
-                  {{t "itemdetail.size"}}: {{package.dimensions}}
-                {{/if}}
-              </div>
-            </p>
-          {{/each}}
-
-          {{#if presentInCart}}
-            <button class="request-item" {{action 'remove' item target=cart}}> {{t "item.remove_item"}} </button>
-          {{else}}
-            <button class="request-item" {{action 'add' item target=cart}}> {{t "item.request_item"}} </button>
-          {{/if}}
-
-          <div class="item_details item_categories">
-            {{#each item.allPackageCategories key="@index" as |category|}}
-              <div class="category_link" {{action "setChildCategory" category}}>
-                <span class="underline_text">{{category.name}}</span>
-              </div>
-            {{/each}}
-          </div>
-        </div>
-        {{!--  --}}
-      </div>
+      {{!--  --}}
     </div>
+
+    <div class="large-8 medium-8 small-12 columns">
+      <nav class='tab-bar show-for-small item_category'>
+        <h1>
+          <section class="item_type">
+            {{item.packageType.name}}
+          </section>
+        </h1>
+      </nav>
+
+      {{!--  --}}
+
+      <div class="all-items main-section">
+        <div class="item_details">
+          {{t "itemdetail.condition"}}: {{item.donorCondition.name}}
+        </div>
+
+        {{#each allPackages key="@index" as |package|}}
+        <div class="item_name">{{package.notes}}</div>
+        <p>
+          {{#if session.isLoggedIn}}
+          {{#if isOrderFulfilmentUser }}
+          <div class="item_details" {{ action 'goToStockItem' package.id }}>
+            {{t "itemdetail.inventory_number"}}: <span class="inventory_redirect">{{package.inventoryNumber}}</span>
+          </div>
+          {{/if}}
+          {{/if}}
+          <div class="item_details">
+            {{t "itemdetail.quantity"}}: {{package.quantity}}
+          </div>
+          <div class="item_details">
+            {{#if package.dimensions}}
+            {{t "itemdetail.size"}}: {{package.dimensions}}
+            {{/if}}
+          </div>
+        </p>
+        {{/each}}
+
+        {{#if presentInCart}}
+        <button class="request-item" {{action 'remove' item target=cart}}> {{t "item.remove_item"}} </button>
+        {{else}}
+        <button class="request-item" {{action 'add' item target=cart}}> {{t "item.request_item"}} </button>
+        {{/if}}
+
+        <div class="item_details item_categories">
+          {{#each item.allPackageCategories key="@index" as |category|}}
+          <div class="category_link" {{action "setChildCategory" category}}>
+            <span class="underline_text">{{category.name}}</span>
+          </div>
+          {{/each}}
+        </div>
+      </div>
+      {{!--  --}}
+    </div>
+  </div>
 
   {{/liquid-bind}}
 </section>
