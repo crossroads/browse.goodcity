@@ -84,7 +84,8 @@
                   {{t 'order.request_purpose.need_description_info'}}
                 </div>
                 {{#form-control}}
-                <i class="remove-text" aria-hidden="true" {{action "clearDescription"}}>{{fa-icon 'times-circle'}}</i>
+                <i class="fa remove-text" aria-hidden="true"
+                  {{action "clearDescription"}}>{{fa-icon 'times-circle'}}</i>
                 {{auto-resize-textarea data-autoresize=true name="description" value=description required="required" pattern=".*\S.*" id="description"}}
                 <div class='input-error'> {{t 'order.request_purpose.description_warning'}} </div>
                 {{/form-control}}

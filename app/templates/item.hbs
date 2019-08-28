@@ -13,14 +13,14 @@
 
       <div class="large-4 medium-4 small-12 columns item-page">
         <div class="no-avatar left show-for-small item-remove-icon" {{action 'back'}}>
-          <i class="remove-icon">{{fa-icon 'times'}}</i>
+          <i class="fa remove-icon">{{fa-icon 'times'}}</i>
         </div>
 
         {{#if showPrevNextButtons}}
         <ul class="text-right pagination right">
           <li class="arrow prev enabled-arrow" {{action "setDirectionAndRender" "moveRight" on="click"}}>
             <a disabled="{{noPreviousItem}}" class="no-avatar">
-              <i>{{fa-icon 'arrow-left'}}</i>
+              <i class="fa">{{fa-icon 'arrow-left'}}</i>
               <span class="hide-for-small {{if hasCartItems 'narrow' ''}}">{{t "itemdetail.previous"}}</span>
             </a>
           </li>
@@ -28,7 +28,7 @@
           <li class="arrow next enabled-arrow" {{action "setDirectionAndRender" "moveLeft" on="click"}}>
             <a disabled="{{noNextItem}}" class="no-avatar">
               <span class="hide-for-small {{if hasCartItems 'narrow' ''}}">{{t "itemdetail.next"}}</span>
-              <i>{{fa-icon 'arrow-right'}}</i>
+              <i class="fa">{{fa-icon 'arrow-right'}}</i>
             </a>
           </li>
         </ul>

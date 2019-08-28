@@ -3,7 +3,7 @@
     <div class="row fixed_search_header search-box ui items-search">
       <div class="small-3 columns back_button">
         <a {{action "cancelSearch"}} class="back-link">
-          <i class="back_icon">{{fa-icon 'angle-left'}}</i>
+          <i class="fa back_icon">{{fa-icon 'angle-left'}}</i>
           <span class="back_text">
             {{#if inlineDescription}}
             {{t 'cancel'}}
@@ -22,7 +22,7 @@
           value=searchText }}
 
         {{#if hasSearchText}}
-        <i {{action "clearSearch"}}>{{fa-icon 'times-circle'}}</i>
+        <i class="fa" {{action "clearSearch"}}>{{fa-icon 'times-circle'}}</i>
         {{/if}}
       </div>
     </div>

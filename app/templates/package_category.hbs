@@ -4,7 +4,7 @@
       <h1 class="title hide-for-small">{{model.name}}</h1>
       <section class="search_icon right-small">
         {{#link-to "search_goods"}}
-          <i aria-hidden="true" class="fa fa-search"></i>
+        <i class="fa">{{fa-icon 'search'}}</i>
         {{/link-to}}
       </section>
       <div class="browse-item-navbar">
@@ -20,7 +20,7 @@
       </div>
       <div class="small-4 large-2 columns dropdown" align="left">
         {{ select-list class="package-category" content=sortOptions on-change=(action (mut selectedSort)) }}
-        <i class="fa fa-sort-amount-desc dropdown" aria-hidden="true"></i>
+        <i class="fa dropdown">{{fa-icon 'sort-amount-down'}}</i>
       </div>
     </div>
 

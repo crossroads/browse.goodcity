@@ -13,7 +13,7 @@
   {{#if showSearchIcon}}
   {{#link-to "search_goods"}}
   <section class="right-small {{if hasCartItems 'cart-icon-with-search' 'search-icon'}}" align="center">
-    <i aria-hidden="true" class="fa fa-search"></i>
+    <i class="fa">{{fa-icon 'search'}}</i>
   </section>
   {{/link-to}}
   {{/if}}
@@ -59,14 +59,14 @@
     {{#if isUserLoggedIn}}
     <li>
       <a href="#" class="menu-5" {{action "logMeOut"}}>
-        <i>{{fa-icon 'sign-out'}}</i>
+        <i class="fa">{{fa-icon 'sign-out-alt'}}</i>
         <div>{{t "logout.logout"}}</div>
       </a>
     </li>
     {{else}}
     <li>
       {{#link-to "login" class="menu-5 login"}}
-      <i class="fa fa-sign-out"></i>
+      <i class="fa">{{fa-icon 'sign-out-alt'}}</i>
       <div>{{t "application.sidebar.login"}}</div>
       {{/link-to}}
     </li>
