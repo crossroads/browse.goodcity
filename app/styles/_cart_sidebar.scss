@@ -57,12 +57,14 @@
 
   .button {
     margin-left: 0 !important;
+
     @media #{$small-only} {
       font-size: 0.7rem !important;
     }
   }
 
-  .button.secondary, button.secondary {
+  .button.secondary,
+  button.secondary {
     border-color: #fff;
     background-color: transparent;
   }
@@ -79,6 +81,7 @@
 .cart-redirect-link {
   background-color: transparent !important;
   cursor: pointer;
+
   &.disabled {
     cursor: default;
     pointer-events: none;
@@ -87,8 +90,12 @@
 
 .cart-icon {
   font-size: 1.3rem;
-  vertical-align: text-top;
+  vertical-align: baseline;
   color: white;
+
+  svg {
+    transform: scaleX(-1);
+  }
 }
 
 .show_cart_link {
@@ -103,11 +110,12 @@
   }
 }
 
-.cart{
+.cart {
   &.unread {
     position: absolute;
     right: 1.5rem;
     margin-top: -.3rem;
+
     .unread_length {
       line-height: 1.3rem;
       width: 1.2rem;
@@ -125,6 +133,7 @@
     }
   }
 }
+
 .right-small {
   border-left: none;
   cursor: pointer;
@@ -137,12 +146,12 @@
 }
 
 .my_cart {
-  width: 100%!important;
+  width: 100% !important;
   background-color: inherit !important;
   padding: 2rem 4rem !important;
 
   @media #{$small-only} {
-    padding: 2rem 0.5rem!important;
+    padding: 2rem 0.5rem !important;
   }
 }
 
@@ -180,6 +189,7 @@
   font-size: 0.8rem;
   text-align: center;
   width: 96.5% !important;
+
   i {
     color: inherit;
     vertical-align: middle;
