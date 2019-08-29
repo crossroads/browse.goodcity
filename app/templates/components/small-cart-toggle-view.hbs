@@ -3,7 +3,11 @@
 <div class="show_cart_summary" {{action "toggleCartSummary"}}>
   <i class="fa cart-icon">{{fa-icon 'truck'}}</i>
   {{t 'order.cart_details.cart_summary'}}
-  <i>{{if showCartSummary 'fa-icon angle-double-up' 'fa-icon angle-double-down'}}</i>
+  {{#if showCartSummary}}
+  {{ fa-icon 'angle-double-up'}}
+  {{else}}
+  {{ fa-icon 'angle-double-down' }}
+  {{/if}}
 </div>
 
 {{#if showCartSummary}}

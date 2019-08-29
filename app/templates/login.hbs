@@ -13,7 +13,7 @@
       </nav>
 
       {{#unless cart.isEmpty}}
-        {{small-cart-toggle-view}}
+      {{small-cart-toggle-view}}
       {{/unless}}
 
       {{#validatable-form onSubmit=(action 'resendPin') as |form|}}
@@ -34,7 +34,7 @@
               <div class="small-12 medium-8 columns">
                 {{input value=mobileOrEmail classNames="number_input center_align_placeholder" id="mobile" type=text pattern="^([456789]\d{7})|([^@\s]+@[^@\s]+)$" required='true'}}
                 <div class="small-12 columns input-error warning_empty login">
-                  {{fa-icon "warning"}}&nbsp;&nbsp;{{t "login.mobile_email_warning"}}
+                  {{fa-icon "exclamation-triangle"}}&nbsp;&nbsp;{{t "login.mobile_email_warning"}}
                 </div>
               </div>
               {{/form-control}}
