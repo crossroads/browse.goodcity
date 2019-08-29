@@ -20,6 +20,10 @@
     font-size: 1.5rem;
     margin-right: 0.5rem;
     vertical-align: bottom;
+
+    svg {
+      transform: scaleX(-1);
+    }
   }
 
   a {
