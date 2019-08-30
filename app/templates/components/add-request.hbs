@@ -11,7 +11,7 @@
         {{numeric-input id=(concat 'quantity' request.id) name="qty" value=request.quantity maxlength="8" required='true' pattern="\d{1,8}" classNames="add-quantity"}}
       </div>
       <div class='small-2 columns icon-center remove-request remove-request-click'>
-        <i class='icon' {{action "removeRequest" request.id on="click"}}>{{ font-icon 'times' size="2x" }}</i>
+        <i class='icon' {{action "removeRequest" request.id on="click"}}>{{ fa-icon 'times-circle' size="2x" }}</i>
       </div>
     </div>
     {{!-- <div class="small-12 columns"> --}}
