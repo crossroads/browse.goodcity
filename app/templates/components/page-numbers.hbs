@@ -1,52 +1,52 @@
 <div>
   <ul class="pagination">
     {{#if canStepBackward}}
-      <li class="arrow prev enabled-arrow">
-        <a href="#" {{action "incrementPage" -1}}>
-          <i class="fa fa-arrow-left"></i>
-          <span class="hide-for-small">{{t "page.previous"}}</span>
-        </a>
-      </li>
+    <li class="arrow prev enabled-arrow">
+      <a href="#" {{action "incrementPage" -1}}>
+        <i>{{fa-icon 'arrow-left'}}</i>
+        <span class="hide-for-small">{{t "page.previous"}}</span>
+      </a>
+    </li>
     {{else}}
-      <li class="arrow prev disabled">
-        <a href="#" {{action "incrementPage" -1}} >
-          <i class="fa fa-arrow-left"></i>
-          <span class="hide-for-small">{{t "page.previous"}}</span>
-        </a>
-      </li>
+    <li class="arrow prev disabled">
+      <a href="#" {{action "incrementPage" -1}}>
+        <i>{{fa-icon 'arrow-left'}}</i>
+        <span class="hide-for-small">{{t "page.previous"}}</span>
+      </a>
+    </li>
     {{/if}}
 
     {{#each pageItems key="@index" as |item|}}
-      {{#if item.dots}}
-        <li class="dots disabled">
-          <span>...</span>
-        </li>
-      {{/if}}
-      {{#if item.current}}
-        <li class="active page-number">
-          <a>{{item.page}}</a>
-        </li>
-      {{else}}
-        <li class="page-number">
-          <a href="#" {{action "pageClicked" item.page}}>{{item.page}}</a>
-        </li>
-      {{/if}}
+    {{#if item.dots}}
+    <li class="dots disabled">
+      <span>...</span>
+    </li>
+    {{/if}}
+    {{#if item.current}}
+    <li class="active page-number">
+      <a>{{item.page}}</a>
+    </li>
+    {{else}}
+    <li class="page-number">
+      <a href="#" {{action "pageClicked" item.page}}>{{item.page}}</a>
+    </li>
+    {{/if}}
     {{/each}}
 
     {{#if canStepForward}}
-      <li class="arrow next enabled-arrow">
-        <a href="#" {{action "incrementPage" 1}}>
-          <span class="hide-for-small">{{t "page.next"}}</span>
-          <i class="fa fa-arrow-right"></i>
-        </a>
-      </li>
+    <li class="arrow next enabled-arrow">
+      <a href="#" {{action "incrementPage" 1}}>
+        <span class="hide-for-small">{{t "page.next"}}</span>
+        <i>{{fa-icon 'arrow-right'}}</i>
+      </a>
+    </li>
     {{else}}
-      <li class="arrow next disabled">
-        <a href="#" {{action "incrementPage" 1}}>
-          <span class="hide-for-small">{{t "page.next"}}</span>
-          <i class="fa fa-arrow-right"></i>
-        </a>
-      </li>
+    <li class="arrow next disabled">
+      <a href="#" {{action "incrementPage" 1}}>
+        <span class="hide-for-small">{{t "page.next"}}</span>
+        <i>{{fa-icon 'arrow-right'}}</i>
+      </a>
+    </li>
     {{/if}}
   </ul>
 </div>

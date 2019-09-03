@@ -1,12 +1,14 @@
-.current{
-  select#category_select{
+.current {
+  select#category_select {
     color: #fff;
-    option{
+
+    option {
       color: black;
     }
   }
 }
-.package-category{
+
+.package-category {
   select {
     color: #fff;
 
@@ -15,48 +17,59 @@
     }
   }
 }
-.category_page{
-  .current{
+
+.category_page {
+  .current {
     color: white !important;
     font-weight: bolder !important;
   }
-  .sort{
-    .title{
+
+  .sort {
+    .title {
       padding-top: 7px;
     }
   }
+
   .all-categories,
   .sort {
     font-size: 0.7rem;
   }
-  .category_select{
-    label{
+
+  .category_select {
+    label {
       line-height: unset;
     }
+
     display: inline-flex;
   }
-  .dropdown-icon{
+
+  .dropdown-icon {
     font-size: 0.8rem;
     z-index: -1;
     cursor: pointer;
   }
 
-  .dropdown{
+  .dropdown {
     position: absolute;
     right: 0%;
+
     @media #{$small-only} {
       right: 22px;
     }
   }
-  .fa.dropdown{
+
+  .fa.dropdown {
     z-index: -1;
     position: absolute;
-    top: 26%;
+    top: 17%;
     right: 28%;
+    font-size: 0.75rem;
+
     @media #{$small-only} {
       right: 0%;
     }
   }
+
   .image-item-overlay {
     @media #{$small-only} {
       position: absolute;
@@ -76,6 +89,7 @@
       }
     }
   }
+
   select {
     -webkit-appearance: unset !important;
     background-color: unset;
@@ -88,14 +102,15 @@
     cursor: pointer;
   }
 }
+
 .tab-bar.category_page {
-  .current{
+  .current {
     color: #fff;
     font-weight: 900;
     font-size: 0.7em;
   }
 
-  .category_name{
+  .category_name {
     font-size: unset !important;
   }
 
@@ -103,7 +118,9 @@
     color: #a3aab6;
     text-transform: none;
   }
+
   height: auto;
+
   @media only screen and (min-width: 120.1em) {
     margin-left: 4rem !important;
   }
@@ -115,9 +132,10 @@
   }
 }
 
-.package-category{
+.package-category {
   select {
     color: #fff;
+
     @media #{$small-only} {
       max-width: 7rem;
     }
@@ -125,13 +143,13 @@
 }
 
 #lightGallery {
-  img.cl-loading-img{
+  img.cl-loading-img {
     max-width: 265px;
     max-height: 283px;
   }
 
   .small-screen-preview {
-    img.cl-loading-img{
+    img.cl-loading-img {
       height: 18rem;
       margin-left: 25%;
     }
@@ -144,7 +162,7 @@
   }
 }
 
-.main-section.category-items-list{
+.main-section.category-items-list {
   @media #{$small-only} {
     padding-left: 0rem;
   }

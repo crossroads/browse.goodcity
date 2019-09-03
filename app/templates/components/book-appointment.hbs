@@ -1,12 +1,13 @@
 {{#if session.isLoggedIn}}
-  <div class="button book-appointment {{if buttonStyle buttonStyle 'small action' }}" {{action "redirectAsPerUserDetails"}}>
-    <i class="fa fa-calendar"></i>
-    {{t (if isMyOrdersRoute "home.visit.new_appointment" "home.visit.action")}}
-  </div>
+<div class="button book-appointment {{if buttonStyle buttonStyle 'small action' }}"
+  {{action "redirectAsPerUserDetails"}}>
+  <i class="fa">{{fa-icon 'calendar'}}</i>
+  {{t (if isMyOrdersRoute "home.visit.new_appointment" "home.visit.action")}}
+</div>
 {{else}}
-  {{#link-to "login" (query-params bookAppointment=true)}}
-    <div class="button book-appointment {{if buttonStyle buttonStyle 'small action' }}">
-      {{ t "home.visit.action" }} <i class="fa fa-calendar"></i>
-    </div>
-  {{/link-to}}
+{{#link-to "login" (query-params bookAppointment=true)}}
+<div class="button book-appointment {{if buttonStyle buttonStyle 'small action' }}">
+  {{ t "home.visit.action" }} <i class="fa">{{fa-icon 'calendar'}}</i>
+</div>
+{{/link-to}}
 {{/if}}

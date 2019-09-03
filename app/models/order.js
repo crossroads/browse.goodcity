@@ -9,25 +9,47 @@ export default Model.extend({
   state: attr("string"),
   purposeDescription: attr("string"),
   orderType: attr("string"),
-  ordersPackages: hasMany("orders_packages", { async: false }),
+  ordersPackages: hasMany("orders_packages", {
+    async: false
+  }),
   orderTransportId: attr("string"),
-  orderTransport: belongsTo("order_transport", { async: false }),
-  address: belongsTo("address", { async: false }),
-  organisation: belongsTo("organisation", { async: false }),
-  createdById: belongsTo("user", { async: false }),
+  orderTransport: belongsTo("order_transport", {
+    async: false
+  }),
+  address: belongsTo("address", {
+    async: false
+  }),
+  organisation: belongsTo("organisation", {
+    async: false
+  }),
+  createdById: belongsTo("user", {
+    async: false
+  }),
   createdAt: attr("date"),
   updatedAt: attr("date"),
   detailType: attr("string"),
   districtId: attr("number"),
-  messages: hasMany("message", { async: false }),
-  ordersPurposes: hasMany("orders_purpose", { async: false }),
+  messages: hasMany("message", {
+    async: false
+  }),
+  ordersPurposes: hasMany("orders_purpose", {
+    async: false
+  }),
   beneficiaryId: attr("string"),
   bookingTypeId: attr("number"),
-  beneficiary: belongsTo("beneficiary", { async: true }),
+  beneficiary: belongsTo("beneficiary", {
+    async: true
+  }),
   peopleHelped: attr("number"),
-  goodcityRequests: hasMany("goodcity_request", { async: false }),
-  district: belongsTo("district", { async: false }),
-  bookingType: belongsTo("booking_type", { async: false }),
+  goodcityRequests: hasMany("goodcity_request", {
+    async: false
+  }),
+  district: belongsTo("district", {
+    async: false
+  }),
+  bookingType: belongsTo("booking_type", {
+    async: false
+  }),
 
   isGoodCityOrder: Ember.computed.equal("detailType", "GoodCity"),
   isDraft: Ember.computed.equal("state", "draft"),
@@ -139,7 +161,7 @@ export default Model.extend({
     switch (state) {
       case "awaiting_dispatch":
       case "scheduled":
-        return "clock-o";
+        return "clock";
       case "processing":
         return "list";
       case "submitted":
@@ -151,7 +173,7 @@ export default Model.extend({
       case "closed":
         return "lock";
       case "draft":
-        return "pencil";
+        return "pencil-alt";
       default:
         return "";
     }

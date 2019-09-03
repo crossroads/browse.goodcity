@@ -1,74 +1,75 @@
 {{#unless hideHeaderBar}}
-  <nav class="tab-bar show-for-small">
-    <section class="left-small">
-      <a class="left-off-canvas-toggle menu-icon" href="#">
-        <span></span>
-      </a>
-    </section>
+<nav class="tab-bar show-for-small">
+  <section class="left-small">
+    <a class="left-off-canvas-toggle menu-icon" href="#">
+      <span></span>
+    </a>
+  </section>
 
-    <section class="middle tab-bar-section show-for-small">
-      <h1>{{pageTitle}}</h1>
-    </section>
+  <section class="middle tab-bar-section show-for-small">
+    <h1>{{pageTitle}}</h1>
+  </section>
 
-    {{#if showSearchIcon}}
-      {{#link-to "search_goods"}}
-        <section class="right-small {{if hasCartItems 'cart-icon-with-search' 'search-icon'}}" align="center">
-          <i aria-hidden="true" class="fa fa-search"></i>
-        </section>
-      {{/link-to}}
-    {{/if}}
+  {{#if showSearchIcon}}
+  {{#link-to "search_goods"}}
+  <section class="right-small {{if hasCartItems 'cart-icon-with-search' 'search-icon'}}" align="center">
+    <i class="fa">{{fa-icon 'search'}}</i>
+  </section>
+  {{/link-to}}
+  {{/if}}
 
-    {{#if hasCartItems}}
-      <section class="right-small" {{action 'displayCart'}}>
-        {{partial 'cart_truck_icon'}}
-      </section>
-    {{/if}}
-  </nav>
+  {{#if hasCartItems}}
+  <section class="right-small" {{action 'displayCart'}}>
+    {{partial 'cart_truck_icon'}}
+  </section>
+  {{/if}}
+</nav>
 {{/unless}}
 
 <aside class="left-off-canvas-menu menu-list {{if isAndroidBrowser "move-bottom" ""}}">
   <ul class="off-canvas-list menu">
     <li>
       {{#link-to "home" class="menu-1 home"}}
-        <i class="fa fa-home"></i>
-        <div>{{t "application.sidebar.home"}}</div>
+      <i>{{fa-icon 'home'}}</i>
+      <div>{{t "application.sidebar.home"}}</div>
       {{/link-to}}
     </li>
 
-     <li>
+    <li>
       {{#link-to "browse" class="menu-2 browse"}}
-        <i class="fa fa-folder-open"></i>
-        <div>{{t "application.sidebar.browse"}}</div>
+      <i>{{fa-icon 'folder-open'}}</i>
+      <div>{{t "application.sidebar.browse"}}</div>
       {{/link-to}}
     </li>
 
     <li>
       {{#link-to "my_orders" class="menu-3 my_dashboard"}}
-        <i class="fa fa-th-large"></i>
-        <div>{{t "my_dashboard.title"}}</div>
+      <i>{{fa-icon 'th-large'}} </i>
+      <div>{{t "my_dashboard.title"}}</div>
       {{/link-to}}
     </li>
 
     <li>
       {{#link-to "about" class="menu-4 about"}}
-        <i class="fa fa-question"></i>
-        <div>{{t "application.sidebar.about"}}</div>
+      <i class="fa fa-question"></i>
+      <i>{{fa-icon 'question' }}</i>
+      <div>{{t "application.sidebar.about"}}</div>
       {{/link-to}}
     </li>
     {{#if isUserLoggedIn}}
-      <li>
-        <a href="#" class="menu-5" {{action "logMeOut"}}>
-          <i class="fa fa-sign-out"></i>
-          <div>{{t "logout.logout"}}</div>
-        </a>
-      </li>
+    <li>
+      <a href="#" class="menu-5" {{action "logMeOut"}}>
+        <i class="fa">{{fa-icon 'sign-out-alt'}}</i>
+        <div>{{t "logout.logout"}}</div>
+      </a>
+    </li>
     {{else}}
-      <li>
-        {{#link-to "login" class="menu-5 login"}}
-          <i class="fa fa-sign-out"></i>
-          <div>{{t "application.sidebar.login"}}</div>
-        {{/link-to}}
-      </li>
+    <li>
+      {{#link-to "login" class="menu-5 login"}}
+      <i class="fa">{{fa-icon 'sign-out-alt'}}</i>
+      <div>{{t "application.sidebar.login"}}</div>
+      {{/link-to}}
+    </li>
     {{/if}}
 
 
@@ -77,23 +78,23 @@
       <div class="line">
         <div>
           {{#link-to "terms" }}
-            <span>{{t "application.sidebar.terms"}} </span>
+          <span>{{t "application.sidebar.terms"}} </span>
           {{/link-to}}
         </div>
         <div>|</div>
         <div>
           {{#link-to "privacy" }}
-            <span>{{t "application.sidebar.privacy_policy"}}</span>
+          <span>{{t "application.sidebar.privacy_policy"}}</span>
           {{/link-to}}
         </div>
       </div>
       {{#if isMobileApp}}
-        <div class="line">{{t "application.sidebar.version" }} {{ appVersion }}</div>
+      <div class="line">{{t "application.sidebar.version" }} {{ appVersion }}</div>
       {{/if}}
     </li>
   </ul>
 </aside>
 
 {{#if hasCartItems}}
-  {{partial "desktop_cart_sidebar"}}
+{{partial "desktop_cart_sidebar"}}
 {{/if}}

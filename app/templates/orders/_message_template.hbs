@@ -13,7 +13,7 @@
           {{#if message.myMessage}}
           {{t 'messages.you'}}
           {{else}}
-          <i class="user-icon">{{fa-icon 'user-circle' size="2x"}}</i>
+          <i class="fa user-icon">{{fa-icon 'user-circle' size="2x"}}</i>
           {{t "full_name" firstName=message.sender.firstName lastName=message.sender.lastName}}
           {{message.sender.roleInitials}}
           {{/if}}
@@ -35,7 +35,7 @@
       {{#if displayChatNote}}
       <div class="row">
         <div class="small-12 columns chat_note">
-          <i class="info-icon">{{fa-icon 'info-circle'}}</i>
+          <i class="fa info-icon">{{fa-icon 'info-circle'}}</i>
           {{t 'messages.chat_note'}}
         </div>
       </div>
@@ -59,4 +59,3 @@
     </div>
   </div>
 </div>
-

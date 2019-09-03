@@ -5,7 +5,7 @@
         <div class="row">
           <div class="small-2 medium-1 large-1 columns back_button">
             <div class="back_icon" {{action "back"}}>
-              {{fa-icon 'angle-left'}}
+              <i>{{fa-icon 'angle-left'}}</i>
               <span class="package_back"> {{t "search_goods.done"}}</span>
             </div>
           </div>
@@ -17,7 +17,7 @@
               value=searchText }}
 
             {{#if hasSearchText}}
-              <i class="fa fa-times-circle" {{action "clearSearch"}}></i>
+            <i class="fa" {{action "clearSearch"}}>{{fa-icon 'times-circle'}}</i>
             {{/if}}
           </div>
           <div class=" large-1 medium-1 columns"></div>
@@ -34,22 +34,23 @@
     <div class="row">
       <div class="small-12 medium-12 large-offset-1 large-10 columns">
         {{#if displayResults}}
-          {{#infinite-list height="80vh" loadMore=(action "loadMoreGoods") as |items| }}
-            <ul class="large-block-grid-5 small-block-grid-2 medium-block-grid-3 list-image items_list xxlarge-block-grid-4">
-              <label class="search_results title">{{t 'search_goods.title'}}</label>
-              {{#each items as |item|}}
-                <li class="goods_search list">
-                  <div class="row" {{action "selectItem" item}}>
-                    <div class="small-12 large-12 columns item">
-                      {{cloudinary-image-tag src=item.displayImageUrl item=item displayItemOverlay=true}}
-                    </div>
-                  </div>
-                </li>
-              {{else}}
-                <div class='no_result'>{{t "no_search_results"}}</div>
-              {{/each}}
-            </ul>
-          {{/infinite-list}}
+        {{#infinite-list height="80vh" loadMore=(action "loadMoreGoods") as |items| }}
+        <ul
+          class="large-block-grid-5 small-block-grid-2 medium-block-grid-3 list-image items_list xxlarge-block-grid-4">
+          <label class="search_results title">{{t 'search_goods.title'}}</label>
+          {{#each items as |item|}}
+          <li class="goods_search list">
+            <div class="row" {{action "selectItem" item}}>
+              <div class="small-12 large-12 columns item">
+                {{cloudinary-image-tag src=item.displayImageUrl item=item displayItemOverlay=true}}
+              </div>
+            </div>
+          </li>
+          {{else}}
+          <div class='no_result'>{{t "no_search_results"}}</div>
+          {{/each}}
+        </ul>
+        {{/infinite-list}}
         {{/if}}
       </div>
     </div>

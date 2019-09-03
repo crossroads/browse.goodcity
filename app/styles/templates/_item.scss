@@ -6,21 +6,24 @@
   @media only screen and (min-width: 120.1em) {
     margin-left: 4rem !important;
   }
-  &.main-section{
+
+  &.main-section {
     padding-top: 1rem;
     padding-left: 0;
-    @media #{$small-only}{
+
+    @media #{$small-only} {
       padding-top: 3.2rem;
     }
   }
 
-  .item_category{
+  .item_category {
     padding-left: 1rem;
   }
 
   .item_name {
     color: $white;
     font-size: 1rem;
+
     @media #{$small-only} {
       font-size: 0.9rem;
       color: #e6e6e6;
@@ -30,18 +33,21 @@
   .item_details {
     @extend .with_more_spacing;
     font-size: 0.9rem;
+
     @media #{$small-only} {
       font-size: 0.73rem;
     }
   }
 
-  .view-image{
+  .view-image {
     @media #{$small-only} {
       margin-left: -1rem;
     }
+
     img {
       display: block;
-      @media #{$small-only}{
+
+      @media #{$small-only} {
         padding-bottom: 0;
       }
     }
@@ -64,45 +70,54 @@
   #lightGallery {
     cursor: pointer;
     text-decoration: underline;
-    @media #{$small-only}{
+
+    @media #{$small-only} {
       background: #1A3964;
     }
   }
 
-  .item_type{
+  .item_type {
     font-size: 1.1rem;
     font-weight: bold;
   }
-  .item_category{
+
+  .item_category {
     margin-bottom: 1.1rem;
   }
-  .item_categories{
+
+  .item_categories {
     margin-bottom: 1rem;
+
     .category_link {
       display: inline-block;
       cursor: pointer;
+
       @media #{$small-only} {
         color: #dfefec;
       }
     }
+
     .underline_text {
       border-bottom: 1px solid #a3aab6;
     }
+
     .category_link:not(:last-of-type):after {
       content: ", "
     }
   }
-  .no_image{
+
+  .no_image {
     line-height: 18rem;
     text-align: center;
     margin-top: -15%;
   }
 }
 
-.item-controls{
+.item-controls {
   @media only screen and (min-width: 120.1em) {
     margin-left: 4rem !important;
   }
+
   @media #{$small-only} {
     border-bottom: none;
     top: -1rem;
@@ -117,17 +132,17 @@
   }
 }
 
-.item-page{
+.item-page {
 
   @media #{$small-only} {
     position: absolute;
     z-index: 1;
   }
 
-  .pagination{
+  .pagination {
     margin-top: 0.5rem;
 
-    @media #{$small-only}{
+    @media #{$small-only} {
       margin-top: 1.3rem;
       margin-right: .1rem;
     }
@@ -135,31 +150,42 @@
     li {
       a {
         border-radius: 0px;
-        &:hover, &:active{
+
+        &:hover,
+        &:active {
           transition: background-color 300ms ease-out;
           @extend .highlight_btn;
         }
-        &:focus{
+
+        &:focus {
           background: initial;
         }
+
+        @media #{$small-only} {
+          padding-top: 0.3rem;
+        }
       }
-      @media #{$small-only}{
+
+      @media #{$small-only} {
         background: none !important;
         margin-right: 1rem;
-        i{
-          font-size: 1rem!important;
-          font-weight: 700!important;
-          margin-top: .4rem!important;
+
+        i {
+          font-size: 1rem !important;
+          font-weight: 700 !important;
+          margin-top: .4rem !important;
           margin-left: -0.2rem;
         }
-        .fa-arrow-right{
+
+        .fa-arrow-right {
           margin-right: -0.1rem;
         }
       }
     }
   }
+
   a {
-    @media #{$small-only}{
+    @media #{$small-only} {
       color: black !important;
       top: 1.5rem;
       color: black;
@@ -169,14 +195,15 @@
       width: 2rem;
       height: 2rem;
       margin-left: 0.2rem;
-      i{
+
+      i {
         margin: -0.2rem 0 0 -.6rem;
       }
     }
   }
 }
 
-.profile{
+.profile {
   background-size: cover;
   width: 100%;
   height: 18rem;
@@ -190,6 +217,7 @@
 }
 
 .slick-slider {
+
   // height: 19.2vw;
   @media #{$small-only} {
     margin-bottom: -2px;
@@ -222,35 +250,34 @@
     }
   }
 
-  &.item-remove-icon{
+  &.item-remove-icon {
     margin-top: 1.5rem;
     cursor: pointer;
 
     .remove-icon {
       @media #{$small-only} {
         margin-left: .2rem;
-        font-size: 1.5rem!important;
-        margin-top: 0.2rem!important;
-        margin-left: -0.05rem!important;
+        font-size: 1.5rem !important;
+        margin-top: 0.2rem !important;
+        margin-left: -0.05rem !important;
       }
     }
   }
 }
 
-.package_category_link{
+.package_category_link {
   border-bottom: 1px solid #a3aab6;
   font-size: 1.125rem;
   cursor: pointer;
 }
 
-.package-type{
+.package-type {
   font-size: 1.125rem;
   font-weight: 700;
 }
 
-.package_catogory_header{
+.package_catogory_header {
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
 }
-
