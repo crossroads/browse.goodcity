@@ -104,6 +104,7 @@ export default Ember.Route.extend({
     } else if (error && _.isString(error)) {
       return error;
     } else if (
+      reason.errors.length &&
       reason.errors[0].detail &&
       reason.errors[0].detail.status == 422
     ) {
