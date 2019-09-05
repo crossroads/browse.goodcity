@@ -99,12 +99,19 @@ export default Ember.Route.extend({
       _.get(reason, "errors[0]") ||
       _.get(reason, "error");
 
-    if (error && _.isString(error)) {
+    if (_.get(reason, "errors[0].status") == 403) {
+      return this.get("i18n").t("not_allowed_error");
+    } else if (error && _.isString(error)) {
       return error;
+    } else if (
+      reason.errors.length &&
+      reason.errors[0].detail &&
+      reason.errors[0].detail.status == 422
+    ) {
+      return reason.errors[0].detail.message;
+    } else {
+      return this.get("i18n").t("unexpected_error");
     }
-    return _.get(reason, "errors[0].status") == 403
-      ? this.get("i18n").t("not_allowed_error")
-      : this.get("i18n").t("unexpected_error");
   },
 
   showErrorPopup(reason) {
@@ -148,8 +155,6 @@ export default Ember.Route.extend({
         return false;
       } else if (status === 401) {
         this.redirectToLogin();
-      } else if (status === 403) {
-        this.showErrorPopup(reason);
       } else {
         this.showErrorPopup(reason);
       }
