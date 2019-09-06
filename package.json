@@ -76,7 +76,6 @@
     "ember-export-application-global": "^2.0.0",
     "ember-font-awesome": "2.2.0",
     "ember-form-validator": "1.0.5",
-    "ember-i18n": "~5.1.0",
     "ember-infinite-list": "^1.0.4",
     "ember-infinity": "^0.2.5",
     "ember-load-initializers": "^1.0.0",
@@ -111,7 +110,7 @@
     "cordova-lib": "https://github.com/crossroads/goodcity-lib.git#master",
     "cordova-update-config": "^1.0.2",
     "ember-i18n-intl-migrator": "^0.4.0",
-    "ember-intl": "4",
+    "ember-intl": "^4.1.0",
     "jquery": "^3.2.0",
     "phantomjs-prebuilt": "^2.1.14",
     "yarn": "^1.9.2"
