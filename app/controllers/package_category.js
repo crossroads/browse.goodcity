@@ -26,10 +26,10 @@ export default Ember.Controller.extend({
   sortOptions: Ember.computed(function() {
     return [
       {
-        name: this.get("i18n").t("category.sort.newfirst"),
+        name: this.get("intl").t("category.sort.newfirst"),
         id: ["createdAt:desc"]
       },
-      { name: this.get("i18n").t("category.sort.oldfirst"), id: ["createdAt"] }
+      { name: this.get("intl").t("category.sort.oldfirst"), id: ["createdAt"] }
     ];
   }),
 

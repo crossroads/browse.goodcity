@@ -37,7 +37,7 @@ export default Model.extend({
   isClosed: Ember.computed.equal("state", "closed"),
   isProcessing: Ember.computed.equal("state", "processing"),
   isCancelled: Ember.computed.equal("state", "cancelled"),
-  i18n: Ember.inject.service(),
+  intl: Ember.inject.service(),
 
   isAppointment: Ember.computed("bookingType", function() {
     return this.get("bookingType.isAppointment");
@@ -105,10 +105,10 @@ export default Model.extend({
   appointmentTransport: Ember.computed(
     "orderTransport.transportType",
     function() {
-      let i18n = this.get("i18n");
+      let intl = this.get("intl");
       return this.get("orderTransport.transportType") === "self"
-        ? i18n.t("order.appointment.self_vehicle")
-        : i18n.t("order.appointment.hire_vehicle");
+        ? intl.t("order.appointment.self_vehicle")
+        : intl.t("order.appointment.hire_vehicle");
     }
   ),
 
@@ -175,7 +175,7 @@ export default Model.extend({
 
   transportLabel: Ember.computed("transportKey", function() {
     const key = this.get("transportKey");
-    return this.get("i18n").t(`my_orders.order_transports.${key}`);
+    return this.get("intl").t(`my_orders.order_transports.${key}`);
   }),
 
   transportKey: Ember.computed("orderTransport.transportType", function() {

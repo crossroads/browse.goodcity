@@ -37,11 +37,11 @@ export default Ember.Controller.extend(cancelOrderMixin, asyncTasksMixin, {
       let order = this.get("order");
 
       if (this.emptyCart()) {
-        return this.i18nAlert("cart_content.empty_cart", _.noop);
+        return this.intlAlert("cart_content.empty_cart", _.noop);
       }
 
       if (this.badCart()) {
-        return this.i18nAlert("items_not_available", _.noop);
+        return this.intlAlert("items_not_available", _.noop);
       }
 
       this.submitOrder(order).then(() => {

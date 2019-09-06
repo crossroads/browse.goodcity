@@ -1,5 +1,5 @@
 import Ember from "ember";
-import { translationMacro as t } from "ember-i18n";
+import { translationMacro as t } from "ember-intl";
 import AjaxPromise from "browse/utils/ajax-promise";
 
 const { getOwner } = Ember;
@@ -13,7 +13,7 @@ export default Ember.Controller.extend({
   searchText: "",
   fetchMoreResult: true,
   searchPlaceholder: t("search.placeholder"),
-  i18n: Ember.inject.service(),
+  intl: Ember.inject.service(),
 
   allPackageTypes: Ember.computed("fetchMoreResult", function() {
     return this.store.peekAll("package_type");

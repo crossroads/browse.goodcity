@@ -55,7 +55,7 @@ export default Ember.Mixin.create({
     }
   },
 
-  i18nAlert(key, cb) {
-    this.get("messageBox").alert(this.get("i18n").t(key), cb);
+  intlAlert(key, cb) {
+    this.get("messageBox").alert(this.get("intl").t(key), cb);
   }
 });

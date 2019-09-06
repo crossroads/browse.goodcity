@@ -19,7 +19,7 @@ export default Ember.Route.extend({
     applicationController.set("hideHeaderBar", true);
     applicationController.set(
       "pageTitle",
-      this.get("i18n").t(`${transition.targetName}.title`)
+      this.get("intl").t(`${transition.targetName}.title`)
     );
   },
 
@@ -31,7 +31,7 @@ export default Ember.Route.extend({
       applicationController.set("hideHeaderBar", false);
       applicationController.set(
         "pageTitle",
-        this.get("i18n").t("browse.title")
+        this.get("intl").t("browse.title")
       );
     }
   },

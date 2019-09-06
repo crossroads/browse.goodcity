@@ -38,10 +38,10 @@ export default Ember.Controller.extend(asyncTasksMixin, {
     const orderId = this.get("orderId");
     const order = this.store.peekRecord("order", orderId);
     if (this.emptyCart()) {
-      return this.i18nAlert("cart_content.empty_cart", _.noop);
+      return this.intlAlert("cart_content.empty_cart", _.noop);
     }
     if (this.badCart()) {
-      return this.i18nAlert("items_not_available", _.noop);
+      return this.intlAlert("items_not_available", _.noop);
     }
     await this.runTask(this.get("cart").checkoutOrder(order));
     this.transitionToRoute("orders.goods", orderId);

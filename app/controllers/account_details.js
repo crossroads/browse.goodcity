@@ -10,7 +10,7 @@ export default Ember.Controller.extend({
   authenticate: Ember.inject.controller(),
   messageBox: Ember.inject.service(),
   orderService: Ember.inject.service(),
-  i18n: Ember.inject.service(),
+  intl: Ember.inject.service(),
   organisationId: Ember.computed.alias("model.organisation.id"),
   organisationsUserId: Ember.computed.alias("model.organisationsUser.id"),
   user: Ember.computed.alias("model.user"),
@@ -47,7 +47,7 @@ export default Ember.Controller.extend({
   }),
 
   titles: Ember.computed(function() {
-    let translation = this.get("i18n");
+    let translation = this.get("intl");
     let mr = translation.t("account.user_title.mr");
     let mrs = translation.t("account.user_title.mrs");
     let miss = translation.t("account.user_title.miss");
