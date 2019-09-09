@@ -1,20 +1,18 @@
-import Ember from 'ember';
+import Ember from "ember";
 
 export default Ember.Component.extend({
-
-  isEnglish: Ember.computed('session.language', function() {
-    return this.get('session.language') === 'en';
+  isEnglish: Ember.computed("session.language", function() {
+    return this.get("session.language") === "en";
   }),
 
-  isChinese: Ember.computed('session.language', function() {
-    return this.get('session.language') === 'zh-tw';
+  isChinese: Ember.computed("session.language", function() {
+    return this.get("session.language") === "zh";
   }),
 
   actions: {
     setLanguage(language) {
-      this.set('session.language', language);
+      this.set("session.language", language);
       window.location.reload();
     }
   }
-
 });
