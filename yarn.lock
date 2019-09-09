@@ -5039,9 +5039,9 @@ cordova-lib@6.5.0:
     valid-identifier "0.0.1"
     xcode "^0.9.0"
 
-"cordova-lib@https://github.com/crossroads/goodcity-lib.git#master":
+"cordova-lib@https://github.com/crossroads/goodcity-lib.git#GCW-2783-Migrate-ember-i18n-to-ember-intl-in-browser-app-lib":
   version "0.0.0"
-  resolved "https://github.com/crossroads/goodcity-lib.git#822c1f8587c4c76f7cafb9717cf1c3cff5b0fc62"
+  resolved "https://github.com/crossroads/goodcity-lib.git#bf29342607d6b607eb30b933ff0cdc8d747957da"
   dependencies:
     bower "^1.8.8"
     codeclimate-test-reporter "^0.5.0"
