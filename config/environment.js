@@ -82,7 +82,7 @@ module.exports = function(environment) {
       BANNER_REOPEN_DAYS: 3
     },
 
-    i18n: {
+    intl: {
       defaultLocale: "en"
     },
     cordova: {
