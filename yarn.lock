@@ -6538,16 +6538,6 @@ ember-hash-helper-polyfill@^0.2.0:
     ember-cli-babel "^6.8.2"
     ember-cli-version-checker "^2.1.0"
 
-ember-i18n-intl-migrator@^0.4.0:
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/ember-i18n-intl-migrator/-/ember-i18n-intl-migrator-0.4.0.tgz#fe5ce3968e1e56d90091c23cadb8308ef7ef895e"
-  integrity sha512-oJuZYUHAVw2+F2wGoADZjwYJfotC6T4BhMxacdzG6O00nrSxF6RmK1wCmDLulJv4wP7tQuE+zbbtyS3aAanMSA==
-  dependencies:
-    chalk "^2.4.1"
-    execa "^1.0.0"
-    yamljs "^0.3.0"
-    yargs "^12.0.5"
-
 ember-infinite-list@^1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/ember-infinite-list/-/ember-infinite-list-1.0.4.tgz#12ded002454b2272afb2bab7b7561ca7ecb1099c"
@@ -16026,14 +16016,6 @@ yam@^1.0.0:
   dependencies:
     fs-extra "^4.0.2"
     lodash.merge "^4.6.0"
-
-yamljs@^0.3.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/yamljs/-/yamljs-0.3.0.tgz#dc060bf267447b39f7304e9b2bfbe8b5a7ddb03b"
-  integrity sha512-C/FsVVhht4iPQYXOInoxUM/1ELSf9EsgKH34FofQOp6hwCPrW4vG4w5++TED3xRUo8gD7l0P1J1dLlDYzODsTQ==
-  dependencies:
-    argparse "^1.0.7"
-    glob "^7.0.5"
 
 yargs-parser@^11.1.1:
   version "11.1.1"
