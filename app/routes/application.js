@@ -60,7 +60,7 @@ export default Ember.Route.extend({
 
     let language = this.get("session.language") || config.intl.defaultLocale;
     if (transition.queryParams.ln) {
-      language = transition.queryParams.ln === "zh" ? "zh" : "en";
+      language = transition.queryParams.ln === "zh-tw" ? "zh-tw" : "en";
     }
     this.set("session.language", language);
     this.set("intl.locale", language);

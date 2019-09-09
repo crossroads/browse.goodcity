@@ -6,7 +6,7 @@ export default Ember.Component.extend({
   }),
 
   isChinese: Ember.computed("session.language", function() {
-    return this.get("session.language") === "zh";
+    return this.get("session.language") === "zh-tw";
   }),
 
   actions: {
