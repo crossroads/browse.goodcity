@@ -109,7 +109,7 @@
     "cordova": "^6.5.0",
     "cordova-lib": "https://github.com/crossroads/goodcity-lib.git#GCW-2783-Migrate-ember-i18n-to-ember-intl-in-browser-app-lib",
     "cordova-update-config": "^1.0.2",
-    "ember-intl": "^4.1.0",
+    "ember-intl": "3.5.2",
     "jquery": "^3.2.0",
     "phantomjs-prebuilt": "^2.1.14",
     "yarn": "^1.9.2"
