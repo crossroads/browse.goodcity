@@ -17,7 +17,10 @@ moduleForModel("order", {
     "model:user-role",
     "model:role",
     "model:orders-purpose",
-    "service:intl"
+    "service:intl",
+    "config:environment",
+    "ember-intl@adapter:default",
+    "cldr:en, zh-tw"
   ]
 });
 
