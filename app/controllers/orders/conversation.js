@@ -8,7 +8,7 @@ export default detail.extend({
   isPrivate: false,
   order: Ember.computed.alias("model"),
   isMobileApp: config.cordova.enabled,
-  i18n: Ember.inject.service(),
+  intl: Ember.inject.service(),
   sortProperties: ["createdAt: asc"],
 
   noMessage: Ember.computed.empty("model.messages"),

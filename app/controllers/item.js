@@ -46,7 +46,7 @@ export default Ember.Controller.extend({
   linkDisplayName: Ember.computed("prevPath", "categoryObj", function() {
     let prevPath = this.get("prevPath");
     if (prevPath === "search_goods") {
-      return this.get("i18n").t("search_goods.back");
+      return this.get("intl").t("search_goods.back");
     }
     return this.get("categoryObj.name");
   }),

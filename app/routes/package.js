@@ -19,7 +19,7 @@ export default PublicRoute.extend({
     }
     this.controllerFor("application").set(
       "pageTitle",
-      this.get("i18n").t("itemdetail.view")
+      this.get("intl").t("itemdetail.view")
     );
   }
 });

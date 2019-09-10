@@ -127,7 +127,7 @@ export default Ember.Controller.extend({
           if ([401].indexOf(error.status) >= 0) {
             _this
               .get("messageBox")
-              .alert(this.get("i18n").t("unauthorized"), () => {
+              .alert(this.get("intl").t("unauthorized"), () => {
                 _this.transitionToRoute("/");
               });
           } else if ([422, 403].indexOf(error.status) >= 0) {

@@ -14,7 +14,7 @@ export default Ember.Controller.extend(cancelOrderMixin, {
   messageBox: Ember.inject.service(),
   orderService: Ember.inject.service(),
   cart: Ember.inject.service(),
-  i18n: Ember.inject.service(),
+  intl: Ember.inject.service(),
   showSidebar: true,
   isWideScreen: Ember.computed.alias("screenresize.isWideScreen"),
   isHomePage: Ember.computed("currentPath", function() {
@@ -121,7 +121,7 @@ export default Ember.Controller.extend(cancelOrderMixin, {
     this.set("showCartDetailSidebar", false);
     if (!this.get("cart.canCheckout")) {
       return this.get("messageBox").alert(
-        this.get("i18n").t("items_not_available"),
+        this.get("intl").t("items_not_available"),
         _.noop
       );
     }

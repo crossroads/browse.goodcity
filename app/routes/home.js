@@ -6,7 +6,7 @@ export default PublicRoute.extend({
     let applicationController = this.controllerFor("application");
     controller.set("cartLength", applicationController.get("cartLength"));
     controller.set("hasCartItems", applicationController.get("hasCartItems"));
-    applicationController.set("pageTitle", this.get("i18n").t("browse.title"));
+    applicationController.set("pageTitle", this.get("intl").t("browse.title"));
     applicationController.set("showSidebar", true);
     applicationController.set("hideHeaderBar", false);
   },

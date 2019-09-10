@@ -7,7 +7,7 @@ export default accountDetails.extend({
     applicationController.set("showSidebar", true);
     applicationController.set(
       "pageTitle",
-      this.get("i18n").t("my_dashboard.title")
+      this.get("intl").t("my_dashboard.title")
     );
   },
 
@@ -16,7 +16,7 @@ export default accountDetails.extend({
     if (isExiting) {
       this.controllerFor("application").set(
         "pageTitle",
-        this.get("i18n").t("browse.title")
+        this.get("intl").t("browse.title")
       );
     }
   }

@@ -8,7 +8,7 @@ export default Ember.Route.extend({
   logger: Ember.inject.service(),
   preloadService: Ember.inject.service(),
   messageBox: Ember.inject.service(),
-  i18n: Ember.inject.service(),
+  intl: Ember.inject.service(),
   previousRoute: null,
   isErrPopUpAlreadyShown: false,
 
@@ -55,15 +55,15 @@ export default Ember.Route.extend({
     try {
       localStorage.test = "isSafariPrivateBrowser";
     } catch (e) {
-      this.get("messageBox").alert(this.get("i18n").t("QuotaExceededError"));
+      this.get("messageBox").alert(this.get("intl").t("QuotaExceededError"));
     }
 
-    let language = this.get("session.language") || config.i18n.defaultLocale;
+    let language = this.get("session.language") || config.intl.defaultLocale;
     if (transition.queryParams.ln) {
       language = transition.queryParams.ln === "zh-tw" ? "zh-tw" : "en";
     }
     this.set("session.language", language);
-    this.set("i18n.locale", language);
+    this.set("intl.locale", language);
     this.set("previousRoute", transition);
     Ember.onerror = window.onerror = error => {
       if (error.errors && error.errors[0] && error.errors[0].status === "401") {
@@ -100,7 +100,7 @@ export default Ember.Route.extend({
       _.get(reason, "error");
 
     if (_.get(reason, "errors[0].status") == 403) {
-      return this.get("i18n").t("not_allowed_error");
+      return this.get("intl").t("not_allowed_error");
     } else if (error && _.isString(error)) {
       return error;
     } else if (
@@ -110,7 +110,7 @@ export default Ember.Route.extend({
     ) {
       return reason.errors[0].detail.message;
     } else {
-      return this.get("i18n").t("unexpected_error");
+      return this.get("intl").t("unexpected_error");
     }
   },
 
@@ -126,7 +126,7 @@ export default Ember.Route.extend({
   },
 
   offlineError(reason) {
-    this.get("messageBox").alert(this.get("i18n").t("offline_error"));
+    this.get("messageBox").alert(this.get("intl").t("offline_error"));
     if (!reason.isAdapterError) {
       this.get("logger").error(reason);
     }
@@ -134,7 +134,7 @@ export default Ember.Route.extend({
 
   quotaExceededError(reason) {
     this.get("logger").error(reason);
-    this.get("messageBox").alert(this.get("i18n").t("QuotaExceededError"));
+    this.get("messageBox").alert(this.get("intl").t("QuotaExceededError"));
   },
 
   handleError: function(reason) {
@@ -188,6 +188,6 @@ export default Ember.Route.extend({
 
   setupController(controller, model) {
     controller.set("model", model);
-    controller.set("pageTitle", this.get("i18n").t("browse.title"));
+    controller.set("pageTitle", this.get("intl").t("browse.title"));
   }
 });

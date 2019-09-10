@@ -64,7 +64,7 @@ export default Ember.Controller.extend(cancelOrder, {
         let cartHasItems = this.get("cart.cartItems").length;
         if (!cartHasItems) {
           this.get("messageBox").alert(
-            this.get("i18n").t("order.order_detail_pop_up"),
+            this.get("intl").t("order.order_detail_pop_up"),
             () => {
               this.transitionToRoute("index");
             }

@@ -36,7 +36,7 @@ export default Ember.Controller.extend(cancelOrder, {
   }),
 
   titles: Ember.computed(function() {
-    let translation = this.get("i18n");
+    let translation = this.get("intl");
     let mr = translation.t("account.user_title.mr");
     let mrs = translation.t("account.user_title.mrs");
     let miss = translation.t("account.user_title.miss");
