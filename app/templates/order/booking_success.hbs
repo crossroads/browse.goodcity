@@ -9,12 +9,13 @@
         </nav>
       </section>
 
-      <section class="main-section client-information large-10 medium-10 small-10 small-offset-1 large-offset-1 medium-offset-1">
+      <section
+        class="main-section client-information large-10 medium-10 small-10 small-offset-1 large-offset-1 medium-offset-1">
         <div class="small-12 columns type-of-id-text">
           {{t "order.booking_success.reference_number"}}
         </div>
         <br>
-        <div class="row time_inputs id-type-radio-input" >
+        <div class="row time_inputs id-type-radio-input">
           <div class=" custom_radio_buttons small-12 columns booking-success" align="center" for="For HKID">
             <div class="booking-success-state">
               {{model.code}}
@@ -27,10 +28,11 @@
         </div>
         <br>
 
-        <div class="row time_inputs id-type-radio-input" >
-          <div class=" custom_radio_buttons small-12 columns booking-success success-submit" align="center" for="For HKID">
+        <div class="row time_inputs id-type-radio-input">
+          <div class=" custom_radio_buttons small-12 columns booking-success success-submit" align="center"
+            for="For HKID">
             <div class="booking-success-state">
-              <span><i class="fa fa-envelope" aria-hidden="true"></i></span>
+              <span><i class="fa">{{fa-icon 'envelope'}}</i></span>
               <span class="submit-state">{{model.state}}</span>
             </div>
           </div>
@@ -53,9 +55,9 @@
         <div class="row">
           <div class="small-12 columns">
             {{#link-to 'my_orders'}}
-              <button id="submit_pin" class="button expand drop_off">
-                {{t "order.booking_success.visit_dashboard"}}
-              </button>
+            <button id="submit_pin" class="button expand drop_off">
+              {{t "order.booking_success.visit_dashboard"}}
+            </button>
             {{/link-to}}
           </div>
         </div>

@@ -1,11 +1,11 @@
 {{#if isMobileApp}}
-  {{scroll-to-bottom customClass="home-page-scroll-arrow" customScrollElement=".scroller"}}
+{{scroll-to-bottom customClass="home-page-scroll-arrow" customScrollElement=".scroller"}}
 {{/if}}
 
 <div class="home_page">
   <div class="scroller">
     <div class="show-for-medium-up">
-      <div id="image-background" class="image-overlay"/>
+      <div id="image-background" class="image-overlay" />
       <div class="image-overlay tinted"></div>
     </div>
     <!-- Introduction -->
@@ -14,15 +14,15 @@
         <div class="small-12 large-10 medium-10 columns introduction">
           {{ t "home.introduction" }}
           {{#link-to "faq"}}
-            {{ t "home.faq_text" }}
+          {{ t "home.faq_text" }}
           {{/link-to}}
         </div>
         {{#if hasCartItems}}
-          <div class="cart-icon large-2 medium-2 columns">
-            {{#link-to "cart"}}
-              {{partial 'cart_truck_icon'}}
-            {{/link-to}}
-          </div>
+        <div class="cart-icon large-2 medium-2 columns">
+          {{#link-to "cart"}}
+          {{partial 'cart_truck_icon'}}
+          {{/link-to}}
+        </div>
         {{/if}}
       </div>
       <div class="row">
@@ -34,11 +34,12 @@
         <!-- Browse button -->
         <div class="columns home_section large-6">
           <div class="section_title"> {{ t "home.order_goods.title" }} </div>
-          <div class="section_subtitle small"> <i class="fa fa-check"></i> {{ t "home.order_goods.subtitle" }} {{#link-to "about"}}{{t 'home.learn_more'}}{{/link-to}} </div>
+          <div class="section_subtitle small"> <i class="fa">{{fa-icon 'check'}}</i> {{ t "home.order_goods.subtitle" }}
+            {{#link-to "about"}}{{t 'home.learn_more'}}{{/link-to}} </div>
           {{#link-to "browse"}}
-            <div class="button small action">
-              <i class="fa fa-shopping-cart"></i> {{ t "home.order_goods.action" }}
-            </div>
+          <div class="button small action">
+            <i class="fa">{{fa-icon 'shopping-cart'}}</i> {{ t "home.order_goods.action" }}
+          </div>
           {{/link-to}}
         </div>
 
@@ -46,7 +47,8 @@
         <div class="columns home_section large-6">
           <div class="section_title"> {{ t "home.visit.title" }} </div>
           <div class="section_subtitle small">
-            <div><i class="fa fa-check"></i> {{ t "home.visit.subtitle" }} {{#link-to "about"}}{{t 'home.learn_more'}}{{/link-to}} </div>
+            <div><i class="fa">{{fa-icon 'check'}}</i> {{ t "home.visit.subtitle" }}
+              {{#link-to "about"}}{{t 'home.learn_more'}}{{/link-to}} </div>
           </div>
           {{book-appointment}}
         </div>
