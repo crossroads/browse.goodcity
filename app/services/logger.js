@@ -5,6 +5,11 @@ export default Ember.Service.extend({
   session: Ember.inject.service(),
   rollbar: Ember.inject.service(),
 
+  raiseError: function(errorData, currentUser) {
+    this.set("rollbar.currentUser", currentUser);
+    this.get("rollbar").error(this.getError(reason), (data = errorData));
+  },
+
   error: function(reason) {
     if (reason.status === 0) {
       return;
@@ -12,18 +17,16 @@ export default Ember.Service.extend({
     console.info(reason);
     if (config.environment === "production" || config.staging) {
       var data;
-      var currentUser = this.get("session.currentUser");
-      if (currentUser.length) {
-        var userName = currentUser.get("fullName");
-        var userId = currentUser.get("id");
-      }
-      var error = this.getError(reason);
-      var environment = config.staging ? "staging" : config.environment;
-      this.set("rollbar.currentUser", currentUser);
-      this.get("rollbar").error(
-        error,
-        (data = { id: userId, username: userName, environment: environment })
-      );
+      let currentUser = this.get("session.currentUser");
+      let userName = currentUser && currentUser.get("fullName");
+      let userId = currentUser && currentUser.get("id");
+      let environment = config.staging ? "staging" : config.environment;
+      let errorData = {
+        id: userId,
+        username: userName,
+        environment: environment
+      };
+      this.raiseError(errorData, currentUser);
     }
   },
 
