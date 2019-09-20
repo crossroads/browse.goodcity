@@ -5,12 +5,12 @@ export default Ember.Service.extend({
   session: Ember.inject.service(),
   rollbar: Ember.inject.service(),
 
-  raiseError: function(errorData, reason, currentUser) {
+  raiseError(errorData, reason, currentUser) {
     this.set("rollbar.currentUser", currentUser);
     this.get("rollbar").error(this.getError(reason), (data = errorData));
   },
 
-  error: function(reason) {
+  error(reason) {
     if (reason.status === 0) {
       return;
     }
@@ -29,7 +29,7 @@ export default Ember.Service.extend({
     }
   },
 
-  getError: function(reason) {
+  getError(reason) {
     return reason instanceof Error || typeof reason !== "object"
       ? reason
       : JSON.stringify(reason);
