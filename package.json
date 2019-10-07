@@ -113,6 +113,7 @@
     "cordova": "^6.5.0",
     "cordova-lib": "https://github.com/crossroads/goodcity-lib.git#master",
     "cordova-update-config": "^1.0.2",
+    "foundation-sites": "^6.5.3",
     "jquery": "^3.2.0",
     "phantomjs-prebuilt": "^2.1.14",
     "yarn": "^1.9.2"
