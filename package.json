@@ -56,7 +56,7 @@
     "ember-cli-babel": "6.6.0",
     "ember-cli-code-coverage": "^0.4.2",
     "ember-cli-coffeescript": "^1.16.1",
-    "ember-cli-content-security-policy": "^0.5.0",
+    "ember-cli-content-security-policy": "1.1.1",
     "ember-cli-cordova": "0.1.0-beta-2",
     "ember-cli-dependency-checker": "^2.1.0",
     "ember-cli-google-analytics": "^1.5.0",

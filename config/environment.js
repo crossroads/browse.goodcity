@@ -5,7 +5,7 @@ module.exports = function(environment) {
   var ENV = {
     modulePrefix: "browse",
     environment: environment,
-    baseURL: "/",
+    rootURL: "/",
     defaultLocationType: "auto",
 
     emberRollbarClient: {
@@ -119,7 +119,7 @@ module.exports = function(environment) {
     ENV.cordova.enabled = false;
 
     // Testem prefers this...
-    ENV.baseURL = "/";
+    ENV.rootURL = "/";
     ENV.locationType = "auto";
 
     // keep test console output quieter
