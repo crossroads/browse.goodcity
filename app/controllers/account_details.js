@@ -174,7 +174,7 @@ export default Ember.Controller.extend({
           this.redirectToTransitionOrBrowse(bookAppointment);
         })
         .catch(xhr => {
-          this.get("messageBox").alert(xhr.responseJSON.errors);
+          this.get("messageBox").alert(xhr.responseJSON.errors[0].message);
         })
         .finally(() => loadingView.destroy());
     },
