@@ -214,16 +214,16 @@ jobs:
               echo 'export PATH=$PATH:`yarn bin`' >> $BASH_ENV
               echo 'export PATH=$PATH:$ANDROID_HOME/tools/gradle/bin' >> $BASH_ENV
       - run:
-          name: Install Gradle 3.3
+          name: Install Gradle 4.10.3
           command: |
-            wget -O /tmp/gradle.zip https://downloads.gradle.org/distributions/gradle-3.3-bin.zip
+            wget -O /tmp/gradle.zip  https://services.gradle.org/distributions/gradle-4.10.3-all.zip
             unzip -d $ANDROID_HOME/tools /tmp/gradle.zip
-            mv $ANDROID_HOME/tools/gradle-3.3 $ANDROID_HOME/tools/gradle
+            mv $ANDROID_HOME/tools/gradle-4.10.3 $ANDROID_HOME/tools/gradle
       - run:
           name: Download Google-services file
           command: |
             yarn run azure-filestore download -d browse/$ENVIRONMENT -f google-services.json
-            mv google-services.json ~/code/cordova
+            mv ~/code/google-services.json ~/code/cordova
           working_directory: ~/code
       - run:
           name: Download Keystore File
@@ -237,16 +237,21 @@ jobs:
             yarn run azure-filestore download -d google-play -f $GOOGLE_PLAY_KEY_FILE
             mv $GOOGLE_PLAY_KEY_FILE ~/code/fastlane
           working_directory: ~/code
+      - run: yes | sdkmanager --licenses || exit 0
+      - run: yes | sdkmanager --update || exit 0
       - run:
           name: android build
-          command: bundle exec rake ${ENVIRONMENT} android app:build
+          command: |
+            cordova platform remove android
+            cordova platform add android@8.0.0
+            # bundle exec rake ${ENVIRONMENT} android app:build
           working_directory: cordova
-      - store_artifacts:
-          path: cordova/platforms/android/build/outputs/apk/
-      - run:
-          name: release android build
-          command: bundle exec fastlane android ${ENVIRONMENT}
-          working_directory: ~/code
+      # - store_artifacts:
+      #     path: cordova/platforms/android/app/build/outputs/apk/
+      # - run:
+      #     name: release android build
+      #     command: bundle exec fastlane android ${ENVIRONMENT}
+      #     working_directory: ~/code
 
   ios_build_and_deploy:
     macos:
@@ -310,7 +315,9 @@ jobs:
           command: npm i -g cordova-update-config
       - run:
           name: Install cordova globally
-          command: npm i -g cordova@7.1.0
+          command: |
+            npm uninstall -g cordova
+            npm install -g cordova@latest
       - run:
           name: Create keychain and import p12 certificate
           command: bundle exec fastlane ios prepare_certificates cert:$CERTIFICATE
@@ -344,32 +351,32 @@ workflows:
               - test_cases
             filters:
               branches:
-                only: /^(master|live)$/
+                only: /^(GCW-2854-upgrade-android-28|live)$/
         - www_build:
             requires:
               - package_dependencies
               - test_cases
             filters:
               branches:
-                only: /^(master|live)$/
-        - www-deploy:
-            requires:
-              - www_build
-            filters:
-              branches:
-                only: /^(master|live)$/
+                only: /^(GCW-2854-upgrade-android-28|live)$/
+        # - www-deploy:
+        #     requires:
+        #       - www_build
+        #     filters:
+        #       branches:
+        #         only: /^(GCW-2854-upgrade-android-28|live)$/
         - ember_cordova_build:
             requires:
               - test_cases
             filters:
               branches:
-                only: /^(master|live)$/
+                only: /^(GCW-2854-upgrade-android-28|live)$/
         - android_build_and_deploy:
             requires:
               - ember_cordova_build
             filters:
               branches:
-                only: /^(master|live)$/
+                only: /^(GCW-2854-upgrade-android-28|live)$/
         - ios_build_and_deploy:
             requires:
               - test_cases
