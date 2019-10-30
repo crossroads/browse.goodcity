@@ -6,6 +6,7 @@ export default Ember.Service.extend({
   rollbar: Ember.inject.service(),
 
   raiseError(errorData, reason, currentUser) {
+    let data;
     this.set("rollbar.currentUser", currentUser);
     this.get("rollbar").error(this.getError(reason), (data = errorData));
   },
