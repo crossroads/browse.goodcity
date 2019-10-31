@@ -62,7 +62,8 @@ end
 platform :android do
 
   before_all do
-    apk_file_path = Dir["#{ENV["CIRCLE_ARTIFACTS"]}/*.apk"].first
+    apk_file_path = Dir["/home/circleci/code/cordova/platforms/android/app/build/outputs/apk/debug/*.apk"].first
+    puts "file path = #{ENV['CIRCLE_ARTIFACTS']}"
     ENV["SUPPLY_APK"] = ENV["TESTFAIRY_IPA_PATH"] = apk_file_path
     raise_if_no_env_var("GOOGLE_PLAY_KEY_FILE")
     ENV["SUPPLY_JSON_KEY"] = File.join(Dir.pwd, ENV["GOOGLE_PLAY_KEY_FILE"])

@@ -128,7 +128,6 @@ jobs:
       - run:
           command: |
             npm rebuild node-sass
-            echo "Building for staging (true/false): $STAGING"
             yarn run ember build --environment=production
       - run: mv dist/ dist-www
       - persist_to_workspace:
@@ -242,16 +241,18 @@ jobs:
       - run:
           name: android build
           command: |
+            sudo npm install -g cordova@latest
             cordova platform remove android
             cordova platform add android@8.0.0
-            # bundle exec rake ${ENVIRONMENT} android app:build
+            sudo npm i -g cordova-update-config
+            bundle exec rake ${ENVIRONMENT} android app:build
           working_directory: cordova
-      # - store_artifacts:
-      #     path: cordova/platforms/android/app/build/outputs/apk/
-      # - run:
-      #     name: release android build
-      #     command: bundle exec fastlane android ${ENVIRONMENT}
-      #     working_directory: ~/code
+      - store_artifacts:
+          path: cordova/platforms/android/app/build/outputs/apk/
+      - run:
+          name: release android build
+          command: bundle exec fastlane android ${ENVIRONMENT}
+          working_directory: ~/code
 
   ios_build_and_deploy:
     macos:

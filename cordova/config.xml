@@ -1,18 +1,21 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget android-versionCode="0" id="hk.goodcity.browsestaging" ios-CFBundleVersion="0" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget android-versionCode="1" id="hk.goodcity.browsestaging" ios-CFBundleVersion="0" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>S. Goodcity for charities</name>
     <description>
       The GoodCity initiative is a new way to donate quality goods in Hong Kong. See www.goodcity.hk for more details.
   </description>
     <author href="https://www.crossroads.org.hk">Crossroads</author>
     <content src="index.html" />
-    <hook src="scripts/update_build_number.py" type="before_prepare" />
+    <!-- <hook src="scripts/update_build_number.py" type="before_prepare" /> -->
     <access origin="*" />
     <allow-intent href="mailto:*" />
     <allow-intent href="http://*/*" launch-external="yes"/>
     <allow-intent href="https://*/*" launch-external="yes"/>
     <preference name="DisallowOverscroll" value="true" />
     <platform name="android">
+        <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application">
+          <application android:usesCleartextTraffic="true" />
+        </edit-config>
         <preference name="LoadUrlTimeoutValue" value="120000" />
         <preference name="SplashScreen" value="screen" />
         <preference name="SplashScreenDelay" value="5000" />
