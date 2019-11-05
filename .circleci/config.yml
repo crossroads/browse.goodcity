@@ -214,16 +214,16 @@ jobs:
               echo 'export PATH=$PATH:`yarn bin`' >> $BASH_ENV
               echo 'export PATH=$PATH:$ANDROID_HOME/tools/gradle/bin' >> $BASH_ENV
       - run:
-          name: Install Gradle 3.3
+          name: Install Gradle 4.10.3
           command: |
-            wget -O /tmp/gradle.zip https://downloads.gradle.org/distributions/gradle-3.3-bin.zip
+            wget -O /tmp/gradle.zip  https://services.gradle.org/distributions/gradle-4.10.3-all.zip
             unzip -d $ANDROID_HOME/tools /tmp/gradle.zip
-            mv $ANDROID_HOME/tools/gradle-3.3 $ANDROID_HOME/tools/gradle
+            mv $ANDROID_HOME/tools/gradle-4.10.3 $ANDROID_HOME/tools/gradle
       - run:
           name: Download Google-services file
           command: |
             yarn run azure-filestore download -d browse/$ENVIRONMENT -f google-services.json
-            mv google-services.json ~/code/cordova
+            mv ~/code/google-services.json ~/code/cordova
           working_directory: ~/code
       - run:
           name: Download Keystore File
@@ -242,7 +242,7 @@ jobs:
           command: bundle exec rake ${ENVIRONMENT} android app:build
           working_directory: cordova
       - store_artifacts:
-          path: cordova/platforms/android/build/outputs/apk/
+          path: cordova/platforms/android/app/build/outputs/apk/
       - run:
           name: release android build
           command: bundle exec fastlane android ${ENVIRONMENT}
@@ -351,25 +351,25 @@ workflows:
               - test_cases
             filters:
               branches:
-                only: /^(master|live)$/
+                only: /^(GCW-2854-upgrade-android-api-to-28|live)$/
         - www-deploy:
             requires:
               - www_build
             filters:
               branches:
-                only: /^(master|live)$/
+                only: /^(GCW-2854-upgrade-android-api-to-28|live)$/
         - ember_cordova_build:
             requires:
               - test_cases
             filters:
               branches:
-                only: /^(master|live)$/
+                only: /^(GCW-2854-upgrade-android-api-to-28|live)$/
         - android_build_and_deploy:
             requires:
               - ember_cordova_build
             filters:
               branches:
-                only: /^(master|live)$/
+                only: /^(GCW-2854-upgrade-android-api-to-28|live)$/
         - ios_build_and_deploy:
             requires:
               - test_cases
