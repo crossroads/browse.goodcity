@@ -74,7 +74,7 @@
         </edit-config>
     </platform>
     <engine name="ios" spec="https://github.com/apache/cordova-ios.git#4.5.5" />
-    <engine name="android" spec="~6.3.0" />
+    <engine name="android" spec="8.0.0" />
     <engine name="windows" spec="~4.3.1" />
     <plugin name="cordova-plugin-whitelist" spec="~1.2.1" />
     <plugin name="cordova-plugin-statusbar" spec="~2.1.1" />
