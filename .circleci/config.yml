@@ -270,8 +270,8 @@ jobs:
           command: |
             echo 'export STAGING=$(if [ "$CIRCLE_BRANCH" == "live" ]; then echo false; else echo true; fi)' >> $BASH_ENV
             echo 'export ENVIRONMENT=$(if [ "$CIRCLE_BRANCH" == "live" ]; then echo production; else echo staging; fi)' >> $BASH_ENV
-            echo 'export PROVISIONING_PROFILE=$(if [ "$CIRCLE_BRANCH" == "live" ]; then echo 'GoodCityBrowse.mobileprovision'; else echo 'GoodCity_Browse_Staging.mobileprovision'; fi)' >> $BASH_ENV
-            echo 'export CERTIFICATE=$(if [ "$CIRCLE_BRANCH" == "live" ]; then echo 'Goodcity_2020.p12'; else echo 'GoodCity_2019_Development.p12'; fi)' >> $BASH_ENV
+            echo 'export PROVISIONING_PROFILE=$(if [ "$CIRCLE_BRANCH" == "live" ]; then echo 'GoodCityBrowse.mobileprovision'; else echo 'GoodCityBrowseStaging.mobileprovision'; fi)' >> $BASH_ENV
+            echo 'export CERTIFICATE=$(if [ "$CIRCLE_BRANCH" == "live" ]; then echo 'Goodcity_2020.p12'; else echo 'GoodCity_2020_Development.p12'; fi)' >> $BASH_ENV
       - run:
           command: |
               npm rebuild node-sass
