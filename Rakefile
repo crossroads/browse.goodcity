@@ -196,7 +196,7 @@ def mobile_provisioning_file
   file = if production_env?
       "GoodCityBrowse.mobileprovision"
     else
-      "GoodCity_Browse_Staging.mobileprovision"
+      "GoodCityBrowseStaging.mobileprovision"
     end
   File.join(prefix, file)
 end
