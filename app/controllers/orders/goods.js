@@ -1,9 +1,10 @@
-import Ember from "ember";
+import { computed } from "@ember/object";
+import { alias, notEmpty } from "@ember/object/computed";
 import detail from "./detail";
 import _ from "lodash";
 
 export default detail.extend({
-  order: Ember.computed.alias("model.order"),
+  order: alias("model.order"),
 
   getCategoryForCode: function(code) {
     const categories = this.get("model.packageCategories");
@@ -13,23 +14,20 @@ export default detail.extend({
     return category && category.get("name");
   },
 
-  showUpdateMessage: Ember.computed(
-    "model.order.ordersPackages.[]",
-    function() {
-      const isRecentlyUpdated = this.get("model.order.ordersPackages")
-        .toArray()
-        .some(this.recentUpdatedPackageCheck);
-      return isRecentlyUpdated;
-    }
-  ),
+  showUpdateMessage: computed("model.order.ordersPackages.[]", function() {
+    const isRecentlyUpdated = this.get("model.order.ordersPackages")
+      .toArray()
+      .some(this.recentUpdatedPackageCheck);
+    return isRecentlyUpdated;
+  }),
 
   recentUpdatedPackageCheck(pkg) {
     return moment().diff(pkg.get("createdAt"), "minutes") <= 5;
   },
 
-  hasRequestedGoods: Ember.computed.notEmpty("requestedGoods"),
+  hasRequestedGoods: notEmpty("requestedGoods"),
 
-  requestedGoods: Ember.computed(
+  requestedGoods: computed(
     "order.goodcityRequests.@each.packageType",
     function() {
       const requests = this.getWithDefault("order.goodcityRequests", []);
@@ -40,9 +38,9 @@ export default detail.extend({
     }
   ),
 
-  hasOrderedGoods: Ember.computed.notEmpty("orderedGoods"),
+  hasOrderedGoods: notEmpty("orderedGoods"),
 
-  orderedGoods: Ember.computed("model.packageCategories", function() {
+  orderedGoods: computed("model.packageCategories", function() {
     const orderPackages = this.getWithDefault("order.ordersPackages", []);
     return orderPackages.map(op => ({
       notes: op.get("package.notes"),

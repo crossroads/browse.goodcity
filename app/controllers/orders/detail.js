@@ -1,15 +1,16 @@
-import Ember from "ember";
+import { computed } from "@ember/object";
+import { alias } from "@ember/object/computed";
 import applicationController from "./../application";
 import AjaxPromise from "browse/utils/ajax-promise";
 import cancelOrderMixin from "../../mixins/cancel_order";
 
 export default applicationController.extend(cancelOrderMixin, {
-  order: Ember.computed.alias("model.order"),
+  order: alias("model.order"),
   showCancelBookingPopUp: false,
-  unreadMessageCount: Ember.computed("order", function() {
+  unreadMessageCount: computed("order", function() {
     return this.get("order.unreadMessagesCount");
   }),
-  hasUnreadMessages: Ember.computed("order", function() {
+  hasUnreadMessages: computed("order", function() {
     return this.get("order.hasUnreadMessages");
   }),
 

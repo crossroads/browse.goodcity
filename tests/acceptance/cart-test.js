@@ -1,4 +1,4 @@
-import Ember from "ember";
+import { run, scheduleOnce } from "@ember/runloop";
 import { module, test } from "qunit";
 import startApp from "../helpers/start-app";
 import { make } from "ember-data-factory-guy";
@@ -183,7 +183,7 @@ module("Acceptance | Cart Page", {
     $.mockjaxSettings.matchInRegistrationOrder = true;
     mocks.forEach($.mockjax.clear);
 
-    Ember.run(App, App.destroy);
+    run(App, App.destroy);
   }
 });
 
@@ -288,7 +288,7 @@ test("Packages are grouped as items", function(assert) {
       assert.equal(updatedGroups[1].record.get("id"), itemPkg2.get("id"));
       assert.equal(updatedGroups[2].record.get("id"), pkg.get("id"));
 
-      Ember.run.scheduleOnce("afterRender", () => {
+      scheduleOnce("afterRender", () => {
         assert.equal(find(".item-collection li").length, 3);
         assert.equal(
           find(".item-collection li:first .unavailable")

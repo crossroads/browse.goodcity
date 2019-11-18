@@ -1,4 +1,4 @@
-import Ember from "ember";
+import { computed } from "@ember/object";
 import Model from "ember-data/model";
 import attr from "ember-data/attr";
 import { belongsTo } from "ember-data/relationships";
@@ -15,20 +15,17 @@ export default Model.extend({
     async: false
   }),
 
-  hasPosition: Ember.computed("position", function() {
+  hasPosition: computed("position", function() {
     var position = this.get("position");
     return position && position.length;
   }),
 
-  hasPreferredContactNumber: Ember.computed(
-    "preferredContactNumber",
-    function() {
-      var preferredContactNumber = this.get("preferredContactNumber");
-      return preferredContactNumber && preferredContactNumber.length;
-    }
-  ),
+  hasPreferredContactNumber: computed("preferredContactNumber", function() {
+    var preferredContactNumber = this.get("preferredContactNumber");
+    return preferredContactNumber && preferredContactNumber.length;
+  }),
 
-  isInfoComplete: Ember.computed(
+  isInfoComplete: computed(
     "hasPosition",
     "hasPreferredContactNumber",
     function() {

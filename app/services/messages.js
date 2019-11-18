@@ -1,15 +1,16 @@
-import Ember from "ember";
-const { getOwner } = Ember;
+import Service, { inject as service } from "@ember/service";
+import { getOwner } from "@ember/application";
 
-export default Ember.Service.extend({
-  logger: Ember.inject.service(),
-  session: Ember.inject.service(),
+export default Service.extend({
+  logger: service(),
+  session: service(),
 
-  markRead: function (message) {
+  markRead: function(message) {
     if (message.get("isUnread")) {
       var adapter = getOwner(this).lookup("adapter:application");
       var url = adapter.buildURL("message", message.id) + "/mark_read";
-      adapter.ajax(url, "PUT")
+      adapter
+        .ajax(url, "PUT")
         .then(data => {
           delete data.message.id;
           message.setProperties(data.message);
@@ -22,8 +23,10 @@ export default Ember.Service.extend({
     return ["orders.conversation", orderId];
   },
 
-  getRoute: function (message) {
-    var orderId = message.get ? message.get("designation.id") : message.designation_id;
+  getRoute: function(message) {
+    var orderId = message.get
+      ? message.get("designation.id")
+      : message.designation_id;
     var messageRoute = this.getMessageRoute(orderId);
     return messageRoute;
   }

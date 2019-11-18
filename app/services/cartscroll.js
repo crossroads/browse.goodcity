@@ -1,7 +1,10 @@
-import Ember from 'ember';
+import $ from "jquery";
+import Service from "@ember/service";
 
-export default Ember.Service.extend({
+export default Service.extend({
   resize() {
-    Ember.$('.item-collection').height(Ember.$('.cart-items').height() - Ember.$('.cart-controls').height());
+    $(".item-collection").height(
+      $(".cart-items").height() - $(".cart-controls").height()
+    );
   }
 });

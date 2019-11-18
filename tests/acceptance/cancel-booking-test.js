@@ -1,4 +1,5 @@
-import Ember from "ember";
+import $ from "jquery";
+import { run } from "@ember/runloop";
 import { module, test } from "qunit";
 import startApp from "../helpers/start-app";
 import { make, mockFindAll } from "ember-data-factory-guy";
@@ -129,7 +130,7 @@ module("Acceptance | Cancel booking", {
     $.mockjaxSettings.matchInRegistrationOrder = true;
     mocks.forEach($.mockjax.clear);
 
-    Ember.run(App, App.destroy);
+    run(App, App.destroy);
   }
 });
 
@@ -185,7 +186,7 @@ test("Request purpose changes order state to canceled if in any other state exce
     click("#cancel-booking-link");
   });
   andThen(function() {
-    fillIn(Ember.$("#messageBox textarea"), "test");
+    fillIn($("#messageBox textarea"), "test");
     click("#messageBox div div:nth-child(2) a");
   });
   andThen(function() {

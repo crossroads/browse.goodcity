@@ -1,8 +1,8 @@
-import Ember from "ember";
+import { inject as service } from "@ember/service";
 import AuthorizeRoute from "./authorize";
 
 export default AuthorizeRoute.extend({
-  orderService: Ember.inject.service(),
+  orderService: service(),
 
   async beforeModel() {
     if (!this._super(...arguments)) {

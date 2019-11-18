@@ -1,7 +1,8 @@
-import Ember from "ember";
+import { inject as service } from "@ember/service";
+import Component from "@ember/component";
 
-export default Ember.Component.extend({
-  cart: Ember.inject.service(),
+export default Component.extend({
+  cart: service(),
 
   // Set to true to enable navigation to the details
   // Usage: {{small-cart-toggle-view allowClick=true}}

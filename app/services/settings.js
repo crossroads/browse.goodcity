@@ -1,4 +1,4 @@
-import Ember from "ember";
+import Service, { inject as service } from "@ember/service";
 import _ from "lodash";
 import "../computed/local-storage";
 
@@ -13,8 +13,8 @@ const TO_BOOL = val => {
   return Boolean(val);
 };
 
-export default Ember.Service.extend({
-  store: Ember.inject.service(),
+export default Service.extend({
+  store: service(),
 
   /**
    *

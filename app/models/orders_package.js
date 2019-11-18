@@ -1,7 +1,7 @@
+import { computed } from "@ember/object";
 import Model from "ember-data/model";
 import attr from "ember-data/attr";
 import { belongsTo } from "ember-data/relationships";
-import Ember from "ember";
 
 export default Model.extend({
   quantity: attr("number"),
@@ -12,11 +12,11 @@ export default Model.extend({
   packageId: attr("number"),
   createdAt: attr("date"),
 
-  availableQty: Ember.computed("quantity", function() {
+  availableQty: computed("quantity", function() {
     return this.get("quantity");
   }),
 
-  isSingleQuantity: Ember.computed("quantity", function() {
+  isSingleQuantity: computed("quantity", function() {
     return this.get("quantity") === 1;
   })
 });

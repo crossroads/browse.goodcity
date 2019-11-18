@@ -1,23 +1,28 @@
-import Ember from "ember";
+import { later } from "@ember/runloop";
+import { on } from "@ember/object/evented";
+import { computed } from "@ember/object";
+import { alias } from "@ember/object/computed";
+import { inject as service } from "@ember/service";
+import Controller from "@ember/controller";
+import { getOwner } from "@ember/application";
 import { containsAny } from "../utils/helpers";
 import config from "../config/environment";
 import AjaxPromise from "browse/utils/ajax-promise";
 import cancelOrderMixin from "../mixins/cancel_order";
 import _ from "lodash";
-const { getOwner } = Ember;
 
-export default Ember.Controller.extend(cancelOrderMixin, {
+export default Controller.extend(cancelOrderMixin, {
   isMobileApp: config.cordova.enabled,
   appVersion: config.APP.VERSION,
-  subscription: Ember.inject.service(),
-  screenresize: Ember.inject.service(),
-  messageBox: Ember.inject.service(),
-  orderService: Ember.inject.service(),
-  cart: Ember.inject.service(),
-  i18n: Ember.inject.service(),
+  subscription: service(),
+  screenresize: service(),
+  messageBox: service(),
+  orderService: service(),
+  cart: service(),
+  i18n: service(),
   showSidebar: true,
-  isWideScreen: Ember.computed.alias("screenresize.isWideScreen"),
-  isHomePage: Ember.computed("currentPath", function() {
+  isWideScreen: alias("screenresize.isWideScreen"),
+  isHomePage: computed("currentPath", function() {
     return this.get("currentPath") === "home";
   }),
 
@@ -27,30 +32,30 @@ export default Ember.Controller.extend(cancelOrderMixin, {
   bannerImage: config.APP.BANNER_IMAGE,
   bannerReopenDays: config.BANNER_REOPEN_DAYS,
 
-  initializer: Ember.on("init", function() {
+  initializer: on("init", function() {
     this.get("subscription").wire();
     this.loadingCounter = 0;
   }),
 
-  isAndroidBrowser: Ember.computed("isMobileApp", function() {
+  isAndroidBrowser: computed("isMobileApp", function() {
     return /Android/i.test(navigator.userAgent) && !this.get("isMobileApp");
   }),
 
-  showSearchIcon: Ember.computed("currentPath", function() {
+  showSearchIcon: computed("currentPath", function() {
     return ["browse", "package_category"].indexOf(this.get("currentPath")) >= 0;
   }),
 
   showCartDetailSidebar: false,
-  cartscroll: Ember.inject.service(),
+  cartscroll: service(),
 
-  hasCartItems: Ember.computed.alias("cart.isNotEmpty"),
-  cartLength: Ember.computed.alias("cart.groupedPackages.length"),
+  hasCartItems: alias("cart.isNotEmpty"),
+  cartLength: alias("cart.groupedPackages.length"),
 
-  isUserLoggedIn: Ember.computed("session.authToken", function() {
+  isUserLoggedIn: computed("session.authToken", function() {
     return !!this.get("session.authToken");
   }),
 
-  showOffCanvas: Ember.computed("showSidebar", "currentPath", function() {
+  showOffCanvas: computed("showSidebar", "currentPath", function() {
     let url = window.location.href;
     return !containsAny(url, [
       "request_purpose",
@@ -65,7 +70,7 @@ export default Ember.Controller.extend(cancelOrderMixin, {
     ]);
   }),
 
-  addMoveLeft: Ember.computed(
+  addMoveLeft: computed(
     "isHomePage",
     "hasCartItems",
     "showOffCanvas",
@@ -146,7 +151,7 @@ export default Ember.Controller.extend(cancelOrderMixin, {
 
     displayCart() {
       this.set("showCartDetailSidebar", true);
-      Ember.run.later(
+      later(
         this,
         function() {
           this.get("cartscroll").resize();

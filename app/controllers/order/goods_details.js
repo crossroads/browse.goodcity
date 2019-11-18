@@ -1,25 +1,25 @@
-import Ember from "ember";
-const { getOwner } = Ember;
+import { all } from "rsvp";
+import { computed } from "@ember/object";
+import { alias, sort } from "@ember/object/computed";
+import Controller from "@ember/controller";
+import { getOwner } from "@ember/application";
 import AjaxPromise from "browse/utils/ajax-promise";
 import config from "../../config/environment";
 import cancelOrder from "../../mixins/cancel_order";
 
-export default Ember.Controller.extend(cancelOrder, {
+export default Controller.extend(cancelOrder, {
   showCancelBookingPopUp: false,
   queryParams: ["typeId", "fromClientInformation"],
   isMobileApp: config.cordova.enabled,
-  order: Ember.computed.alias("model"),
+  order: alias("model"),
   typeId: null,
   fromClientInformation: false,
   qty: null,
   otherDetails: "",
   sortProperties: ["id"],
-  sortedGcRequests: Ember.computed.sort(
-    "order.goodcityRequests",
-    "sortProperties"
-  ),
+  sortedGcRequests: sort("order.goodcityRequests", "sortProperties"),
 
-  hasNoGcRequests: Ember.computed("order.goodcityRequests.[]", function() {
+  hasNoGcRequests: computed("order.goodcityRequests.[]", function() {
     return !this.get("order.goodcityRequests").length;
   }),
 
@@ -60,7 +60,7 @@ export default Ember.Controller.extend(cancelOrder, {
         .lookup("component:loading")
         .append();
 
-      Ember.RSVP.all(promises)
+      all(promises)
         .then(function() {
           loadingView.destroy();
         })

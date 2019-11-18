@@ -1,22 +1,25 @@
-import Ember from "ember";
+import $ from "jquery";
+import { computed } from "@ember/object";
+import { inject as service } from "@ember/service";
+import Controller, { inject as controller } from "@ember/controller";
+import { getOwner } from "@ember/application";
 import AjaxPromise from "./../utils/ajax-promise";
 import config from "../config/environment";
-const { getOwner } = Ember;
 
-export default Ember.Controller.extend({
+export default Controller.extend({
   queryParams: ["bookAppointment"],
-  messageBox: Ember.inject.service(),
-  application: Ember.inject.controller(),
+  messageBox: service(),
+  application: controller(),
   attemptedTransition: null,
   bookAppointment: false,
   pin: "",
   mobileOrEmail: "",
-  loginParam: Ember.computed.localStorage(),
-  loginParamEmail: Ember.computed.localStorage(),
+  loginParam: computed.localStorage(),
+  loginParamEmail: computed.localStorage(),
   mobile: "",
   email: "",
 
-  pinFor: Ember.computed("email", "mobile", function() {
+  pinFor: computed("email", "mobile", function() {
     if (this.get("email")) {
       return "email";
     } else if (this.get("mobile")) {
@@ -34,7 +37,7 @@ export default Ember.Controller.extend({
 
   actions: {
     authenticateUser(bookAppointment) {
-      Ember.$(".auth_error").hide();
+      $(".auth_error").hide();
       var pin = this.get("pin");
       var pin_for = this.get("pinFor");
       var otp_auth_key = this.get("session.otpAuthKey");
@@ -65,7 +68,7 @@ export default Ember.Controller.extend({
           });
         })
         .catch(function(jqXHR) {
-          Ember.$("#pin")
+          $("#pin")
             .closest("div")
             .addClass("error");
           _this.setProperties({

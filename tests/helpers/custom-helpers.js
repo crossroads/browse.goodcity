@@ -1,7 +1,7 @@
-import Ember from 'ember';
+import { registerHelper } from "@ember/test";
 
 export default function() {
-  Ember.Test.registerHelper('lookup', function(app, name) {
+  registerHelper("lookup", function(app, name) {
     return app.__container__.lookup(name);
   });
 }

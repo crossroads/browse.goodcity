@@ -1,13 +1,15 @@
-import Ember from "ember";
+import { observer, computed } from "@ember/object";
+import { inject as service } from "@ember/service";
+import Controller, { inject as controller } from "@ember/controller";
 import config from "../config/environment";
 
-export default Ember.Controller.extend({
+export default Controller.extend({
   isMobileApp: config.cordova.enabled,
-  packageCategory: Ember.inject.controller(),
+  packageCategory: controller(),
   showCartDetailSidebar: false,
   packageCategoryReloaded: false,
-  flashMessage: Ember.inject.service(),
-  subscription: Ember.inject.service(),
+  flashMessage: service(),
+  subscription: service(),
   queryParams: ["orderCancelled"],
   triggerFlashMessage: false,
   previousRouteName: null,
@@ -26,7 +28,7 @@ export default Ember.Controller.extend({
     this.toggleProperty("packageCategoryReloaded");
   },
 
-  cancelOrderFlashMessage: Ember.observer(
+  cancelOrderFlashMessage: observer(
     "orderCancelled",
     "triggerFlashMessage",
     function() {
@@ -41,17 +43,13 @@ export default Ember.Controller.extend({
     }
   ),
 
-  parentCategories: Ember.computed(
-    "model.[]",
-    "packageCategoryReloaded",
-    function() {
-      var model = this.get("model");
-      model.forEach(packageCategory => {
-        packageCategory.toggleProperty("reloadPackageCategory");
-      });
-      return this.get("model").filterBy("parentId", null);
-    }
-  ),
+  parentCategories: computed("model.[]", "packageCategoryReloaded", function() {
+    var model = this.get("model");
+    model.forEach(packageCategory => {
+      packageCategory.toggleProperty("reloadPackageCategory");
+    });
+    return this.get("model").filterBy("parentId", null);
+  }),
   actions: {
     setChildCategory(childCategory) {
       let parentId = childCategory.get("parentId");

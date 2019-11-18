@@ -1,14 +1,16 @@
-import Ember from "ember";
+import { hash } from "rsvp";
+import { inject as service } from "@ember/service";
 import _ from "lodash";
 import AuthorizeRoute from "./authorize";
 
 export default AuthorizeRoute.extend({
-  orderService: Ember.inject.service(),
+  orderService: service(),
   previousRouteName: null,
 
   beforeModel() {
     this._super(...arguments);
-    var previousRoutes = this.router.router.currentHandlerInfos;
+    var previousRoutes =
+      this.router.router && this.router.router.currentHandlerInfos;
     var previousRoute = previousRoutes && previousRoutes.pop();
 
     if (previousRoute) {
@@ -18,7 +20,7 @@ export default AuthorizeRoute.extend({
   },
 
   model() {
-    return Ember.RSVP.hash({
+    return hash({
       organisation: this.store.peekAll("organisation").objectAt(0),
       user: this.store.peekAll("user").objectAt(0),
       orders: this.get("orderService").loadAll({ shallow: true })

@@ -1,9 +1,9 @@
+import { hash } from "rsvp";
 import detail from "./detail";
-import Ember from "ember";
 
 export default detail.extend({
   model(params) {
-    return Ember.RSVP.hash({
+    return hash({
       order:
         this.store.peekRecord("order", params.order_id, {
           reload: true

@@ -1,5 +1,5 @@
+import { hash } from "rsvp";
 import AuthorizeRoute from "./../authorize";
-import Ember from "ember";
 
 export default AuthorizeRoute.extend({
   currentRouteName: null,
@@ -9,7 +9,7 @@ export default AuthorizeRoute.extend({
   },
 
   model(params) {
-    return Ember.RSVP.hash({
+    return hash({
       packageCategories: this.store.peekAll("package_category"),
       order: this.loadIfAbsent("order", params.order_id)
     });

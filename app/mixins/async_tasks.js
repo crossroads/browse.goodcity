@@ -1,8 +1,11 @@
+import { reject } from "rsvp";
+import { inject as service } from "@ember/service";
+import Mixin from "@ember/object/mixin";
+import { getOwner } from "@ember/application";
 import Ember from "ember";
-const { getOwner } = Ember;
 
-export default Ember.Mixin.create({
-  messageBox: Ember.inject.service(),
+export default Mixin.create({
+  messageBox: service(),
 
   // ---- Helpers
 
@@ -30,7 +33,7 @@ export default Ember.Mixin.create({
       })
       .catch(err => {
         this.__incrementTaskCount(-1);
-        return Ember.RSVP.reject(err);
+        return reject(err);
       });
   },
 
@@ -39,7 +42,7 @@ export default Ember.Mixin.create({
       return;
     }
     if (!this.__loadingView) {
-      this.__loadingView = Ember.getOwner(this)
+      this.__loadingView = getOwner(this)
         .lookup("component:loading")
         .append();
     }
