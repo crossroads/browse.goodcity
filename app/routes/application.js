@@ -1,14 +1,16 @@
+import { inject as service } from "@ember/service";
+import Route from "@ember/routing/route";
+import { getOwner } from "@ember/application";
+import { later } from "@ember/runloop";
 import Ember from "ember";
 import config from "../config/environment";
 import _ from "lodash";
 
-const { getOwner } = Ember;
-
-export default Ember.Route.extend({
-  logger: Ember.inject.service(),
-  preloadService: Ember.inject.service(),
-  messageBox: Ember.inject.service(),
-  i18n: Ember.inject.service(),
+export default Route.extend({
+  logger: service(),
+  preloadService: service(),
+  messageBox: service(),
+  i18n: service(),
   previousRoute: null,
   isErrPopUpAlreadyShown: false,
 
@@ -104,6 +106,7 @@ export default Ember.Route.extend({
     } else if (error && _.isString(error)) {
       return error;
     } else if (
+      reason.errors &&
       reason.errors.length &&
       reason.errors[0].detail &&
       reason.errors[0].detail.status === 422
@@ -165,16 +168,23 @@ export default Ember.Route.extend({
 
   actions: {
     loading() {
-      if (this.loadingView) {
-        this.loadingView.destroy();
-        this.loadingView = null;
-      }
       if (!this.loadingView) {
-        this.loadingView = Ember.getOwner(this)
+        this.loadingView = getOwner(this)
           .lookup("component:loading")
           .append();
       }
-      this.router.one("didTransition", this.loadingView, "destroy");
+    },
+
+    didTransition() {
+      // Without later() it causes double render error
+      // as we're trying to render a page and remove loading
+      // indicator at a same time
+      later(() => {
+        if (this.loadingView) {
+          this.loadingView.destroy();
+          this.loadingView = null;
+        }
+      }, 100);
     },
 
     error(reason) {

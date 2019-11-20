@@ -4,7 +4,8 @@ export default Route.extend({
   backLink: null,
 
   beforeModel() {
-    var previousRoutes = this.router.router.currentHandlerInfos;
+    var previousRoutes =
+      this.router.router && this.router.router.currentHandlerInfos;
     var previousRoute = previousRoutes && previousRoutes.pop();
     if (previousRoute && this.isPreviousRouteStatic(previousRoute.name)) {
       this.set("backLink", "home");
