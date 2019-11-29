@@ -15,6 +15,7 @@ export default Ember.Controller.extend(cancelOrderMixin, {
   orderService: Ember.inject.service(),
   cart: Ember.inject.service(),
   intl: Ember.inject.service(),
+
   showSidebar: true,
   isWideScreen: Ember.computed.alias("screenresize.isWideScreen"),
   isHomePage: Ember.computed("currentPath", function() {
