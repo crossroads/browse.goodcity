@@ -14,13 +14,13 @@
       <p>{{t "faq.description"}}</p>
 
       <ul class="question_list">
-        <li><a href="faq#question1">{{t "faq.questions.question1"}}</a></li>
-        <li><a href="faq#question2">{{t "faq.questions.question2"}}</a></li>
-        <li><a href="faq#question3">{{t "faq.questions.question3"}}</a></li>
-        <li><a href="faq#question4">{{t "faq.questions.question4"}}</a></li>
-        <li><a href="faq#question5">{{t "faq.questions.question5"}}</a></li>
-        <li><a href="faq#question6">{{t "faq.questions.question6"}}</a></li>
-        <li><a href="faq#question7">{{t "faq.questions.question7"}}</a></li>
+        <li><a href="#/" {{action 'goToLink' "#question1"}}>{{t "faq.questions.question1"}}</a></li>
+        <li><a href="#/" {{action 'goToLink' "#question2"}}>{{t "faq.questions.question2"}}</a></li>
+        <li><a href="#/" {{action 'goToLink' "#question3"}}>{{t "faq.questions.question3"}}</a></li>
+        <li><a href="#/" {{action 'goToLink' "#question4"}}>{{t "faq.questions.question4"}}</a></li>
+        <li><a href="#/" {{action 'goToLink' "#question5"}}>{{t "faq.questions.question5"}}</a></li>
+        <li><a href="#/" {{action 'goToLink' "#question6"}}>{{t "faq.questions.question6"}}</a></li>
+        <li><a href="#/" {{action 'goToLink' "#question7"}}>{{t "faq.questions.question7"}}</a></li>
       </ul>
 
 
@@ -95,6 +95,6 @@
   </div>
   {{go-to-top-button}}
   {{#if isMobileApp}}
-    <a class="exit-off-canvas modify-off-canvas"></a>
+  <a class="exit-off-canvas modify-off-canvas"></a>
   {{/if}}
 </section>

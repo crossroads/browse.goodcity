@@ -2,6 +2,7 @@ import Ember from "ember";
 
 export default Ember.Route.extend({
   backLink: null,
+  scrollDuration: 500,
 
   beforeModel() {
     var previousRoutes = this.router.router.currentHandlerInfos;
@@ -48,6 +49,14 @@ export default Ember.Route.extend({
       } else {
         window.history.back(); // equivalent to window.history.go(-1)
       }
+    },
+    goToLink: function(selector) {
+      $("html, body").animate(
+        {
+          scrollTop: $(selector).offset().top
+        },
+        this.get("scrollDuration")
+      );
     }
   }
 });
