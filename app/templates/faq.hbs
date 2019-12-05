@@ -14,7 +14,7 @@
       <p>{{t "faq.description"}}</p>
       <ul class="question_list">
         {{#each questionLinks as |question|}}
-        {{faq-questions id=question.id text=question.text}}
+          {{faq-questions id=question.id text=question.text}}
         {{/each}}
       </ul>
       <p id="question1"><b>{{t "faq.questions.question1"}}</b></p>
@@ -88,6 +88,6 @@
   </div>
   {{go-to-top-button}}
   {{#if isMobileApp}}
-  <a class="exit-off-canvas modify-off-canvas"></a>
+    <a class="exit-off-canvas modify-off-canvas"></a>
   {{/if}}
 </section>
