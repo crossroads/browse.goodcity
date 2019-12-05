@@ -6,18 +6,10 @@ export default Ember.Controller.extend({
   questionLinks: Ember.computed("", function() {
     var i18n = this.get("i18n");
     let questions = [];
-    [
-      "question1",
-      "question2",
-      "question3",
-      "question4",
-      "question5",
-      "question6",
-      "question7"
-    ].forEach(function(question) {
+    [...Array(7)].map((i, index) => {
       questions.push({
-        id: `#${question}`,
-        text: i18n.t(`faq.questions.${question}`)
+        id: `#question${index + 1}`,
+        text: i18n.t(`faq.questions.question${index + 1}`)
       });
     });
     return questions;

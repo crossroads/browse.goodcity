@@ -2,7 +2,6 @@ import Ember from "ember";
 
 export default Ember.Route.extend({
   backLink: null,
-  scrollDuration: 500,
 
   beforeModel() {
     var previousRoutes = this.router.router.currentHandlerInfos;
