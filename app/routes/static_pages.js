@@ -49,14 +49,6 @@ export default Ember.Route.extend({
       } else {
         window.history.back(); // equivalent to window.history.go(-1)
       }
-    },
-    goToLink: function(selector) {
-      $("html, body").animate(
-        {
-          scrollTop: $(selector).offset().top
-        },
-        this.get("scrollDuration")
-      );
     }
   }
 });
