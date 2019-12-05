@@ -5,7 +5,6 @@ export default Ember.Component.extend({
   scrollDuration: 500,
   actions: {
     goToLink: function() {
-      console.log(this);
       $("html, body").animate(
         {
           scrollTop: $(this.id).offset().top
