@@ -12,18 +12,11 @@
   <div class="row faq_list">
     <div class="small-12 columns">
       <p>{{t "faq.description"}}</p>
-
       <ul class="question_list">
-        <li><a href="faq#question1">{{t "faq.questions.question1"}}</a></li>
-        <li><a href="faq#question2">{{t "faq.questions.question2"}}</a></li>
-        <li><a href="faq#question3">{{t "faq.questions.question3"}}</a></li>
-        <li><a href="faq#question4">{{t "faq.questions.question4"}}</a></li>
-        <li><a href="faq#question5">{{t "faq.questions.question5"}}</a></li>
-        <li><a href="faq#question6">{{t "faq.questions.question6"}}</a></li>
-        <li><a href="faq#question7">{{t "faq.questions.question7"}}</a></li>
+        {{#each questionLinks as |question|}}
+          {{faq-questions id=question.id text=question.text}}
+        {{/each}}
       </ul>
-
-
       <p id="question1"><b>{{t "faq.questions.question1"}}</b></p>
 
       <p>{{t "faq.answers.answer1.good_condition"}}</p>
