@@ -96,7 +96,7 @@ export default Controller.extend(cancelOrder, {
         organisation_id: user_organisation_id,
         purpose_description: this.get("description"),
         purpose_ids: [],
-        people_helped: this.get("peopleCount"),
+        people_helped: Number(this.get("peopleCount")),
         district_id: this.get("selectedDistrict.id"),
         booking_type_id: this.getSelectedBookingTypeId(),
         state: order ? order.get("state") : "draft"

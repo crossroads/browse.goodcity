@@ -43,9 +43,6 @@ export default Controller.extend({
       var otp_auth_key = this.get("session.otpAuthKey");
       var _this = this;
 
-      var loadingView = getOwner(this)
-        .lookup("component:loading")
-        .append();
       new AjaxPromise("/auth/verify", "POST", null, {
         pin: pin,
         otp_auth_key: otp_auth_key,
@@ -82,8 +79,7 @@ export default Controller.extend({
             _this.get("messageBox").alert(jqXHR.responseJSON.errors.pin);
           }
           console.log("Unable to authenticate");
-        })
-        .finally(() => loadingView.destroy());
+        });
     },
 
     resendPin() {

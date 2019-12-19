@@ -147,6 +147,7 @@ export default Controller.extend(cancelOrderMixin, {
 
     hideCart() {
       this.set("showCartDetailSidebar", false);
+      this.transitionToRoute("browse");
     },
 
     displayCart() {
