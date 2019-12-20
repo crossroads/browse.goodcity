@@ -1,10 +1,12 @@
-import Ember from "ember";
+import { computed } from "@ember/object";
+import { inject as service } from "@ember/service";
+import Controller from "@ember/controller";
 import asyncTasksMixin from "../mixins/async_tasks";
 import _ from "lodash";
 
-export default Ember.Controller.extend(asyncTasksMixin, {
-  cart: Ember.inject.service(),
-  orderService: Ember.inject.service(),
+export default Controller.extend(asyncTasksMixin, {
+  cart: service(),
+  orderService: service(),
   orderId: "",
 
   badCart() {
@@ -15,7 +17,7 @@ export default Ember.Controller.extend(asyncTasksMixin, {
     return this.get("cart.isEmpty");
   },
 
-  submittableOrders: Ember.computed("model.@each.state", function() {
+  submittableOrders: computed("model.@each.state", function() {
     return this.get("model").filter(this.isPackageSubmittableOrder);
   }),
 

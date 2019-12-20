@@ -1,9 +1,10 @@
-import Ember from "ember";
+import { alias } from "@ember/object/computed";
+import { computed } from "@ember/object";
+import { getOwner } from "@ember/application";
 import Model from "ember-data/model";
 import attr from "ember-data/attr";
 import { belongsTo, hasMany } from "ember-data/relationships";
 import cloudinaryImage from "../mixins/cloudinary_image";
-const { getOwner } = Ember;
 
 export default Model.extend(cloudinaryImage, {
   donorDescription: attr("string"),
@@ -15,7 +16,7 @@ export default Model.extend(cloudinaryImage, {
   donorCondition: belongsTo("donor_condition", { async: false }),
   saleable: attr("boolean"),
 
-  quantity: Ember.computed("packages.@each.quantity", function() {
+  quantity: computed("packages.@each.quantity", function() {
     let totalQuantity = 0;
     this.get("packages").forEach(function(pkg) {
       totalQuantity = totalQuantity + pkg.get("quantity");
@@ -23,11 +24,11 @@ export default Model.extend(cloudinaryImage, {
     return totalQuantity;
   }),
 
-  isAvailable: Ember.computed("packages.@each.isAvailable", function() {
+  isAvailable: computed("packages.@each.isAvailable", function() {
     return this.get("packages").filterBy("isAvailable").length > 0;
   }),
 
-  isUnavailableAndDesignated: Ember.computed(
+  isUnavailableAndDesignated: computed(
     "packages.@each.isUnavailableAndDesignated",
     function() {
       return (
@@ -37,7 +38,7 @@ export default Model.extend(cloudinaryImage, {
     }
   ),
 
-  images: Ember.computed("packages.@each.images.[]", function() {
+  images: computed("packages.@each.images.[]", function() {
     var images = [];
     this.get("packages").forEach(function(pkg) {
       var pkgImages = pkg.get("images") ? pkg.get("images").toArray() : [];
@@ -46,17 +47,17 @@ export default Model.extend(cloudinaryImage, {
     return images;
   }),
 
-  isItem: Ember.computed("this", function() {
+  isItem: computed("this", function() {
     return this.get("constructor.modelName") === "item";
   }),
 
-  favouriteImage: Ember.computed("images.@each.favourite", function() {
+  favouriteImage: computed("images.@each.favourite", function() {
     return this.get("images")
       .filterBy("favourite")
       .get("firstObject");
   }),
 
-  otherImages: Ember.computed("images.[]", function() {
+  otherImages: computed("images.[]", function() {
     var images = this.get("images").filter(
       (image, index, self) =>
         self.findIndex(
@@ -66,13 +67,13 @@ export default Model.extend(cloudinaryImage, {
     return images.removeObject(this.get("favouriteImage"));
   }),
 
-  sortedImages: Ember.computed("otherImages.[]", "image", function() {
+  sortedImages: computed("otherImages.[]", "image", function() {
     var images = this.get("otherImages").toArray();
     images.unshift(this.get("favouriteImage"));
     return images;
   }),
 
-  displayImage: Ember.computed("images.@each.favourite", function() {
+  displayImage: computed("images.@each.favourite", function() {
     return (
       this.get("favouriteImage") ||
       this.get("images")
@@ -82,28 +83,23 @@ export default Model.extend(cloudinaryImage, {
     );
   }),
 
-  displayImageUrl: Ember.computed("displayImage", function() {
+  displayImageUrl: computed("displayImage", function() {
     return (
       this.get("displayImage.defaultImageUrl") ||
       this.generateUrl(500, 500, true)
     );
   }),
 
-  previewImageUrl: Ember.computed("displayImage", function() {
+  previewImageUrl: computed("displayImage", function() {
     return (
       this.get("displayImage.previewImageUrl") ||
       this.generateUrl(265, 265, true)
     );
   }),
 
-  allPackageCategories: Ember.computed.alias(
-    "packageType.allPackageCategories"
-  ),
+  allPackageCategories: alias("packageType.allPackageCategories"),
 
-  undispatchedPackages: Ember.computed(
-    "packages.@each.stockitSentOn",
-    function() {
-      return this.get("packages").filter(pkg => pkg.get("stockitSentOn"));
-    }
-  )
+  undispatchedPackages: computed("packages.@each.stockitSentOn", function() {
+    return this.get("packages").filter(pkg => pkg.get("stockitSentOn"));
+  })
 });

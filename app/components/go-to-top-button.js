@@ -1,6 +1,8 @@
-import Ember from "ember";
+import $ from "jquery";
+import { scheduleOnce } from "@ember/runloop";
+import Component from "@ember/component";
 
-export default Ember.Component.extend({
+export default Component.extend({
   // dont remove this commented code, will need this later.
   // didDestroyElement() {
   //   let liquidContainer = Ember.$(".liquid-container");
@@ -29,24 +31,24 @@ export default Ember.Component.extend({
   didInsertElement() {
     this._super();
 
-    Ember.run.scheduleOnce("afterRender", this, function() {
+    scheduleOnce("afterRender", this, function() {
       var offset = 300;
       var duration = 300;
 
-      Ember.$(".sticky_title_bar").on("click", ".back", function() {
+      $(".sticky_title_bar").on("click", ".back", function() {
         window.scrollTo(0, 0);
       });
 
-      Ember.$(window).scroll(function() {
-        if (Ember.$(this).scrollTop() > offset) {
-          Ember.$(".back-to-top").fadeIn(duration);
+      $(window).scroll(function() {
+        if ($(this).scrollTop() > offset) {
+          $(".back-to-top").fadeIn(duration);
         } else {
-          Ember.$(".back-to-top").fadeOut(duration);
+          $(".back-to-top").fadeOut(duration);
         }
       });
 
-      Ember.$(".back-to-top").click(function() {
-        Ember.$("html, body").animate(
+      $(".back-to-top").click(function() {
+        $("html, body").animate(
           {
             scrollTop: 0
           },

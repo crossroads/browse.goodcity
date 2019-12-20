@@ -1,46 +1,50 @@
-import Ember from 'ember';
+import $ from "jquery";
+import { scheduleOnce } from "@ember/runloop";
+import Component from "@ember/component";
 
-export default Ember.Component.extend({
+export default Component.extend({
   didInsertElement() {
     this._super();
 
-    Ember.run.scheduleOnce('afterRender', this, function(){
+    scheduleOnce("afterRender", this, function() {
       validateInputs();
       validateForm();
     });
 
-    function validateForm(){
-      Ember.$('.book_van').click(function(){
-        Ember.$.each(['.pickadate', '.timepicker'], function(i, input){
-          checkInput(Ember.$(input));
+    function validateForm() {
+      $(".book_van").click(function() {
+        $.each([".pickadate", ".timepicker"], function(i, input) {
+          checkInput($(input));
         });
-        if(Ember.$('.form__control--error').length > 0) { return false; }
+        if ($(".form__control--error").length > 0) {
+          return false;
+        }
       });
     }
 
-    function validateInputs(){
-      Ember.$('.pickadate, .timepicker').focusout(function(){
+    function validateInputs() {
+      $(".pickadate, .timepicker").focusout(function() {
         return checkInput(this);
       });
-      Ember.$('.pickadate, .timepicker').focus(function(){
+      $(".pickadate, .timepicker").focus(function() {
         return removeHighlight(this);
       });
     }
 
-    function checkInput(element){
-      var parent = Ember.$(element).parent();
-      var value = Ember.$(element).val();
+    function checkInput(element) {
+      var parent = $(element).parent();
+      var value = $(element).val();
 
-      if(value === undefined || value.length === 0) {
-        parent.addClass('form__control--error');
+      if (value === undefined || value.length === 0) {
+        parent.addClass("form__control--error");
       } else {
-        parent.removeClass('form__control--error');
+        parent.removeClass("form__control--error");
       }
     }
 
-    function removeHighlight(element){
-      var parent = Ember.$(element).parent();
-      parent.removeClass('form__control--error');
+    function removeHighlight(element) {
+      var parent = $(element).parent();
+      parent.removeClass("form__control--error");
     }
   }
 });

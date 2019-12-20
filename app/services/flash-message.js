@@ -1,23 +1,27 @@
-import Ember from 'ember';
+import { debounce } from "@ember/runloop";
+import $ from "jquery";
+import Service, { inject as service } from "@ember/service";
 
-export default Ember.Service.extend({
-  i18n: Ember.inject.service(),
+export default Service.extend({
+  i18n: service(),
 
   //Need to pass message to show
   show(message) {
-    var element = Ember.$("#flash_message").clone().text(this.get("i18n").t(message));
-    Ember.$(".flash_message_block").addClass("visible");
+    var element = $("#flash_message")
+      .clone()
+      .text(this.get("i18n").t(message));
+    $(".flash_message_block").addClass("visible");
     element.prependTo(".flash_message_block");
-    Ember.run.debounce(this, this.hideFlashMessage, 500);
+    debounce(this, this.hideFlashMessage, 500);
   },
 
   hideFlashMessage() {
-    Ember.$(".flash_message_block").fadeOut(3000);
-    Ember.run.debounce(this, this.removeFlashMessage, 2500);
+    $(".flash_message_block").fadeOut(3000);
+    debounce(this, this.removeFlashMessage, 2500);
   },
 
   removeFlashMessage() {
-    Ember.$(".flash_message_block").empty();
-    Ember.$(".flash_message_block").addClass("visible");
+    $(".flash_message_block").empty();
+    $(".flash_message_block").addClass("visible");
   }
 });

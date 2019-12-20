@@ -1,3 +1,4 @@
+import { all, hash } from "rsvp";
 import detail from "./detail";
 
 export default detail.extend({
@@ -7,7 +8,7 @@ export default detail.extend({
         search_by_order_id: order.get("id")
       })
       .then(ops => {
-        return Ember.RSVP.all(
+        return all(
           ops.map(op => {
             return this.loadIfAbsent("package", op.get("packageId"));
           })
@@ -21,7 +22,7 @@ export default detail.extend({
       const store = this.get("store");
       data.gcRequests = store.query("goodcity_request", { order_ids });
       data.packages = this.loadPackagesOf(data.order);
-      return Ember.RSVP.hash(data);
+      return hash(data);
     });
   }
 });

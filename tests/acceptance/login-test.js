@@ -1,4 +1,4 @@
-import Ember from "ember";
+import { run } from "@ember/runloop";
 import { module, test } from "qunit";
 import startApp from "../helpers/start-app";
 import { make, mockFindAll } from "ember-data-factory-guy";
@@ -146,7 +146,7 @@ module("Acceptance: Login", {
   },
   afterEach: function() {
     $.mockjax.clear();
-    Ember.run(App, "destroy");
+    run(App, "destroy");
   }
 });
 

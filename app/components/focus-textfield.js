@@ -1,12 +1,14 @@
-import Ember from "ember";
+import $ from "jquery";
+import { observer } from "@ember/object";
+import TextField from "@ember/component/text-field";
 
-export default Ember.TextField.extend({
+export default TextField.extend({
   tagName: "input",
   type: "text",
   maxlength: "25",
   attributeBindings: ["name", "id", "value", "placeholder"],
 
-  triggerAutofocus: Ember.observer("value", function() {
+  triggerAutofocus: observer("value", function() {
     if (this.get("value").length === 0) {
       this.$().focus();
     }
@@ -17,18 +19,18 @@ export default Ember.TextField.extend({
   },
 
   scrollToStart() {
-    Ember.$(".fixed_search_header").addClass("absolute");
-    Ember.$(".footer").addClass("absolute_footer");
-    Ember.$(".search").addClass("no-padding");
+    $(".fixed_search_header").addClass("absolute");
+    $(".footer").addClass("absolute_footer");
+    $(".search").addClass("no-padding");
 
     document.body.scrollTop = document.documentElement.scrollTop = 0;
   },
 
   focusOut() {
     if (this.get("hasFixedInputHeader")) {
-      Ember.$(".fixed_search_header").removeClass("absolute");
-      Ember.$(".footer").removeClass("absolute_footer");
-      Ember.$(".search").removeClass("no-padding");
+      $(".fixed_search_header").removeClass("absolute");
+      $(".footer").removeClass("absolute_footer");
+      $(".search").removeClass("no-padding");
     }
   },
 

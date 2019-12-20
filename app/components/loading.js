@@ -1,7 +1,7 @@
-import Ember from 'ember';
-import loading from '../templates/loading';
+import Component from "@ember/component";
+import loading from "../templates/loading";
 
-export default Ember.Component.extend({
+export default Component.extend({
   layout: loading,
   classNames: ["loading-indicator"]
 });

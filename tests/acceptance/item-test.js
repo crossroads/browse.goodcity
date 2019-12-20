@@ -1,4 +1,5 @@
-import Ember from "ember";
+import $ from "jquery";
+import { run } from "@ember/runloop";
 import { module, test } from "qunit";
 import startApp from "browse/tests/helpers/start-app";
 import FactoryGuy from "ember-data-factory-guy";
@@ -133,7 +134,7 @@ module("Acceptance | Item Page", {
 
   afterEach: function() {
     $.mockjax.clear();
-    Ember.run(this.application, "destroy");
+    run(this.application, "destroy");
   }
 });
 
@@ -151,13 +152,13 @@ test("should redirect item page and Display details", function(assert) {
 
     // Display all the associated items
     assert.equal(
-      Ember.$(".main-section .item_name:first").text(),
+      $(".main-section .item_name:first").text(),
       item_with_packages.get("packages.firstObject.notes")
     );
 
     // Verify donorCondition
     assert.equal(
-      Ember.$(".main-section .item_details:first")
+      $(".main-section .item_details:first")
         .text()
         .indexOf(item_with_packages.get("donorCondition.name")) > 0,
       true
@@ -165,7 +166,7 @@ test("should redirect item page and Display details", function(assert) {
 
     // Verify quantity
     assert.equal(
-      Ember.$(".main-section .item_details:eq(1)")
+      $(".main-section .item_details:eq(1)")
         .text()
         .indexOf(item_with_packages.get("packages.firstObject.quantity")) > 0,
       true
@@ -173,7 +174,7 @@ test("should redirect item page and Display details", function(assert) {
 
     // verify dimension
     assert.equal(
-      Ember.$(".main-section .item_details:eq(3)")
+      $(".main-section .item_details:eq(3)")
         .text()
         .indexOf(item_with_packages.get("packages.firstObject.dimensions")) > 0,
       true
@@ -181,7 +182,7 @@ test("should redirect item page and Display details", function(assert) {
 
     // verify packages details length
     assert.equal(
-      Ember.$(".main-section .item_name").length,
+      $(".main-section .item_name").length,
       item_with_packages.get("packages.length")
     );
   });
@@ -240,7 +241,7 @@ test("should display inventory number for order fulfillment user", function(asse
     assert.equal(currentURL(), item_path);
     // Display inventory Number
     assert.equal(
-      Ember.$(".inventory_redirect:first").text(),
+      $(".inventory_redirect:first").text(),
       pkg.get("inventoryNumber")
     );
   });

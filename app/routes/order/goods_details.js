@@ -1,9 +1,9 @@
-import Ember from "ember";
+import { computed } from "@ember/object";
 import AuthorizeRoute from "./../authorize";
 import AjaxPromise from "browse/utils/ajax-promise";
 
 export default AuthorizeRoute.extend({
-  backLinkPath: Ember.computed.localStorage(),
+  backLinkPath: computed.localStorage(),
   orderId: null,
 
   queryParams: {
@@ -11,7 +11,8 @@ export default AuthorizeRoute.extend({
   },
 
   beforeModel() {
-    var previousRoutes = this.router.router.currentHandlerInfos;
+    var previousRoutes =
+      this.router.router && this.router.router.currentHandlerInfos;
     var previousRoute = previousRoutes && previousRoutes.pop();
     if (previousRoute) {
       var parentRoute = previousRoutes[1];

@@ -1,9 +1,9 @@
-import Ember from "ember";
+import Service, { inject as service } from "@ember/service";
 import AjaxPromise from "browse/utils/ajax-promise";
 
-export default Ember.Service.extend({
+export default Service.extend({
   // ----- Services -----
-  session: Ember.inject.service(),
+  session: service(),
 
   // ----- Utilities -----
   _request(url, options, authorizedRequest) {

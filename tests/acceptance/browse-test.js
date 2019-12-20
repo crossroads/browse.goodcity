@@ -1,4 +1,5 @@
-import Ember from "ember";
+import $ from "jquery";
+import { run } from "@ember/runloop";
 import { module, test } from "qunit";
 import startApp from "../helpers/start-app";
 import { make } from "ember-data-factory-guy";
@@ -92,14 +93,14 @@ module("Acceptance | Browse Page", {
     // Clear our ajax mocks
     $.mockjaxSettings.matchInRegistrationOrder = true;
     mocks.forEach($.mockjax.clear);
-    Ember.run(App, App.destroy);
+    run(App, App.destroy);
   }
 });
 
 test("should redirect browse page", function(assert) {
   visit("/browse").then(function() {
     assert.equal(currentURL(), "/browse");
-    assert.equal(Ember.$(".main-section li").length, 3);
+    assert.equal($(".main-section li").length, 3);
   });
 });
 
@@ -107,14 +108,14 @@ test("should list main-category with subcategories if has items", function(asser
   visit("/browse").then(function() {
     // check first group of main-category
     assert.equal(
-      Ember.$(".main-section li:first .main_category")
+      $(".main-section li:first .main_category")
         .text()
         .trim()
         .indexOf(category_title) <= 0,
       true
     );
     assert.equal(
-      Ember.$(".main-section li:first .subcategories")
+      $(".main-section li:first .subcategories")
         .text()
         .trim()
         .indexOf(subcategory_title) <= 0,
@@ -129,16 +130,13 @@ test("should list main-category without subcategories if has no items", function
   andThen(function() {
     // check last group of main-category with no-items
     assert.equal(
-      Ember.$(".main-section li:last .main_category")
+      $(".main-section li:last .main_category")
         .text()
         .trim()
         .indexOf(empty_category_title) <= 0,
       true
     );
-    assert.equal(
-      Ember.$.trim(Ember.$(".main-section li:last .subcategories").text()),
-      ""
-    );
+    assert.equal($.trim($(".main-section li:last .subcategories").text()), "");
   });
 });
 

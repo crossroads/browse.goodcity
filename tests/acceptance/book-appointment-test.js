@@ -1,4 +1,5 @@
-import Ember from "ember";
+import $ from "jquery";
+import { run } from "@ember/runloop";
 import _ from "lodash";
 import { module, test } from "qunit";
 import startApp from "browse/tests/helpers/start-app";
@@ -209,7 +210,7 @@ module("Acceptance | Book appointment/order ", {
     mocks.forEach($.mockjax.clear);
 
     // Stop the app
-    Ember.run(App, "destroy");
+    run(App, "destroy");
   }
 });
 
@@ -224,7 +225,7 @@ test("should redirect to login page if user not logged in", function(assert) {
   andThen(function() {
     assert.equal(currentURL(), "/login?bookAppointment=true");
     assert.equal(
-      Ember.$(".title")
+      $(".title")
         .text()
         .trim(),
       "Welcome!"
@@ -242,7 +243,7 @@ test("should redirect to Account details page if user is logged in and account d
   andThen(function() {
     assert.equal(currentURL(), "/account_details?bookAppointment=true");
     assert.equal(
-      Ember.$(".title")
+      $(".title")
         .text()
         .trim(),
       "Account Details"
@@ -286,7 +287,7 @@ test("request purpose page on completely filled should not redirect to Goods det
     andThen(function() {
       assert.equal(currentURL(), requestPurposeUrl);
       assert.equal(
-        Ember.$(".title")
+        $(".title")
           .text()
           .trim(),
         "Request Purpose"
@@ -303,7 +304,7 @@ test("request purpose page should not redirect if incomplete form", function(ass
     andThen(function() {
       assert.equal(currentURL(), requestPurposeUrl);
       assert.equal(
-        Ember.$(".title")
+        $(".title")
           .text()
           .trim(),
         "Request Purpose"
@@ -380,7 +381,7 @@ test("Select HkID on client info should display form for hkid", function(assert)
     click(".custom_radio_buttons .for-client");
     andThen(function() {
       assert.equal(
-        Ember.$("#id-initials")
+        $("#id-initials")
           .text()
           .trim(),
         "P12"
@@ -420,7 +421,7 @@ test("Select RBCL on client info should display form for rbcl", function(assert)
     click(".custom_radio_buttons .for-client");
     andThen(function() {
       assert.equal(
-        Ember.$("#id-initials")
+        $("#id-initials")
           .text()
           .trim(),
         "P12"
@@ -431,7 +432,7 @@ test("Select RBCL on client info should display form for rbcl", function(assert)
     click(".custom_radio_buttons .abcl");
     andThen(function() {
       assert.equal(
-        Ember.$("#id-initials")
+        $("#id-initials")
           .text()
           .trim(),
         "RBCL"
@@ -532,7 +533,7 @@ test("Online order : Filled Up client info page, should redirect to schedule det
       );
       assert.equal(currentURL(), scheduleDetailsUrl);
       assert.equal(
-        Ember.$(".title")
+        $(".title")
           .text()
           .trim(),
         "Transport Details"
@@ -624,7 +625,7 @@ test("Appointment : Filled Up client info page, should redirect to goods details
         `${goodsDetailsUrl}?fromClientInformation=true`
       );
       assert.equal(
-        Ember.$(".title")
+        $(".title")
           .text()
           .trim(),
         "Goods Details"
@@ -686,7 +687,7 @@ test("Incomplete form submit client info page, should not redirect to goods deta
     andThen(function() {
       assert.equal(currentURL(), clientInfoUrl);
       assert.equal(
-        Ember.$(".title")
+        $(".title")
           .text()
           .trim(),
         "Client Information"
@@ -720,7 +721,7 @@ test("Goods Details Page on incomplete submit should not redirect to appointment
   andThen(function() {
     assert.equal(currentURL(), appointmentGoodsDetailsUrl);
     assert.equal(
-      Ember.$(".title")
+      $(".title")
         .text()
         .trim(),
       "Goods Details"

@@ -1,9 +1,11 @@
-import Ember from "ember";
+import { bool, alias } from "@ember/object/computed";
+import { once } from "@ember/runloop";
+import { observer, computed } from "@ember/object";
+import { getOwner } from "@ember/application";
 import Model from "ember-data/model";
 import attr from "ember-data/attr";
 import { belongsTo, hasMany } from "ember-data/relationships";
 import cloudinaryImage from "../mixins/cloudinary_image";
-const { getOwner } = Ember;
 
 export default Model.extend(cloudinaryImage, {
   quantity: attr("number"),
@@ -26,12 +28,12 @@ export default Model.extend(cloudinaryImage, {
   allowWebPublish: attr("boolean"),
 
   //This is fix for live update for ticket GCW-1632(only implemented on singleton packages, nee to change for qty packages)
-  updateAllowwebpublishQtyIfDesignated: Ember.observer(
+  updateAllowwebpublishQtyIfDesignated: observer(
     "allowWebPublish",
     "quantity",
     "orderId",
     function() {
-      Ember.run.once(this, function() {
+      once(this, function() {
         if (this.get("orderId")) {
           this.set("allowWebPublish", false);
         }
@@ -39,9 +41,9 @@ export default Model.extend(cloudinaryImage, {
     }
   ),
 
-  isDispatched: Ember.computed.bool("stockitSentOn"),
+  isDispatched: bool("stockitSentOn"),
 
-  isAvailable: Ember.computed("isDispatched", "allowWebPublish", function() {
+  isAvailable: computed("isDispatched", "allowWebPublish", function() {
     return Boolean(
       !this.get("isDispatched") &&
         (this.get("allowWebPublish") ||
@@ -51,7 +53,7 @@ export default Model.extend(cloudinaryImage, {
     );
   }),
 
-  isUnavailableAndDesignated: Ember.computed(
+  isUnavailableAndDesignated: computed(
     "isDispatched",
     "allowWebPublish",
     function() {
@@ -62,26 +64,24 @@ export default Model.extend(cloudinaryImage, {
     }
   ),
 
-  allPackageCategories: Ember.computed.alias(
-    "packageType.allPackageCategories"
-  ),
+  allPackageCategories: alias("packageType.allPackageCategories"),
 
-  _packages: Ember.computed(function() {
+  _packages: computed(function() {
     return this.store.peekAll("package");
   }),
 
-  hasSiblingPackages: Ember.computed("_packages.@each.itemId", function() {
+  hasSiblingPackages: computed("_packages.@each.itemId", function() {
     return (
       this.get("itemId") &&
       this.get("_packages").filterBy("itemId", this.get("itemId")).length > 1
     );
   }),
 
-  packageName: Ember.computed("packageType", function() {
+  packageName: computed("packageType", function() {
     return this.get("packageType.name");
   }),
 
-  packageTypeObject: Ember.computed("packageType", function() {
+  packageTypeObject: computed("packageType", function() {
     var obj = this.get("packageType").getProperties(
       "id",
       "name",
@@ -91,7 +91,7 @@ export default Model.extend(cloudinaryImage, {
     return obj;
   }),
 
-  dimensions: Ember.computed("width", "height", "length", function() {
+  dimensions: computed("width", "height", "length", function() {
     var res = "";
     var append = val => {
       if (val) {
@@ -104,35 +104,35 @@ export default Model.extend(cloudinaryImage, {
     return !res ? "" : res + "cm";
   }),
 
-  image: Ember.computed("images.@each.favourite", function() {
+  image: computed("images.@each.favourite", function() {
     return this.get("images")
       .filterBy("favourite")
       .get("firstObject");
   }),
 
-  favouriteImage: Ember.computed.alias("image"),
+  favouriteImage: alias("image"),
 
-  otherImages: Ember.computed("images.[]", function() {
+  otherImages: computed("images.[]", function() {
     return this.get("images")
       .toArray()
       .removeObject(this.get("image"));
   }),
 
-  sortedImages: Ember.computed("otherImages.[]", "image", function() {
+  sortedImages: computed("otherImages.[]", "image", function() {
     var images = this.get("otherImages").toArray();
     images.unshift(this.get("image"));
     return images;
   }),
 
-  displayImage: Ember.computed.alias("image"),
+  displayImage: alias("image"),
 
-  displayImageUrl: Ember.computed("image", function() {
+  displayImageUrl: computed("image", function() {
     return (
       this.get("image.defaultImageUrl") || this.generateUrl(500, 500, true)
     );
   }),
 
-  previewImageUrl: Ember.computed("image", function() {
+  previewImageUrl: computed("image", function() {
     return (
       this.get("image.previewImageUrl") || this.generateUrl(265, 265, true)
     );

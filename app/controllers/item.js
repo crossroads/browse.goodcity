@@ -1,49 +1,51 @@
-import Ember from "ember";
+import { later } from "@ember/runloop";
+import { computed } from "@ember/object";
+import { alias, empty, gt, sort } from "@ember/object/computed";
+import { inject as service } from "@ember/service";
+import Controller, { inject as controller } from "@ember/controller";
 import config from "../config/environment";
 
-export default Ember.Controller.extend({
-  messageBox: Ember.inject.service(),
-  application: Ember.inject.controller(),
-  packageCategory: Ember.inject.controller(),
+export default Controller.extend({
+  messageBox: service(),
+  application: controller(),
+  packageCategory: controller(),
   queryParams: ["categoryId", "sortBy"],
   prevPath: null,
   categoryId: null,
-  cart: Ember.inject.service(),
+  cart: service(),
   sortBy: "createdAt",
-  item: Ember.computed.alias("model"),
-  noNextItem: Ember.computed.empty("nextItem"),
-  noPreviousItem: Ember.computed.empty("previousItem"),
-  hideThumbnails: Ember.computed.gt("item.sortedImages.length", 1),
-  smallScreenPreviewUrl: Ember.computed.alias(
-    "item.displayImage.smallScreenPreviewImageUrl"
-  ),
+  item: alias("model"),
+  noNextItem: empty("nextItem"),
+  noPreviousItem: empty("previousItem"),
+  hideThumbnails: gt("item.sortedImages.length", 1),
+  smallScreenPreviewUrl: alias("item.displayImage.smallScreenPreviewImageUrl"),
   itemNotAvailableShown: false,
-  hasCartItems: Ember.computed.alias("application.hasCartItems"),
+  hasCartItems: alias("application.hasCartItems"),
   isMobileApp: config.cordova.enabled,
 
   direction: null,
 
-  isOrderFulfilmentUser: Ember.computed(function() {
+  isOrderFulfilmentUser: computed(function() {
     let user = this.get("session.currentUser");
     return user.hasRole("Order fulfilment");
   }),
 
-  presentInCart: Ember.computed("item", "cart.counter", function() {
+  presentInCart: computed("item", "cart.counter", function() {
     return this.get("cart").contains(this.get("item"));
   }),
 
-  allPackages: Ember.computed("item.packages.@each.isAvailable", function() {
+  allPackages: computed("item.packages.@each.isAvailable", function() {
     var item = this.get("item");
     return item.get("isItem")
       ? item.get("packages").filterBy("isAvailable")
       : [item];
   }),
 
-  categoryObj: Ember.computed("categoryId", function() {
+  categoryObj: computed("categoryId", function() {
     return this.store.peekRecord("package_category", this.get("categoryId"));
   }),
 
-  linkDisplayName: Ember.computed("prevPath", "categoryObj", function() {
+  linkDisplayName: computed("prevPath", "categoryObj", function() {
     let prevPath = this.get("prevPath");
     if (prevPath === "search_goods") {
       return this.get("i18n").t("search_goods.back");
@@ -51,29 +53,29 @@ export default Ember.Controller.extend({
     return this.get("categoryObj.name");
   }),
 
-  showPrevNextButtons: Ember.computed("prevPath", function() {
+  showPrevNextButtons: computed("prevPath", function() {
     return this.get("prevPath") !== "search_goods";
   }),
 
-  selectedSort: Ember.computed("sortBy", function() {
+  selectedSort: computed("sortBy", function() {
     return [this.get("sortBy")];
   }),
 
-  sortedItems: Ember.computed.sort("categoryObj.items", "selectedSort"),
+  sortedItems: sort("categoryObj.items", "selectedSort"),
 
-  nextItem: Ember.computed("model", "sortedItems.[]", function() {
+  nextItem: computed("model", "sortedItems.[]", function() {
     var currentItem = this.get("item");
     var items = this.get("sortedItems").toArray();
     return items[items.indexOf(currentItem) + 1];
   }),
 
-  previousItem: Ember.computed("model", "sortedItems.[]", function() {
+  previousItem: computed("model", "sortedItems.[]", function() {
     var currentItem = this.get("item");
     var items = this.get("sortedItems").toArray();
     return items[items.indexOf(currentItem) - 1];
   }),
 
-  previewUrl: Ember.computed("item.previewImageUrl", {
+  previewUrl: computed("item.previewImageUrl", {
     get() {
       return this.get("item.previewImageUrl");
     },
@@ -143,7 +145,7 @@ export default Ember.Controller.extend({
 
     requestItem(item) {
       this.get("cart").add(item);
-      Ember.run.later(
+      later(
         this,
         function() {
           this.get("application").send("displayCart");

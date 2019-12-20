@@ -1,4 +1,4 @@
-import Ember from "ember";
+import { helper as buildHelper } from "@ember/component/helper";
 
 const OPS = {
   "+": (a, b) => a + b,
@@ -8,7 +8,7 @@ const OPS = {
   "%": (a, b) => a % b
 };
 
-export default Ember.Helper.helper(function([lvalue, operator, rvalue]) {
+export default buildHelper(function([lvalue, operator, rvalue]) {
   const leftNumber = parseFloat(lvalue);
   const rightNumber = parseFloat(rvalue);
   return OPS[operator](leftNumber, rightNumber);

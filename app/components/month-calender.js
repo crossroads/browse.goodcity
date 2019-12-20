@@ -1,4 +1,6 @@
-import Ember from 'ember';
+import $ from "jquery";
+import { scheduleOnce, next } from "@ember/runloop";
+import TextField from "@ember/component/text-field";
 
 // Handle time selection based on current time
 // <select id="ember1325" required="">
@@ -7,62 +9,66 @@ import Ember from 'ember';
 //   <option value="2">2PM-4PM</option>  => (840mins - 960mins)
 // </select>
 
-export default Ember.TextField.extend({
-  tagName: 'input',
-  classNames: 'pickadate',
-  attributeBindings: [ "name", "type", "value", "id", 'required', 'pattern', 'available', 'placeholder' ],
+export default TextField.extend({
+  tagName: "input",
+  classNames: "pickadate",
+  attributeBindings: [
+    "name",
+    "type",
+    "value",
+    "id",
+    "required",
+    "pattern",
+    "available",
+    "placeholder"
+  ],
 
-  currentMinutes: function(){
+  currentMinutes: function() {
     var currentTime = new Date();
     var hours = currentTime.getHours();
     var minutes = currentTime.getMinutes();
-    var total_mins = hours*60 + minutes;
-    return (total_mins > 961) ? 961 : total_mins;
+    var total_mins = hours * 60 + minutes;
+    return total_mins > 961 ? 961 : total_mins;
   },
 
-  _currentDay: function(){
+  _currentDay: function() {
     var currentDate = new Date();
-    currentDate.setHours(0,0,0,0);
+    currentDate.setHours(0, 0, 0, 0);
     return currentDate;
   },
 
-  _getValidDate: function(selectedDate){
+  _getValidDate: function(selectedDate) {
     var today = new Date();
     var currentDate = new Date();
     var selected = selectedDate;
-    currentDate.setHours(0,0,0,0);
-    selected.setHours(0,0,0,0);
+    currentDate.setHours(0, 0, 0, 0);
+    selected.setHours(0, 0, 0, 0);
     return currentDate > selected ? today : selectedDate;
   },
 
   // TO DO: when we have final logic for when to allow user to book slot.
-  _setTimeSlots: function(){
+  _setTimeSlots: function() {
     // var selectedDate = date;
     // var currentDate = new Date();
     // currentDate.setHours(0,0,0,0);
     // selectedDate.setHours(0,0,0,0);
-
     // if(selectedDate.getTime() === currentDate.getTime()) {
     //   var total_mins = this.currentMinutes();
     //   var option;
-
     //   if(total_mins >= 780 && total_mins < 960) {
     //     option = Ember.$(".time_selector select option:eq(1)");
     //   } else if(total_mins >= 960) {
     //     option = Ember.$(".time_selector select option:eq(2)");
     //   }
-
     //   if(option && option.length > 0) {
     //     option.addClass("hidden");
     //     option[0].disabled = true;
     //     if(option.is(':selected')) { option.prop("selected", false) }
-
     //     option.prevAll().each(function() {
     //       Ember.$( this ).addClass("hidden");
     //       this.disabled = true;
     //     });
     //   }
-
     // } else {
     //   // Enable all select options
     //   Ember.$(".time_selector select option").each(function() {
@@ -74,11 +80,12 @@ export default Ember.TextField.extend({
 
   didInsertElement() {
     var _this = this;
-    var list = this.get('available');
-    var available_count = 0, available_array = [true];
+    var list = this.get("available");
+    var available_count = 0,
+      available_array = [true];
     var setting = false;
 
-    if(list) {
+    if (list) {
       available_count = list.length;
       for (var i = available_count - 1; i >= 0; i--) {
         var date = new Date(list[i]);
@@ -96,9 +103,9 @@ export default Ember.TextField.extend({
       available_array.pop();
     }
 
-    Ember.run.scheduleOnce('afterRender', this, function(){
-      Ember.$('.pickadate').pickadate({
-        format: 'ddd mmm d',
+    scheduleOnce("afterRender", this, function() {
+      $(".pickadate").pickadate({
+        format: "ddd mmm d",
         monthsFull: moment.months(),
         monthsShort: moment.monthsShort(),
         weekdaysShort: moment.weekdaysShort(),
@@ -110,28 +117,30 @@ export default Ember.TextField.extend({
         max: available_array[1],
 
         onClose: function() {
-          Ember.$(document.activeElement).blur();
-          if (setting) { return; }
-          var date = this.get('select') && this.get('select').obj;
+          $(document.activeElement).blur();
+          if (setting) {
+            return;
+          }
+          var date = this.get("select") && this.get("select").obj;
 
-          if(date) {
+          if (date) {
             _this.set("selection", date);
-            Ember.$('.time_selector select').val('');
+            $(".time_selector select").val("");
 
             setting = true;
-            Ember.run.next(() => {
-              this.set('select', new Date(date), { format: 'ddd mmm d' });
+            next(() => {
+              this.set("select", new Date(date), { format: "ddd mmm d" });
               setting = false;
             });
             _this._setTimeSlots(date);
           }
         },
 
-        onStart: function(){
-          var date = _this.get('selection');
-          if(date) {
+        onStart: function() {
+          var date = _this.get("selection");
+          if (date) {
             date = _this._getValidDate(date);
-            this.set('select', new Date(date), { format: 'ddd mmm d' });
+            this.set("select", new Date(date), { format: "ddd mmm d" });
             _this._setTimeSlots(date);
           }
         }
@@ -142,47 +151,48 @@ export default Ember.TextField.extend({
       closeOnClick();
     });
 
-    function closeOnClick(){
-      Ember.$(".picker__holder").click(function(e){
-        if(e.target !== this) { return; }
-        Ember.$('#selectedDate').trigger("blur");
+    function closeOnClick() {
+      $(".picker__holder").click(function(e) {
+        if (e.target !== this) {
+          return;
+        }
+        $("#selectedDate").trigger("blur");
       });
     }
 
-    function validateForm(){
-      Ember.$('.button.drop_off').click(function(){
-        var date = checkInput(Ember.$('#selectedDate'));
-        var time = checkInput(Ember.$('.time_selector select'));
+    function validateForm() {
+      $(".button.drop_off").click(function() {
+        var date = checkInput($("#selectedDate"));
+        var time = checkInput($(".time_selector select"));
         return date && time;
       });
     }
 
-    function validateInputs(){
-      Ember.$('#selectedDate').focus(function(){
+    function validateInputs() {
+      $("#selectedDate").focus(function() {
         return removeHighlight(this);
       });
-      Ember.$('.time_selector select').focus(function(){
+      $(".time_selector select").focus(function() {
         return removeHighlight(this);
       });
     }
 
-    function checkInput(element){
-      var parent = Ember.$(element).parent();
-      var value = Ember.$(element).val();
+    function checkInput(element) {
+      var parent = $(element).parent();
+      var value = $(element).val();
 
-      if(value === undefined || value.length === 0) {
-        parent.addClass('form__control--error');
+      if (value === undefined || value.length === 0) {
+        parent.addClass("form__control--error");
         return false;
       } else {
-        parent.removeClass('form__control--error');
+        parent.removeClass("form__control--error");
         return true;
       }
     }
 
-    function removeHighlight(element){
-      var parent = Ember.$(element).parent();
-      parent.removeClass('form__control--error');
+    function removeHighlight(element) {
+      var parent = $(element).parent();
+      parent.removeClass("form__control--error");
     }
-
   }
 });

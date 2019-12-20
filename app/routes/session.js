@@ -1,12 +1,14 @@
-import Ember from 'ember';
+import Route from "@ember/routing/route";
 
-export default Ember.Route.extend({
-
+export default Route.extend({
   beforeModel() {
-    if (window.localStorage.getItem("authToken") && this.session.get('isLoggedIn')) {
-      this.transitionTo('/');
+    if (
+      window.localStorage.getItem("authToken") &&
+      this.session.get("isLoggedIn")
+    ) {
+      this.transitionTo("/");
     } else {
-      this.set('cart.checkout', true);
+      this.set("cart.checkout", true);
     }
   }
 });

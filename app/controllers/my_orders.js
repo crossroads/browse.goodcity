@@ -1,27 +1,28 @@
+import { all, reject } from "rsvp";
+import { computed, observer } from "@ember/object";
+import { inject as controller } from "@ember/controller";
+import { inject as service } from "@ember/service";
+import { sort, alias } from "@ember/object/computed";
 import applicationController from "./application";
-import Ember from "ember";
 
 export default applicationController.extend({
   sortProperties: ["createdAt:desc"],
-  arrangedOrders: Ember.computed.sort("model.orders", "sortProperties"),
-  orders: Ember.computed.alias("model"),
-  flashMessage: Ember.inject.service(),
-  messageBox: Ember.inject.service(),
+  arrangedOrders: sort("model.orders", "sortProperties"),
+  orders: alias("model"),
+  flashMessage: service(),
+  messageBox: service(),
   queryParams: ["submitted"],
   triggerFlashMessage: false,
   previousRouteName: null,
   showCancelBookingPopUp: false,
   cancellationReasonWarning: false,
-  applicationController: Ember.inject.controller("application"),
-  isMyOrdersRoute: Ember.computed(
-    "applicationController.currentPath",
-    function() {
-      return this.get("applicationController.currentPath") === "my_orders";
-    }
-  ),
+  applicationController: controller("application"),
+  isMyOrdersRoute: computed("applicationController.currentPath", function() {
+    return this.get("applicationController.currentPath") === "my_orders";
+  }),
 
   fetchPackageImages(pkg) {
-    return Ember.RSVP.all(
+    return all(
       pkg
         .getWithDefault("imageIds", [])
         .map(id => this.store.findRecord("image", id, { reload: false }))
@@ -30,14 +31,14 @@ export default applicationController.extend({
 
   fetchMissingImages(order) {
     const ordersPackages = order.getWithDefault("ordersPackages", []);
-    return Ember.RSVP.all(
+    return all(
       ordersPackages.map(op => this.fetchPackageImages(op.get("package")))
     );
   },
 
   submitted: false,
 
-  submittedOrderFlashMessage: Ember.observer(
+  submittedOrderFlashMessage: observer(
     "submitted",
     "triggerFlashMessage",
     function() {
@@ -56,7 +57,7 @@ export default applicationController.extend({
       .findRecord("order", order.get("id"), { reload: true })
       .catch(e => {
         this.stopLoading();
-        return Ember.RSVP.reject(e);
+        return reject(e);
       })
       .then(res => {
         this.stopLoading();

@@ -1,41 +1,44 @@
-import Ember from "ember";
+import $ from "jquery";
+import { computed } from "@ember/object";
+import { alias, equal } from "@ember/object/computed";
+import Controller, { inject as controller } from "@ember/controller";
+import { getOwner } from "@ember/application";
 import config from "../../config/environment";
 import AjaxPromise from "browse/utils/ajax-promise";
-const { getOwner } = Ember;
 import cancelOrder from "../../mixins/cancel_order";
 import { task } from "ember-concurrency";
 
-export default Ember.Controller.extend(cancelOrder, {
+export default Controller.extend(cancelOrder, {
   queryParams: ["prevPath"],
   prevPath: null,
   showCancelBookingPopUp: false,
   isMobileApp: config.cordova.enabled,
-  myOrders: Ember.inject.controller(),
+  myOrders: controller(),
   firstName: null,
   lastName: null,
   mobilePhone: null,
   isEditing: false,
   selectedId: null,
   identityNumber: null,
-  order: Ember.computed.alias("model.order"),
-  beneficiary: Ember.computed.alias("model.beneficiary"),
-  purposes: Ember.computed.alias("model.purposes"),
+  order: alias("model.order"),
+  beneficiary: alias("model.beneficiary"),
+  purposes: alias("model.purposes"),
 
-  isHkIdSelected: Ember.computed.equal("selectedId", "hkId"),
-  isOrganisationSelected: Ember.computed.equal("clientInfoId", "organisation"),
+  isHkIdSelected: equal("selectedId", "hkId"),
+  isOrganisationSelected: equal("clientInfoId", "organisation"),
 
-  clientInfoId: Ember.computed("order", function() {
+  clientInfoId: computed("order", function() {
     let orderPurpose = this.get("order.ordersPurposes").get("firstObject");
     return (
       (orderPurpose && orderPurpose.get("purpose.identifier")) || "organisation"
     );
   }),
 
-  mobile: Ember.computed("mobilePhone", function() {
+  mobile: computed("mobilePhone", function() {
     return config.APP.HK_COUNTRY_CODE + this.get("mobilePhone");
   }),
 
-  titles: Ember.computed(function() {
+  titles: computed(function() {
     let translation = this.get("i18n");
     let mr = translation.t("account.user_title.mr");
     let mrs = translation.t("account.user_title.mrs");
@@ -51,7 +54,7 @@ export default Ember.Controller.extend(cancelOrder, {
   }),
 
   beneficiaryParams() {
-    let title = Ember.$("select#title option")
+    let title = $("select#title option")
       .toArray()
       .filter(title => title.selected === true)[0].value;
     var beneficieryParams = {

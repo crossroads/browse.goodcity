@@ -1,9 +1,11 @@
-import Ember from "ember";
-const { getOwner } = Ember;
+import $ from "jquery";
+import { inject as service } from "@ember/service";
+import Mixin from "@ember/object/mixin";
+import { getOwner } from "@ember/application";
 import AjaxPromise from "browse/utils/ajax-promise";
 
-export default Ember.Mixin.create({
-  orderService: Ember.inject.service(),
+export default Mixin.create({
+  orderService: service(),
 
   deleteOrder(order) {
     var loadingView = getOwner(this)
@@ -25,7 +27,7 @@ export default Ember.Mixin.create({
   },
 
   cancelOrder(order) {
-    const div = Ember.$(`.cancel-appointment-reasons${order.id}`);
+    const div = $(`.cancel-appointment-reasons${order.id}`);
     const cancellationReason = div.val().trim();
 
     this.set("cancellationReasonWarning", !cancellationReason);
