@@ -30,11 +30,13 @@
   .cart {
     &.unread {
       position: absolute;
+      top: 0;
+
       @media #{$large-only} {
-        right: 50%;
+        right: 47%;
       }
       @media #{$xlarge-only} {
-        right: 35%;
+        right: 33%;
       }
       @media #{$medium-only} {
         right: 2%;
@@ -224,6 +226,31 @@
       a {
         text-decoration: underline;
       }
+    }
+  }
+}
+
+.wrap {
+  color: #fff;
+  position: relative;
+  display: inline-block;
+  z-index: 1;
+  padding: 4px;
+
+  .in {
+    padding: 60% 10%;
+    margin-top: -0.6em;
+
+    &:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 120%;
+      padding-bottom: 120%;
+      background-color: #D95353;
+      border-radius: 50%;
+      z-index: -1;
     }
   }
 }

@@ -117,8 +117,9 @@
 .cart {
   &.unread {
     position: absolute;
-    right: 1.5rem;
+    right: 1.8rem;
     margin-top: -.3rem;
+    top: .7rem;
 
     .unread_length {
       line-height: 1.3rem;
@@ -144,8 +145,12 @@
 
   .unread {
     position: absolute;
-    right: 0.8rem;
-    margin-top: 0.2rem;
+    right: 0.5rem;
+    line-height: 1.5rem;
+
+    .wrap {
+      padding: 3px;
+    }
   }
 }
 
