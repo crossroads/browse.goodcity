@@ -73,7 +73,7 @@ test("dimensions", function(assert) {
     record = subject.store.peekRecord("package", 1);
   });
 
-  assert.equal(record.get("dimensions"), "W 10 x H 10 x L 10cm");
+  assert.equal(record.get("dimensions"), "W 10 x H 10 x L 10 cm");
 });
 
 test("isDispatched: check package is dispatched or not", function(assert) {
