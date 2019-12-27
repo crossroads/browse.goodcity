@@ -98,9 +98,9 @@ export default Model.extend(cloudinaryImage, {
         res += !res ? val : " x " + val;
       }
     };
-    append(`W${this.get("width")}`);
-    append(`H${this.get("height")}`);
-    append(`L${this.get("length")}`);
+    append(`W ${this.get("width")}`);
+    append(`H ${this.get("height")}`);
+    append(`L ${this.get("length")}`);
     return !res ? "" : res + " cm";
   }),
 
