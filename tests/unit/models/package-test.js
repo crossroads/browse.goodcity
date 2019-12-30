@@ -1,6 +1,7 @@
 import { compare } from "@ember/utils";
 import { run } from "@ember/runloop";
 import { get } from "@ember/object";
+
 import { test, moduleForModel } from "ember-qunit";
 
 moduleForModel("package", {
@@ -16,6 +17,7 @@ test("item relationship", function(assert) {
   var pkg = this.subject().store.modelFor("package");
   var relationship = get(pkg, "relationshipsByName").get("item");
 
+
   assert.equal(relationship.key, "item");
   assert.equal(relationship.kind, "belongsTo");
 });
@@ -23,7 +25,6 @@ test("item relationship", function(assert) {
 test("packageType relationship", function(assert) {
   var pkg = this.subject().store.modelFor("package");
   var relationship = get(pkg, "relationshipsByName").get("packageType");
-
   assert.equal(relationship.key, "packageType");
   assert.equal(relationship.kind, "belongsTo");
 });
@@ -31,7 +32,6 @@ test("packageType relationship", function(assert) {
 test("Valid ember-data Model", function(assert) {
   var record;
   var subject = this.subject();
-
   run(function() {
     subject.store.createRecord("package", { id: 1, notes: "Test" });
     record = subject.store.peekRecord("package", 1);
@@ -43,7 +43,6 @@ test("Valid ember-data Model", function(assert) {
 test("packageName", function(assert) {
   var record, packageType;
   var subject = this.subject();
-
   run(function() {
     subject.store.createRecord("packageType", { id: 1, name: "Test" });
     packageType = subject.store.peekRecord("packageType", 1);
@@ -74,7 +73,7 @@ test("dimensions", function(assert) {
     record = subject.store.peekRecord("package", 1);
   });
 
-  assert.equal(record.get("dimensions"), "10 x 10 x 10cm");
+  assert.equal(record.get("dimensions"), "W 10 x H 10 x L 10 cm");
 });
 
 test("isDispatched: check package is dispatched or not", function(assert) {
