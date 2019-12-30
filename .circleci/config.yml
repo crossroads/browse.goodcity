@@ -253,6 +253,7 @@ jobs:
           working_directory: ~/code
 
   ios_build_and_deploy:
+    <<: *defaults
     macos:
       xcode: "10.1.0"
     working_directory: ~/code
