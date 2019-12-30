@@ -263,7 +263,6 @@ jobs:
 
     steps:
       - checkout
-      - run: brew install node
       - restore-cache: *restore-ios-yarn-cache
       - run: *yarn
       - save-cache: *save-ios-yarn-cache
