@@ -253,7 +253,6 @@ jobs:
           working_directory: ~/code
 
   ios_build_and_deploy:
-    <<: *defaults
     macos:
       xcode: "10.1.0"
     working_directory: ~/code
@@ -264,6 +263,7 @@ jobs:
 
     steps:
       - checkout
+      - run: brew install node
       - restore-cache: *restore-ios-yarn-cache
       - run: *yarn
       - save-cache: *save-ios-yarn-cache
