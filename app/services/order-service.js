@@ -60,7 +60,7 @@ export default ApiService.extend({
    */
   cancelOrder(order, reason) {
     return this.applyStateTransition(order, "cancel", {
-      cancellation_reason: reason
+      cancel_reason: reason
     });
   },
 
