@@ -35,7 +35,7 @@
   border-top: 1px solid;
 
   span {
-    margin-right: 2rem;
+    margin-right: 1.8rem;
   }
 
   span, i {
@@ -60,8 +60,10 @@
 
 .req-more-goods div.link-blue {
   text-align: center;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
   color: #f34d4f;
+  float: none;
+  width: 80%;
+  max-width: 260px;
+  margin: 2rem auto;
 }
 
