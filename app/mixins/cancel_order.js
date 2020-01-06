@@ -4,7 +4,7 @@ import Mixin from "@ember/object/mixin";
 import { getOwner } from "@ember/application";
 import asyncMixin from "browse/mixins/async_tasks";
 
-export default Mixin.create({
+export default Mixin.create(asyncMixin, {
   orderService: service(),
 
   deleteOrder(order) {
