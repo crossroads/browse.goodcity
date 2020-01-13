@@ -4,9 +4,9 @@
     margin-top: 1rem;
   }
   .id-confidential-text{
-    font-size: 0.7rem;
-    @media #{$large-only}{
-      font-size: 0.9rem;
+    font-size: 0.9rem;
+    @media #{$small-only}{
+      font-size: 0.7rem;
     }
   }
 
