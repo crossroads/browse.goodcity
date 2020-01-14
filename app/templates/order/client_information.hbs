@@ -24,11 +24,7 @@
           </nav>
         </section>
         <section class="main-section client-information large-10 large-offset-1 small-12 medium-12 columns">
-          {{#unless cart.isEmpty}}
-            {{#unless isAppointment}}
-              {{small-cart-toggle-view}}
-            {{/unless}}
-          {{/unless}}
+          {{partial 'order/order_summary'}}
           <div class="request_purpose_title">{{t 'order.client_information.for_client'}}</div>
           <div class="row time_inputs purpose" >
             <div class=" custom_radio_buttons small-12 columns purpose">

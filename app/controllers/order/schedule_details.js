@@ -32,9 +32,7 @@ export default Controller.extend(cancelOrder, {
     );
   }),
 
-  isAppointment: computed("order", function() {
-    return this.get("order.isAppointment");
-  }),
+  isAppointment: alias("order.isAppointment"),
 
   timeSlots: computed("selectedDate", function() {
     let selectedDate = this.get("selectedDate");
