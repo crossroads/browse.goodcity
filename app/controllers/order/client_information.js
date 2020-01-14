@@ -38,9 +38,7 @@ export default Controller.extend(cancelOrder, {
     return config.APP.HK_COUNTRY_CODE + this.get("mobilePhone");
   }),
 
-  isAppointment: computed("order", function() {
-    return this.get("order.isAppointment");
-  }),
+  isAppointment: alias("order.isAppointment"),
 
   titles: computed(function() {
     let translation = this.get("i18n");
