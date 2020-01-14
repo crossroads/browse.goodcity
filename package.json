@@ -32,7 +32,7 @@
     ]
   },
   "engines": {
-    "node": ">= 6"
+    "node": "10.18.1"
   },
   "devDependencies": {
     "@fortawesome/ember-fontawesome": "^0.1.14",
