@@ -34,7 +34,9 @@
             <section
               class="main-section request-purpose medium-10 medium-offset-1 large-10 large-offset-1 small-10 small-offset-1 columns">
               {{#unless cart.isEmpty}}
-              {{small-cart-toggle-view}}
+               {{#unless bookAppointment}}
+                {{small-cart-toggle-view}}
+               {{/unless}}
               {{/unless}}
               {{validate-inputs
                   elementCssIdentifiersArrayJson='["#people-count", "#description", ".district-selector select"]'
