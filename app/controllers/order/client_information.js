@@ -38,6 +38,8 @@ export default Controller.extend(cancelOrder, {
     return config.APP.HK_COUNTRY_CODE + this.get("mobilePhone");
   }),
 
+  isAppointment: alias("order.isAppointment"),
+
   titles: computed(function() {
     let translation = this.get("i18n");
     let mr = translation.t("account.user_title.mr");
