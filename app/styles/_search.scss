@@ -45,7 +45,8 @@
     }
 
     @media #{$medium-only} {
-      margin-top: 1.5% !important;
+      width: 12%;
+      margin-top: 2.0% !important;
     }
 
     @media #{$xlarge-only} {
@@ -56,10 +57,23 @@
       margin-top: 1% !important;
     }
 
+    @media #{$small-only} {
+      width: 22%;
+      margin-top: 1.4%;
+    }
+
     .back_icon {
       display: flex;
+      align-items: center;
     }
+
   }
+
+   .input-field {
+      @media #{$small-only} {
+        width: 73%;
+      }
+    }
 
   .search_info {
     margin-left: 5%;
@@ -147,15 +161,12 @@
     margin-left: 15%;
 
     @media #{$small-only} {
-      margin-top: 20%;
       margin-left: unset;
       font-size: 0.7em;
     }
   }
 
   .back_button {
-    margin-top: 1.5%;
-
     i {
       position: inherit;
     }
