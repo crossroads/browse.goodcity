@@ -455,6 +455,7 @@ export default {
     representative: "Representative",
     purpose: "Purpose(s)",
     cancel_order: "Cancel Order",
+    default_reason: "Changed mind",
     goodcity_order: "GoodCity Order",
     cart: "Cart",
     order_details: "Order details",

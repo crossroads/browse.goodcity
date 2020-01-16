@@ -419,6 +419,7 @@ export default {
     order_delete_confirmation: "這動作會刪除所有訂單資料，並不能復原。",
     representative: "代表人員",
     cancel_order: "取消訂單",
+    default_reason: "Changed mind",
     purpose: "申請目的",
     login: "登入",
     register: "註冊",

@@ -24,6 +24,7 @@ function ORDER_URL(order) {
  */
 export default ApiService.extend({
   store: service(),
+  i18n: service(),
 
   /**
    * Transitions an order to a state
@@ -59,8 +60,18 @@ export default ApiService.extend({
    * @return {Object} the json response
    */
   cancelOrder(order, reason) {
+    const cancellationReasons = this.get("store").peekAll(
+      "cancellation_reason"
+    );
+    const defaultReason = this.get("i18n").t("order.default_reason").string;
+    const cancellationReason = cancellationReasons.findBy(
+      "name",
+      defaultReason
+    );
+    const cancellationReasonId = cancellationReason && cancellationReason.id;
     return this.applyStateTransition(order, "cancel", {
-      cancel_reason: reason
+      cancel_reason: reason,
+      cancellation_reason_id: cancellationReasonId
     });
   },
 
