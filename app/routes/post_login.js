@@ -15,10 +15,6 @@ export default Route.extend({
     this.set("isBookAppointment", params.queryParams.bookAppointment);
   },
 
-  model() {
-    return this.get("preloadService").preloadData();
-  },
-
   loadIfAbsent(modelName, id) {
     let cachedRecord = this.store.peekRecord(modelName, id);
     if (cachedRecord) {
@@ -48,7 +44,7 @@ export default Route.extend({
         this.transitionTo("browse");
       }
     } else {
-      this.transitionTo("account_details");
+      window.location.replace("/account_details");
     }
   }
 });
