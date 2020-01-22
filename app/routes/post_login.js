@@ -47,10 +47,8 @@ export default Route.extend({
     } else {
       if (this.get("browserDetect").ie()) {
         window.location.replace("/account_details");
-        debugger;
       } else {
         this.transitionTo("account_details");
-        debugger;
       }
     }
   }
