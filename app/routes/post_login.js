@@ -9,6 +9,7 @@ export default Route.extend({
   session: service(),
   preloadService: service(),
   session: service(),
+  browserDetect: service(),
   isBookAppointment: false,
 
   beforeModel(params) {
@@ -44,7 +45,13 @@ export default Route.extend({
         this.transitionTo("browse");
       }
     } else {
-      window.location.replace("/account_details");
+      if (this.get("browserDetect").ie()) {
+        window.location.replace("/account_details");
+        debugger;
+      } else {
+        this.transitionTo("account_details");
+        debugger;
+      }
     }
   }
 });
