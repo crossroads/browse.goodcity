@@ -104,6 +104,10 @@ export default Model.extend(cloudinaryImage, {
     return !res ? "" : res + " cm";
   }),
 
+  isDimensionPresent: computed("width", "height", "length", function() {
+    return this.get("width") && this.get("height") && this.get("length");
+  }),
+
   image: computed("images.@each.favourite", function() {
     return this.get("images")
       .filterBy("favourite")
