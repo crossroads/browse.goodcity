@@ -355,28 +355,28 @@ workflows:
               # - test_cases
             filters:
               branches:
-                only: /^(master|live|GCW-2984-dimensions-are-shown-as-null)$/
+                only: /^(master|live)$/
         - www-deploy:
             requires:
               - www_build
             filters:
               branches:
-                only: /^(master|live|GCW-2984-dimensions-are-shown-as-null)$/
+                only: /^(master|live)$/
         - ember_cordova_build:
             requires:
               - package_dependencies
             filters:
               branches:
-                only: /^(master|live|GCW-2984-dimensions-are-shown-as-null)$/
+                only: /^(master|live)$/
         - android_build_and_deploy:
             requires:
               - ember_cordova_build
             filters:
               branches:
-                only: /^(master|live|GCW-2984-dimensions-are-shown-as-null)$/
+                only: /^(master|live)$/
         - ios_build_and_deploy:
             requires:
               - package_dependencies
             filters:
               branches:
-                only: /^(master|live|GCW-2984-dimensions-are-shown-as-null)$/
+                only: /^(master|live)$/
