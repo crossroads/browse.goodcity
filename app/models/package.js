@@ -1,4 +1,4 @@
-import { bool, alias } from "@ember/object/computed";
+import { bool, alias, and } from "@ember/object/computed";
 import { once } from "@ember/runloop";
 import { observer, computed } from "@ember/object";
 import { getOwner } from "@ember/application";
@@ -103,6 +103,8 @@ export default Model.extend(cloudinaryImage, {
     append(`L ${this.get("length")}`);
     return !res ? "" : res + " cm";
   }),
+
+  isDimensionPresent: and("width", "height", "length"),
 
   image: computed("images.@each.favourite", function() {
     return this.get("images")
