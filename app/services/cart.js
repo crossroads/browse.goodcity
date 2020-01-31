@@ -1,4 +1,7 @@
-import Ember from "ember";
+import { resolve, all } from "rsvp";
+import { alias, empty, not } from "@ember/object/computed";
+import { computed } from "@ember/object";
+import { inject as service } from "@ember/service";
 import ApiService from "./api-base-service";
 import _ from "lodash";
 
@@ -9,10 +12,10 @@ import _ from "lodash";
  *
  */
 export default ApiService.extend({
-  store: Ember.inject.service(),
-  session: Ember.inject.service(),
-  localStorage: Ember.inject.service(),
-  preloadService: Ember.inject.service(),
+  store: service(),
+  session: service(),
+  localStorage: service(),
+  preloadService: service(),
 
   init() {
     this._super(...arguments);
@@ -28,23 +31,19 @@ export default ApiService.extend({
 
   // ---- Properties
 
-  cartItems: Ember.computed(function() {
+  cartItems: computed(function() {
     return this.get("store").peekAll("requested_package");
   }),
 
-  packages: Ember.computed("cartItems.[]", function() {
+  packages: computed("cartItems.[]", function() {
     return this.get("cartItems").mapBy("package");
   }),
 
-  offlineCartItems: Ember.computed(
-    "cartItems.[]",
-    "cartItems.@each.id",
-    function() {
-      return this.get("cartItems").filter(it => !it.get("id"));
-    }
-  ),
+  offlineCartItems: computed("cartItems.[]", "cartItems.@each.id", function() {
+    return this.get("cartItems").filter(it => !it.get("id"));
+  }),
 
-  availableCartItems: Ember.computed(
+  availableCartItems: computed(
     "cartItems.[]",
     "cartItems.@each.isAvailable",
     function() {
@@ -52,7 +51,7 @@ export default ApiService.extend({
     }
   ),
 
-  unavailableCartItems: Ember.computed(
+  unavailableCartItems: computed(
     "cartItems.[]",
     "cartItems.@each.isAvailable",
     function() {
@@ -60,7 +59,7 @@ export default ApiService.extend({
     }
   ),
 
-  canCheckout: Ember.computed("availableCartItems.length", function() {
+  canCheckout: computed("availableCartItems.length", function() {
     const availableItemCount = this.get("availableCartItems.length");
     return (
       availableItemCount > 0 &&
@@ -68,12 +67,12 @@ export default ApiService.extend({
     );
   }),
 
-  isLoggedIn: Ember.computed.alias("session.authToken"),
-  isEmpty: Ember.computed.empty("cartItems"),
-  isNotEmpty: Ember.computed.not("isEmpty"),
-  counter: Ember.computed.alias("cartItems.length"),
-  user: Ember.computed.alias("session.currentUser"),
-  userId: Ember.computed.alias("user.id"),
+  isLoggedIn: alias("session.authToken"),
+  isEmpty: empty("cartItems"),
+  isNotEmpty: not("isEmpty"),
+  counter: alias("cartItems.length"),
+  user: alias("session.currentUser"),
+  userId: alias("user.id"),
 
   // ---- Hooks
 
@@ -126,7 +125,7 @@ export default ApiService.extend({
    */
   populate() {
     if (!this.get("isLoggedIn")) {
-      return Ember.RSVP.resolve();
+      return resolve();
     }
     return this.get("store").findAll("requested_package", { reload: true });
   },
@@ -144,12 +143,12 @@ export default ApiService.extend({
    */
   persistLocalRecords() {
     if (!this.get("isLoggedIn")) {
-      return Ember.RSVP.resolve();
+      return resolve();
     }
 
     this.clearDuplicates();
 
-    return Ember.RSVP.all(
+    return all(
       this.get("offlineCartItems").map(it => {
         it.set("user", this.get("user"));
         it.set("userId", this.get("userId"));
@@ -173,9 +172,7 @@ export default ApiService.extend({
    * If the user is not logged in, will only save it locally
    */
   addItem(item) {
-    return Ember.RSVP.all(
-      item.get("packages").map(pkg => this.addPackage(pkg))
-    );
+    return all(item.get("packages").map(pkg => this.addPackage(pkg)));
   },
 
   /**
@@ -194,7 +191,7 @@ export default ApiService.extend({
     if (!this.get("isLoggedIn")) {
       // Will be persisted when the user logs in
       this.rememberGuestItems();
-      return Ember.RSVP.resolve();
+      return resolve();
     }
 
     record.set("user", this.get("user"));
@@ -214,9 +211,7 @@ export default ApiService.extend({
    * The changes are local only if the user is not logged in
    */
   removeItem(item) {
-    return Ember.RSVP.all(
-      item.get("packages").map(pkg => this.removePackage(pkg))
-    );
+    return all(item.get("packages").map(pkg => this.removePackage(pkg)));
   },
 
   /**
@@ -226,7 +221,7 @@ export default ApiService.extend({
   removePackage(pkg) {
     let cartItem = this.getCartItemForPackage(pkg);
     if (!cartItem) {
-      return Ember.computed.resolve();
+      return computed.resolve();
     }
     return this.removeCartItem(cartItem);
   },
@@ -239,7 +234,7 @@ export default ApiService.extend({
     cartItem.deleteRecord();
 
     if (!this.get("isLoggedIn")) {
-      return Ember.RSVP.resolve();
+      return resolve();
     }
     return cartItem.save();
   },
@@ -338,7 +333,7 @@ export default ApiService.extend({
    *    }
    *  ]
    */
-  groupedPackages: Ember.computed(
+  groupedPackages: computed(
     "cartItems.[]",
     "cartItems.@each.isAvailable",
     function() {

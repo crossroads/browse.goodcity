@@ -1,4 +1,5 @@
-import Ember from "ember";
+import $ from "jquery";
+import { run } from "@ember/runloop";
 import _ from "lodash";
 import { module, test } from "qunit";
 import startApp from "../helpers/start-app";
@@ -160,7 +161,7 @@ module("Acceptance | My Orders Page", {
   afterEach: function() {
     $.mockjaxSettings.matchInRegistrationOrder = true;
     mocks.forEach($.mockjax.clear);
-    Ember.run(App, App.destroy);
+    run(App, App.destroy);
   }
 });
 
@@ -176,15 +177,15 @@ test("should redirect to my orders page", function(assert) {
 
 test("should list all orders to the user", function(assert) {
   assert.expect(2);
-  assert.ok(Ember.$(".list-items"));
-  assert.equal(Ember.$(".list-items .order_block").length, 2);
+  assert.ok($(".list-items"));
+  assert.equal($(".list-items .order_block").length, 2);
 });
 
 test("should show the scheduled date on each item", function(assert) {
   assert.expect(2);
-  assert.ok(Ember.$(".list-items"));
+  assert.ok($(".list-items"));
   assert.equal(
-    Ember.$(".list-items .order_block .value.schedule")
+    $(".list-items .order_block .value.schedule")
       .text()
       .trim(),
     "Monday 19th November 04:00 pm"
@@ -194,50 +195,50 @@ test("should show the scheduled date on each item", function(assert) {
 test("clicking on an order opens the summary", function(assert) {
   assert.expect(1);
 
-  click(Ember.$(".list-items .order_block")[0]);
+  click($(".list-items .order_block")[0]);
 
   andThen(() => {
-    assert.equal(Ember.$(".order-summary").length, 1);
+    assert.equal($(".order-summary").length, 1);
   });
 });
 
 test("the summary booking tab is selected by default", function(assert) {
   assert.expect(1);
 
-  click(Ember.$(".list-items .order_block")[0]);
+  click($(".list-items .order_block")[0]);
   andThen(() => {
-    assert.equal(Ember.$(".order-summary .tabs .tab.booking.active").length, 2);
+    assert.equal($(".order-summary .tabs .tab.booking.active").length, 2);
   });
 });
 
 test("clicking on the goods tab selects it", function(assert) {
   assert.expect(1);
-  click(Ember.$(".list-items .order_block")[0]);
+  click($(".list-items .order_block")[0]);
   andThen(() => {
-    click(Ember.$(".order-summary .tabs .tab.goods"));
+    click($(".order-summary .tabs .tab.goods"));
   });
   andThen(() => {
-    assert.equal(Ember.$(".order-summary .tabs .tab.goods.active").length, 2);
+    assert.equal($(".order-summary .tabs .tab.goods.active").length, 2);
   });
 });
 
 test("on the good tabs, we can see the packages of the order listed", function(assert) {
   assert.expect(4);
-  click(Ember.$(".list-items .order_block")[0]);
+  click($(".list-items .order_block")[0]);
   andThen(() => {
-    click(Ember.$(".order-summary .tabs .tab.goods"));
+    click($(".order-summary .tabs .tab.goods"));
   });
   andThen(() => {
-    assert.equal(Ember.$(".order-summary .tabs .tab.goods.active").length, 2);
-    assert.equal(Ember.$(".goods-tab .product-row").length, 1);
+    assert.equal($(".order-summary .tabs .tab.goods.active").length, 2);
+    assert.equal($(".goods-tab .product-row").length, 1);
     assert.equal(
-      Ember.$(".goods-tab .product-row .text")
+      $(".goods-tab .product-row .text")
         .text()
         .trim(),
       "Category4"
     );
     assert.equal(
-      Ember.$(".goods-tab .product-row .notes")
+      $(".goods-tab .product-row .notes")
         .text()
         .trim(),
       "example"

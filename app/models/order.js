@@ -1,10 +1,12 @@
-import Ember from "ember";
+import { computed } from "@ember/object";
+import { equal, alias } from "@ember/object/computed";
+import { inject as service } from "@ember/service";
 import Model from "ember-data/model";
 import attr from "ember-data/attr";
 import { belongsTo, hasMany } from "ember-data/relationships";
 
 export default Model.extend({
-  store: Ember.inject.service(),
+  store: service(),
   code: attr("string"),
   state: attr("string"),
   purposeDescription: attr("string"),
@@ -51,26 +53,26 @@ export default Model.extend({
     async: false
   }),
 
-  isGoodCityOrder: Ember.computed.equal("detailType", "GoodCity"),
-  isDraft: Ember.computed.equal("state", "draft"),
-  isSubmitted: Ember.computed.equal("state", "submitted"),
-  isAwaitingDispatch: Ember.computed.equal("state", "awaiting_dispatch"),
-  isDispatching: Ember.computed.equal("state", "dispatching"),
-  isClosed: Ember.computed.equal("state", "closed"),
-  isProcessing: Ember.computed.equal("state", "processing"),
-  isCancelled: Ember.computed.equal("state", "cancelled"),
-  i18n: Ember.inject.service(),
+  isGoodCityOrder: equal("detailType", "GoodCity"),
+  isDraft: equal("state", "draft"),
+  isSubmitted: equal("state", "submitted"),
+  isAwaitingDispatch: equal("state", "awaiting_dispatch"),
+  isDispatching: equal("state", "dispatching"),
+  isClosed: equal("state", "closed"),
+  isProcessing: equal("state", "processing"),
+  isCancelled: equal("state", "cancelled"),
+  i18n: service(),
 
-  isAppointment: Ember.computed("bookingType", function() {
+  isAppointment: computed("bookingType", function() {
     return this.get("bookingType.isAppointment");
   }),
 
-  isOnlineOrder: Ember.computed("bookingType", function() {
+  isOnlineOrder: computed("bookingType", function() {
     return this.get("bookingType.isOnlineOrder");
   }),
 
   // only to show ordersPackages on confirmation screen
-  orderItems: Ember.computed("ordersPackages.[]", function() {
+  orderItems: computed("ordersPackages.[]", function() {
     var items = [];
     this.get("ordersPackages").forEach(function(record) {
       if (record) {
@@ -81,15 +83,15 @@ export default Model.extend({
     return items.uniq();
   }),
 
-  isAppointmentDraft: Ember.computed("state", "orderType", function() {
+  isAppointmentDraft: computed("state", "orderType", function() {
     return this.get("isAppointment") && this.get("isDraft");
   }),
 
-  isOnlineOrderDraft: Ember.computed("state", "orderType", function() {
+  isOnlineOrderDraft: computed("state", "orderType", function() {
     return this.get("isOnlineOrder") && this.get("isDraft");
   }),
 
-  isEditAllowed: Ember.computed("state", function() {
+  isEditAllowed: computed("state", function() {
     let editableStates = [
       "draft",
       "submitted",
@@ -100,7 +102,7 @@ export default Model.extend({
     return editableStates.indexOf(this.get("state")) >= 0;
   }),
 
-  isCancelAllowed: Ember.computed("state", function() {
+  isCancelAllowed: computed("state", function() {
     let cancellableStates = [
       "submitted",
       "processing",
@@ -110,31 +112,24 @@ export default Model.extend({
     return cancellableStates.indexOf(this.get("state")) >= 0;
   }),
 
-  clientIdType: Ember.computed(
-    "beneficiary",
-    "beneficiary.identityType",
-    function() {
-      return this.get("beneficiary.identityType.name");
-    }
-  ),
+  clientIdType: computed("beneficiary", "beneficiary.identityType", function() {
+    return this.get("beneficiary.identityType.name");
+  }),
 
-  clientIdNumber: Ember.computed.alias("beneficiary.identityNumber"),
+  clientIdNumber: alias("beneficiary.identityNumber"),
 
-  clientName: Ember.computed.alias("beneficiary.fullName"),
+  clientName: alias("beneficiary.fullName"),
 
-  clientPhone: Ember.computed.alias("beneficiary.phoneNumber"),
+  clientPhone: alias("beneficiary.phoneNumber"),
 
-  appointmentTransport: Ember.computed(
-    "orderTransport.transportType",
-    function() {
-      let i18n = this.get("i18n");
-      return this.get("orderTransport.transportType") === "self"
-        ? i18n.t("order.appointment.self_vehicle")
-        : i18n.t("order.appointment.hire_vehicle");
-    }
-  ),
+  appointmentTransport: computed("orderTransport.transportType", function() {
+    let i18n = this.get("i18n");
+    return this.get("orderTransport.transportType") === "self"
+      ? i18n.t("order.appointment.self_vehicle")
+      : i18n.t("order.appointment.hire_vehicle");
+  }),
 
-  appointmentDate: Ember.computed("orderTransport.scheduledAt", function() {
+  appointmentDate: computed("orderTransport.scheduledAt", function() {
     let orderTransport = this.get("orderTransport");
     if (!orderTransport) {
       return "";
@@ -142,7 +137,7 @@ export default Model.extend({
     return moment(orderTransport.get("scheduledAt")).format("dddd MMMM Do");
   }),
 
-  appointmentTime: Ember.computed(
+  appointmentTime: computed(
     "appointmentDate",
     "orderTransport.timeslot",
     function() {
@@ -156,7 +151,7 @@ export default Model.extend({
     }
   ),
 
-  stateIcon: Ember.computed("state", function() {
+  stateIcon: computed("state", function() {
     const state = this.get("state");
     switch (state) {
       case "awaiting_dispatch":
@@ -179,11 +174,11 @@ export default Model.extend({
     }
   }),
 
-  purposeName: Ember.computed("ordersPurposes.[]", function() {
+  purposeName: computed("ordersPurposes.[]", function() {
     return this.get("ordersPurposes.firstObject.purpose.description");
   }),
 
-  transportIcon: Ember.computed("transportKey", function() {
+  transportIcon: computed("transportKey", function() {
     const key = this.get("transportKey");
     switch (key) {
       case "gogovan_transport":
@@ -195,12 +190,12 @@ export default Model.extend({
     }
   }),
 
-  transportLabel: Ember.computed("transportKey", function() {
+  transportLabel: computed("transportKey", function() {
     const key = this.get("transportKey");
     return this.get("i18n").t(`my_orders.order_transports.${key}`);
   }),
 
-  transportKey: Ember.computed("orderTransport.transportType", function() {
+  transportKey: computed("orderTransport.transportType", function() {
     const transportId = this.get("orderTransportId");
     if (
       !transportId ||
@@ -221,11 +216,11 @@ export default Model.extend({
   }),
 
   // unread order messages
-  unreadMessagesCount: Ember.computed("messages.@each.state", function() {
+  unreadMessagesCount: computed("messages.@each.state", function() {
     return this.get("messages").filterBy("state", "unread").length;
   }),
 
-  hasUnreadMessages: Ember.computed("unreadMessagesCount", function() {
+  hasUnreadMessages: computed("unreadMessagesCount", function() {
     return this.get("unreadMessagesCount") > 0;
   })
 });

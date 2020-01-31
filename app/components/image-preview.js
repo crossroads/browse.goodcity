@@ -1,4 +1,4 @@
-import Ember from "ember";
+import $ from "jquery";
 import ObserveScreenResize from "./observe-screen-resize";
 
 export default ObserveScreenResize.extend({
@@ -9,12 +9,12 @@ export default ObserveScreenResize.extend({
   },
 
   initializeLightgallery() {
-    var gallery = Ember.$("#lightGallery").data("lightGallery");
+    var gallery = $("#lightGallery").data("lightGallery");
     if (gallery) {
       gallery.destroy();
     }
 
-    var lightGalleryObj = Ember.$("#lightGallery").lightGallery({
+    var lightGalleryObj = $("#lightGallery").lightGallery({
       mode: "lg-slide",
       zoom: true,
       download: false,
@@ -35,7 +35,7 @@ export default ObserveScreenResize.extend({
   },
 
   willDestroyElement() {
-    var gallery = Ember.$("#lightGallery").data("lightGallery");
+    var gallery = $("#lightGallery").data("lightGallery");
     if (gallery) {
       gallery.destroy();
     }

@@ -1,4 +1,4 @@
-import Ember from "ember";
+import Service from "@ember/service";
 import config from "../config/environment";
 
 const LS = window.localStorage;
@@ -30,7 +30,7 @@ function prefixKey(key) {
 
 // --- Service
 
-export default Ember.Service.extend({
+export default Service.extend({
   read(key, defaultValue) {
     const fullKey = prefixKey(key);
     return deserialize(LS.getItem(fullKey)) || defaultValue;

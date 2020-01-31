@@ -1,10 +1,12 @@
-import Ember from "ember";
+import { alias } from "@ember/object/computed";
+import { inject as service } from "@ember/service";
+import Component from "@ember/component";
 
-export default Ember.Component.extend({
-  screenresize: Ember.inject.service(),
+export default Component.extend({
+  screenresize: service(),
 
-  isSmallScreen: Ember.computed.alias("screenresize.isSmallScreen"),
-  isMediumScreen: Ember.computed.alias("screenresize.isMediumScreen"),
+  isSmallScreen: alias("screenresize.isSmallScreen"),
+  isMediumScreen: alias("screenresize.isMediumScreen"),
 
   onScreenResized() {
     throw "Method not implemented";

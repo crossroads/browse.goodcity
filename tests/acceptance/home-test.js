@@ -1,4 +1,5 @@
-import Ember from "ember";
+import $ from "jquery";
+import { run } from "@ember/runloop";
 import { module, test } from "qunit";
 import { make } from "ember-data-factory-guy";
 import { mockFindAll } from "ember-data-factory-guy";
@@ -30,7 +31,7 @@ module("Acceptance | Home Page", {
     $.mockjaxSettings.matchInRegistrationOrder = true;
     mocks.forEach($.mockjax.clear);
 
-    Ember.run(App, App.destroy);
+    run(App, App.destroy);
   }
 });
 
@@ -42,18 +43,14 @@ test("should redirect to home page", function(assert) {
 
 test("should link to the browse page", function(assert) {
   visit("/").then(function() {
-    let links = Ember.$(".home_page a").filter((key, link) =>
-      /\/browse$/.test(link)
-    );
+    let links = $(".home_page a").filter((key, link) => /\/browse$/.test(link));
     assert.ok(links.length >= 1);
   });
 });
 
 test("should link to the FAQ page", function(assert) {
   visit("/").then(function() {
-    let links = Ember.$(".home_page a").filter((key, link) =>
-      /\/faq$/.test(link)
-    );
+    let links = $(".home_page a").filter((key, link) => /\/faq$/.test(link));
     assert.ok(links.length >= 1);
   });
 });

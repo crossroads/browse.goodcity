@@ -1,13 +1,13 @@
+import { inject as service } from "@ember/service";
 import AuthorizeRoute from "./authorize";
-import Ember from "ember";
 
 export default AuthorizeRoute.extend({
   orderId: null,
   order: null,
   previousRouteName: null,
   isBookAppointment: null,
-  session: Ember.inject.service(),
-  orderService: Ember.inject.service(),
+  session: service(),
+  orderService: service(),
 
   beforeModel(transition) {
     if (!this._super(...arguments)) {

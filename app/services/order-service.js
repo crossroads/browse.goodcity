@@ -1,3 +1,4 @@
+import { inject as service } from "@ember/service";
 import ApiService from "./api-base-service";
 import DS from "ember-data";
 import _ from "lodash";
@@ -22,7 +23,7 @@ function ORDER_URL(order) {
  *
  */
 export default ApiService.extend({
-  store: Ember.inject.service(),
+  store: service(),
 
   /**
    * Transitions an order to a state

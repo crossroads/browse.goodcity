@@ -33,6 +33,15 @@
 
 .req-more-goods{
   border-top: 1px solid;
+
+  span {
+    margin-right: 1.8rem;
+  }
+
+  span, i {
+    display: inline-block;
+    vertical-align: middle;
+  }
 }
 
 .add-request{
@@ -49,13 +58,12 @@
   cursor: pointer;
 }
 
-.req-more-goods div.link-blue, .req-more-goods div.icon-center{
-  text-align: right;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
+.req-more-goods div.link-blue {
+  text-align: center;
   color: #f34d4f;
-  @media #{$small-only}{
-    margin-left: 1rem;
-  }
+  float: none;
+  width: 80%;
+  max-width: 260px;
+  margin: 2rem auto;
 }
 

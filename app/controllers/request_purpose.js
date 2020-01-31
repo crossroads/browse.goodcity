@@ -1,13 +1,16 @@
-import Ember from "ember";
+import { computed } from "@ember/object";
+import { inject as service } from "@ember/service";
+import { alias, equal } from "@ember/object/computed";
+import Controller, { inject as controller } from "@ember/controller";
+import { getOwner } from "@ember/application";
 import AjaxPromise from "browse/utils/ajax-promise";
-const { getOwner } = Ember;
 import config from "../config/environment";
 import cancelOrder from "../mixins/cancel_order";
 
-export default Ember.Controller.extend(cancelOrder, {
+export default Controller.extend(cancelOrder, {
   showCancelBookingPopUp: false,
   isMobileApp: config.cordova.enabled,
-  myOrders: Ember.inject.controller(),
+  myOrders: controller(),
   queryParams: ["orderId", "editRequest", "bookAppointment", "prevPath"],
   prevPath: null,
   editRequest: null,
@@ -16,16 +19,16 @@ export default Ember.Controller.extend(cancelOrder, {
   bookAppointment: false,
   peopleCount: null,
   description: "",
-  order: Ember.computed.alias("model"),
+  order: alias("model"),
   selectedId: null,
-  isSelfSelected: Ember.computed.equal("selectedId", "organisation"),
-  user: Ember.computed.alias("session.currentUser"),
-  cart: Ember.inject.service(),
-  messageBox: Ember.inject.service(),
+  isSelfSelected: equal("selectedId", "organisation"),
+  user: alias("session.currentUser"),
+  cart: service(),
+  messageBox: service(),
 
   selectedDistrict: null,
 
-  districts: Ember.computed(function() {
+  districts: computed(function() {
     return this.store.peekAll("district").sortBy("name");
   }),
 
@@ -93,7 +96,7 @@ export default Ember.Controller.extend(cancelOrder, {
         organisation_id: user_organisation_id,
         purpose_description: this.get("description"),
         purpose_ids: [],
-        people_helped: this.get("peopleCount"),
+        people_helped: Number(this.get("peopleCount")),
         district_id: this.get("selectedDistrict.id"),
         booking_type_id: this.getSelectedBookingTypeId(),
         state: order ? order.get("state") : "draft"

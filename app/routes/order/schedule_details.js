@@ -1,4 +1,4 @@
-import Ember from "ember";
+import { hash } from "rsvp";
 import AuthorizeRoute from "./../authorize";
 import AjaxPromise from "browse/utils/ajax-promise";
 
@@ -106,7 +106,7 @@ export default AuthorizeRoute.extend({
 
   model() {
     var orderId = this.paramsFor("order").order_id;
-    return Ember.RSVP.hash({
+    return hash({
       availableDatesAndtime: new AjaxPromise(
         "/appointment_slots/calendar",
         "GET",

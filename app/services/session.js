@@ -1,13 +1,15 @@
-import Ember from "ember";
+import { inject as service } from "@ember/service";
+import { notEmpty } from "@ember/object/computed";
+import { computed } from "@ember/object";
 import ApiService from "./api-base-service";
 import "../computed/local-storage";
 
 export default ApiService.extend({
-  authToken: Ember.computed.localStorage(),
-  otpAuthKey: Ember.computed.localStorage(),
-  isLoggedIn: Ember.computed.notEmpty("authToken"),
-  language: Ember.computed.localStorage(),
-  store: Ember.inject.service(),
+  authToken: computed.localStorage(),
+  otpAuthKey: computed.localStorage(),
+  isLoggedIn: notEmpty("authToken"),
+  language: computed.localStorage(),
+  store: service(),
   deviceId: Math.random()
     .toString()
     .substring(2),
@@ -42,7 +44,7 @@ export default ApiService.extend({
 
   currentUserId: null,
 
-  currentUser: Ember.computed("currentUserId", function() {
+  currentUser: computed("currentUserId", function() {
     if (!this.get("authToken") || !this.get("currentUserId")) {
       return null;
     }

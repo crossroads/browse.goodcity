@@ -1,12 +1,14 @@
-import Ember from "ember";
+import { resolve } from "rsvp";
+import { inject as service } from "@ember/service";
+import Route from "@ember/routing/route";
 import AjaxPromise from "browse/utils/ajax-promise";
 
-export default Ember.Route.extend({
-  cart: Ember.inject.service(),
-  messageBox: Ember.inject.service(),
-  session: Ember.inject.service(),
-  preloadService: Ember.inject.service(),
-  session: Ember.inject.service(),
+export default Route.extend({
+  cart: service(),
+  messageBox: service(),
+  session: service(),
+  preloadService: service(),
+  session: service(),
   isBookAppointment: false,
 
   beforeModel(params) {
@@ -20,7 +22,7 @@ export default Ember.Route.extend({
   loadIfAbsent(modelName, id) {
     let cachedRecord = this.store.peekRecord(modelName, id);
     if (cachedRecord) {
-      return Ember.RSVP.resolve(cachedRecord);
+      return resolve(cachedRecord);
     }
     return this.store.findRecord(modelName, id);
   },

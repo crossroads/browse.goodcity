@@ -1,18 +1,22 @@
-import Ember from "ember";
+import $ from "jquery";
+import { computed } from "@ember/object";
+import { inject as service } from "@ember/service";
+import { alias } from "@ember/object/computed";
+import Controller, { inject as controller } from "@ember/controller";
+import { getOwner } from "@ember/application";
 import AjaxPromise from "browse/utils/ajax-promise";
-const { getOwner } = Ember;
 import cancelOrder from "../../mixins/cancel_order";
 
 const ONLINE_ORDER_HALF_DAY_SLOT_COUNT = 10;
 
-export default Ember.Controller.extend(cancelOrder, {
+export default Controller.extend(cancelOrder, {
   queryParams: ["prevPath"],
   prevPath: null,
   showCancelBookingPopUp: false,
-  order: Ember.computed.alias("model.order"),
-  orderTransport: Ember.computed.alias("model.orderTransport"),
-  myOrders: Ember.inject.controller(),
-  settings: Ember.inject.service(),
+  order: alias("model.order"),
+  orderTransport: alias("model.orderTransport"),
+  myOrders: controller(),
+  settings: service(),
   selectedId: null,
   selectedTimeId: null,
   selectedDate: null,
@@ -20,7 +24,7 @@ export default Ember.Controller.extend(cancelOrder, {
   isEditing: false,
   showOrderSlotSelection: false,
 
-  bookingMargin: Ember.computed(function() {
+  bookingMargin: computed(function() {
     // To allow time to prepare orders, we set a saftety margin
     // of days in which clients cannot book anything.
     return this.get("settings").readNumber(
@@ -28,11 +32,9 @@ export default Ember.Controller.extend(cancelOrder, {
     );
   }),
 
-  isAppointment: Ember.computed("order", function() {
-    return this.get("order.isAppointment");
-  }),
+  isAppointment: alias("order.isAppointment"),
 
-  timeSlots: Ember.computed("selectedDate", function() {
+  timeSlots: computed("selectedDate", function() {
     let selectedDate = this.get("selectedDate");
     if (selectedDate) {
       let timeSlots = this.get(
@@ -44,7 +46,7 @@ export default Ember.Controller.extend(cancelOrder, {
     }
   }),
 
-  onlineOrderPickupSlots: Ember.computed("available_dates", function() {
+  onlineOrderPickupSlots: computed("available_dates", function() {
     let results = [];
     let availableDates = this.get(
       "available_dates"
@@ -128,7 +130,7 @@ export default Ember.Controller.extend(cancelOrder, {
 
     saveTransportDetails() {
       if (this.get("isAppointment")) {
-        const isTimeSlotSelected = Ember.$(".time-slots input")
+        const isTimeSlotSelected = $(".time-slots input")
           .toArray()
           .filter(radioButton => radioButton.checked === true).length;
         if (isTimeSlotSelected) {

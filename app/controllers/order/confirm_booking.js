@@ -1,14 +1,16 @@
-import Ember from "ember";
+import { alias } from "@ember/object/computed";
+import { inject as service } from "@ember/service";
+import Controller from "@ember/controller";
 import _ from "lodash";
 import cancelOrderMixin from "../../mixins/cancel_order";
 import asyncTasksMixin from "../../mixins/async_tasks";
 
-export default Ember.Controller.extend(cancelOrderMixin, asyncTasksMixin, {
+export default Controller.extend(cancelOrderMixin, asyncTasksMixin, {
   showCancelBookingPopUp: false,
-  messageBox: Ember.inject.service(),
-  orderService: Ember.inject.service(),
-  cart: Ember.inject.service(),
-  order: Ember.computed.alias("model"),
+  messageBox: service(),
+  orderService: service(),
+  cart: service(),
+  order: alias("model"),
 
   submitOrder(order) {
     return this.runTask(

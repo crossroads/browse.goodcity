@@ -1,7 +1,7 @@
 .static_page_title {
   @media #{$small-only} {
-   display: none;
- }
+    display: none;
+  }
 }
 
 .faq_list {
@@ -35,6 +35,7 @@
 
       a {
         text-decoration: underline;
+        cursor: pointer;
       }
     }
   }

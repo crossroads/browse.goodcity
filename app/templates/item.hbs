@@ -88,8 +88,8 @@
             {{t "itemdetail.quantity"}}: {{package.quantity}}
           </div>
           <div class="item_details">
-            {{#if package.dimensions}}
-            {{t "itemdetail.size"}}: {{package.dimensions}}
+            {{#if package.isDimensionPresent}}
+              {{t "itemdetail.size"}}: {{package.dimensions}}
             {{/if}}
           </div>
         </p>

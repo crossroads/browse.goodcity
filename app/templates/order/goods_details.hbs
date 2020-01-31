@@ -41,14 +41,11 @@
           {{add-request id=index order=model request=req num=index}}
           {{/each}}
           <div class='row req-more-goods'>
-            <div class='large-4 columns small-7 small-offset-2 request-more link-blue add_package_link add_more_request'
+            <div class='columns request-more link-blue add_package_link add_more_request'
               {{action "addRequest" on="click"}}>
-              {{t "order.goods_details.request_more"}}
-            </div>
-            <div class='small-2 columns icon-center add_more_request'>
+              <span>{{t "order.goods_details.request_more"}}</span>
               <i class='fa icon' {{action "addRequest" on="click"}}>{{fa-icon 'plus-circle' size='2x'}}</i>
             </div>
-            <div class='small-2 columns'>&nbsp;</div>
           </div>
           <br>
           <div class="row">

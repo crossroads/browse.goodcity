@@ -1,4 +1,5 @@
-import Ember from "ember";
+import { computed } from "@ember/object";
+import Service from "@ember/service";
 import "../computed/local-storage";
 
 const MEDIA_QUERIES = {
@@ -7,7 +8,7 @@ const MEDIA_QUERIES = {
   LARGE: Foundation.media_queries.large
 };
 
-export default Ember.Service.extend({
+export default Service.extend({
   init() {
     this._super(...arguments);
     window.addEventListener("resize", () => {
@@ -16,14 +17,14 @@ export default Ember.Service.extend({
     });
   },
 
-  isSmallScreen: Ember.computed(function() {
+  isSmallScreen: computed(function() {
     return (
       matchMedia(MEDIA_QUERIES.SMALL).matches &&
       !matchMedia(MEDIA_QUERIES.MEDIUM).matches
     );
   }),
 
-  isMediumScreen: Ember.computed(function() {
+  isMediumScreen: computed(function() {
     return (
       matchMedia(MEDIA_QUERIES.SMALL).matches &&
       matchMedia(MEDIA_QUERIES.MEDIUM).matches &&
@@ -31,7 +32,7 @@ export default Ember.Service.extend({
     );
   }),
 
-  isWideScreen: Ember.computed(function() {
+  isWideScreen: computed(function() {
     return (
       matchMedia(MEDIA_QUERIES.MEDIUM).matches ||
       matchMedia(MEDIA_QUERIES.LARGE).matches

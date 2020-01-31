@@ -1,4 +1,5 @@
-import Ember from "ember";
+import $ from "jquery";
+import { run } from "@ember/runloop";
 import _ from "lodash";
 import { module, test } from "qunit";
 import startApp from "../helpers/start-app";
@@ -204,7 +205,7 @@ module("Acceptance | My Dashboard", {
   afterEach: function() {
     $.mockjaxSettings.matchInRegistrationOrder = true;
     mocks.forEach($.mockjax.clear);
-    Ember.run(App, App.destroy);
+    run(App, App.destroy);
   }
 });
 
@@ -212,10 +213,10 @@ test("should redirect to my_dashboard page", function(assert) {
   assert.expect(2);
   visit("/");
   andThen(function() {
-    click(Ember.$(".my_dashboard"));
+    click($(".my_dashboard"));
     andThen(function() {
       assert.equal(currentURL(), "/my_orders");
-      assert.equal(Ember.$(".my_dashboard .title").text(), "My Dashboard");
+      assert.equal($(".my_dashboard .title").text(), "My Dashboard");
     });
   });
 });
@@ -224,12 +225,12 @@ test("should redirect to my_account page", function(assert) {
   assert.expect(3);
   visit("/");
   andThen(function() {
-    click(Ember.$(".my_dashboard"));
+    click($(".my_dashboard"));
     andThen(function() {
       assert.equal(currentURL(), "/my_orders");
-      assert.equal(Ember.$(".my_dashboard .title").text(), "My Dashboard");
+      assert.equal($(".my_dashboard .title").text(), "My Dashboard");
       andThen(function() {
-        click(Ember.$(".account.tab"));
+        click($(".account.tab"));
         andThen(function() {
           assert.equal(currentURL(), "/my_account");
         });

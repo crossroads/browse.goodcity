@@ -1,3 +1,7 @@
+import { all, resolve } from "rsvp";
+import { alias } from "@ember/object/computed";
+import { inject as service } from "@ember/service";
+import Evented from "@ember/object/evented";
 import _ from "lodash";
 import config from "../config/environment";
 import ApiService from "./api-base-service";
@@ -8,19 +12,17 @@ const { PRELOAD_TYPES, PRELOAD_AUTHORIZED_TYPES } = config.APP;
  * Preload service
  *
  */
-export default ApiService.extend(Ember.Evented, {
-  store: Ember.inject.service(),
-  session: Ember.inject.service(),
+export default ApiService.extend(Evented, {
+  store: service(),
+  session: service(),
 
-  isLoggedIn: Ember.computed.alias("session.isLoggedIn"),
+  isLoggedIn: alias("session.isLoggedIn"),
 
   preloadData: function() {
-    return Ember.RSVP.all([this.loadStaticData(), this.loadUserData()]).then(
-      res => {
-        this.trigger("data");
-        return res;
-      }
-    );
+    return all([this.loadStaticData(), this.loadUserData()]).then(res => {
+      this.trigger("data");
+      return res;
+    });
   },
 
   loadStaticData() {
@@ -29,10 +31,10 @@ export default ApiService.extend(Ember.Evented, {
 
   loadUserData() {
     if (!this.get("isLoggedIn")) {
-      return Ember.RSVP.resolve();
+      return resolve();
     }
 
-    return Ember.RSVP.all([
+    return all([
       this.get("session").loadUserProfile(),
       this.fetch(PRELOAD_AUTHORIZED_TYPES)
     ]);
@@ -40,7 +42,7 @@ export default ApiService.extend(Ember.Evented, {
 
   fetch(type) {
     if (_.isArray(type)) {
-      return Ember.RSVP.all(type.map(this.fetch.bind(this)));
+      return all(type.map(this.fetch.bind(this)));
     }
     return this.get("store").findAll(type, { backgroundReload: false });
   }

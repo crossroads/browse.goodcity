@@ -1,11 +1,12 @@
-import Ember from "ember";
+import { resolve } from "rsvp";
+import Route from "@ember/routing/route";
 
-export default Ember.Route.extend({
+export default Route.extend({
   loadIfAbsent(modelName, id) {
     let store = this.get("store");
     let cachedRecord = store.peekRecord(modelName, id);
     if (cachedRecord) {
-      return Ember.RSVP.resolve(cachedRecord);
+      return resolve(cachedRecord);
     }
     return store.findRecord(modelName, id, { reload: true });
   },

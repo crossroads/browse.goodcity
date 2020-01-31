@@ -42,10 +42,12 @@
   .back_button {
     @media #{$large-only} {
       margin-top: 1.5% !important;
+      width: 12%;
     }
 
     @media #{$medium-only} {
-      margin-top: 1.5% !important;
+      width: 22%;
+      margin-top: 2% !important;
     }
 
     @media #{$xlarge-only} {
@@ -56,10 +58,28 @@
       margin-top: 1% !important;
     }
 
+    @media #{$small-only} {
+      width: 24%;
+      margin-top: 1.4%;
+    }
+
     .back_icon {
       display: flex;
+      align-items: center;
     }
+
   }
+
+   .input-field {
+
+      @media #{$medium-only} {
+        width: 73%;
+      }
+
+      @media #{$small-only} {
+        width: 73%;
+      }
+    }
 
   .search_info {
     margin-left: 5%;
@@ -144,18 +164,15 @@
     color: #000;
     font-size: 0.9rem;
     cursor: pointer;
-    margin-left: 15%;
+    margin-left: 10%;
 
     @media #{$small-only} {
-      margin-top: 20%;
       margin-left: unset;
       font-size: 0.7em;
     }
   }
 
   .back_button {
-    margin-top: 1.5%;
-
     i {
       position: inherit;
     }

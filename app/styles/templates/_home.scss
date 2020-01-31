@@ -1,4 +1,5 @@
 .home_page {
+
   .introduction{
     @media #{$large-only}{
       margin-top: 10px;
@@ -27,6 +28,11 @@
       }
     }
   }
+
+  .content {
+    position: relative;
+  }
+
   .cart {
     &.unread {
       position: absolute;

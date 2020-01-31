@@ -1,5 +1,5 @@
+import { computed } from "@ember/object";
 import attr from "ember-data/attr";
-import Ember from "ember";
 import Addressable from "./addressable";
 import { hasMany } from "ember-data/relationships";
 
@@ -27,7 +27,7 @@ export default Addressable.extend({
     async: false
   }),
 
-  mobileWithoutCountryCode: Ember.computed("mobile", function() {
+  mobileWithoutCountryCode: computed("mobile", function() {
     var mobile = this.get("mobile");
     return mobile
       ? mobile.indexOf("+852") >= 0
@@ -36,19 +36,19 @@ export default Addressable.extend({
       : "";
   }),
 
-  positionInOrganisation: Ember.computed("organisationsUsers.[]", function() {
+  positionInOrganisation: computed("organisationsUsers.[]", function() {
     let organisationsUser = this.get("organisationsUsers.firstObject");
     return organisationsUser ? organisationsUser.get("position") : "";
   }),
 
-  preferredContactNumber: Ember.computed("organisationsUsers.[]", function() {
+  preferredContactNumber: computed("organisationsUsers.[]", function() {
     let organisationsUser = this.get("organisationsUsers.firstObject");
     return organisationsUser
       ? organisationsUser.get("preferredContactNumber")
       : "";
   }),
 
-  organisationName: Ember.computed("organisationsUsers.[]", function() {
+  organisationName: computed("organisationsUsers.[]", function() {
     let organisation = this.get("organisationsUsers.firstObject.organisation");
     let language = JSON.parse(window.localStorage.getItem("language"));
     if (organisation) {
@@ -60,7 +60,7 @@ export default Addressable.extend({
     }
   }),
 
-  fullName: Ember.computed("firstName", "lastName", function() {
+  fullName: computed("firstName", "lastName", function() {
     return (
       this.get("title") +
       " " +
@@ -70,7 +70,7 @@ export default Addressable.extend({
     );
   }),
 
-  isInfoComplete: Ember.computed(
+  isInfoComplete: computed(
     "firstName",
     "lastName",
     "email",

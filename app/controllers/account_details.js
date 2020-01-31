@@ -1,19 +1,23 @@
-import Ember from "ember";
+import $ from "jquery";
+import { computed } from "@ember/object";
+import { alias } from "@ember/object/computed";
+import { inject as service } from "@ember/service";
+import Controller, { inject as controller } from "@ember/controller";
+import { getOwner } from "@ember/application";
 import AjaxPromise from "browse/utils/ajax-promise";
 import config from "../config/environment";
-const { getOwner } = Ember;
 
-export default Ember.Controller.extend({
+export default Controller.extend({
   showCancelBookingPopUp: false,
   queryParams: ["orgId", "bookAppointment", "onlineOrder"],
 
-  authenticate: Ember.inject.controller(),
-  messageBox: Ember.inject.service(),
-  orderService: Ember.inject.service(),
-  i18n: Ember.inject.service(),
-  organisationId: Ember.computed.alias("model.organisation.id"),
-  organisationsUserId: Ember.computed.alias("model.organisationsUser.id"),
-  user: Ember.computed.alias("model.user"),
+  authenticate: controller(),
+  messageBox: service(),
+  orderService: service(),
+  i18n: service(),
+  organisationId: alias("model.organisation.id"),
+  organisationsUserId: alias("model.organisationsUser.id"),
+  user: alias("model.user"),
   position: "",
   email: "",
   bookAppointment: false,
@@ -22,7 +26,7 @@ export default Ember.Controller.extend({
   mobilePhone: "",
   isMobileApp: config.cordova.enabled,
 
-  userTitle: Ember.computed("model", function() {
+  userTitle: computed("model", function() {
     let userTitle = this.get("model.user.title");
     let titles = this.get("titles");
 
@@ -39,14 +43,14 @@ export default Ember.Controller.extend({
     };
   }),
 
-  selectedTitle: Ember.computed("userTitle", function() {
+  selectedTitle: computed("userTitle", function() {
     return {
       name: this.get("userTitle.name"),
       id: this.get("userTitle.id")
     };
   }),
 
-  titles: Ember.computed(function() {
+  titles: computed(function() {
     let translation = this.get("i18n");
     let mr = translation.t("account.user_title.mr");
     let mrs = translation.t("account.user_title.mrs");
@@ -102,7 +106,7 @@ export default Ember.Controller.extend({
       ? this.get("model.organisationsUser.position")
       : this.get("position");
     let preferredNumber =
-      this.get("preferredContactNumber") || Ember.$("#preferred_contact").val();
+      this.get("preferredContactNumber") || $("#preferred_contact").val();
     var title = this.get("selectedTitle.id");
     var params = {
       organisation_id: this.get("organisationId"),

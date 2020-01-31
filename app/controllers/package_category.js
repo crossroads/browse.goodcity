@@ -1,16 +1,18 @@
-import Ember from "ember";
+import { computed, observer } from "@ember/object";
+import { sort, alias, bool } from "@ember/object/computed";
+import Controller from "@ember/controller";
 
-export default Ember.Controller.extend({
+export default Controller.extend({
   queryParams: ["page"],
   page: 1,
   perPage: 12,
   selectedCategoryId: null,
-  sortedItems: Ember.computed.sort("categoryObj.items", "selectedSort"),
-  currentCategoryId: Ember.computed.alias("categoryObj.id"),
-  currentCategoryName: Ember.computed.alias("categoryObj.name"),
-  currentCategory: Ember.computed.alias("categoryObj"),
+  sortedItems: sort("categoryObj.items", "selectedSort"),
+  currentCategoryId: alias("categoryObj.id"),
+  currentCategoryName: alias("categoryObj.name"),
+  currentCategory: alias("categoryObj"),
 
-  selectedSort: Ember.computed({
+  selectedSort: computed({
     get() {
       return this.get("sortOptions.firstObject.id");
     },
@@ -19,11 +21,11 @@ export default Ember.Controller.extend({
     }
   }),
 
-  navigateToPageTop: Ember.observer("page", function() {
+  navigateToPageTop: observer("page", function() {
     window.scrollTo(0, 0);
   }),
 
-  sortOptions: Ember.computed(function() {
+  sortOptions: computed(function() {
     return [
       {
         name: this.get("i18n").t("category.sort.newfirst"),
@@ -33,9 +35,9 @@ export default Ember.Controller.extend({
     ];
   }),
 
-  isCategorySelected: Ember.computed.bool("selectedCategoryId.id"),
+  isCategorySelected: bool("selectedCategoryId.id"),
 
-  categoryObj: Ember.computed("selectedCategoryId", "model", function() {
+  categoryObj: computed("selectedCategoryId", "model", function() {
     this.set("page", 1);
     var selectedCategoryId = this.get("selectedCategoryId.id");
     return selectedCategoryId
@@ -43,7 +45,7 @@ export default Ember.Controller.extend({
       : this.get("model");
   }),
 
-  selectCategories: Ember.computed("model", function() {
+  selectCategories: computed("model", function() {
     return this.get("model.childCategories").map(c => ({
       name: c.get("nameItemsCount"),
       id: c.get("id")
