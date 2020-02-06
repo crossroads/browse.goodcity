@@ -13,6 +13,7 @@ export default Controller.extend({
   attemptedTransition: null,
   bookAppointment: false,
   pin: "",
+  cart: service(),
   mobileOrEmail: "",
   loginParam: computed.localStorage(),
   loginParamEmail: computed.localStorage(),
@@ -36,6 +37,10 @@ export default Controller.extend({
   },
 
   actions: {
+    showItemDetails(record) {
+      this.get("cart").navigateToItemDetails(record);
+    },
+
     authenticateUser(bookAppointment) {
       $(".auth_error").hide();
       var pin = this.get("pin");
