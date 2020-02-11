@@ -65,9 +65,9 @@ module.exports = function(environment) {
       PRELOAD_AUTHORIZED_TYPES: [
         "gogovan_transport",
         "booking_type",
-        "purpose",
-        "cancellation_reason"
+        "purpose"
       ],
+      PRELOAD_OF_TYPE_ORDER: ["cancellation_reason"],
 
       SHA: process.env.APP_SHA || "00000000",
       VERSION: pkgJson.version,
