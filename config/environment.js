@@ -67,6 +67,7 @@ module.exports = function(environment) {
         "booking_type",
         "purpose"
       ],
+      PRELOAD_OF_TYPE_ORDER: ["cancellation_reason"],
 
       SHA: process.env.APP_SHA || "00000000",
       VERSION: pkgJson.version,
