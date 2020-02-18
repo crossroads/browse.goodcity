@@ -89,13 +89,16 @@
           </div>
           <div class="item_details">
             {{#if package.isDimensionPresent}}
-              {{t "itemdetail.size"}}: {{package.dimensions}}
+            {{t "itemdetail.size"}}: {{package.dimensions}}
             {{/if}}
           </div>
         </p>
         {{/each}}
 
-        {{#if presentInCart}}
+        {{#if notAvailableInStock}}
+        <button class="request-item disabled" disabled> {{t "item.request_item"}} </button>
+        <i class="item-unavailable">This item is no longer available in stock.</i>
+        {{else if presentInCart}}
         <button class="request-item" {{action 'remove' item target=cart}}> {{t "item.remove_item"}} </button>
         {{else}}
         <button class="request-item" {{action 'add' item target=cart}}> {{t "item.request_item"}} </button>
