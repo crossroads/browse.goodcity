@@ -9,6 +9,7 @@ import cloudinaryImage from "../mixins/cloudinary_image";
 
 export default Model.extend(cloudinaryImage, {
   quantity: attr("number"),
+  onHandQuantity: attr("number"),
   length: attr("number"),
   width: attr("number"),
   height: attr("number"),

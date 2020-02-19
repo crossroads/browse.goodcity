@@ -42,8 +42,10 @@ export default Controller.extend({
       : [item];
   }),
 
-  notAvailableInStock: computed("allPackages.@each.quantity", function() {
-    let quantities = this.get("allPackages").map(pkg => pkg.get("quantity"));
+  notAvailableInStock: computed("allPackages.@each.onHandQuantity", function() {
+    let quantities = this.get("allPackages").map(pkg =>
+      pkg.get("onHandQuantity")
+    );
     return _.sum(quantities) === 0;
   }),
 
