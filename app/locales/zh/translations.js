@@ -396,7 +396,8 @@ export default {
 
   item: {
     request_item: "申請項目",
-    remove_item: "刪除項目"
+    remove_item: "刪除項目",
+    unavailable_item: "This item is no longer available in stock."
   },
 
   cart_content: {

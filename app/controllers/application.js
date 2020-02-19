@@ -162,6 +162,10 @@ export default Controller.extend(cancelOrderMixin, {
     },
 
     checkout() {
+      if (this.get("cart.isEmpty")) {
+        return;
+      }
+
       const accountComplete = this.get("session").accountDetailsComplete();
       const loggedIn = this.get("session.isLoggedIn");
 

@@ -429,7 +429,8 @@ export default {
 
   item: {
     request_item: "Request Item",
-    remove_item: "Remove Item"
+    remove_item: "Remove Item",
+    unavailable_item: "This item is no longer available in stock."
   },
 
   cart_content: {
