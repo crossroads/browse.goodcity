@@ -97,7 +97,7 @@
 
         {{#if notAvailableInStock}}
         <button class="request-item disabled" disabled> {{t "item.request_item"}} </button>
-        <i class="item-unavailable">This item is no longer available in stock.</i>
+        <i class="item-unavailable"> {{t "item.unavailable_item"}} </i>
         {{else if presentInCart}}
         <button class="request-item" {{action 'remove' item target=cart}}> {{t "item.remove_item"}} </button>
         {{else}}
