@@ -1,4 +1,4 @@
-import { hash } from "rsvp";
+import { hash, resolve } from "rsvp";
 import AuthorizeRoute from "./../authorize";
 import AjaxPromise from "browse/utils/ajax-promise";
 
@@ -104,26 +104,34 @@ export default AuthorizeRoute.extend({
     return calendarDates;
   },
 
+  loadOrder(orderId) {
+    const cachedOrder = this.store.peekRecord("order", orderId);
+    return cachedOrder
+      ? resolve(cachedOrder)
+      : this.store.findRecord("order", orderId);
+  },
+
   model() {
     var orderId = this.paramsFor("order").order_id;
-    return hash({
-      availableDatesAndtime: new AjaxPromise(
-        "/appointment_slots/calendar",
-        "GET",
-        this.get("session.authToken"),
-        {
-          to: moment()
-            .add(120, "days")
-            .format("YYYY-MM-DD")
-        }
-      ),
-      order:
-        this.store.peekRecord("order", orderId) ||
-        this.store.findRecord("order", orderId),
-      orderTransport: this.store
-        .peekAll("orderTransport")
-        .filterBy("order.id", orderId)
-        .get("firstObject")
+    return this.loadOrder(orderId).then(order => {
+      return hash({
+        availableDatesAndtime: new AjaxPromise(
+          "/appointment_slots/calendar",
+          "GET",
+          this.get("session.authToken"),
+          {
+            booking_type_id: order.get("bookingTypeId"),
+            to: moment()
+              .add(120, "days")
+              .format("YYYY-MM-DD")
+          }
+        ),
+        order: order,
+        orderTransport: this.store
+          .peekAll("orderTransport")
+          .filterBy("order.id", orderId)
+          .get("firstObject")
+      });
     });
   },
 
