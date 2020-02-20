@@ -4,6 +4,7 @@ import { alias, empty, gt, sort } from "@ember/object/computed";
 import { inject as service } from "@ember/service";
 import Controller, { inject as controller } from "@ember/controller";
 import config from "../config/environment";
+import _ from "lodash";
 
 export default Controller.extend({
   messageBox: service(),
@@ -39,6 +40,13 @@ export default Controller.extend({
     return item.get("isItem")
       ? item.get("packages").filterBy("isAvailable")
       : [item];
+  }),
+
+  notAvailableInStock: computed("allPackages.@each.onHandQuantity", function() {
+    let quantities = this.get("allPackages").map(pkg =>
+      pkg.get("onHandQuantity")
+    );
+    return _.sum(quantities) === 0;
   }),
 
   categoryObj: computed("categoryId", function() {

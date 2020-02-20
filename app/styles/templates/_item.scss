@@ -39,6 +39,15 @@
     }
   }
 
+  .item-unavailable {
+    font-size: 14px;
+    margin-top: -1rem;
+    color: $coral-red;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 1rem;
+  }
+
   .view-image {
     @media #{$small-only} {
       margin-left: -1rem;
