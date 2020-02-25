@@ -16,6 +16,7 @@ export default ApiService.extend({
   session: service(),
   localStorage: service(),
   preloadService: service(),
+  messageBox: service(),
 
   init() {
     this._super(...arguments);
@@ -58,6 +59,12 @@ export default ApiService.extend({
       return this.get("cartItems").filterBy("isAvailable", false);
     }
   ),
+
+  hasValidItems: computed("unavailableCartItems", "isNotEmpty", function() {
+    return (
+      this.get("isNotEmpty") && this.get("unavailableCartItems.length") === 0
+    );
+  }),
 
   canCheckout: computed("availableCartItems.length", function() {
     const availableItemCount = this.get("availableCartItems.length");
@@ -180,6 +187,7 @@ export default ApiService.extend({
    * If the user is not logged in, will only save it locally
    */
   addPackage(pkg) {
+    let _this = this;
     let record = this.get("store").createRecord("requested_package", {
       packageId: pkg.get("id"),
       package: pkg,
@@ -196,7 +204,15 @@ export default ApiService.extend({
 
     record.set("user", this.get("user"));
     record.set("userId", this.get("userId"));
-    return record.save();
+
+    return record.save().catch(error => {
+      let errorMessage = error.errors[0].detail.message;
+      // Remove record from Cart
+      _this.get("store").unloadRecord(record);
+      _this.get("messageBox").alert(errorMessage, () => {
+        _this.get("router").transitionTo("/");
+      });
+    });
   },
 
   remove(pkgOrItem) {

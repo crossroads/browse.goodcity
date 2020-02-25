@@ -151,17 +151,6 @@ export default Controller.extend({
       }
     },
 
-    requestItem(item) {
-      this.get("cart").add(item);
-      later(
-        this,
-        function() {
-          this.get("application").send("displayCart");
-        },
-        50
-      );
-    },
-
     setChildCategory(category) {
       this.setAndRedirectToCategory(category);
     },
