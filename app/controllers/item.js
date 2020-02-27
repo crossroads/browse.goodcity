@@ -42,12 +42,15 @@ export default Controller.extend({
       : [item];
   }),
 
-  notAvailableInStock: computed("allPackages.@each.onHandQuantity", function() {
-    let quantities = this.get("allPackages").map(pkg =>
-      pkg.get("onHandQuantity")
-    );
-    return _.sum(quantities) === 0;
-  }),
+  notAvailableInStock: computed(
+    "allPackages.@each.availableQuantity",
+    function() {
+      let quantities = this.get("allPackages").map(pkg =>
+        pkg.get("availableQuantity")
+      );
+      return _.sum(quantities) === 0;
+    }
+  ),
 
   categoryObj: computed("categoryId", function() {
     return this.store.peekRecord("package_category", this.get("categoryId"));
