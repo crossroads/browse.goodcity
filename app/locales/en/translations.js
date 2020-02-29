@@ -100,7 +100,7 @@ export default {
     learn_more: "Learn More",
     alerts: {
       covid:
-        "Due to COVID-19, our distribution center is closed until April 19th."
+        "Due to COVID-19, our distribution center is closed for appointments until April 19th."
     },
     order_goods: {
       title: "Get immediate access to goods!",
