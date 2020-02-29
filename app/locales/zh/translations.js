@@ -93,7 +93,7 @@ export default {
     learn_more: "了解更多",
     alerts: {
       covid:
-        "Due to COVID-19, our distribution center is closed until April 19th."
+        "Due to COVID-19, our distribution center is closed for appointments until April 19th."
     },
     order_goods: {
       title: "隨時瀏覽選取優質物資",
