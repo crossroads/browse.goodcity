@@ -91,6 +91,10 @@ export default {
       "為香港的非牟利機構及社會福利組織或其服務對使用者提供優質的捐贈物品",
     faq_text: "受惠資格及常見問題",
     learn_more: "了解更多",
+    alerts: {
+      covid:
+        "Due to COVID-19, our distribution center is closed until April 19th."
+    },
     order_goods: {
       title: "隨時瀏覽選取優質物資",
       subtitle: "隨時瀏覽，安排運送。",
