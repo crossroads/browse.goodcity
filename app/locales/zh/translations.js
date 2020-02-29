@@ -93,7 +93,7 @@ export default {
     learn_more: "了解更多",
     alerts: {
       covid:
-        "Due to COVID-19, our distribution center is closed for appointments until April 19th."
+        "因應新冠病毒疫情，即日起至4月19日，我們的物資分配中心將暫停預約申請。不便之處，敬請原諒。"
     },
     order_goods: {
       title: "隨時瀏覽選取優質物資",
