@@ -49,6 +49,7 @@ export default Controller.extend(cancelOrderMixin, {
   cartscroll: service(),
 
   hasCartItems: alias("cart.isNotEmpty"),
+
   cartLength: alias("cart.groupedPackages.length"),
 
   isUserLoggedIn: computed("session.authToken", function() {
@@ -162,10 +163,14 @@ export default Controller.extend(cancelOrderMixin, {
     },
 
     checkout() {
+      if (this.get("cart.isEmpty")) {
+        return;
+      }
+
       const accountComplete = this.get("session").accountDetailsComplete();
       const loggedIn = this.get("session.isLoggedIn");
 
-      if (loggedIn && !accountComplete && this.get("hasCartItems")) {
+      if (loggedIn && !accountComplete && this.get("cart.hasValidItems")) {
         this.set("showCartDetailSidebar", false);
         return this.transitionToRoute("account_details", {
           queryParams: {

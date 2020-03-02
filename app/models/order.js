@@ -11,6 +11,7 @@ export default Model.extend({
   state: attr("string"),
   purposeDescription: attr("string"),
   orderType: attr("string"),
+  cancellationReason: belongsTo("cancellation_reason", { async: false }),
   ordersPackages: hasMany("orders_packages", {
     async: false
   }),

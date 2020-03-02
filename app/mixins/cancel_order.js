@@ -2,28 +2,23 @@ import $ from "jquery";
 import { inject as service } from "@ember/service";
 import Mixin from "@ember/object/mixin";
 import { getOwner } from "@ember/application";
-import AjaxPromise from "browse/utils/ajax-promise";
+import asyncMixin from "browse/mixins/async_tasks";
 
-export default Mixin.create({
+export default Mixin.create(asyncMixin, {
   orderService: service(),
 
   deleteOrder(order) {
-    var loadingView = getOwner(this)
-      .lookup("component:loading")
-      .append();
-
-    this.get("orderService")
-      .deleteOrder(order)
-      .then(() => {
-        this.set("showCancelBookingPopUp", false);
-        this.transitionToRoute("home");
-      })
-      .catch(e => {
-        this.get("messageBox").alert();
-      })
-      .finally(() => {
-        loadingView.destroy();
-      });
+    this.runTask(
+      this.get("orderService")
+        .deleteOrder(order)
+        .then(() => {
+          this.set("showCancelBookingPopUp", false);
+          this.transitionToRoute("home");
+        })
+        .catch(e => {
+          this.get("messageBox").alert();
+        })
+    );
   },
 
   cancelOrder(order) {
@@ -39,21 +34,17 @@ export default Mixin.create({
 
     div.removeClass("cancel-booking-error");
 
-    var loadingView = getOwner(this)
-      .lookup("component:loading")
-      .append();
-    this.get("orderService")
-      .cancelOrder(order, cancellationReason)
-      .then(() => {
-        this.set("showCancelBookingPopUp", false);
-        this.transitionToRoute("home");
-      })
-      .catch(e => {
-        this.get("messageBox").alert();
-      })
-      .finally(() => {
-        loadingView.destroy();
-      });
+    this.runTask(
+      this.get("orderService")
+        .cancelOrder(order, cancellationReason)
+        .then(() => {
+          this.set("showCancelBookingPopUp", false);
+          this.transitionToRoute("home");
+        })
+        .catch(e => {
+          this.get("messageBox").alert();
+        })
+    );
   },
 
   actions: {

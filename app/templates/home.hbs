@@ -11,7 +11,7 @@
     <!-- Introduction -->
     <div class="content">
       <div class="row home_section small light">
-        <div class="small-12 large-10 medium-10 columns introduction">
+        <div class="small-12 large-10 medium-10 columns introduction small-centered">
           {{ t "home.introduction" }}
           {{#link-to "faq"}}
           {{ t "home.faq_text" }}
@@ -25,11 +25,21 @@
         </div>
         {{/if}}
       </div>
+
       <div class="row">
         <div class="small-12 columns intro-text">
           <h1>GoodCity For Charities<br><em class="chinese" lang="zh-hant">好人好巿 (慈善組織)</em></h1>
         </div>
       </div>
+
+      <div class="row">
+        <div class="columns small-10 large-6 small-centered intro-text">
+          <div class="alert-box warning">
+            {{ t "home.alerts.covid" }}
+          </div>
+        </div>
+      </div>
+
       <div class="row button_container">
         <!-- Browse button -->
         <div class="columns home_section large-6">

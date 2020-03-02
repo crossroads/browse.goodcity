@@ -4,6 +4,7 @@ import { alias, empty, gt, sort } from "@ember/object/computed";
 import { inject as service } from "@ember/service";
 import Controller, { inject as controller } from "@ember/controller";
 import config from "../config/environment";
+import _ from "lodash";
 
 export default Controller.extend({
   messageBox: service(),
@@ -40,6 +41,16 @@ export default Controller.extend({
       ? item.get("packages").filterBy("isAvailable")
       : [item];
   }),
+
+  notAvailableInStock: computed(
+    "allPackages.@each.availableQuantity",
+    function() {
+      let quantities = this.get("allPackages").map(pkg =>
+        pkg.get("availableQuantity")
+      );
+      return _.sum(quantities) === 0;
+    }
+  ),
 
   categoryObj: computed("categoryId", function() {
     return this.store.peekRecord("package_category", this.get("categoryId"));
@@ -141,17 +152,6 @@ export default Controller.extend({
           });
         }
       }
-    },
-
-    requestItem(item) {
-      this.get("cart").add(item);
-      later(
-        this,
-        function() {
-          this.get("application").send("displayCart");
-        },
-        50
-      );
     },
 
     setChildCategory(category) {

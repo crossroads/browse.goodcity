@@ -9,7 +9,7 @@
       </a>
     </div>
     <div class="small-6 columns">
-      <a {{action 'checkout'}} class="button expand">
+      <a {{action 'checkout'}} class="button expand" disabled={{cart.isEmpty}}>
         {{t "cart_content.submit_request"}}
       </a>
     </div>

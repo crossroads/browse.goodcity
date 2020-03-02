@@ -91,6 +91,10 @@ export default {
       "為香港的非牟利機構及社會福利組織或其服務對使用者提供優質的捐贈物品",
     faq_text: "受惠資格及常見問題",
     learn_more: "了解更多",
+    alerts: {
+      covid:
+        "因應新冠病毒疫情，即日起至4月19日，我們的物資分配中心將暫停預約申請。不便之處，敬請原諒。"
+    },
     order_goods: {
       title: "隨時瀏覽選取優質物資",
       subtitle: "隨時瀏覽，安排運送。",
@@ -396,7 +400,8 @@ export default {
 
   item: {
     request_item: "申請項目",
-    remove_item: "刪除項目"
+    remove_item: "刪除項目",
+    unavailable_item: "This item is no longer available in stock."
   },
 
   cart_content: {
@@ -419,6 +424,7 @@ export default {
     order_delete_confirmation: "這動作會刪除所有訂單資料，並不能復原。",
     representative: "代表人員",
     cancel_order: "取消訂單",
+    default_reason: "改變了主意",
     purpose: "申請目的",
     login: "登入",
     register: "註冊",

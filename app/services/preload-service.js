@@ -6,7 +6,11 @@ import _ from "lodash";
 import config from "../config/environment";
 import ApiService from "./api-base-service";
 
-const { PRELOAD_TYPES, PRELOAD_AUTHORIZED_TYPES } = config.APP;
+const {
+  PRELOAD_TYPES,
+  PRELOAD_AUTHORIZED_TYPES,
+  PRELOAD_OF_TYPE_ORDER
+} = config.APP;
 
 /**
  * Preload service
@@ -29,6 +33,10 @@ export default ApiService.extend(Evented, {
     return this.fetch(PRELOAD_TYPES);
   },
 
+  loadOrderData() {
+    return this.query(PRELOAD_OF_TYPE_ORDER);
+  },
+
   loadUserData() {
     if (!this.get("isLoggedIn")) {
       return resolve();
@@ -36,7 +44,8 @@ export default ApiService.extend(Evented, {
 
     return all([
       this.get("session").loadUserProfile(),
-      this.fetch(PRELOAD_AUTHORIZED_TYPES)
+      this.fetch(PRELOAD_AUTHORIZED_TYPES),
+      this.loadOrderData()
     ]);
   },
 
@@ -45,5 +54,12 @@ export default ApiService.extend(Evented, {
       return all(type.map(this.fetch.bind(this)));
     }
     return this.get("store").findAll(type, { backgroundReload: false });
+  },
+
+  query(type) {
+    if (_.isArray(type)) {
+      return all(type.map(this.query.bind(this)));
+    }
+    return this.get("store").query(type, { for: "order" });
   }
 });
