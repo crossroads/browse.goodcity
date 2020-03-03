@@ -142,7 +142,6 @@ export default Route.extend({
 
   handleError: function(reason) {
     try {
-      debugger;
       var status;
       // let hasPopup = Ember.$('.reveal-modal:visible').length > 0;
       try {
