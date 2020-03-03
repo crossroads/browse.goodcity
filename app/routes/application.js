@@ -180,7 +180,7 @@ export default Route.extend({
       // as we're trying to render a page and remove loading
       // indicator at a same time
       later(() => {
-        // Clear the loader only if the loader is actualy present in the DOM
+        // Clear the loader only if the loader is actually present in the DOM
         if (
           this.loadingView &&
           document.getElementById(this.loadingView.elementId)
