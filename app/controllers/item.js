@@ -1,4 +1,3 @@
-import { later } from "@ember/runloop";
 import { computed } from "@ember/object";
 import { alias, empty, gt, sort } from "@ember/object/computed";
 import { inject as service } from "@ember/service";
@@ -116,9 +115,10 @@ export default Controller.extend({
       this.set("previewUrl", image.get("previewImageUrl"));
     },
     noItemsPresent: function() {
+      let i18n = this.get("i18n");
       this.get("messageBox").custom(
-        "Item is no longer available",
-        "Okay",
+        i18n.t("browse.item_unavailable"),
+        i18n.t("okay"),
         () => {
           this.transitionToRoute("browse");
         }

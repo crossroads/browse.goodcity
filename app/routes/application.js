@@ -182,7 +182,10 @@ export default Route.extend({
       // indicator at a same time
       later(() => {
         // Clear the loader only if the loader is actualy present in the DOM
-        if (document.getElementById(this.loadingView.elementId)) {
+        if (
+          this.loadingView &&
+          document.getElementById(this.loadingView.elementId)
+        ) {
           this.loadingView.destroy();
           this.loadingView = null;
         }
