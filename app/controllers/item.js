@@ -37,6 +37,11 @@ export default Controller.extend({
 
   allPackages: computed("item.packages.@each.isAvailable", function() {
     var item = this.get("item");
+    if (!item) {
+      this.send("noItemsPresent");
+      return [];
+    }
+
     return item.get("isItem")
       ? item.get("packages").filterBy("isAvailable")
       : [item];
@@ -110,7 +115,15 @@ export default Controller.extend({
     showPreview(image) {
       this.set("previewUrl", image.get("previewImageUrl"));
     },
-
+    noItemsPresent: function() {
+      this.get("messageBox").custom(
+        "Item is no longer available",
+        "Okay",
+        () => {
+          this.transitionToRoute("browse");
+        }
+      );
+    },
     goToStockItem(inventoryNumber) {
       let finalUrl;
 

@@ -142,6 +142,7 @@ export default Route.extend({
 
   handleError: function(reason) {
     try {
+      debugger;
       var status;
       // let hasPopup = Ember.$('.reveal-modal:visible').length > 0;
       try {
@@ -180,7 +181,8 @@ export default Route.extend({
       // as we're trying to render a page and remove loading
       // indicator at a same time
       later(() => {
-        if (this.loadingView) {
+        // Clear the loader only if the loader is actualy present in the DOM
+        if (document.getElementById(this.loadingView.elementId)) {
           this.loadingView.destroy();
           this.loadingView = null;
         }
