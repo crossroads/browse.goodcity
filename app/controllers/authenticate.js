@@ -29,10 +29,11 @@ export default Controller.extend({
   }),
 
   setMobileOrEmail() {
-    if (/^[456789]\d{7}/.test(this.get("mobileOrEmail"))) {
-      this.set("mobile", "+852" + this.get("mobileOrEmail"));
+    const mobileOrEmail = this.get("mobileOrEmail").trim();
+    if (/^[456789]\d{7}/.test(mobileOrEmail)) {
+      this.set("mobile", `+852${mobileOrEmail}`);
     } else {
-      this.set("email", this.get("mobileOrEmail"));
+      this.set("email", mobileOrEmail);
     }
   },
 
