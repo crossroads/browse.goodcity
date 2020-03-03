@@ -83,7 +83,8 @@ export default {
     all_goods: "所有物資",
     filter_results: "過濾這些結果 <span>&#x25be;</span>",
     intro_text: "歡迎已在港註冊的慈善及社福團體下單",
-    faq: "資格"
+    faq: "資格",
+    item_unavailable: "Item is no longer available."
   },
 
   home: {
