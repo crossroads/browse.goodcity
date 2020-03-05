@@ -107,7 +107,7 @@
     "azure-api": "git://github.com/crossroads/azure-api.git#master",
     "blueimp-file-upload": "^9.17.0",
     "bower": "^1.8.4",
-    "cloudinary-jquery-file-upload": "^2.2.0",
+    "cloudinary-jquery-file-upload": "^2.8.0",
     "codeclimate-test-reporter": "^0.5.1",
     "cordova": "^6.5.0",
     "cordova-lib": "https://github.com/crossroads/goodcity-lib.git#master",
