@@ -113,11 +113,11 @@ export default {
       opening:
         "好人好市令社福機構申領物資變得更容易。你需要在首次登記時，揀選你所屬的機構並進行登記。如你未能從清單上找到你所屬的機構，請<a href='mailto:contact@goodcity.hk'>聯絡我們</a>。符合資格的機構包括：",
       charities:
-        "獲豁免繳稅的慈善團體 <a href='https://www.ird.gov.hk/eng/tax/ach_index.htm'>(詳列見此)</a>",
+        "獲豁免繳稅的慈善團體 <a href='https://www.ird.gov.hk/chi/tax/ach_index.htm'>(詳列見此)</a>",
       social_welfare:
-        "社福機構單位 <a href='https://www.swd.gov.hk/en/index/site_download/page_listofserv/'>(詳列見此)</a>",
+        "社福機構單位 <a href='https://www.swd.gov.hk/tc/index/site_download/page_listofserv/'>(詳列見此)</a>",
       educational:
-        "教學團體及機構 <a href='https://applications.edb.gov.hk/schoolsearch/schoolsearch.aspx?langno=1'>(詳列見此)</a>",
+        "教學團體及機構 <a href='https://applications.edb.gov.hk/schoolsearch/schoolsearch.aspx?langno=2'>(詳列見此)</a>",
       other_groups: "其他團體及機構將按個別服務性質處理及審批",
       two_ways: "使用我們的服務有兩個方法．．．"
     },
