@@ -109,7 +109,7 @@
     "bower": "^1.8.4",
     "cloudinary-jquery-file-upload": "^2.2.0",
     "codeclimate-test-reporter": "^0.5.1",
-    "cordova": "^6.5.0",
+    "cordova": "^9.0.0",
     "cordova-lib": "https://github.com/crossroads/goodcity-lib.git#master",
     "cordova-update-config": "^1.0.2",
     "jquery": "^3.2.0",
