@@ -87,21 +87,20 @@ export default {
   },
 
   home: {
-    introduction:
-      "為香港的非牟利機構及社會福利組織或其服務對使用者提供優質的捐贈物品",
+    introduction: "優質的捐贈物品以支援社會需要。",
+    introduction_video: "簡介短片",
     faq_text: "受惠資格及常見問題",
     learn_more: "了解更多",
-    alerts: {
-      covid:
-        "因應新冠病毒疫情，即日起至4月19日，我們的物資分配中心將暫停預約申請。不便之處，敬請原諒。"
-    },
     order_goods: {
       title: "隨時瀏覽選取優質物資",
+      covid:
+        "因應新冠病毒疫情，直至四月十九日期間，未能安排自取物品。只限送貨。",
       subtitle: "隨時瀏覽，安排運送。",
       action: "瀏覽物資"
     },
     visit: {
       title: "親臨國際十字路會",
+      covid: "因應新冠病毒疫情，暫時關閉。立即登記四月十九日後的預約。",
       subtitle: "親臨本會挑選物資",
       action: "預約時間",
       new_appointment: "新的預約"
@@ -110,6 +109,18 @@ export default {
 
   about: {
     title: "關於",
+    introduction: {
+      opening:
+        "好人好市令社福機構申領物資變得更容易。你需要在首次登記時，揀選你所屬的機構並進行登記。如你未能從清單上找到你所屬的機構，請<a href='mailto:contact@goodcity.hk'>聯絡我們</a>。符合資格的機構包括：",
+      charities:
+        "獲豁免繳稅的慈善團體 <a href='https://www.ird.gov.hk/eng/tax/ach_index.htm'>(詳列見此)</a>",
+      social_welfare:
+        "社福機構單位 <a href='https://www.swd.gov.hk/en/index/site_download/page_listofserv/'>(詳列見此)</a>",
+      educational:
+        "教學團體及機構 <a href='https://applications.edb.gov.hk/schoolsearch/schoolsearch.aspx?langno=1'>(詳列見此)</a>",
+      other_groups: "其他團體及機構將按個別服務性質處理及審批",
+      two_ways: "使用我們的服務有兩個方法．．．"
+    },
     user_guide_title: "使用指南",
     tap_button: "立即開始",
     coming_soon: "即將面世",

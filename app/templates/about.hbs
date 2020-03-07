@@ -10,11 +10,29 @@
     </section>
   </nav>
   <div class="about_page" id="how_to">
+
+    <div class="row">
+      <div class="columns intro_text">
+        <p>{{t "about.introduction.opening" }}</p>
+        <ul>
+          <li>{{ t "about.introduction.charities" }}</li>
+          <li>{{ t "about.introduction.social_welfare" }}</li>
+          <li>{{ t "about.introduction.educational" }}</li>
+          <li>{{ t "about.introduction.other_groups" }}</li>
+        </ul>
+        <p>{{ t "about.introduction.two_ways" }}</p>
+      </div>
+    </div>
+
+
     <div class="row">
       <!-- How to browse -->
       <div class="columns large-6">
         <div class="section_text small">
-          <div class="section_subtitle"> {{ t "about.order_goods.title" }} </div>
+          <div class="section_subtitle">{{ t "about.order_goods.title" }}</div>
+          <div class="row">
+            <div class="columns small-centered alert-box warning">{{ t "home.order_goods.covid" }}</div>
+          </div>
           <div class="step"> 1) {{ t "about.order_goods.step_1.desc" }} </div>
           <div class="step"> 2) {{ t "about.order_goods.step_2.desc" }} </div>
           <div class="step">
@@ -50,6 +68,9 @@
       <div class="columns large-6">
         <div class="section_text small">
           <div class="section_subtitle"> {{ t "about.visit.title" }} </div>
+          <div class="row">
+            <div class="columns small-centered alert-box warning">{{ t "home.visit.covid" }}</div>
+          </div>
           <div class="step light"> {{ t "about.visit.guide_intro" }} </div>
           <div class="step light">
             {{#each (range 1 4) as |num|}}

@@ -94,21 +94,21 @@ export default {
   },
 
   home: {
-    introduction:
-      "Helping Hong Kong’s charities & Social Welfare agencies receive quality donated goods for their facilities and beneficiaries.",
+    introduction: "Quality donated goods for Hong Kong's social causes.",
+    introduction_video: "Introduction video",
     faq_text: "Eligibility and frequently asked questions.",
-    learn_more: "Learn More",
-    alerts: {
-      covid:
-        "Due to COVID-19, our distribution center is closed for appointments until April 19th."
-    },
+    learn_more: "Learn more",
     order_goods: {
       title: "Get immediate access to goods!",
+      covid:
+        "No self-pickup until after April 19th due to COVID-19. Delivery only.",
       subtitle: "Instant access. Have items delivered.",
       action: "Browse goods"
     },
     visit: {
       title: "Visit our distribution center",
+      covid:
+        "Book now for appointments after April 19th. Temporary closure due to COVID-19.",
       subtitle: "Choose goods in-person.",
       action: "Book appointment",
       new_appointment: "New Appointment"
@@ -117,6 +117,19 @@ export default {
 
   about: {
     title: "About",
+    introduction: {
+      opening:
+        "GoodCity makes it easy to request goods for social causes. First time users will be asked to indicate which organisation they represent from a list of eligible groups. If your organisation is missing, please <a href='mailto:contact@goodcity.hk'>contact us</a> for assistance. Eligible organisations include:",
+      charities:
+        "Tax-exempt charities in Hong Kong <a href='https://www.ird.gov.hk/eng/tax/ach_index.htm'>(listed here)</a>",
+      social_welfare:
+        "Social Welfare Service Units <a href='https://www.swd.gov.hk/en/index/site_download/page_listofserv/'>(listed here)</a>",
+      educational:
+        "Educational facilities <a href='https://applications.edb.gov.hk/schoolsearch/schoolsearch.aspx?langno=1'>(listed here)</a>",
+      other_groups:
+        "Other groups with a social mission, on a case-by-case basis.",
+      two_ways: "There are two ways to use our service..."
+    },
     user_guide_title: "How it works",
     tap_button: "Tap the button below to get started",
     coming_soon: "coming soon",

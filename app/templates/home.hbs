@@ -11,11 +11,9 @@
     <!-- Introduction -->
     <div class="content">
       <div class="row home_section small light">
-        <div class="small-12 large-10 medium-10 columns introduction small-centered">
+        <div class="small-12 large-6 medium-9 columns introduction small-centered">
           {{ t "home.introduction" }}
-          {{#link-to "faq"}}
-          {{ t "home.faq_text" }}
-          {{/link-to}}
+          <a href="https://www.youtube.com/watch?v=dGDUJykjsYw">{{ t "home.introduction_video" }}</a>
         </div>
         {{#if hasCartItems}}
         <div class="cart-icon large-2 medium-2 columns">
@@ -32,18 +30,12 @@
         </div>
       </div>
 
-      <div class="row">
-        <div class="columns small-10 large-6 small-centered intro-text">
-          <div class="alert-box warning">
-            {{ t "home.alerts.covid" }}
-          </div>
-        </div>
-      </div>
-
       <div class="row button_container">
-        <!-- Browse button -->
+        
+        <!-- Browse goods -->
         <div class="columns home_section large-6">
           <div class="section_title"> {{ t "home.order_goods.title" }} </div>
+          <div class="columns small-8 medium-6 large-7 small-centered alert-box warning">{{ t "home.order_goods.covid" }}</div>
           <div class="section_subtitle small"> <i class="fa">{{fa-icon 'check'}}</i> {{ t "home.order_goods.subtitle" }}
             {{#link-to "about"}}{{t 'home.learn_more'}}{{/link-to}} </div>
           {{#link-to "browse"}}
@@ -53,16 +45,19 @@
           {{/link-to}}
         </div>
 
-        <!-- Visit button -->
+        <!-- Book appointment -->
         <div class="columns home_section large-6">
           <div class="section_title"> {{ t "home.visit.title" }} </div>
+          <div class="columns small-8 medium-6 large-7 small-centered alert-box warning">{{ t "home.visit.covid" }}</div>
           <div class="section_subtitle small">
             <div><i class="fa">{{fa-icon 'check'}}</i> {{ t "home.visit.subtitle" }}
               {{#link-to "about"}}{{t 'home.learn_more'}}{{/link-to}} </div>
           </div>
           {{book-appointment}}
         </div>
+
       </div>
+
       {{ logo-banner device="desktop" }}
       {{ logo-banner device="mobile" }}
     </div>
