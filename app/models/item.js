@@ -16,10 +16,10 @@ export default Model.extend(cloudinaryImage, {
   donorCondition: belongsTo("donor_condition", { async: false }),
   saleable: attr("boolean"),
 
-  quantity: computed("packages.@each.quantity", function() {
+  quantity: computed("packages.@each.availableQuantity", function() {
     let totalQuantity = 0;
     this.get("packages").forEach(function(pkg) {
-      totalQuantity = totalQuantity + pkg.get("quantity");
+      totalQuantity = totalQuantity + pkg.get("availableQuantity");
     });
     return totalQuantity;
   }),

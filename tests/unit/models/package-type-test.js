@@ -34,8 +34,11 @@ test("_packages: Returns all packages", function(assert) {
   model = this.subject();
 
   run(function() {
-    package1 = store.createRecord("package", { id: 1, quantity: 1 });
-    package2 = store.createRecord("package", { id: 2, quantity: 1 });
+    package1 = store.createRecord("package", { id: 1, availableQuantity: 1 });
+    package2 = store.createRecord("package", {
+      id: 2,
+      quaavailableQuantityntity: 1
+    });
   });
 
   assert.equal(model.get("_packages.length"), 2);
@@ -50,7 +53,7 @@ test("getItemPackageList: it returns single packages with no siblings", function
   run(function() {
     package1 = store.createRecord("package", {
       id: 1,
-      quantity: 1,
+      availableQuantity: 1,
       isAvailable: true,
       hasSiblingPackages: false
     });
@@ -71,7 +74,7 @@ test("getItemPackageList: list of associated items if package has sibling", func
     item = store.createRecord("item", { id: 1, saleable: true });
     package1 = store.createRecord("package", {
       id: 1,
-      quantity: 1,
+      availableQuantity: 1,
       isAvailable: true,
       hasSiblingPackages: true,
       item: item

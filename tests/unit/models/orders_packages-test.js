@@ -25,9 +25,7 @@ test("Relationship with other models", function(assert) {
 });
 
 test("Checking computed properties", function(assert) {
-  assert.expect(2);
   var orders_package = this.subject({ state: "designated", quantity: 6 });
-  assert.equal(orders_package.get("availableQty"), 6);
   assert.equal(orders_package.get("isSingleQuantity"), false);
 });
 

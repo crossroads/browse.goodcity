@@ -168,7 +168,9 @@ test("should redirect item page and Display details", function(assert) {
     assert.equal(
       $(".main-section .item_details:eq(1)")
         .text()
-        .indexOf(item_with_packages.get("packages.firstObject.quantity")) > 0,
+        .indexOf(
+          item_with_packages.get("packages.firstObject.availableQuantity")
+        ) > 0,
       true
     );
 
