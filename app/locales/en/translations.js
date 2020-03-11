@@ -90,7 +90,8 @@ export default {
     browse_title: "Browse Goods",
     intro_text:
       "Registered charities & social welfare organisations in Hongkong are welcome to place an order.",
-    faq: "Eligibility"
+    faq: "Eligibility",
+    item_unavailable: "Item is no longer available."
   },
 
   home: {

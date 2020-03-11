@@ -1,4 +1,3 @@
-import { later } from "@ember/runloop";
 import { computed } from "@ember/object";
 import { alias, empty, gt, sort } from "@ember/object/computed";
 import { inject as service } from "@ember/service";
@@ -37,6 +36,11 @@ export default Controller.extend({
 
   allPackages: computed("item.packages.@each.isAvailable", function() {
     var item = this.get("item");
+    if (!item) {
+      this.send("noItemsPresent");
+      return [];
+    }
+
     return item.get("isItem")
       ? item.get("packages").filterBy("isAvailable")
       : [item];
@@ -110,7 +114,16 @@ export default Controller.extend({
     showPreview(image) {
       this.set("previewUrl", image.get("previewImageUrl"));
     },
-
+    noItemsPresent: function() {
+      let i18n = this.get("i18n");
+      this.get("messageBox").custom(
+        i18n.t("browse.item_unavailable"),
+        i18n.t("okay"),
+        () => {
+          this.transitionToRoute("browse");
+        }
+      );
+    },
     goToStockItem(inventoryNumber) {
       let finalUrl;
 
