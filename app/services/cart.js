@@ -4,6 +4,7 @@ import { computed } from "@ember/object";
 import { inject as service } from "@ember/service";
 import ApiService from "./api-base-service";
 import _ from "lodash";
+import { getOwner } from "@ember/application";
 
 /**
  *
@@ -168,10 +169,20 @@ export default ApiService.extend({
   },
 
   add(pkgOrItem) {
+    let promise;
+    let loadingView = getOwner(this)
+      .lookup("component:loading")
+      .append();
+
     if (pkgOrItem.get("isItem")) {
-      return this.addItem(pkgOrItem);
+      promise = this.addItem(pkgOrItem);
+    } else {
+      promise = this.addPackage(pkgOrItem);
     }
-    return this.addPackage(pkgOrItem);
+
+    promise.finally(() => {
+      loadingView.destroy();
+    });
   },
 
   /**
@@ -216,10 +227,20 @@ export default ApiService.extend({
   },
 
   remove(pkgOrItem) {
+    let promise;
+    let loadingView = getOwner(this)
+      .lookup("component:loading")
+      .append();
+
     if (pkgOrItem.get("isItem")) {
-      return this.removeItem(pkgOrItem);
+      promise = this.removeItem(pkgOrItem);
+    } else {
+      promise = this.removePackage(pkgOrItem);
     }
-    return this.removePackage(pkgOrItem);
+
+    promise.finally(() => {
+      loadingView.destroy();
+    });
   },
 
   /**
@@ -237,7 +258,7 @@ export default ApiService.extend({
   removePackage(pkg) {
     let cartItem = this.getCartItemForPackage(pkg);
     if (!cartItem) {
-      return computed.resolve();
+      return resolve();
     }
     return this.removeCartItem(cartItem);
   },
