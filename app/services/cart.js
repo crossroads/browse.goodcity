@@ -4,7 +4,7 @@ import { computed } from "@ember/object";
 import { inject as service } from "@ember/service";
 import ApiService from "./api-base-service";
 import _ from "lodash";
-import { getOwner } from "@ember/application";
+import asyncMixin from "browse/mixins/async_tasks";
 
 /**
  *
@@ -12,7 +12,7 @@ import { getOwner } from "@ember/application";
  * Records are all of the requested_package type
  *
  */
-export default ApiService.extend({
+export default ApiService.extend(asyncMixin, {
   store: service(),
   session: service(),
   localStorage: service(),
@@ -169,20 +169,11 @@ export default ApiService.extend({
   },
 
   add(pkgOrItem) {
-    let promise;
-    let loadingView = getOwner(this)
-      .lookup("component:loading")
-      .append();
-
     if (pkgOrItem.get("isItem")) {
-      promise = this.addItem(pkgOrItem);
+      this.runTask(this.addItem(pkgOrItem));
     } else {
-      promise = this.addPackage(pkgOrItem);
+      this.runTask(this.addPackage(pkgOrItem));
     }
-
-    promise.finally(() => {
-      loadingView.destroy();
-    });
   },
 
   /**
@@ -227,20 +218,11 @@ export default ApiService.extend({
   },
 
   remove(pkgOrItem) {
-    let promise;
-    let loadingView = getOwner(this)
-      .lookup("component:loading")
-      .append();
-
     if (pkgOrItem.get("isItem")) {
-      promise = this.removeItem(pkgOrItem);
+      this.runTask(this.removeItem(pkgOrItem));
     } else {
-      promise = this.removePackage(pkgOrItem);
+      this.runTask(this.removePackage(pkgOrItem));
     }
-
-    promise.finally(() => {
-      loadingView.destroy();
-    });
   },
 
   /**
