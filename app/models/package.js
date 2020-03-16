@@ -8,8 +8,12 @@ import { belongsTo, hasMany } from "ember-data/relationships";
 import cloudinaryImage from "../mixins/cloudinary_image";
 
 export default Model.extend(cloudinaryImage, {
-  quantity: attr("number"),
+  onHandQuantity: attr("number"),
+  designatedQuantity: attr("number"),
+  dispatchedQuantity: attr("number"),
   availableQuantity: attr("number"),
+  quantity: alias("availableQuantity"), // Temporary fallback, do not use
+
   length: attr("number"),
   width: attr("number"),
   height: attr("number"),
@@ -31,7 +35,7 @@ export default Model.extend(cloudinaryImage, {
   //This is fix for live update for ticket GCW-1632(only implemented on singleton packages, nee to change for qty packages)
   updateAllowwebpublishQtyIfDesignated: observer(
     "allowWebPublish",
-    "quantity",
+    "availableQuantity",
     "orderId",
     function() {
       once(this, function() {
@@ -50,7 +54,7 @@ export default Model.extend(cloudinaryImage, {
         (this.get("allowWebPublish") ||
           (this._internalModel._data &&
             this._internalModel._data.allowWebPublish)) &&
-        this.get("quantity")
+        this.get("availableQuantity")
     );
   }),
 

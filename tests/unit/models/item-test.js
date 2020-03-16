@@ -105,12 +105,12 @@ test("isAvailable: returns true if all packages are available", function(assert)
   run(function() {
     package1 = store.createRecord("package", {
       id: 1,
-      quantity: 2,
+      availableQuantity: 2,
       isAvailable: true
     });
     package2 = store.createRecord("package", {
       id: 2,
-      quantity: 2,
+      availableQuantity: 2,
       isAvailable: true
     });
     model.get("packages").pushObjects([package1, package2]);
@@ -119,7 +119,7 @@ test("isAvailable: returns true if all packages are available", function(assert)
   assert.equal(model.get("isAvailable"), true);
 });
 
-test("quantity: returns total quantity of all packages", function(assert) {
+test("availableQuantity: returns total availableQuantity of all packages", function(assert) {
   assert.expect(1);
   var package1, package2;
 
@@ -127,13 +127,14 @@ test("quantity: returns total quantity of all packages", function(assert) {
   var store = this.store();
 
   run(function() {
-    package1 = store.createRecord("package", { id: 1, quantity: 2 });
-    package2 = store.createRecord("package", { id: 2, quantity: 2 });
+    package1 = store.createRecord("package", { id: 1, availableQuantity: 2 });
+    package2 = store.createRecord("package", { id: 2, availableQuantity: 2 });
     model.get("packages").pushObjects([package1, package2]);
   });
 
-  var totalQty = package1.get("quantity") + package2.get("quantity");
-  assert.equal(model.get("quantity"), totalQty);
+  var totalQty =
+    package1.get("availableQuantity") + package2.get("availableQuantity");
+  assert.equal(model.get("availableQuantity"), totalQty);
 });
 
 test("isUnavailableAndDesignated: returns true if all packages are unavailable and designated", function(assert) {
@@ -146,12 +147,12 @@ test("isUnavailableAndDesignated: returns true if all packages are unavailable a
   run(function() {
     package1 = store.createRecord("package", {
       id: 1,
-      quantity: 2,
+      availableQuantity: 2,
       isUnavailableAndDesignated: true
     });
     package2 = store.createRecord("package", {
       id: 2,
-      quantity: 2,
+      availableQuantity: 2,
       isUnavailableAndDesignated: true
     });
     model.get("packages").pushObjects([package1, package2]);
@@ -170,12 +171,12 @@ test("isUnavailableAndDesignated: returns false if all packages are not unavaila
   run(function() {
     package1 = store.createRecord("package", {
       id: 1,
-      quantity: 2,
+      availableQuantity: 2,
       isUnavailableAndDesignated: true
     });
     package2 = store.createRecord("package", {
       id: 2,
-      quantity: 2,
+      availableQuantity: 2,
       isUnavailableAndDesignated: false
     });
     model.get("packages").pushObjects([package1, package2]);
@@ -194,7 +195,7 @@ test("images: returns blank array if associated package do not have any image", 
   run(function() {
     package1 = store.createRecord("package", {
       id: 1,
-      quantity: 2,
+      availableQuantity: 2,
       isUnavailableAndDesignated: true
     });
     model.get("packages").pushObjects([package1]);
@@ -212,7 +213,7 @@ test("favouriteImage: Returns first fav image", function(assert) {
 
   run(function() {
     item = store.createRecord("item", { id: 1, saleable: true });
-    package1 = store.createRecord("package", { id: 1, quantity: 2 });
+    package1 = store.createRecord("package", { id: 1, availableQuantity: 2 });
     model.get("packages").pushObjects([package1]);
     image = store.createRecord("image", {
       id: 1,
@@ -232,7 +233,7 @@ test("displayImage: Returns image to be dispayed", function(assert) {
 
   run(function() {
     item = store.createRecord("item", { id: 1, saleable: true });
-    package1 = store.createRecord("package", { id: 1, quantity: 2 });
+    package1 = store.createRecord("package", { id: 1, availableQuantity: 2 });
     model.get("packages").pushObjects([package1]);
     image = store.createRecord("image", {
       id: 1,
