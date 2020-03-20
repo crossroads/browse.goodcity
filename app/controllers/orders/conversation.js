@@ -107,6 +107,7 @@ export default detail.extend({
     sendMessage() {
       $("textarea").trigger("blur");
       var values = this.getProperties("body");
+      values.body = values.body.trim();
       values.order = this.get("model");
       values.isPrivate = false;
       values.createdAt = new Date();
