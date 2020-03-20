@@ -527,6 +527,7 @@ export default {
       info_1: "請指出所需每件貨物的類型和數量。",
       info_2:
         "我們會根據庫存常有的項目定期更新可用類別。 有關此處未列出的特殊類別要求，請發送電子郵件至local@crossroads.org.hk。我們會盡力提供幫助。",
+      info_3: "and we will help if we can.",
       request_more: "申請更多貨物",
       type_label: "貨物類型",
       quantity_label: "數量",
