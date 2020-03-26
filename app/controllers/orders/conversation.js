@@ -64,16 +64,18 @@ export default detail.extend({
   },
 
   createMessage(values) {
-    var message = this.store.createRecord("message", values);
-    message
-      .save()
-      .then(() => {
-        this.set("body", "");
-      })
-      .catch(error => {
-        this.store.unloadRecord(message);
-        throw error;
-      });
+    if (values.body) {
+      var message = this.store.createRecord("message", values);
+      message
+        .save()
+        .then(() => {
+          this.set("body", "");
+        })
+        .catch(error => {
+          this.store.unloadRecord(message);
+          throw error;
+        });
+    }
   },
 
   markReadAndScroll: function({ record }) {
@@ -108,6 +110,7 @@ export default detail.extend({
       $("textarea").trigger("blur");
       var values = this.getProperties("body");
       values.order = this.get("model");
+      values.body = values.body.trim();
       values.isPrivate = false;
       values.createdAt = new Date();
       values.sender = this.store.peekRecord(
