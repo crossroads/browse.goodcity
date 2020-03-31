@@ -17,7 +17,6 @@ test("item relationship", function(assert) {
   var pkg = this.subject().store.modelFor("package");
   var relationship = get(pkg, "relationshipsByName").get("item");
 
-
   assert.equal(relationship.key, "item");
   assert.equal(relationship.kind, "belongsTo");
 });
@@ -100,7 +99,7 @@ test("image: returns favourite image", function(assert) {
   store = this.store();
 
   run(function() {
-    package1 = store.createRecord("package", { id: 1, quantity: 2 });
+    package1 = store.createRecord("package", { id: 1, availableQuantity: 2 });
     image = store.createRecord("image", {
       id: 1,
       favourite: true,
@@ -118,7 +117,7 @@ test("otherImages", function(assert) {
   store = this.store();
 
   run(function() {
-    package1 = store.createRecord("package", { id: 1, quantity: 2 });
+    package1 = store.createRecord("package", { id: 1, availableQuantity: 2 });
     image1 = store.createRecord("image", {
       id: 1,
       favourite: true,
@@ -142,7 +141,7 @@ test("sortedImages: Returns sorted images", function(assert) {
   store = this.store();
 
   run(function() {
-    package1 = store.createRecord("package", { id: 1, quantity: 2 });
+    package1 = store.createRecord("package", { id: 1, availableQuantity: 2 });
     image1 = store.createRecord("image", {
       id: 1,
       favourite: true,
@@ -162,7 +161,7 @@ test("sortedImages: Returns sorted images", function(assert) {
 test("isAvailable: Checks package is available or not", function(assert) {
   var package1 = this.subject({
     id: 1,
-    quantity: 1,
+    availableQuantity: 1,
     isDispatched: false,
     allowWebPublish: true
   });
@@ -175,7 +174,7 @@ test("isAvailable: Checks package is available or not", function(assert) {
 test("isUnavailableAndDesignated: Checks is package unavailable and designated", function(assert) {
   var package1 = this.subject({
     id: 1,
-    quantity: 1,
+    availableQuantity: 1,
     isDispatched: false,
     allowWebPublish: false
   });

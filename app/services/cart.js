@@ -4,6 +4,7 @@ import { computed } from "@ember/object";
 import { inject as service } from "@ember/service";
 import ApiService from "./api-base-service";
 import _ from "lodash";
+import asyncMixin from "browse/mixins/async_tasks";
 
 /**
  *
@@ -11,7 +12,7 @@ import _ from "lodash";
  * Records are all of the requested_package type
  *
  */
-export default ApiService.extend({
+export default ApiService.extend(asyncMixin, {
   store: service(),
   session: service(),
   localStorage: service(),
@@ -169,9 +170,10 @@ export default ApiService.extend({
 
   add(pkgOrItem) {
     if (pkgOrItem.get("isItem")) {
-      return this.addItem(pkgOrItem);
+      this.runTask(this.addItem(pkgOrItem));
+    } else {
+      this.runTask(this.addPackage(pkgOrItem));
     }
-    return this.addPackage(pkgOrItem);
   },
 
   /**
@@ -217,9 +219,10 @@ export default ApiService.extend({
 
   remove(pkgOrItem) {
     if (pkgOrItem.get("isItem")) {
-      return this.removeItem(pkgOrItem);
+      this.runTask(this.removeItem(pkgOrItem));
+    } else {
+      this.runTask(this.removePackage(pkgOrItem));
     }
-    return this.removePackage(pkgOrItem);
   },
 
   /**
@@ -237,7 +240,7 @@ export default ApiService.extend({
   removePackage(pkg) {
     let cartItem = this.getCartItemForPackage(pkg);
     if (!cartItem) {
-      return computed.resolve();
+      return resolve();
     }
     return this.removeCartItem(cartItem);
   },

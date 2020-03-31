@@ -90,7 +90,7 @@ test("orderItems: returns order package if package do not have sibling", functio
   store = this.store();
 
   run(function() {
-    package1 = store.createRecord("package", { id: 1, quantity: 1 });
+    package1 = store.createRecord("package", { id: 1, availableQuantity: 1 });
     ordersPackage1 = store.createRecord("orders_package", {
       id: 1,
       state: "dispatched",
@@ -115,12 +115,12 @@ test("orderItems: returns order item if package have sibling", function(assert) 
     item = store.createRecord("item", { id: 1, saleable: true });
     package1 = store.createRecord("package", {
       id: 1,
-      quantity: 1,
+      availableQuantity: 1,
       item: item
     });
     package2 = store.createRecord("package", {
       id: 2,
-      quantity: 1,
+      availableQuantity: 1,
       item: item
     });
     ordersPackage1 = store.createRecord("orders_package", {
@@ -145,7 +145,7 @@ test("orderItems: returns order item if hasSibling is true", function(assert) {
     item = store.createRecord("item", { id: 1, saleable: true });
     package1 = store.createRecord("package", {
       id: 1,
-      quantity: 1,
+      availableQuantity: 1,
       item: item,
       hasSiblingPackages: true
     });

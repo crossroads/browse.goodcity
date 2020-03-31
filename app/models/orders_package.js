@@ -12,10 +12,6 @@ export default Model.extend({
   packageId: attr("number"),
   createdAt: attr("date"),
 
-  availableQty: computed("quantity", function() {
-    return this.get("quantity");
-  }),
-
   isSingleQuantity: computed("quantity", function() {
     return this.get("quantity") === 1;
   })
