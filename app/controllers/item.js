@@ -57,7 +57,9 @@ export default Controller.extend({
   ),
 
   categoryObj: computed("categoryId", function() {
-    return this.store.peekRecord("package_category", this.get("categoryId"));
+    if (this.get("categoryId")) {
+      return this.store.peekRecord("package_category", this.get("categoryId"));
+    }
   }),
 
   linkDisplayName: computed("prevPath", "categoryObj", function() {
@@ -100,14 +102,15 @@ export default Controller.extend({
   }),
 
   setAndRedirectToCategory(category) {
-    const parentId = category.get("parentId");
-    if (parentId) {
-      this.get("packageCategory").set("selectedCategoryId", category);
+    if (category) {
+      const parentId = category.get("parentId");
+      if (parentId) {
+        this.get("packageCategory").set("selectedCategoryId", category);
+      }
+      this.transitionToRoute("package_category", parentId || category.id);
+    } else {
+      this.transitionToRoute("browse");
     }
-    this.transitionToRoute(
-      "package_category",
-      parentId ? parentId : category.id
-    );
   },
 
   actions: {
