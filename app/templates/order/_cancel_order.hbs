@@ -8,12 +8,12 @@
     {{auto-resize-textarea data-autoresize=true name="cancellation-reason" required="required" pattern=".*\S.*" class=(concat "cancel-appointment-reasons" order.id)}}
   {{/if}}
     <div class="row cancel-appointment-buttons">
-      <div class="small-6 medium-6 large-6 columns">
+      <div class="small-6 medium-5 large-6 columns">
         <a {{action 'removePopUp'}} class="button expand">
           {{t 'not_now'}}
         </a>
       </div>
-      <div class="small-6 medium-6 large-6 columns">
+      <div class="small-6 medium-7 large-6 columns">
         <a {{action 'cancelOrder'}} class="button expand">
           {{t 'cancel_booking.title'}}
         </a>
