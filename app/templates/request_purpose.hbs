@@ -50,7 +50,7 @@
                 </div>
                 <div class="people-count-input">
                   {{#form-control}}
-                  {{input type='number' value=peopleCount required='true' id="people-count"}}
+                  {{numeric-input value=peopleCount name="people-count" required="true"  maxlength= "10" id="people-count"}}
                   <div class='input-error'> {{t 'order.request_purpose.people_count_warning'}} </div>
                   {{/form-control}}
                 </div>
