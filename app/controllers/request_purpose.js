@@ -127,15 +127,7 @@ export default Controller.extend(cancelOrder, {
     },
 
     back() {
-      let prevPageName = this.get("prevPath") || this.get("previousRouteName");
-      let orderId = this.get("order.id") || this.get("orderId");
-      if (["orders.goods", "orders.booking"].indexOf(prevPageName) >= 0) {
-        this.transitionToRoute(prevPageName, orderId);
-      } else if (["account_details", "my_orders"].indexOf(prevPageName) >= 0) {
-        this.transitionToRoute(prevPageName);
-      } else {
-        this.transitionToRoute("home");
-      }
+      window.history.back();
     }
   }
 });
