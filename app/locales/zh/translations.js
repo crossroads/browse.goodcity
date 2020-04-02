@@ -461,6 +461,7 @@ export default {
     transport_order_detail_pop_up: "請先填寫訂單詳情",
     transport_details_pop_up: "請在購物車中新增物資以提交運輸詳情。",
     numbers_warning: "請輸入一個4位數字。",
+    error: "Something went wrong while processing the order. Please try again.",
     transport_details: {
       title: "預約詳情",
       transport_method: "運輸方式: ",

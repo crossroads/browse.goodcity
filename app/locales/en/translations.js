@@ -501,6 +501,7 @@ export default {
     transport_details_pop_up:
       "Add items to your cart before submitting transport details.",
     numbers_warning: "Please enter 4 digit number.",
+    error: "Something went wrong while processing the order. Please try again.",
     transport_details: {
       title: "Transport Details",
       transport_method: "Transport method: ",
