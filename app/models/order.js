@@ -1,4 +1,4 @@
-import { computed } from "@ember/object";
+import { computed, observer } from "@ember/object";
 import { equal, alias } from "@ember/object/computed";
 import { inject as service } from "@ember/service";
 import Model from "ember-data/model";
@@ -63,6 +63,8 @@ export default Model.extend({
   isProcessing: equal("state", "processing"),
   isCancelled: equal("state", "cancelled"),
   i18n: service(),
+  messageBox: service(),
+  isVanished: "false",
 
   isAppointment: computed("bookingType", function() {
     return this.get("bookingType.isAppointment");
@@ -151,6 +153,12 @@ export default Model.extend({
       )}`;
     }
   ),
+
+  showError: observer("isVanished", function() {
+    this.get("messageBox").alert(this.get("i18n").t("order.error"), () =>
+      this.transitionToRoute("/cart")
+    );
+  }),
 
   stateIcon: computed("state", function() {
     const state = this.get("state");

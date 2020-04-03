@@ -278,6 +278,7 @@ export default Service.extend(Evented, {
       case "delete":
         let existingItem = this.get("store").peekRecord(type, record.id);
         if (existingItem) {
+          existingItem.set("isVanished", "true");
           this.get("store").unloadRecord(existingItem);
         }
         break;

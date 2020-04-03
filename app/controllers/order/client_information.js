@@ -92,58 +92,52 @@ export default Controller.extend(cancelOrder, {
   },
 
   editOrder: task(function*(orderParams, isOrganisation) {
-    try {
-      let order = this.get("order");
-      let orderId = order.id;
-      let beneficiaryId = order.get("beneficiary.id");
-      let store = this.store;
-      let beneficiaryResponse;
-      let url = beneficiaryId
-        ? "/beneficiaries/" + beneficiaryId
-        : "/beneficiaries";
-      let actionType = this.actionType(isOrganisation, beneficiaryId);
-      let beneficiary =
-        beneficiaryId && store.peekRecord("beneficiary", beneficiaryId);
-      let beneficiaryParams =
-        ["PUT", "POST"].indexOf(actionType) > -1
-          ? { beneficiary: this.beneficiaryParams(), order_id: orderId }
-          : {};
-      let loadingView = getOwner(this)
-        .lookup("component:loading")
-        .append();
+    let order = this.get("order");
+    let orderId = order.id;
+    let beneficiaryId = order.get("beneficiary.id");
+    let store = this.store;
+    let beneficiaryResponse;
+    let url = beneficiaryId
+      ? "/beneficiaries/" + beneficiaryId
+      : "/beneficiaries";
+    let actionType = this.actionType(isOrganisation, beneficiaryId);
+    let beneficiary =
+      beneficiaryId && store.peekRecord("beneficiary", beneficiaryId);
+    let beneficiaryParams =
+      ["PUT", "POST"].indexOf(actionType) > -1
+        ? { beneficiary: this.beneficiaryParams(), order_id: orderId }
+        : {};
+    let loadingView = getOwner(this)
+      .lookup("component:loading")
+      .append();
 
-      if (actionType) {
-        beneficiaryResponse = yield new AjaxPromise(
-          url,
-          actionType,
-          this.get("session.authToken"),
-          beneficiaryParams
-        );
-        orderParams["beneficiary_id"] = beneficiaryResponse.beneficiary
-          ? beneficiaryResponse.beneficiary.id
-          : null;
-      }
-
-      let orderResponse = yield new AjaxPromise(
-        "/orders/" + orderId,
-        "PUT",
+    if (actionType) {
+      beneficiaryResponse = yield new AjaxPromise(
+        url,
+        actionType,
         this.get("session.authToken"),
-        { order: orderParams }
+        beneficiaryParams
       );
-      store.pushPayload(orderResponse);
-
-      if (beneficiary && actionType === "DELETE") {
-        store.unloadRecord(beneficiary);
-      } else {
-        store.pushPayload(beneficiaryResponse);
-      }
-      this.send("redirectToGoodsDetails");
-      loadingView.destroy();
-    } catch (err) {
-      this.get("messageBox").alert(this.get("i18n").t("order.error"), () =>
-        this.transitionToRoute("/home")
-      );
+      orderParams["beneficiary_id"] = beneficiaryResponse.beneficiary
+        ? beneficiaryResponse.beneficiary.id
+        : null;
     }
+
+    let orderResponse = yield new AjaxPromise(
+      "/orders/" + orderId,
+      "PUT",
+      this.get("session.authToken"),
+      { order: orderParams }
+    );
+    store.pushPayload(orderResponse);
+
+    if (beneficiary && actionType === "DELETE") {
+      store.unloadRecord(beneficiary);
+    } else {
+      store.pushPayload(beneficiaryResponse);
+    }
+    this.send("redirectToGoodsDetails");
+    loadingView.destroy();
   }),
 
   actions: {
