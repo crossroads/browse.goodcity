@@ -46,6 +46,7 @@ module.exports = function(environment) {
       // Here you can pass flags/options to your application instance
       // when it is created
       NAME: "browse.goodcity",
+      ORIGIN: "browse.goodcity.hk",
       CLOUD_NAME: "ddoadcjjl",
       CLOUD_API_KEY: 926849638736153,
       CLOUD_URL: "https://api.cloudinary.com/v1_1/ddoadcjjl/auto/upload",
@@ -151,6 +152,7 @@ module.exports = function(environment) {
 
     if ((process.env.staging || process.env.STAGING) === "true") {
       ENV.staging = true;
+      ENV.APP.ORIGIN = "charities-staging.goodcity.hk";
       ENV.APP.API_HOST_URL = "https://api-staging.goodcity.hk";
       ENV.APP.SOCKETIO_WEBSERVICE_URL =
         "https://socket-staging.goodcity.hk:81/goodcity";

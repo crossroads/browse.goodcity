@@ -1,14 +1,16 @@
 <section class="main-section privacy faq_list">
   <nav class="tab-bar">
     <section class="left-large">
-      <div class="back-button" {{action 'back'}}>
+      {{#back-link fallbackRoute="/" }}
         {{fa-icon "angle-left"}} {{t "back"}}
-      </div>
+      {{/back-link}}
     </section>
+
     <section class="middle tab-bar-section">
       <h1 class="title">{{t "faq.title"}}</h1>
     </section>
   </nav>
+
   <div class="row faq_list">
     <div class="small-12 columns">
       <p>{{t "faq.description"}}</p>
