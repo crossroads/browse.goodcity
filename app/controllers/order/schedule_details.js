@@ -6,6 +6,7 @@ import Controller, { inject as controller } from "@ember/controller";
 import { getOwner } from "@ember/application";
 import AjaxPromise from "browse/utils/ajax-promise";
 import cancelOrder from "../../mixins/cancel_order";
+import _ from "lodash";
 
 const ONLINE_ORDER_HALF_DAY_SLOT_COUNT = 10;
 
@@ -47,56 +48,38 @@ export default Controller.extend(cancelOrder, {
   }),
 
   onlineOrderPickupSlots: computed("available_dates", function() {
-    let results = [];
-    let availableDates = this.get(
-      "available_dates"
-    ).appointment_calendar_dates.slice(this.get("bookingMargin"));
-
+    const available_dates = this.get("available_dates");
     const atHour = (d, h) => {
-      d = new Date(d);
-      d.setHours(h);
-      d.setMinutes(0);
-      d.setSeconds(0);
-      return {
-        isMorning: h < 12,
-        timestamp: d
-      };
+      const isMorning = h < 12;
+      const timestamp = new Date(d);
+
+      timestamp.setHours(h, 0, 0, 0);
+      return { isMorning, timestamp };
     };
 
+    const toDate = s => new Date(s.timestamp);
     const morningOf = d => atHour(d, 10);
     const afternoonOf = d => atHour(d, 14);
 
-    for (let date of availableDates) {
-      let slots = date.slots;
-      let allowMorning = false;
-      let allowAfternoon = false;
-      for (let s of slots) {
-        let dt = new Date(s.timestamp);
-        let isMorning = dt.getHours() < 12;
-        let isToday = this.isToday(dt);
+    return _.chain(available_dates)
+      .get("appointment_calendar_dates", [])
+      .filter(d => d.slots.length > 0)
+      .slice(this.get("bookingMargin"))
+      .transform((results, entry) => {
+        const { date, slots } = entry;
+        const hasMorning = slots.map(toDate).find(dt => dt.getHours() < 12);
+        const hasAfternoon = slots.map(toDate).find(dt => dt.getHours() >= 12);
 
-        if (isToday) {
-          if (isMorning || new Date().getHours() >= 11) {
-            // We don't allow booking the current day's morning
-            // and we don't allow booking the afternoon if we're past 11am
-            continue;
-          }
+        if (hasMorning) {
+          results.push(morningOf(date));
+        }
+        if (hasAfternoon) {
+          results.push(afternoonOf(date));
         }
 
-        if (isMorning && !allowMorning) {
-          results.push(morningOf(dt));
-          allowMorning = true;
-        } else if (!allowAfternoon) {
-          results.push(afternoonOf(dt));
-          allowAfternoon = true;
-        }
-      }
-
-      if (results.length >= ONLINE_ORDER_HALF_DAY_SLOT_COUNT) {
-        break;
-      }
-    }
-    return results;
+        return results.length < ONLINE_ORDER_HALF_DAY_SLOT_COUNT;
+      })
+      .value();
   }),
 
   orderTransportParams() {
