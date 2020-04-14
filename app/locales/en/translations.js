@@ -559,7 +559,6 @@ export default {
       district_label: "Where in Hong Kong will these goods be primarily used?",
       "district-label-info": "This assists us with our reporting.",
       select_placeholder: "Select District",
-      people_count_warning: "You must input a number here",
       need_description: "Description of need",
       need_description_info: "Please briefly describe why goods are needed.",
       description_warning: "Description cannot be blank."

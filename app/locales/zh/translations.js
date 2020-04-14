@@ -514,7 +514,6 @@ export default {
       for_organisation: "予機構自用",
       for_client: "予服務對象",
       people_count_info: "多少人會從這些物品中受惠？",
-      people_count_warning: "您必須在這裡輸入一個數字",
       district_label: "這些物資將在香港哪區使用?",
       "district-label-info": "此項能協助我們作出準確的紀錄及數據",
       select_placeholder: "請選擇區域",
