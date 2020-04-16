@@ -1,16 +1,18 @@
 <section class="main-section new-user-section ui login_page">
   <nav class="tab-bar">
+
     <section class="left-large">
-      <div class="back-button" {{action 'back'}}>
+      {{#back-link fallbackRoute="/" }}
         {{fa-icon "angle-left"}} {{t "back"}}
-      </div>
+      {{/back-link}}
     </section>
+
     <section class="middle tab-bar-section">
       <h1 class="title">{{t "about.title"}}</h1>
     </section>
   </nav>
-  <div class="about_page" id="how_to">
 
+  <div class="about_page" id="how_to">
     <div class="row">
       <div class="columns intro_text">
         <p>{{t "about.introduction.opening" }}</p>

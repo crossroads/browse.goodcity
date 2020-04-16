@@ -12,7 +12,6 @@ export default Controller.extend({
   subscription: service(),
   queryParams: ["orderCancelled"],
   triggerFlashMessage: false,
-  previousRouteName: null,
 
   orderCancelled: false,
 
@@ -32,12 +31,7 @@ export default Controller.extend({
     "orderCancelled",
     "triggerFlashMessage",
     function() {
-      var previousRoute = this.get("previousRouteName");
-      if (
-        this.get("orderCancelled") &&
-        (previousRoute === "order.schedule_details" ||
-          previousRoute === "order.confirm")
-      ) {
+      if (this.get("orderCancelled")) {
         this.get("flashMessage").show("order.flash_cancelled_message");
       }
     }

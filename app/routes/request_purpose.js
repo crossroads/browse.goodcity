@@ -4,7 +4,6 @@ import AuthorizeRoute from "./authorize";
 export default AuthorizeRoute.extend({
   orderId: null,
   order: null,
-  previousRouteName: null,
   isBookAppointment: null,
   session: service(),
   orderService: service(),
@@ -14,16 +13,8 @@ export default AuthorizeRoute.extend({
       return; // not authorized
     }
 
-    let previousRoutes =
-      this.router.router && this.router.router.currentHandlerInfos;
-    let previousRoute = previousRoutes && previousRoutes.pop();
-    let isAppointment = transition.queryParams.bookAppointment === "true";
-    let editRequest = transition.queryParams.editRequest === "true";
-
-    if (previousRoute && previousRoute.name) {
-      this.set("previousRouteName", previousRoute.name);
-    }
-
+    let isAppointment = transition.queryParams.bookAppointment === "true",
+      editRequest = transition.queryParams.editRequest === "true";
     this.set("editRequest", editRequest);
     this.set("isBookAppointment", isAppointment);
     this.set("orderId", transition.queryParams.orderId);
@@ -70,7 +61,7 @@ export default AuthorizeRoute.extend({
 
   setupController(controller, model, transition) {
     this._super(...arguments);
-    controller.set("previousRouteName", this.get("previousRouteName"));
+
     controller.set("isEditing", false);
     this.setUpFormData(model, controller, transition);
     this.controllerFor("application").set("showSidebar", false);
