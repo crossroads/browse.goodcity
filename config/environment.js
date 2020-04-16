@@ -133,6 +133,7 @@ module.exports = function(environment) {
 
   if (environment === "production") {
     ENV.APP.API_HOST_URL = "https://api.goodcity.hk";
+    ENV.APP.ORIGIN = "https://charities.goodcity.hk";
     ENV.APP.SOCKETIO_WEBSERVICE_URL = "https://socket.goodcity.hk:81/goodcity";
     ENV.APP.STOCK_APP_HOST_URL = "https://stock.goodcity.hk";
     ENV.APP.STOCK_ANDROID_APP_HOST_URL = "stock.goodcity.hk";
