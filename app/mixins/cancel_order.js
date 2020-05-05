@@ -61,7 +61,7 @@ export default Mixin.create(asyncMixin, {
       order = order || this.get("order");
       if (order) {
         if (order.get("state") === "cancelled") {
-          this.get("messageBox").alert("Order cannot be cancelled.", () =>
+          this.get("messageBox").alert(i18n.t("order.already_cancelled"), () =>
             this.transitionToRoute("/")
           );
         }
