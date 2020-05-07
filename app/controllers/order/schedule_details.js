@@ -164,7 +164,7 @@ export default Controller.extend(cancelOrder, {
         })
         .catch(err => {
           this.get("messageBox").alert(err.responseJSON.error, () =>
-            this.transitionToRoute("/")
+            this.transitionToRoute("/my_orders")
           );
         });
     }
