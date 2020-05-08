@@ -6,6 +6,7 @@ import asyncMixin from "browse/mixins/async_tasks";
 
 export default Mixin.create(asyncMixin, {
   orderService: service(),
+  messageBox: service(),
 
   deleteOrder(order) {
     this.runTask(
@@ -59,6 +60,12 @@ export default Mixin.create(asyncMixin, {
     cancelOrder(order) {
       order = order || this.get("order");
       if (order) {
+        if (order.get("state") === "cancelled") {
+          this.get("messageBox").alert(
+            this.get("i18n").t("order.already_cancelled"),
+            () => this.transitionToRoute("/my_orders")
+          );
+        }
         if (order.get("isDraft")) {
           this.deleteOrder(order);
         } else if (order.get("isCancelAllowed")) {

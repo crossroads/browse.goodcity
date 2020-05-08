@@ -108,22 +108,28 @@ export default Controller.extend(cancelOrder, {
 
       new AjaxPromise(url, actionType, this.get("session.authToken"), {
         order: orderParams
-      }).then(data => {
-        this.get("store").pushPayload(data);
+      })
+        .then(data => {
+          this.get("store").pushPayload(data);
 
-        let orderId = data.order.id;
-        loadingView.destroy();
-        if (
-          this.get("prevPath") === "orders.booking" &&
-          this.get("editRequest")
-        ) {
-          this.transitionToRoute("orders.booking", orderId);
-          this.set("prevPath", "null");
-          this.set("editRequest", false);
-        } else {
-          this.transitionToRoute("order.client_information", orderId);
-        }
-      });
+          let orderId = data.order.id;
+          loadingView.destroy();
+          if (
+            this.get("prevPath") === "orders.booking" &&
+            this.get("editRequest")
+          ) {
+            this.transitionToRoute("orders.booking", orderId);
+            this.set("prevPath", "null");
+            this.set("editRequest", false);
+          } else {
+            this.transitionToRoute("order.client_information", orderId);
+          }
+        })
+        .catch(err => {
+          this.get("messageBox").alert(err.responseJSON.error, () =>
+            this.transitionToRoute("/my_orders")
+          );
+        });
     },
 
     back() {

@@ -152,15 +152,21 @@ export default Controller.extend(cancelOrder, {
 
       new AjaxPromise(url, actionType, this.get("session.authToken"), {
         order_transport: this.orderTransportParams()
-      }).then(data => {
-        this.get("store").pushPayload(data);
-        loadingView.destroy();
-        if (previousRouteName === "orders.booking") {
-          this.transitionToRoute(previousRouteName, orderId);
-        } else {
-          this.transitionToRoute("order.confirm_booking", orderId);
-        }
-      });
+      })
+        .then(data => {
+          this.get("store").pushPayload(data);
+          loadingView.destroy();
+          if (previousRouteName === "orders.booking") {
+            this.transitionToRoute(previousRouteName, orderId);
+          } else {
+            this.transitionToRoute("order.confirm_booking", orderId);
+          }
+        })
+        .catch(err => {
+          this.get("messageBox").alert(err.responseJSON.error, () =>
+            this.transitionToRoute("/my_orders")
+          );
+        });
     }
   }
 });

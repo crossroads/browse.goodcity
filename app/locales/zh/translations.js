@@ -436,6 +436,7 @@ export default {
     order_delete_confirmation: "這動作會刪除所有訂單資料，並不能復原。",
     representative: "代表人員",
     cancel_order: "取消訂單",
+    already_cancelled: "Order is already cancelled",
     default_reason: "改變了主意",
     purpose: "申請目的",
     login: "登入",
