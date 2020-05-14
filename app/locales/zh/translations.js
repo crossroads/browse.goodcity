@@ -94,14 +94,11 @@ export default {
     learn_more: "了解更多",
     order_goods: {
       title: "隨時瀏覽選取優質物資",
-      covid:
-        "因應新冠病毒疫情，直至五月三十一日期間，未能安排自取物品。只限送貨。",
       subtitle: "隨時瀏覽，安排運送。",
       action: "瀏覽物資"
     },
     visit: {
       title: "親臨國際十字路會",
-      covid: "因應新冠病毒疫情，暫時關閉。立即登記五月三十一日後的預約。",
       subtitle: "親臨本會挑選物資",
       action: "預約時間",
       new_appointment: "新的預約"
