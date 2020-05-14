@@ -142,7 +142,7 @@ export default Controller.extend(cancelOrder, {
           this.transitionToRoute(prevPageName);
         }
       } else {
-        window.history.back();
+        this.transitionToRoute("home");
       }
     }
   }
