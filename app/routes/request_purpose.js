@@ -28,6 +28,8 @@ export default AuthorizeRoute.extend({
       : this.get("orderService").getLastDraft({ appointment: isAppointment });
 
     return loadTask.then(order => {
+      let districts = this.store.query("district", {});
+      this.store.pushPayload(districts);
       this.set("order", order);
       return order;
     });
