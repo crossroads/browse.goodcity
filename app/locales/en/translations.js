@@ -101,15 +101,11 @@ export default {
     learn_more: "Learn more",
     order_goods: {
       title: "Get immediate access to goods!",
-      covid:
-        "No self-pickup until after May 31st due to COVID-19. Delivery only.",
       subtitle: "Instant access. Have items delivered.",
       action: "Browse goods"
     },
     visit: {
       title: "Visit our distribution center",
-      covid:
-        "Book now for appointments after May 31st. Temporary closure due to COVID-19.",
       subtitle: "Choose goods in-person.",
       action: "Book appointment",
       new_appointment: "New Appointment"
