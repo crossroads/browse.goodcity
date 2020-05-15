@@ -22,7 +22,8 @@ export default AuthorizeRoute.extend({
         queryParams: {
           onlineOrder: true,
           bookAppointment: false,
-          orderId: orderId
+          orderId: orderId,
+          prevPath: "cart"
         }
       });
     }

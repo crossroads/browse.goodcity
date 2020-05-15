@@ -26,7 +26,8 @@ export default Controller.extend(asyncTasksMixin, {
       queryParams: {
         onlineOrder: true,
         bookAppointment: false,
-        orderId: null
+        orderId: null,
+        prevPath: "submitted_order_selection"
       }
     });
   },
@@ -59,7 +60,7 @@ export default Controller.extend(asyncTasksMixin, {
     },
 
     goBack() {
-      history.back();
+      this.transitionToRoute("cart");
     }
   }
 });
