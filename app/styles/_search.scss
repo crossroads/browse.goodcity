@@ -278,16 +278,26 @@
 .search-code,
 .goods_search {
   .back-link {
+    display: flex;
+    justify-content: center;
     text-decoration: none;
-    padding-top: 0.8rem;
+    margin-top: 0.9rem;
     color: #000 !important;
-    cursor: pointer;
-    font-size: 0.9rem;
-    padding-left: 1.5rem;
+    font-size: 1rem;
 
     @media #{$small-only} {
-      margin-left: -10%;
-      font-size: 0.7rem;
+      font-size: 0.85rem;
+    }
+  }
+
+  .back_text {
+    cursor: pointer;
+    font-size: 1.1rem;
+    margin-top: -0.2rem;
+    margin-left: 0.2rem;
+
+    @media #{$small-only} {
+      font-size: 0.95rem;
     }
   }
 

@@ -1,17 +1,15 @@
 <div class="search-code">
   <div class="large-8 columns large-offset-2 medium-offset-1 medium-10 small-12">
     <div class="row fixed_search_header search-box ui items-search">
-      <div class="small-3 columns back_button">
-        <a {{action "cancelSearch"}} class="back-link">
-          <i class="fa back_icon">{{fa-icon 'angle-left'}}</i>
-          <span class="back_text">
-            {{#if inlineDescription}}
+      <div class="small-3 columns back-link">
+        {{fa-icon 'angle-left'}}
+        <div class="back_text" {{action "cancelSearch"}}  >
+          {{#if inlineDescription}}
             {{t 'cancel'}}
-            {{else}}
+          {{else}}
             {{t 'back'}}
-            {{/if}}
-          </span>
-        </a>
+          {{/if}}
+        </div>
       </div>
 
       <div class="small-9 columns">
