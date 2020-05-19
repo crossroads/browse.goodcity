@@ -54,10 +54,10 @@ test("Check attributes", function(assert) {
   assert.ok(packageTypeCodes);
 });
 
-test("nameItemsCount: Returns name and items count", function(assert) {
+test("nameWithCount: Returns name and items count", function(assert) {
   var packageCategory = this.subject({ id: 1, name: "Name" });
 
-  assert.equal(packageCategory.get("nameItemsCount"), "Name (0)");
+  assert.equal(packageCategory.get("nameWithCount"), "Name (0)");
 });
 
 test("packageTypes: returns blank array if no packageTypes are present", function(assert) {
