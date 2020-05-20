@@ -94,11 +94,14 @@ export default {
     learn_more: "了解更多",
     order_goods: {
       title: "隨時瀏覽選取優質物資",
+      covid:
+        "因應新冠病毒疫情，直至五月三十一日期間，未能安排自取物品。只限送貨。",
       subtitle: "隨時瀏覽，安排運送。",
       action: "瀏覽物資"
     },
     visit: {
       title: "親臨國際十字路會",
+      covid: "因應新冠病毒疫情，暫時關閉。立即登記五月三十一日後的預約。",
       subtitle: "親臨本會挑選物資",
       action: "預約時間",
       new_appointment: "新的預約"
@@ -433,7 +436,6 @@ export default {
     order_delete_confirmation: "這動作會刪除所有訂單資料，並不能復原。",
     representative: "代表人員",
     cancel_order: "取消訂單",
-    already_cancelled: "Order is already cancelled",
     default_reason: "改變了主意",
     purpose: "申請目的",
     login: "登入",
@@ -512,6 +514,7 @@ export default {
       for_organisation: "予機構自用",
       for_client: "予服務對象",
       people_count_info: "多少人會從這些物品中受惠？",
+      people_count_warning: "您必須在這裡輸入一個數字",
       district_label: "這些物資將在香港哪區使用?",
       "district-label-info": "此項能協助我們作出準確的紀錄及數據",
       select_placeholder: "請選擇區域",
