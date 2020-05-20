@@ -7,7 +7,7 @@ export default Controller.extend({
   page: 1,
   perPage: 12,
   selectedCategoryId: null,
-  sortedItems: sort("categoryObj.items", "selectedSort"),
+  sortedItems: sort("categoryObj.packagesAndSets", "selectedSort"),
   currentCategoryId: alias("categoryObj.id"),
   currentCategoryName: alias("categoryObj.name"),
   currentCategory: alias("categoryObj"),
@@ -47,7 +47,7 @@ export default Controller.extend({
 
   selectCategories: computed("model", function() {
     return this.get("model.childCategories").map(c => ({
-      name: c.get("nameItemsCount"),
+      name: c.get("nameWithCount"),
       id: c.get("id")
     }));
   })

@@ -19,12 +19,12 @@ export default Model.extend({
       : null;
   }),
 
-  nameItemsCount: computed(
+  nameWithCount: computed(
     "name",
-    "items.[]",
+    "packagesAndSets.length",
     "reloadPackageCategory",
     function() {
-      return this.get("name") + " (" + this.get("items.length") + ")";
+      return this.get("name") + " (" + this.get("packagesAndSets.length") + ")";
     }
   ),
 
@@ -51,38 +51,21 @@ export default Model.extend({
     return this.store.peekAll("package_category");
   }),
 
-  allItems: computed(
-    "childCategories",
-    "items",
-    "reloadPackageCategory",
-    function() {
-      var items = [];
-      if (this.get("isParent")) {
-        this.get("childCategories").forEach(function(category) {
-          items = items.concat((category.get("items") || []).toArray());
-        });
-      }
-      return items.uniq();
-    }
-  ),
-
-  items: computed(
+  packagesAndSets: computed(
     "reloadPackageCategory",
     "packageTypeCodes",
-    "packageTypes.@each.getItemPackageList",
-    "childCategories.@each.items.[]",
+    "packageTypes.@each.packagesAndSets",
+    "childCategories.@each.content.[]",
     function() {
-      var items = [];
-      if (this.get("isParent")) {
-        return this.get("allItems");
-      } else {
-        if (this.get("packageTypeCodes.length") > 0) {
-          this.get("packageTypes").forEach(function(type) {
-            items = items.concat(type.get("getItemPackageList"));
-          });
-        }
-      }
-      return items.uniq();
+      const children = this.get("isParent")
+        ? this.get("childCategories")
+        : this.get("packageTypes");
+
+      return (children || [])
+        .reduce((res, child) => {
+          return [...res, ...(child.get("packagesAndSets") || []).toArray()];
+        }, [])
+        .uniq();
     }
   ),
 

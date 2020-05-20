@@ -1,6 +1,6 @@
 import { alias } from "@ember/object/computed";
-import itemController from "./item";
+import packageSetController from "./package_set";
 
-export default itemController.extend({
+export default packageSetController.extend({
   package: alias("model")
 });

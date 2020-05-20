@@ -30,11 +30,11 @@ export default ApiService.extend(Evented, {
   },
 
   loadStaticData() {
-    return this.fetch(PRELOAD_TYPES);
+    return this.fetchAll(PRELOAD_TYPES);
   },
 
   loadOrderData() {
-    return this.query(PRELOAD_OF_TYPE_ORDER);
+    return this.fetchAll(PRELOAD_OF_TYPE_ORDER);
   },
 
   loadUserData() {
@@ -44,22 +44,20 @@ export default ApiService.extend(Evented, {
 
     return all([
       this.get("session").loadUserProfile(),
-      this.fetch(PRELOAD_AUTHORIZED_TYPES),
+      this.fetchAll(PRELOAD_AUTHORIZED_TYPES),
       this.loadOrderData()
     ]);
   },
 
-  fetch(type) {
-    if (_.isArray(type)) {
-      return all(type.map(this.fetch.bind(this)));
-    }
-    return this.get("store").findAll(type, { backgroundReload: false });
+  fetchAll(types) {
+    return all(_.map(types, t => this.fetch(t)));
   },
 
-  query(type) {
-    if (_.isArray(type)) {
-      return all(type.map(this.query.bind(this)));
+  fetch(type) {
+    if (_.isString(type)) {
+      type = [type, {}];
     }
-    return this.get("store").query(type, { for: "order" });
+    const [model, params] = type;
+    return this.get("store").query(model, params);
   }
 });
