@@ -41,11 +41,6 @@ export default detail.extend({
   hasOrderedGoods: notEmpty("orderedGoods"),
 
   orderedGoods: computed("model.packageCategories", function() {
-    const orderPackages = this.getWithDefault("order.ordersPackages", []);
-    return orderPackages.map(op => ({
-      notes: op.get("package.notes"),
-      text: op.get("package.packageType.name"),
-      imageUrl: op.get("package.previewImageUrl")
-    }));
+    return this.getWithDefault("order.ordersPackages", []);
   })
 });
