@@ -168,20 +168,20 @@ export default ApiService.extend(asyncMixin, {
     });
   },
 
-  add(pkgOrItem) {
-    if (pkgOrItem.get("isItem")) {
-      this.runTask(this.addItem(pkgOrItem));
+  add(pkgOrSet) {
+    if (pkgOrSet.get("isSet")) {
+      this.runTask(this.addSet(pkgOrSet));
     } else {
-      this.runTask(this.addPackage(pkgOrItem));
+      this.runTask(this.addPackage(pkgOrSet));
     }
   },
 
   /**
-   * Adds the packages of the item to the cloud cart.
+   * Adds the packages of the set to the cloud cart.
    * If the user is not logged in, will only save it locally
    */
-  addItem(item) {
-    return all(item.get("packages").map(pkg => this.addPackage(pkg)));
+  addSet(packageSet) {
+    return all(packageSet.get("packages").map(pkg => this.addPackage(pkg)));
   },
 
   /**
@@ -217,20 +217,20 @@ export default ApiService.extend(asyncMixin, {
     });
   },
 
-  remove(pkgOrItem) {
-    if (pkgOrItem.get("isItem")) {
-      this.runTask(this.removeItem(pkgOrItem));
+  remove(pkgOrSet) {
+    if (pkgOrSet.get("isSet")) {
+      this.runTask(this.removeSet(pkgOrSet));
     } else {
-      this.runTask(this.removePackage(pkgOrItem));
+      this.runTask(this.removePackage(pkgOrSet));
     }
   },
 
   /**
-   * Removes the packages of the item from the cart
+   * Removes the packages of the set from the cart
    * The changes are local only if the user is not logged in
    */
-  removeItem(item) {
-    return all(item.get("packages").map(pkg => this.removePackage(pkg)));
+  removeSet(packageSet) {
+    return all(packageSet.get("packages").map(pkg => this.removePackage(pkg)));
   },
 
   /**
@@ -266,13 +266,13 @@ export default ApiService.extend(asyncMixin, {
   },
 
   /**
-   * Returns true if the package or item is already in the cart
+   * Returns true if the package or set is already in the cart
    */
-  contains(pkgOrItem) {
-    if (pkgOrItem.get("isItem")) {
-      return this.containsItem(pkgOrItem);
+  contains(pkgOrSet) {
+    if (pkgOrSet.get("isSet")) {
+      return this.containsSet(pkgOrSet);
     }
-    return this.containsPackage(pkgOrItem);
+    return this.containsPackage(pkgOrSet);
   },
 
   /**
@@ -283,23 +283,23 @@ export default ApiService.extend(asyncMixin, {
   },
 
   /**
-   * Returns true if all of the item's packages are in the cart
+   * Returns true if all of the set's packages are in the cart
    */
-  containsItem(item) {
-    return item.get("packages").every(pkg => this.containsPackage(pkg));
+  containsSet(packageSet) {
+    return packageSet.get("packages").every(pkg => this.containsPackage(pkg));
   },
 
   /**
-   * Returns true if the package or item is both in the cart and available
+   * Returns true if the package or set is both in the cart and available
    */
-  isAvailable(pkgOrItem) {
-    if (!this.contains(pkgOrItem)) {
+  isAvailable(pkgOrSet) {
+    if (!this.contains(pkgOrSet)) {
       return false;
     }
 
-    let packages = pkgOrItem.get("isItem")
-      ? pkgOrItem.get("packages").toArray()
-      : [pkgOrItem];
+    let packages = pkgOrSet.get("isSet")
+      ? pkgOrSet.get("packages").toArray()
+      : [pkgOrSet];
 
     return _.every(packages, pkg => {
       return this.getCartItemForPackage(pkg).get("isAvailable");
@@ -323,11 +323,11 @@ export default ApiService.extend(asyncMixin, {
   },
 
   navigateToItemDetails(record) {
-    let isItem = record.get("isItem");
+    let isPackageSet = record.get("isSet");
     let categoryId = record.get("allPackageCategories.firstObject.id");
     let sortBy = "createdAt:desc";
 
-    const route = isItem ? "item" : "package";
+    const route = isPackageSet ? "package_set" : "package";
     const routeId = record.get("id");
     this.get("router").transitionTo(route, routeId, {
       queryParams: {
@@ -357,9 +357,9 @@ export default ApiService.extend(asyncMixin, {
     "cartItems.@each.isAvailable",
     function() {
       let res = [];
-      let itemsRef = {};
+      let refs = {};
 
-      this.get("packages").filter(pkg => {
+      this.get("packages").forEach(pkg => {
         // Single packages
         if (!pkg.get("hasSiblingPackages")) {
           res.push(pkg);
@@ -367,17 +367,17 @@ export default ApiService.extend(asyncMixin, {
         }
 
         // Items
-        const item = pkg.get("item");
-        const itemId = item.get("id");
+        const packageSet = pkg.get("packageSet");
+        const packageSetId = packageSet.get("id");
 
-        if (itemsRef[itemId]) {
+        if (refs[packageSetId]) {
           return; // Already processed
         }
 
-        if (this.isAvailable(item)) {
+        if (this.isAvailable(packageSet)) {
           // We mark this item as in cart and available
-          itemsRef[itemId] = item;
-          res.push(item);
+          refs[packageSetId] = packageSet;
+          res.push(packageSet);
           return;
         }
 

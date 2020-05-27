@@ -13,14 +13,18 @@
     {{/if}}
   </div>
 {{else}}
-  <div id='lightGallery'>
-    <div class="imageZoom view-image hide-for-small" data-src="{{item.favouriteImage.imageUrl}}">
-      {{cloudinary-image-tag src=previewUrl}}
-    </div>
-    {{#each item.otherImages key="@index" as |image|}}
-      <div data-src={{image.imageUrl}} class="image-src hidden imageZoom">
-        <img class="thumb-image" src="{{image.thumbImageUrl}}" />
+  {{#if item.images.length}}
+    <div id='lightGallery'>
+      <div class="imageZoom view-image hide-for-small" data-src="{{item.favouriteImage.imageUrl}}">
+        {{cloudinary-image-tag src=previewUrl}}
       </div>
-    {{/each}}
-  </div>
+      {{#each item.otherImages key="@index" as |image|}}
+        <div data-src={{image.imageUrl}} class="image-src hidden imageZoom">
+          <img class="thumb-image" src="{{image.thumbImageUrl}}" />
+        </div>
+      {{/each}}
+    </div>
+  {{else}}
+    {{partial "no_image"}}
+  {{/if}}
 {{/if}}

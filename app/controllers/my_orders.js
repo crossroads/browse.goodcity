@@ -13,7 +13,6 @@ export default applicationController.extend({
   messageBox: service(),
   queryParams: ["submitted"],
   triggerFlashMessage: false,
-  previousRouteName: null,
   showCancelBookingPopUp: false,
   cancellationReasonWarning: false,
   applicationController: controller("application"),
@@ -42,10 +41,7 @@ export default applicationController.extend({
     "submitted",
     "triggerFlashMessage",
     function() {
-      if (
-        this.get("submitted") &&
-        this.get("previousRouteName") === "order.confirm"
-      ) {
+      if (this.get("submitted")) {
         this.get("flashMessage").show("order.flash_submit_message");
       }
     }
@@ -79,7 +75,8 @@ export default applicationController.extend({
         this.transitionToRoute("request_purpose", {
           queryParams: {
             bookAppointment: this.get("isAppointmentDraft"),
-            orderId: id
+            orderId: id,
+            prevPath: "my_orders"
           }
         });
       });

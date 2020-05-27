@@ -13,8 +13,8 @@ Router.map(function() {
   this.route("package_category", {
     path: "/category/:id"
   });
-  this.route("item", {
-    path: "/item/:id"
+  this.route("package_set", {
+    path: "/package_set/:id"
   });
   this.route("package", {
     path: "/package/:id"

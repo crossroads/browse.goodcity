@@ -8,6 +8,7 @@
     {{/link-to}}
   </section>
 </nav>
+
 <section class="main-section">
   <div class="row home_section show-for-small small light">
     <div class="small-12 columns">
@@ -28,13 +29,13 @@
           {{/link-to}}
           <div class='main_category'>
             {{#link-to 'package_category' category.id class="big_txt"}}
-            {{category.name}} ({{category.items.length}})
+            {{category.name}} ({{category.packagesAndSets.length}})
             {{/link-to}}
           </div>
           <ul class="list subcategories hide-for-small">
             {{#each category.childCategories as |childCategory|}}
             <div class="custom_a" {{action "setChildCategory" childCategory}}>
-              <li>{{childCategory.name}} ({{childCategory.items.length}})</li>
+              <li>{{childCategory.name}} ({{childCategory.packagesAndSets.length}})</li>
             </div>
             {{/each}}
           </ul>

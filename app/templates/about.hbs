@@ -1,16 +1,18 @@
 <section class="main-section new-user-section ui login_page">
   <nav class="tab-bar">
+
     <section class="left-large">
-      <div class="back-button" {{action 'back'}}>
+      {{#back-link fallbackRoute="/" }}
         {{fa-icon "angle-left"}} {{t "back"}}
-      </div>
+      {{/back-link}}
     </section>
+
     <section class="middle tab-bar-section">
       <h1 class="title">{{t "about.title"}}</h1>
     </section>
   </nav>
-  <div class="about_page" id="how_to">
 
+  <div class="about_page" id="how_to">
     <div class="row">
       <div class="columns intro_text">
         <p>{{t "about.introduction.opening" }}</p>
@@ -30,9 +32,6 @@
       <div class="columns large-6">
         <div class="section_text small">
           <div class="section_subtitle">{{ t "about.order_goods.title" }}</div>
-          <div class="row">
-            <div class="columns small-centered alert-box warning">{{ t "home.order_goods.covid" }}</div>
-          </div>
           <div class="step"> 1) {{ t "about.order_goods.step_1.desc" }} </div>
           <div class="step"> 2) {{ t "about.order_goods.step_2.desc" }} </div>
           <div class="step">
@@ -68,9 +67,6 @@
       <div class="columns large-6">
         <div class="section_text small">
           <div class="section_subtitle"> {{ t "about.visit.title" }} </div>
-          <div class="row">
-            <div class="columns small-centered alert-box warning">{{ t "home.visit.covid" }}</div>
-          </div>
           <div class="step light"> {{ t "about.visit.guide_intro" }} </div>
           <div class="step light">
             {{#each (range 1 4) as |num|}}
@@ -86,7 +82,7 @@
         </div>
         <div>
           <div class="small">{{ t "about.tap_button" }}</div>
-          {{book-appointment}}
+          {{book-appointment prevPath="about"}}
         </div>
       </div>
     </div>

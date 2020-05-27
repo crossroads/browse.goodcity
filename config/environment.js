@@ -46,6 +46,7 @@ module.exports = function(environment) {
       // Here you can pass flags/options to your application instance
       // when it is created
       NAME: "browse.goodcity",
+      ORIGIN: "browse.goodcity.hk",
       CLOUD_NAME: "ddoadcjjl",
       CLOUD_API_KEY: 926849638736153,
       CLOUD_URL: "https://api.cloudinary.com/v1_1/ddoadcjjl/auto/upload",
@@ -59,7 +60,7 @@ module.exports = function(environment) {
         "territory",
         "package_category",
         "donor_condition",
-        "package",
+        ["package", { include_package_set: true }],
         "goodcity_setting"
       ],
       PRELOAD_AUTHORIZED_TYPES: [
@@ -67,7 +68,7 @@ module.exports = function(environment) {
         "booking_type",
         "purpose"
       ],
-      PRELOAD_OF_TYPE_ORDER: ["cancellation_reason"],
+      PRELOAD_OF_TYPE_ORDER: [["cancellation_reason", { for: "order " }]],
 
       SHA: process.env.APP_SHA || "00000000",
       VERSION: pkgJson.version,
@@ -132,6 +133,7 @@ module.exports = function(environment) {
 
   if (environment === "production") {
     ENV.APP.API_HOST_URL = "https://api.goodcity.hk";
+    ENV.APP.ORIGIN = "https://charities.goodcity.hk";
     ENV.APP.SOCKETIO_WEBSERVICE_URL = "https://socket.goodcity.hk:81/goodcity";
     ENV.APP.STOCK_APP_HOST_URL = "https://stock.goodcity.hk";
     ENV.APP.STOCK_ANDROID_APP_HOST_URL = "stock.goodcity.hk";
@@ -151,6 +153,7 @@ module.exports = function(environment) {
 
     if ((process.env.staging || process.env.STAGING) === "true") {
       ENV.staging = true;
+      ENV.APP.ORIGIN = "charities-staging.goodcity.hk";
       ENV.APP.API_HOST_URL = "https://api-staging.goodcity.hk";
       ENV.APP.SOCKETIO_WEBSERVICE_URL =
         "https://socket-staging.goodcity.hk:81/goodcity";

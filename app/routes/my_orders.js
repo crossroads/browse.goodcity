@@ -5,17 +5,9 @@ import AuthorizeRoute from "./authorize";
 
 export default AuthorizeRoute.extend({
   orderService: service(),
-  previousRouteName: null,
 
   beforeModel() {
     this._super(...arguments);
-    var previousRoutes =
-      this.router.router && this.router.router.currentHandlerInfos;
-    var previousRoute = previousRoutes && previousRoutes.pop();
-
-    if (previousRoute) {
-      this.set("previousRouteName", previousRoute.name);
-    }
     this.set("cart.checkout", false);
   },
 
@@ -33,7 +25,6 @@ export default AuthorizeRoute.extend({
 
   setupController(controller, model) {
     this._super(controller, model);
-    controller.set("previousRouteName", this.get("previousRouteName"));
     controller.toggleProperty("triggerFlashMessage");
     this.controllerFor("application").set("hideHeaderBar", false);
     this.controllerFor("application").set(
