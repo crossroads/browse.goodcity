@@ -19,10 +19,11 @@ export default DS.Model.extend({
   sender: belongsTo("user", {
     async: false
   }),
+  messageableType: attr("string"),
+  messageableId: attr("string"),
   order: belongsTo("order", {
     async: false
   }),
-
   myMessage: computed("sender", function() {
     return this.get("sender.id") === this.get("session.currentUser.id");
   }),

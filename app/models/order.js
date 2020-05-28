@@ -32,6 +32,7 @@ export default Model.extend({
   updatedAt: attr("date"),
   detailType: attr("string"),
   districtId: attr("number"),
+  messageIds: attr(),
   messages: hasMany("message", {
     async: false
   }),

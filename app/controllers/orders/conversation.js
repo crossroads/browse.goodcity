@@ -110,14 +110,16 @@ export default detail.extend({
       $("textarea").trigger("blur");
       var values = this.getProperties("body");
       values.body = values.body.trim();
-      values.order = this.get("model");
       values.body = values.body.trim();
       values.isPrivate = false;
       values.createdAt = new Date();
+      values.messageableType = "Order";
+      values.messageableId = this.get("model.id");
       values.sender = this.store.peekRecord(
         "user",
         this.get("session.currentUser.id")
       );
+
       this.createMessage(values);
 
       // Animate and scroll to bottom
