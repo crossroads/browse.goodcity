@@ -3,6 +3,7 @@ import { alias } from "@ember/object/computed";
 import Model from "ember-data/model";
 import attr from "ember-data/attr";
 import { hasMany, belongsTo } from "ember-data/relationships";
+import cloudinaryImage from "../mixins/cloudinary_image";
 
 /**
  * @module Models/PackageSet
@@ -10,7 +11,7 @@ import { hasMany, belongsTo } from "ember-data/relationships";
  * @augments ember/Model
  *
  */
-export default Model.extend({
+export default Model.extend(cloudinaryImage, {
   description: attr("string"),
   packageIds: attr(),
   packageTypIeId: attr("string"),
