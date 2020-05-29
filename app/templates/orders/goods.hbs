@@ -47,11 +47,11 @@
 							{{#each orderedGoods as |good|}}
 								<div class="row product-row">
 									<div class="columns small-4 image-container">
-										<img src={{good.imageUrl}} />
+										<img src={{good.package.previewImageUrl}} />
 									</div>
 									<div class="columns small-8 text-container">
-										<div class="text">{{ good.text }}</div>
-										<div class="notes">{{ good.notes }}</div>
+										<div class="text">{{ good.package.packageType.name }}</div>
+										<div class="notes">{{ good.package.notes }}</div>
 									</div>
 								</div>
 							{{/each}}
