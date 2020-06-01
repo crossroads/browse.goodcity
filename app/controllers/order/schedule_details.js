@@ -99,6 +99,18 @@ export default Controller.extend(cancelOrder, {
   },
 
   actions: {
+    back() {
+      let prevPageName = this.get("prevPath");
+      let orderId = this.get("order.id") || this.get("orderId");
+      if (["orders.goods", "orders.booking"].indexOf(prevPageName) >= 0) {
+        this.transitionToRoute(prevPageName, orderId);
+      } else if (this.get("isAppointment")) {
+        this.transitionToRoute("order.goods_details", orderId);
+      } else {
+        this.transitionToRoute("order.client_information", orderId);
+      }
+    },
+
     showOrderSlotSelectionOverlay() {
       this.set("showOrderSlotSelection", true);
     },

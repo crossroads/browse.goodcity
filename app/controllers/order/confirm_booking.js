@@ -31,6 +31,10 @@ export default Controller.extend(cancelOrderMixin, asyncTasksMixin, {
   },
 
   actions: {
+    back() {
+      window.history.back();
+    },
+
     browseMore() {
       this.transitionToRoute("browse");
     },

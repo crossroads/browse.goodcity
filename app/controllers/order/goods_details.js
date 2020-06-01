@@ -24,6 +24,17 @@ export default Controller.extend(cancelOrder, {
   }),
 
   actions: {
+    back() {
+      let orderId = this.get("order.id") || this.get("orderId");
+      if (
+        this.get("fromClientInformation") ||
+        this.get("backLinkPath") == "order.client_information"
+      ) {
+        this.transitionToRoute("order.client_information", orderId);
+      } else {
+        this.transitionToRoute(this.get("backLinkPath"), orderId);
+      }
+    },
     addRequest() {
       var orderId = this.get("order.id");
       var goodcityRequestParams = {};

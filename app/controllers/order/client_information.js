@@ -139,6 +139,21 @@ export default Controller.extend(cancelOrder, {
   }),
 
   actions: {
+    back() {
+      let prevPageName = this.get("prevPath");
+      let orderId = this.get("order.id") || this.get("orderId");
+      if (["orders.goods", "orders.booking"].indexOf(prevPageName) >= 0) {
+        this.transitionToRoute(prevPageName, orderId);
+      } else {
+        this.transitionToRoute("request_purpose", {
+          queryParams: {
+            bookAppointment: this.get("order.isAppointment"),
+            orderId: orderId
+          }
+        });
+      }
+    },
+
     saveClientDetails() {
       let orderParams;
       let clientInfo = this.get("clientInfoId");
