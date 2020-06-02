@@ -25,7 +25,7 @@ export default Controller.extend(cancelOrder, {
 
   actions: {
     back() {
-      let orderId = this.get("order.id") || this.get("orderId");
+      let orderId = this.get("order.id");
       if (
         this.get("fromClientInformation") ||
         this.get("backLinkPath") == "order.client_information"

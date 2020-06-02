@@ -32,7 +32,8 @@ export default Controller.extend(cancelOrderMixin, asyncTasksMixin, {
 
   actions: {
     back() {
-      window.history.back();
+      let orderId = this.get("order.id");
+      this.transitionToRoute("order.schedule_details", orderId);
     },
 
     browseMore() {

@@ -101,7 +101,7 @@ export default Controller.extend(cancelOrder, {
   actions: {
     back() {
       let prevPageName = this.get("prevPath");
-      let orderId = this.get("order.id") || this.get("orderId");
+      let orderId = this.get("order.id");
       if (["orders.goods", "orders.booking"].indexOf(prevPageName) >= 0) {
         this.transitionToRoute(prevPageName, orderId);
       } else if (this.get("isAppointment")) {
