@@ -106,11 +106,21 @@ export default detail.extend({
   },
 
   actions: {
+    setMessageBody: function(text) {
+      this.set("body", text);
+    },
+
+    parseMessageBody: function(text) {
+      this.set("parsedBody", text);
+    },
+
     sendMessage() {
       $("textarea").trigger("blur");
-      var values = this.getProperties("body");
+      const values = {};
       values.body = values.body.trim();
-      values.body = values.body.trim();
+      values.body = this.get("parsedBody");
+      values.body = Ember.Handlebars.Utils.escapeExpression(values.body || "");
+      values.body = values.body.replace(/(\r\n|\n|\r)/gm, "<br>");
       values.isPrivate = false;
       values.createdAt = new Date();
       values.messageableType = "Order";
