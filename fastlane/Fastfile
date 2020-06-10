@@ -1,5 +1,15 @@
 default_platform :ios
 
+class FastlaneCore::Shell
+  def error(message)
+    UI.user_error!(message)
+  end
+end
+
+def xsh(cmd)
+  sh cmd, error_callback: -> (err) { UI.user_error!(err) }
+end
+
 platform :ios do
 
   before_all do
@@ -22,7 +32,7 @@ platform :ios do
       keychain_password: ENV['KEYCHAIN_PWD']
     )
     unlock_keychain(path:"default_keychain", password:ENV['KEYCHAIN_PWD'])
-    sh "security set-keychain-settings -t 3600 -l ~/Library/Keychains/default_keychain-db"
+    xsh "security set-keychain-settings -t 3600 -l ~/Library/Keychains/default_keychain-db"
   end
 
   desc "Generate staging build (just upload to TestFairy)"
@@ -35,7 +45,7 @@ platform :ios do
   lane :production do
     raise_if_no_env_var(["APP_VERSION", "PILOT_USERNAME", "PILOT_IPA", "PILOT_TESTER_EMAIL", "ITUNESCONNECT_PASSWORD"])
     version_number = ENV["APP_VERSION"]
-    sh %{ source ~/.circlerc; bundle exec fastlane fastlane-credentials add --username $PILOT_USERNAME --password $ITUNESCONNECT_PASSWORD }
+    xsh %{ source ~/.circlerc; bundle exec fastlane fastlane-credentials add --username $PILOT_USERNAME --password $ITUNESCONNECT_PASSWORD }
     latest_testflight_build_number(version: version_number, username: ENV['PILOT_USERNAME'])
     pilot
     deliver(
@@ -50,7 +60,7 @@ platform :ios do
 
   after_all do
     # remove credentials from keychain
-    sh %{ source ~/.circlerc; bundle exec fastlane fastlane-credentials remove --username $PILOT_USERNAME }
+    xsh %{ source ~/.circlerc; bundle exec fastlane fastlane-credentials remove --username $PILOT_USERNAME }
   end
 
   error do |lane, exception|
