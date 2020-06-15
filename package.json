@@ -114,7 +114,6 @@
     "cordova-lib": "https://github.com/crossroads/goodcity-lib.git#master",
     "cordova-update-config": "^1.0.2",
     "jquery": "^3.2.0",
-    "message-textbox": "git://github.com/crossroads/message-textbox#master",
     "phantomjs-prebuilt": "^2.1.16",
     "tributejs": "^5.1.3",
     "yarn": "^1.19.1"
