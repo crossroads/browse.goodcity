@@ -60,7 +60,7 @@ module.exports = function(environment) {
         "territory",
         "package_category",
         "donor_condition",
-        "package",
+        ["package", { include_package_set: true }],
         "goodcity_setting"
       ],
       PRELOAD_AUTHORIZED_TYPES: [
@@ -68,7 +68,7 @@ module.exports = function(environment) {
         "booking_type",
         "purpose"
       ],
-      PRELOAD_OF_TYPE_ORDER: ["cancellation_reason"],
+      PRELOAD_OF_TYPE_ORDER: [["cancellation_reason", { for: "order " }]],
 
       SHA: process.env.APP_SHA || "00000000",
       VERSION: pkgJson.version,

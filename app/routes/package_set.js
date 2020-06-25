@@ -2,18 +2,12 @@ import PublicRoute from "./browse_pages";
 
 export default PublicRoute.extend({
   model(params) {
-    return this.store.peekRecord("package", params["id"]);
-  },
-
-  renderTemplate() {
-    this.render("package_set", { controller: "package" });
+    return this.store.peekRecord("package_set", params["id"]);
   },
 
   setupController(controller, model) {
-    this._super(...arguments);
+    controller.set("model", model);
     if (model) {
-      controller.set("model", model);
-      controller.set("prevPath", this.router.currentPath);
       controller.set("previewUrl", model.get("previewImageUrl"));
     }
     this.controllerFor("application").set(

@@ -1,6 +1,6 @@
 {
   "name": "browse",
-  "version": "0.8.2",
+  "version": "0.8.5",
   "description": "Small description for GoodCity Charity goes here",
   "license": "MIT",
   "author": "",
@@ -68,7 +68,7 @@
     "ember-cli-photoswipe": "1.1.0",
     "ember-cli-qunit": "2.2.6",
     "ember-cli-release": "^1.0.0-beta.2",
-    "ember-cli-sass": "^7.2.0",
+    "ember-cli-sass": "5.5.2",
     "ember-cli-slick-carousel": "0.0.0",
     "ember-cli-sri": "^2.1.1",
     "ember-cli-test-loader": "2.2.0",

@@ -33,15 +33,15 @@
     <div class="row">
       <div class="small-12 medium-12 large-offset-1 large-10 columns">
         {{#if displayResults}}
-        {{#infinite-list height="80vh" loadMore=(action "loadMoreGoods") as |items| }}
+        {{#infinite-list height="80vh" loadMore=(action "loadMoreGoods") as |results| }}
         <ul
           class="large-block-grid-5 small-block-grid-2 medium-block-grid-3 list-image items_list xxlarge-block-grid-4">
           <label class="search_results title">{{t 'search_goods.title'}}</label>
-          {{#each items as |item|}}
+          {{#each results as |result|}}
           <li class="goods_search list">
-            <div class="row" {{action "selectItem" item}}>
+            <div class="row" {{action "selectItem" result}}>
               <div class="small-12 large-12 columns item">
-                {{cloudinary-image-tag src=item.displayImageUrl item=item displayItemOverlay=true}}
+                {{cloudinary-image-tag src=result.displayImageUrl item=result displayItemOverlay=true}}
               </div>
             </div>
           </li>

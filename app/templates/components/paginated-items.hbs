@@ -1,13 +1,13 @@
 <ul class="large-block-grid-6 small-block-grid-2 medium-block-grid-3 list items_list xxlarge-block-grid-4">
-  {{#each pagedContent key="@index" as |item|}}
+  {{#each pagedContent key="@index" as |record|}}
     <li>
-      {{#if item.isItem}}
-        {{#link-to 'item' item.id (query-params sortBy=sortBy categoryId=category) }}
-          {{cloudinary-image-tag src=item.displayImageUrl item=item displayItemName=item.packageType.name displayItemOverlay=true}}
+      {{#if record.isSet}}
+        {{#link-to 'package_set' record.id (query-params sortBy=sortBy categoryId=category) }}
+          {{cloudinary-image-tag src=record.displayImageUrl item=record displayItemName=record.packageType.name displayItemOverlay=true}}
         {{/link-to}}
       {{else}}
-        {{#link-to 'package' item.id (query-params sortBy=sortBy categoryId=category) }}
-          {{cloudinary-image-tag src=item.displayImageUrl item=item displayItemName=item.packageType.name displayItemOverlay=true}}
+        {{#link-to 'package' record.id (query-params sortBy=sortBy categoryId=category) }}
+          {{cloudinary-image-tag src=record.displayImageUrl item=record displayItemName=record.packageType.name displayItemOverlay=true}}
         {{/link-to}}
       {{/if}}
     </li>

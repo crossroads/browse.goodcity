@@ -14,7 +14,6 @@ export default Controller.extend({
   categoryId: null,
   cart: service(),
   sortBy: "createdAt",
-  item: alias("model"),
   noNextItem: empty("nextItem"),
   noPreviousItem: empty("previousItem"),
   hideThumbnails: gt("item.sortedImages.length", 1),
@@ -30,21 +29,26 @@ export default Controller.extend({
     return user.hasRole("Order fulfilment");
   }),
 
-  presentInCart: computed("item", "cart.counter", function() {
-    return this.get("cart").contains(this.get("item"));
+  presentInCart: computed("model", "cart.counter", function() {
+    return this.get("cart").contains(this.get("model"));
   }),
 
-  allPackages: computed("item.packages.@each.isAvailable", function() {
-    var item = this.get("item");
-    if (!item) {
-      this.send("noItemsPresent");
-      return [];
+  allPackages: computed(
+    "model",
+    "model.isSet",
+    "model.packagesAndSets.@each.isAvailable",
+    function() {
+      var record = this.get("model");
+      if (!record) {
+        this.send("noItemsPresent");
+        return [];
+      }
+
+      return record.get("isSet")
+        ? record.get("packages").filterBy("isAvailable")
+        : [record];
     }
-
-    return item.get("isItem")
-      ? item.get("packages").filterBy("isAvailable")
-      : [item];
-  }),
+  ),
 
   notAvailableInStock: computed(
     "allPackages.@each.availableQuantity",
@@ -78,10 +82,10 @@ export default Controller.extend({
     return [this.get("sortBy")];
   }),
 
-  sortedItems: sort("categoryObj.items", "selectedSort"),
+  sortedItems: sort("categoryObj.packagesAndSets", "selectedSort"),
 
   nextItem: computed("model", "sortedItems.[]", function() {
-    var currentItem = this.get("item");
+    var currentItem = this.get("model");
     var items = this.get("sortedItems").toArray();
     return items[items.indexOf(currentItem) + 1];
   }),

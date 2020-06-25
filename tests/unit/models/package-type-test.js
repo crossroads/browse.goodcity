@@ -44,7 +44,7 @@ test("_packages: Returns all packages", function(assert) {
   assert.equal(model.get("_packages.length"), 2);
 });
 
-test("getItemPackageList: it returns single packages with no siblings", function(assert) {
+test("packagesAndSets: it returns single packages with no siblings", function(assert) {
   var package1, store, model;
 
   store = this.store();
@@ -60,11 +60,11 @@ test("getItemPackageList: it returns single packages with no siblings", function
     model.get("packages").pushObjects([package1]);
   });
 
-  assert.equal(model.get("getItemPackageList.length"), 1);
-  assert.equal(compare(model.get("getItemPackageList"), [package1]), 0);
+  assert.equal(model.get("packagesAndSets.length"), 1);
+  assert.equal(compare(model.get("packagesAndSets"), [package1]), 0);
 });
 
-test("getItemPackageList: list of associated items if package has sibling", function(assert) {
+test("packagesAndSets: list of associated items if package has sibling", function(assert) {
   var package1, item, store, model;
 
   store = this.store();
@@ -82,6 +82,6 @@ test("getItemPackageList: list of associated items if package has sibling", func
     model.get("packages").pushObjects([package1]);
   });
 
-  assert.equal(model.get("getItemPackageList.length"), 1);
-  assert.equal(compare(model.get("getItemPackageList"), [item]), 0);
+  assert.equal(model.get("packagesAndSets.length"), 1);
+  assert.equal(compare(model.get("packagesAndSets"), [item]), 0);
 });
