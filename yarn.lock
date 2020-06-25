@@ -4976,7 +4976,7 @@ cordova-lib@6.5.0:
 
 "cordova-lib@https://github.com/crossroads/goodcity-lib.git#master":
   version "0.0.0"
-  resolved "https://github.com/crossroads/goodcity-lib.git#e6696e8d9152d26c41899db97bed8934b2c9abbb"
+  resolved "https://github.com/crossroads/goodcity-lib.git#e041de5bf8cf742da810b31457e9e8cd206a0298"
   dependencies:
     bower "^1.8.8"
     codeclimate-test-reporter "^0.5.0"
