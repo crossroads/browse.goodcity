@@ -7,26 +7,28 @@ export default Model.extend({
   name: attr("string"),
   code: attr("string"),
   allowRequests: attr("boolean"),
-  items: hasMany("item", { async: false }),
+  package_sets: hasMany("package_set", { async: false }),
   packages: hasMany("package", { async: false }),
 
-  getItemPackageList: computed(
+  packagesAndSets: computed(
     "packages.@each.allowWebPublish",
     "_packages.@each.packageType",
     "packages.@each.hasSiblingPackages",
     "packages.@each.isAvailable",
     function() {
       var packages = this.get("packages").filterBy("isAvailable");
-      var items = [];
+      var records = [];
 
       if (packages.length) {
         var singlePackages = packages.rejectBy("hasSiblingPackages") || [];
-        items = items.concat(singlePackages.toArray());
+        records = records.concat(singlePackages.toArray());
 
         var multiPackages = packages.filterBy("hasSiblingPackages") || [];
-        items = items.concat(multiPackages.map(pkg => pkg.get("item")).uniq());
+        records = records.concat(
+          multiPackages.map(pkg => pkg.get("packageSet")).uniq()
+        );
       }
-      return items.uniq();
+      return records.uniq();
     }
   ),
 

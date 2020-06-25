@@ -39,16 +39,16 @@
 </nav>
 
 <section class="main-section view-item {{direction}}">
-  {{#liquid-bind item as |item| }}
+  {{#liquid-bind model as |model| }}
 
   <div class="row complete_item_view">
     <div class="large-4 medium-4 small-12 columns images-section right">
       {{!-- IMAGES SECTION --}}
-      {{image-preview item=item previewUrl=previewUrl smallScreenPreviewUrl=smallScreenPreviewUrl}}
+      {{image-preview item=model previewUrl=previewUrl smallScreenPreviewUrl=smallScreenPreviewUrl}}
 
       <div class="row hide-for-small">
         {{#if hideThumbnails}}
-        {{#each item.sortedImages key="@index" as |image|}}
+        {{#each model.sortedImages key="@index" as |image|}}
         <img class="thumb-image {{if (is-equal previewUrl image.previewImageUrl) 'thumb'}}"
           src="{{image.thumbImageUrl}}" {{action "showPreview" image on="click"}} />
         {{/each}}
@@ -62,7 +62,7 @@
       <nav class='tab-bar show-for-small item_category'>
         <h1>
           <section class="item_type">
-            {{item.packageType.name}}
+            {{model.packageType.name}}
           </section>
         </h1>
       </nav>
@@ -70,12 +70,12 @@
       {{!--  --}}
 
       <div class="all-items main-section">
-        <div class="item_details">
-          {{t "itemdetail.condition"}}: {{item.donorCondition.name}}
-        </div>
 
         {{#each allPackages key="@index" as |package|}}
         <div class="item_name">{{package.notes}}</div>
+          <div class="item_details">
+          {{t "itemdetail.condition"}}: {{package.donorCondition.name}}
+        </div>
         <p>
           {{#if session.isLoggedIn}}
           {{#if isOrderFulfilmentUser }}
@@ -99,13 +99,13 @@
         <button class="request-item disabled" disabled> {{t "item.request_item"}} </button>
         <i class="item-unavailable"> {{t "item.unavailable_item"}} </i>
         {{else if presentInCart}}
-        <button class="request-item" {{action 'remove' item target=cart}}> {{t "item.remove_item"}} </button>
+        <button class="request-item" {{action 'remove' model target=cart}}> {{t "item.remove_item"}} </button>
         {{else}}
-        <button class="request-item" {{action 'add' item target=cart}}> {{t "item.request_item"}} </button>
+        <button class="request-item" {{action 'add' model target=cart}}> {{t "item.request_item"}} </button>
         {{/if}}
 
         <div class="item_details item_categories">
-          {{#each item.allPackageCategories key="@index" as |category|}}
+          {{#each model.allPackageCategories key="@index" as |category|}}
           <div class="category_link" {{action "setChildCategory" category}}>
             <span class="underline_text">{{category.name}}</span>
           </div>

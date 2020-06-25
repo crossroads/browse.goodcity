@@ -1,40 +1,42 @@
-import { alias } from "@ember/object/computed";
 import { computed } from "@ember/object";
-import { getOwner } from "@ember/application";
+import { alias } from "@ember/object/computed";
 import Model from "ember-data/model";
 import attr from "ember-data/attr";
-import { belongsTo, hasMany } from "ember-data/relationships";
+import { hasMany, belongsTo } from "ember-data/relationships";
 import cloudinaryImage from "../mixins/cloudinary_image";
 
+/**
+ * @module Models/PackageSet
+ * @description A collection (or 'set') of packages, locally known as 'items'
+ * @augments ember/Model
+ *
+ */
 export default Model.extend(cloudinaryImage, {
-  donorDescription: attr("string"),
-  createdAt: attr("date"),
-  updatedAt: attr("date"),
+  description: attr("string"),
+  packageIds: attr(),
+  packageTypIeId: attr("string"),
 
-  packages: hasMany("package", { async: false }),
-  packageType: belongsTo("package_type", { async: false }),
-  donorCondition: belongsTo("donor_condition", { async: false }),
-  saleable: attr("boolean"),
+  packageType: belongsTo("packageType", {
+    async: false
+  }),
+
+  packages: hasMany("package", {
+    async: false
+  }),
+
+  isSet: true,
 
   quantity: computed("packages.@each.availableQuantity", function() {
-    let totalQuantity = 0;
-    this.get("packages").forEach(function(pkg) {
-      totalQuantity = totalQuantity + pkg.get("availableQuantity");
-    });
-    return totalQuantity;
+    return this.get("packages").reduce(function(qty, pkg) {
+      return qty + pkg.get("availableQuantity");
+    }, 0);
   }),
 
-  isAvailable: computed("packages.@each.isAvailable", function() {
-    return this.get("packages").filterBy("isAvailable").length > 0;
-  }),
-
-  isUnavailableAndDesignated: computed(
-    "packages.@each.isUnavailableAndDesignated",
+  isAvailable: computed(
+    "packages.[]",
+    "packages.@each.isAvailable",
     function() {
-      return (
-        this.get("packages").filterBy("isUnavailableAndDesignated").length ===
-        this.get("packages").length
-      );
+      return this.get("packages").filterBy("isAvailable").length > 0;
     }
   ),
 
@@ -45,10 +47,6 @@ export default Model.extend(cloudinaryImage, {
       images = images.concat(pkgImages);
     });
     return images;
-  }),
-
-  isItem: computed("this", function() {
-    return this.get("constructor.modelName") === "item";
   }),
 
   favouriteImage: computed("images.@each.favourite", function() {
@@ -97,9 +95,5 @@ export default Model.extend(cloudinaryImage, {
     );
   }),
 
-  allPackageCategories: alias("packageType.allPackageCategories"),
-
-  undispatchedPackages: computed("packages.@each.stockitSentOn", function() {
-    return this.get("packages").filter(pkg => pkg.get("stockitSentOn"));
-  })
+  allPackageCategories: alias("packageType.allPackageCategories")
 });

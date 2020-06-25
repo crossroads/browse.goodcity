@@ -10,7 +10,7 @@ export default Component.extend({
           queryParams: {
             bookAppointment: true,
             orderId: null,
-            prevPath: null,
+            prevPath: this.get("prevPath") || null,
             editRequest: null
           }
         });

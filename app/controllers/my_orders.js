@@ -75,7 +75,8 @@ export default applicationController.extend({
         this.transitionToRoute("request_purpose", {
           queryParams: {
             bookAppointment: this.get("isAppointmentDraft"),
-            orderId: id
+            orderId: id,
+            prevPath: "my_orders"
           }
         });
       });

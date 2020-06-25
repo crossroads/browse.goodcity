@@ -38,14 +38,11 @@ export default detail.extend({
     }
   ),
 
-  hasOrderedGoods: notEmpty("orderedGoods"),
+  hasOrderedGoods: notEmpty("order.ordersPackages"),
 
   orderedGoods: computed("model.packageCategories", function() {
-    const orderPackages = this.getWithDefault("order.ordersPackages", []);
-    return orderPackages.map(op => ({
-      notes: op.get("package.notes"),
-      text: op.get("package.packageType.name"),
-      imageUrl: op.get("package.previewImageUrl")
-    }));
+    return this.getWithDefault("order.ordersPackages", []).filter(
+      req => req.get("state") !== "cancelled " && req.get("quantity") > 0
+    );
   })
 });
