@@ -1,14 +1,10 @@
-.tribute-container {
-  top: -13rem !important;
-}
-
 .messaging-tab {
   .btm {
     height: 60px;
     margin: 0 auto;
     text-align: center;
     > div {
-      position: relative;
+      position: fixed;
       bottom: 0;
       .button {
         margin: 10px 0;
@@ -19,12 +15,11 @@
   .message-section {
     margin-top: 15px;
     margin-bottom: 0.2em;
-    position: relative;
   }
 
   .message_details {
-    font-size: 0.7rem;
-    margin-bottom: 0.5rem;
+    font-size: .7rem;
+    margin-bottom: .5rem;
   }
 
   .user_icon {
@@ -97,7 +92,6 @@
   }
 
   .message-textbar {
-    position: relative;
     @media #{$xxlarge-only} {
       width: 32% !important;
     }
@@ -111,11 +105,11 @@
     }
 
     @media #{$large-only} {
-      width: 86.1% !important;
+      width: 62.1% !important;
     }
 
     @media #{$medium-only} {
-      width: 86.1% !important;
+      width: 63.1% !important;
     }
   }
 
@@ -147,9 +141,4 @@
 
 .has-error .message-bar {
   background: #fddbdc !important;
-}
-
-.message-textbar-container {
-  position: absolute !important;
-  left: -20rem !important;
 }
