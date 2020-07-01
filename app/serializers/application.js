@@ -6,6 +6,7 @@ Ember is unable to pickup the polymorphic association with the hasMany relations
 We are intercepting the payload response and mapping the messageable_id with the order_id
 */
 function normalize(payload) {
+  if (!payload) return;
   const messages = _.flatten([payload.messages, payload.message]).filter(
     _.identity
   );
