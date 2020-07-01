@@ -117,14 +117,14 @@
 .cart {
   &.unread {
     position: absolute;
-    right: 1.5rem;
+    right: 2.2rem;
     margin-top: -.3rem;
 
     .unread_length {
       line-height: 1.3rem;
       width: 1.2rem;
       height: 1.2rem;
-      font-size: .8rem;
+      font-size: .6rem;
       display: block;
       color: white;
       text-transform: uppercase;
