@@ -27,6 +27,19 @@
         margin-right: 10%;
       }
     }
+    .fa.max-cart-count {
+      @media #{$small-only} {
+        margin-right: 23%;
+      }
+
+      @media #{$medium-only} {
+        margin-right: 35%;
+      }
+
+      @media #{$large-only} {
+        margin-left: 18%;
+      }
+    }
   }
 
   .content {
@@ -47,18 +60,11 @@
       }
       .unread_length {
         line-height: 1.3rem;
-        width: 1.2rem;
         height: 1.2rem;
         font-size: .8rem;
-        display: block;
-        color: white;
-        text-transform: uppercase;
-        text-align: center;
-        border-radius: 50%;
-        background: #ee4c4e;
-        font-weight: 700;
         margin-top: -.1rem;
-        float: inherit;
+        padding: 0 7px;
+        margin-right: 0;
       }
     }
   }

@@ -50,7 +50,12 @@ export default Controller.extend(cancelOrderMixin, {
 
   hasCartItems: alias("cart.isNotEmpty"),
 
-  cartLength: alias("cart.groupedPackages.length"),
+  cartLength: computed("cart.groupedPackages.[]", function() {
+    let cartCount = this.get("cart.groupedPackages.length");
+    return cartCount > 999 ? "999+" : cartCount;
+  }),
+
+  isCartCountExceeded: computed.gt("cart.groupedPackages", 99),
 
   isUserLoggedIn: computed("session.authToken", function() {
     return !!this.get("session.authToken");
