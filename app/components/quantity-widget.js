@@ -16,17 +16,17 @@ export default Component.extend({
       this.set("showErrorMessage", true);
     }
   },
-  elementValue(id = 1) {
+  elementValue(id) {
     console.log(Ember.$("#qty" + id).val());
     return Ember.$("#qty" + id).val();
   },
   actions: {
-    incrementQty(quantity, id = 1) {
+    incrementQty(quantity, id) {
       let incrementedValue = +this.elementValue(id) + 1;
       this.setValueIfValid(incrementedValue, incrementedValue <= +quantity, id);
     },
 
-    decrementQty(id = 1) {
+    decrementQty(id) {
       let decrementedValue = +this.elementValue(id) - 1;
       this.setValueIfValid(decrementedValue, decrementedValue >= 1, id);
     },
