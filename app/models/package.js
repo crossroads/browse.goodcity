@@ -29,9 +29,10 @@ export default Model.extend(cloudinaryImage, {
   stockitSentOn: attr("date"),
   orderId: attr("number"),
   allowWebPublish: attr("boolean"),
-
   packageSetId: attr("number"),
-  packageSet: belongsTo("packageSet", { async: false }),
+  packageSet: belongsTo("packageSet"),
+  ordersPackage: belongsTo("orders_package", { async: false }),
+  requestedPackage: belongsTo("requested_package", { async: false }),
   isPartOfSet: bool("packageSetId"),
 
   //This is fix for live update for ticket GCW-1632(only implemented on singleton packages, nee to change for qty packages)
@@ -87,6 +88,14 @@ export default Model.extend(cloudinaryImage, {
 
   packageName: computed("packageType", function() {
     return this.get("packageType.name");
+  }),
+
+  orderedQuantity: computed("ordersPackage", function() {
+    return this.get("ordersPackage.quantity");
+  }),
+
+  requestedQuantity: computed("requestedPackage", function() {
+    return this.get("requestedPackage.quantity");
   }),
 
   packageTypeObject: computed("packageType", function() {

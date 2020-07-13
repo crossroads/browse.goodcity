@@ -162,11 +162,11 @@ export default Controller.extend(cancelOrderMixin, {
       );
     },
 
-    checkout() {
+    async checkout() {
       if (this.get("cart.isEmpty")) {
         return;
       }
-
+      await this.get("cart").updateRequestedQuantity();
       const accountComplete = this.get("session").accountDetailsComplete();
       const loggedIn = this.get("session.isLoggedIn");
 

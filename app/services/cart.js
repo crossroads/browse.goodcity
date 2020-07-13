@@ -128,6 +128,16 @@ export default ApiService.extend(asyncMixin, {
     });
   },
 
+  updateRequestedQuantity() {
+    this.get("store")
+      .peekAll("requested_package")
+      .map(record => {
+        record.set("quantity", this.elementValue(record.get("packageId")));
+        record.save();
+        console.log(record);
+      });
+  },
+
   /**
    * Fetches the user's cart items from the api
    */
@@ -193,7 +203,8 @@ export default ApiService.extend(asyncMixin, {
     let record = this.get("store").createRecord("requested_package", {
       packageId: pkg.get("id"),
       package: pkg,
-      isAvailable: pkg.get("isAvailable")
+      isAvailable: pkg.get("isAvailable"),
+      quantity: +this.elementValue(pkg.id) || pkg.get("quantity")
     });
 
     this.notifyPropertyChange("cartItems");
@@ -335,6 +346,11 @@ export default ApiService.extend(asyncMixin, {
         sortBy: sortBy
       }
     });
+  },
+
+  elementValue(id) {
+    console.log(Ember.$("#qty" + id).val());
+    return Ember.$("#qty" + id).val();
   },
 
   /**

@@ -35,7 +35,7 @@ export default Controller.extend(cancelOrderMixin, asyncTasksMixin, {
       this.transitionToRoute("browse");
     },
 
-    confirmBooking() {
+    async confirmBooking() {
       let order = this.get("order");
 
       if (this.emptyCart()) {
@@ -45,7 +45,7 @@ export default Controller.extend(cancelOrderMixin, asyncTasksMixin, {
       if (this.badCart()) {
         return this.i18nAlert("items_not_available", _.noop);
       }
-
+      await this.get("cart").updateRequestedQuantity();
       this.submitOrder(order).then(() => {
         this.transitionToRoute("order.booking_success", this.get("order.id"));
       });

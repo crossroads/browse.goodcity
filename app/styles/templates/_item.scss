@@ -18,6 +18,9 @@
 
   .item_category {
     padding-left: 1rem;
+    margin-bottom: 1.1rem;
+    height: unset;
+    line-height: 2rem;
   }
 
   .item_name {
@@ -90,10 +93,6 @@
     font-weight: bold;
   }
 
-  .item_category {
-    margin-bottom: 1.1rem;
-  }
-
   .item_categories {
     margin-bottom: 1rem;
 
@@ -122,6 +121,27 @@
   }
 }
 
+.request-item{
+  font-size: inherit;
+  padding: 6px;
+  height:2.5rem;
+
+  @media #{$medium-only} {
+    font-size: 0.9rem;
+    padding: 6px;
+  }
+  @media #{$small-only} {
+  font-size: 0.73rem;
+  padding: 4px;
+  height:2rem;
+  }
+
+}
+.widget{
+  float: left !important;
+  margin-top: -0.9rem;
+}
+
 .item-controls {
   @media only screen and (min-width: 120.1em) {
     margin-left: 4rem !important;
@@ -139,6 +159,9 @@
   &.tab-bar-placeholder {
     background: $dark-blue;
   }
+}
+.quantity-fields{
+  margin-top: 1rem !important;
 }
 
 .item-page {
