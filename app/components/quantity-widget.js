@@ -17,7 +17,6 @@ export default Component.extend({
     }
   },
   elementValue(id) {
-    console.log(Ember.$("#qty" + id).val());
     return Ember.$("#qty" + id).val();
   },
   actions: {
@@ -33,9 +32,6 @@ export default Component.extend({
 
     focusOut(pkg) {
       const quantity = this.elementValue(pkg.id);
-      console.log(pkg.availableQuantity);
-      console.log(pkg.get("availableQuantity"));
-      console.log(!+quantity);
       if (
         +quantity < 1 ||
         +quantity > +pkg.get("availableQuantity") ||

@@ -445,6 +445,11 @@ export default {
     }
   },
 
+  requested_package: {
+    max_quantity: `Quantity (max {{quantity}})`,
+    boundaries: `Quantity between 1 and {{max}}`
+  },
+
   item: {
     request_item: "Request Item",
     remove_item: "Remove Item",

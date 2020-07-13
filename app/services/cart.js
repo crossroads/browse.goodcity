@@ -134,7 +134,6 @@ export default ApiService.extend(asyncMixin, {
       .map(record => {
         record.set("quantity", +this.getElementValue(record.get("packageId")));
         record.save();
-        console.log(record);
       });
   },
 
@@ -349,7 +348,6 @@ export default ApiService.extend(asyncMixin, {
   },
 
   getElementValue(id) {
-    console.log(Ember.$("#qty" + id).val());
     return Ember.$("#qty" + id).val();
   },
 

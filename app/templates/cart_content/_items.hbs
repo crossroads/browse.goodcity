@@ -1,17 +1,62 @@
 {{#each cart.groupedPackages as |row|}}
   <li class="no-bullet">
-    <div class="row">
-      <div class="small-3 columns cart-redirect-link {{if (is-not row.isAvailable) disabled}}" {{action 'showItemDetails' row.record}}>
+    {{#if row.record.isSet}}
+      <div class="row">
+        <div class="small-6 columns cart-redirect-link {{if (is-not row.isAvailable) disabled}}"
+        {{action 'showItemDetails' row.record}}>
+          <!-- Title -->
+          {{row.record.packageType.name}}
+          <!-- Availability -->
+          {{#unless row.isAvailable}}
+            <div class="unavailable red-warning">{{t "cart_content.unavailable"}}</div>
+          {{/unless}}
+        </div>
+      </div>
+      <div class="row">
+      {{#each row.record.packages as |row|}}
+      <div class="row cart-row">
+        <div class="small-3 columns cart-redirect-link {{if (is-not row.isAvailable) disabled}}"
+          {{action 'showItemDetails' row}}>
+            <!-- Thumbnail -->
+            <img class="thumb-image" src="{{row.displayImageUrl}}" />
+        </div>
+
+        <div class="small-5 columns cart-redirect-link {{if (is-not row.isAvailable) disabled}}"
+          {{action 'showItemDetails' row}}>
+          <!-- Title -->
+          {{row.notes}}
+          <!-- Availability -->
+          {{#unless row.isAvailable}}
+          <div class="unavailable red-warning">{{t "cart_content.unavailable"}}</div>
+          {{/unless}}
+        </div>
+
+        <div class="small-4 columns cart-redirect-link">
+          {{t 'order.goods_details.quantity_label'}}:{{row.requestedPackage.quantity}}
+        </div>
+      </div>
+      {{/each}}
+      </div>
+    {{else}}
+      <div class="row">
+        <div class="small-3 columns cart-redirect-link {{if (is-not row.isAvailable) disabled}}" {{action 'showItemDetails' row.record}}>
+           <!-- Thumbnail -->
           <img class="thumb-image {{unless row.isAvailable 'grayed-image'}}" src="{{row.record.favouriteImage.cartImageUrl}}" />
-      </div>
+        </div>
 
-      <div class="small-9 columns cart-redirect-link {{if (is-not row.isAvailable) disabled}}" {{action 'showItemDetails' row.record}}>
-        {{row.record.packageType.name}}
+        <div class="small-5 columns cart-redirect-link {{if (is-not row.isAvailable) disabled}}" {{action 'showItemDetails' row.record}}>
+          <!-- Title -->
+          {{row.record.packageType.name}}
+          <!-- Availability -->
+          {{#unless row.isAvailable}}
+            <div class="unavailable">{{t "cart_content.unavailable"}}</div>
+          {{/unless}}
+        </div>
 
-        {{#unless row.isAvailable}}
-          <div class="unavailable">{{t "cart_content.unavailable"}}</div>
-        {{/unless}}
+        <div class="small-4 columns cart-redirect-link">
+          {{t 'order.goods_details.quantity_label'}}:{{row.record.requestedPackage.quantity}}
+        </div>
       </div>
-    </div>
+    {{/if}}
   </li>
 {{/each}}
