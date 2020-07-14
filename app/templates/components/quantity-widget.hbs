@@ -2,13 +2,13 @@
   {{t "requested_package.max_quantity" quantity=package.quantity}}
 </div>
 <div class="quantity-widget">
-  <span id='decrementOperator' {{action 'decrementQty' package.id}}>
+  <span id='decrementOperator' {{action 'decrementQty'}}>
     {{fa-icon 'minus'}}
   </span>
   <span class="qty">
     {{input type="number"  value=value  name="requestedQuanity" id=(concat "qty" package.id)  pattern="\d{1,8}" required="true" focusOut=(action 'focusOut' package)}}
   </span>
-  <span id='incrementOperator' {{action 'incrementQty' package.quantity package.id}}>
+  <span id='incrementOperator' {{action 'incrementQty' package.quantity}}>
     {{fa-icon 'plus'}}
   </span>
 </div>

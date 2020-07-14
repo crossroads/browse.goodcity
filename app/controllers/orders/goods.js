@@ -63,7 +63,6 @@ export default detail.extend({
       }
       const packageSet = req.get("package.packageSet");
       const packageSetId = packageSet.get("id");
-      refs[packageSetId];
       if (refs[packageSetId]) {
         return; // Already processed
       }
