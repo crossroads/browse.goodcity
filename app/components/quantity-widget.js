@@ -12,6 +12,7 @@ export default Component.extend({
     if (isValidValue) {
       this.set("showErrorMessage", false);
       this.set("value", value);
+      this.sendAction("setElementValue", value);
     } else {
       this.set("showErrorMessage", true);
     }
@@ -38,6 +39,8 @@ export default Component.extend({
         this.set("showErrorMessage", true);
         this.set("value", 1);
         return false;
+      } else {
+        this.sendAction("setElementValue", quantity);
       }
     },
 

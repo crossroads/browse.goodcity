@@ -1,5 +1,4 @@
-import { computed } from "@ember/object";
-import { observer } from "@ember/object";
+import { computed, observer } from "@ember/object";
 import { alias, empty, gt, sort } from "@ember/object/computed";
 import { inject as service } from "@ember/service";
 import Controller, { inject as controller } from "@ember/controller";
@@ -10,6 +9,7 @@ export default Controller.extend({
   messageBox: service(),
   application: controller(),
   packageCategory: controller(),
+  elementValue: 1,
   queryParams: ["categoryId", "sortBy"],
   prevPath: null,
   packageUnavailableInSet: false,
@@ -46,7 +46,7 @@ export default Controller.extend({
         this.set("packageUnavailableInSet", true);
         return [];
       }
-
+      this.set("elementValue", 1);
       return record.get("isSet") ? record.get("packages") : [record];
     }
   ),
@@ -123,6 +123,10 @@ export default Controller.extend({
   },
 
   actions: {
+    setElementValue(value) {
+      this.set("elementValue", value);
+    },
+
     showPreview(image) {
       this.set("previewUrl", image.get("previewImageUrl"));
     },
