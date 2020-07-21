@@ -30,6 +30,26 @@
         </div>
       </div>
 
+      {{#if appointmentWarning}}
+        <div class="row">
+          <div class="columns small-10 large-6 small-centered intro-text">
+            <div class="alert-box warning">
+              {{appointmentWarning}}
+            </div>
+          </div>
+        </div>
+      {{/if}}
+
+      {{#if onlineOrderWarning}}
+        <div class="row">
+          <div class="columns small-10 large-6 small-centered intro-text">
+            <div class="alert-box warning">
+              {{onlineOrderWarning}}
+            </div>
+          </div>
+        </div>
+      {{/if}}
+
       <div class="row button_container">
 
         <!-- Browse goods -->
