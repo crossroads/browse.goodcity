@@ -1,12 +1,10 @@
 import Controller from "@ember/controller";
 import { inject as service } from "@ember/service";
 import { computed } from "@ember/object";
-import config from "../config/environment";
 
 export default Controller.extend({
   i18n: service(),
   settings: service(),
-  isMobileApp: config.cordova.enabled,
 
   langShort: computed("i18n.locale", function() {
     const lang = this.get("i18n.locale");

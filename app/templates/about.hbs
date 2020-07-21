@@ -32,6 +32,17 @@
       <div class="columns large-6">
         <div class="section_text small">
           <div class="section_subtitle">{{ t "about.order_goods.title" }}</div>
+
+          {{#if onlineOrderWarning}}
+            <div class="row">
+              <div class="columns small-12 small-centered warning-text">
+                <div class="alert-box warning">
+                  {{onlineOrderWarning}}
+                </div>
+              </div>
+            </div>
+          {{/if}}
+
           <div class="step"> 1) {{ t "about.order_goods.step_1.desc" }} </div>
           <div class="step"> 2) {{ t "about.order_goods.step_2.desc" }} </div>
           <div class="step">
@@ -67,6 +78,17 @@
       <div class="columns large-6">
         <div class="section_text small">
           <div class="section_subtitle"> {{ t "about.visit.title" }} </div>
+
+          {{#if appointmentWarning}}
+            <div class="row">
+              <div class="columns small-12 warning-text">
+                <div class="alert-box warning">
+                  {{appointmentWarning}}
+                </div>
+              </div>
+            </div>
+          {{/if}}
+
           <div class="step light"> {{ t "about.visit.guide_intro" }} </div>
           <div class="step light">
             {{#each (range 1 4) as |num|}}
