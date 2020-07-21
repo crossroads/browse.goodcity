@@ -91,7 +91,7 @@ export default Controller.extend({
   }),
 
   previousItem: computed("model", "sortedItems.[]", function() {
-    var currentItem = this.get("item");
+    var currentItem = this.get("model");
     var items = this.get("sortedItems").toArray();
     return items[items.indexOf(currentItem) - 1];
   }),

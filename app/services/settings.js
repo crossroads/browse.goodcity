@@ -35,7 +35,12 @@ export default Service.extend({
    *          ':`
    */
   defaults: {
-    "browse.online_order.timeslots.booking_margin": 2
+    "browse.online_order.timeslots.booking_margin": 2,
+    "browse.appointment_warning_en": "",
+    "browse.appointment_warning_zh_tw": "",
+    "browse.online_order_warning_en": "",
+    "browse.online_order_warning_zh_tw": "",
+    "browse.allow_appointments": true
   },
 
   // ---- Access methods

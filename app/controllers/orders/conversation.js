@@ -112,12 +112,18 @@ export default detail.extend({
       values.body = values.body.trim();
       values.order = this.get("model");
       values.body = values.body.trim();
+
+      values.body = Ember.Handlebars.Utils.escapeExpression(values.body || "");
+      values.body = values.body.replace(/(\r\n|\n|\r)/gm, "<br>");
       values.isPrivate = false;
       values.createdAt = new Date();
+      values.messageableType = "Order";
+      values.messageableId = this.get("model.id");
       values.sender = this.store.peekRecord(
         "user",
         this.get("session.currentUser.id")
       );
+
       this.createMessage(values);
 
       // Animate and scroll to bottom
