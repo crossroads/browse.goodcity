@@ -40,7 +40,7 @@
             </div>
             <div class="small-4 columns">
               <div class="cart-widget">
-                {{quantity-widget package=row}}
+                {{quantity-widget package=row action="setUpdatedValue"}}
               </div>
             </div>
           </div>
@@ -65,7 +65,7 @@
         </div>
         <div class="small-4 columns">
           <div class="cart-widget">
-            {{quantity-widget package=row.record}}
+            {{quantity-widget package=row.record action="setUpdatedValue"}}
           </div>
         </div>
       </div>

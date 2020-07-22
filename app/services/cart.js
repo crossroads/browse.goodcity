@@ -128,11 +128,10 @@ export default ApiService.extend(asyncMixin, {
     });
   },
 
-  updateRequestedQuantity() {
-    this.get("cartItems").map(record => {
-      record.set("quantity", +this.getElementValue(record.get("packageId")));
-      record.save();
-    });
+  updateRequestedQuantity(pkgId, quantity) {
+    let record = this.get("cartItems").findBy("packageId", pkgId);
+    record.set("quantity", +quantity);
+    return record.save();
   },
 
   /**
@@ -347,10 +346,6 @@ export default ApiService.extend(asyncMixin, {
         sortBy: sortBy
       }
     });
-  },
-
-  getElementValue(id) {
-    return Ember.$("#qty" + id).val();
   },
 
   /**

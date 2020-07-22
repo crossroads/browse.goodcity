@@ -94,10 +94,6 @@ export default Model.extend(cloudinaryImage, {
     return this.get("ordersPackage.quantity");
   }),
 
-  requestedQuantity: computed("requestedPackage", function() {
-    return this.get("requestedPackage.quantity");
-  }),
-
   packageTypeObject: computed("packageType", function() {
     var obj = this.get("packageType").getProperties(
       "id",

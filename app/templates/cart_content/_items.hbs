@@ -18,7 +18,7 @@
         <div class="small-3 columns cart-redirect-link {{if (is-not row.isAvailable) disabled}}"
           {{action 'showItemDetails' row}}>
             <!-- Thumbnail -->
-            <img class="thumb-image" src="{{row.displayImageUrl}}" />
+            <img class="thumb-image {{unless row.isAvailable 'grayed-image'}}" src="{{row.favouriteImage.cartImageUrl}}"/>
         </div>
 
         <div class="small-5 columns cart-redirect-link {{if (is-not row.isAvailable) disabled}}"

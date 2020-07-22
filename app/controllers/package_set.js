@@ -46,7 +46,6 @@ export default Controller.extend({
         this.set("packageUnavailableInSet", true);
         return [];
       }
-      this.set("elementValue", 1);
       return record.get("isSet") ? record.get("packages") : [record];
     }
   ),
@@ -123,7 +122,7 @@ export default Controller.extend({
   },
 
   actions: {
-    setElementValue(value) {
+    setRequestValue(value) {
       this.set("elementValue", value);
     },
 

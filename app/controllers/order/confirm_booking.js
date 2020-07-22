@@ -1,5 +1,6 @@
 import { alias } from "@ember/object/computed";
 import { inject as service } from "@ember/service";
+import EmberObject from "@ember/object";
 import Controller from "@ember/controller";
 import _ from "lodash";
 import cancelOrderMixin from "../../mixins/cancel_order";
@@ -11,6 +12,7 @@ export default Controller.extend(cancelOrderMixin, asyncTasksMixin, {
   orderService: service(),
   cart: service(),
   order: alias("model"),
+  updatedValue: EmberObject.create({}),
 
   submitOrder(order) {
     return this.runTask(
@@ -18,6 +20,12 @@ export default Controller.extend(cancelOrderMixin, asyncTasksMixin, {
         ? this.get("cart").checkoutOrder(order)
         : this.get("orderService").submitOrder(order)
     );
+  },
+
+  updateRequestedQuantityValue(record) {
+    Object.keys(record).map(pkgId => {
+      return this.get("cart").updateRequestedQuantity(pkgId, record[pkgId]);
+    });
   },
 
   badCart() {
@@ -31,6 +39,10 @@ export default Controller.extend(cancelOrderMixin, asyncTasksMixin, {
   },
 
   actions: {
+    setUpdatedValue(value, id) {
+      this.get("updatedValue").set(id, value);
+    },
+
     browseMore() {
       this.transitionToRoute("browse");
     },
@@ -45,7 +57,9 @@ export default Controller.extend(cancelOrderMixin, asyncTasksMixin, {
       if (this.badCart()) {
         return this.i18nAlert("items_not_available", _.noop);
       }
-      await this.get("cart").updateRequestedQuantity();
+
+      await this.updateRequestedQuantityValue(this.get("updatedValue"));
+
       this.submitOrder(order).then(() => {
         this.transitionToRoute("order.booking_success", this.get("order.id"));
       });

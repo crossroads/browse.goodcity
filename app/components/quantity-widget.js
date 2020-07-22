@@ -4,15 +4,23 @@ import Component from "@ember/component";
 export default Component.extend({
   value: computed("model.package", function() {
     return this.get("package.requestedPackage")
-      ? this.get("package.requestedQuantity")
+      ? this.get("package.requestedPackage.quantity")
       : 1;
   }),
+
+  actionValue(value) {
+    if (this.get("action") == "setRequestValue") {
+      this.sendAction("action", value);
+    } else {
+      this.sendAction("action", value, this.get("package.id"));
+    }
+  },
 
   setValue(value, isValidValue) {
     if (isValidValue) {
       this.set("showErrorMessage", false);
       this.set("value", value);
-      this.sendAction("setElementValue", value);
+      this.actionValue(value);
     } else {
       this.set("showErrorMessage", true);
     }
@@ -39,9 +47,8 @@ export default Component.extend({
         this.set("showErrorMessage", true);
         this.set("value", 1);
         return false;
-      } else {
-        this.sendAction("setElementValue", quantity);
       }
+      this.actionValue(quantity);
     },
 
     updateErrorMessage() {

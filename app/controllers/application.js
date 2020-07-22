@@ -1,5 +1,6 @@
 import { later } from "@ember/runloop";
 import { on } from "@ember/object/evented";
+import EmberObject from "@ember/object";
 import { computed } from "@ember/object";
 import { alias } from "@ember/object/computed";
 import { inject as service } from "@ember/service";
@@ -25,7 +26,7 @@ export default Controller.extend(cancelOrderMixin, {
   isHomePage: computed("currentPath", function() {
     return this.get("currentPath") === "home";
   }),
-
+  updatedValue: EmberObject.create({}),
   app_id: config.APP.ANDROID_APP_ID,
   ios_app_id: config.APP.APPLE_APP_ID,
   appTitle: config.APP.TITLE,
@@ -123,6 +124,11 @@ export default Controller.extend(cancelOrderMixin, {
     UNLOAD_MODELS.forEach(model => this.store.unloadAll(model));
   },
 
+  updateRequestedQuantityValue(record) {
+    Object.keys(record).map(pkgId => {
+      return this.get("cart").updateRequestedQuantity(pkgId, record[pkgId]);
+    });
+  },
   submitCart() {
     this.set("showCartDetailSidebar", false);
     if (!this.get("cart.canCheckout")) {
@@ -135,6 +141,10 @@ export default Controller.extend(cancelOrderMixin, {
   },
 
   actions: {
+    setUpdatedValue(value, id) {
+      this.get("updatedValue").set(id, value);
+    },
+
     moveSidebarUp() {
       $(".left-off-canvas-menu").removeClass("move-bottom");
     },
@@ -166,7 +176,8 @@ export default Controller.extend(cancelOrderMixin, {
       if (this.get("cart.isEmpty")) {
         return;
       }
-      await this.get("cart").updateRequestedQuantity();
+      await this.updateRequestedQuantityValue(this.get("updatedValue"));
+
       const accountComplete = this.get("session").accountDetailsComplete();
       const loggedIn = this.get("session.isLoggedIn");
 
