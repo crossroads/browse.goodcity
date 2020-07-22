@@ -23,8 +23,8 @@ export default Controller.extend(cancelOrderMixin, asyncTasksMixin, {
   },
 
   updateRequestedQuantityValue(record) {
-    Object.keys(record).map(pkgId => {
-      return this.get("cart").updateRequestedQuantity(pkgId, record[pkgId]);
+    return Object.keys(record).map(pkgId => {
+      this.get("cart").updateRequestedQuantity(pkgId, record[pkgId]);
     });
   },
 

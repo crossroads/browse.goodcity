@@ -8,33 +8,29 @@ export default Component.extend({
       : 1;
   }),
 
-  actionValue(value) {
-    if (this.get("action") == "setRequestValue") {
-      this.sendAction("action", value);
+  performAction(value) {
+    if (this.get("type") == "request") {
+      this.requestAction(value);
     } else {
-      this.sendAction("action", value, this.get("package.id"));
-    }
-  },
-
-  setValue(value, isValidValue) {
-    if (isValidValue) {
-      this.set("showErrorMessage", false);
-      this.set("value", value);
-      this.actionValue(value);
-    } else {
-      this.set("showErrorMessage", true);
+      this.updateAction(value, this.get("package.id"));
     }
   },
 
   actions: {
     incrementQty(quantity) {
       let incrementedValue = +this.get("value") + 1;
-      this.setValue(incrementedValue, incrementedValue <= +quantity);
+      incrementedValue <= +quantity
+        ? this.set("value", incrementedValue) &&
+          this.performAction(incrementedValue)
+        : this.set("showErrorMessage", true);
     },
 
     decrementQty() {
       let decrementedValue = +this.get("value") - 1;
-      this.setValue(decrementedValue, decrementedValue >= 1);
+      decrementedValue >= 1
+        ? this.set("value", decrementedValue) &&
+          this.performAction(decrementedValue)
+        : this.set("showErrorMessage", true);
     },
 
     focusOut(pkg) {
@@ -48,7 +44,7 @@ export default Component.extend({
         this.set("value", 1);
         return false;
       }
-      this.actionValue(quantity);
+      this.performAction(quantity);
     },
 
     updateErrorMessage() {

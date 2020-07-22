@@ -9,7 +9,7 @@ export default Controller.extend({
   messageBox: service(),
   application: controller(),
   packageCategory: controller(),
-  elementValue: 1,
+  requestedQty: 1,
   queryParams: ["categoryId", "sortBy"],
   prevPath: null,
   packageUnavailableInSet: false,
@@ -123,7 +123,7 @@ export default Controller.extend({
 
   actions: {
     setRequestValue(value) {
-      this.set("elementValue", value);
+      this.set("requestedQty", value);
     },
 
     showPreview(image) {
