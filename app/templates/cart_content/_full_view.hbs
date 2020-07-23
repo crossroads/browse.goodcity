@@ -51,7 +51,7 @@
                 </div>
                 <div class=" small-3 columns remove_link cart-column">
                   <div class="set-cart-column">
-                    {{quantity-widget package=row type="update" updateAction=(action 'setUpdatedValue')}}
+                    {{quantity-widget package=row type="update" updateAction=(action 'UpdateRequestedValue')}}
                   </div>
                 </div>
               </div>
@@ -80,7 +80,7 @@
                 <span>{{t "cart_content.remove"}}</span>
               </div>
               <div class="cart-column">
-                {{quantity-widget package=row.record type="update" updateAction=(action 'setUpdatedValue')}}
+                {{quantity-widget package=row.record type="update" updateAction=(action 'UpdateRequestedValue')}}
               </div>
             </div>
           </div>

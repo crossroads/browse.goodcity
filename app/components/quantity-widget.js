@@ -36,9 +36,9 @@ export default Component.extend({
     focusOut(pkg) {
       const quantity = +this.get("value");
       if (
-        +quantity < 1 ||
-        +quantity > +pkg.get("availableQuantity") ||
-        !+quantity
+        quantity < 1 ||
+        quantity > pkg.get("availableQuantity") ||
+        !quantity
       ) {
         this.set("showErrorMessage", true);
         this.set("value", 1);

@@ -12,7 +12,7 @@ export default Controller.extend(cancelOrderMixin, asyncTasksMixin, {
   orderService: service(),
   cart: service(),
   order: alias("model"),
-  updatedValue: EmberObject.create({}),
+  updatedQuantity: EmberObject.create({}),
 
   submitOrder(order) {
     return this.runTask(
@@ -39,8 +39,8 @@ export default Controller.extend(cancelOrderMixin, asyncTasksMixin, {
   },
 
   actions: {
-    setUpdatedValue(value, id) {
-      this.get("updatedValue").set(id, value);
+    UpdateRequestedValue(value, id) {
+      this.get("updatedQuantity").set(id, value);
     },
 
     browseMore() {
@@ -58,7 +58,7 @@ export default Controller.extend(cancelOrderMixin, asyncTasksMixin, {
         return this.i18nAlert("items_not_available", _.noop);
       }
 
-      await this.updateRequestedQuantityValue(this.get("updatedValue"));
+      await this.updateRequestedQuantityValue(this.get("updatedQuantity"));
 
       this.submitOrder(order).then(() => {
         this.transitionToRoute("order.booking_success", this.get("order.id"));

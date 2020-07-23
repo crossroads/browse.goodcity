@@ -26,7 +26,7 @@ export default Controller.extend(cancelOrderMixin, {
   isHomePage: computed("currentPath", function() {
     return this.get("currentPath") === "home";
   }),
-  updatedValue: EmberObject.create({}),
+  updatedQuantity: EmberObject.create({}),
   app_id: config.APP.ANDROID_APP_ID,
   ios_app_id: config.APP.APPLE_APP_ID,
   appTitle: config.APP.TITLE,
@@ -141,8 +141,8 @@ export default Controller.extend(cancelOrderMixin, {
   },
 
   actions: {
-    setUpdatedValue(value, id) {
-      this.get("updatedValue").set(id, value);
+    UpdateRequestedValue(value, id) {
+      this.get("updatedQuantity").set(id, value);
     },
 
     moveSidebarUp() {
@@ -176,7 +176,7 @@ export default Controller.extend(cancelOrderMixin, {
       if (this.get("cart.isEmpty")) {
         return;
       }
-      await this.updateRequestedQuantityValue(this.get("updatedValue"));
+      await this.updateRequestedQuantityValue(this.get("updatedQuantity"));
 
       const accountComplete = this.get("session").accountDetailsComplete();
       const loggedIn = this.get("session.isLoggedIn");
