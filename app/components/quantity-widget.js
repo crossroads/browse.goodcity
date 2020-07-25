@@ -2,7 +2,7 @@ import { computed } from "@ember/object";
 import Component from "@ember/component";
 
 export default Component.extend({
-  value: computed("model.package", function() {
+  value: computed("package", function() {
     return this.get("package.requestedPackage")
       ? this.get("package.requestedPackage.quantity")
       : 1;
@@ -16,25 +16,29 @@ export default Component.extend({
     }
   },
 
+  setUpdatedValue(value, isValueValid) {
+    if (isValueValid) {
+      this.set("showErrorMessage", false);
+      this.set("value", value);
+      this.performAction(value);
+    } else {
+      this.set("showErrorMessage", true);
+    }
+  },
+
   actions: {
     incrementQty(quantity) {
       let incrementedValue = +this.get("value") + 1;
-      incrementedValue <= +quantity
-        ? this.set("value", incrementedValue) &&
-          this.performAction(incrementedValue)
-        : this.set("showErrorMessage", true);
+      this.setUpdatedValue(incrementedValue, incrementedValue < +quantity);
     },
 
     decrementQty() {
       let decrementedValue = +this.get("value") - 1;
-      decrementedValue >= 1
-        ? this.set("value", decrementedValue) &&
-          this.performAction(decrementedValue)
-        : this.set("showErrorMessage", true);
+      this.setUpdatedValue(decrementedValue, decrementedValue >= 1);
     },
 
     focusOut(pkg) {
-      const quantity = +this.get("value");
+      let quantity = +this.get("value");
       if (
         quantity < 1 ||
         quantity > pkg.get("availableQuantity") ||
@@ -42,11 +46,13 @@ export default Component.extend({
       ) {
         this.set("showErrorMessage", true);
         this.set("value", 1);
-        return false;
+        quantity = 1;
       }
       this.performAction(quantity);
     },
 
+    // Fix: Failing randomly(Known issue with Ember)
+    //Remove when Ember is upgraded to >= 3.0
     updateErrorMessage() {
       return false;
     }

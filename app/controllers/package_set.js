@@ -38,7 +38,7 @@ export default Controller.extend({
   allPackages: computed(
     "model",
     "model.isSet",
-    "model.packagesAndSets@each.isAvailable",
+    "model.packagesAndSets.@each.isAvailable",
     function() {
       var record = this.get("model");
       if (!record) {

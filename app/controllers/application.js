@@ -1,6 +1,5 @@
 import { later } from "@ember/runloop";
 import { on } from "@ember/object/evented";
-import EmberObject from "@ember/object";
 import { computed } from "@ember/object";
 import { alias } from "@ember/object/computed";
 import { inject as service } from "@ember/service";
@@ -10,9 +9,10 @@ import { containsAny } from "../utils/helpers";
 import config from "../config/environment";
 import AjaxPromise from "browse/utils/ajax-promise";
 import cancelOrderMixin from "../mixins/cancel_order";
+import quantityUpdateMixin from "browse/mixins/quantity_update";
 import _ from "lodash";
 
-export default Controller.extend(cancelOrderMixin, {
+export default Controller.extend(cancelOrderMixin, quantityUpdateMixin, {
   isMobileApp: config.cordova.enabled,
   appVersion: config.APP.VERSION,
   subscription: service(),
@@ -26,7 +26,6 @@ export default Controller.extend(cancelOrderMixin, {
   isHomePage: computed("currentPath", function() {
     return this.get("currentPath") === "home";
   }),
-  updatedQuantity: EmberObject.create({}),
   app_id: config.APP.ANDROID_APP_ID,
   ios_app_id: config.APP.APPLE_APP_ID,
   appTitle: config.APP.TITLE,
@@ -124,11 +123,6 @@ export default Controller.extend(cancelOrderMixin, {
     UNLOAD_MODELS.forEach(model => this.store.unloadAll(model));
   },
 
-  updateRequestedQuantityValue(record) {
-    return Object.keys(record).map(pkgId => {
-      this.get("cart").updateRequestedQuantity(pkgId, record[pkgId]);
-    });
-  },
   submitCart() {
     this.set("showCartDetailSidebar", false);
     if (!this.get("cart.canCheckout")) {
@@ -141,10 +135,6 @@ export default Controller.extend(cancelOrderMixin, {
   },
 
   actions: {
-    UpdateRequestedValue(value, id) {
-      this.get("updatedQuantity").set(id, value);
-    },
-
     moveSidebarUp() {
       $(".left-off-canvas-menu").removeClass("move-bottom");
     },
