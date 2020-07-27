@@ -59,6 +59,15 @@
     }
   }
 
+  .set-cart-column{
+    float: right;
+  }
+
+  .cart-column{
+    float: right;
+    margin-top: 0.2rem;
+  }
+
   .button {
     margin-left: 0 !important;
 
@@ -90,6 +99,15 @@
     cursor: default;
     pointer-events: none;
   }
+}
+
+.cart-row{
+  margin-top: 1.5rem !important;
+}
+
+.set-header {
+  padding-left: 1rem;
+  padding-top: 0.3rem;
 }
 
 .cart-icon {

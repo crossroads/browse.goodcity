@@ -1,4 +1,4 @@
-import { computed } from "@ember/object";
+import { computed, observer } from "@ember/object";
 import { alias, empty, gt, sort } from "@ember/object/computed";
 import { inject as service } from "@ember/service";
 import Controller, { inject as controller } from "@ember/controller";
@@ -9,8 +9,10 @@ export default Controller.extend({
   messageBox: service(),
   application: controller(),
   packageCategory: controller(),
+  requestedQty: 1,
   queryParams: ["categoryId", "sortBy"],
   prevPath: null,
+  packageUnavailableInSet: false,
   categoryId: null,
   cart: service(),
   sortBy: "createdAt",
@@ -41,22 +43,24 @@ export default Controller.extend({
       var record = this.get("model");
       if (!record) {
         this.send("noItemsPresent");
+        this.set("packageUnavailableInSet", true);
         return [];
       }
-
-      return record.get("isSet")
-        ? record.get("packages").filterBy("isAvailable")
-        : [record];
+      return record.get("isSet") ? record.get("packages") : [record];
     }
   ),
 
-  notAvailableInStock: computed(
+  notAvailableInStock: observer(
     "allPackages.@each.availableQuantity",
     function() {
-      let quantities = this.get("allPackages").map(pkg =>
-        pkg.get("availableQuantity")
+      let quantity = this.get("allPackages").any(
+        pkg => pkg.get("availableQuantity") == 0
       );
-      return _.sum(quantities) === 0;
+      if (quantity) {
+        this.set("packageUnavailableInSet", true);
+      } else {
+        this.set("packageUnavailableInSet", false);
+      }
     }
   ),
 
@@ -118,6 +122,10 @@ export default Controller.extend({
   },
 
   actions: {
+    setRequestedQty(value) {
+      this.set("requestedQty", value);
+    },
+
     showPreview(image) {
       this.set("previewUrl", image.get("previewImageUrl"));
     },

@@ -38,11 +38,43 @@ export default detail.extend({
     }
   ),
 
+  allPackageSetsOrdered(packageSet, id) {
+    const packages = packageSet.get("packages").toArray();
+    return _.every(packages, pkg => {
+      return pkg.get("ordersPackage.orderId") == id;
+    });
+  },
+
   hasOrderedGoods: notEmpty("order.ordersPackages"),
 
   orderedGoods: computed("model.packageCategories", function() {
-    return this.getWithDefault("order.ordersPackages", []).filter(
+    const ordersPackages = this.getWithDefault(
+      "order.ordersPackages",
+      []
+    ).filter(
       req => req.get("state") !== "cancelled " && req.get("quantity") > 0
     );
+    let res = [];
+    let refs = {};
+    ordersPackages.map(req => {
+      if (!req.get("package.hasSiblingPackages")) {
+        res.push(req);
+        return;
+      }
+      const packageSet = req.get("package.packageSet");
+      const packageSetId = packageSet.get("id");
+      if (refs[packageSetId]) {
+        return; // Already processed
+      }
+      if (this.allPackageSetsOrdered(packageSet, req.get("orderId"))) {
+        refs[packageSetId] = packageSet;
+        res.push(packageSet);
+        return;
+      }
+      res.push(req);
+    });
+    return _.map(res, record => {
+      return { record };
+    });
   })
 });

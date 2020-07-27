@@ -7,5 +7,6 @@ export default Model.extend({
   user: belongsTo("user", { async: false }),
   packageId: attr("string"),
   package: belongsTo("package", { async: false }),
-  isAvailable: attr("boolean")
+  isAvailable: attr("boolean"),
+  quantity: attr("number")
 });

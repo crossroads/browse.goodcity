@@ -128,6 +128,14 @@ export default ApiService.extend(asyncMixin, {
     });
   },
 
+  updateRequestedQuantity(pkgId, quantity) {
+    let record = this.get("cartItems").findBy("packageId", pkgId);
+    if (record) {
+      record.set("quantity", +quantity);
+      return record.save();
+    }
+  },
+
   /**
    * Fetches the user's cart items from the api
    */
@@ -168,11 +176,11 @@ export default ApiService.extend(asyncMixin, {
     });
   },
 
-  add(pkgOrSet) {
+  add(pkgOrSet, quantity) {
     if (pkgOrSet.get("isSet")) {
       this.runTask(this.addSet(pkgOrSet));
     } else {
-      this.runTask(this.addPackage(pkgOrSet));
+      this.runTask(this.addPackage(pkgOrSet, quantity));
     }
   },
 
@@ -181,19 +189,24 @@ export default ApiService.extend(asyncMixin, {
    * If the user is not logged in, will only save it locally
    */
   addSet(packageSet) {
-    return all(packageSet.get("packages").map(pkg => this.addPackage(pkg)));
+    return all(
+      packageSet
+        .get("packages")
+        .map(pkg => this.addPackage(pkg, pkg.get("quantity")))
+    );
   },
 
   /**
    * Adds a package to the cloud cart.
    * If the user is not logged in, will only save it locally
    */
-  addPackage(pkg) {
+  addPackage(pkg, quantity) {
     let _this = this;
     let record = this.get("store").createRecord("requested_package", {
       packageId: pkg.get("id"),
       package: pkg,
-      isAvailable: pkg.get("isAvailable")
+      isAvailable: pkg.get("isAvailable"),
+      quantity: +quantity
     });
 
     this.notifyPropertyChange("cartItems");
@@ -409,6 +422,6 @@ export default ApiService.extend(asyncMixin, {
       .map(id => this.get("store").peekRecord("package", id))
       .filter(_.identity)
       .reject(pkg => this.contains(pkg))
-      .forEach(pkg => this.add(pkg));
+      .forEach(pkg => this.add(pkg, 1));
   }
 });

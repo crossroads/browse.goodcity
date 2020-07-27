@@ -410,6 +410,12 @@ export default {
     }
   },
 
+  requested_package: {
+    max_quantity: `Quantity (max {{quantity}})`,
+    boundaries: `Quantity between 1 and {{max}}`,
+    single_quantity: `Only 1 item available`
+  },
+
   item: {
     request_item: "申請項目",
     remove_item: "刪除項目",
