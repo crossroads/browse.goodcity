@@ -167,7 +167,7 @@ export default Controller.extend(cancelOrderMixin, quantityUpdateMixin, {
         return;
       }
       await this.updateRequestedQuantityValue(this.get("updatedQuantity"));
-
+      this.send("resetUpdatedQuantity");
       const accountComplete = this.get("session").accountDetailsComplete();
       const loggedIn = this.get("session.isLoggedIn");
 

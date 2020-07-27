@@ -17,11 +17,6 @@ export default Controller.extend(
     cart: service(),
     order: alias("model"),
 
-    init() {
-      this._super();
-      this.set("updatedQuantity", {});
-    },
-
     submitOrder(order) {
       return this.runTask(
         order.get("isOnlineOrder")
@@ -59,6 +54,7 @@ export default Controller.extend(
         await this.updateRequestedQuantityValue(this.get("updatedQuantity"));
 
         this.submitOrder(order).then(() => {
+          this.send("resetUpdatedQuantity");
           this.transitionToRoute("order.booking_success", this.get("order.id"));
         });
       }

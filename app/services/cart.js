@@ -130,8 +130,10 @@ export default ApiService.extend(asyncMixin, {
 
   updateRequestedQuantity(pkgId, quantity) {
     let record = this.get("cartItems").findBy("packageId", pkgId);
-    record.set("quantity", +quantity);
-    return record.save();
+    if (record) {
+      record.set("quantity", +quantity);
+      return record.save();
+    }
   },
 
   /**

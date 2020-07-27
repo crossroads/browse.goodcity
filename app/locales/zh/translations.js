@@ -412,7 +412,8 @@ export default {
 
   requested_package: {
     max_quantity: `Quantity (max {{quantity}})`,
-    boundaries: `Quantity between 1 and {{max}}`
+    boundaries: `Quantity between 1 and {{max}}`,
+    single_quantity: `Only 1 item available`
   },
 
   item: {

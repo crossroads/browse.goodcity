@@ -122,7 +122,7 @@ export default Controller.extend({
   },
 
   actions: {
-    setRequestValue(value) {
+    setRequestedQty(value) {
       this.set("requestedQty", value);
     },
 

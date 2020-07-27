@@ -15,6 +15,10 @@ export default Mixin.create({
     UpdateRequestedValue(value, id) {
       var quantityHash = { [id]: value };
       Object.assign(this.get("updatedQuantity"), quantityHash);
+    },
+
+    resetUpdatedQuantity() {
+      this.set("updatedQuantity", {});
     }
   }
 });

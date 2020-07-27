@@ -16,6 +16,11 @@ export default Component.extend({
     }
   },
 
+  validValueCheck(pkg) {
+    let quantity = +this.get("value");
+    return quantity < 1 || quantity > pkg.get("availableQuantity") || !quantity;
+  },
+
   setUpdatedValue(value, isValueValid) {
     if (isValueValid) {
       this.set("showErrorMessage", false);
@@ -29,7 +34,7 @@ export default Component.extend({
   actions: {
     incrementQty(quantity) {
       let incrementedValue = +this.get("value") + 1;
-      this.setUpdatedValue(incrementedValue, incrementedValue < +quantity);
+      this.setUpdatedValue(incrementedValue, incrementedValue <= +quantity);
     },
 
     decrementQty() {
@@ -38,17 +43,11 @@ export default Component.extend({
     },
 
     focusOut(pkg) {
-      let quantity = +this.get("value");
-      if (
-        quantity < 1 ||
-        quantity > pkg.get("availableQuantity") ||
-        !quantity
-      ) {
+      if (this.validValueCheck(pkg)) {
         this.set("showErrorMessage", true);
         this.set("value", 1);
-        quantity = 1;
       }
-      this.performAction(quantity);
+      this.performAction(+this.get("value"));
     },
 
     // Fix: Failing randomly(Known issue with Ember)

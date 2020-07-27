@@ -13,5 +13,11 @@
   </span>
 </div>
 {{#if showErrorMessage}}
-  <div class="error-msg">{{t "requested_package.boundaries" max=package.quantity}}</div>
+  <div class="error-msg">
+    {{#if (is-equal package.quantity 1)}}
+      {{t "requested_package.single_quantity"}}
+    {{else}}
+      {{t "requested_package.boundaries" max=package.quantity}}
+    {{/if}}
+  </div>
 {{/if}}
