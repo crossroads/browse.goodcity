@@ -55,7 +55,6 @@ export default Controller.extend({
       let quantity = this.get("allPackages").any(
         pkg => pkg.get("availableQuantity") == 0
       );
-      console.log(quantity);
       return quantity ? true : false;
     }
   ),
