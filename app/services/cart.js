@@ -124,6 +124,7 @@ export default ApiService.extend(asyncMixin, {
       order_id: order.get("id")
     }).then(data => {
       this.get("store").pushPayload(data);
+
       return this.refresh();
     });
   },
@@ -151,6 +152,7 @@ export default ApiService.extend(asyncMixin, {
    */
   refresh() {
     this.get("store").unloadAll("requested_package");
+    this.get("store").findAll("package", { reload: true });
     return this.populate();
   },
 

@@ -49,6 +49,16 @@ export default Controller.extend({
       return record.get("isSet") ? record.get("packages") : [record];
     }
   ),
+  packageUnavailableInSet: computed(
+    "allPackages.@each.availableQuantity",
+    function() {
+      let quantity = this.get("allPackages").any(
+        pkg => pkg.get("availableQuantity") == 0
+      );
+      console.log(quantity);
+      return quantity ? true : false;
+    }
+  ),
 
   notAvailableInStock: observer(
     "allPackages.@each.availableQuantity",
