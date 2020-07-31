@@ -46,6 +46,8 @@ export default Component.extend({
       if (this.validValueCheck(pkg)) {
         this.set("showErrorMessage", true);
         this.set("value", 1);
+      } else {
+        this.set("showErrorMessage", false);
       }
       this.performAction(+this.get("value"));
     },

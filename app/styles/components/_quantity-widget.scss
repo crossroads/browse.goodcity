@@ -1,5 +1,7 @@
 .quantity-widget{
   display: flex;
+  user-select: none;
+  -ms-user-select: none;
   border:1px solid white;
   height: 2rem;
   line-height: 2rem;
@@ -9,8 +11,8 @@
     width:125px;
   }
   .qty >*{
-    border: unset;
-    background: unset !important;
+    border: none !important;
+    background: transparent !important;
     color: white;
     padding-top: 0.1rem;
     width: 60px;
