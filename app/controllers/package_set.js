@@ -59,20 +59,6 @@ export default Controller.extend({
     }
   ),
 
-  notAvailableInStock: observer(
-    "allPackages.@each.availableQuantity",
-    function() {
-      let quantity = this.get("allPackages").any(
-        pkg => pkg.get("availableQuantity") == 0
-      );
-      if (quantity) {
-        this.set("packageUnavailableInSet", true);
-      } else {
-        this.set("packageUnavailableInSet", false);
-      }
-    }
-  ),
-
   categoryObj: computed("categoryId", function() {
     if (this.get("categoryId")) {
       return this.store.peekRecord("package_category", this.get("categoryId"));
