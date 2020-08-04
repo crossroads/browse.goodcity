@@ -124,7 +124,12 @@ export default ApiService.extend(asyncMixin, {
       order_id: order.get("id")
     }).then(data => {
       this.get("store").pushPayload(data);
-      return this.refresh();
+      this.refresh();
+      return data.orders_packages.map(data => {
+        return this.get("store").findRecord("package", data.package_id, {
+          reload: true
+        });
+      });
     });
   },
 
