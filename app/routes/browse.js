@@ -7,12 +7,16 @@ export default PublicRoute.extend({
 
   setupController(controller, model) {
     controller.set("model", model);
+    controller.on();
+
+    let applicationController = this.controllerFor("application");
+    applicationController.set("hideHeaderBar", false);
+
     controller.toggleProperty("triggerFlashMessage");
     this.controllerFor("application").set(
       "pageTitle",
       this.get("i18n").t("browse.browse_title")
     );
-    controller.on();
   },
 
   resetController(controller) {
