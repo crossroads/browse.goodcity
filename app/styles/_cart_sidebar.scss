@@ -66,6 +66,10 @@
   .cart-column{
     float: right;
     margin-top: 0.2rem;
+
+    & .quantity-widget{
+      float: right
+    }
   }
 
   .button {

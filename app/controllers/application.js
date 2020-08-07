@@ -152,6 +152,8 @@ export default Controller.extend(cancelOrderMixin, quantityUpdateMixin, {
     },
 
     hideCart() {
+      this.updateRequestedQuantityValue(this.get("updatedQuantity"));
+      this.send("resetUpdatedQuantity");
       this.set("showCartDetailSidebar", false);
       this.transitionToRoute("browse");
     },
