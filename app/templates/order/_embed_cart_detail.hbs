@@ -40,9 +40,9 @@
             </div>
             <div class="small-4 columns">
               <div class="cart-widget">
-                {{#unless (is-not row.isAvailable)}}
+                {{#if row.isAvailable}}
                   {{quantity-widget package=row type="update" updateAction=(action 'UpdateRequestedValue')}}
-                {{/unless}}
+                {{/if}}
               </div>
             </div>
           </div>
@@ -67,9 +67,9 @@
         </div>
         <div class="small-4 columns">
           <div class="cart-widget">
-            {{#unless (is-not row.isAvailable)}}
+            {{#if row.isAvailable}}
               {{quantity-widget package=row.record type="update" updateAction=(action 'UpdateRequestedValue')}}
-            {{/unless}}
+            {{/if}}
           </div>
         </div>
       </div>

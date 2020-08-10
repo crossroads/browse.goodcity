@@ -53,9 +53,9 @@
                 </div>
                 <div class=" small-3 columns remove_link cart-column">
                   <div class="set-cart-column">
-                    {{#unless (is-not row.isAvailable)}}
+                    {{#if row.isAvailable}}
                       {{quantity-widget package=row type="update" updateAction=(action 'UpdateRequestedValue')}}
-                    {{/unless}}
+                    {{/if}}
                   </div>
                 </div>
               </div>
@@ -86,9 +86,9 @@
                 <span>{{t "cart_content.remove"}}</span>
               </div>
               <div class="cart-column">
-                {{#unless (is-not row.isAvailable)}}
+                {{#if row.isAvailable}}
                   {{quantity-widget package=row.record type="update" updateAction=(action 'UpdateRequestedValue')}}
-                {{/unless}}
+                {{/if}}
               </div>
             </div>
           </div>
