@@ -20,7 +20,7 @@
     {{#each cart.groupedPackages as |row|}}
       <li>
         {{#if row.record.isSet}}
-          <div class="row cart-redirect-link {{if (is-not row.isAvailable) disabled}}">
+          <div class="row cart-redirect-link {{if (is-not row.isAvailable) "disabled"}}">
             <div class=" small-8 columns"
             {{action 'showItemDetails' row.record}}>
               <!-- DESCRIPTION -->
@@ -36,14 +36,16 @@
           <div class="row">
             {{#each row.record.packages as |row|}}
               <div class="row cart-row">
-                <div class="small-3 columns cart-redirect-link {{if (is-not row.isAvailable) disabled}}"{{action 'showItemDetails' row}}>
+                <div class="small-3 columns cart-redirect-link {{if (is-not row.isAvailable) "disabled"}}"{{action 'showItemDetails' row}}>
                   <!-- Thumbnail -->
                   <img class="thumb-image {{unless row.isAvailable 'grayed-image'}}"
                   src="{{row.favouriteImage.cartImageUrl}}" />
                 </div>
-                <div class="small-6 columns cart-redirect-link {{if (is-not row.isAvailable) disabled}}"{{action 'showItemDetails' row}}>
-                  <!-- Title -->
-                  {{row.notes}}
+                <div class="small-6 columns cart-redirect-link {{if (is-not row.isAvailable) "disabled"}}"{{action 'showItemDetails' row}}>
+                  <div class="package-name">
+                    <!-- Title -->
+                    {{row.notes}}
+                  </div>
                   <!-- Availability -->
                   {{#unless row.isAvailable}}
                     <div class="unavailable red-warning">{{t "cart_content.unavailable"}}</div>
@@ -51,7 +53,9 @@
                 </div>
                 <div class=" small-3 columns remove_link cart-column">
                   <div class="set-cart-column">
-                    {{quantity-widget package=row type="update" updateAction=(action 'UpdateRequestedValue')}}
+                    {{#unless (is-not row.isAvailable)}}
+                      {{quantity-widget package=row type="update" updateAction=(action 'UpdateRequestedValue')}}
+                    {{/unless}}
                   </div>
                 </div>
               </div>
@@ -59,16 +63,18 @@
           </div>
         {{else}}
           <div class="row">
-            <div class="small-3 columns cart-redirect-link {{if (is-not row.isAvailable) disabled}}"
+            <div class="small-3 columns cart-redirect-link {{if (is-not row.isAvailable) "disabled"}}"
             {{action 'showItemDetails' row.record}}>
               <!-- Thumbnail -->
               <img class="thumb-image {{unless row.isAvailable 'grayed-image'}}"
               src="{{row.record.favouriteImage.cartImageUrl}}" />
             </div>
-            <div class="small-6 columns cart-redirect-link {{if (is-not row.isAvailable) disabled}}"
+            <div class="small-6 columns cart-redirect-link {{if (is-not row.isAvailable) "disabled"}}"
             {{action 'showItemDetails' row.record}}>
-              <!-- Title -->
-              {{row.record.packageType.name}}
+              <div class="package-name">
+                <!-- Title -->
+                {{row.record.packageType.name}}
+              </div>
               <!-- Availability -->
               {{#unless row.isAvailable}}
                 <div class="unavailable red-warning">{{t "cart_content.unavailable"}}</div>
@@ -80,7 +86,9 @@
                 <span>{{t "cart_content.remove"}}</span>
               </div>
               <div class="cart-column">
-                {{quantity-widget package=row.record type="update" updateAction=(action 'UpdateRequestedValue')}}
+                {{#unless (is-not row.isAvailable)}}
+                  {{quantity-widget package=row.record type="update" updateAction=(action 'UpdateRequestedValue')}}
+                {{/unless}}
               </div>
             </div>
           </div>

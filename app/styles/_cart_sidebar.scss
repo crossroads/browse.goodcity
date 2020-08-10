@@ -102,6 +102,12 @@
   &.disabled {
     cursor: default;
     pointer-events: none;
+    img {
+      opacity: 0.5;
+    }
+    .package-name {
+      text-decoration: line-through;
+    }
   }
 }
 
