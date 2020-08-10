@@ -51,7 +51,7 @@ export default Controller.extend(
           return this.i18nAlert("items_not_available", _.noop);
         }
 
-        await this.updateRequestedQuantityValue(this.get("updatedQuantity"));
+        await this.updateRequestedQuantityValue(this.get("updatedCartValues"));
 
         this.submitOrder(order).then(() => {
           this.send("resetUpdatedQuantity");
