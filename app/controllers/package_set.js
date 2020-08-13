@@ -26,10 +26,7 @@ export default Controller.extend({
 
   direction: null,
 
-  isOrderFulfilmentUser: computed(function() {
-    let user = this.get("session.currentUser");
-    return user.hasRole("Order fulfilment");
-  }),
+  canMoveToStock: computed.alias("session.currentUser.canMoveToStock"),
 
   presentInCart: computed("model", "cart.counter", function() {
     return this.get("cart").contains(this.get("model"));
