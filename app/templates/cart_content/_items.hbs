@@ -2,7 +2,7 @@
   <li class="no-bullet">
     {{#if row.record.isSet}}
       <div class="row">
-        <div class="small-6 columns cart-redirect-link {{if (is-not row.isAvailable) disabled}}"
+        <div class="small-6 columns cart-redirect-link {{unless row.isAvailable "disabled"}}"
         {{action 'showItemDetails' row.record}}>
           <!-- Title -->
           {{row.record.packageType.name}}
@@ -15,13 +15,13 @@
       <div class="row">
       {{#each row.record.packages as |row|}}
       <div class="row cart-row">
-        <div class="small-3 columns cart-redirect-link {{if (is-not row.isAvailable) disabled}}"
+        <div class="small-3 columns cart-redirect-link {{unless row.isAvailable "disabled"}}"
           {{action 'showItemDetails' row}}>
             <!-- Thumbnail -->
             <img class="thumb-image {{unless row.isAvailable 'grayed-image'}}" src="{{row.favouriteImage.cartImageUrl}}"/>
         </div>
 
-        <div class="small-5 columns cart-redirect-link {{if (is-not row.isAvailable) disabled}}"
+        <div class="small-5 columns cart-redirect-link {{unless row.isAvailable "disabled"}}"
           {{action 'showItemDetails' row}}>
           <!-- Title -->
           {{row.notes}}
@@ -39,12 +39,12 @@
       </div>
     {{else}}
       <div class="row">
-        <div class="small-3 columns cart-redirect-link {{if (is-not row.isAvailable) disabled}}" {{action 'showItemDetails' row.record}}>
+        <div class="small-3 columns cart-redirect-link {{unless row.isAvailable "disabled"}}" {{action 'showItemDetails' row.record}}>
            <!-- Thumbnail -->
           <img class="thumb-image {{unless row.isAvailable 'grayed-image'}}" src="{{row.record.favouriteImage.cartImageUrl}}" />
         </div>
 
-        <div class="small-5 columns cart-redirect-link {{if (is-not row.isAvailable) disabled}}" {{action 'showItemDetails' row.record}}>
+        <div class="small-5 columns cart-redirect-link {{unless row.isAvailable "disabled"}}" {{action 'showItemDetails' row.record}}>
           <!-- Title -->
           {{row.record.packageType.name}}
           <!-- Availability -->

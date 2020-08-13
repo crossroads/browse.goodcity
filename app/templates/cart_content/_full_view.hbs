@@ -20,7 +20,7 @@
     {{#each cart.groupedPackages as |row|}}
       <li>
         {{#if row.record.isSet}}
-          <div class="row cart-redirect-link {{if (is-not row.isAvailable) "disabled"}}">
+          <div class="row cart-redirect-link {{unless row.isAvailable "disabled"}}">
             <div class=" small-8 columns"
             {{action 'showItemDetails' row.record}}>
               <!-- DESCRIPTION -->
@@ -36,12 +36,12 @@
           <div class="row">
             {{#each row.record.packages as |row|}}
               <div class="row cart-row">
-                <div class="small-3 columns cart-redirect-link {{if (is-not row.isAvailable) "disabled"}}"{{action 'showItemDetails' row}}>
+                <div class="small-3 columns cart-redirect-link {{unless row.isAvailable "disabled"}}"{{action 'showItemDetails' row}}>
                   <!-- Thumbnail -->
                   <img class="thumb-image {{unless row.isAvailable 'grayed-image'}}"
                   src="{{row.favouriteImage.cartImageUrl}}" />
                 </div>
-                <div class="small-6 columns cart-redirect-link {{if (is-not row.isAvailable) "disabled"}}"{{action 'showItemDetails' row}}>
+                <div class="small-6 columns cart-redirect-link {{unless row.isAvailable "disabled"}}"{{action 'showItemDetails' row}}>
                   <div class="package-name">
                     <!-- Title -->
                     {{row.notes}}
@@ -63,13 +63,13 @@
           </div>
         {{else}}
           <div class="row">
-            <div class="small-3 columns cart-redirect-link {{if (is-not row.isAvailable) "disabled"}}"
+            <div class="small-3 columns cart-redirect-link {{unless row.isAvailable "disabled"}}"
             {{action 'showItemDetails' row.record}}>
               <!-- Thumbnail -->
               <img class="thumb-image {{unless row.isAvailable 'grayed-image'}}"
               src="{{row.record.favouriteImage.cartImageUrl}}" />
             </div>
-            <div class="small-6 columns cart-redirect-link {{if (is-not row.isAvailable) "disabled"}}"
+            <div class="small-6 columns cart-redirect-link {{unless row.isAvailable "disabled"}}"
             {{action 'showItemDetails' row.record}}>
               <div class="package-name">
                 <!-- Title -->
