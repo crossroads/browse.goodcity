@@ -27,15 +27,14 @@ export default Addressable.extend({
     async: false
   }),
 
-  currentUserRole: computed("userRoles.[]", function() {
+  currentUserRoles: computed("userRoles.[]", function() {
     return this.get("userRoles").map(userRole => {
       return userRole.get("role");
     });
   }),
 
-  canMoveToStock: computed("currentUserRole", function() {
+  canRedirectToStock: computed("currentUserRole", function() {
     const roles = this.get("currentUserRole");
-    // return roles.includes()
     return roles.find(
       r =>
         r.get("permissionNames").indexOf("can_manage_packages") >= 0 &&

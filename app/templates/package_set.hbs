@@ -77,7 +77,7 @@
           </div>
         <p>
           {{#if session.isLoggedIn}}
-          {{#if canMoveToStock }}
+          {{#if canRedirectToStock }}
           <div class="item_details" {{ action 'goToStockItem' package.id }}>
             {{t "itemdetail.inventory_number"}}: <span class="inventory_redirect">{{package.inventoryNumber}}</span>
           </div>

@@ -26,7 +26,7 @@ export default Controller.extend({
 
   direction: null,
 
-  canMoveToStock: computed.alias("session.currentUser.canMoveToStock"),
+  canRedirectToStock: computed.alias("session.currentUser.canRedirectToStock"),
 
   presentInCart: computed("model", "cart.counter", function() {
     return this.get("cart").contains(this.get("model"));
