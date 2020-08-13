@@ -35,8 +35,11 @@ export default Addressable.extend({
 
   canMoveToStock: computed("currentUserRole", function() {
     const roles = this.get("currentUserRole");
+    // return roles.includes()
     return roles.find(
-      r => r.get("permissionNames").indexOf("can_login_to_stock") >= 0
+      r =>
+        r.get("permissionNames").indexOf("can_manage_packages") >= 0 &&
+        r.get("permissionNames").indexOf("can_login_to_stock") >= 0
     );
   }),
 
