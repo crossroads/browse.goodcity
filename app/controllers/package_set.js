@@ -43,15 +43,18 @@ export default Controller.extend({
       var record = this.get("model");
       if (!record) {
         this.send("noItemsPresent");
-        this.set("packageUnavailableInSet", true);
         return [];
       }
       return record.get("isSet") ? record.get("packages") : [record];
     }
   ),
   packageUnavailableInSet: computed(
+    "model",
     "allPackages.@each.availableQuantity",
     function() {
+      if (!this.get("model")) {
+        return true;
+      }
       let quantity = this.get("allPackages").any(
         pkg => pkg.get("availableQuantity") == 0
       );
