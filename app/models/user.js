@@ -27,6 +27,21 @@ export default Addressable.extend({
     async: false
   }),
 
+  currentUserRoles: computed("userRoles.[]", function() {
+    return this.get("userRoles").map(userRole => {
+      return userRole.get("role");
+    });
+  }),
+
+  canRedirectToStock: computed("currentUserRole", function() {
+    const roles = this.get("currentUserRole");
+    return roles.find(
+      r =>
+        r.get("permissionNames").indexOf("can_manage_packages") >= 0 &&
+        r.get("permissionNames").indexOf("can_login_to_stock") >= 0
+    );
+  }),
+
   mobileWithoutCountryCode: computed("mobile", function() {
     var mobile = this.get("mobile");
     return mobile
