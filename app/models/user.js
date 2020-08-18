@@ -33,8 +33,8 @@ export default Addressable.extend({
     });
   }),
 
-  canRedirectToStock: computed("currentUserRole", function() {
-    const roles = this.get("currentUserRole");
+  canRedirectToStock: computed("currentUserRoles", function() {
+    const roles = this.get("currentUserRoles");
     return roles.find(
       r =>
         r.get("permissionNames").indexOf("can_manage_packages") >= 0 &&
