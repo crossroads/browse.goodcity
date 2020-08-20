@@ -152,6 +152,8 @@ export default Controller.extend(cancelOrderMixin, quantityUpdateMixin, {
     },
 
     hideCart() {
+      this.updateRequestedQuantityValue(this.get("updatedCartValues"));
+      this.send("resetUpdatedQuantity");
       this.set("showCartDetailSidebar", false);
       this.transitionToRoute("browse");
     },
@@ -171,7 +173,7 @@ export default Controller.extend(cancelOrderMixin, quantityUpdateMixin, {
       if (this.get("cart.isEmpty")) {
         return;
       }
-      await this.updateRequestedQuantityValue(this.get("updatedQuantity"));
+      await this.updateRequestedQuantityValue(this.get("updatedCartValues"));
       this.send("resetUpdatedQuantity");
       const accountComplete = this.get("session").accountDetailsComplete();
       const loggedIn = this.get("session.isLoggedIn");

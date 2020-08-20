@@ -3,7 +3,7 @@ import Mixin from "@ember/object/mixin";
 
 export default Mixin.create({
   cart: service(),
-  updatedQuantity: {},
+  updatedCartValues: {},
 
   updateRequestedQuantityValue(record) {
     return Object.keys(record).map(pkgId => {
@@ -14,11 +14,11 @@ export default Mixin.create({
   actions: {
     UpdateRequestedValue(value, id) {
       var quantityHash = { [id]: value };
-      Object.assign(this.get("updatedQuantity"), quantityHash);
+      Object.assign(this.get("updatedCartValues"), quantityHash);
     },
 
     resetUpdatedQuantity() {
-      this.set("updatedQuantity", {});
+      this.set("updatedCartValues", {});
     }
   }
 });

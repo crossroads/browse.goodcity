@@ -30,7 +30,9 @@
 }
 
 .cart-widget{
-  float: right;
+  @media #{$small-only} {
+    float: right;
+  }
 }
 
 .your-detail {
