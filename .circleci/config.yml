@@ -193,7 +193,7 @@ jobs:
   android_build_and_deploy:
     <<: *defaults
     docker:
-      - image: circleci/android:api-29-node
+      - image: circleci/android:api-29-node@sha256:f57cbd442b1d90d01a672e87fa9c516a71312376641d70aee67736e78cb9645f
     environment:
       JVM_OPTS: -Xmx3200m
       KEYSTORE: goodcity.keystore
