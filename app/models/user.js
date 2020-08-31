@@ -20,6 +20,20 @@ export default Addressable.extend({
     async: false
   }),
 
+  activeOrganisationsUsers: computed.filterBy("organisationsUsers", "isActive"),
+  activeOrganisations: computed.mapBy(
+    "activeOrganisationsUsers",
+    "organisation"
+  ),
+
+  defaultOrganisationsUser: computed("activeOrganisationsUsers.[]", function() {
+    return this.get("activeOrganisationsUsers")
+      .sortBy("id")
+      .get("lastObject");
+  }),
+
+  defaultOrganisation: computed.alias("defaultOrganisationsUser.organisation"),
+
   userRoles: hasMany("userRoles", {
     async: false
   }),
