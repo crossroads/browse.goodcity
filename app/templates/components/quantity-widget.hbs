@@ -1,0 +1,23 @@
+<div class="max-quantity">
+  {{t "requested_package.max_quantity" quantity=package.quantity}}
+</div>
+<div class="quantity-widget">
+  <span id='decrementOperator' {{action 'decrementQty'}}>
+    {{fa-icon 'minus'}}
+  </span>
+  <span class="qty">
+    {{numeric-input value=value name="requestedQuanity" id=(concat "qty" package.id)  maxlength="4" autocomplete="off" required='true' pattern="\d{1,8}" focusOut=(action 'focusOut' package)}}
+  </span>
+  <span id='incrementOperator' {{action 'incrementQty' package.quantity}}>
+    {{fa-icon 'plus'}}
+  </span>
+</div>
+{{#if showErrorMessage}}
+  <div class="error-msg">
+    {{#if (is-equal package.quantity 1)}}
+      {{t "requested_package.single_quantity"}}
+    {{else}}
+      {{t "requested_package.boundaries" max=package.quantity}}
+    {{/if}}
+  </div>
+{{/if}}

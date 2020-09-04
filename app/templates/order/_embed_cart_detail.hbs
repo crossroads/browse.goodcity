@@ -6,18 +6,74 @@
   </div>
 
   {{#each cart.groupedPackages as |row|}}
-    <div class="row info cart-item-info {{unless row.isAvailable "unavailable" }}">
-      <div class="small-4 columns">
-        <img class="thumb-image" src="{{row.record.displayImageUrl}}" />
+    {{#if row.record.isSet}}
+      <div class="row info cart-item-info detail {{unless row.isAvailable "unavailable" }}">
+        <div class="small-8 columns cart-redirect-link">
+          <!-- Title -->
+          {{row.record.packageType.name}}
+        </div>
+        <div class=" small-4 columns remove_link">
+          <div {{action 'remove' row.record target=cart}}>
+            <a><i class="fa">{{fa-icon 'times'}}</i>
+            {{t 'item.remove_item'}}</a>
+          </div>
+        </div>
       </div>
-      <div class="small-8 detail columns">
-        <div class="package-name">{{row.record.packageType.name}}</div>
-        {{#unless row.isAvailable}}
-          <div class="unavailable red-warning">{{t "cart_content.unavailable"}}</div>
-        {{/unless}}
-        <a {{action cart.remove row.record target=cart}}> {{t 'item.remove_item' }}</a>
+      <div class="row info cart-item-info">
+        {{#each row.record.packages as |row|}}
+          <div class="row info cart-item-info">
+            <div class="small-4 columns cart-redirect-link">
+              <!-- Thumbnail -->
+              <img class="thumb-image" src="{{row.displayImageUrl}}"/>
+            </div>
+            <div class="small-4 detail columns">
+              <div class="package-name">
+                <!-- Title -->
+                {{row.packageType.name}}
+              </div>
+              <!-- Availability -->
+              {{#unless row.isAvailable}}
+                <div class="unavailable red-warning">
+                  {{t "cart_content.unavailable"}}
+                </div>
+              {{/unless}}
+            </div>
+            <div class="small-4 columns">
+              <div class="cart-widget">
+                {{#if row.isAvailable}}
+                  {{quantity-widget package=row type="update" updateAction=(action 'UpdateRequestedValue')}}
+                {{/if}}
+              </div>
+            </div>
+          </div>
+        {{/each}}
       </div>
-    </div>
+    {{else}}
+      <div class="row info cart-item-info {{unless row.isAvailable "unavailable" }}">
+        <div class="small-4 columns">
+           <!-- Thumbnail -->
+          <img class="thumb-image" src="{{row.record.displayImageUrl}}"/>
+        </div>
+        <div class="small-4 detail columns">
+          <div class="package-name">
+            <!-- Title -->
+            {{row.record.packageType.name}}
+          </div>
+          <!-- Availability -->
+          {{#unless row.isAvailable}}
+            <div class="unavailable red-warning">{{t "cart_content.unavailable"}}</div>
+          {{/unless}}
+          <a {{action cart.remove row.record target=cart}}> {{t 'item.remove_item' }}</a>
+        </div>
+        <div class="small-4 columns">
+          <div class="cart-widget">
+            {{#if row.isAvailable}}
+              {{quantity-widget package=row.record type="update" updateAction=(action 'UpdateRequestedValue')}}
+            {{/if}}
+          </div>
+        </div>
+      </div>
+    {{/if}}
     <hr>
   {{/each}}
 

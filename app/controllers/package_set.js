@@ -1,4 +1,4 @@
-import { computed } from "@ember/object";
+import { computed, observer } from "@ember/object";
 import { alias, empty, gt, sort } from "@ember/object/computed";
 import { inject as service } from "@ember/service";
 import Controller, { inject as controller } from "@ember/controller";
@@ -9,8 +9,10 @@ export default Controller.extend({
   messageBox: service(),
   application: controller(),
   packageCategory: controller(),
+  requestedQty: 1,
   queryParams: ["categoryId", "sortBy"],
   prevPath: null,
+  packageUnavailableInSet: false,
   categoryId: null,
   cart: service(),
   sortBy: "createdAt",
@@ -24,10 +26,7 @@ export default Controller.extend({
 
   direction: null,
 
-  isOrderFulfilmentUser: computed(function() {
-    let user = this.get("session.currentUser");
-    return user.hasRole("Order fulfilment");
-  }),
+  canRedirectToStock: computed.alias("session.currentUser.canRedirectToStock"),
 
   presentInCart: computed("model", "cart.counter", function() {
     return this.get("cart").contains(this.get("model"));
@@ -43,20 +42,20 @@ export default Controller.extend({
         this.send("noItemsPresent");
         return [];
       }
-
-      return record.get("isSet")
-        ? record.get("packages").filterBy("isAvailable")
-        : [record];
+      return record.get("isSet") ? record.get("packages") : [record];
     }
   ),
-
-  notAvailableInStock: computed(
+  packageUnavailableInSet: computed(
+    "model",
     "allPackages.@each.availableQuantity",
     function() {
-      let quantities = this.get("allPackages").map(pkg =>
-        pkg.get("availableQuantity")
+      if (!this.get("model")) {
+        return true;
+      }
+      let quantity = this.get("allPackages").any(
+        pkg => pkg.get("availableQuantity") == 0
       );
-      return _.sum(quantities) === 0;
+      return !!quantity;
     }
   ),
 
@@ -118,6 +117,10 @@ export default Controller.extend({
   },
 
   actions: {
+    setRequestedQty(value) {
+      this.set("requestedQty", value);
+    },
+
     showPreview(image) {
       this.set("previewUrl", image.get("previewImageUrl"));
     },

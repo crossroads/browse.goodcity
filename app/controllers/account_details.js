@@ -175,12 +175,13 @@ export default Controller.extend({
               this.store.findRecord("user_role", id);
             });
           }
+          loadingView.destroy();
           this.redirectToTransitionOrBrowse(bookAppointment);
         })
         .catch(xhr => {
+          loadingView.destroy();
           this.get("messageBox").alert(xhr.responseJSON.errors[0].message);
-        })
-        .finally(() => loadingView.destroy());
+        });
     },
 
     goToSearchOrg() {

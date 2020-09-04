@@ -9,9 +9,10 @@ import { containsAny } from "../utils/helpers";
 import config from "../config/environment";
 import AjaxPromise from "browse/utils/ajax-promise";
 import cancelOrderMixin from "../mixins/cancel_order";
+import quantityUpdateMixin from "browse/mixins/quantity_update";
 import _ from "lodash";
 
-export default Controller.extend(cancelOrderMixin, {
+export default Controller.extend(cancelOrderMixin, quantityUpdateMixin, {
   isMobileApp: config.cordova.enabled,
   appVersion: config.APP.VERSION,
   subscription: service(),
@@ -25,7 +26,6 @@ export default Controller.extend(cancelOrderMixin, {
   isHomePage: computed("currentPath", function() {
     return this.get("currentPath") === "home";
   }),
-
   app_id: config.APP.ANDROID_APP_ID,
   ios_app_id: config.APP.APPLE_APP_ID,
   appTitle: config.APP.TITLE,
@@ -152,6 +152,8 @@ export default Controller.extend(cancelOrderMixin, {
     },
 
     hideCart() {
+      this.updateRequestedQuantityValue(this.get("updatedCartValues"));
+      this.send("resetUpdatedQuantity");
       this.set("showCartDetailSidebar", false);
       this.transitionToRoute("browse");
     },
@@ -167,11 +169,12 @@ export default Controller.extend(cancelOrderMixin, {
       );
     },
 
-    checkout() {
+    async checkout() {
       if (this.get("cart.isEmpty")) {
         return;
       }
-
+      await this.updateRequestedQuantityValue(this.get("updatedCartValues"));
+      this.send("resetUpdatedQuantity");
       const accountComplete = this.get("session").accountDetailsComplete();
       const loggedIn = this.get("session.isLoggedIn");
 

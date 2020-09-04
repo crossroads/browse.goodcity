@@ -29,6 +29,11 @@
   }
 }
 
+.cart-widget{
+  @media #{$small-only} {
+    float: right;
+  }
+}
 
 .your-detail {
   .detail {

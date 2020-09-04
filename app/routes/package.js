@@ -14,6 +14,7 @@ export default PublicRoute.extend({
     if (model) {
       controller.set("model", model);
       controller.set("prevPath", this.router.currentPath);
+      controller.set("requestedQty", 1);
       controller.set("previewUrl", model.get("previewImageUrl"));
     }
     this.controllerFor("application").set(

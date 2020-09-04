@@ -44,15 +44,37 @@
 									{{ t "my_orders.details.note" }}
 								</em>
 							</div>
+
 							{{#each orderedGoods as |good|}}
 								<div class="row product-row">
-									<div class="columns small-4 image-container">
-										<img src={{good.package.previewImageUrl}} />
-									</div>
-									<div class="columns small-8 text-container">
-										<div class="text">{{ good.package.packageType.name }}</div>
-										<div class="notes">{{ good.package.notes }}</div>
-									</div>
+									{{#if good.record.isSet}}
+										<div class="row">
+									    <div class="small-6 columns cart-redirect-link set-header">
+              		      {{good.record.packageType.name}}
+                	    </div>
+            				</div>
+						      	{{#each good.record.packages as |row|}}
+											<div class="row">
+								    		<div class="columns small-4 image-container">
+													<img src={{row.previewImageUrl}} />
+												</div>
+												<div class="columns small-8 text-container">
+													<div class="text">{{ row.packageType.name }}</div>
+													<div class="notes">{{ row.notes }}</div>
+													<div class="notes">{{t 'order.goods_details.quantity_label'}} : {{ row.orderedQuantity }}</div>
+												</div>
+											</div>
+										{{/each}}
+									{{else}}
+										<div class="columns small-4 image-container">
+											<img src={{good.record.package.previewImageUrl}}/>
+										</div>
+								  	<div class="columns small-8 text-container">
+											<div class="text">{{ good.record.package.packageType.name }}</div>
+											<div class="notes">{{ good.record.package.notes }}</div>
+											<div class="notes">{{t 'order.goods_details.quantity_label'}} : {{ good.record.package.orderedQuantity}}</div>
+										</div>
+									{{/if}}
 								</div>
 							{{/each}}
 						</section>

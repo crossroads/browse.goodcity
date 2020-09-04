@@ -59,6 +59,19 @@
     }
   }
 
+  .set-cart-column{
+    float: right;
+  }
+
+  .cart-column{
+    float: right;
+    margin-top: 0.2rem;
+
+    & .quantity-widget{
+      float: right
+    }
+  }
+
   .button {
     margin-left: 0 !important;
 
@@ -89,7 +102,22 @@
   &.disabled {
     cursor: default;
     pointer-events: none;
+    img {
+      opacity: 0.5;
+    }
+    .package-name {
+      text-decoration: line-through;
+    }
   }
+}
+
+.cart-row{
+  margin-top: 1.5rem !important;
+}
+
+.set-header {
+  padding-left: 1rem;
+  padding-top: 0.3rem;
 }
 
 .cart-icon {
