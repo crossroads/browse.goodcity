@@ -25,20 +25,11 @@ export default ApiService.extend({
 
   accountDetailsComplete() {
     const user = this.get("currentUser");
-    if (!user) {
-      return false;
-    }
-
-    const organisationsUser = user.get("organisationsUsers.firstObject");
-    const organisation =
-      organisationsUser && organisationsUser.get("organisation");
-    const hasInfoAndCharityRole =
-      user.get("isInfoComplete") && user.hasRole("Charity");
-    const hasCompleteOrganisationUserInfo =
-      organisationsUser && organisationsUser.get("isInfoComplete");
 
     return (
-      hasInfoAndCharityRole && organisation && hasCompleteOrganisationUserInfo
+      user &&
+      user.get("isInfoComplete") &&
+      user.getWithDefault("defaultOrganisationsUser.isInfoComplete", false)
     );
   },
 

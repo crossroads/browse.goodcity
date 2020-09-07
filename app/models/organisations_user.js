@@ -7,6 +7,7 @@ export default Model.extend({
   userId: attr("number"),
   organisationId: attr("number"),
   position: attr("string"),
+  status: attr("string"),
   preferredContactNumber: attr("string"),
   user: belongsTo("user", {
     async: false
@@ -23,6 +24,14 @@ export default Model.extend({
   hasPreferredContactNumber: computed("preferredContactNumber", function() {
     var preferredContactNumber = this.get("preferredContactNumber");
     return preferredContactNumber && preferredContactNumber.length;
+  }),
+
+  isInactive: computed.not("isActive"),
+
+  isActive: computed("status", function() {
+    return (
+      this.get("status") === "pending" || this.get("status") === "approved"
+    );
   }),
 
   isInfoComplete: computed(

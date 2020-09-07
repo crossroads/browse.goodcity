@@ -109,6 +109,7 @@ export default Controller.extend({
       this.get("preferredContactNumber") || $("#preferred_contact").val();
     var title = this.get("selectedTitle.id");
     var params = {
+      user_id: user.get("id"),
       organisation_id: this.get("organisationId"),
       position: position,
       preferred_contact_number: preferredNumber,
@@ -166,15 +167,6 @@ export default Controller.extend({
       })
         .then(data => {
           this.get("store").pushPayload(data);
-          if (
-            !this.get("session.currentUser").hasRole("Charity") &&
-            data.users.length &&
-            data.users[0]["user_roles_ids"]
-          ) {
-            data.users[0]["user_roles_ids"].forEach(id => {
-              this.store.findRecord("user_role", id);
-            });
-          }
           loadingView.destroy();
           this.redirectToTransitionOrBrowse(bookAppointment);
         })
