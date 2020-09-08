@@ -367,13 +367,13 @@ workflows:
               - package_dependencies
             filters:
               branches:
-                only: /^(master|live)$/
+                only: /^(master|live|GCW-3305-Deprecate-Usage-Of-App-Version)$/
         - android_build_and_deploy:
             requires:
               - ember_cordova_build
             filters:
               branches:
-                only: /^(master|live)$/
+                only: /^(master|live|GCW-3305-Deprecate-Usage-Of-App-Version)$/
         - ios_build_and_deploy:
             requires:
               - package_dependencies
