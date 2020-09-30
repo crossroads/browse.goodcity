@@ -130,6 +130,11 @@ export default Controller.extend({
 
   mobileParam() {
     const mobile = this.get("user.mobile") || this.get("mobilePhone");
+
+    if (!mobile) {
+      return;
+    }
+
     if (mobile.startsWith("+852")) {
       return mobile;
     } else {
