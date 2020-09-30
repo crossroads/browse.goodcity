@@ -128,13 +128,12 @@ export default Controller.extend({
     return params;
   },
 
-  mobileParam(user) {
-    let mobile = user && user.get("mobile");
-    let mobilePhone = this.get("mobilePhone");
-    if (mobile && mobile.length) {
+  mobileParam() {
+    const mobile = this.get("user.mobile") || this.get("mobilePhone");
+    if (mobile.startsWith("+852")) {
       return mobile;
-    } else if (mobilePhone.length) {
-      return "+852" + mobilePhone;
+    } else {
+      return `+852${mobile}`;
     }
   },
 
@@ -162,6 +161,7 @@ export default Controller.extend({
         .lookup("component:loading")
         .append();
       var bookAppointment = this.get("bookAppointment");
+
       new AjaxPromise(url, actionType, this.get("session.authToken"), {
         organisations_user: this.organisationsUserParams()
       })
@@ -172,7 +172,7 @@ export default Controller.extend({
         })
         .catch(xhr => {
           loadingView.destroy();
-          this.get("messageBox").alert(xhr.responseJSON.errors[0].message);
+          this.get("messageBox").alert(xhr.responseJSON.error);
         });
     },
 
