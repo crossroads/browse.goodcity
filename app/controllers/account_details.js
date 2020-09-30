@@ -161,6 +161,7 @@ export default Controller.extend({
         .lookup("component:loading")
         .append();
       var bookAppointment = this.get("bookAppointment");
+
       new AjaxPromise(url, actionType, this.get("session.authToken"), {
         organisations_user: this.organisationsUserParams()
       })
@@ -171,7 +172,7 @@ export default Controller.extend({
         })
         .catch(xhr => {
           loadingView.destroy();
-          this.get("messageBox").alert(xhr.responseJSON.errors[0].message);
+          this.get("messageBox").alert(xhr.responseJSON.error);
         });
     },
 
