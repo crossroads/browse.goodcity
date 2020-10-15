@@ -109,6 +109,7 @@ export default Controller.extend({
       this.get("preferredContactNumber") || $("#preferred_contact").val();
     var title = this.get("selectedTitle.id");
     var params = {
+      user_id: user.get("id"),
       organisation_id: this.get("organisationId"),
       position: position,
       preferred_contact_number: preferredNumber,
@@ -127,13 +128,17 @@ export default Controller.extend({
     return params;
   },
 
-  mobileParam(user) {
-    let mobile = user && user.get("mobile");
-    let mobilePhone = this.get("mobilePhone");
-    if (mobile && mobile.length) {
+  mobileParam() {
+    const mobile = this.get("user.mobile") || this.get("mobilePhone");
+
+    if (!mobile) {
+      return;
+    }
+
+    if (mobile.startsWith("+852")) {
       return mobile;
-    } else if (mobilePhone.length) {
-      return "+852" + mobilePhone;
+    } else {
+      return `+852${mobile}`;
     }
   },
 
@@ -161,26 +166,18 @@ export default Controller.extend({
         .lookup("component:loading")
         .append();
       var bookAppointment = this.get("bookAppointment");
+
       new AjaxPromise(url, actionType, this.get("session.authToken"), {
         organisations_user: this.organisationsUserParams()
       })
         .then(data => {
           this.get("store").pushPayload(data);
-          if (
-            !this.get("session.currentUser").hasRole("Charity") &&
-            data.users.length &&
-            data.users[0]["user_roles_ids"]
-          ) {
-            data.users[0]["user_roles_ids"].forEach(id => {
-              this.store.findRecord("user_role", id);
-            });
-          }
           loadingView.destroy();
           this.redirectToTransitionOrBrowse(bookAppointment);
         })
         .catch(xhr => {
           loadingView.destroy();
-          this.get("messageBox").alert(xhr.responseJSON.errors[0].message);
+          this.get("messageBox").alert(xhr.responseJSON.error);
         });
     },
 
