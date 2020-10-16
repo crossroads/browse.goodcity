@@ -260,17 +260,18 @@ export default ApiService.extend(asyncMixin, {
     if (!cartItem) {
       return resolve();
     }
-    return this.removeCartItem(cartItem);
+    return this.removeCartItem(cartItem, pkg.id);
   },
 
   /**
    * Remove a cart item from the cart
    * The changes are local only if the user is not logged in
    */
-  removeCartItem(cartItem) {
+  removeCartItem(cartItem, pkgId) {
     cartItem.deleteRecord();
 
     if (!this.get("isLoggedIn")) {
+      this.removeGuestCartItem(pkgId);
       return resolve();
     }
     return cartItem.save();
@@ -418,6 +419,12 @@ export default ApiService.extend(asyncMixin, {
 
   forgetGuestItems() {
     this.get("localStorage").remove("offlineCart");
+  },
+
+  removeGuestCartItem(pkgId) {
+    let pkgIds = this.get("localStorage").read("offlineCart", []);
+    pkgIds = _.filter(pkgIds, record => +record !== +pkgId);
+    this.get("localStorage").write("offlineCart", pkgIds);
   },
 
   restoreGuestItems() {
