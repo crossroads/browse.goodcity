@@ -181,13 +181,12 @@ def app_id
 end
 
 def app_version
-  if ENV["CI"]
-    is_staging ? "#{ENV['APP_VERSION']}.#{ENV['CIRCLE_BUILD_NUM']||ENV['BUILD_BUILDNUMBER']}" : ENV['APP_VERSION']
-  elsif @ver
-    @ver
+  package_json = File.open(File.join(File.expand_path('../',  __FILE__), 'package.json'), 'r').read
+  version_number = JSON.parse(package_json)['version']
+  if is_staging
+    "#{version_number}.#{ENV['CIRCLE_BUILD_NUM']||ENV['BUILD_BUILDNUMBER']}"
   else
-    print "Enter Browse app version: "
-    @ver = STDIN.gets.strip
+    version_number
   end
 end
 

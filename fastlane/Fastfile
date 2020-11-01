@@ -1,3 +1,5 @@
+require 'json'
+
 default_platform :ios
 
 class FastlaneCore::Shell
@@ -43,8 +45,9 @@ platform :ios do
 
   desc "Upload to TestFlight"
   lane :production do
-    raise_if_no_env_var(["APP_VERSION", "PILOT_USERNAME", "PILOT_IPA", "PILOT_TESTER_EMAIL", "ITUNESCONNECT_PASSWORD"])
-    version_number = ENV["APP_VERSION"]
+    raise_if_no_env_var(["PILOT_USERNAME", "PILOT_IPA", "PILOT_TESTER_EMAIL", "ITUNESCONNECT_PASSWORD"])
+    package_json = File.open(File.join(File.expand_path('../../',  __FILE__), 'package.json'), 'r').read
+    version_number = JSON.parse(package_json)['version']
     xsh %{ source ~/.circlerc; bundle exec fastlane fastlane-credentials add --username $PILOT_USERNAME --password $ITUNESCONNECT_PASSWORD }
     latest_testflight_build_number(version: version_number, username: ENV['PILOT_USERNAME'])
     pilot
