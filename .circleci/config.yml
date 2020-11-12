@@ -299,6 +299,12 @@ jobs:
               mv $PROVISIONING_PROFILE ~/Library/MobileDevice/Provisioning\ Profiles
           working_directory: ~/code
       - run:
+          name: Download AppStore API KEY file
+          command: |
+            APPSTORE_CONNECT_API_KEY_FILENAME="AuthKey_${APPSTORE_CONNECT_API_KEY_ID}.p8"
+            yarn run azure-filestore download -d ios -f $APPSTORE_CONNECT_API_KEY_FILENAME
+            mv $APPSTORE_CONNECT_API_KEY_FILENAME ~/code/fastlane
+      - run:
           name: Download P12 certificate
           command: |
               yarn run azure-filestore download -f $CERTIFICATE
