@@ -30,6 +30,7 @@ cordova/.secret_keys
 *.mobileprovision
 *.keystore
 *.p12
+*.p8
 
 # fastlane
 Preview.html
