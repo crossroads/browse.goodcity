@@ -33,33 +33,23 @@
 <section class="main-section organisation_search_result">
   <div class="row search">
     <div class="small-12 medium-12 large-offset-2 large-8 columns">
-      {{#if isLoading}}
-      <div class="loading_screen">
-        {{partial 'loading'}}
-      </div>
-      {{else}}
-      {{#if filteredResults}}
-      <ul class="list list-activity">
-        {{#each filteredResults as |organisation|}}
-        <li class="org_search">
-          <div class="row" {{action "selectOrganisation" organisation}}>
-            <div class="small-12 large-12 columns">
-              {{organisation.nameEn}}
-            </div>
-            <div class="small-12 large-12 columns">
-              {{organisation.nameZhTw}}
-            </div>
-          </div>
-        </li>
-        {{/each}}
-      </ul>
-
-      {{#infinity-loader infinityModel= filteredResults}}
-      {{/infinity-loader}}
-
-      {{else if hasNoResults}}
-      <div class='no_result'>{{t "no_search_results"}}</div>
-      {{/if}}
+      {{#if displayResults}}
+        {{#infinite-list height="80vh" loadMore=(action "loadMoreOrganisations") as |organisations| }}
+          <ul class="list list-activity">
+            {{#each organisations as |organisation|}}
+              <li class="org_search">
+                <div class="row" {{action "selectOrganisation" organisation}}>
+                  <div class="small-12 large-12 columns">
+                    {{organisation.nameEn}}
+                  </div>
+                  <div class="small-12 large-12 columns">
+                    {{organisation.nameZhTw}}
+                  </div>
+                </div>
+              </li>
+            {{/each}}
+          </ul>
+        {{/infinite-list}}
       {{/if}}
     </div>
   </div>
