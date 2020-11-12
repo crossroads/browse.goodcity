@@ -17,5 +17,14 @@ export default ActiveModelAdapter.extend({
       "X-GOODCITY-APP-SHA": config.APP.SHA,
       "X-GOODCITY-DEVICE-ID": this.get("session.deviceId")
     };
-  })
+  }),
+
+  urlForQuery(query, modelName, snapshot) {
+    const { NAMESPACE, API_HOST_URL } = config.APP;
+    const url = query.url;
+    if (url) {
+      return `${API_HOST_URL}/${NAMESPACE}/${url}`;
+    }
+    return this._super(...arguments);
+  }
 });
