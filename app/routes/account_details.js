@@ -12,7 +12,7 @@ export default AuthorizeRoute.extend({
 
     return hash({
       organisation: params.orgId
-        ? this.store.peekRecord("gc_organisation", parseInt(params.orgId))
+        ? this.store.peekRecord("organisation", parseInt(params.orgId))
         : organisation,
       organisationsUser: organisationsUser,
       user: user
