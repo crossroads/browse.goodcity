@@ -100,7 +100,7 @@
     "glob": "^7.1.6",
     "husky": "^3.0.9",
     "lint-staged": "^9.4.2",
-    "liquid-fire": "0.31.0",
+    "liquid-fire": "~0.29.5",
     "loader.js": "^4.7.0",
     "morgan": "^1.9.1",
     "node-sass": "^4.13.0",
