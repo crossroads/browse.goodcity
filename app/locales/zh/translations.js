@@ -539,7 +539,10 @@ export default {
       quantity_label: "數量",
       description_details_label: "項目詳情（可選）",
       no_goods_error: "需要申請最少一件物品",
-      no_time_slot_selected_error: "請選擇預約時間"
+      no_time_slot_selected_error: "請選擇預約時間",
+      validation_error: {
+        invalid_details: "Enter valid details."
+      }
     },
     request: {
       remove_req: "從此訂單中刪除申請",

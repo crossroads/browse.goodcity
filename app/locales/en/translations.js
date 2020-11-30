@@ -581,7 +581,10 @@ export default {
       quantity_label: "Quantity",
       description_details_label: "Specifics of item (Optional)",
       no_goods_error: "At least one Item is required.",
-      no_time_slot_selected_error: "Please select appointment time."
+      no_time_slot_selected_error: "Please select appointment time.",
+      validation_error: {
+        invalid_details: "Enter valid details."
+      }
     },
     request: {
       remove_req: "Remove this request from order",
