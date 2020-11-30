@@ -5,10 +5,10 @@ import Controller, { inject as controller } from "@ember/controller";
 import { getOwner } from "@ember/application";
 import config from "../../config/environment";
 import AjaxPromise from "browse/utils/ajax-promise";
-import cancelOrder from "../../mixins/cancel_order";
-import { task } from "ember-concurrency";
+import CancelOrder from "../../mixins/cancel_order";
+import AsyncMixin from "browse/mixins/async_tasks";
 
-export default Controller.extend(cancelOrder, {
+export default Controller.extend(CancelOrder, AsyncMixin, {
   queryParams: ["prevPath"],
   prevPath: null,
   showCancelBookingPopUp: false,
@@ -40,123 +40,95 @@ export default Controller.extend(cancelOrder, {
 
   isAppointment: alias("order.isAppointment"),
 
-  titles: computed(function() {
-    let translation = this.get("i18n");
-    let mr = translation.t("account.user_title.mr");
-    let mrs = translation.t("account.user_title.mrs");
-    let miss = translation.t("account.user_title.miss");
-    let ms = translation.t("account.user_title.ms");
-
-    return [
-      { name: mr, id: "Mr" },
-      { name: mrs, id: "Mrs" },
-      { name: miss, id: "Miss" },
-      { name: ms, id: "Ms" }
-    ];
-  }),
-
   beneficiaryParams() {
-    let title = $("select#title option")
-      .toArray()
-      .filter(title => title.selected === true)[0].value;
-    var beneficieryParams = {
+    return {
       first_name: this.get("firstName"),
       last_name: this.get("lastName"),
-      title: title,
+      title: this.get("selectedTitle.name").toString(),
       identity_number: this.get("identityNumber"),
       phone_number: this.get("mobile"),
       order_id: this.get("order.id"),
       identity_type_id: this.identityTypeId()
     };
-    return beneficieryParams;
   },
 
   identityTypeId() {
     return this.get("selectedId") === "hkId" ? 1 : 2;
   },
 
-  actionType(isOrganisation, beneficiaryId) {
-    let actionType;
-    if (isOrganisation && beneficiaryId) {
-      actionType = "DELETE";
-    } else if (!isOrganisation && beneficiaryId) {
-      actionType = "PUT";
-    } else if (!isOrganisation && !beneficiaryId) {
-      actionType = "POST";
+  beneficiaryAction(forBeneficiary, beneficiaryId) {
+    if (!forBeneficiary && beneficiaryId) {
+      return "DELETE";
+    } else if (forBeneficiary && beneficiaryId) {
+      return "PUT";
+    } else if (forBeneficiary && !beneficiaryId) {
+      return "POST";
     } else {
-      actionType = null;
+      return null;
     }
-    return actionType;
   },
 
-  editOrder: task(function*(orderParams, isOrganisation) {
-    let order = this.get("order");
-    let orderId = order.id;
-    let beneficiaryId = order.get("beneficiary.id");
-    let store = this.store;
-    let beneficiaryResponse;
-    let url = beneficiaryId
-      ? "/beneficiaries/" + beneficiaryId
-      : "/beneficiaries";
-    let actionType = this.actionType(isOrganisation, beneficiaryId);
-    let beneficiary =
-      beneficiaryId && store.peekRecord("beneficiary", beneficiaryId);
-    let beneficiaryParams =
-      ["PUT", "POST"].indexOf(actionType) > -1
-        ? { beneficiary: this.beneficiaryParams(), order_id: orderId }
-        : {};
+  async updateOrder(forBeneficiary) {
+    const order = this.get("order");
+    const beneficiary = order.get("beneficiary");
+    const beneficiaryAction = this.beneficiaryAction(
+      forBeneficiary,
+      beneficiary.get("id")
+    );
+    const orderParams = this.getOrderParams();
     let loadingView = getOwner(this)
       .lookup("component:loading")
       .append();
+    try {
+      if (beneficiaryAction) {
+        const response = await this.get("orderService").updateBeneficiary(
+          beneficiary.get("id"),
+          beneficiaryAction,
+          {
+            orderId: order.get("id"),
+            beneficiary: this.beneficiaryParams()
+          }
+        );
+        orderParams["beneficiary_id"] = response.beneficiary
+          ? response.beneficiary.id
+          : null;
+      }
 
-    if (actionType) {
-      beneficiaryResponse = yield new AjaxPromise(
-        url,
-        actionType,
-        this.get("session.authToken"),
-        beneficiaryParams
+      await this.get("orderService").updateOrder(
+        order,
+        { order: orderParams },
+        () => {
+          this.send("redirectToGoodsDetails");
+        }
       );
-      orderParams["beneficiary_id"] = beneficiaryResponse.beneficiary
-        ? beneficiaryResponse.beneficiary.id
-        : null;
-    }
 
-    let orderResponse = yield new AjaxPromise(
-      "/orders/" + orderId,
-      "PUT",
-      this.get("session.authToken"),
-      { order: orderParams }
-    );
-    store.pushPayload(orderResponse);
-
-    if (beneficiary && actionType === "DELETE") {
-      store.unloadRecord(beneficiary);
-    } else {
-      store.pushPayload(beneficiaryResponse);
+      loadingView.destroy();
+    } catch (error) {
+      loadingView.destroy();
+      throw error;
     }
-    this.send("redirectToGoodsDetails");
-    loadingView.destroy();
-  }),
+  },
+
+  getOrderParams() {
+    const clientInfo = this.get("clientInfoId");
+    const purposeId = this.get("purposes")
+      .filterBy("identifier", clientInfo)
+      .get("firstObject.id");
+
+    return {
+      purpose_ids: [purposeId],
+      beneficiary_id: null
+    };
+  },
 
   actions: {
+    onTitleChange(title) {
+      this.set("selectedTitle", title);
+    },
+
     saveClientDetails() {
-      let orderParams;
-      let clientInfo = this.get("clientInfoId");
-      let purposeId = this.get("purposes")
-        .filterBy("identifier", clientInfo)
-        .get("firstObject.id");
-
-      const isForOrganisation = clientInfo === "organisation";
-      orderParams = isForOrganisation
-        ? {
-            purpose_ids: [purposeId],
-            beneficiary_id: null
-          }
-        : {
-            purpose_ids: [purposeId]
-          };
-
-      this.get("editOrder").perform(orderParams, isForOrganisation);
+      const forBeneficiary = this.get("clientInfoId") === "client";
+      this.updateOrder(forBeneficiary);
     },
 
     redirectToGoodsDetails() {

@@ -112,7 +112,7 @@
                     <div class="small-2 columns client_title">
                       {{select-list
                         content=titles
-                        on-change=(action (mut selectedTitle))
+                        on-change=(action 'onTitleChange')
                         selectedValue=selectedTitle
                         value= selectedTitle
                         selectArrow=true
