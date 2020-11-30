@@ -29,6 +29,10 @@
     }
     margin-top: -1rem;
   }
+  .request-type{
+    pointer-events: none;
+  }
+
 }
 
 .req-more-goods{
@@ -67,3 +71,18 @@
   margin: 2rem auto;
 }
 
+.request_empty_error{
+  background-color: $coral-red;
+  color:$white;
+  margin-top:-0.9rem !important;
+  width: 81%;
+  margin-left: 0.5rem;
+
+  @media #{$small-only}{
+    width: 79%;
+  }
+}
+
+.error-reason-margin{
+  margin-left: 0.7rem;
+}

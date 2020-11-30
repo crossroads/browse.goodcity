@@ -9,9 +9,10 @@ export default Component.extend({
   request: null,
   num: null,
   order: null,
+  requestType: Ember.computed.alias("request.packageType"),
 
   packageTypeName: computed("request.packageType.name", function() {
-    return this.get("request.packageType.name");
+    return this.get("requestType") ? `${this.get("requestType.name")}` : "";
   }),
 
   actions: {

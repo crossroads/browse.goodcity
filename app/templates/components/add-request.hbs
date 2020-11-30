@@ -1,10 +1,12 @@
 <section class="new-user-section request-section">
   <div class="request-block">
-    {{#form-control}}
     <div class="small-12 columns add-request">
       <div class="small-7 columns" {{action "searchPackageType" request.id order.id}}>
         <label> {{t 'order.goods_details.type_label'}} </label>
-        {{input type="text" name="packageTypeDescription" value=packageTypeName pattern=".*\S.*" id=(concat 'packageTypeDescription' request.id) classNames="select-goods" required='true' disabled=true}}
+        <div class="request-type">
+          {{input type="text" value=packageTypeName
+          name="packageTypeDescription" pattern=".*\S.*" classNames="select-goods" required='true' tabindex="-1"}}
+        </div>
       </div>
       <div class="small-3 columns">
         <label> {{t 'order.goods_details.quantity_label'}} </label>
@@ -15,12 +17,16 @@
       </div>
     </div>
     {{!-- <div class="small-12 columns"> --}}
-    <div class="small-10 columns input-error warning_empty request-error">
-      <div class='input-error'> Enter valid details. </div>
-    </div>
-    <div class='small-2 columns'>&nbsp;</div>
+    {{#if (is-not requestType)}}
+      <div class="row">
+        <div class="small-12 columns request_empty_error">
+          <div class='error'>{{fa-icon "exclamation-triangle"}}
+            <span class="error-reason-margin">{{t "add_request.error"}}</span>
+          </div>
+        </div>
+      </div>
+    {{/if}}
     {{!-- </div> --}}
-    {{/form-control}}
   </div>
   <div class="row">
     <div class="small-12 columns">

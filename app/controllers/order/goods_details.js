@@ -19,9 +19,16 @@ export default Controller.extend(cancelOrder, {
   sortProperties: ["id"],
   sortedGcRequests: sort("order.goodcityRequests", "sortProperties"),
 
-  hasNoGcRequests: computed("order.goodcityRequests.[]", function() {
-    return !this.get("order.goodcityRequests").length;
-  }),
+  hasNoGcRequests: computed(
+    "order.goodcityRequests.[]",
+    "order.goodcityRequests.@each.packageType",
+    function() {
+      return (
+        this.get("order.goodcityRequests").filter(gr => gr.get("packageType"))
+          .length !== this.get("order.goodcityRequests").length
+      );
+    }
+  ),
 
   actions: {
     addRequest() {
