@@ -7,6 +7,7 @@ export default {
   "company.name": "Crossroads Foundation",
   by: "By",
   ok: "OK",
+  access_denied: "Access Denied",
   go_to_top: "Go to top",
   okay: "Okay",
   unexpected_error: "Something went wrong",

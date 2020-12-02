@@ -5,6 +5,7 @@ export default {
   "company.name": "國際十字路會",
   by: "了解",
   ok: "確定",
+  access_denied: "Access Denied",
   unexpected_error: "出錯了",
   not_allowed_error: "You are not allowed to perform this action.",
   QuotaExceededError:

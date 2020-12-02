@@ -121,6 +121,11 @@
           </div>
         </div>
       </div>
+      {{#if order}}
+        {{#message-box btn1Text=(t "ok") btn1Callback=(action "back") isVisible=(if order.isEditAllowed false) classNames="popupOverlay"}}
+          <p class="bold"> {{t 'access_denied'}}</p>
+        {{/message-box}}
+      {{/if}}
     </div>
   </div>
 </div>
