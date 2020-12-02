@@ -3,18 +3,18 @@ import { computed } from "@ember/object";
 import { alias, equal } from "@ember/object/computed";
 import Controller, { inject as controller } from "@ember/controller";
 import { getOwner } from "@ember/application";
+import { inject as service } from "@ember/service";
 import config from "../../config/environment";
-import AjaxPromise from "browse/utils/ajax-promise";
 import CancelOrder from "../../mixins/cancel_order";
-import AsyncMixin from "browse/mixins/async_tasks";
 
-export default Controller.extend(CancelOrder, AsyncMixin, {
+export default Controller.extend(CancelOrder, {
   queryParams: ["prevPath"],
   prevPath: null,
   showCancelBookingPopUp: false,
   isMobileApp: config.cordova.enabled,
   myOrders: controller(),
   firstName: null,
+  messageBox: service(),
   lastName: null,
   mobilePhone: null,
   isEditing: false,
@@ -103,9 +103,8 @@ export default Controller.extend(CancelOrder, AsyncMixin, {
       );
 
       loadingView.destroy();
-    } catch (error) {
-      loadingView.destroy();
-      throw error;
+    } catch (e) {
+      this.get("messageBox").alert(e.responseJSON.errors);
     }
   },
 
