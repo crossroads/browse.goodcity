@@ -6,8 +6,9 @@ import { getOwner } from "@ember/application";
 import AjaxPromise from "browse/utils/ajax-promise";
 import config from "../../config/environment";
 import cancelOrder from "../../mixins/cancel_order";
+import AsyncMixin from "../../mixins/async_tasks";
 
-export default Controller.extend(cancelOrder, {
+export default Controller.extend(cancelOrder, AsyncMixin, {
   showCancelBookingPopUp: false,
   queryParams: ["typeId", "fromClientInformation"],
   isMobileApp: config.cordova.enabled,
@@ -17,7 +18,6 @@ export default Controller.extend(cancelOrder, {
   qty: null,
   otherDetails: "",
   sortProperties: ["id"],
-  sortedGcRequests: sort("order.goodcityRequests", "sortProperties"),
 
   hasNoGcRequests: computed(
     "order.goodcityRequests.[]",
@@ -32,32 +32,66 @@ export default Controller.extend(cancelOrder, {
 
   actions: {
     addRequest() {
-      var orderId = this.get("order.id");
-      var goodcityRequestParams = {};
-      goodcityRequestParams["quantity"] = 1;
-      goodcityRequestParams["order_id"] = orderId;
-      var loadingView = getOwner(this)
-        .lookup("component:loading")
-        .append();
-
-      new AjaxPromise(
-        "/goodcity_requests",
-        "POST",
-        this.get("session.authToken"),
-        { goodcity_request: goodcityRequestParams }
-      )
-        .then(data => {
-          this.get("store").pushPayload(data);
-        })
-        .finally(() => {
-          loadingView.destroy();
-        });
+      const goodcityRequest = {
+        description: "",
+        quantity: null,
+        packageType: null
+      };
+      this.set("goodcityRequests", [
+        ...this.get("goodcityRequests"),
+        goodcityRequest
+      ]);
     },
 
-    saveGoodsDetails() {
+    async removeRequest(id, index) {
+      try {
+        if (id) {
+          var url = `/goodcity_requests/${id}`;
+          var req = this.get("store").peekRecord("goodcity_request", id);
+          var loadingView = getOwner(this)
+            .lookup("component:loading")
+            .append();
+          const data = await new AjaxPromise(
+            url,
+            "DELETE",
+            this.get("session.authToken")
+          );
+          this.get("store").pushPayload(data);
+          this.get("store").unloadRecord(req);
+        }
+        this.set("goodcityRequests", [
+          ...this.get("goodcityRequests").slice(0, index),
+          ...this.get("goodcityRequests").slice(index + 1)
+        ]);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        loadingView && loadingView.destroy();
+      }
+    },
+
+    async saveGoodsDetails() {
       if (this.get("hasNoGcRequests")) {
         return false;
       }
+
+      const goodcityRequests = this.get("goodcityRequests");
+
+      await this.runTask(
+        Promise.all(
+          goodcityRequests.map(async gr => {
+            if (gr.id) {
+              await this.get("orderService").createGoodsDetails(
+                this.get("order.id"),
+                gr
+              );
+            } else {
+              // await this.get('orderService').updateGoodsDetails(gr)
+            }
+          })
+        )
+      );
+
       var promises = [];
       this.get("order.goodcityRequests").forEach(goodcityRequest => {
         promises.push(goodcityRequest.save());

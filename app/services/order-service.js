@@ -186,5 +186,17 @@ export default ApiService.extend({
     this.get("store").pushPayload(data);
     cb(data);
     return data;
+  },
+
+  async createGoodsDetails(orderId, params) {
+    const url = `/goodcity_requests`;
+    const data = await this.POST(url, {
+      goodcity_request: {
+        quantity: params.quantity,
+        order_id: orderId,
+        package_type_id: params.packageTypeId
+      }
+    });
+    this.get("store").pushPayload(data);
   }
 });

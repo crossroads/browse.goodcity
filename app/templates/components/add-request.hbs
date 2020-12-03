@@ -10,10 +10,10 @@
       </div>
       <div class="small-3 columns">
         <label> {{t 'order.goods_details.quantity_label'}} </label>
-        {{numeric-input id=(concat 'quantity' request.id) name="qty" value=request.quantity maxlength="8" required='true' pattern="\d{1,8}" classNames="add-quantity"}}
+        {{numeric-input name="qty" value=request.quantity maxlength="8" required='true' pattern="\d{1,8}" classNames="add-quantity"}}
       </div>
       <div class='small-2 columns icon-center remove-request remove-request-click'>
-        <i class='icon' {{action "removeRequest" request.id on="click"}}>{{ fa-icon 'times-circle' size="2x" }}</i>
+        <i class='icon' {{action "removeRequest" request.id num on="click"}}>{{ fa-icon 'times-circle' size="2x" }}</i>
       </div>
     </div>
     {{!-- <div class="small-12 columns"> --}}
@@ -32,7 +32,7 @@
     <div class="small-12 columns">
       <div class="small-10 columns req-description">
         <label> {{t 'order.goods_details.description_details_label'}} </label>
-        {{input type="text" id=(concat 'description' request.id) name="otherDetails" value=request.description classNames="number_input center_align_placeholder add-description"}}
+        {{input type="text" name="otherDetails" value=request.description classNames="number_input center_align_placeholder add-description"}}
       </div>
     </div>
   </div>
