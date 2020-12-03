@@ -1,39 +1,35 @@
 import { computed } from "@ember/object";
 import { inject as service } from "@ember/service";
 import Component from "@ember/component";
-import { getOwner } from "@ember/application";
-import AjaxPromise from "browse/utils/ajax-promise";
+import AsyncMixin from "browse/mixins/async_tasks";
 
-export default Component.extend({
+export default Component.extend(AsyncMixin, {
   store: service(),
   request: null,
   num: null,
   order: null,
   requestType: Ember.computed.alias("request.packageType"),
-
-  packageTypeName: computed("request.packageType.name", function() {
+  packageTypeService: service(),
+  orderService: service(),
+  packageTypeName: computed("request.packageType", function() {
     return this.get("requestType") ? `${this.get("requestType.name")}` : "";
   }),
 
   actions: {
-    deleteRequest(reqId) {
-      var i18n = this.get("i18n");
-      this.get("messageBox").custom(
-        i18n.t("order.request.remove_req").string + this.get("model.code"),
-        i18n.t("order.request.remove").string,
-        () => this.send("removeRequest", reqId),
-        i18n.t("not_now").string
-      );
+    async removeRequest(id, index) {
+      const req = this.get("store").peekRecord("goodcity_request", id);
+      await this.runTask(this.get("orderService").deleteGoodsDetails(id));
+
+      this.get("store").unloadRecord(req);
+      this.get("onRemoveRequest")(id, index);
     },
 
-    removeRequest(reqId, index) {
-      this.get("onRemoveRequest")(reqId, index);
-    },
+    async packageTypeLookup() {
+      const packageType = await this.get(
+        "packageTypeService"
+      ).packageTypeLookup();
 
-    searchPackageType(reqId, orderId) {
-      this.get("router").transitionTo("order.search_code", orderId, {
-        queryParams: { reqId: reqId }
-      });
+      this.set("request.packageType", packageType);
     },
 
     //Fix: Too deeply nested component(3 levels) failing randomly(Known issue with Ember)

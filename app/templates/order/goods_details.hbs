@@ -38,7 +38,7 @@
           class="main-section client-information request-add-remove-section medium-10 medium-offset-1 large-10 large-offset-1 columns">
           {{#validatable-form onSubmit=(action 'saveGoodsDetails') as |form|}}
           {{#each goodcityRequests as |req index|}}
-          {{add-request id=index order=model request=req num=index onRemoveRequest=(action 'removeRequest')}}
+          {{add-request id=index order=model request=req num=index onRemoveRequest=(action 'onRemoveRequest')}}
           {{/each}}
           <div class='row req-more-goods'>
             <div class='columns request-more link-blue add_package_link add_more_request'
@@ -63,5 +63,5 @@
     </div>
   </div>
 </div>
-
+{{package-type-overlay open=packageTypeService.openPackageTypeSearch onSelect=packageTypeService.onPackageTypeSelect}}
 {{partial "order/cancel_order"}}

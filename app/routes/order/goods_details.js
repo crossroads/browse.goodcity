@@ -5,7 +5,6 @@ import AjaxPromise from "browse/utils/ajax-promise";
 export default AuthorizeRoute.extend({
   backLinkPath: computed.localStorage(),
   orderId: null,
-
   queryParams: {
     fromClientInformation: false
   },

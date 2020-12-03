@@ -1,19 +1,20 @@
-import { all } from "rsvp";
 import { computed } from "@ember/object";
-import { alias, sort } from "@ember/object/computed";
+import { alias } from "@ember/object/computed";
 import Controller from "@ember/controller";
-import { getOwner } from "@ember/application";
-import AjaxPromise from "browse/utils/ajax-promise";
+import { inject as service } from "@ember/service";
 import config from "../../config/environment";
 import cancelOrder from "../../mixins/cancel_order";
 import AsyncMixin from "../../mixins/async_tasks";
 
 export default Controller.extend(cancelOrder, AsyncMixin, {
+  packageTypeService: service(),
+  messageBox: service(),
   showCancelBookingPopUp: false,
   queryParams: ["typeId", "fromClientInformation"],
   isMobileApp: config.cordova.enabled,
   order: alias("model"),
   typeId: null,
+
   fromClientInformation: false,
   qty: null,
   otherDetails: "",
@@ -30,6 +31,20 @@ export default Controller.extend(cancelOrder, AsyncMixin, {
     }
   ),
 
+  async createGoodsDetails(orderId, params, index) {
+    const data = await this.get("orderService").createGoodsDetails(
+      orderId,
+      params
+    );
+    goodcityRequests[index].id = data["goodcity_request"]["id"];
+    this.set("goodcityRequests", [...goodcityRequests]);
+  },
+
+  async updateGoodsDetails(orderId, params) {
+    params.id = gr.id;
+    await this.get("orderService").updateGoodsDetails(orderId, params);
+  },
+
   actions: {
     addRequest() {
       const goodcityRequest = {
@@ -43,31 +58,11 @@ export default Controller.extend(cancelOrder, AsyncMixin, {
       ]);
     },
 
-    async removeRequest(id, index) {
-      try {
-        if (id) {
-          var url = `/goodcity_requests/${id}`;
-          var req = this.get("store").peekRecord("goodcity_request", id);
-          var loadingView = getOwner(this)
-            .lookup("component:loading")
-            .append();
-          const data = await new AjaxPromise(
-            url,
-            "DELETE",
-            this.get("session.authToken")
-          );
-          this.get("store").pushPayload(data);
-          this.get("store").unloadRecord(req);
-        }
-        this.set("goodcityRequests", [
-          ...this.get("goodcityRequests").slice(0, index),
-          ...this.get("goodcityRequests").slice(index + 1)
-        ]);
-      } catch (error) {
-        console.log(error);
-      } finally {
-        loadingView && loadingView.destroy();
-      }
+    async onRemoveRequest(_id, index) {
+      this.set("goodcityRequests", [
+        ...this.get("goodcityRequests").slice(0, index),
+        ...this.get("goodcityRequests").slice(index + 1)
+      ]);
     },
 
     async saveGoodsDetails() {
@@ -76,41 +71,25 @@ export default Controller.extend(cancelOrder, AsyncMixin, {
       }
 
       const goodcityRequests = this.get("goodcityRequests");
-
-      await this.runTask(
-        Promise.all(
-          goodcityRequests.map(async gr => {
-            if (gr.id) {
-              await this.get("orderService").createGoodsDetails(
-                this.get("order.id"),
-                gr
-              );
-            } else {
-              // await this.get('orderService').updateGoodsDetails(gr)
-            }
-          })
-        )
-      );
-
-      var promises = [];
-      this.get("order.goodcityRequests").forEach(goodcityRequest => {
-        promises.push(goodcityRequest.save());
-      });
-
-      var loadingView = getOwner(this)
-        .lookup("component:loading")
-        .append();
-
-      all(promises)
-        .then(function() {
-          loadingView.destroy();
-        })
-        .finally(() => {
-          this.transitionToRoute(
-            "order.schedule_details",
-            this.get("order.id")
-          );
-        });
+      try {
+        await this.runTask(
+          Promise.all(
+            goodcityRequests.map(async (gr, index) => {
+              const params = {
+                packageTypeId: gr.packageType.get("id"),
+                quantity: gr.quantity
+              };
+              if (!gr.id) {
+                this.createGoodsDetails(this.get("order.id"), params, index);
+              } else {
+                this.updateGoodsDetails(this.get("order.id"), params);
+              }
+            })
+          )
+        );
+      } catch (e) {
+        this.get("messageBox").alert(e.responseJSON.errors);
+      }
     }
   }
 });

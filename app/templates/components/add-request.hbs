@@ -1,7 +1,7 @@
 <section class="new-user-section request-section">
   <div class="request-block">
     <div class="small-12 columns add-request">
-      <div class="small-7 columns" {{action "searchPackageType" request.id order.id}}>
+      <div class="small-7 columns" {{action "packageTypeLookup"}}>
         <label> {{t 'order.goods_details.type_label'}} </label>
         <div class="request-type">
           {{input type="text" value=packageTypeName
