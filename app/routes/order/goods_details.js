@@ -36,7 +36,7 @@ export default AuthorizeRoute.extend({
     if (!model.get("goodcityRequests").length) {
       goodcityRequests.push({
         description: null,
-        quantity: null,
+        quantity: 1,
         packageType: null
       });
     } else {

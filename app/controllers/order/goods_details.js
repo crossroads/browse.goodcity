@@ -50,7 +50,7 @@ export default Controller.extend(cancelOrder, AsyncMixin, {
     addRequest() {
       const goodcityRequest = {
         description: "",
-        quantity: null,
+        quantity: 1,
         packageType: null
       };
       this.set("goodcityRequests", [
@@ -78,7 +78,8 @@ export default Controller.extend(cancelOrder, AsyncMixin, {
             goodcityRequests.map(async (gr, index) => {
               const params = {
                 packageTypeId: gr.packageType.get("id"),
-                quantity: gr.quantity
+                quantity: gr.quantity,
+                description: gr.description
               };
               if (!gr.id) {
                 return this.createGoodsDetails(orderId, params, index);
