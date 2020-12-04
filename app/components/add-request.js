@@ -14,13 +14,16 @@ export default Component.extend(AsyncMixin, {
   packageTypeName: computed("request.packageType", function() {
     return this.get("requestType") ? `${this.get("requestType.name")}` : "";
   }),
-
+  hasError: Ember.computed("requestType", "request.quantity", function() {
+    return !this.get("requestType") || !this.get("request.quantity");
+  }),
   actions: {
     async removeRequest(id, index) {
-      const req = this.get("store").peekRecord("goodcity_request", id);
-      await this.runTask(this.get("orderService").deleteGoodsDetails(id));
-
-      this.get("store").unloadRecord(req);
+      if (id) {
+        const req = this.get("store").peekRecord("goodcity_request", id);
+        await this.runTask(this.get("orderService").deleteGoodsDetails(id));
+        this.get("store").unloadRecord(req);
+      }
       this.get("onRemoveRequest")(id, index);
     },
 

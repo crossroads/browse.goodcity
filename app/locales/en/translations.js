@@ -583,7 +583,7 @@ export default {
       no_goods_error: "At least one Item is required.",
       no_time_slot_selected_error: "Please select appointment time.",
       validation_error: {
-        invalid_details: "Enter valid details."
+        invalid_details: "Goods Type and Quantity cannot be blank"
       }
     },
     request: {

@@ -35,9 +35,9 @@ export default AuthorizeRoute.extend({
     const goodcityRequests = [];
     if (!model.get("goodcityRequests").length) {
       goodcityRequests.push({
+        description: null,
         quantity: null,
-        specifics: null,
-        packageTypeId: null
+        packageType: null
       });
     } else {
       model.get("goodcityRequests").map(gr => {

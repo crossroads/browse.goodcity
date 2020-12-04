@@ -21,12 +21,13 @@ export default Controller.extend(cancelOrder, AsyncMixin, {
   sortProperties: ["id"],
 
   hasNoGcRequests: computed(
-    "order.goodcityRequests.[]",
-    "order.goodcityRequests.@each.packageType",
+    "goodcityRequests.[]",
+    "goodcityRequests.@each.packageType",
     function() {
       return (
-        this.get("order.goodcityRequests").filter(gr => gr.get("packageType"))
-          .length !== this.get("order.goodcityRequests").length
+        this.get("goodcityRequests").length === 0 ||
+        this.get("goodcityRequests").filter(gr => gr.packageType).length !==
+          this.get("goodcityRequests").length
       );
     }
   ),
@@ -36,12 +37,12 @@ export default Controller.extend(cancelOrder, AsyncMixin, {
       orderId,
       params
     );
+    const goodcityRequests = this.get("goodcityRequests");
     goodcityRequests[index].id = data["goodcity_request"]["id"];
     this.set("goodcityRequests", [...goodcityRequests]);
   },
 
   async updateGoodsDetails(orderId, params) {
-    params.id = gr.id;
     await this.get("orderService").updateGoodsDetails(orderId, params);
   },
 
@@ -69,7 +70,7 @@ export default Controller.extend(cancelOrder, AsyncMixin, {
       if (this.get("hasNoGcRequests")) {
         return false;
       }
-
+      const orderId = this.get("order.id");
       const goodcityRequests = this.get("goodcityRequests");
       try {
         await this.runTask(
@@ -80,15 +81,17 @@ export default Controller.extend(cancelOrder, AsyncMixin, {
                 quantity: gr.quantity
               };
               if (!gr.id) {
-                this.createGoodsDetails(this.get("order.id"), params, index);
+                return this.createGoodsDetails(orderId, params, index);
               } else {
-                this.updateGoodsDetails(this.get("order.id"), params);
+                params.id = gr.id;
+                return this.updateGoodsDetails(orderId, params);
               }
             })
           )
         );
+        this.transitionToRoute("order.schedule_details", orderId);
       } catch (e) {
-        this.get("messageBox").alert(e.responseJSON.errors);
+        this.get("messageBox").alert(e.responseJSON.errors[0].message);
       }
     }
   }

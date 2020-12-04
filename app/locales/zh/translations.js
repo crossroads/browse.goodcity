@@ -541,7 +541,7 @@ export default {
       no_goods_error: "需要申請最少一件物品",
       no_time_slot_selected_error: "請選擇預約時間",
       validation_error: {
-        invalid_details: "Enter valid details."
+        invalid_details: "Goods Type and Quantity cannot be blank"
       }
     },
     request: {
