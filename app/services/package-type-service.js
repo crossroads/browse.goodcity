@@ -21,20 +21,5 @@ export default ApiService.extend({
         });
       });
     });
-  },
-
-  cannedMessageLookup() {
-    const deferred = Ember.RSVP.defer();
-
-    Ember.run(() => {
-      this.set("isCannedMessagesVisible", true);
-      this.set("onCannedMessageSelect", text => {
-        this.set("onCannedMessageSelect", _.noop);
-        this.set("openLocationSearch", false);
-        deferred.resolve(text || null);
-      });
-    });
-
-    return deferred.promise;
   }
 });
