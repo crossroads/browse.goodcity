@@ -1,82 +1,99 @@
-import { all } from "rsvp";
 import { computed } from "@ember/object";
-import { alias, sort } from "@ember/object/computed";
+import { alias } from "@ember/object/computed";
 import Controller from "@ember/controller";
-import { getOwner } from "@ember/application";
-import AjaxPromise from "browse/utils/ajax-promise";
+import { inject as service } from "@ember/service";
 import config from "../../config/environment";
 import cancelOrder from "../../mixins/cancel_order";
+import AsyncMixin from "../../mixins/async_tasks";
 
-export default Controller.extend(cancelOrder, {
+export default Controller.extend(cancelOrder, AsyncMixin, {
+  packageTypeService: service(),
+  messageBox: service(),
   showCancelBookingPopUp: false,
   queryParams: ["typeId", "fromClientInformation"],
   isMobileApp: config.cordova.enabled,
   order: alias("model"),
   typeId: null,
+
   fromClientInformation: false,
   qty: null,
   otherDetails: "",
   sortProperties: ["id"],
-  sortedGcRequests: sort("order.goodcityRequests", "sortProperties"),
 
   hasNoGcRequests: computed(
-    "order.goodcityRequests.[]",
-    "order.goodcityRequests.@each.packageType",
+    "goodcityRequests.[]",
+    "goodcityRequests.@each.packageType",
     function() {
       return (
-        this.get("order.goodcityRequests").filter(gr => gr.get("packageType"))
-          .length !== this.get("order.goodcityRequests").length
+        this.get("goodcityRequests").length === 0 ||
+        this.get("goodcityRequests").filter(gr => gr.packageType).length !==
+          this.get("goodcityRequests").length
       );
     }
   ),
 
+  async createGoodsDetails(orderId, params, index) {
+    const data = await this.get("orderService").createGoodsDetails(
+      orderId,
+      params
+    );
+    const goodcityRequests = this.get("goodcityRequests");
+    goodcityRequests[index].id = data["goodcity_request"]["id"];
+    this.set("goodcityRequests", [...goodcityRequests]);
+  },
+
+  async updateGoodsDetails(orderId, params) {
+    await this.get("orderService").updateGoodsDetails(orderId, params);
+  },
+
   actions: {
     addRequest() {
-      var orderId = this.get("order.id");
-      var goodcityRequestParams = {};
-      goodcityRequestParams["quantity"] = 1;
-      goodcityRequestParams["order_id"] = orderId;
-      var loadingView = getOwner(this)
-        .lookup("component:loading")
-        .append();
-
-      new AjaxPromise(
-        "/goodcity_requests",
-        "POST",
-        this.get("session.authToken"),
-        { goodcity_request: goodcityRequestParams }
-      )
-        .then(data => {
-          this.get("store").pushPayload(data);
-        })
-        .finally(() => {
-          loadingView.destroy();
-        });
+      const goodcityRequest = {
+        description: "",
+        quantity: 1,
+        packageType: null
+      };
+      this.set("goodcityRequests", [
+        ...this.get("goodcityRequests"),
+        goodcityRequest
+      ]);
     },
 
-    saveGoodsDetails() {
+    async onRemoveRequest(_id, index) {
+      this.set("goodcityRequests", [
+        ...this.get("goodcityRequests").slice(0, index),
+        ...this.get("goodcityRequests").slice(index + 1)
+      ]);
+    },
+
+    async saveGoodsDetails() {
       if (this.get("hasNoGcRequests")) {
         return false;
       }
-      var promises = [];
-      this.get("order.goodcityRequests").forEach(goodcityRequest => {
-        promises.push(goodcityRequest.save());
-      });
-
-      var loadingView = getOwner(this)
-        .lookup("component:loading")
-        .append();
-
-      all(promises)
-        .then(function() {
-          loadingView.destroy();
-        })
-        .finally(() => {
-          this.transitionToRoute(
-            "order.schedule_details",
-            this.get("order.id")
-          );
-        });
+      const orderId = this.get("order.id");
+      const goodcityRequests = this.get("goodcityRequests");
+      try {
+        await this.runTask(
+          Promise.all(
+            goodcityRequests.map(async (gr, index) => {
+              const params = {
+                packageTypeId: gr.packageType.get("id"),
+                quantity: gr.quantity,
+                description: gr.description
+              };
+              if (!gr.id) {
+                return this.createGoodsDetails(orderId, params, index);
+              } else {
+                params.id = gr.id;
+                return this.updateGoodsDetails(orderId, params);
+              }
+            })
+          )
+        );
+        this.transitionToRoute("order.schedule_details", orderId);
+      } catch (e) {
+        this.get("messageBox").alert(e.responseJSON.errors[0].message);
+      }
     }
   }
 });

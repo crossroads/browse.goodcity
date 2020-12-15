@@ -1,5 +1,5 @@
 {{#if isMobileApp}}
-{{scroll-to-bottom customClass="goods-detail-info-scroll-arrow"}}
+  {{scroll-to-bottom customClass="goods-detail-info-scroll-arrow"}}
 {{/if}}
 <div class="row">
   <div class="large-8 columns large-offset-2 medium-offset-1 medium-10 small-12">
@@ -10,11 +10,11 @@
             <section class="left-large inline-content">
               {{fa-icon "angle-left"}}
               {{#if fromClientInformation}}
-              {{#link-to 'order.client_information' order.id classNames="back"}}{{t "back"}}{{/link-to}}
+                {{#link-to 'order.client_information' order.id classNames="back"}}{{t "back"}}{{/link-to}}
               {{else if (is-equal backLinkPath 'order.client_information')}}
-              {{#link-to backLinkPath order.id classNames="back"}}{{t "back"}}{{/link-to}}
+                {{#link-to backLinkPath order.id classNames="back"}}{{t "back"}}{{/link-to}}
               {{else}}
-              {{#link-to backLinkPath classNames="back"}}{{t "back"}}{{/link-to}}
+                {{#link-to backLinkPath classNames="back"}}{{t "back"}}{{/link-to}}
               {{/if}}
             </section>
             <section class="middle tab-bar-section">
@@ -37,31 +37,29 @@
         <section
           class="main-section client-information request-add-remove-section medium-10 medium-offset-1 large-10 large-offset-1 columns">
           {{#validatable-form onSubmit=(action 'saveGoodsDetails') as |form|}}
-          {{#each sortedGcRequests as |req index|}}
-          {{add-request id=index order=model request=req num=index}}
-          {{/each}}
-          <div class='row req-more-goods'>
-            <div class='columns request-more link-blue add_package_link add_more_request'
-              {{action "addRequest" on="click"}}>
-              <span>{{t "order.goods_details.request_more"}}</span>
-              <i class='fa icon'>{{fa-icon 'plus-circle' size='2x'}}</i>
+            {{#each goodcityRequests as |req index|}}
+              {{add-request id=index order=model request=req num=index onRemoveRequest=(action 'onRemoveRequest')}}
+            {{/each}}
+            <div class='row req-more-goods'>
+              <div class='columns request-more link-blue add_package_link add_more_request'
+                {{action "addRequest" on="click"}}>
+                <span>{{t "order.goods_details.request_more"}}</span>
+                <i class='fa icon'>{{fa-icon 'plus-circle' size='2x'}}</i>
+              </div>
             </div>
-          </div>
-          <br>
-          <div class="row">
-            <div class="small-11 columns">
-              {{#if hasNoGcRequests}}<p align="center" class="no-gc-req-error">
-                {{t "order.goods_details.no_goods_error"}}</p>{{/if}}
-              <button {{action 'submit' target=form}} id="goods-details-submit" disabled={{hasNoGcRequests}}
-                class="button expand expand_button">{{t "continue"}}</button>
+            <br>
+            <div class="row">
+              <div class="small-11 columns">
+                <button {{action 'submit' target=form}} id="goods-details-submit" disabled={{hasNoGcRequests}}
+                  class="button expand expand_button">{{t "continue"}}</button>
+              </div>
+              <div class='small-1 columns'>&nbsp;</div>
             </div>
-            <div class='small-1 columns'>&nbsp;</div>
-          </div>
           {{/validatable-form}}
         </section>
       </div>
     </div>
   </div>
 </div>
-
+{{package-type-overlay open=packageTypeService.openPackageTypeSearch onSelect=packageTypeService.onPackageTypeSelect}}
 {{partial "order/cancel_order"}}

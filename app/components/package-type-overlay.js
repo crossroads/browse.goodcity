@@ -3,12 +3,11 @@ import $ from "jquery";
 import { computed, observer } from "@ember/object";
 import { inject as service } from "@ember/service";
 import { alias } from "@ember/object/computed";
-import Controller from "@ember/controller";
-import { getOwner } from "@ember/application";
+import Component from "@ember/component";
 import { translationMacro as t } from "ember-i18n";
-import AjaxPromise from "browse/utils/ajax-promise";
+import _ from "lodash";
 
-export default Controller.extend({
+export default Component.extend({
   queryParams: ["changeCode", "reqId"],
   reqId: null,
   changeCode: false,
@@ -18,17 +17,19 @@ export default Controller.extend({
   fetchMoreResult: true,
   searchPlaceholder: t("search.placeholder"),
   i18n: service(),
+  store: service(),
+  packageTypeService: service(),
 
   allPackageTypes: computed("fetchMoreResult", function() {
-    return this.store.peekAll("package_type");
+    return this.get("store").peekAll("package_type");
   }),
 
   hasSearchText: computed("searchText", function() {
-    return $.trim(this.get("searchText")).length;
+    return this.get("searchText").trim().length;
   }),
 
   hasFilter: computed("filter", function() {
-    return $.trim(this.get("filter")).length;
+    return this.get("filter").trim().length;
   }),
 
   onSearchTextChange: observer("searchText", function() {
@@ -46,7 +47,9 @@ export default Controller.extend({
     "fetchMoreResult",
     "allPackageTypes.[]",
     function() {
-      var filter = $.trim(this.get("filter").toLowerCase());
+      var filter = this.get("filter")
+        .toLowerCase()
+        .trim();
       var types = [];
       var matchFilter = value =>
         (value || "").toLowerCase().indexOf(filter) !== -1;
@@ -74,7 +77,9 @@ export default Controller.extend({
   ),
 
   highlight() {
-    var string = $.trim(this.get("filter").toLowerCase());
+    var string = this.get("filter")
+      .toLowerCase()
+      .trim();
     this.clearHiglight();
     $(".codes_results li div").each(function() {
       var text = $(this).text();
@@ -98,55 +103,22 @@ export default Controller.extend({
   },
 
   actions: {
-    clearSearch(isCancelled) {
+    clearSearch() {
       this.set("filter", "");
       this.set("searchText", "");
       this.set("fetchMoreResult", true);
-      if (!isCancelled) {
-        $("#searchText").focus();
-      }
     },
 
     cancelSearch() {
-      $("#searchText").blur();
-      this.send("clearSearch", true);
-      this.transitionToRoute("order.goods_details", this.get("order.id"));
+      this.get("packageTypeService").setOverlayVisibility(false);
     },
 
     assignItemLabel(type) {
-      let url, actionType;
-      var orderId = this.get("order.id");
-      var reqId = this.get("reqId");
-      // var url = `/goodcity_requests/`;
-      var key = "package_type_id";
-      var goodcityRequestParams = {};
-      goodcityRequestParams[key] = type.get("id");
-      goodcityRequestParams["quantity"] = 1;
-      goodcityRequestParams["order_id"] = orderId;
-
-      if (reqId) {
-        url = "/goodcity_requests/" + reqId;
-        actionType = "PUT";
-      } else {
-        url = "/goodcity_requests";
-        actionType = "POST";
+      if (!type) {
+        return;
       }
-
-      var loadingView = getOwner(this)
-        .lookup("component:loading")
-        .append();
-
-      new AjaxPromise(url, actionType, this.get("session.authToken"), {
-        goodcity_request: goodcityRequestParams
-      })
-        .then(data => {
-          this.send("clearSearch");
-          this.get("store").pushPayload(data);
-        })
-        .finally(() => {
-          loadingView.destroy();
-        });
-      this.transitionToRoute("order.goods_details", orderId);
+      const onSelect = this.getWithDefault("onSelect", _.noop);
+      onSelect(type);
     }
   }
 });
