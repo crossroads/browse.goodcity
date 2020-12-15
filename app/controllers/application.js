@@ -70,7 +70,6 @@ export default Controller.extend(cancelOrderMixin, quantityUpdateMixin, {
       "schedule_details",
       "goods_details",
       "client_information",
-      "search_code",
       "confirm_booking",
       "booking_success"
     ]);

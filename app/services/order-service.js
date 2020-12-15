@@ -154,5 +154,69 @@ export default ApiService.extend({
   isOrderSubmittedOrProcessed(order) {
     const orderState = order.get("state");
     return ["submitted", "processing"].includes(orderState);
+  },
+
+  async updateBeneficiary(beneficiaryId, action = "POST", params) {
+    const url = beneficiaryId
+      ? `/beneficiaries/${beneficiaryId}`
+      : `/beneficiaries/`;
+    const actionMapper = {
+      DELETE: this.DELETE,
+      POST: this.POST,
+      PUT: this.PUT
+    };
+    const method = actionMapper[action];
+    const response = await method.call(this, url, params);
+    if (action === "DELETE") {
+      const beneficiary = this.get("store").peekRecord(
+        "beneficiary",
+        beneficiaryId
+      );
+
+      this.get("store").unloadRecord(beneficiary);
+    } else {
+      this.get("store").pushPayload(response);
+    }
+    return response;
+  },
+
+  async updateOrder(order, params = {}, cb = _.noop) {
+    const url = ORDER_URL(order.get("id"));
+    const data = await this.PUT(url, params);
+    this.get("store").pushPayload(data);
+    cb(data);
+    return data;
+  },
+
+  async createGoodsDetails(orderId, params) {
+    const url = `/goodcity_requests`;
+    const data = await this.POST(url, {
+      goodcity_request: {
+        quantity: params.quantity,
+        order_id: orderId,
+        package_type_id: params.packageTypeId
+      }
+    });
+    this.get("store").pushPayload(data);
+    return data;
+  },
+
+  async updateGoodsDetails(orderId, params) {
+    const url = `/goodcity_requests/${params.id}`;
+    const data = await this.PUT(url, {
+      goodcity_request: {
+        quantity: params.quantity,
+        order_id: orderId,
+        package_type_id: params.packageTypeId
+      }
+    });
+    this.get("store").pushPayload(data);
+    return data;
+  },
+
+  async deleteGoodsDetails(id) {
+    const url = `/goodcity_requests/${id}`;
+    const data = await this.DELETE(url);
+    this.get("store").pushPayload(data);
   }
 });
