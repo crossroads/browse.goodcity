@@ -64,14 +64,14 @@
             {{model.packageType.name}}
           </div>
         <div class="item_details">
-            {{package.notes}}
+            {{package.packageDescription}}
           </div>
       </nav>
 
       {{!-- DETAILS SECTION --}}
       <div class="all-items main-section">
         {{#each allPackages key="@index" as |package|}}
-        <div class="item_name show-for-medium-up">{{package.notes}}</div>
+        <div class="item_name show-for-medium-up">{{package.packageDescription}}</div>
         <div class="item_details">
             {{t "itemdetail.quantity"}}: {{package.quantity}}
           </div>

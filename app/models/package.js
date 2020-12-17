@@ -18,6 +18,7 @@ export default Model.extend(cloudinaryImage, {
   width: attr("number"),
   height: attr("number"),
   notes: attr("string"),
+  notes_zh_tw: attr("string"),
   inventoryNumber: attr("string"),
 
   createdAt: attr("date"),
@@ -114,6 +115,22 @@ export default Model.extend(cloudinaryImage, {
     append(`L ${this.get("length")}`);
     return !res ? "" : res + " cm";
   }),
+
+  packageDescription: computed(
+    "i18n.locale",
+    "notes",
+    "notes_zh_tw",
+    function() {
+      const lang = this.get("i18n.locale");
+
+      if (!!this.get("notes_zh_tw")) {
+        return lang == "zh-tw" && this.get("notes_zh_tw").trim() != ""
+          ? this.get("notes_zh_tw")
+          : this.get("notes");
+      }
+      return this.get("notes");
+    }
+  ),
 
   isDimensionPresent: and("width", "height", "length"),
 
