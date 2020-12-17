@@ -24,13 +24,15 @@ export default Service.extend({
     By default requests are authorized
   **/
   GET(url, opts = {}) {
-    const { authorizedRequest = true } = opts;
+    const { authorizedRequest = true, version } = opts;
     return this._request(
       url,
       {
         action: "GET"
       },
-      authorizedRequest
+      authorizedRequest,
+      {},
+      { version }
     );
   },
 

@@ -13,6 +13,11 @@ Router.map(function() {
   this.route("package_category", {
     path: "/category/:id"
   });
+  this.route("offers", function() {
+    this.route("detail", {
+      path: "/:offer_id"
+    });
+  });
   this.route("package_set", {
     path: "/package_set/:id"
   });
