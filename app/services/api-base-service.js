@@ -7,13 +7,13 @@ export default Service.extend({
 
   // ----- Utilities -----
   _request(url, options, authorizedRequest) {
-    const { action, body } = options;
+    const { action, body, version } = options;
     return new AjaxPromise(
       url,
       action,
       authorizedRequest ? this.get("session.authToken") : null,
       body,
-      {},
+      { version },
       this.get("session.language")
     );
   },
@@ -25,14 +25,14 @@ export default Service.extend({
   **/
   GET(url, opts = {}) {
     const { authorizedRequest = true, version } = opts;
+
     return this._request(
       url,
       {
-        action: "GET"
+        action: "GET",
+        version
       },
-      authorizedRequest,
-      {},
-      { version }
+      authorizedRequest
     );
   },
 

@@ -26,98 +26,30 @@
 
     <hr>
     <ul class="large-block-grid-6 small-block-grid-2 medium-block-grid-3 list items_list xxlarge-block-grid-4">
-      {{!-- {{#each pagedContent key="@index" as |record|}}
-        <li>
-          {{#if record.isSet}}
-            {{#link-to 'package_set' record.id (query-params sortBy=sortBy categoryId=category) }}
-              {{cloudinary-image-tag src=record.displayImageUrl item=record displayItemName=record.packageType.name displayItemOverlay=true}}
+      {{#each model as |record|}}
+        <div>
+          <div class="header">
+            <span style="color:#A7ACB1;">Tuen Mun-11 Items</span>
+            <span style="margin-left: 6%;color: #C4C9CF;">Offered 4 hours ago</span>
+            {{#link-to "offers.detail" 21 class="underline-link" style="background: #ED4C4E;padding-left: 20px;padding-right: 20px;color: #F7C8C8;padding-top: 5px;padding-bottom: 5px;"}}
+              View/Respond to this offer
             {{/link-to}}
-          {{else}}
-            {{#link-to 'package' record.id (query-params sortBy=sortBy categoryId=category) }}
-              {{cloudinary-image-tag src=record.displayImageUrl item=record displayItemName=record.packageType.name displayItemOverlay=true}}
-            {{/link-to}}
-          {{/if}}
-        </li>
-      {{/each}} --}}
-
-      <div>
-        <div class="header">
-          <span style="color:#A7ACB1;">Tuen Mun-11 Items</span>
-          <span style="margin-left: 6%;color: #C4C9CF;">Offered 4 hours ago</span>
-          {{#link-to "offers.detail" 21 class="underline-link" style="background: #ED4C4E;padding-left: 20px;padding-right: 20px;color: #F7C8C8;padding-top: 5px;padding-bottom: 5px;"}}
-            View/Respond to this offer
-          {{/link-to}}
-          {{!-- <div class="right" style="background: #ED4C4E;padding-left: 20px;padding-right: 20px;color: #F7C8C8;padding-top: 5px;padding-bottom: 5px;">View/Respond to this offer</div> --}}
+            {{!-- <div class="right" style="background: #ED4C4E;padding-left: 20px;padding-right: 20px;color: #F7C8C8;padding-top: 5px;padding-bottom: 5px;">View/Respond to this offer</div> --}}
+          </div>
+          <div class="sub-heading" style="margin-top: 1.5%;">
+            Seating(7) | Shelves(1) | Storage(2) | Recreation(1)
+          </div>
+          <div class="large-block-grid-6 small-block-grid-2 medium-block-grid-3 list items_list xxlarge-block-grid-4">
+            {{#each record.items as |item|}}
+              {{log item.images.[0].attributes.cloudinary_id}}
+              <li>
+                {{cloudinary-image-tag src=item.images.[0].attributes.cloudinary_id item=item displayItemName="Piano: upright" displayItemOverlay=true}}
+              </li>  
+            {{/each}}
+          </div>
         </div>
-        <div class="sub-heading" style="margin-top: 1.5%;">
-          Seating(7) | Shelves(1) | Storage(2) | Recreation(1)
-        </div>
-        <div class="large-block-grid-6 small-block-grid-2 medium-block-grid-3 list items_list xxlarge-block-grid-4">
-          <li>
-            {{cloudinary-image-tag src="https://thumbs.dreamstime.com/b/grand-piano-5481313.jpg" item=record displayItemName="Piano: upright" displayItemOverlay=true}}
-          </li>
-          <li>
-            {{cloudinary-image-tag src="https://thumbs.dreamstime.com/b/grand-piano-5481313.jpg" item=record displayItemName="Piano: upright" displayItemOverlay=true}}
-          </li>
-          <li>
-            {{cloudinary-image-tag src="https://thumbs.dreamstime.com/b/grand-piano-5481313.jpg" item=record displayItemName="Piano: upright" displayItemOverlay=true}}
-          </li>
-          <li>
-            {{cloudinary-image-tag src="https://thumbs.dreamstime.com/b/grand-piano-5481313.jpg" item=record displayItemName="Piano: upright" displayItemOverlay=true}}
-          </li>
-        </div>
-      </div>
-      <hr>
-      <div>
-        <div class="header">
-          <span style="color:#A7ACB1;">Tuen Mun-11 Items</span>
-          <span style="margin-left: 6%;color: #C4C9CF;">Offered 4 hours ago</span>
-          <div class="right" style="background: #ED4C4E;padding-left: 20px;padding-right: 20px;color: #F7C8C8;padding-top: 5px;padding-bottom: 5px;">View/Respond to this offer</div>
-        </div>
-        <div class="sub-heading" style="margin-top: 1.5%;">
-          Seating(7) | Shelves(1) | Storage(2) | Recreation(1)
-        </div>
-        <div class="large-block-grid-6 small-block-grid-2 medium-block-grid-3 list items_list xxlarge-block-grid-4">
-          <li>
-            {{cloudinary-image-tag src="https://thumbs.dreamstime.com/b/grand-piano-5481313.jpg" item=record displayItemName="Piano: upright" displayItemOverlay=true}}
-          </li>
-          <li>
-            {{cloudinary-image-tag src="https://thumbs.dreamstime.com/b/grand-piano-5481313.jpg" item=record displayItemName="Piano: upright" displayItemOverlay=true}}
-          </li>
-          <li>
-            {{cloudinary-image-tag src="https://thumbs.dreamstime.com/b/grand-piano-5481313.jpg" item=record displayItemName="Piano: upright" displayItemOverlay=true}}
-          </li>
-          <li>
-            {{cloudinary-image-tag src="https://thumbs.dreamstime.com/b/grand-piano-5481313.jpg" item=record displayItemName="Piano: upright" displayItemOverlay=true}}
-          </li>
-        </div>
-      </div>
-      <hr>
-      <div>
-        <div class="header">
-          <span style="color:#A7ACB1;">Tuen Mun-11 Items</span>
-          <span style="margin-left: 6%;color: #C4C9CF;">Offered 4 hours ago</span>
-          <div class="right" style="background: #ED4C4E;padding-left: 20px;padding-right: 20px;color: #F7C8C8;padding-top: 5px;padding-bottom: 5px;">View/Respond to this offer</div>
-        </div>
-        <div class="sub-heading" style="margin-top: 1.5%;">
-          Seating(7) | Shelves(1) | Storage(2) | Recreation(1)
-        </div>
-        <div class="large-block-grid-6 small-block-grid-2 medium-block-grid-3 list items_list xxlarge-block-grid-4">
-          <li>
-            {{cloudinary-image-tag src="https://thumbs.dreamstime.com/b/grand-piano-5481313.jpg" item=record displayItemName="Piano: upright" displayItemOverlay=true}}
-          </li>
-          <li>
-            {{cloudinary-image-tag src="https://thumbs.dreamstime.com/b/grand-piano-5481313.jpg" item=record displayItemName="Piano: upright" displayItemOverlay=true}}
-          </li>
-          <li>
-            {{cloudinary-image-tag src="https://thumbs.dreamstime.com/b/grand-piano-5481313.jpg" item=record displayItemName="Piano: upright" displayItemOverlay=true}}
-          </li>
-          <li>
-            {{cloudinary-image-tag src="https://thumbs.dreamstime.com/b/grand-piano-5481313.jpg" item=record displayItemName="Piano: upright" displayItemOverlay=true}}
-          </li>
-        </div>
-      </div>
-      <hr>
+        <hr>
+      {{/each}}
     </ul>
   </section>
 </div>

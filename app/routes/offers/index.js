@@ -1,55 +1,41 @@
-import AuthorizeRoute from "./../authorize";
+import PublicRoute from "../browse_pages";
+import { inject as service } from "@ember/service";
+import _ from "lodash";
 
-export default AuthorizeRoute.extend({
+export default PublicRoute.extend({
+  offerService: service(),
+
+  normalizeResponse(response) {
+    const normalizedResponse = _.reduce(
+      response.data,
+      (results, offer) => {
+        const offerObj = {
+          ...offer.attributes
+        };
+        const items = _.filter(
+          response.included,
+          pkg => pkg.attributes.offer_id == offer.id
+        );
+        items.map(item => {
+          item.images = _.filter(
+            response.included,
+            image => image.attributes.imageable_id == item.id
+          );
+        });
+        offerObj.items = items;
+        results.push(offerObj);
+        return results;
+      },
+      []
+    );
+    return normalizedResponse;
+  },
+
   model() {
-    return {
-      data: [
-        {
-          id: "3",
-          type: "offer",
-          attributes: {
-            id: 3,
-            state: "receiving",
-            notes: null,
-            created_at: "2020-10-09T10:30:53.771+08:00",
-            public_uid: "0f96bb6b-2f4c-36ff-6fc5-1bf289f92de2"
-          },
-          relationships: {}
-        }
-      ],
-      included: [
-        {
-          id: "11",
-          type: "item",
-          attributes: {
-            id: 11,
-            donor_description: "Baby bath / toilet + Baby bath / toilet",
-            state: "accepted",
-            offer_id: 3,
-            created_at: "2020-10-09T10:30:57.482+08:00",
-            package_type_id: 310,
-            public_uid: "d7f2d85b-ebfc-44b3-eec1-1228ce670330"
-          },
-          relationships: {}
-        },
-        {
-          id: "123",
-          type: "image",
-          attributes: {
-            id: 123,
-            favourite: true,
-            cloudinary_id: "1602210661/sxn3busci5tguu0lkmqh.png",
-            angle: 0,
-            imageable_type: "Item",
-            imageable_id: 11,
-            public_uid: null
-          }
-        }
-      ],
-      meta: {
-        page: 1,
-        per_page: 25
-      }
-    };
+    return this.get("offerService")
+      .getAllOffers()
+      .then(data => {
+        return this.normalizeResponse(data);
+      });
   }
 });
