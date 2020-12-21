@@ -122,11 +122,10 @@ export default Model.extend(cloudinaryImage, {
     "notes_zh_tw",
     function() {
       const lang = this.get("i18n.locale");
+      const chineseDescription = (this.get("notes_zh_tw") || "").trim();
 
-      if (!!this.get("notes_zh_tw")) {
-        return lang == "zh-tw" && this.get("notes_zh_tw").trim() != ""
-          ? this.get("notes_zh_tw")
-          : this.get("notes");
+      if (lang == "zh-tw" && !!chineseDescription) {
+        return chineseDescription;
       }
       return this.get("notes");
     }
