@@ -1,0 +1,40 @@
+<div class="row my_orders">
+  <div class="small-12 columns content">
+    <div class="order-summary">
+      {{!-- {{partial 'orders/order_header'}}
+      {{partial 'orders/order_tabs'}} --}}
+      {{partial 'offers/offers_tabs'}}
+      <div class="tab-content-messaging">
+        <div class="messaging-tab">
+          <section class="message-section">
+            <div class="row">
+              <div class="small-12 columns">
+                {{log model}}
+                {{#each messages as |message|}}
+                  {{#if message.isMessage}}
+                    <div class="ellipsis {{message.state}} {{if message.myMessage 'my_message' 'received_message'}}"
+                      id={{message.id}}>
+                      <div class='message_details'>
+                        {{#if message.myMessage}}
+                        {{t 'messages.you'}}
+                        {{else}}
+                        <i class="fa user-icon">{{fa-icon 'user-circle' size="2x"}}</i>
+                        {{t "full_name" firstName=message.sender.firstName lastName=message.sender.lastName}}
+                        {{message.sender.roleInitials}}
+                        {{/if}}
+                        →
+                        {{display-datetime message.createdAt format="HH:mm"}}
+                      </div>
+
+                      {{{apply-line-break message.parsedBody}}}
+                    </div>
+                  {{/if}}
+                {{/each}}
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

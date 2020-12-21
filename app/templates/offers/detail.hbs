@@ -1,44 +1,33 @@
 <div class="row my_dashboard">
-  <div class="title show-for-medium-up">{{t "my_dashboard.title"}}</div>
-  <div class="row tabs tab-icons">
-    {{#link-to 'my_orders' tagName="div" classNames="small-6 orders tab columns text-center"}}
-    <i class="fa dashboard-menu item-menu">{{fa-icon 'shopping-cart'}}</i>
+  <div class="title show-for-medium-up">Respond to Offer {{model.id}}</div>
+  {{!-- <div class="row tabs tab-icons">
+    {{#link-to 'offers.detail' model.id tagName="div" classNames="small-6 orders tab columns text-center"}}
+      <i class="fa dashboard-menu item-menu">{{fa-icon 'list'}}</i>
     {{/link-to}}
 
-    {{#link-to 'my_account' tagName="div" classNames="small-6 account tab columns text-center"}}
-    <i class="fa dashboard-menu item-menu">{{fa-icon 'address-card'}}</i>
+    {{#link-to 'offers.messages' model.id  tagName="div" classNames="small-6 account tab columns text-center"}}
+      <i class="fa dashboard-menu item-menu">{{fa-icon 'comments' }}</i>
     {{/link-to}}
   </div>
 
   <div class="row tabs tab-name active-tab">
-    {{#link-to 'my_orders' tagName="div" classNames="small-6 orders tab active-tab columns text-center item-menu"}}
-    {{t 'my_dashboard.orders'}}
+    {{#link-to 'offers.detail' model.id tagName="div" classNames="small-6 orders tab active-tab columns text-center item-menu"}}
+      Offer Details
     {{/link-to}}
 
-    {{#link-to 'my_account' tagName="div" classNames="small-6 account active-tab tab columns text-center item-menu"}}
-    {{t 'my_dashboard.account.account_text'}}
+    {{#link-to 'offers.messages' model.id tagName="div" classNames="small-6 account active-tab tab columns text-center item-menu"}}
+      Your Response
     {{/link-to}}
-  </div>
+  </div> --}}
+  {{partial 'offers/offers_tabs'}}
 
-
-  Notes:
-  Goods located in Kwai Chung
-  These items may not be sold.
-  Interested parties may be required to collect during business hours in the week of November 16th 2020.
-
+  Notes:{{model.notes}}
 
   <div class="large-block-grid-6 small-block-grid-2 medium-block-grid-3 list items_list xxlarge-block-grid-4">
-    <li>
-      {{cloudinary-image-tag src="https://thumbs.dreamstime.com/b/grand-piano-5481313.jpg" item=record displayItemName="Piano: upright" displayItemOverlay=true}}
-    </li>
-    <li>
-      {{cloudinary-image-tag src="https://thumbs.dreamstime.com/b/grand-piano-5481313.jpg" item=record displayItemName="Piano: upright" displayItemOverlay=true}}
-    </li>
-    <li>
-      {{cloudinary-image-tag src="https://thumbs.dreamstime.com/b/grand-piano-5481313.jpg" item=record displayItemName="Piano: upright" displayItemOverlay=true}}
-    </li>
-    <li>
-      {{cloudinary-image-tag src="https://thumbs.dreamstime.com/b/grand-piano-5481313.jpg" item=record displayItemName="Piano: upright" displayItemOverlay=true}}
-    </li>
-  </div>
+    {{#each model.items as |item|}}
+      <li>
+        {{item-thumbnail-view cloudinaryId=item.images.[0].attributes.cloudinary_id item=item displayItemOverlay=true}}
+      </li>  
+    {{/each}}
+  </div>  
 </div>

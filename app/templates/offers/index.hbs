@@ -31,7 +31,8 @@
           <div class="header">
             <span style="color:#A7ACB1;">Tuen Mun-11 Items</span>
             <span style="margin-left: 6%;color: #C4C9CF;">Offered 4 hours ago</span>
-            {{#link-to "offers.detail" 21 class="underline-link" style="background: #ED4C4E;padding-left: 20px;padding-right: 20px;color: #F7C8C8;padding-top: 5px;padding-bottom: 5px;"}}
+            {{log record.public_uid}}
+            {{#link-to "offers.detail" record.public_uid class="underline-link" style="background: #ED4C4E;padding-left: 20px;padding-right: 20px;color: #F7C8C8;padding-top: 5px;padding-bottom: 5px;"}}
               View/Respond to this offer
             {{/link-to}}
             {{!-- <div class="right" style="background: #ED4C4E;padding-left: 20px;padding-right: 20px;color: #F7C8C8;padding-top: 5px;padding-bottom: 5px;">View/Respond to this offer</div> --}}
@@ -41,9 +42,8 @@
           </div>
           <div class="large-block-grid-6 small-block-grid-2 medium-block-grid-3 list items_list xxlarge-block-grid-4">
             {{#each record.items as |item|}}
-              {{log item.images.[0].attributes.cloudinary_id}}
               <li>
-                {{cloudinary-image-tag src=item.images.[0].attributes.cloudinary_id item=item displayItemName="Piano: upright" displayItemOverlay=true}}
+                {{item-thumbnail-view cloudinaryId=item.images.[0].attributes.cloudinary_id item=item displayItemOverlay=true}}
               </li>  
             {{/each}}
           </div>
