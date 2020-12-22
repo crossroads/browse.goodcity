@@ -2,7 +2,8 @@
   <div class="title show-for-medium-up">Respond to Offer {{model.id}}</div>
   {{partial 'offers/offers_tabs'}}
 
-  Notes:{{model.notes}}
+  <b style="color: white;">Notes:</b> <br>
+  {{model.notes}}
   <div class="large-block-grid-6 small-block-grid-2 medium-block-grid-3 list items_list xxlarge-block-grid-4">
     {{#each model.items as |item|}}
       <li>

@@ -1,4 +1,3 @@
-import { hash } from "rsvp";
 import AuthorizeRoute from "../authorize";
 
 export default AuthorizeRoute.extend({

@@ -51,7 +51,5 @@ export default ApiService.extend({
       []
     );
     return normalizedResponse;
-  },
-
-  normalizeSingleResponse(response) {}
+  }
 });

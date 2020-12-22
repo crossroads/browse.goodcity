@@ -6,7 +6,9 @@
   {{/link-to}}
 </div>
 <div class="sub-heading" style="margin-top: 1.5%;">
-  Seating(7) | Shelves(1) | Storage(2) | Recreation(1)
+  {{#each-in typesCounts as |type count|}}
+    {{type}} ({{count}}) |
+  {{/each-in}}
 </div>
 <div class="large-block-grid-6 small-block-grid-2 medium-block-grid-3 list items_list xxlarge-block-grid-4">
   {{#each initialItems as |item|}}
