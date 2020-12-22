@@ -1,0 +1,26 @@
+.offers {
+  .view_offer {
+    background: #ED4C4E;
+    padding-left: 20px;
+    padding-right: 20px;
+    color: #F7C8C8;
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+
+  .location {
+    margin-left: 1%;
+    color:#A7ACB1;
+  }
+
+  .offer-item {
+    @media #{$large-only} {
+      margin-right: 4%;
+    }
+  }
+
+  .offers-time-ago {
+    margin-left: 6%;
+    color: #C4C9CF;
+  }
+}

@@ -1,10 +1,10 @@
-<div class="category_page">
+<div class="category_page offers">
   <nav class="tab-bar category_page">
     <section class='main-section ui'>
       <h1 class="title hide-for-small">{{model.name}}</h1>
       <section class="search_icon right-small">
         {{#link-to "search_goods"}}
-        <i class="fa">{{fa-icon 'search'}}</i>
+          <i class="fa">{{fa-icon 'search'}}</i>
         {{/link-to}}
       </section>
       <div class="browse-item-navbar">
@@ -27,28 +27,7 @@
     <hr>
     <ul class="large-block-grid-6 small-block-grid-2 medium-block-grid-3 list items_list xxlarge-block-grid-4">
       {{#each model as |record|}}
-        <div>
-          <div class="header">
-            <span style="color:#A7ACB1;">Tuen Mun-11 Items</span>
-            <span style="margin-left: 6%;color: #C4C9CF;">Offered 4 hours ago</span>
-            {{log record.public_uid}}
-            {{#link-to "offers.detail" record.public_uid class="underline-link" style="background: #ED4C4E;padding-left: 20px;padding-right: 20px;color: #F7C8C8;padding-top: 5px;padding-bottom: 5px;"}}
-              View/Respond to this offer
-            {{/link-to}}
-            {{!-- <div class="right" style="background: #ED4C4E;padding-left: 20px;padding-right: 20px;color: #F7C8C8;padding-top: 5px;padding-bottom: 5px;">View/Respond to this offer</div> --}}
-          </div>
-          <div class="sub-heading" style="margin-top: 1.5%;">
-            Seating(7) | Shelves(1) | Storage(2) | Recreation(1)
-          </div>
-          <div class="large-block-grid-6 small-block-grid-2 medium-block-grid-3 list items_list xxlarge-block-grid-4">
-            {{#each record.items as |item|}}
-              <li>
-                {{item-thumbnail-view cloudinaryId=item.images.[0].attributes.cloudinary_id item=item displayItemOverlay=true}}
-              </li>  
-            {{/each}}
-          </div>
-        </div>
-        <hr>
+        {{offers-block record=record}}
       {{/each}}
     </ul>
   </section>
