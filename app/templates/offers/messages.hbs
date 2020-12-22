@@ -1,16 +1,32 @@
 <div class="row my_orders">
   <div class="small-12 columns content">
     <div class="order-summary">
-      {{!-- {{partial 'orders/order_header'}}
-      {{partial 'orders/order_tabs'}} --}}
-      {{partial 'offers/offers_tabs'}}
+      <div class="row tabs tab-icons">
+        {{#link-to 'offers.detail' uid tagName="div" classNames="small-6 orders tab columns text-center"}}
+          <i class="fa dashboard-menu item-menu">{{fa-icon 'list'}}</i>
+        {{/link-to}}
+
+        {{#link-to 'offers.messages' model.id  (query-params uid=uid) tagName="div" classNames="small-6 account tab columns text-center"}}
+          <i class="fa dashboard-menu item-menu">{{fa-icon 'comments' }}</i>
+        {{/link-to}}
+      </div>
+      <div class="row tabs tab-name active-tab">
+        {{#link-to 'offers.detail' uid tagName="div" classNames="small-6 orders tab active-tab columns text-center item-menu"}}
+          Offer Details
+        {{/link-to}}
+
+        {{#link-to 'offers.messages' model.id (query-params uid=uid) tagName="div" classNames="small-6 account active-tab tab columns text-center item-menu"}}
+          Your Response
+        {{/link-to}}
+      </div>
+      
       <div class="tab-content-messaging">
         <div class="messaging-tab">
           <section class="message-section">
             <div class="row">
               <div class="small-12 columns">
                 {{log model}}
-                {{#each messages as |message|}}
+                {{#each sortedMessages as |message|}}
                   {{#if message.isMessage}}
                     <div class="ellipsis {{message.state}} {{if message.myMessage 'my_message' 'received_message'}}"
                       id={{message.id}}>
@@ -33,6 +49,36 @@
               </div>
             </div>
           </section>
+          <div class="message-footer">
+  <div class="btm message-form">
+    <div class="row message-textbar">
+      {{#if displayChatNote}}
+      <div class="row">
+        <div class="small-12 columns chat_note">
+          <i class="fa info-icon">{{fa-icon 'info-circle'}}</i>
+          {{t 'messages.chat_note'}}
+        </div>
+      </div>
+      {{/if}}
+      <div class="row message-base">
+        <div class="small-12 columns">
+          {{#validatable-form class="form-horizontal" onSubmit=(action 'sendMessage') as |form|}}
+          <div class="row ui">
+            <div class="small-9 large-10 medium-9 columns">
+              {{variable-height-textarea value=body name="body" required="true"  parentDiv="message-section"}}
+            </div>
+            <div class="small-3 large-2 medium-3 columns">
+              {{#online-button classNames="button" onClick=(action "sendMessage") actionArgs=true}}
+              {{t 'messages.send'}}
+              {{/online-button}}
+            </div>
+          </div>
+          {{/validatable-form}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
         </div>
       </div>
     </div>

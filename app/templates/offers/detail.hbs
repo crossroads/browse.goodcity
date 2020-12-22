@@ -1,28 +1,8 @@
 <div class="row my_dashboard">
   <div class="title show-for-medium-up">Respond to Offer {{model.id}}</div>
-  {{!-- <div class="row tabs tab-icons">
-    {{#link-to 'offers.detail' model.id tagName="div" classNames="small-6 orders tab columns text-center"}}
-      <i class="fa dashboard-menu item-menu">{{fa-icon 'list'}}</i>
-    {{/link-to}}
-
-    {{#link-to 'offers.messages' model.id  tagName="div" classNames="small-6 account tab columns text-center"}}
-      <i class="fa dashboard-menu item-menu">{{fa-icon 'comments' }}</i>
-    {{/link-to}}
-  </div>
-
-  <div class="row tabs tab-name active-tab">
-    {{#link-to 'offers.detail' model.id tagName="div" classNames="small-6 orders tab active-tab columns text-center item-menu"}}
-      Offer Details
-    {{/link-to}}
-
-    {{#link-to 'offers.messages' model.id tagName="div" classNames="small-6 account active-tab tab columns text-center item-menu"}}
-      Your Response
-    {{/link-to}}
-  </div> --}}
   {{partial 'offers/offers_tabs'}}
 
   Notes:{{model.notes}}
-
   <div class="large-block-grid-6 small-block-grid-2 medium-block-grid-3 list items_list xxlarge-block-grid-4">
     {{#each model.items as |item|}}
       <li>
