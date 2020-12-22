@@ -88,6 +88,24 @@
     }
   }
 
+  .offer-item-overlay {
+    position: absolute;
+    background: #002352;
+    margin-top: -35%;
+    display: block;
+    opacity: .8;
+    width: 16%;
+    padding-bottom: 14%;
+
+    .item_desc {
+      @media #{$small-only} {
+        margin-top: 10%;
+        color: #fff;
+        padding-bottom: 2%;
+      }
+    }
+  }
+
   select {
     -webkit-appearance: unset !important;
     background-color: unset;
