@@ -1,15 +1,10 @@
 <div class="category_page offers">
   <nav class="tab-bar category_page">
     <section class='main-section ui'>
-      <h1 class="title hide-for-small">{{model.name}}</h1>
+      <h1 align="center" class="title hide-for-small">GoodCity for Charities</h1>     
       <section class="search_icon right-small">
-        {{#link-to "search_goods"}}
-          <i class="fa">{{fa-icon 'search'}}</i>
-        {{/link-to}}
+        <i {{action "showSearch"}} class="fa">{{fa-icon 'search'}}</i>
       </section>
-      <div class="browse-item-navbar">
-        {{partial 'breadcrumbs'}}
-      </div>
     </section>
   </nav>
 
