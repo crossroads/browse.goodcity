@@ -12,7 +12,6 @@ export default AuthorizeRoute.extend({
   },
 
   setupController(controller, model) {
-    controller.set("messages", model);
     controller.set("model", { id: this.get("offerId") });
   }
 });

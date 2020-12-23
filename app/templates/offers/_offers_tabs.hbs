@@ -1,5 +1,5 @@
 <div class="row tabs tab-icons">
-  {{#link-to 'offers.detail' model.id tagName="div" classNames="small-6 orders tab columns text-center"}}
+  {{#link-to 'offers.detail' model.public_uid tagName="div" classNames="small-6 orders tab columns text-center"}}
     <i class="fa dashboard-menu item-menu">{{fa-icon 'list'}}</i>
   {{/link-to}}
 
@@ -8,7 +8,7 @@
   {{/link-to}}
 </div>
 <div class="row tabs tab-name active-tab">
-  {{#link-to 'offers.detail' model.id tagName="div" classNames="small-6 orders tab active-tab columns text-center item-menu"}}
+  {{#link-to 'offers.detail' model.public_uid tagName="div" classNames="small-6 orders tab active-tab columns text-center item-menu"}}
     Offer Details
   {{/link-to}}
 

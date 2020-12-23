@@ -14,6 +14,7 @@ export default Controller.extend({
         .save()
         .then(() => {
           this.set("body", "");
+          this.autoScroll();
         })
         .catch(error => {
           this.store.unloadRecord(message);
@@ -21,6 +22,25 @@ export default Controller.extend({
         });
     }
   },
+
+  autoScroll() {
+    window.scrollTo(0, document.body.scrollHeight);
+  },
+
+  allMessages: Ember.computed(function() {
+    return this.get("store").peekAll("message");
+  }),
+
+  messages: Ember.computed(
+    "model.id",
+    "allMessages",
+    "allMessages.[]",
+    function() {
+      return this.get("allMessages")
+        .filterBy("messageableType", "Offer")
+        .filterBy("messageableId", this.get("model.id"));
+    }
+  ),
 
   actions: {
     sendMessage() {
