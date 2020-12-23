@@ -38,7 +38,22 @@ export default AuthorizeRoute.extend({
   setupController(controller, model) {
     this._super(...arguments);
     this.setUpFormData(model, controller);
+    this.setupTitleData(controller);
     this.controllerFor("application").set("showSidebar", false);
+  },
+
+  setupTitleData(controller) {
+    const translation = this.get("i18n");
+
+    const titleData = [
+      { name: translation.t("account.user_title.mr"), id: 1 },
+      { name: translation.t("account.user_title.mrs"), id: 2 },
+      { name: translation.t("account.user_title.miss"), id: 3 },
+      { name: translation.t("account.user_title.ms"), id: 4 }
+    ];
+
+    controller.set("titles", titleData);
+    controller.set("selectedTitle", titleData[0]);
   },
 
   deactivate() {
