@@ -1,0 +1,20 @@
+<div class="header">
+  <span class="location">{{locationName}}</span>
+  <span class="offers-time-ago">Offered 4 hours ago</span>
+  {{#link-to "offers.detail" record.public_uid class="right underline-link view_offer"}}
+    View/Respond to this offer
+  {{/link-to}}
+</div>
+<div class="sub-heading" style="margin-top: 1.5%;">
+  {{#each-in typesCounts as |type count|}}
+    {{type}} ({{count}}) |
+  {{/each-in}}
+</div>
+<div class="large-block-grid-6 small-block-grid-2 medium-block-grid-3 list items_list xxlarge-block-grid-4">
+  {{#each initialItems as |item|}}
+    <li class="offer-item">
+      {{item-thumbnail-view cloudinaryId=item.images.[0].attributes.cloudinary_id item=item displayItemOverlay=true}}
+    </li>  
+  {{/each}}
+</div>
+<hr>
