@@ -124,7 +124,7 @@ export default Model.extend(cloudinaryImage, {
       const lang = this.get("i18n.locale");
       const chineseDescription = (this.get("notes_zh_tw") || "").trim();
 
-      if (lang == "zh-tw" && !!chineseDescription) {
+      if (lang === "zh-tw" && !!chineseDescription) {
         return chineseDescription;
       }
       return this.get("notes");
