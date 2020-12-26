@@ -1,6 +1,9 @@
 <div class="header">
   <span class="location">{{locationName}}</span>
-  <span class="offers-time-ago">Offered 4 hours ago</span>
+  <span class="offers-time-ago">
+    Offered
+    {{display-datetime record.created_at format="preset:timeago"}}
+  </span>
   {{#link-to "offers.detail" record.public_uid class="right underline-link view_offer"}}
     View/Respond to this offer
   {{/link-to}}

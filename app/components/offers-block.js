@@ -1,40 +1,62 @@
 import { inject as service } from "@ember/service";
-import { getWithDefault } from "@ember/object";
+import { getWithDefault, computed } from "@ember/object";
 import Component from "@ember/component";
 import _ from "lodash";
 
+const NA = "N/A";
+const DEFAULT_LOCATION_NAME = "Hong Kong";
+
+function safeGet(obj, field, defaultValue) {
+  if (!obj) {
+    return defaultValue;
+  }
+
+  return (
+    // --- Normal Ember model
+    getWithDefault(obj, field, false) ||
+    // --- JSON Api structure
+    getWithDefault(obj, `attributes.${field}`, defaultValue)
+  );
+}
+
 export default Component.extend({
   store: service(),
-  locationName: "",
 
-  didReceiveAttrs() {
-    this._super(...arguments);
-    console.log(this.get("record"));
-    const location = this.get("store").peekRecord(
-      "district",
-      this.get("record").district_id
-    );
-    this.getPackageTypesCounts(this.get("record").items);
-    this.set("locationName", getWithDefault(location, "name", "N/A"));
-    this.set("initialItems", this.get("record").items.slice(0, 4));
-  },
+  locationName: computed("district", function() {
+    const id = this.get("district");
+    const district = this.get("store").peekRecord("district", id);
 
-  getPackageTypesCounts(items) {
-    const counts = _.reduce(
-      items,
-      (results, item) => {
-        const packageType = this.get("store").peekRecord(
-          "package_type",
-          item.attributes.package_type_id
-        );
-        const packageTypeName = getWithDefault(packageType, "name", "N/A");
-        const count = _.get(results, packageTypeName, 0);
-        _.set(results, packageTypeName, count + 1);
-        return results;
-      },
-      {}
-    );
+    return safeGet(district, "name", DEFAULT_LOCATION_NAME);
+  }),
 
-    this.set("typesCounts", counts);
+  items: computed.alias("record.items"),
+
+  initialItems: computed("record", "record.id", "items.[]", function() {
+    return getWithDefault(this, "items", []).slice(0, 4);
+  }),
+
+  typesCounts: computed(
+    "record.id",
+    "items.[]",
+    "items.@each.attributes.package_type_id",
+    function() {
+      return _.reduce(
+        this.get("items"),
+        (results, item) => {
+          const packageTypeName = this.typeOf(item);
+          const count = _.get(results, packageTypeName, 0);
+          _.set(results, packageTypeName, count + 1);
+          return results;
+        },
+        {}
+      );
+    }
+  ),
+
+  typeOf(item) {
+    const ptid = safeGet(item, "package_type_id", null);
+    const packageType = this.get("store").peekRecord("package_type", ptid);
+
+    return safeGet(packageType, "name", NA);
   }
 });
