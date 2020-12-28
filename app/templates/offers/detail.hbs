@@ -1,15 +1,17 @@
-<div class="row my_dashboard offer-details">
+<div class="row my_dashboard offer-details category_page offers">
   <div class="title show-for-medium-up">Respond to Offer {{model.id}}</div>
   {{partial 'offers/offers_tabs'}}
 
   <div>
     These are the list of Items:
   </div>
-  <div class="large-block-grid-6 small-block-grid-2 medium-block-grid-3 list items_list xxlarge-block-grid-4">
-    {{#each model.items as |item|}}
-      <li>
-        {{item-thumbnail-view cloudinaryId=item.images.[0].attributes.cloudinary_id item=item displayItemOverlay=true}}
-      </li>  
-    {{/each}}
-  </div>  
+  <section class="main-section category-items-list">
+    <ul class="large-block-grid-6 small-block-grid-2 medium-block-grid-3 list items_list xxlarge-block-grid-4">
+      {{#each model.items as |item|}}
+        <li>
+          {{item-thumbnail-view cloudinaryId=item.images.[0].attributes.cloudinary_id item=item displayItemOverlay=true}}
+        </li>  
+      {{/each}}
+    </ul>  
+  </section>  
 </div>
