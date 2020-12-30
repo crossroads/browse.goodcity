@@ -1,0 +1,18 @@
+<div class="item">
+  <img src="/assets/images/image-loading.gif" class="cl-loading-img {{unless loading 'hidden'}}"/>
+  <img src="{{src}}" class="cl-item-image {{if loading 'hidden'}} {{if isSmallScreen 'profile'}}"/>
+  
+  {{#if displayItemOverlay}}
+    <div class="item-overlay top">
+      <li class="ellipsis" style="text-align: left;">
+        <span class="item-package-category">
+          {{pkgTypeType.name}}
+        </span>
+        :
+        <span class="item-notes">
+          {{item.attributes.notes}}
+        </span>
+      </li>
+    </div>
+  {{/if}}
+</div>

@@ -1,0 +1,116 @@
+<div class="row my_orders">
+  <div class="small-12 columns content">
+    <div class="order-summary">
+      <div class="row tabs tab-icons">
+        {{#link-to 'offers.detail' uid tagName="div" classNames="small-6 orders tab columns text-center"}}
+          <i class="fa dashboard-menu item-menu">{{fa-icon 'list'}}</i>
+        {{/link-to}}
+
+        {{#link-to 'offers.messages' model.id  (query-params uid=uid) tagName="div" classNames="small-6 account tab columns text-center"}}
+          <i class="fa dashboard-menu item-menu">{{fa-icon 'comments' }}</i>
+        {{/link-to}}
+      </div>
+      <div class="row tabs tab-name active-tab">
+        {{#link-to 'offers.detail' uid tagName="div" classNames="small-6 orders tab active-tab columns text-center item-menu"}}
+          Offer Details
+        {{/link-to}}
+
+        {{#link-to 'offers.messages' model.id (query-params uid=uid) tagName="div" classNames="small-6 account active-tab tab columns text-center item-menu"}}
+          Your Response
+        {{/link-to}}
+      </div>
+      
+      <div class="tab-content-messaging">
+        <div class="messaging-tab">
+          {{#unless showLogin}}
+            <section class="message-section">
+              <div class="row">
+                <div class="small-12 columns">
+                  {{#each sortedMessages as |message|}}
+                    {{#if message.isMessage}}
+                      <div class="ellipsis {{message.state}} {{if message.myMessage 'my_message' 'received_message'}}"
+                        id={{message.id}}>
+                        <div class='message_details'>
+                          {{#if message.myMessage}}
+                          {{t 'messages.you'}}
+                          {{else}}
+                          <i class="fa user-icon">{{fa-icon 'user-circle' size="2x"}}</i>
+                          {{t "full_name" firstName=message.sender.firstName lastName=message.sender.lastName}}
+                          {{message.sender.roleInitials}}
+                          {{/if}}
+                          →
+                          {{display-datetime message.createdAt format="HH:mm"}}
+                        </div>
+
+                        {{{apply-line-break message.parsedBody}}}
+                      </div>
+                    {{/if}}
+                  {{/each}}
+                </div>
+              </div>
+            </section>
+            <div class="message-footer">
+              <div class="btm message-form">
+                <div class="row message-textbar">
+                  {{#if displayChatNote}}
+                  <div class="row">
+                    <div class="small-12 columns chat_note">
+                      <i class="fa info-icon">{{fa-icon 'info-circle'}}</i>
+                      {{t 'messages.chat_note'}}
+                    </div>
+                  </div>
+                  {{/if}}
+                  <div class="row message-base">
+                    <div class="small-12 columns">
+                      {{#validatable-form class="form-horizontal" onSubmit=(action 'sendMessage') as |form|}}
+                      <div class="row ui">
+                        <div class="small-9 large-10 medium-9 columns">
+                          {{variable-height-textarea value=body name="body" required="true"  parentDiv="message-section"}}
+                        </div>
+                        <div class="small-3 large-2 medium-3 columns">
+                          {{#online-button classNames="button" onClick=(action "sendMessage") actionArgs=true}}
+                          {{t 'messages.send'}}
+                          {{/online-button}}
+                        </div>
+                      </div>
+                      {{/validatable-form}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {{else}}  
+            <section class="main-section">
+              <div class="row">
+                <div class="small-12 columns">
+                  <div class="mobile">
+                    <div class="row">
+                      <div class="small-12 columns">
+                      <label class="form-label">{{t "login.hk_only"}}</label>
+                      </div>
+                    </div>
+
+                    <div class="row collapse">
+                      <div class="small-3 large-1 columns">
+                        <span class="prefix">{{t "mobile_prefix"}}</span>
+                      </div>
+                      <div class="small-9 large-11 columns">
+                        {{numeric-input value=mobilePhone name="mobilePhone" id="mobile" maxlength="8" required=true pattern=".{8,}" autoFocus=true}}
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              <div class="row">
+                <div class="small-10 small-offset-1 columns">
+                  <button id="getsmscode" type="submit" class="button expand" {{action 'resendPin'}}>{{t "login.smscode"}}</button>
+                </div>
+              </div>
+            </section>
+          {{/unless}}  
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
