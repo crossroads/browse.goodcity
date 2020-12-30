@@ -108,7 +108,6 @@
 
   .item {
     position: relative;
-    
     border: 1px solid #333;
     float: left;
     margin: 2%;
@@ -117,6 +116,8 @@
   }
   .item img {
     max-width: 100%;
+    padding-bottom: 0;
+    padding-top: 0;
   }
 
   .item:hover .item-overlay.top {
@@ -131,7 +132,6 @@
     left: 0;
     background: #1A3C63;
     color: #fff;
-    overflow: hidden;
     text-align: center;
     width: 100%; 
     opacity: .8;
@@ -140,7 +140,7 @@
     transition: top 0.3s;
   }
   .item-overlay.top {
-    top: 80%;
+    top: 75%;
   }
 
   select {
