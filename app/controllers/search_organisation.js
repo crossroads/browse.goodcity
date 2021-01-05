@@ -64,6 +64,10 @@ export default BrowseController.extend({
       this.set("searchText", "");
     },
 
+    back() {
+      this.transitionToRoute("account_details");
+    },
+
     loadMoreOrganisations(pageNo) {
       const params = this.trimQuery(
         _.merge(
