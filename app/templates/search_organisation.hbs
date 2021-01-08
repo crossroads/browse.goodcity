@@ -13,7 +13,9 @@
           id="searchText"
           placeholder= "Search Organisation"
           value=searchText
-          disabled=false}}
+          disabled=false
+          autocomplete="off"
+        }}
 
         {{#if hasSearchText}}
           <i class="fa" {{action "clearSearch"}}>{{fa-icon 'times-circle'}}</i>
