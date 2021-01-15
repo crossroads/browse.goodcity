@@ -68,9 +68,9 @@ export default Component.extend({
         types = types.concat(this.get("allPackageTypes").toArray());
         this.clearHiglight();
       }
-
       return types
         .filterBy("allowRequests")
+        .rejectBy("name", null)
         .sortBy("name")
         .uniq();
     }
