@@ -110,6 +110,7 @@ export default Controller.extend({
     var title = this.get("selectedTitle.id");
     var params = {
       user_id: user.get("id"),
+      force_replace: true,
       organisation_id: this.get("organisationId"),
       position: position,
       preferred_contact_number: preferredNumber,
@@ -171,6 +172,18 @@ export default Controller.extend({
         organisations_user: this.organisationsUserParams()
       })
         .then(data => {
+          debugger;
+          if (data.reverify) {
+            this.get("messageBox").withContent(
+              "pin_verify",
+              data.message,
+              "Ok",
+              () => {
+                console.log("hello");
+              }
+            );
+            return;
+          }
           this.get("store").pushPayload(data);
           loadingView.destroy();
           this.redirectToTransitionOrBrowse(bookAppointment);
