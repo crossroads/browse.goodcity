@@ -43,7 +43,11 @@ export default {
       today: "今天",
       morning: "早上",
       afternoon: "下午"
-    }
+    },
+    offer_details: "Offer Details",
+    your_response: "Your Response",
+    supervisor_warning:
+      "This chat is reserved for charity users. As a staff member, please use the admin app to discuss this offer"
   },
 
   banner: {
