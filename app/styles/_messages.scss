@@ -17,6 +17,20 @@
     margin-bottom: 0.2em;
   }
 
+  .warning-icon {
+    padding-left: 3%;
+    padding-top: 2%;
+    color: red;
+  }
+
+  .permission-error-container {
+    margin-top: 10%;
+    border: 2px solid;
+    padding: 1%;
+    margin-left: 1%;
+    margin-right: 1%;
+  }
+
   .message_details {
     font-size: .7rem;
     margin-bottom: .5rem;

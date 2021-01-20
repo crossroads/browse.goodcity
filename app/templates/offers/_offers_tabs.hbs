@@ -9,10 +9,10 @@
 </div>
 <div class="row tabs tab-name active-tab">
   {{#link-to 'offers.detail' model.public_uid tagName="div" classNames="small-6 orders tab active-tab columns text-center item-menu"}}
-    Offer Details
+    {{t 'messages.offer_details'}}
   {{/link-to}}
 
   {{#link-to 'offers.messages' model.id (query-params uid=model.public_uid) tagName="div" classNames="small-6 account active-tab tab columns text-center item-menu"}}
-    Your Response
+    {{t 'messages.your_response'}}
   {{/link-to}}
 </div>
