@@ -12,17 +12,26 @@
       </div>
       <div class="row tabs tab-name active-tab">
         {{#link-to 'offers.detail' uid tagName="div" classNames="small-6 orders tab active-tab columns text-center item-menu"}}
-          Offer Details
+          {{t 'messages.offer_details'}}
         {{/link-to}}
 
         {{#link-to 'offers.messages' model.id (query-params uid=uid) tagName="div" classNames="small-6 account active-tab tab columns text-center item-menu"}}
-          Your Response
+          {{t 'messages.your_response'}}
         {{/link-to}}
       </div>
       
       <div class="tab-content-messaging">
         <div class="messaging-tab">
-          {{#unless showLogin}}
+          {{#if isStaffMember}}
+            <div class="row permission-error-container">
+              <div class="small-1 columns warning-icon">
+                {{fa-icon "ban"}} 
+              </div>
+              <span class="small-11 columns">
+                {{t 'messages.supervisor_warning'}}
+              </span>
+            </div>
+          {{else}}  
             <section class="message-section">
               <div class="row">
                 <div class="small-12 columns">
@@ -79,36 +88,7 @@
                 </div>
               </div>
             </div>
-          {{else}}  
-            <section class="main-section">
-              <div class="row">
-                <div class="small-12 columns">
-                  <div class="mobile">
-                    <div class="row">
-                      <div class="small-12 columns">
-                      <label class="form-label">{{t "login.hk_only"}}</label>
-                      </div>
-                    </div>
-
-                    <div class="row collapse">
-                      <div class="small-3 large-1 columns">
-                        <span class="prefix">{{t "mobile_prefix"}}</span>
-                      </div>
-                      <div class="small-9 large-11 columns">
-                        {{numeric-input value=mobilePhone name="mobilePhone" id="mobile" maxlength="8" required=true pattern=".{8,}" autoFocus=true}}
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-              <div class="row">
-                <div class="small-10 small-offset-1 columns">
-                  <button id="getsmscode" type="submit" class="button expand" {{action 'resendPin'}}>{{t "login.smscode"}}</button>
-                </div>
-              </div>
-            </section>
-          {{/unless}}  
+          {{/if}}
         </div>
       </div>
     </div>

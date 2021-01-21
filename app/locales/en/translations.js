@@ -49,7 +49,11 @@ export default {
       today: "Today",
       morning: "Morning",
       afternoon: "Afternoon"
-    }
+    },
+    offer_details: "Offer Details",
+    your_response: "Your Response",
+    supervisor_warning:
+      "This chat is reserved for charity users. As a staff member, please use the admin app to discuss this offer"
   },
 
   banner: {
