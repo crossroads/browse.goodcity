@@ -194,7 +194,8 @@ export default ApiService.extend({
       goodcity_request: {
         quantity: params.quantity,
         order_id: orderId,
-        package_type_id: params.packageTypeId
+        package_type_id: params.packageTypeId,
+        description: params.description
       }
     });
     this.get("store").pushPayload(data);
@@ -207,7 +208,8 @@ export default ApiService.extend({
       goodcity_request: {
         quantity: params.quantity,
         order_id: orderId,
-        package_type_id: params.packageTypeId
+        package_type_id: params.packageTypeId,
+        description: params.description
       }
     });
     this.get("store").pushPayload(data);

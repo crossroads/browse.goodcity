@@ -1,38 +1,35 @@
 <div class="row">
-  <div class="small-12 large-offset-2 large-8">
+  <div class="small-12 medium-offset-1 medium-10 large-offset-2 large-8 columns">
     <div class="row fixed_search_header search-box ui organisations_search">
-      <div class="row">
-        <div class="small-2 medium-2 large-1 columns back_button">
-          {{#link-to 'account_details' class="back_icon"}}
-          {{fa-icon 'angle-left'}}
+      <div class="small-2 medium-2 large-2 columns back_button">
+        <div class="back_icon" {{action "back"}}>
+          <i class="angle_left_icon">{{fa-icon 'angle-left'}}</i>
           <span class="organisation_back"> {{t "account.back"}}</span>
-          {{/link-to}}
         </div>
-        <div class="small-10 large-10 medium-10 columns">
-          {{input
-            name="searchText"
-            id="searchText"
-            placeholder= "Search Organisation"
-            value=searchText
-            disabled=false}}
-
-          {{#if hasSearchText}}
-          <i class="fa" {{action "clearSearch"}}>{{fa-icon 'times-circle'}}</i>
-          {{/if}}
-        </div>
-        <div class=" large-1 columns"></div>
       </div>
-      <div class="row">
-        <div class="small-12 medium-12 columns">
-          <label class="form-label contact_us">{{t "account.contact_us"}}</label>
-        </div>
+      <div class="small-10 large-10 medium-10 columns">
+        {{input
+          name="searchText"
+          id="searchText"
+          placeholder= "Search Organisation"
+          value=searchText
+          disabled=false
+          autocomplete="off"
+        }}
+
+        {{#if hasSearchText}}
+          <i class="fa" {{action "clearSearch"}}>{{fa-icon 'times-circle'}}</i>
+        {{/if}}
+      </div>
+      <div class="small-12 medium-12 columns">
+        <label class="form-label contact_us">{{t "account.contact_us"}}</label>
       </div>
     </div>
   </div>
 </div>
 <section class="main-section organisation_search_result">
   <div class="row search">
-    <div class="small-12 medium-12 large-offset-2 large-8 columns">
+    <div class="small-12 medium-offset-1 medium-10 large-offset-2 large-8 columns">
       {{#if displayResults}}
         {{#infinite-list height="80vh" loadMore=(action "loadMoreOrganisations") as |organisations| }}
           <ul class="list list-activity">
