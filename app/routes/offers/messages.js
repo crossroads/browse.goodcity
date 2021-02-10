@@ -13,9 +13,10 @@ export default AuthorizeRoute.extend({
 
   setupController(controller, model) {
     this._super(controller, model);
-    if (this.get("session.currentUser").roleNames().length) {
-      controller.set("isStaffMember", true);
-    }
+    controller.set(
+      "isStaffMember",
+      !!this.get("session.currentUser").get("userRoles").length
+    );
     this.controllerFor("application").set("cart.checkout", false);
     controller.set("model", { id: this.get("offerId") });
   }
