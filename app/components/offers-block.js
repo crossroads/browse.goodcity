@@ -1,6 +1,7 @@
 import { inject as service } from "@ember/service";
 import { getWithDefault, computed } from "@ember/object";
 import Component from "@ember/component";
+import cloudinaryImage from "../mixins/cloudinary_image";
 import _ from "lodash";
 
 const NA = "N/A";
@@ -19,8 +20,26 @@ function safeGet(obj, field, defaultValue) {
   );
 }
 
-export default Component.extend({
+export default Component.extend(cloudinaryImage, {
   store: service(),
+
+  didReceiveAttrs() {
+    this._super(...arguments);
+
+    this.get("items").forEach(item => {
+      const packageTypeName = this.typeOf(item);
+      _.set(item, "packageTypeName", packageTypeName);
+      const chineseDescription = (
+        safeGet(item, "notes_zh_tw", null) || ""
+      ).trim();
+      if (this.get("i18n.locale") === "zh-tw" && !!chineseDescription) {
+        debugger;
+        _.set(item, "description", chineseDescription);
+      } else {
+        _.set(item, "description", safeGet(item, "notes", null));
+      }
+    });
+  },
 
   locationName: computed("district", function() {
     const id = this.get("district");
@@ -32,26 +51,8 @@ export default Component.extend({
   items: computed.alias("record.items"),
 
   initialItems: computed("record", "record.id", "items.[]", function() {
-    return getWithDefault(this, "items", []).slice(0, 4);
+    return getWithDefault(this, "items", []);
   }),
-
-  typesCounts: computed(
-    "record.id",
-    "items.[]",
-    "items.@each.attributes.package_type_id",
-    function() {
-      return _.reduce(
-        this.get("items"),
-        (results, item) => {
-          const packageTypeName = this.typeOf(item);
-          const count = _.get(results, packageTypeName, 0);
-          _.set(results, packageTypeName, count + 1);
-          return results;
-        },
-        {}
-      );
-    }
-  ),
 
   typeOf(item) {
     const ptid = safeGet(item, "package_type_id", null);
