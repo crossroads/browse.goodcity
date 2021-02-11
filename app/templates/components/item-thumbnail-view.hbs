@@ -1,18 +1,36 @@
-<div class="item">
-  <img src="/assets/images/image-loading.gif" class="cl-loading-img {{unless loading 'hidden'}}"/>
-  <img src="{{src}}" class="cl-item-image {{if loading 'hidden'}} {{if isSmallScreen 'profile'}}"/>
-  
-  {{#if displayItemOverlay}}
-    <div class="item-overlay top">
-      <li class="ellipsis" style="text-align: left;">
-        <span class="item-package-category">
-          {{pkgTypeType.name}}
-        </span>
-        :
-        <span class="item-notes">
-          {{item.attributes.notes}}
-        </span>
-      </li>
+<div class="columns small-4 large-3 image-container">
+  <div class ="package_type">
+    {{packageType}}
+  </div>
+  {{#if item.images.length}}
+    <div id='lightGallery{{item.id}}' class="images">
+      {{#slick-carousel class="ember-carousel no_bottom_margin" autoplay=true autoplaySpeed=2500 speed=500 swipeToSlide=true infinite=false  mobileFirst=true touchMove=true slidesToShow=1 slidesToScroll=1}}
+        {{#each itemImages as |image|}}
+          <div data-src={{image.imageUrl}} class="imageZoom  view-image">
+            <img class="thumb-image" src="{{image.imageUrl}}" />
+          </div>
+        {{/each}}
+      {{/slick-carousel}}
+    </div>
+  {{else}}
+    <div class="offer">
+      {{partial "no_image"}}
+    </div>
+  {{/if}}
+</div>
+<div class="columns small-8 large-9 item-list">
+  <div class="item-details">
+    Quantity: {{item.attributes.received_quantity}}
+  </div>
+  <div class="item-details">
+    Description: {{description}}
+  </div>
+  <div class="item-details">
+    Condition: {{condition}}
+  </div>
+  {{#if dimension}}
+    <div class="item-details">
+      Dimensions: {{dimension}}
     </div>
   {{/if}}
 </div>
