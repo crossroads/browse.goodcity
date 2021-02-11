@@ -2,16 +2,17 @@
   <div class="title show-for-medium-up">Respond to Offer {{model.id}}</div>
   {{partial 'offers/offers_tabs'}}
 
-  <div>
-    These are the list of Items:
+  <div class="item_view">
+    List of Items:
   </div>
   <section class="main-section category-items-list">
-    <ul class="large-block-grid-6 small-block-grid-2 medium-block-grid-3 list items_list xxlarge-block-grid-4">
+    <ul>
       {{#each model.items as |item|}}
-        <li>
-          {{item-thumbnail-view cloudinaryId=item.images.[0].attributes.cloudinary_id item=item displayItemOverlay=true}}
-        </li>  
+        <div class="row items">
+          {{item-thumbnail-view item=item displayItemOverlay=true}}
+        </div>
+        <hr>
       {{/each}}
-    </ul>  
-  </section>  
+    </ul>
+  </section>
 </div>
