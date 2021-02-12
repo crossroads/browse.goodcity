@@ -6679,13 +6679,6 @@ ember-router-generator@^1.0.0:
   dependencies:
     recast "^0.11.3"
 
-ember-scroll-to-bottom@^1.2.0:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/ember-scroll-to-bottom/-/ember-scroll-to-bottom-1.3.0.tgz#7b0318cc1baa77e7dd97ca872945a127e09d2780"
-  dependencies:
-    ember-cli-babel "^6.3.0"
-    ember-cli-sass "5.5.2"
-
 ember-scroll-to@0.6.5:
   version "0.6.5"
   resolved "https://registry.yarnpkg.com/ember-scroll-to/-/ember-scroll-to-0.6.5.tgz#d9a7658eed6b8ae0e3c71b93b03f59a8550b8a10"
