@@ -31,13 +31,16 @@ export default ImagePreview.extend(cloudinaryImage, {
     this.set("lightGalleryObj", lightGalleryObj);
   },
 
+  safeGet(model, id) {
+    let record = this.get("store").peekRecord(model, id);
+    return getWithDefault(record, "name", "N/A");
+  },
+
   packageType: computed("item", function() {
-    const pkgType = this.get("store").peekRecord(
+    return this.safeGet(
       "package_type",
       this.get("item").attributes.package_type_id
     );
-
-    return getWithDefault(pkgType, "name");
   }),
 
   description: computed(
@@ -63,11 +66,10 @@ export default ImagePreview.extend(cloudinaryImage, {
     "item.id",
     "item.attributes.donor_condition_id",
     function() {
-      const condition = this.get("store").peekRecord(
+      return this.safeGet(
         "donor_condition",
         this.get("item").attributes.donor_condition_id
       );
-      return getWithDefault(condition, "name");
     }
   ),
 
