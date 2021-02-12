@@ -33,7 +33,6 @@ export default Component.extend(cloudinaryImage, {
         safeGet(item, "notes_zh_tw", null) || ""
       ).trim();
       if (this.get("i18n.locale") === "zh-tw" && !!chineseDescription) {
-        debugger;
         _.set(item, "description", chineseDescription);
       } else {
         _.set(item, "description", safeGet(item, "notes", null));

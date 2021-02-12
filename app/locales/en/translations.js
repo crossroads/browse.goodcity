@@ -207,10 +207,19 @@ export default {
     next: "Next Item",
     condition: "Condition",
     quantity: "Quantity",
+    description: "Description",
+    dimension: "Dimensions",
     size: "Size",
     categories: "Categories",
     image_unavailable: "No image available.",
     inventory_number: "Inventory Number"
+  },
+
+  shareableOffers: {
+    list_of_items: "List of Items",
+    respond_to_offer: "Respond to Offer",
+    offered: "Offered",
+    view_offer: "View/Respond to this offer"
   },
 
   page: {

@@ -1,11 +1,11 @@
 <div class="header">
   <span class="location">{{locationName}}</span>
   <span class="offers-time-ago">
-    Offered
+    {{t "shareableOffers.offered"}}
     {{display-datetime record.submitted_at format="preset:timeago"}}
   </span>
   {{#link-to "offers.detail" record.public_uid class="right underline-link view_offer"}}
-    View/Respond to this offer
+    {{t "shareableOffers.view_offer"}}
   {{/link-to}}
 </div>
 <div class="large-block-grid-5 small-block-grid-2 medium-block-grid-3 list items_list xxlarge-block-grid-4">

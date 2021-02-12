@@ -20,17 +20,17 @@
 </div>
 <div class="columns small-8 large-9 item-list">
   <div class="item-details">
-    Quantity: {{item.attributes.received_quantity}}
+    {{t "itemdetail.quantity"}}: {{item.attributes.received_quantity}}
   </div>
   <div class="item-details">
-    Description: {{description}}
+    {{t "itemdetail.description"}}: {{description}}
   </div>
   <div class="item-details">
-    Condition: {{condition}}
+    {{t "itemdetail.condition"}}: {{condition}}
   </div>
   {{#if dimension}}
     <div class="item-details">
-      Dimensions: {{dimension}}
+      {{t "itemdetail.dimension"}}: {{dimension}}
     </div>
   {{/if}}
 </div>
