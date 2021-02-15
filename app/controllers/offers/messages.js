@@ -23,6 +23,10 @@ export default Controller.extend({
     }
   },
 
+  isStaffMember: Ember.computed("session.currentUser", function() {
+    return !!this.get("session.currentUser").get("userRoles").length;
+  }),
+
   autoScroll() {
     window.scrollTo(0, document.body.scrollHeight);
   },
