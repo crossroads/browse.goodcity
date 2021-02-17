@@ -2,25 +2,12 @@ import { inject as service } from "@ember/service";
 import { getWithDefault, computed } from "@ember/object";
 import Component from "@ember/component";
 import cloudinaryImage from "../mixins/cloudinary_image";
+import safeGet from "../mixins/safe_get";
 import _ from "lodash";
 
-const NA = "N/A";
 const DEFAULT_LOCATION_NAME = "Hong Kong";
 
-function safeGet(obj, field, defaultValue) {
-  if (!obj) {
-    return defaultValue;
-  }
-
-  return (
-    // --- Normal Ember model
-    getWithDefault(obj, field, false) ||
-    // --- JSON Api structure
-    getWithDefault(obj, `attributes.${field}`, defaultValue)
-  );
-}
-
-export default Component.extend(cloudinaryImage, {
+export default Component.extend(cloudinaryImage, safeGet, {
   store: service(),
 
   didReceiveAttrs() {
@@ -29,22 +16,26 @@ export default Component.extend(cloudinaryImage, {
     this.get("items").forEach(item => {
       const packageTypeName = this.typeOf(item);
       _.set(item, "packageTypeName", packageTypeName);
+
       const chineseDescription = (
-        safeGet(item, "notes_zh_tw", null) || ""
+        getWithDefault(item, "attributes.notes_zh_tw", null) || ""
       ).trim();
+
       if (this.get("i18n.locale") === "zh-tw" && !!chineseDescription) {
         _.set(item, "description", chineseDescription);
       } else {
-        _.set(item, "description", safeGet(item, "notes", null));
+        _.set(
+          item,
+          "description",
+          getWithDefault(item, "attributes.notes", "")
+        );
       }
     });
   },
 
   locationName: computed("district", function() {
     const id = this.get("district");
-    const district = this.get("store").peekRecord("district", id);
-
-    return safeGet(district, "name", DEFAULT_LOCATION_NAME);
+    return this.safeGet("district", id, "name", DEFAULT_LOCATION_NAME);
   }),
 
   items: computed.alias("record.items"),
@@ -54,9 +45,7 @@ export default Component.extend(cloudinaryImage, {
   }),
 
   typeOf(item) {
-    const ptid = safeGet(item, "package_type_id", null);
-    const packageType = this.get("store").peekRecord("package_type", ptid);
-
-    return safeGet(packageType, "name", NA);
+    const ptid = getWithDefault(item, "attributes.package_type_id", null);
+    return this.safeGet("packageType", ptid, "name");
   }
 });
