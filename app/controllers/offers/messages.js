@@ -23,8 +23,10 @@ export default Controller.extend({
     }
   },
 
-  isStaffMember: Ember.computed("session.currentUser", function() {
-    return !!this.get("session.currentUser").get("userRoles").length;
+  isStaffMember: Ember.computed("session.currentUser.userRoles.[]", function() {
+    return this.get("session.currentUser")
+      ? !!this.get("session.currentUser").get("userRoles").length
+      : false;
   }),
 
   autoScroll() {
@@ -64,7 +66,6 @@ export default Controller.extend({
         "user",
         this.get("session.currentUser.id")
       );
-      console.log(this.get("uid"));
 
       this.createMessage(values);
     }
