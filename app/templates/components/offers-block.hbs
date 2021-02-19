@@ -2,7 +2,7 @@
   <span class="location">{{locationName}}</span>
   <span class="offers-time-ago">
     {{t "shareableOffers.offered"}}
-    {{display-datetime record.submitted_at format="preset:timeago"}}
+    {{display-datetime validDate format="preset:timeago"}}
   </span>
   {{#link-to "offers.detail" record.public_uid class="right underline-link view_offer"}}
     {{t "shareableOffers.view_offer"}}

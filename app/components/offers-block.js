@@ -38,6 +38,11 @@ export default Component.extend(cloudinaryImage, safeGet, {
     return this.safeGet("district", id, "name", DEFAULT_LOCATION_NAME);
   }),
 
+  validDate: computed("record", function() {
+    const record = this.get("record");
+    return record.submitted_at || record.created_at;
+  }),
+
   items: computed.alias("record.items"),
 
   initialItems: computed("record", "record.id", "items.[]", function() {
