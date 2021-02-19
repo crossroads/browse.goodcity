@@ -1,4 +1,30 @@
 .offers {
+  @media #{$small-only} {
+    font-size: 0.7rem;
+  }
+
+  @media #{$large-only} {
+    font-size: 1rem;
+  }
+
+  ul{
+    margin-left:0rem;
+  }
+
+  .images{
+    @media #{$large-only} {
+      img{
+        max-width: 80%;
+      }
+    }
+  }
+
+  .no_image{
+    line-height: 1.5rem;
+    text-align: center;
+    margin-top: 3rem;
+  }
+
   .view_offer {
     background: #ED4C4E;
     padding-left: 20px;
@@ -8,14 +34,42 @@
     padding-bottom: 5px;
   }
 
+  .package_type{
+    color:white;
+    text-decoration:underline;
+    margin-top: -0.7rem;
+    margin-bottom: 0.7rem;
+  }
+
   .location {
     margin-left: 1%;
     color:#A7ACB1;
   }
 
-  .offer-item {
+  .item_view{
+    border-bottom: 1px solid #334f75;
+    margin-bottom:1.2rem;
+    padding-left: 0.7rem;
+    padding-top: 0.6rem;
+  }
+
+  .items{
+    @media #{$small-only} {
+      padding-left:0.7rem ;
+      // margin-left: unset;
+      font-size: 0.7rem;
+    }
+
     @media #{$large-only} {
-      margin-right: 4%;
+      font-size: 1rem;
+    }
+
+    .item-list{
+      padding: 1.2rem 0.8rem;
+    }
+
+    .item-details{
+      line-height: 1.5rem;
     }
   }
 

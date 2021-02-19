@@ -1,23 +1,30 @@
 <div class="header">
   <span class="location">{{locationName}}</span>
   <span class="offers-time-ago">
-    Offered
-    {{display-datetime record.created_at format="preset:timeago"}}
+    {{t "shareableOffers.offered"}}
+    {{display-datetime record.submitted_at format="preset:timeago"}}
   </span>
   {{#link-to "offers.detail" record.public_uid class="right underline-link view_offer"}}
-    View/Respond to this offer
+    {{t "shareableOffers.view_offer"}}
   {{/link-to}}
 </div>
-<div class="sub-heading" style="margin-top: 1.5%;">
-  {{#each-in typesCounts as |type count|}}
-    {{type}} ({{count}}) |
-  {{/each-in}}
-</div>
-<div class="large-block-grid-6 small-block-grid-2 medium-block-grid-3 list items_list xxlarge-block-grid-4">
+<div class="large-block-grid-5 small-block-grid-2 medium-block-grid-3 list items_list xxlarge-block-grid-4">
   {{#each initialItems as |item|}}
     <li class="offer-item">
-      {{item-thumbnail-view cloudinaryId=item.images.[0].attributes.cloudinary_id item=item displayItemOverlay=true}}
-    </li>  
+      {{cloudinary-image-tag src=item.previewUrl}}
+      <div class="image-item-overlay image-tabs">
+        <div class="item_desc">
+          <li class="ellipsis two-line-ellipsis" style="color: white;">
+            <span class="item-package-category">
+              {{item.packageTypeName}}
+            </span>:
+            <span class="item-notes">
+              {{item.description}}
+            </span>
+          </li>
+        </div>
+      </div>
+    </li>
   {{/each}}
 </div>
 <hr>

@@ -44,10 +44,10 @@ export default {
       morning: "早上",
       afternoon: "下午"
     },
-    offer_details: "Offer Details",
-    your_response: "Your Response",
+    offer_details: "捐贈詳情",
+    your_response: "你的回覆",
     supervisor_warning:
-      "This chat is reserved for charity users. As a staff member, please use the admin app to discuss this offer"
+      "此對話功能為慈善機構員工專用。請各職員及義工使用管理程式作溝通。"
   },
 
   banner: {
@@ -195,10 +195,19 @@ export default {
     next: "下一項",
     condition: "質量",
     quantity: "數量",
+    description: "描述",
+    dimension: "尺寸",
     size: "尺寸",
     categories: "分類",
     image_unavailable: "沒有照片提供",
     inventory_number: "存貨編號"
+  },
+
+  shareableOffers: {
+    list_of_items: "物品清單",
+    respond_to_offer: "回覆捐贈",
+    offered: "已捐贈",
+    view_offer: "檢視/回覆這個捐贈"
   },
 
   page: {
