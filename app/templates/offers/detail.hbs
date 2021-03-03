@@ -2,8 +2,19 @@
   <div class="title show-for-medium-up">{{t "shareableOffers.respond_to_offer"}} {{model.id}}</div>
   {{partial 'offers/offers_tabs'}}
 
-  <div class="item_view">
-    {{t "shareableOffers.list_of_items"}}:
+  <div class="offer_view">
+    <span style="color: white;">
+      {{t "shareableOffers.offer_instruction"}} :
+    </span>
+    <span>
+      {{#if (is-and (is-equal session.language "zh-tw") model.public_notes_zh_tw)}}
+        {{apply-line-break model.public_notes_zh_tw}}
+      {{else if model.public_notes}}
+        {{apply-line-break model.public_notes}}
+      {{else}}
+        {{t "shareableOffers.no_description_available"}}
+      {{/if}}
+    </span>
   </div>
   <section class="main-section category-items-list">
     <ul>

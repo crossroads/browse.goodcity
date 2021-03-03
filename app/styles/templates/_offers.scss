@@ -34,19 +34,14 @@
     padding-bottom: 5px;
   }
 
-  .package_type{
-    color:white;
-    text-decoration:underline;
-    margin-top: -0.7rem;
-    margin-bottom: 0.7rem;
-  }
-
   .location {
     margin-left: 1%;
     color:#A7ACB1;
   }
 
-  .item_view{
+  .offer_view{
+    display:flex;
+    flex-direction: column;
     border-bottom: 1px solid #334f75;
     margin-bottom:1.2rem;
     padding-left: 0.7rem;
