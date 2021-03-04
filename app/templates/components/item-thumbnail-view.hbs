@@ -1,7 +1,4 @@
 <div class="columns small-4 large-3 image-container">
-  <div class ="package_type">
-    {{packageType}}
-  </div>
   {{#if item.images.length}}
     <div id='lightGallery{{item.id}}' class="images">
       {{#slick-carousel class="ember-carousel no_bottom_margin" autoplay=true autoplaySpeed=2500 speed=500 swipeToSlide=true infinite=false  mobileFirst=true touchMove=true slidesToShow=1 slidesToScroll=1}}
@@ -21,6 +18,9 @@
 <div class="columns small-8 large-9 item-list">
   <div class="item-details">
     {{t "itemdetail.quantity"}}: {{item.attributes.received_quantity}}
+  </div>
+  <div class="item-details">
+    {{t "itemdetail.categories"}}: {{packageType}}
   </div>
   <div class="item-details">
     {{t "itemdetail.description"}}: {{description}}

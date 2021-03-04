@@ -210,7 +210,7 @@ export default {
     description: "Description",
     dimension: "Dimensions",
     size: "Size",
-    categories: "Categories",
+    categories: "Category",
     image_unavailable: "No image available.",
     inventory_number: "Inventory Number"
   },
@@ -218,6 +218,8 @@ export default {
   shareableOffers: {
     list_of_items: "List of Items",
     respond_to_offer: "Respond to Offer",
+    no_description_available: "No Description Available",
+    offer_instruction: "Offer Instructions",
     offered: "Offered",
     view_offer: "View/Respond to this offer"
   },
