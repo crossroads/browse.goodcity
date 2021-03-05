@@ -1,17 +1,29 @@
 <div class="row my_dashboard offer-details category_page offers">
-  <div class="title show-for-medium-up">Respond to Offer {{model.id}}</div>
+  <div class="title show-for-medium-up">{{t "shareableOffers.respond_to_offer"}} {{model.id}}</div>
   {{partial 'offers/offers_tabs'}}
 
-  <div>
-    These are the list of Items:
+  <div class="offer_view">
+    <span style="color: white;">
+      {{t "shareableOffers.offer_instruction"}} :
+    </span>
+    <span>
+      {{#if (is-and (is-equal session.language "zh-tw") model.public_notes_zh_tw)}}
+        {{apply-line-break model.public_notes_zh_tw}}
+      {{else if model.public_notes}}
+        {{apply-line-break model.public_notes}}
+      {{else}}
+        {{t "shareableOffers.no_description_available"}}
+      {{/if}}
+    </span>
   </div>
   <section class="main-section category-items-list">
-    <ul class="large-block-grid-6 small-block-grid-2 medium-block-grid-3 list items_list xxlarge-block-grid-4">
+    <ul>
       {{#each model.items as |item|}}
-        <li>
-          {{item-thumbnail-view cloudinaryId=item.images.[0].attributes.cloudinary_id item=item displayItemOverlay=true}}
-        </li>  
+        <div class="row items">
+          {{item-thumbnail-view item=item displayItemOverlay=true}}
+        </div>
+        <hr>
       {{/each}}
-    </ul>  
-  </section>  
+    </ul>
+  </section>
 </div>

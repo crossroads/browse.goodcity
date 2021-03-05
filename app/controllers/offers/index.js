@@ -17,10 +17,10 @@ export default Controller.extend({
   offers: computed("model", "selectedSort", function() {
     const sortedOffer = _.sortBy(this.get("model"), [
       function(offer) {
-        return offer.created_at;
+        return offer.submitted_at || offer.created_at;
       }
     ]);
-    return this.get("selectedSort") == "desc"
+    return this.get("selectedSort") == "asc"
       ? sortedOffer
       : sortedOffer.reverse();
   }),
