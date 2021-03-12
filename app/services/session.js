@@ -40,7 +40,7 @@ export default ApiService.extend({
       return null;
     }
     return this.get("store").peekRecord("user", this.get("currentUserId"));
-  }).volatile(),
+  }),
 
   clear() {
     this.set("currentUserId", null);
