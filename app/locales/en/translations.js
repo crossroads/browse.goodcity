@@ -284,6 +284,7 @@ export default {
       "The contact number you would like us to reach you on.",
     preffered_contact_warning: "You must provide a contact number",
     user_info: "User Information is incomplete",
+    change_phone_number: "Change Phone Number",
     user_title: {
       mr: "Mr",
       mrs: "Mrs",

@@ -97,10 +97,17 @@
                   {{/if}}
                 </div>
               </div>
+              <div class="detail-row row">
+                <div class="small-3 columns data-type">
+                  <button {{action 'showPhoneOverlay'}}>{{t 'account.change_phone_number'}}</button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
     </div>
   </div>
+
+  {{change-phone-number-overlay open=accountService.openPhoneOverlay}}
 </div>

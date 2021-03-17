@@ -267,6 +267,7 @@ export default {
     preffered_contact_label: "請提供我們可聯絡您的電話號碼。",
     preffered_contact_warning: "閣下需要提供聯絡號碼",
     user_info: "用戶資料不齊",
+    change_phone_number: "變更電話號碼",
     user_title: {
       mr: "先生",
       mrs: "太太",
