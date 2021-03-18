@@ -20,9 +20,13 @@
   {{/unless}}
   {{#if showPinInput}}
   <div class="pin-input-container">
-    {{numeric-input classNames="number_input center_align_placeholder" value=pin name="pin" id="pin" maxlength="4"
-    placeholder="XXXX" required='true' pattern=".{4,}" autoFocus=true}}
-    <button {{action 'updatePhoneNumber' }}>Continue</button>
+    <div class="item-wide">
+      {{numeric-input classNames="number_input center_align_placeholder" value=pin name="pin" id="pin" maxlength="4"
+      placeholder="XXXX" required='true' pattern=".{4,}" autoFocus=true}}
+    </div>
+    <div class="item">
+      <button {{action 'updatePhoneNumber' }}>Continue</button>
+    </div>
   </div>
   {{/if}}
   {{/popup-overlay}}

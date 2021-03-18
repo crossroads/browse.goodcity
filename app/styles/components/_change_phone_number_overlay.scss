@@ -20,14 +20,28 @@
 
 .pin-input-container {
   display: flex;
-  flex-direction: column;
   height: 70%;
   justify-content: center;
   align-items: center;
-  margin: auto;
+
+  .item {
+    flex-grow: 1;
+    margin: auto;
+  }
+
+  .item-wide {
+    flex-grow: 2;
+    margin: auto;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
 
   input {
     color: black !important;
     text-align: center;
+    margin: auto;
+  }
+  button {
+    margin: auto;
   }
 }
