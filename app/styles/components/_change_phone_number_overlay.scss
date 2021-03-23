@@ -1,39 +1,53 @@
 .change-phonenumber-container {
   height: 70%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  grid-gap: 10px;
+  padding: 10px;
+  justify-items: center;
+  align-content: center;
   padding-right: 0%;
 
+  .item-description {
+    grid-column: auto / span 3;
+    margin: 5px auto;
+    width: 100%;
+  }
+
   .item {
-    flex-grow: 1;
     margin: auto;
   }
 
   .item-wide {
-    flex-grow: 3;
     margin: auto;
-    padding-left: 5px;
-    padding-right: 5px;
+    width: 100%;
   }
 }
 
 .pin-input-container {
-  display: flex;
   height: 70%;
-  justify-content: center;
-  align-items: center;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  padding: 10px;
+  justify-items: center;
+  align-content: center;
+  padding-right: 0%;
+  grid-gap: 10px;
 
   .item {
     flex-grow: 1;
     margin: auto;
   }
 
+  .item-description {
+    grid-column: auto / span 3;
+    margin: 5px auto;
+    width: 100%;
+  }
+
   .item-wide {
-    flex-grow: 2;
     margin: auto;
-    padding-left: 5px;
-    padding-right: 5px;
+    width: 100%;
   }
 
   input {
@@ -41,6 +55,7 @@
     text-align: center;
     margin: auto;
   }
+
   button {
     margin: auto;
   }

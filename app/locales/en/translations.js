@@ -284,7 +284,11 @@ export default {
       "The contact number you would like us to reach you on.",
     preffered_contact_warning: "You must provide a contact number",
     user_info: "User Information is incomplete",
-    change_phone_number: "Change Phone Number",
+    change_phone_number: {
+      title: "Change Phone Number",
+      description: "Please enter the new phone number",
+      pin_instruction: "Please enter the pin which we sent to"
+    },
     user_title: {
       mr: "Mr",
       mrs: "Mrs",
