@@ -20,7 +20,9 @@ export default Model.extend(cloudinaryImage, {
     async: false
   }),
 
-  packages: hasMany("package"),
+  packages: hasMany("package", {
+    async: false
+  }),
 
   isSet: true,
 
