@@ -94,7 +94,28 @@
     margin-bottom: 0.5rem;
   }
 }
-
+.notifications{
+  display:flex ;
+  font-size: 1.3rem;
+  &.unread {
+    margin-left:-0.4rem
+  }
+    .unread_length {
+      line-height: 1rem;
+      width: fit-content;
+      height: 1rem;
+      font-size: .7rem;
+      display: block;
+      color: $white;
+      text-transform: uppercase;
+      // border-radius: 16px;
+      background: $bright-red;
+      font-weight: 700;
+      margin-top: .2rem;
+      padding: 0px 6px;
+      border-radius: 16px;
+    }
+}
 .cart-redirect-link {
   background-color: transparent !important;
   cursor: pointer;
