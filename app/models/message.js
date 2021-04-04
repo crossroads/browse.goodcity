@@ -19,6 +19,7 @@ export default DS.Model.extend({
   sender: belongsTo("user", {
     async: false
   }),
+  unreadCount: attr("string"),
   lookup: attr("string"),
   messageableType: attr("string"),
   messageableId: attr("string"),
