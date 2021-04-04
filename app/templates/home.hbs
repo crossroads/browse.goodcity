@@ -7,7 +7,10 @@
     <!-- Introduction -->
     <div class="content">
       <div class="row home_section small light">
-        <div class="small-12 large-6 medium-9 columns introduction small-centered">
+        <div class="notification-icon {{if hasCartItems 'with-cart-icon' ''}} large-2 medium-2 columns">
+          {{notification-icon}}
+        </div>
+        <div class="small-12 large-6 medium-5 columns introduction small-centered">
           {{ t "home.introduction" }}
           <a href="https://www.youtube.com/watch?v=dGDUJykjsYw">{{ t "home.introduction_video" }}</a>
         </div>
