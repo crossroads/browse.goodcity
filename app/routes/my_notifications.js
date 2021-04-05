@@ -14,16 +14,9 @@ export default AuthorizeRoute.extend({
     if (isExiting) {
       let applicationController = this.controllerFor("application");
       applicationController.set("hideHeaderBar", true);
-      // applicationController.set(
-      //   "pageTitle",
-      //   this.get("i18n").t("browse.title")
-      // );
       controller.set("notifications", []);
     }
 
     controller.off();
   }
-  // deactivate(){
-  //   this.controllerFor('application').set('showSidebar', true);
-  // }
 });

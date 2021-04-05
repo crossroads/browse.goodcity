@@ -82,10 +82,8 @@ export default Controller.extend({
   messagesToNotification(messages) {
     const props = ["id", "sender", "createdAt", "isPrivate"];
     const lastMessage = messages.sortBy("id").get("lastObject");
-    // let itemId = lastMessage.get("itemId");
 
     let order;
-    // const lastMessage = messages.sortBy("id").get("lastObject");
     let messageableType = lastMessage.get("messageableType");
     let recordId = lastMessage.get("messageableId");
 
@@ -98,7 +96,6 @@ export default Controller.extend({
     let notification = EmberObject.create(lastMessage.getProperties(props));
     notification.setProperties({
       key: MSG_KEY(lastMessage),
-      // offer: offer,
       messages: messages,
       isSingleMessage: computed.equal("unreadCount", 1),
       isThread: computed.not("isSingleMessage"),
