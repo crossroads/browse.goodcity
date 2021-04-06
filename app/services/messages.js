@@ -99,27 +99,18 @@ export default Service.extend({
     this.get("logger").error(e);
   },
 
-  getMessageRoute(messageableId, messageableType) {
-    if (messageableType === "Order") {
-      return ["orders.conversation", messageableId];
-    }
-
-    if (messageableType === "Offer") {
-      return ["offers.messages", messageableId];
-    }
-  },
-
   getRoute: function(message) {
     let messageableId = message.get
       ? message.get("messageableId")
       : message.messageable_id;
 
-    let messageableType = message.get
-      ? message.get("messageableType")
-      : message.messageable_type;
+    if (message.get("isOfferMessage")) {
+      return ["offers.messages", messageableId];
+    }
 
-    let messageRoute = this.getMessageRoute(messageableId, messageableType);
-    return messageRoute;
+    if (message.get("isOrderMessage")) {
+      return ["orders.conversation", messageableId];
+    }
   },
 
   _incrementCount(step = 1) {

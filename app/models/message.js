@@ -42,6 +42,25 @@ export default DS.Model.extend({
       return body;
     }
   }),
+
+  plainBody: Ember.computed("body", function() {
+    let body = this.get("body");
+    let lookup = this.get("lookup");
+
+    if (Object.keys(lookup).length === 0) {
+      return body;
+    } else {
+      lookup = JSON.parse(lookup);
+      Object.keys(lookup).forEach(key => {
+        body = body.replace(
+          new RegExp(`\\[:${key}\\]`, "g"),
+          lookup[key].display_name
+        );
+      });
+    }
+    return body;
+  }),
+
   myMessage: computed("sender", function() {
     return this.get("sender.id") === this.get("session.currentUser.id");
   }),
@@ -53,7 +72,8 @@ export default DS.Model.extend({
   createdDate: computed("createdAt", function() {
     return new Date(this.get("createdAt")).toDateString();
   }),
-
+  isOrderMessage: equal("messageableType", "Order"),
+  isOfferMessage: equal("messageableType", "Offer"),
   isRead: equal("state", "read"),
   isUnread: equal("state", "unread")
 });

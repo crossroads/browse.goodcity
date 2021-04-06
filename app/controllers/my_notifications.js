@@ -4,7 +4,7 @@ import { later } from "@ember/runloop";
 import { inject as service } from "@ember/service";
 import EmberObject, { computed } from "@ember/object";
 
-const MSG_KEY = msg => {
+const getMessageKey = msg => {
   return [
     msg.get("isPrivate") ? "private" : "public",
     msg.get("messageableType") || "-",
@@ -15,7 +15,6 @@ const MSG_KEY = msg => {
 export default Controller.extend({
   messagesUtil: service("messages"),
   store: service(),
-  offerService: service(),
   logger: service(),
   subscription: service(),
 
@@ -50,7 +49,7 @@ export default Controller.extend({
       return;
     }
 
-    let notif = notifications.findBy("key", MSG_KEY(msg));
+    let notif = notifications.findBy("key", getMessageKey(msg));
 
     if (notification.operation === "create") {
       if (notif) {
@@ -95,7 +94,7 @@ export default Controller.extend({
 
     let notification = EmberObject.create(lastMessage.getProperties(props));
     notification.setProperties({
-      key: MSG_KEY(lastMessage),
+      key: getMessageKey(lastMessage),
       messages: messages,
       isSingleMessage: computed.equal("unreadCount", 1),
       isThread: computed.not("isSingleMessage"),
@@ -104,7 +103,7 @@ export default Controller.extend({
       text: computed("messages.[]", function() {
         return this.get("messages")
           .sortBy("id")
-          .get("lastObject.body");
+          .get("lastObject.plainBody");
       }),
       unreadCount: computed("messages.@each.unreadCount", "messages.[]", {
         get() {
@@ -133,7 +132,7 @@ export default Controller.extend({
     });
 
     return _.chain(groupedMessages)
-      .groupBy(MSG_KEY)
+      .groupBy(getMessageKey)
       .map(msgs => this.messagesToNotification(msgs))
       .value();
   },
@@ -167,7 +166,7 @@ export default Controller.extend({
         .then(data => this.toMessageModels(data))
         .then(messages => {
           const notifications = _.chain(messages)
-            .groupBy(MSG_KEY)
+            .groupBy(getMessageKey)
             .map(o => this.buildNotifications(o))
             .flatten()
             .value();
