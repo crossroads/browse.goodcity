@@ -36,25 +36,34 @@ export default Service.extend({
     );
   },
 
+  /**
+   *
+   * @param {*} url
+   * @param {*} body
+   * @param {*} opts
+   * @returns
+   */
   POST(url, body, opts = {}) {
-    const { authorizedRequest = true } = opts;
+    const { authorizedRequest = true, version } = opts;
     return this._request(
       url,
       {
         action: "POST",
-        body
+        body,
+        version
       },
       authorizedRequest
     );
   },
 
   PUT(url, body, opts = {}) {
-    const { authorizedRequest = true } = opts;
+    const { authorizedRequest = true, version } = opts;
     return this._request(
       url,
       {
         action: "PUT",
-        body
+        body,
+        version
       },
       authorizedRequest
     );

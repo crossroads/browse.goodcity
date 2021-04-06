@@ -1,0 +1,41 @@
+<div class="cmp search-overlay">
+  {{#popup-overlay open=open}}
+  <div class="back_text" {{action "cancelSearch" }}>
+    {{fa-icon 'angle-left' }} {{t 'cancel'}}
+  </div>
+
+  {{#unless showPinInput}}
+  <div class="change-phonenumber-container">
+    <div class="item-description">
+      {{t "account.change_phone_number.description"}}
+    </div>
+    <div class="item">
+      <span class="prefix item">+852</span>
+    </div>
+    <div class="item-wide">
+      {{numeric-input class="item-wide" maxlength="8" value=mobileNumber pattern="^.{8}$" autoFocus=true}}
+    </div>
+    <div class="item">
+      <button class="item" {{action 'initiateChange' }}>Update</button>
+    </div>
+  </div>
+
+  {{/unless}}
+  {{#if showPinInput}}
+  <div class="pin-input-container">
+    <div class="item-description">
+      <span>
+        {{t "account.change_phone_number.pin_instruction"}} {{mobileNumber}}
+      </span>
+    </div>
+    <div class="item-wide">
+      {{numeric-input classNames="number_input center_align_placeholder" value=pin name="pin" id="pin" maxlength="4"
+      placeholder="XXXX" required='true' pattern=".{4,}" autoFocus=true}}
+    </div>
+    <div class="item">
+      <button {{action 'updatePhoneNumber' }}>Continue</button>
+    </div>
+  </div>
+  {{/if}}
+  {{/popup-overlay}}
+</div>
