@@ -7,18 +7,26 @@ export default ApiService.extend({
     this.set("openPhoneOverlay", val);
   },
 
-  initiatePinFor(mobile, userId) {
-    return this.POST("/auth/send_pin", {
-      mobile,
-      user_id: userId
-    });
+  initiatePinFor(mobile) {
+    return this.POST(
+      "/auth/resend_pin",
+      {
+        mobile
+      },
+      { version: "2" }
+    );
   },
 
-  updatePhoneNumber(userId, { mobile, otp_auth_key, pin }) {
-    return this.PUT(`/users/${userId}/update_mobile_number`, {
-      mobile,
-      otp_auth_key,
-      pin
-    });
+  updatePhoneNumber(userId, { token, pin }) {
+    return this.PUT(
+      `/users/${userId}/update_phone_number`,
+      {
+        token,
+        pin
+      },
+      {
+        version: "2"
+      }
+    );
   }
 });

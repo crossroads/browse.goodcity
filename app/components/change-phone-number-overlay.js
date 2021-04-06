@@ -27,8 +27,7 @@ export default Component.extend(AsyncMixin, {
       try {
         const data = await this.runTask(
           this.get("accountService").initiatePinFor(
-            this.get("formattedMobileNumber"),
-            this.get("session.currentUser.id")
+            this.get("formattedMobileNumber")
           )
         );
         this.set("otpAuth", data.otp_auth_key);
@@ -40,20 +39,20 @@ export default Component.extend(AsyncMixin, {
 
     async updatePhoneNumber() {
       try {
-        const data = await this.runTask(
+        const res = await this.runTask(
           this.get("accountService").updatePhoneNumber(
             this.get("session.currentUser.id"),
             {
-              mobile: this.get("formattedMobileNumber"),
-              otp_auth_key: this.get("otpAuth"),
+              token: this.get("otpAuth"),
               pin: this.get("pin")
             }
           )
         );
-        this.get("model").set("mobile", data.user.mobile);
+        this.get("model").set("mobile", res.data.attributes.mobile);
         this.send("cancelSearch");
       } catch (error) {
-        this.get("messageBox").alert(error.responseJSON.errors[0].message.pin);
+        this.get("messageBox").alert(error.responseJSON.error);
+        this.send("cancelSearch");
       }
     }
   }
