@@ -83,10 +83,9 @@ export default Controller.extend({
     const lastMessage = messages.sortBy("id").get("lastObject");
 
     let order;
-    let messageableType = lastMessage.get("messageableType");
     let recordId = lastMessage.get("messageableId");
 
-    if (messageableType === "Order") {
+    if (lastMessage.get("isOrderMessage")) {
       order =
         this.get("store").peekRecord("order", recordId) ||
         this.get("store").findRecord("order", recordId);
