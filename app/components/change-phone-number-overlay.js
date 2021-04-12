@@ -15,6 +15,13 @@ export default Component.extend(AsyncMixin, {
     return `+852${mobile}`;
   }),
 
+  willDestroyElement() {
+    this.get("accountService").setOverlayVisibility(false);
+    this.set("mobileNumber", "");
+    this.set("pin", "");
+    this.set("showPinInput", false);
+  },
+
   actions: {
     cancelSearch() {
       this.get("accountService").setOverlayVisibility(false);
