@@ -5,6 +5,23 @@
       margin-top: 10px;
     }
   }
+  .notification-icon{
+    margin-left: 1.5rem;
+    margin-top: 0.6rem;
+    a {
+      text-decoration: none !important;
+    }
+    .unread_length{
+      margin-top:unset;
+    }
+    &.with-cart-icon{
+      margin-top: 1.8rem;
+    }
+
+    @media #{$small-only} {
+      display: none;
+    }
+  }
   .cart-icon{
     text-align: left;
     @media #{$small-only} {

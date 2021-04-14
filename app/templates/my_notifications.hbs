@@ -1,0 +1,99 @@
+<nav class="tab-bar my-notifications">
+  <div class="row header">
+    <div class="title show-for-medium-up">
+      Notifications
+    </div>
+    <div class="small-6 large-6 columns link">
+      <a href="#" {{action 'toggleShowUnread'}}>
+        {{#if showUnread}}
+        {{t "my_notifications.all_notifications"}}
+        {{else}}
+        {{t "my_notifications.show_unread"}}
+        {{/if}}
+      </a>
+    </div>
+    <div class="small-6 large-6 columns link">
+      <a href="#" {{action 'markAllRead'}}>
+        {{t "my_notifications.mark_all_read"}} {{fa-icon 'check'}}
+      </a>
+    </div>
+  </div>
+</nav>
+
+<section class="main-section my-notifications-section">
+  <div class="row">
+    <div class="small-12 columns">
+      {{#if displayMessages}}
+        {{#infinite-list height="82vh" loadMore=(action "loadMoreMessages") }}
+          <ul class="list list-notifications">
+            {{#each notifications as |notification|}}
+            <li>
+
+              <a {{action "view" notification.id}}>
+                <div class="thread {{if notification.unreadCount 'unread'}}">
+
+                  <span class="thread_image">
+                    {{#if notification.order}}
+                      {{fa-icon notification.order.orderDetailTypeIcon class="default-icon"}}
+                    {{else}}
+                     <i class="fa fa-bullhorn thumb"> {{fa-icon "bullhorn"}}</i>
+                    {{/if}}
+                  </span>
+
+                  <span class="thread_info">
+                    <div class="row">
+                      <div class="small-8 large-10 columns">
+                        <div class='ellipsis one-line-ellipsis message-text'>
+                          Re:
+                          {{#if notification.order}}
+                            Order {{notification.order.code}}
+                            {{#if notification.order.beneficiary}}
+                              - {{notification.order.beneficiary.fullName}}
+                            {{/if}}
+                          {{else}}
+                            Offer {{notification.offerId}}
+                          {{/if}}
+                        </div>
+
+                        <div class="sender">
+                          From: {{notification.sender.fullName}}
+                          <i>{{fa-icon 'clock'}}</i>
+                          {{message-time notification.createdAt}}
+                        </div>
+                      </div>
+
+                      <div class="small-4 large-2 columns thread_icon right"
+                        {{action 'markThreadRead' notification on='click' bubbles=false}}>
+                        {{#if notification.unreadCount}}
+                          <span class="unread notifications">
+                            <div class="unread_length">{{notification.unreadCount}}</div>
+                          </span>
+                        {{/if}}
+                        {{#if notification.isSingleMessage}}
+                          <i class="mark_read">{{fa-icon 'check'}}</i>
+                        {{else if notification.isThread}}
+                          <i class="mark_read">{{fa-icon 'arrow-right'}}</i>
+                        {{/if}}
+                      </div>
+                    </div>
+
+                    <div class="row thread_last_message">
+                      <div class="small-12 columns">
+                        <div class='ellipsis two-line-ellipsis message-text'>
+                          {{apply-line-break notification.text}}
+                        </div>
+                      </div>
+                    </div>
+                  </span>
+                </div>
+              </a>
+
+            </li>
+            {{/each}}
+          </ul>
+        {{/infinite-list}}
+      {{/if}}
+
+    </div>
+  </div>
+</section>

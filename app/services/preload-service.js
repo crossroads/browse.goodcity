@@ -19,7 +19,7 @@ const {
 export default ApiService.extend(Evented, {
   store: service(),
   session: service(),
-
+  messages: service(),
   isLoggedIn: alias("session.isLoggedIn"),
 
   preloadData: function() {
@@ -37,6 +37,10 @@ export default ApiService.extend(Evented, {
     return this.fetchAll(PRELOAD_OF_TYPE_ORDER);
   },
 
+  loadNotifications() {
+    return this.get("messages").fetchUnreadMessageCount();
+  },
+
   loadUserData() {
     if (!this.get("isLoggedIn")) {
       return resolve();
@@ -45,7 +49,8 @@ export default ApiService.extend(Evented, {
     return all([
       this.get("session").loadUserProfile(),
       this.fetchAll(PRELOAD_AUTHORIZED_TYPES),
-      this.loadOrderData()
+      this.loadOrderData(),
+      this.loadNotifications()
     ]);
   },
 

@@ -70,6 +70,14 @@ export default {
     }
   },
 
+  my_notifications: {
+    heading: "{{name}}的捐贈",
+    all_notifications: "所有新信息",
+    show_unread: "顯示未讀信息",
+    mark_all_read: "全部標示為已讀",
+    no_unread: "沒有未讀信息"
+  },
+
   submitted_orders: {
     submit_order: "Submit Order",
     select_option: "Please select from the Following Options",

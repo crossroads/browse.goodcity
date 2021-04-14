@@ -1,0 +1,172 @@
+.my-notifications-section {
+  padding: 0;
+  a{
+    color: $medium-blue;
+  }
+  @media #{$large-up} {
+      max-width: 800px;
+      margin: 0 auto;
+  }
+}
+
+
+.header{
+  a{
+    text-decoration: underline;
+  }
+  border-bottom: 1px solid $light-gray-1;
+  @media #{$small-only}{
+    border-bottom: unset;
+  }
+
+}
+.tab-bar.my-notifications {
+  margin-bottom: 0;
+  height: 3.1rem;
+  text-align: center;
+  @media #{$large-up} {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  a{
+    color: $medium-blue;
+  }
+}
+
+.list.list-notifications {
+  vertical-item {
+    height: 6.8rem !important;
+  }
+
+  overflow: hidden !important;
+
+  li {
+    padding-right: unset;
+    border-bottom: 1px solid $light-gray-1;
+  }
+}
+
+.thread.unread {
+  background-color: $light-blue-2;
+}
+
+.thread {
+  padding: 0.5rem;
+
+  span {
+    display: table-cell;
+  }
+
+  img {
+    width: 2.3rem;
+    height: 2.3rem;
+
+    @media #{$small-only} {
+      -webkit-margin-end: 2rem;
+    }
+  }
+
+  i.thumb {
+    font-size: 1.3rem;
+    padding: 0.4rem;
+  }
+
+  .thread_image {
+    padding-top: 0.7rem;
+    width: 3.35rem;
+
+    .default-icon{
+      font-size: 1.5rem;
+      margin-left: 0.4rem;
+    }
+  }
+
+  .thread_info {
+    width: 38rem;
+
+    @media #{$small-only} {
+      width: 20rem;
+    }
+
+    .thread_icon {
+      text-align: right;
+      display: inline-table;
+      padding-top: 0.5rem;
+
+      .unread {
+        display: inline;
+        padding-bottom: 0.4rem;
+        margin-left: -0.3rem;
+
+        .unread_length {
+
+        line-height: 1.3rem;
+        width: 1.2rem;
+        height: 1.2rem;
+        display: inline-block;
+          color: $white;
+          text-align: center;
+        }
+      }
+
+      .fa-users {
+        margin-left: 0.5rem;
+      }
+    }
+
+  }
+
+  .sender {
+    font-size: 0.65rem;
+  }
+
+  .thread_last_message {
+    padding-top: 0.3rem;
+    color: $white;
+
+    .ellipsis {
+      min-height: 2.35rem;
+    }
+
+    audio {
+      width: 100%;
+    }
+  }
+}
+
+.mark_read {
+  padding: 0.4rem 0.35rem;
+  display: inline;
+}
+
+.no_unread_message {
+  position: fixed;
+  top: 30%;
+  left: 0px;
+  width: 97% !important;
+  text-align: center;
+
+  .child_icon {
+    display: inline-block;
+    vertical-align: super;
+
+    i {
+      font-size: 4rem;
+    }
+  }
+
+  .info-message {
+    display: inline-block;
+    word-wrap: normal;
+    font-weight: bold;
+    text-align: left;
+    margin-left: 0.5rem;
+    width: 22%;
+    font-size: 1.6rem;
+
+    @media #{$small-only} {
+      width: 35%;
+      font-size: 1.2rem;
+    }
+  }
+}

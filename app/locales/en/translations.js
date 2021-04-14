@@ -76,6 +76,13 @@ export default {
     }
   },
 
+  my_notifications: {
+    heading: "{{name}}'s Offer",
+    all_notifications: "Show all notifications",
+    show_unread: "Show unread only",
+    mark_all_read: "Mark all read",
+    no_unread: "No unread messages!"
+  },
   submitted_orders: {
     submit_order: "Submit Order",
     select_option: "Please select from the Following Options",
