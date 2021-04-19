@@ -23,7 +23,7 @@ export default Component.extend(AsyncMixin, {
   },
 
   actions: {
-    cancelSearch() {
+    cancel() {
       this.get("accountService").setOverlayVisibility(false);
       this.set("mobileNumber", "");
       this.set("pin", "");
@@ -56,10 +56,10 @@ export default Component.extend(AsyncMixin, {
           )
         );
         this.get("model").set("mobile", res.data.attributes.mobile);
-        this.send("cancelSearch");
+        this.send("cancel");
       } catch (error) {
         this.get("messageBox").alert(error.responseJSON.error);
-        this.send("cancelSearch");
+        this.send("cancel");
       }
     }
   }
