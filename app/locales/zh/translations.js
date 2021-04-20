@@ -33,8 +33,8 @@ export default {
   continue: "繼續",
   save_changes: "儲存修正",
   discard_changes: "放棄修正",
-  morning: "早安",
-  afternoon: "午安",
+  morning: "早上",
+  afternoon: "下午",
   messages: {
     you: "閣下",
     chat_note: "有關這個指示請跟我們的職員聯絡",
