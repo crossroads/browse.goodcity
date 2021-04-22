@@ -1,0 +1,64 @@
+.phone-form {
+  height: 90%;
+}
+
+.mobile-update-popup {
+  height: 100vh;
+  padding: 0.5rem;
+
+  .row .row {
+    width: 100%;
+  }
+
+  .prefix {
+    display: inline-block;
+    width: 5rem;
+  }
+
+  .mobile input {
+    display: inline-block;
+    width: 65%;
+    color: black;
+  }
+
+  button {
+    width: 100%;
+    float: left;
+  }
+}
+
+.pin-input-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  padding: 10px;
+  justify-items: center;
+  align-content: center;
+  padding-right: 10px;
+  grid-gap: 10px;
+
+  .item {
+    flex-grow: 1;
+    margin: auto;
+  }
+
+  .item-description {
+    grid-column: auto / span 3;
+    margin: 5px auto;
+    width: 100%;
+  }
+
+  .item-wide {
+    margin: auto;
+    width: 100%;
+  }
+
+  input {
+    color: black !important;
+    text-align: center;
+    margin: auto;
+  }
+
+  button {
+    margin: auto;
+  }
+}

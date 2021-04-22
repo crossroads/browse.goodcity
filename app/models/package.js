@@ -30,8 +30,10 @@ export default Model.extend(cloudinaryImage, {
   stockitSentOn: attr("date"),
   orderId: attr("number"),
   allowWebPublish: attr("boolean"),
+  packageSet: belongsTo("packageSet", {
+    async: false
+  }),
   packageSetId: attr("number"),
-  packageSet: belongsTo("packageSet"),
   ordersPackage: belongsTo("orders_package", { async: false }),
   requestedPackage: belongsTo("requested_package", { async: false }),
   isPartOfSet: bool("packageSetId"),

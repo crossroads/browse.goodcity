@@ -1,3 +1,11 @@
+    <div class="title show-for-medium-up">
+    <div class="large-1 medium-1 columns">
+      {{notification-icon}}
+    </div>
+    <div style="padding-right:4rem;">
+      {{t "shareableOffers.respond_to_offer"}} {{model.id}}
+    </div>
+  </div>
 <div class="row tabs tab-icons">
   {{#link-to 'offers.detail' model.public_uid tagName="div" classNames="small-6 orders tab columns text-center"}}
     <i class="fa dashboard-menu item-menu">{{fa-icon 'list'}}</i>

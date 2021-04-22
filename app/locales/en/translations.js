@@ -76,6 +76,13 @@ export default {
     }
   },
 
+  my_notifications: {
+    heading: "{{name}}'s Offer",
+    all_notifications: "Show all notifications",
+    show_unread: "Show unread only",
+    mark_all_read: "Mark all read",
+    no_unread: "No unread messages!"
+  },
   submitted_orders: {
     submit_order: "Submit Order",
     select_option: "Please select from the Following Options",
@@ -284,6 +291,11 @@ export default {
       "The contact number you would like us to reach you on.",
     preffered_contact_warning: "You must provide a contact number",
     user_info: "User Information is incomplete",
+    change_phone_number: {
+      title: "Change Phone Number",
+      description: "Please enter the new phone number",
+      pin_instruction: "Please enter the pin which we sent to"
+    },
     user_title: {
       mr: "Mr",
       mrs: "Mrs",

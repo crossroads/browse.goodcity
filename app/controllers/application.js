@@ -45,6 +45,17 @@ export default Controller.extend(cancelOrderMixin, quantityUpdateMixin, {
     return ["browse", "package_category"].indexOf(this.get("currentPath")) >= 0;
   }),
 
+  showNotificationIcon: computed("currentPath", function() {
+    return (
+      [
+        "my_notifications",
+        "package_category",
+        "package",
+        "package_set"
+      ].indexOf(this.get("currentPath")) < 0
+    );
+  }),
+
   showCartDetailSidebar: false,
   cartscroll: service(),
 

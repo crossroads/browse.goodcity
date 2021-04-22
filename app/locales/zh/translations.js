@@ -33,8 +33,8 @@ export default {
   continue: "繼續",
   save_changes: "儲存修正",
   discard_changes: "放棄修正",
-  morning: "早安",
-  afternoon: "午安",
+  morning: "早上",
+  afternoon: "下午",
   messages: {
     you: "閣下",
     chat_note: "有關這個指示請跟我們的職員聯絡",
@@ -68,6 +68,14 @@ export default {
       version: "版本",
       login: "登入"
     }
+  },
+
+  my_notifications: {
+    heading: "{{name}}的捐贈",
+    all_notifications: "所有新信息",
+    show_unread: "顯示未讀信息",
+    mark_all_read: "全部標示為已讀",
+    no_unread: "沒有未讀信息"
   },
 
   submitted_orders: {
@@ -267,6 +275,11 @@ export default {
     preffered_contact_label: "請提供我們可聯絡您的電話號碼。",
     preffered_contact_warning: "閣下需要提供聯絡號碼",
     user_info: "用戶資料不齊",
+    change_phone_number: {
+      title: "變更電話號碼",
+      description: "Please enter the new phone number",
+      change_phone_number: "Please enter the pin which we sent to"
+    },
     user_title: {
       mr: "先生",
       mrs: "太太",

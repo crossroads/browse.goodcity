@@ -15,5 +15,6 @@ export default AuthorizeRoute.extend({
     this._super(controller, model);
     this.controllerFor("application").set("cart.checkout", false);
     controller.set("model", { id: this.get("offerId") });
+    controller.send("markRead");
   }
 });

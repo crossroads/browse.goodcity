@@ -1,11 +1,13 @@
 import Controller from "@ember/controller";
 import { sort } from "@ember/object/computed";
+import { inject as service } from "@ember/service";
 
 export default Controller.extend({
   queryParams: ["uid"],
   sortProperties: ["createdAt: asc"],
   sortedMessages: sort("messages", "sortProperties"),
   body: "",
+  messagesUtil: service("messages"),
 
   createMessage(values) {
     if (values.body) {
@@ -68,6 +70,14 @@ export default Controller.extend({
       );
 
       this.createMessage(values);
+    },
+
+    markRead() {
+      this.get("sortedMessages")
+        .filterBy("state", "unread")
+        .forEach(message => {
+          this.get("messagesUtil").markRead(message);
+        });
     }
   }
 });

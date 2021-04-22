@@ -180,6 +180,19 @@ export default Model.extend({
     return this.get("ordersPurposes.firstObject.purpose.description");
   }),
 
+  orderDetailTypeIcon: Ember.computed(
+    "isAppointment",
+    "isOnlineOrder",
+
+    function() {
+      if (this.get("isAppointment")) {
+        return "warehouse";
+      } else if (this.get("isOnlineOrder")) {
+        return "desktop";
+      }
+    }
+  ),
+
   transportIcon: computed("transportKey", function() {
     const key = this.get("transportKey");
     switch (key) {

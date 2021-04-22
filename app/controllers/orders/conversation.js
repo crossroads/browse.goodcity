@@ -132,7 +132,9 @@ export default detail.extend({
     markRead() {
       this.get("sortedMessages")
         .filterBy("state", "unread")
-        .forEach(message => this.get("messagesUtil").markRead(message));
+        .forEach(message => {
+          this.get("messagesUtil").markRead(message);
+        });
     }
   }
 });
