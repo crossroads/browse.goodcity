@@ -5,6 +5,7 @@
 .mobile-update-popup {
   height: 100vh;
   padding: 0.5rem;
+  overflow: hidden !important;
 
   .row .row {
     width: 100%;
@@ -15,10 +16,19 @@
     width: 5rem;
   }
 
-  .mobile input {
-    display: inline-block;
-    width: 65%;
-    color: black;
+  .mobile {
+    @media #{$large-up} {
+      margin: 0 auto;
+      width: 50%;
+    }
+
+    margin-top: 5rem !important;
+
+    input {
+      display: inline-block;
+      width: 65%;
+      color: black;
+    }
   }
 
   button {

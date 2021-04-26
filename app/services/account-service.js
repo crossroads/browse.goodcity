@@ -2,6 +2,7 @@ import ApiService from "./api-base-service";
 
 export default ApiService.extend({
   isOpen: false,
+  openPhoneOverlay: false,
 
   setOverlayVisibility(val) {
     this.set("openPhoneOverlay", val);

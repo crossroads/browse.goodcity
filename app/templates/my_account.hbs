@@ -1,4 +1,4 @@
-<div class="my_dashboard">
+<div class="my_dashboard row">
   {{partial 'my_dashboard/my_dashboard_tabs'}}
 
   <div class="row">
@@ -15,14 +15,12 @@
               </div>
               <div class="detail-row row">
                 {{#if model.organisation}}
-                <div class="small-12 columns" id="organisation_id">
-                  <div class='row'>
-                    <div class="small-5 columns data-type">
-                      {{t "account.organisation"}}
-                    </div>
-                    <div class="small-7 columns data">
-                      {{model.organisation.nameEn}}
-                    </div>
+                <div class='row'>
+                  <div class="small-5 columns data-type">
+                    {{t "account.organisation"}}
+                  </div>
+                  <div class="small-7 columns data">
+                    {{model.organisation.nameEn}}
                   </div>
                 </div>
                 {{/if}}
@@ -49,18 +47,12 @@
                 </div>
                 <div class="small-7 columns data">
                   {{#if model.user.email}}
-                  <div class="row">
-                    <div class="small-12 medium-12 large-8 columns">
-                      {{model.user.email}}
-
-                      {{#if model.user.isEmailVerified}}
-                      <div class="verified_icon">
-                          {{fa-icon "check-circle" prefix="far"}}
-                          <span>{{t 'my_dashboard.account.verified_text'}}</span>
-                      </div>
-                      {{/if}}
+                    {{model.user.email}}
+                    {{#if model.user.isEmailVerified}}
+                    <div class="verified_icon">
+                        {{fa-icon "check-circle" prefix="far"}}
                     </div>
-                  </div>
+                    {{/if}}
                   {{/if}}
                 </div>
               </div>
@@ -69,21 +61,14 @@
                   {{t 'account.mobile'}}
                 </div>
                 <div class="small-7 columns data">
-                  <div class="row">
-                    {{#if model.user.mobile}}
-                    <div class="small-12 medium-12 large-6 columns">
-                      {{model.user.mobileWithoutCountryCode}}
-                    </div>
-                    {{#if model.user.isMobileVerified}}
-                    <div class="small-5 medium-3 large-3 columns verified_icon">
-                      <div>
-                        {{fa-icon "check-circle" prefix="far"}}
-                        <span class="verified_text">{{t 'my_dashboard.account.verified_text'}}</span>
-                      </div>
-                    </div>
-                    {{/if}}
-                    {{/if}}
+                  {{#if model.user.mobile}}
+                  {{model.user.mobileWithoutCountryCode}}
+                  {{#if model.user.isMobileVerified}}
+                  <div class="verified_icon">
+                    {{fa-icon "check-circle" prefix="far"}}
                   </div>
+                  {{/if}}
+                  {{/if}}
                 </div>
               </div>
               <div class="detail-row row">

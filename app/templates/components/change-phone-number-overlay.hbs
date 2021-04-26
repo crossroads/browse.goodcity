@@ -1,69 +1,86 @@
 <div class="cmp search-overlay">
   {{#popup-overlay open=open additionalClassNames='mobile-update-popup'}}
 
-  {{#unless showPinInput}}
-    {{#validatable-form class='phone-form' onSubmit=(action 'initiateChange') as |form|}}
-
-      <div class="mobile ">
-        <div class="row">
-          <div class="small-12 columns">
-            <label class="form-label">
-              {{t "account.change_phone_number.description"}}
-            </label>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="small-12 large-7 columns">
-            {{#form-control}}
-            <div class="prefix">+852</div>
-            {{numeric-input
-              class="item-wide"
-              maxlength="8"
-              value=mobileNumber
-              pattern="^.{8}$"
-              required="true"
-              autoFocus=true}}
-            {{/form-control}}
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="small-6 large-3 columns">
-            <button class="secondary" {{action 'cancel' }}>Cancel</button>
-
-          </div>
-          <div class="small-6 large-3 columns">
-            <button {{action 'submit' target=form}}>Update</button>
-          </div>
-          <div class="large-6 columns"></div>
-        </div>
-      </div>
-    {{/validatable-form}}
-
-  {{/unless}}
-
   {{#if showPinInput}}
-  {{#validatable-form class='phone-form' onSubmit=(action 'updatePhoneNumber') as |form|}}
-    <div class="pin-input-container">
-      <div class="item-description">
-        <span>
+  {{#validatable-form onSubmit=(action 'updatePhoneNumber') as |form|}}
+    <div class="mobile">
+      <div class="row">
+        <div class="small-12 columns">
           {{t "account.change_phone_number.pin_instruction"}} {{mobileNumber}}
-        </span>
+        </div>
       </div>
-      <div class="item-wide">
-        {{#form-control}}
-        {{numeric-input classNames="number_input center_align_placeholder" value=pin name="pin" id="pin" maxlength="4"
-        onEvent="keypress"
-        action='updatePhoneNumber'
-        placeholder="XXXX" required='true' pattern=".{4,}" autoFocus=true}}
-        {{/form-control}}
+
+      <div class="row">
+        <div class="small-12 columns">
+          {{#form-control}}
+            {{numeric-input
+            classNames="center_align_placeholder"
+            value=pin
+            name="pin"
+            id="pin"
+            maxlength="4"
+            placeholder="XXXX"
+            required='true'
+            pattern=".{4,}"
+            autoFocus=true}}
+          {{/form-control}}
+        </div>
       </div>
-      <div class="item">
-        <button {{action 'submit' target=form}}>{{t 'continue'}}</button>
+
+      <div class="row">
+        <div class="small-6 columns">
+          <button class="secondary" {{action 'cancel' }}>Cancel</button>
+
+        </div>
+        <div class="small-6 columns">
+          <button {{action 'submit' target=form}}>{{t 'continue'}}</button>
+        </div>
+
       </div>
     </div>
   {{/validatable-form}}
+
+  {{else}}
+
+  {{#validatable-form onSubmit=(action 'initiateChange') as |form|}}
+  <div class="mobile ">
+    <div class="row">
+      <div class="small-12 columns">
+        <label class="form-label">
+          {{t "account.change_phone_number.description"}}
+        </label>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="small-12 columns">
+        {{#form-control}}
+        <div class="prefix">+852</div>
+        {{numeric-input
+        class="item-wide"
+        maxlength="8"
+        value=mobileNumber
+        action='initiateChange'
+        pattern="^.{8}$"
+        required="true"
+        autoFocus=true}}
+        {{/form-control}}
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="small-6 columns">
+        <button class="secondary" {{action 'cancel' }}>Cancel</button>
+
+      </div>
+      <div class="small-6 columns">
+        <button {{action 'submit' target=form}}>Update</button>
+      </div>
+
+    </div>
+  </div>
+  {{/validatable-form}}
+
   {{/if}}
   {{/popup-overlay}}
 </div>
