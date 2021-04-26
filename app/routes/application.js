@@ -23,6 +23,7 @@ export default Route.extend({
       currentPath.indexOf("package") >= 0 ||
       currentPath.indexOf("item") >= 0 ||
       currentPath.indexOf("browse") >= 0 ||
+      currentPath.indexOf("offers") >= 0 ||
       window.location.pathname === "/"
     );
   },
