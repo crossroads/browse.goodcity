@@ -1,5 +1,11 @@
 .my_dashboard, .my_orders {
 
+  @media #{$medium-only} {
+    &.row {
+      margin: 0 !important;
+    }
+  }
+
   @media #{$large-up} {
     &.row {
       max-width: 800px;
