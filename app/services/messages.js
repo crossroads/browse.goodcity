@@ -105,7 +105,11 @@ export default Service.extend({
       : message.messageable_id;
 
     if (message.get("isOfferMessage")) {
-      return ["offers.messages", messageableId];
+      return [
+        "offers.messages",
+        messageableId,
+        { queryParams: { uid: message.get("shareablePublicId") } }
+      ];
     }
 
     if (message.get("isOrderMessage")) {
