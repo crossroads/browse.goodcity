@@ -26,6 +26,7 @@ export default DS.Model.extend({
   order: belongsTo("order", {
     async: false
   }),
+  shareablePublicId: attr("string"),
   parsedBody: Ember.computed("body", function() {
     let body = this.get("body");
     let lookup = this.get("lookup");
