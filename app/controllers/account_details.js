@@ -25,6 +25,7 @@ export default Controller.extend({
   preferredContactNumber: "",
   mobilePhone: "",
   isMobileApp: config.cordova.enabled,
+  userInfoError: "",
 
   userTitle: computed("model", function() {
     let userTitle = this.get("model.user.title");
@@ -184,6 +185,16 @@ export default Controller.extend({
     goToSearchOrg() {
       if (!this.get("organisationsUserId")) {
         this.transitionToRoute("search_organisation");
+      }
+    },
+
+    validateUserInfo() {
+      let firstName = this.get("model.user.firstName");
+      let lastName = this.get("model.user.lastName");
+      if (firstName && lastName) {
+        this.set("userInfoError", "");
+      } else {
+        this.set("userInfoError", "user-info-error");
       }
     }
   }

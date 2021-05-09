@@ -62,13 +62,13 @@
                         </div>
                         <div class="small-5 columns">
                           <label class="form-label title-label">{{t "account.first"}}</label>
-                          {{input type="text" value=model.user.firstName id="firstName" classNames="number_input center_align_placeholder" required='true'}}
+                          {{input type="text" value=model.user.firstName id="firstName" classNames="number_input center_align_placeholder" required='true' focus-out="validateUserInfo"}}
                         </div>
                         <div class="small-5 columns">
                           <label class="form-label title-label">{{t "account.last"}}</label>
-                          {{input type="text" value=model.user.lastName id="lastName" classNames="number_input center_align_placeholder" required='true'}}
+                          {{input type="text" value=model.user.lastName id="lastName" classNames="number_input center_align_placeholder" required='true' focus-out="validateUserInfo"}}
                         </div>
-                        <div class="small-12 columns input-error warning_empty">
+                        <div class="{{userInfoError}} small-12 columns input-error warning_empty">
                           {{fa-icon "exclamation-triangle"}}&nbsp;&nbsp;{{t "account.user_info"}}
                         </div>
                       {{/form-control}}
