@@ -32,6 +32,11 @@ export default Controller.extend({
   lastName: computed("model.user.lastName", function() {
     return (this.get("model.user.lastName") || "").trim();
   }),
+  inValidUserName: computed("firstName", "lastName", function() {
+    return (
+      this.get("firstName").length === 0 || this.get("lastName").length === 0
+    );
+  }),
 
   userTitle: computed("model", function() {
     let userTitle = this.get("model.user.title");
@@ -156,7 +161,7 @@ export default Controller.extend({
 
   actions: {
     saveAccount() {
-      if (!this.get("firstName") || !this.get("lastName")) {
+      if (this.get("inValidUserName")) {
         return false;
       }
 
@@ -199,10 +204,10 @@ export default Controller.extend({
     },
 
     validateUserInfo() {
-      if (this.get("firstName") && this.get("lastName")) {
-        this.set("userInfoError", "");
-      } else {
+      if (this.get("inValidUserName")) {
         this.set("userInfoError", "user-info-error");
+      } else {
+        this.set("userInfoError", "");
       }
     }
   }
