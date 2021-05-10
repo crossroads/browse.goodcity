@@ -27,10 +27,10 @@ export default Controller.extend({
   isMobileApp: config.cordova.enabled,
   userInfoError: "",
   firstName: computed("model.user.firstName", function() {
-    return $.trim(this.get("model.user.firstName"));
+    return (this.get("model.user.firstName") || "").trim();
   }),
   lastName: computed("model.user.lastName", function() {
-    return $.trim(this.get("model.user.lastName"));
+    return (this.get("model.user.lastName") || "").trim();
   }),
 
   userTitle: computed("model", function() {
