@@ -26,6 +26,12 @@ export default Controller.extend({
   mobilePhone: "",
   isMobileApp: config.cordova.enabled,
   userInfoError: "",
+  firstName: computed("model.user.firstName", function() {
+    return $.trim(this.get("model.user.firstName"));
+  }),
+  lastName: computed("model.user.lastName", function() {
+    return $.trim(this.get("model.user.lastName"));
+  }),
 
   userTitle: computed("model", function() {
     let userTitle = this.get("model.user.title");
@@ -115,8 +121,8 @@ export default Controller.extend({
       position: position,
       preferred_contact_number: preferredNumber,
       user_attributes: {
-        first_name: user.get("firstName"),
-        last_name: user.get("lastName"),
+        first_name: this.get("firstName"),
+        last_name: this.get("lastName"),
         mobile: this.mobileParam(user),
         email: this.emailParam(user),
         title: title
@@ -150,6 +156,10 @@ export default Controller.extend({
 
   actions: {
     saveAccount() {
+      if (!this.get("firstName") || !this.get("lastName")) {
+        return false;
+      }
+
       let url, actionType;
       let organisationUserId = this.get("organisationsUserId");
       if (organisationUserId) {
@@ -189,9 +199,7 @@ export default Controller.extend({
     },
 
     validateUserInfo() {
-      let firstName = this.get("model.user.firstName");
-      let lastName = this.get("model.user.lastName");
-      if (firstName && lastName) {
+      if (this.get("firstName") && this.get("lastName")) {
         this.set("userInfoError", "");
       } else {
         this.set("userInfoError", "user-info-error");
