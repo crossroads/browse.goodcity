@@ -26,15 +26,10 @@ export default Controller.extend({
   mobilePhone: "",
   isMobileApp: config.cordova.enabled,
   userInfoError: "",
-  firstName: computed("model.user.firstName", function() {
-    return (this.get("model.user.firstName") || "").trim();
-  }),
-  lastName: computed("model.user.lastName", function() {
-    return (this.get("model.user.lastName") || "").trim();
-  }),
-  inValidUserName: computed("firstName", "lastName", function() {
+  inValidUserName: computed("user.firstName", "user.lastName", function() {
     return (
-      this.get("firstName").length === 0 || this.get("lastName").length === 0
+      (this.get("user.firstName") || "").trim().length === 0 ||
+      (this.get("user.lastName") || "").trim().length === 0
     );
   }),
 
@@ -126,8 +121,8 @@ export default Controller.extend({
       position: position,
       preferred_contact_number: preferredNumber,
       user_attributes: {
-        first_name: this.get("firstName"),
-        last_name: this.get("lastName"),
+        first_name: user.get("firstName").trim(),
+        last_name: user.get("lastName").trim(),
         mobile: this.mobileParam(user),
         email: this.emailParam(user),
         title: title
