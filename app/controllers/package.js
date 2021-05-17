@@ -5,8 +5,10 @@ import { computed } from "@ember/object";
 export default packageSetController.extend({
   package: alias("model"),
 
-  isPackagePartOfSet: computed("package", function() {
-    let packageSet = this.get("package.packageSet");
+  packageSet: computed.alias("package.packageSet"),
+
+  isPackagePartOfSet: computed("package", "packageSet.packages.[]", function() {
+    let packageSet = this.get("packageSet");
     return packageSet && packageSet.get("packages").length > 1;
   })
 });
