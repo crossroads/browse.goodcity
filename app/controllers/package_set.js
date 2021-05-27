@@ -62,12 +62,11 @@ export default Controller.extend({
       if (!this.get("model")) {
         return true;
       }
-      let quantity = this.get("allPackages").any(pkg => {
-        return (
-          pkg.get("availableQuantity") == 0 ||
-          pkg.get("allowWebPublish") == false
-        );
-      });
+      let quantity = this.get("allPackages").any(
+        pkg =>
+          pkg.get("allowWebPublish") == false ||
+          pkg.get("availableQuantity") === 0
+      );
       return !!quantity;
     }
   ),
