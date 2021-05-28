@@ -64,7 +64,7 @@ export default Controller.extend({
       }
       let quantity = this.get("allPackages").any(
         pkg =>
-          pkg.get("allowWebPublish") == false ||
+          pkg.get("allowWebPublish") === false ||
           pkg.get("availableQuantity") === 0
       );
       return !!quantity;
