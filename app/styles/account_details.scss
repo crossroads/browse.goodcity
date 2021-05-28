@@ -45,6 +45,10 @@
     display: block;
   }
 
+  .form__control .user-info-error.input-error {
+    display: block;
+  }
+
   .description-block .form__control.form__control--error .input-error {
     margin-top: -2%;
   }

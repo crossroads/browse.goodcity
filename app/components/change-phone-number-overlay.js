@@ -7,6 +7,7 @@ export default Component.extend(AsyncMixin, {
   accountService: service(),
   store: service(),
   messageBox: service(),
+  showPinInput: false,
 
   mobileNumber: "",
 

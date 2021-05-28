@@ -25,6 +25,13 @@ export default Controller.extend({
   preferredContactNumber: "",
   mobilePhone: "",
   isMobileApp: config.cordova.enabled,
+  userInfoError: "",
+  inValidUserName: computed("user.firstName", "user.lastName", function() {
+    return (
+      (this.get("user.firstName") || "").trim().length === 0 ||
+      (this.get("user.lastName") || "").trim().length === 0
+    );
+  }),
 
   userTitle: computed("model", function() {
     let userTitle = this.get("model.user.title");
@@ -114,8 +121,8 @@ export default Controller.extend({
       position: position,
       preferred_contact_number: preferredNumber,
       user_attributes: {
-        first_name: user.get("firstName"),
-        last_name: user.get("lastName"),
+        first_name: user.get("firstName").trim(),
+        last_name: user.get("lastName").trim(),
         mobile: this.mobileParam(user),
         email: this.emailParam(user),
         title: title
@@ -149,6 +156,10 @@ export default Controller.extend({
 
   actions: {
     saveAccount() {
+      if (this.get("inValidUserName")) {
+        return false;
+      }
+
       let url, actionType;
       let organisationUserId = this.get("organisationsUserId");
       if (organisationUserId) {
@@ -184,6 +195,14 @@ export default Controller.extend({
     goToSearchOrg() {
       if (!this.get("organisationsUserId")) {
         this.transitionToRoute("search_organisation");
+      }
+    },
+
+    validateUserInfo() {
+      if (this.get("inValidUserName")) {
+        this.set("userInfoError", "user-info-error");
+      } else {
+        this.set("userInfoError", "");
       }
     }
   }

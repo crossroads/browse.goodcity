@@ -96,6 +96,8 @@
         {{#if packageUnavailableInSet}}
         <button class="request-item disabled" disabled> {{t "item.request_item"}} </button>
         <i class="item-unavailable"> {{t "item.unavailable_item"}} </i>
+        {{else if isPackagePartOfSet}}
+        <button class="request-item disabled" disabled> {{t "item.request_item"}} </button>
         {{else if presentInCart}}
         <button class="request-item" {{action 'remove' model  target=cart}}> {{t "item.remove_item"}} </button>
         {{else}}
