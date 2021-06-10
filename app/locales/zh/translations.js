@@ -102,8 +102,10 @@ export default {
 
   home: {
     introduction: "優質的捐贈物品以支援社會需要。",
+    mobile_introduction: "Quality donated goods helping Hong Kong",
     introduction_video: "簡介短片",
     faq_text: "受惠資格及常見問題",
+    access_goods: "Three ways to access goods",
     learn_more: "了解更多",
     order_goods: {
       title: "隨時瀏覽選取優質物資",

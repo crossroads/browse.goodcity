@@ -27,33 +27,34 @@
         <div class="small-12 columns show-for-medium-up video-box">
           <p>{{ t "home.introduction" }}</p>
           <p style="margin-top: 1.5rem;">
+            {{log youtubeVideo}}
             {{#link-to "faq"}}{{ t "home.faq_text" }}{{/link-to}}
-            <a href="https://www.youtube.com/watch?v=dGDUJykjsYw">{{ t "home.introduction_video" }}</a>&nbsp;<i>{{fa-icon "play-circle" prefix="far"}}</i>
+            <a href={{youtubeVideo}}>{{ t "home.introduction_video" }}</a>&nbsp;<i>{{fa-icon "play-circle" prefix="far"}}</i>
           </p>
         </div>
-
       </div>
 
       <div class="row button_container order-cards">
         <div class="show-for-medium-up">
-          Three ways to access goods
+          {{ t "home.access_goods" }}
         </div>
         <div class="cards">
-          {{order-cards icon='calendar-alt' prefix="far" route='browse' title="home.visit.title" subtitle= "home.visit.subtitle" src='/assets/images/visit-center.jpg'}}
-          {{order-cards icon='shopping-cart' prefix="fas" title="home.order_goods.title" subtitle= "home.order_goods.subtitle" src='/assets/images/order-online.jpg'}}
+          {{order-cards icon='calendar-alt' prefix="far" title="home.visit.title" subtitle= "home.visit.subtitle" src='/assets/images/visit-center.jpg'}}
+          {{order-cards icon='shopping-cart' prefix="fas" route='browse'  title="home.order_goods.title" subtitle= "home.order_goods.subtitle" src='/assets/images/order-online.jpg'}}
           {{order-cards icon='hand-paper' prefix="far" route='offers' title="home.offers.title" subtitle= "home.offers.subtitle" src='/assets/images/offers.jpg'}}
         </div>
       </div>
       {{ logo-banner device="mobile" }}
     </div>
     {{ logo-banner device="desktop" }}
+
     <div class="row show-for-small video">
-      <a href="https://www.youtube.com/watch?v=dGDUJykjsYw">
+      <a href={{youtubeVideo}}>
         <i>{{fa-icon "play-circle" prefix="far" size="2x"}}</i>
         <img src='assets/images/mobile-bg.jpg'>
       </a>
       <div class="intro">
-        Quality donated goods helping Hong Kong
+        {{ t "home.mobile_introduction" }}
       </div>
     </div>
   </div>

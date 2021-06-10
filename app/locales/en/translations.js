@@ -109,8 +109,10 @@ export default {
   home: {
     introduction:
       "Quality donated goods for Hong Kong charities and their beneficiaries.",
+    mobile_introduction: "Quality donated goods helping Hong Kong",
     introduction_video: "Watch Intro",
     faq_text: "Eligibility & details.",
+    access_goods: "Three ways to access goods",
     learn_more: "Learn more",
     order_goods: {
       title: "Browse our stock online",
