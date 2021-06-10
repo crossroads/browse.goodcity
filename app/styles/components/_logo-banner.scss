@@ -2,15 +2,17 @@
   width: 100%;
   display: none;
   z-index: 3;
-  position: absolute;
+  position: fixed;
+  bottom: 0;
 
   @media #{$medium-up} {
     &.desktop {
       display: block;
+      position: fixed;
       margin-top: 30px;
-      margin-bottom: 30px;
+      margin-bottom: 2px;
       .content {
-        max-width: 700px;
+        padding-left: 6rem;
       }
     }
   }
@@ -20,6 +22,7 @@
       // Stick to bottom
       display: block;
       position: fixed;
+      margin-left: -2rem;
       bottom: 0;
       .content {
         width: 100%;
@@ -36,7 +39,7 @@
     .contributors {
       position: relative;
       display: flex;
-      justify-content: space-around;
+      justify-content: space-evenly;
 
       &.labels {
         height: 1rem;
@@ -47,8 +50,7 @@
 
       &.logos {
         height: 5rem;
-        margin-top: 0.5rem;
-        margin-bottom: 0.5rem;
+        margin-bottom: 0.1rem;
       }
 
       .contributor {
@@ -60,6 +62,7 @@
 
         &.jockey_club {
           width: 60%;
+          padding-left: 53px;
         }
       }
 
