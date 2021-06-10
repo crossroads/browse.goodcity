@@ -28,6 +28,11 @@ export default Component.extend({
           queryParams: { bookAppointment: true, onlineOrder: false }
         });
       }
+    },
+    redirectToLogin() {
+      this.get("router").transitionTo("login", {
+        queryParams: { bookAppointment: true }
+      });
     }
   }
 });
