@@ -55,11 +55,13 @@
       {{/link-to}}
     </li>
 
-      <li>
-      {{#link-to "browse" class="menu-4 appointments"}}
+    <li>
+      {{#book-appointment as |appointment|}}
+      <a class="menu-4 appointments" {{action appointment.clickItem}}>
         <i>{{fa-icon 'calendar-alt' prefix="far" }}</i>
         <div class="multi-line-description">{{t "application.sidebar.appointments"}}</div>
-      {{/link-to}}
+      </a>
+      {{/book-appointment}}
     </li>
 
     <li>
