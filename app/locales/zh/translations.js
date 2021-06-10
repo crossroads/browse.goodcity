@@ -59,8 +59,9 @@ export default {
     loading: "正在加載...",
     sidebar: {
       home: "主頁",
-      browse: "瀏覽",
-      myorders: "我的訂單",
+      browse: "Browse Online",
+      appointments: "Visit Our Center",
+      offers: "Direct From Donors",
       faq: "常問問題",
       about: "關於我們",
       terms: "條款",
