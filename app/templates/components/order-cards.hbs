@@ -1,0 +1,19 @@
+<div class="orders-card">
+  <div class="tiles show-for-medium-up">
+    <i>{{fa-icon icon prefix=prefix}}</i>
+    {{#link-to route}}
+      <p style="font-size: 20px">{{t title}}</p>
+    {{/link-to}}
+    <p style="font-size: 10px;">{{t subtitle}}  {{#link-to "about"}}{{t 'home.learn_more'}}{{/link-to}} </p>
+  </div>
+  <img src= {{src}} alt="Picture">
+  <div class="small-tiles show-for-small">
+    <div class="view">
+      <i>{{fa-icon icon prefix=prefix}}</i>
+      {{#link-to route}}
+        <p style="">{{t title}}</p>
+      {{/link-to}}
+    </div>
+    <p style="font-size: 10px;">{{t subtitle}}  {{#link-to "about"}}{{t 'home.learn_more'}}{{/link-to}} </p>
+  </div>
+</div>

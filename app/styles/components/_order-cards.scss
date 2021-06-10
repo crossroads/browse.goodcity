@@ -1,0 +1,57 @@
+.orders-card{
+  width: 200px;
+  margin-right: 1.2rem;
+  text-align: center;
+  color: white;
+  background-color: $coral-red;
+  height:320px;
+
+  @media #{$small-only} {
+    display: flex;
+    text-align: center;
+    height: 100px;
+    margin-right: unset;
+    margin-top: 0.7rem;
+    width: unset;
+   }
+
+  .view{
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .tiles{
+    padding: 12.8px;
+  }
+
+  .small-tiles{
+    padding: 10px;
+    @media #{$small-only} {
+      display: unset !important;
+    }
+
+  }
+
+  p{
+    margin-top: 0.3rem;
+    margin-bottom: 0.7rem;
+    @media #{$small-only} {
+        margin-top: unset;
+        margin-bottom: 0.3rem;
+    }
+  }
+
+  img{
+    height: 49%;
+    width:100%;
+    @media #{$small-only} {
+      height: 100%;
+      width: 45%;
+      object-fit: fill;
+    }
+  }
+
+  a{
+    text-decoration: underline;
+  }
+}
