@@ -71,6 +71,14 @@
     @media #{$small-only} {
       display: none;
     }
+    @media #{$medium-only} {
+      margin-top: -1.7rem;
+    }
+
+    @media #{$large-only} {
+      margin-top: -2rem;
+    }
+
     .fa {
       @media #{$medium-only} {
         float: right;
@@ -122,6 +130,7 @@
         right: 35%;
       }
       @media #{$medium-only} {
+        margin-top: -1.6rem;
         right: 2%;
       }
       .unread_length {
