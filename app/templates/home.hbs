@@ -27,7 +27,6 @@
         <div class="small-12 columns show-for-medium-up video-box">
           <p>{{ t "home.introduction" }}</p>
           <p style="margin-top: 1.5rem;">
-            {{log youtubeVideo}}
             {{#link-to "faq"}}{{ t "home.faq_text" }}{{/link-to}}
             <a href={{youtubeVideo}}>{{ t "home.introduction_video" }}</a>&nbsp;<i>{{fa-icon "play-circle" prefix="far"}}</i>
           </p>
@@ -51,7 +50,7 @@
     <div class="row show-for-small video">
       <a href={{youtubeVideo}}>
         <i>{{fa-icon "play-circle" prefix="far" size="2x"}}</i>
-        <img src='assets/images/mobile-bg.jpg'>
+        <img src='assets/images/mobile-bg.jpg' loading="lazy">
       </a>
       <div class="intro">
         {{ t "home.mobile_introduction" }}

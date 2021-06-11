@@ -59,9 +59,9 @@ export default {
     loading: "正在加載...",
     sidebar: {
       home: "主頁",
-      browse: "Browse Online",
-      appointments: "Visit Our Center",
-      offers: "Direct From Donors",
+      browse: "網上瀏覽",
+      appointments: "到訪我們的中心",
+      offers: "直接從捐贈者接收",
       faq: "常問問題",
       about: "關於我們",
       terms: "條款",
@@ -101,25 +101,29 @@ export default {
   },
 
   home: {
-    introduction: "優質的捐贈物品以支援社會需要。",
-    mobile_introduction: "Quality donated goods helping Hong Kong",
-    introduction_video: "簡介短片",
-    faq_text: "受惠資格及常見問題",
-    access_goods: "Three ways to access goods",
+    introduction: "供香港慈善機構及其服務使用者申請的高質素捐贈物品。",
+    mobile_introduction: "以高質素捐贈物品幫助香港社會",
+    introduction_video: "觀看簡介",
+    faq_text: "申請資格及詳情",
+    access_goods: "申領物資的三種方法",
     learn_more: "了解更多",
     order_goods: {
-      title: "隨時瀏覽選取優質物資",
+      title: "網上瀏覽我們的庫存",
       covid:
         "因應新冠病毒疫情，直至五月三十一日期間，未能安排自取物品。只限送貨。",
-      subtitle: "隨時瀏覽，安排運送。",
+      subtitle: "網上訂單會由我們屯門會址送出。",
       action: "瀏覽物資"
     },
     visit: {
-      title: "親臨國際十字路會",
+      title: "預約到訪我們的中心",
       covid: "因應新冠病毒疫情，暫時關閉。立即登記五月三十一日後的預約。",
-      subtitle: "親臨本會挑選物資",
+      subtitle: "在我們屯門會址選取物資",
       action: "預約時間",
       new_appointment: "新的預約"
+    },
+    offers: {
+      title: "直接從捐贈者接收",
+      subtitle: "瀏覽及回應在香港各區的捐贈."
     }
   },
 
@@ -351,7 +355,7 @@ export default {
   },
 
   my_dashboard: {
-    title: "我的控制頁",
+    title: "控制頁",
     orders: "訂單",
     account: {
       account_text: "帳戶",
