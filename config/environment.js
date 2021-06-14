@@ -55,6 +55,7 @@ module.exports = function(environment) {
       NAMESPACE: "api/v1",
       NAMESPACE_V2: "api/v2",
       HK_COUNTRY_CODE: "+852",
+      CROSSROADS_YOUTUBE_VIDEO: "https://www.youtube.com/watch?v=dGDUJykjsYw",
       PRELOAD_TYPES: [
         "package_type",
         "district",

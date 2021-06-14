@@ -36,43 +36,58 @@
   <ul class="off-canvas-list menu">
     <li>
       {{#link-to "home" class="menu-1 home"}}
-      <i>{{fa-icon 'home'}}</i>
-      <div>{{t "application.sidebar.home"}}</div>
+        <i>{{fa-icon 'home'}}</i>
+        <div>{{t "application.sidebar.home"}}</div>
       {{/link-to}}
     </li>
 
     <li>
-      {{#link-to "browse" class="menu-2 browse"}}
-      <i>{{fa-icon 'folder-open'}}</i>
-      <div>{{t "application.sidebar.browse"}}</div>
+      {{#link-to "my_orders" class="menu-2 my_dashboard"}}
+        <i>{{fa-icon 'list-alt' prefix="far"}} </i>
+        <div>{{t "my_dashboard.title"}}</div>
       {{/link-to}}
     </li>
 
     <li>
-      {{#link-to "my_orders" class="menu-3 my_dashboard"}}
-      <i>{{fa-icon 'th-large'}} </i>
-      <div>{{t "my_dashboard.title"}}</div>
+      {{#link-to "browse" class="menu-3 browse"}}
+        <i>{{fa-icon 'shopping-cart'}}</i>
+        <div class="multi-line-description">{{t "application.sidebar.browse"}}</div>
       {{/link-to}}
     </li>
 
     <li>
-      {{#link-to "about" class="menu-4 about"}}
-      <i class="fa fa-question"></i>
-      <i>{{fa-icon 'question' }}</i>
+      {{#book-appointment as |appointment|}}
+      <a class="menu-4 appointments" {{action appointment.clickItem}}>
+        <i>{{fa-icon 'calendar-alt' prefix="far" }}</i>
+        <div class="multi-line-description">{{t "application.sidebar.appointments"}}</div>
+      </a>
+      {{/book-appointment}}
+    </li>
+
+    <li>
+      {{#link-to "offers" class="menu-5 offers"}}
+        <i>{{fa-icon 'hand-paper' prefix="far" }}</i>
+        <div class="multi-line-description">{{t "application.sidebar.offers"}}</div>
+      {{/link-to}}
+    </li>
+
+    <li>
+      {{#link-to "about" class="menu-6 about"}}
+      <i>{{fa-icon 'question-circle' prefix="far" }}</i>
       <div>{{t "application.sidebar.about"}}</div>
       {{/link-to}}
     </li>
     {{#if isUserLoggedIn}}
     <li>
-      <a href="#" class="menu-5" {{action "logMeOut"}}>
+      <a href="#" class="menu-7" {{action "logMeOut"}}>
         <i class="fa">{{fa-icon 'sign-out-alt'}}</i>
         <div>{{t "logout.logout"}}</div>
       </a>
     </li>
     {{else}}
     <li>
-      {{#link-to "login" class="menu-5 login"}}
-      <i class="fa">{{fa-icon 'sign-out-alt'}}</i>
+      {{#link-to "login" class="menu-7 login"}}
+      <i class="fa">{{fa-icon 'sign-in-alt'}}</i>
       <div>{{t "application.sidebar.login"}}</div>
       {{/link-to}}
     </li>

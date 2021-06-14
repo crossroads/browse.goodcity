@@ -65,8 +65,9 @@ export default {
     loading: "Loading",
     sidebar: {
       home: "Home",
-      browse: "Browse",
-      myorders: "My Orders",
+      browse: "Browse Online",
+      appointments: "Visit Our Center",
+      offers: "Direct From Donors",
       faq: "Faq",
       about: "About",
       terms: "Terms",
@@ -106,24 +107,31 @@ export default {
   },
 
   home: {
-    introduction: "Quality donated goods for Hong Kong's social causes.",
-    introduction_video: "Introduction video",
-    faq_text: "Eligibility and frequently asked questions.",
+    introduction:
+      "Quality donated goods for Hong Kong charities and their beneficiaries.",
+    mobile_introduction: "Quality donated goods helping Hong Kong",
+    introduction_video: "Watch Intro",
+    faq_text: "Eligibility & details.",
+    access_goods: "Three ways to access goods",
     learn_more: "Learn more",
     order_goods: {
-      title: "Get immediate access to goods!",
+      title: "Browse our stock online",
       covid:
         "No self-pickup until after May 31st due to COVID-19. Delivery only.",
-      subtitle: "Instant access. Have items delivered.",
+      subtitle: "Order online from our Tuen Mun facility",
       action: "Browse goods"
     },
     visit: {
-      title: "Visit our distribution center",
+      title: "Book to visit our center",
       covid:
         "Book now for appointments after May 31st. Temporary closure due to COVID-19.",
-      subtitle: "Choose goods in-person.",
+      subtitle: "Select goods at our Tuen Mun facility.",
       action: "Book appointment",
       new_appointment: "New Appointment"
+    },
+    offers: {
+      title: "Direct from donors",
+      subtitle: "Respond to offers located around HongKong."
     }
   },
 
@@ -368,7 +376,7 @@ export default {
   },
 
   my_dashboard: {
-    title: "My Dashboard",
+    title: "Dashboard",
     orders: "Orders",
     account: {
       account_text: "Account",

@@ -20,10 +20,6 @@
     font-size: 1.1rem;
     margin-right: 0.5rem;
     vertical-align: bottom;
-
-    svg {
-      transform: scaleX(-1);
-    }
   }
 
   a {
@@ -144,10 +140,6 @@
   font-size: 1.3rem;
   vertical-align: baseline;
   color: white;
-
-  svg {
-    transform: scaleX(-1);
-  }
 
   &.max-cart-count {
     @media #{$large-only} {

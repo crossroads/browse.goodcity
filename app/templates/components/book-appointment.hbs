@@ -1,16 +1,16 @@
 <div>
   {{#if session.isLoggedIn}}
-    <div class="button book-appointment {{if disabled 'disabled'}} {{if buttonStyle buttonStyle 'small action' }}"
+    <div class="{{if (has-block) "hide" "button book-appointment"}} {{if disabled 'disabled'}} {{if (has-block) "hide" (if buttonStyle buttonStyle 'small action') }}"
       {{action "redirectAsPerUserDetails"}}>
       <i class="fa">{{fa-icon 'calendar'}}</i>
       {{t (if isMyOrdersRoute "home.visit.new_appointment" "home.visit.action")}}
     </div>
+    {{yield (hash clickItem=(action "redirectAsPerUserDetails"))}}
     {{else}}
-    {{#link-to "login" (query-params bookAppointment=true) disabled=disabled }}
-    <div class="button book-appointment {{if disabled 'disabled'}} {{if buttonStyle buttonStyle 'small action' }}">
-      <i class="fa">{{fa-icon 'calendar'}}</i>
-      {{ t "home.visit.action" }}
-    </div>
-    {{/link-to}}
+      <div class="{{if (has-block) "hide" "button book-appointment"}} {{if disabled 'disabled'}} {{if (has-block) "hide" (if buttonStyle buttonStyle 'small action') }}" {{action "redirectToLogin"}}>
+        <i class="fa">{{fa-icon 'calendar'}}</i>
+        {{ t "home.visit.action" }}
+      </div>
+      {{yield (hash clickItem=(action "redirectToLogin"))}}
   {{/if}}
 </div>

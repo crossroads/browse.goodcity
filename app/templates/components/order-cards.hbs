@@ -1,0 +1,25 @@
+<div class="orders-card">
+  <div class="tiles">
+    <div class="view">
+    <i>{{fa-icon icon prefix=prefix}}</i>
+    {{#if route}}
+      {{#link-to route}}
+        <p>{{t title}}</p>
+      {{/link-to}}
+    {{else}}
+      {{#book-appointment as |appointment|}}
+        <a {{action appointment.clickItem}}>
+          <p>{{t title}}</p>
+        </a>
+      {{/book-appointment}}
+    {{/if}}
+    </div>
+    <p id="about">
+      {{t subtitle}}
+      {{#link-to "about"}}
+        {{t 'home.learn_more'}}
+      {{/link-to}}
+    </p>
+  </div>
+  <img src= {{src}} alt="Picture">
+</div>

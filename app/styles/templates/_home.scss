@@ -7,7 +7,6 @@
   }
   .notification-icon{
     margin-left: 1.5rem;
-    margin-top: 0.6rem;
     a {
       text-decoration: none !important;
     }
@@ -15,18 +14,71 @@
       margin-top:unset;
     }
     &.with-cart-icon{
-      margin-top: 1.8rem;
+      // margin-top: 1.8rem;
     }
 
     @media #{$small-only} {
       display: none;
     }
   }
+  .order-cards {
+    position: relative;
+    margin-top: 1rem;
+    color: #ffffff;
+    text-align: center;
+
+    .cards{
+      margin-top: 1.0rem;
+      display: flex;
+      margin-left: 1.5rem;
+      justify-content: space-around;
+
+      @media #{$small-only} {
+        display: unset;;
+       }
+    }
+    @media #{$large-only} {
+      padding-right: 4rem;
+    }
+    @media #{$medium-only} {
+      padding-right: unset;
+    }
+    @media #{$small-only} {
+     margin-top: 7.7rem;
+    }
+  }
+  .video-box{
+    margin: 10px 30px;
+    background: rgba(255,255,255,0.2);
+    padding: 20px;
+    box-shadow: 0px 5px 15px rgba(0,0,0,0.5);
+    width: 89%;
+    position: relative;
+    z-index: 1;
+    > p{
+      margin: 0 ;
+      padding: 0;
+      text-align: center;
+      color: #ffffff;
+    }
+    a{
+      text-decoration: underline;
+    }
+  }
   .cart-icon{
     text-align: left;
+    margin-top: -2rem;
     @media #{$small-only} {
       display: none;
     }
+    @media #{$medium-only} {
+      margin-top: -1.7rem;
+    }
+
+    @media #{$large-only} {
+      margin-top: -2rem;
+    }
+
     .fa {
       @media #{$medium-only} {
         float: right;
@@ -61,11 +113,16 @@
 
   .content {
     position: relative;
+    margin: 0rem 5rem;
+    @media #{$small-only} {
+      margin: 0rem 2rem;
+    }
   }
 
   .cart {
     &.unread {
       position: absolute;
+
       @media #{$large-only} {
         right: 50%;
       }
@@ -73,6 +130,7 @@
         right: 35%;
       }
       @media #{$medium-only} {
+        margin-top: -1.6rem;
         right: 2%;
       }
       .unread_length {
@@ -94,7 +152,7 @@
     height: 100%;
 
     &.tinted {
-      background-color: #1a1d21;
+      background-color: #364b63;
       opacity: 0.5;
     }
   }
@@ -108,39 +166,27 @@
   }
 
   .intro-text{
-    height: 100%;
     z-index: 2;
-    overflow: hidden;
     position: relative;
     text-align: center;
     @media #{$small-only} {
       width: 100%
     }
     @media #{$large-only} {
-      width: 90%;
-      margin-left: 2em;
+      width: 50%;
     }
     h1 {
       @media #{$small-only}{
         margin: 1em 0;
-        font-size: 2em;
+        font-size: 1em;
       }
-      @media #{$large-only}{
-        margin: 0.5em 0;
-        font-size: 4em;
-      }
-      @media #{$xlarge-only} {
-        margin: 0.5em 0;
-        font-size: 3em;
-      }
-      @media #{$xxlarge-only} {
-        margin: 0.5em 0;
-        font-size: 4em;
+      @media #{$medium-up} {
+        font-size: 1rem;
       }
     }
     h1 em {
+      padding: 0.5rem;
       z-index: 2;
-      color: #FB4951;
       font-style: normal;
       text-transform: uppercase;
     }
@@ -151,23 +197,53 @@
     }
   }
 
+
   .scroller {
-    overflow-y: auto;
+    overflow-y: hidden;
     overflow-x: hidden;
 
     @media #{$small-only} {
       height: 93vh;
+      overflow-y: auto;
       padding-bottom: 8rem;
     }
 
     @media #{$medium-up} {
       height: 120vh;
       .button_container {
-        border-bottom: 1px solid;
+        z-index: 3;
 
         .home_section {
           border-bottom: none;
         }
+      }
+    }
+
+    .video{
+      z-index: 3;
+      position: fixed;
+      top: 0rem;
+      color: $white;
+      margin-top: -2.8rem;
+
+      i{
+        position: absolute;
+        left: 45%;
+        top: 50%;
+      }
+
+      .intro{
+        position: absolute;
+        top:70%;
+        left: 5%;
+        right: 5%;
+        font-size: 18px;
+      }
+
+      img{
+        height: 11.5rem;
+        width: 110rem;
+        opacity: 0.5;
       }
     }
 
@@ -177,7 +253,6 @@
       color: white;
       text-align: center;
       padding: 0.9rem;
-      border-bottom: 1px solid ;
 
       // Content
       .content{
@@ -255,4 +330,7 @@
       }
     }
   }
+}
+.tab-bar{
+  background-color: unset;
 }

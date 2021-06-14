@@ -4,15 +4,15 @@
       <div id="image-background" class="image-overlay" />
       <div class="image-overlay tinted"></div>
     </div>
+
     <!-- Introduction -->
     <div class="content">
-      <div class="row home_section small light">
+      <div class="row home_section show-for-medium-up small light">
         <div class="notification-icon {{if hasCartItems 'with-cart-icon' ''}} large-2 medium-2 columns">
           {{notification-icon}}
         </div>
-        <div class="small-12 large-6 medium-5 columns introduction small-centered">
-          {{ t "home.introduction" }}
-          <a href="https://www.youtube.com/watch?v=dGDUJykjsYw">{{ t "home.introduction_video" }}</a>
+        <div class="large-6 medium-5 columns intro-text small-centered">
+          <h1>GoodCity For Charities<em class="chinese" lang="zh-hant">好人好巿 (慈善組織)</em></h1>
         </div>
         {{#if hasCartItems}}
         <div class="cart-icon large-2 medium-2 columns">
@@ -24,57 +24,37 @@
       </div>
 
       <div class="row">
-        <div class="small-12 columns intro-text">
-          <h1>GoodCity For Charities<br><em class="chinese" lang="zh-hant">好人好巿 (慈善組織)</em></h1>
+        <div class="small-12 columns show-for-medium-up video-box">
+          <p>{{ t "home.introduction" }}</p>
+          <p style="margin-top: 1.5rem;">
+            {{#link-to "faq"}}{{ t "home.faq_text" }}{{/link-to}}
+            <a href={{youtubeVideo}}>{{ t "home.introduction_video" }}</a>&nbsp;<i>{{fa-icon "play-circle" prefix="far"}}</i>
+          </p>
         </div>
       </div>
 
-      <div class="row button_container">
-
-        <!-- Browse goods -->
-        <div class="columns home_section large-6">
-          {{#if onlineOrderWarning}}
-            <div class="row">
-              <div class="columns small-10 large-6 small-centered intro-text">
-                <div class="alert-box warning">
-                  {{onlineOrderWarning}}
-                </div>
-              </div>
-            </div>
-          {{/if}}
-          <div class="section_title"> {{ t "home.order_goods.title" }} </div>
-          <div class="section_subtitle small"> <i class="fa">{{fa-icon 'check'}}</i> {{ t "home.order_goods.subtitle" }}
-            {{#link-to "about"}}{{t 'home.learn_more'}}{{/link-to}} </div>
-          {{#link-to "browse"}}
-          <div class="button small action">
-            <i class="fa">{{fa-icon 'shopping-cart'}}</i> {{ t "home.order_goods.action" }}
-          </div>
-          {{/link-to}}
+      <div class="row button_container order-cards">
+        <div class="show-for-medium-up">
+          {{ t "home.access_goods" }}
         </div>
-
-        <!-- Book appointment -->
-        <div class="columns home_section large-6">
-          {{#if appointmentWarning}}
-            <div class="row">
-              <div class="columns small-10 large-6 small-centered intro-text">
-                <div class="alert-box warning">
-                  {{appointmentWarning}}
-                </div>
-              </div>
-            </div>
-          {{/if}}
-          <div class="section_title"> {{ t "home.visit.title" }} </div>
-          <div class="section_subtitle small">
-            <div><i class="fa">{{fa-icon 'check'}}</i> {{ t "home.visit.subtitle" }}
-              {{#link-to "about"}}{{t 'home.learn_more'}}{{/link-to}} </div>
-          </div>
-          {{book-appointment prevPath="home"}}
+        <div class="cards">
+          {{order-cards icon='calendar-alt' prefix="far" title="home.visit.title" subtitle= "home.visit.subtitle" src='/assets/images/visit-center.jpg'}}
+          {{order-cards icon='shopping-cart' prefix="fas" route='browse'  title="home.order_goods.title" subtitle= "home.order_goods.subtitle" src='/assets/images/order-online.jpg'}}
+          {{order-cards icon='hand-paper' prefix="far" route='offers' title="home.offers.title" subtitle= "home.offers.subtitle" src='/assets/images/offers.jpg'}}
         </div>
-
       </div>
-
-      {{ logo-banner device="desktop" }}
       {{ logo-banner device="mobile" }}
+    </div>
+    {{ logo-banner device="desktop" }}
+
+    <div class="row show-for-small video">
+      <a href={{youtubeVideo}}>
+        <i>{{fa-icon "play-circle" prefix="far" size="2x"}}</i>
+        <img src='assets/images/mobile-bg.jpg'alt="Picture" >
+      </a>
+      <div class="intro">
+        {{ t "home.mobile_introduction" }}
+      </div>
     </div>
   </div>
 </div>
