@@ -28,7 +28,7 @@
           <p>{{ t "home.introduction" }}</p>
           <p style="margin-top: 1.5rem;">
             {{#link-to "faq"}}{{ t "home.faq_text" }}{{/link-to}}
-            <a href={{youtubeVideo}}>{{ t "home.introduction_video" }}</a>&nbsp;<i>{{fa-icon "play-circle" prefix="far"}}</i>
+            <a href={{youtubeVideo}}>{{ t "home.introduction_video" }}&nbsp;<i>{{fa-icon "play-circle" prefix="far"}}</i></a>
           </p>
         </div>
       </div>
@@ -38,9 +38,9 @@
           {{ t "home.access_goods" }}
         </div>
         <div class="cards">
-          {{order-cards icon='calendar-alt' prefix="far" title="home.visit.title" subtitle= "home.visit.subtitle" src='/assets/images/visit-center.jpg'}}
-          {{order-cards icon='shopping-cart' prefix="fas" route='browse'  title="home.order_goods.title" subtitle= "home.order_goods.subtitle" src='/assets/images/order-online.jpg'}}
-          {{order-cards icon='hand-paper' prefix="far" route='offers' title="home.offers.title" subtitle= "home.offers.subtitle" src='/assets/images/offers.jpg'}}
+          {{order-cards icon='calendar-alt' prefix="far" title="home.visit.title" subtitle= "home.visit.subtitle" src='assets/images/visit-center.jpg'}}
+          {{order-cards icon='shopping-cart' prefix="fas" route='browse'  title="home.order_goods.title" subtitle= "home.order_goods.subtitle" src='assets/images/order-online.jpg'}}
+          {{order-cards icon='hand-paper' prefix="far" route='offers' title="home.offers.title" subtitle= "home.offers.subtitle" src='assets/images/offers.jpg'}}
         </div>
       </div>
       {{ logo-banner device="mobile" }}
@@ -51,10 +51,10 @@
       <a href={{youtubeVideo}}>
         <i>{{fa-icon "play-circle" prefix="far" size="2x"}}</i>
         <img src='assets/images/mobile-bg.jpg'alt="Picture" >
+        <div class="intro">
+          {{ t "home.mobile_introduction" }}
+        </div>
       </a>
-      <div class="intro">
-        {{ t "home.mobile_introduction" }}
-      </div>
     </div>
   </div>
 </div>

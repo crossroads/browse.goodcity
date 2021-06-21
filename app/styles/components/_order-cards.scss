@@ -16,6 +16,11 @@
     width: unset;
    }
 
+   @media #{$medium-only} {
+    height: 250px;
+    width: 150px;
+   }
+
   .view{
     @media #{$small-only} {
       display: flex;
