@@ -1,5 +1,6 @@
 import $ from "jquery";
 import { computed } from "@ember/object";
+import { inject as service } from "@ember/service";
 import { alias, equal } from "@ember/object/computed";
 import Controller, { inject as controller } from "@ember/controller";
 import { getOwner } from "@ember/application";
@@ -23,6 +24,7 @@ export default Controller.extend(CancelOrder, {
   order: alias("model.order"),
   beneficiary: alias("model.beneficiary"),
   purposes: alias("model.purposes"),
+  messageBox: service(),
 
   isHkIdSelected: equal("selectedId", "hkId"),
   isOrganisationSelected: equal("clientInfoId", "organisation"),
