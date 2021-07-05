@@ -55,7 +55,7 @@ export default Service.extend({
   _queryMessages(state, page, perPage) {
     return new AjaxPromise("/messages", "GET", this.get("session.authToken"), {
       state: state,
-      scope: ["order", "offer"],
+      scope: ["order", "offer_response"],
       page: page,
       per_page: perPage
     });
@@ -65,7 +65,7 @@ export default Service.extend({
     const params = {
       page: page,
       state: state,
-      messageable_type: ["order", "offer"]
+      messageable_type: ["order", "offer_response"]
     };
 
     return new AjaxPromise(
@@ -82,7 +82,7 @@ export default Service.extend({
       "PUT",
       this.get("session.authToken"),
       {
-        scope: ["order", "offer"]
+        scope: ["order", "offer_response"]
       }
     ).then(() => {
       this.get("store")
@@ -99,21 +99,17 @@ export default Service.extend({
     this.get("logger").error(e);
   },
 
-  getRoute: function(message) {
-    let messageableId = message.get
-      ? message.get("messageableId")
-      : message.messageable_id;
-
-    if (message.get("isOfferMessage")) {
+  getRoute: function(message, notification) {
+    if (message.get("isOfferResponseMessage")) {
       return [
         "offers.messages",
-        messageableId,
+        notification.offerId,
         { queryParams: { uid: message.get("shareablePublicId") } }
       ];
     }
 
     if (message.get("isOrderMessage")) {
-      return ["orders.conversation", messageableId];
+      return ["orders.conversation", notification.order.id];
     }
   },
 
