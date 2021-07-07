@@ -93,6 +93,8 @@
 .notifications{
   display:flex ;
   font-size: 1.3rem;
+  justify-content: center;
+
   &.unread {
     margin-left:-0.4rem
   }
@@ -200,8 +202,6 @@
   cursor: pointer;
 
   .unread {
-    position: absolute;
-    right: 0.8rem;
     margin-top: 0.2rem;
   }
 }

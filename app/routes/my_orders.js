@@ -15,7 +15,10 @@ export default AuthorizeRoute.extend({
     return hash({
       organisation: this.store.peekAll("organisation").objectAt(0),
       user: this.store.peekAll("user").objectAt(0),
-      orders: this.get("orderService").loadAll({ shallow: true })
+      orders: this.get("orderService").fetchOrdersOfType({
+        shallow: true,
+        appointment: false
+      })
     }).then(res => {
       return this.get("orderService")
         .loadOrderTransports()

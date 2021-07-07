@@ -1,14 +1,62 @@
 import Service, { inject as service } from "@ember/service";
 import { getOwner } from "@ember/application";
 import AjaxPromise from "browse/utils/ajax-promise";
+import _ from "lodash";
 
 export default Service.extend({
   logger: service(),
   session: service(),
   store: Ember.inject.service(),
   subscription: Ember.inject.service(),
-
   unreadMessageCount: 0,
+
+  allOrders: Ember.computed(function() {
+    return this.get("store").peekAll("order");
+  }),
+
+  allMessages: Ember.computed(function() {
+    return this.get("store").peekAll("message");
+  }),
+
+  unreadBookingsMessagesCount: Ember.computed(
+    "allMessages.[]",
+    "allMessages.@each{state,messageableType}",
+    "allOrders.[]",
+    "allOrders.@each{isAppointment}",
+    function() {
+      let unreadMessages = this.get("allMessages")
+        .filterBy("state", "unread")
+        .filterBy("messageableType", "Order");
+      let bookings = this.get("allOrders").filterBy("isAppointment", true);
+      let bookingIds = _.map(bookings, "id");
+      let bookingMessages = _.filter(
+        unreadMessages,
+        msg => bookingIds.indexOf(msg.get("messageableId")) >= 0
+      );
+
+      return bookingMessages.length;
+    }
+  ),
+
+  unreadOrdersMessagesCount: Ember.computed(
+    "allMessages.[]",
+    "allMessages.@each{state,messageableType}",
+    "allOrders.[]",
+    "allOrders.@each{isAppointment}",
+    function() {
+      let unreadMessages = this.get("allMessages")
+        .filterBy("state", "unread")
+        .filterBy("messageableType", "Order");
+      let bookings = this.get("allOrders").filterBy("isAppointment", false);
+      let bookingIds = _.map(bookings, "id");
+      let bookingMessages = _.filter(
+        unreadMessages,
+        msg => bookingIds.indexOf(msg.get("messageableId")) >= 0
+      );
+
+      return bookingMessages.length;
+    }
+  ),
 
   init() {
     this._super(...arguments);
@@ -43,11 +91,12 @@ export default Service.extend({
     }
   },
 
-  fetchUnreadMessageCount() {
-    return this._queryMessages("unread", 1, 1)
+  async fetchUnreadMessages() {
+    await this._queryMessages("unread")
       .then(data => {
-        const count = data.meta && data.meta.total_count;
-        this.set("unreadMessageCount", count || 0);
+        this.get("store").pushPayload(data);
+        const count = (data.messages && data.messages.length) || 0;
+        this.set("unreadMessageCount", count);
       })
       .catch(e => this._onError(e));
   },

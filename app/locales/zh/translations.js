@@ -112,7 +112,8 @@ export default {
       covid:
         "因應新冠病毒疫情，直至五月三十一日期間，未能安排自取物品。只限送貨。",
       subtitle: "網上訂單會由我們屯門會址送出。",
-      action: "瀏覽物資"
+      action: "瀏覽物資",
+      learn_how: "Learn how"
     },
     visit: {
       title: "預約到訪我們的中心",

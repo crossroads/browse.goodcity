@@ -37,8 +37,8 @@ export default ApiService.extend(Evented, {
     return this.fetchAll(PRELOAD_OF_TYPE_ORDER);
   },
 
-  loadNotifications() {
-    return this.get("messages").fetchUnreadMessageCount();
+  loadMessages() {
+    return this.get("messages").fetchUnreadMessages();
   },
 
   loadUserData() {
@@ -50,7 +50,7 @@ export default ApiService.extend(Evented, {
       this.get("session").loadUserProfile(),
       this.fetchAll(PRELOAD_AUTHORIZED_TYPES),
       this.loadOrderData(),
-      this.loadNotifications()
+      this.loadMessages()
     ]);
   },
 

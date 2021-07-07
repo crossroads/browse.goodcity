@@ -119,7 +119,8 @@ export default {
       covid:
         "No self-pickup until after May 31st due to COVID-19. Delivery only.",
       subtitle: "Order online from our Tuen Mun facility",
-      action: "Browse goods"
+      action: "Browse / Order Goods",
+      learn_how: "Learn how"
     },
     visit: {
       title: "Book to visit our center",
