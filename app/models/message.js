@@ -26,6 +26,7 @@ export default DS.Model.extend({
   order: belongsTo("order", {
     async: false
   }),
+  offerResponse: belongsTo("offer_response", { async: false }),
   shareablePublicId: attr("string"),
   parsedBody: Ember.computed("body", function() {
     let body = this.get("body");
@@ -74,7 +75,7 @@ export default DS.Model.extend({
     return new Date(this.get("createdAt")).toDateString();
   }),
   isOrderMessage: equal("messageableType", "Order"),
-  isOfferMessage: equal("messageableType", "Offer"),
+  isOfferResponseMessage: equal("messageableType", "OfferResponse"),
   isRead: equal("state", "read"),
   isUnread: equal("state", "unread")
 });

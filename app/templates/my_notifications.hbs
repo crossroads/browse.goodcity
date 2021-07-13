@@ -29,7 +29,7 @@
             {{#each notifications as |notification|}}
             <li>
 
-              <a {{action "view" notification.id}}>
+              <a {{action "view" notification}}>
                 <div class="thread {{if notification.unreadCount 'unread'}}">
 
                   <span class="thread_image">
