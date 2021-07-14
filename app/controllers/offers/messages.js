@@ -7,6 +7,7 @@ export default Controller.extend({
   sortProperties: ["createdAt: asc"],
   sortedMessages: sort("messages", "sortProperties"),
   body: "",
+  offerResponseId: "",
   messagesUtil: service("messages"),
 
   createMessage(values) {
@@ -44,31 +45,40 @@ export default Controller.extend({
     "allMessages",
     "allMessages.[]",
     function() {
-      return this.get("allMessages")
-        .filterBy("messageableType", "Offer")
-        .filterBy("messageableId", this.get("model.id"));
+      return this.get("allMessages").filter(m => {
+        return (
+          m.get("messageableType") == "OfferResponse" &&
+          m.get("messageableId") == this.get("offerResponseId")
+        );
+      });
     }
   ),
 
   actions: {
-    sendMessage() {
+    async sendMessage() {
       $("textarea").trigger("blur");
       var values = this.getProperties("body");
       values.body = values.body.trim();
-      // values.order = this.get("model");
-      values.body = values.body.trim();
-
       values.body = Ember.Handlebars.Utils.escapeExpression(values.body || "");
       values.body = values.body.replace(/(\r\n|\n|\r)/gm, "<br>");
       values.isPrivate = false;
       values.createdAt = new Date();
-      values.messageableType = "Offer";
-      values.messageableId = this.get("model.id");
+
+      if (!this.get("offerResponseId")) {
+        let record = this.store.createRecord("offerResponse", {
+          userId: this.get("session.currentUser.id"),
+          offerId: this.get("model.id")
+        });
+        let offerResponse = await record.save();
+        this.set("offerResponseId", offerResponse.id);
+      }
+
+      values.messageableType = "OfferResponse";
+      values.messageableId = this.get("offerResponseId");
       values.sender = this.store.peekRecord(
         "user",
         this.get("session.currentUser.id")
       );
-
       this.createMessage(values);
     },
 
