@@ -65,7 +65,7 @@ export default Service.extend({
     const params = {
       page: page,
       state: state,
-      messageable_type: ["order", "offer_response"]
+      messageable_type: ["Order", "OfferResponse"]
     };
 
     return new AjaxPromise(
