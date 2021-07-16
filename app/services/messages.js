@@ -91,8 +91,16 @@ export default Service.extend({
     }
   },
 
+  async fetchOfferResponseMessages() {
+    await this._queryMessages(["offer_response"])
+      .then(data => {
+        this.get("store").pushPayload(data);
+      })
+      .catch(e => this._onError(e));
+  },
+
   async fetchUnreadMessages() {
-    await this._queryMessages("unread")
+    await this._queryMessages(["order", "offer_response"], "unread")
       .then(data => {
         this.get("store").pushPayload(data);
         const count = (data.messages && data.messages.length) || 0;
@@ -101,10 +109,10 @@ export default Service.extend({
       .catch(e => this._onError(e));
   },
 
-  _queryMessages(state, page, perPage) {
+  _queryMessages(scope, state, page, perPage) {
     return new AjaxPromise("/messages", "GET", this.get("session.authToken"), {
       state: state,
-      scope: ["order", "offer_response"],
+      scope: scope,
       page: page,
       per_page: perPage
     });
@@ -114,7 +122,7 @@ export default Service.extend({
     const params = {
       page: page,
       state: state,
-      messageable_type: ["order", "offer_response"]
+      messageable_type: ["Order", "OfferResponse"]
     };
 
     return new AjaxPromise(

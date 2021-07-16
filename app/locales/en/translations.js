@@ -377,7 +377,7 @@ export default {
   },
 
   my_dashboard: {
-    title: "Dashboard",
+    title: "My Dashboard",
     orders: "Orders",
     account: {
       account_text: "Account",

@@ -8,6 +8,9 @@ export default Service.extend({
   // ----- Utilities -----
   _request(url, options, authorizedRequest) {
     const { action, body, version } = options;
+
+    url = this.baseUrl ? `${this.baseUrl}${url}` : url;
+
     return new AjaxPromise(
       url,
       action,
@@ -16,6 +19,12 @@ export default Service.extend({
       { version },
       this.get("session.language")
     );
+  },
+
+  // ----- Configuration -----
+
+  useBaseUrl(baseUrl) {
+    this.baseUrl = baseUrl;
   },
 
   // ----- CRUD ACTIONS -----

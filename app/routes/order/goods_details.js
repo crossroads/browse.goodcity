@@ -1,6 +1,5 @@
 import { computed } from "@ember/object";
 import AuthorizeRoute from "./../authorize";
-import AjaxPromise from "browse/utils/ajax-promise";
 
 export default AuthorizeRoute.extend({
   backLinkPath: computed.localStorage(),

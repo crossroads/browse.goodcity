@@ -9,6 +9,15 @@ export default ApiService.extend({
     return await this.GET(url, { version: "2" });
   },
 
+  async getSelectedOffers(offerIds) {
+    let url = "/shared/offers";
+    if (offerIds.length > 0) {
+      url = url + `?resource_id=${offerIds}`;
+    }
+
+    return await this.GET(url, { version: "2" });
+  },
+
   async getDetailOffer(public_uid) {
     const url = `/shared/offers/${public_uid}`;
 
