@@ -7,7 +7,10 @@ import { belongsTo, hasMany } from "ember-data/relationships";
 export default Model.extend({
   userId: attr("string"),
   offerId: attr("string"),
+
   messages: hasMany("message", {
     async: false
-  })
+  }),
+
+  offer: belongsTo("offer", { async: false })
 });

@@ -1,6 +1,5 @@
 import { hash } from "rsvp";
 import { inject as service } from "@ember/service";
-import _ from "lodash";
 import MyOrdersRoute from "./my_orders";
 
 export default MyOrdersRoute.extend({

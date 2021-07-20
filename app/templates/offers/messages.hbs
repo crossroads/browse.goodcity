@@ -1,24 +1,7 @@
 <div class="row my_orders">
   <div class="small-12 columns content">
     <div class="order-summary">
-      <div class="row tabs tab-icons">
-        {{#link-to 'offers.detail' uid tagName="div" classNames="small-6 orders tab columns text-center"}}
-          <i class="fa dashboard-menu item-menu">{{fa-icon 'list'}}</i>
-        {{/link-to}}
-
-        {{#link-to 'offers.messages' model.id  (query-params uid=uid) tagName="div" classNames="small-6 account tab columns text-center"}}
-          <i class="fa dashboard-menu item-menu">{{fa-icon 'comments' }}</i>
-        {{/link-to}}
-      </div>
-      <div class="row tabs tab-name active-tab">
-        {{#link-to 'offers.detail' uid tagName="div" classNames="small-6 orders tab active-tab columns text-center item-menu"}}
-          {{t 'messages.offer_details'}}
-        {{/link-to}}
-
-        {{#link-to 'offers.messages' model.id (query-params uid=uid) tagName="div" classNames="small-6 account active-tab tab columns text-center item-menu"}}
-          {{t 'messages.your_response'}}
-        {{/link-to}}
-      </div>
+      {{partial 'offers/offers_tabs'}}
 
       <div class="tab-content-messaging">
         <div class="messaging-tab">

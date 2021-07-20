@@ -1,7 +1,6 @@
 import { reject } from "rsvp";
 import { sort, alias } from "@ember/object/computed";
 import applicationController from "./application";
-import { inject as service } from "@ember/service";
 
 export default applicationController.extend({
   orders: alias("model"),
@@ -38,7 +37,7 @@ export default applicationController.extend({
           queryParams: {
             bookAppointment: this.get("isAppointmentDraft"),
             orderId: id,
-            prevPath: "my_orders"
+            prevPath: "my_bookings"
           }
         });
       });

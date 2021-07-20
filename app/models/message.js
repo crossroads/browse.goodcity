@@ -21,13 +21,15 @@ export default DS.Model.extend({
   }),
   unreadCount: attr("string"),
   lookup: attr("string"),
+
   messageableType: attr("string"),
   messageableId: attr("string"),
-  order: belongsTo("order", {
-    async: false
-  }),
+
+  order: belongsTo("order", { async: false }),
   offerResponse: belongsTo("offer_response", { async: false }),
+
   shareablePublicId: attr("string"),
+
   parsedBody: Ember.computed("body", function() {
     let body = this.get("body");
     let lookup = this.get("lookup");
@@ -74,6 +76,7 @@ export default DS.Model.extend({
   createdDate: computed("createdAt", function() {
     return new Date(this.get("createdAt")).toDateString();
   }),
+
   isOrderMessage: equal("messageableType", "Order"),
   isOfferResponseMessage: equal("messageableType", "OfferResponse"),
   isRead: equal("state", "read"),

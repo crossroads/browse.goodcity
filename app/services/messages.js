@@ -18,6 +18,18 @@ export default Service.extend({
     return this.get("store").peekAll("message");
   }),
 
+  unreadSharedOffersMessagesCount: Ember.computed(
+    "allMessages.[]",
+    "allMessages.@each{state,messageableType}",
+    "allOrders.[]",
+    "allOrders.@each{isAppointment}",
+    function() {
+      return this.get("allMessages")
+        .filterBy("state", "unread")
+        .filterBy("messageableType", "OfferResponse").length;
+    }
+  ),
+
   unreadBookingsMessagesCount: Ember.computed(
     "allMessages.[]",
     "allMessages.@each{state,messageableType}",
