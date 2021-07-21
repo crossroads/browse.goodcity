@@ -379,11 +379,23 @@ export default {
   my_dashboard: {
     title: "My Dashboard",
     orders: "Orders",
+    bookings: "Bookings",
+    online_orders: "Online Orders",
+    create_new_booking: "Create New Booking",
     account: {
       account_text: "Account",
       name: "Name",
       your_details: "Your Details",
       verified_text: "verified"
+    },
+    from_donors: {
+      offer: "Offer",
+      open_for_response: "Open for responses",
+      closed_for_response: "Closed for new Responses",
+      respond_offers: "View / Respond to offers",
+      your_responses: "Your Responses to Donor Offers",
+      title: "Direct from Donors",
+      closed_offer: "The offer you are looking for is no longer available."
     }
   },
 

@@ -5,6 +5,7 @@ import { inject as service } from "@ember/service";
 export default applicationController.extend({
   offerResponses: alias("model"),
   messageBox: service(),
+  i18n: service(),
 
   sortProperties: ["createdAt:desc"],
   arrangedOrders: sort("offerResponses", "sortProperties"),
@@ -19,7 +20,7 @@ export default applicationController.extend({
         this.transitionToRoute("offers.detail", offer.get("publicUid"));
       } else {
         this.get("messageBox").alert(
-          "The offer you are looking for is no longer available."
+          this.get("i18n").t("my_dashboard.from_donors.closed_offer")
         );
       }
     }

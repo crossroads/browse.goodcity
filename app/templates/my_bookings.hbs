@@ -8,7 +8,7 @@
           {{#book-appointment prevPath="my_bookings" as |appointment|}}
           <div class="browse-button button light" {{action appointment.clickItem}}>
             <i class="fa">{{fa-icon 'calendar-alt'}}</i>
-            Create New Booking
+            {{t "my_dashboard.create_new_booking"}}
           </div>
           {{/book-appointment}}
         </div>

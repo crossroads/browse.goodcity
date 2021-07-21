@@ -8,7 +8,7 @@
           {{#link-to "offers"}}
           <div class="browse-button button light">
             <i class="fa">{{fa-icon 'hand-paper'}}</i>
-            View / Respond to offers
+            {{t "my_dashboard.from_donors.respond_offers"}}
           </div>
           {{/link-to}}
         </div>
@@ -19,22 +19,22 @@
         </div>
       </div>
       <div class="row donor-offers-heading">
-        Your Responses to Donor Offers
+        {{t "my_dashboard.from_donors.your_responses"}}
       </div>
       <ul class="list list-items shared-offers-list">
         {{#each offers as |offer|}}
           <div class="order_block" {{action "visitSharedOffer" offer}}>
             <div class="row order_header offer-header">
               <div class="small-4 medium-0 large-4 columns order_transport">
-                Offer {{offer.id}}
+                {{t "my_dashboard.from_donors.offer"}} {{offer.id}}
               </div>
               <div class="small-8 columns order_code response-status">
 
                 <span class="response-text">
                   {{#if offer.openForResponses}}
-                    Open for responses
+                    {{t "my_dashboard.from_donors.open_for_response"}}
                   {{else}}
-                    Closed for new Responses
+                    {{t "my_dashboard.from_donors.closed_for_response"}}
                   {{/if}}
                 </span>
 
