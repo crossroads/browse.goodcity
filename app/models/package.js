@@ -38,6 +38,11 @@ export default Model.extend(cloudinaryImage, {
   requestedPackage: belongsTo("requested_package", { async: false }),
   isPartOfSet: bool("packageSetId"),
 
+  sharingExpiresAt: attr("date"),
+  isShared: attr("boolean"),
+  offerId: attr("number"),
+  offer: belongsTo("offer", { async: false }),
+
   //This is fix for live update for ticket GCW-1632(only implemented on singleton packages, nee to change for qty packages)
   updateAllowwebpublishQtyIfDesignated: observer(
     "allowWebPublish",
@@ -167,5 +172,9 @@ export default Model.extend(cloudinaryImage, {
     return (
       this.get("image.previewImageUrl") || this.generateUrl(265, 265, true)
     );
+  }),
+
+  miniImageUrl: computed("image", function() {
+    return this.get("image.miniImageUrl") || this.generateUrl(30, 30, true);
   })
 });

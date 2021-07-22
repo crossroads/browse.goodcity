@@ -119,7 +119,8 @@ export default {
       covid:
         "No self-pickup until after May 31st due to COVID-19. Delivery only.",
       subtitle: "Order online from our Tuen Mun facility",
-      action: "Browse goods"
+      action: "Browse / Order Goods",
+      learn_how: "Learn how"
     },
     visit: {
       title: "Book to visit our center",
@@ -376,13 +377,25 @@ export default {
   },
 
   my_dashboard: {
-    title: "Dashboard",
+    title: "My Dashboard",
     orders: "Orders",
+    bookings: "Bookings",
+    online_orders: "Online Orders",
+    create_new_booking: "Create New Booking",
     account: {
       account_text: "Account",
       name: "Name",
       your_details: "Your Details",
       verified_text: "verified"
+    },
+    from_donors: {
+      offer: "Offer",
+      open_for_response: "Open for responses",
+      closed_for_response: "Closed for new Responses",
+      respond_offers: "View / Respond to offers",
+      your_responses: "Your Responses to Donor Offers",
+      title: "Direct from Donors",
+      closed_offer: "The offer you are looking for is no longer available."
     }
   },
 

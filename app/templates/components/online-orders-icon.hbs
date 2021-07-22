@@ -1,0 +1,9 @@
+<div class="notifications">
+  <i class="fa dashboard-menu item-menu">{{fa-icon 'shopping-cart'}}</i>
+  {{#if hasMessages}}
+  <span class="notifications unread tab-unread-count">
+    <div class="unread_length">{{unreadOrdersMessagesCount}}</div>
+  </span>
+  {{/if}}
+</div>
+{{t "my_dashboard.online_orders"}}

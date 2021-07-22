@@ -22,6 +22,10 @@ export default Model.extend(cloudinaryImage, {
     return this.generateUrl(50, 50, true);
   }),
 
+  miniImageUrl: computed("cloudinaryId", "angle", function() {
+    return this.generateUrl(30, 30, true);
+  }),
+
   cartImageUrl: computed("cloudinaryId", "angle", function() {
     return this.generateUrl(80, 80, true);
   }),
