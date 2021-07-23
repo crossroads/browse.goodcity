@@ -65,9 +65,13 @@ export default Controller.extend({
       values.createdAt = new Date();
 
       if (!this.get("offerResponseId")) {
+        let offer = this.store.createRecord("offer", {
+          id: this.get("model.id")
+        });
+
         let record = this.store.createRecord("offerResponse", {
           userId: this.get("session.currentUser.id"),
-          offerId: this.get("model.id")
+          offer: offer
         });
         let offerResponse = await record.save();
         this.set("offerResponseId", offerResponse.id);
