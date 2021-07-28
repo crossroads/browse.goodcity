@@ -14,9 +14,6 @@ export default Component.extend(cloudinaryImage, safeGet, {
     this._super(...arguments);
 
     this.get("items").forEach(item => {
-      const packageTypeName = this.typeOf(item);
-      _.set(item, "packageTypeName", packageTypeName);
-
       const chineseDescription = (
         getWithDefault(item, "attributes.notes_zh_tw", null) || ""
       ).trim();
@@ -46,11 +43,6 @@ export default Component.extend(cloudinaryImage, safeGet, {
   items: computed.alias("record.items"),
 
   initialItems: computed("record", "record.id", "items.[]", function() {
-    return getWithDefault(this, "items", []);
-  }),
-
-  typeOf(item) {
-    const ptid = getWithDefault(item, "attributes.package_type_id", null);
-    return this.safeGet("packageType", ptid, "name");
-  }
+    return getWithDefault(this, "items", []).slice(0, 4);
+  })
 });
