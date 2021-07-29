@@ -1,6 +1,8 @@
 import AuthorizeRoute from "../authorize";
+import { inject as service } from "@ember/service";
 
 export default AuthorizeRoute.extend({
+  offerService: service(),
   beforeModel(transition) {
     this._super(...arguments);
 
@@ -11,13 +13,17 @@ export default AuthorizeRoute.extend({
     }
   },
 
-  async model({ offer_id }) {
-    this.set("offerId", offer_id);
+  async model(params) {
+    this.set("offerId", params.offer_id);
     this.set("offerResponseId", "");
+    let offerShareable = await this.get("offerService").getDetailOffer(
+      params.uid
+    );
+    this.set("offerShareable", offerShareable);
     let offerResponse = await this.store.query("offerResponse", {
       offer_response: {
         user_id: this.get("session.currentUser").id,
-        offer_id: offer_id
+        offer_id: params.offer_id
       }
     });
 
@@ -32,7 +38,16 @@ export default AuthorizeRoute.extend({
 
   setupController(controller, model) {
     this._super(controller, model);
+    let isChatVisible = true;
+    let expiresAt = this.get("offerShareable").expires_at;
+    if (!this.get("offerResponseId") && expiresAt) {
+      isChatVisible = moment(expiresAt) > moment();
+    }
+
     this.controllerFor("application").set("cart.checkout", false);
+    controller.set("showOfferShareDetails", false);
+    controller.set("isChatVisible", isChatVisible);
+    controller.set("shareableoffer", this.get("offerShareable"));
     controller.set("offerResponseId", this.get("offerResponseId"));
     controller.set("model", { id: this.get("offerId") });
     controller.send("markRead");

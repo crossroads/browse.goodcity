@@ -8,6 +8,7 @@ export default Controller.extend({
   sortedMessages: sort("messages", "sortProperties"),
   body: "",
   offerResponseId: "",
+  shareableoffer: "",
   messagesUtil: service("messages"),
 
   createMessage(values) {
