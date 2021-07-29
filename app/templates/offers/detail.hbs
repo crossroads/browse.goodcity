@@ -1,28 +1,67 @@
-<div class="row my_dashboard offer-details category_page offers">
-  {{partial 'offers/offers_tabs'}}
-
-  <div class="offer_view">
-    <span style="color: white;">
-      {{t "shareableOffers.offer_instruction"}} :
-    </span>
-    <span>
-      {{#if (is-and (is-equal session.language "zh-tw") model.public_notes_zh_tw)}}
-        {{apply-line-break model.public_notes_zh_tw}}
-      {{else if model.public_notes}}
-        {{apply-line-break model.public_notes}}
-      {{else}}
-        {{t "shareableOffers.no_description_available"}}
-      {{/if}}
-    </span>
-  </div>
-  <section class="main-section category-items-list">
-    <ul>
-      {{#each model.items as |item|}}
-        <div class="row items">
-          {{item-thumbnail-view item=item displayItemOverlay=true}}
-        </div>
-        <hr>
-      {{/each}}
-    </ul>
+<nav class="tab-bar category_page hide-for-small">
+  <section class='left-samll'style="float: left;padding-top:0.6rem;">
+    {{#back-link fallbackRoute="/" }}
+        {{fa-icon "angle-left"}} {{t "back"}}
+    {{/back-link}}
   </section>
-</div>
+  <section class='main-section ui'>
+    <div align="center" class="title">{{t "shareableOffers.respond_to_offer"}} {{model.id}}</div>
+  </section>
+</nav>
+
+{{#if offerNotPresent}}
+ <div class="row" style="padding: 4rem;">
+    This offer is closed to new responses:
+    <ul>
+      <li>
+        {{#link-to "offers"}}
+          See all available offers
+        {{/link-to}}
+      </li>
+      <li>
+        {{#link-to "my_orders"}}
+          Visit your dashboard to see any offers you have responded to already
+        {{/link-to}}
+      </li>
+    </ul>
+  </div>
+{{else}}
+  <div class="row my_dashboard offer-details category_page offers">
+    <div class="offer_display">
+      <div class="offer_view">
+        <span style="color: white;">
+          Notes :
+        </span>
+        <span>
+          {{#if (is-and (is-equal session.language "zh-tw") model.public_notes_zh_tw)}}
+            {{apply-line-break model.public_notes_zh_tw}}
+          {{else if model.public_notes}}
+            {{apply-line-break model.public_notes}}
+          {{else}}
+            {{t "shareableOffers.no_description_available"}}
+          {{/if}}
+        </span>
+      </div>
+      {{#link-to "offers.messages"model.id (query-params uid=uid) class="right underline-link view_offer view_message"}}
+        {{t "shareableOffers.view_offer"}}
+      {{/link-to}}
+    </div>
+
+    <div class="large-block-grid-5 small-block-grid-2 medium-block-grid-3 list items_list xxlarge-block-grid-4">
+    {{#each model.items as |item|}}
+      <li class="offer-item">
+        {{cloudinary-image-tag src=item.previewUrl}}
+        <div class="image-item-overlay image-tabs">
+          <div class="item_desc">
+            <li class="ellipsis two-line-ellipsis" style="color: white;">
+              <span class="item-notes">
+                {{item.description}}
+              </span>
+            </li>
+          </div>
+        </div>
+      </li>
+    {{/each}}
+    </div>
+  </div>
+{{/if}}
