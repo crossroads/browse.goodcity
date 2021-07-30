@@ -96,7 +96,9 @@
   justify-content: center;
 
   &.unread {
-    margin-left:-0.4rem
+    margin-left: -0.4rem;
+    position: absolute;
+    margin-right: -1.8rem;
   }
     .unread_length {
       line-height: 1rem;
