@@ -318,6 +318,8 @@ export default {
   },
 
   _resend: {
+    try_again: "Try again in {{timer}} seconds",
+    please_wait: "Please wait {{timer}} seconds before requesting a pin again",
     no_sms: "Haven't received your pin code?",
     email_correct: "Is {{email}} correct?  ",
     phone_correct: "Is {{phone}} correct?  ",
