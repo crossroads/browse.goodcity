@@ -5,6 +5,7 @@ import Controller, { inject as controller } from "@ember/controller";
 import { getOwner } from "@ember/application";
 import AjaxPromise from "./../utils/ajax-promise";
 import config from "../config/environment";
+let timeout;
 
 export default Controller.extend({
   queryParams: ["bookAppointment"],
@@ -13,6 +14,8 @@ export default Controller.extend({
   attemptedTransition: null,
   bookAppointment: false,
   pin: "",
+  timer: config.APP.OTP_RESEND_TIME,
+  pinAlreadySent: false,
   cart: service(),
   mobileOrEmail: "",
   loginParam: computed.localStorage(),
@@ -27,6 +30,23 @@ export default Controller.extend({
       return "mobile";
     }
   }),
+
+  timerFunction() {
+    let waitTime = this.get("timer");
+    if (waitTime === 0) {
+      this.resetTimerParameters();
+      return false;
+    }
+    this.set("timer", waitTime - 1);
+    timeout = setTimeout(() => {
+      this.timerFunction();
+    }, 1000);
+  },
+
+  resetTimerParameters() {
+    this.set("pinAlreadySent", false);
+    this.set("timer", config.APP.OTP_RESEND_TIME);
+  },
 
   setMobileOrEmail() {
     const mobileOrEmail = this.get("mobileOrEmail").trim();
@@ -55,6 +75,8 @@ export default Controller.extend({
         pin_for: pin_for
       })
         .then(function(data) {
+          clearTimeout(timeout);
+          _this.resetTimerParameters();
           _this.setProperties({
             pin: null
           });
@@ -122,6 +144,8 @@ export default Controller.extend({
           this.setProperties({
             pin: null
           });
+          this.set("pinAlreadySent", true);
+          this.timerFunction();
           this.transitionToRoute("authenticate", {
             queryParams: {
               bookAppointment: this.get("bookAppointment")

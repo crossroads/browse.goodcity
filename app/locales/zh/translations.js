@@ -301,6 +301,8 @@ export default {
   },
 
   _resend: {
+    try_again: "Try again in {{timer}} seconds",
+    please_wait: "Please wait {{timer}} seconds before requesting a pin again",
     no_sms: "收不到短訊？",
     email_correct: "{{email}} 是否正確? ",
     phone_correct: "{{phone}} 是否正確? ",

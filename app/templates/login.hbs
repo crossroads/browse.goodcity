@@ -42,8 +42,13 @@
 
             <div class="row collapse">
               <div class="small-12 medium-8 columns">
-                <button id="getsmscode" class="button expand expand_button"
+                <button id="getsmscode" disabled = {{pinAlreadySent}} class="button expand expand_button"
                   {{action 'submit' target=form}}>{{t "login.continue"}}</button>
+                <label class="form-label">
+                {{#if pinAlreadySent}}
+                  {{t "_resend.please_wait" timer=timer}}
+                {{/if}}
+                </label>
               </div>
             </div>
             <div class="small-12 columns">
