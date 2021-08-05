@@ -42,9 +42,11 @@ export default Service.extend(Evented, {
   deviceTtl: 0,
   hooks: { before: {}, after: {} },
   deviceId: alias("session.deviceId"),
+  isSubscribed: false,
   status: {
     online: false
   },
+
   connectUrl: computed("session.authToken", "deviceId", function() {
     return (
       config.APP.SOCKETIO_WEBSERVICE_URL +
@@ -118,6 +120,11 @@ export default Service.extend(Evented, {
   },
 
   wire() {
+    if (this.isSubscribed) {
+      return;
+    }
+
+    this.isSubscribed = true;
     let updateStatus = bind(this, this.updateStatus);
     let socket = io(this.get("connectUrl"), {
       autoConnect: false,
