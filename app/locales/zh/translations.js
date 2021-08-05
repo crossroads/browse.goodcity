@@ -358,11 +358,23 @@ export default {
   my_dashboard: {
     title: "控制頁",
     orders: "訂單",
+    bookings: "Bookings",
+    online_orders: "Online Orders",
+    create_new_booking: "Create New Booking",
     account: {
       account_text: "帳戶",
       name: "名稱",
       your_details: "你的資料",
       verified_text: "已認證"
+    },
+    from_donors: {
+      offer: "Offer",
+      open_for_response: "Open for responses",
+      closed_for_response: "Closed for new Responses",
+      respond_offers: "View / Respond to offers",
+      your_responses: "Your Responses to Donor Offers",
+      title: "Direct from Donors",
+      closed_offer: "The offer you are looking for is no longer available."
     }
   },
 
