@@ -3,7 +3,7 @@ import { computed, observer } from "@ember/object";
 import { inject as controller } from "@ember/controller";
 import { inject as service } from "@ember/service";
 import { sort, alias } from "@ember/object/computed";
-import applicationController from "./application";
+import applicationController from "./application_root";
 
 export default applicationController.extend({
   sortProperties: ["createdAt:desc"],
