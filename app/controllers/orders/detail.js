@@ -1,6 +1,6 @@
 import { computed } from "@ember/object";
 import { alias } from "@ember/object/computed";
-import applicationController from "./../application_root";
+import applicationController from "./../application";
 import AjaxPromise from "browse/utils/ajax-promise";
 import cancelOrderMixin from "../../mixins/cancel_order";
 

@@ -1,9 +1,11 @@
-import applicationController from "./application_root";
+import applicationController from './application';
 
 export default applicationController.extend({
+
   actions: {
     displayCart() {
       this.transitionToRoute("/");
     }
   }
+
 });

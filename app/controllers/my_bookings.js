@@ -1,6 +1,6 @@
 import { reject } from "rsvp";
 import { sort, alias } from "@ember/object/computed";
-import applicationController from "./application_root";
+import applicationController from "./application";
 
 export default applicationController.extend({
   orders: alias("model"),

@@ -1,5 +1,5 @@
 import { sort, alias } from "@ember/object/computed";
-import applicationController from "./application_root";
+import applicationController from "./application";
 import { inject as service } from "@ember/service";
 
 export default applicationController.extend({
