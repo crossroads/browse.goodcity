@@ -153,6 +153,7 @@ export default Service.extend(Evented, {
   },
 
   unwire() {
+    this.isSubscribed = false;
     var socket = this.get("socket");
     if (socket) {
       socket.close();
