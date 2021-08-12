@@ -40,6 +40,7 @@ export default {
   morning: "Morning",
   afternoon: "Afternoon",
   full_name: "{{firstName}} {{lastName}}",
+  invalid_category_error: "The category you are looking for does not exist.",
 
   messages: {
     you: "You",
