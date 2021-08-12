@@ -35,6 +35,8 @@ export default {
   discard_changes: "放棄修正",
   morning: "早上",
   afternoon: "下午",
+  invalid_category_error: "The category you are looking for does not exist.",
+
   messages: {
     you: "閣下",
     chat_note: "有關這個指示請跟我們的職員聯絡",
