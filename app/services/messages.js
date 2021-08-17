@@ -21,12 +21,15 @@ export default Service.extend({
   unreadSharedOffersMessagesCount: Ember.computed(
     "allMessages.[]",
     "allMessages.@each{state,messageableType}",
-    "allOrders.[]",
-    "allOrders.@each{isAppointment}",
-    function() {
-      return this.get("allMessages")
-        .filterBy("state", "unread")
-        .filterBy("messageableType", "OfferResponse").length;
+    {
+      get() {
+        return this.get("allMessages")
+          .filterBy("state", "unread")
+          .filterBy("messageableType", "OfferResponse").length;
+      },
+      set(_, value) {
+        return value;
+      }
     }
   ),
 
@@ -35,18 +38,23 @@ export default Service.extend({
     "allMessages.@each{state,messageableType}",
     "allOrders.[]",
     "allOrders.@each{isAppointment}",
-    function() {
-      let unreadMessages = this.get("allMessages")
-        .filterBy("state", "unread")
-        .filterBy("messageableType", "Order");
-      let bookings = this.get("allOrders").filterBy("isAppointment", true);
-      let bookingIds = _.map(bookings, "id");
-      let bookingMessages = _.filter(
-        unreadMessages,
-        msg => bookingIds.indexOf(msg.get("messageableId")) >= 0
-      );
+    {
+      get() {
+        let unreadMessages = this.get("allMessages")
+          .filterBy("state", "unread")
+          .filterBy("messageableType", "Order");
+        let bookings = this.get("allOrders").filterBy("isAppointment", true);
+        let bookingIds = _.map(bookings, "id");
+        let bookingMessages = _.filter(
+          unreadMessages,
+          msg => bookingIds.indexOf(msg.get("messageableId")) >= 0
+        );
 
-      return bookingMessages.length;
+        return bookingMessages.length;
+      },
+      set(_, value) {
+        return value;
+      }
     }
   ),
 
@@ -55,18 +63,23 @@ export default Service.extend({
     "allMessages.@each{state,messageableType}",
     "allOrders.[]",
     "allOrders.@each{isAppointment}",
-    function() {
-      let unreadMessages = this.get("allMessages")
-        .filterBy("state", "unread")
-        .filterBy("messageableType", "Order");
-      let bookings = this.get("allOrders").filterBy("isAppointment", false);
-      let bookingIds = _.map(bookings, "id");
-      let bookingMessages = _.filter(
-        unreadMessages,
-        msg => bookingIds.indexOf(msg.get("messageableId")) >= 0
-      );
+    {
+      get() {
+        let unreadMessages = this.get("allMessages")
+          .filterBy("state", "unread")
+          .filterBy("messageableType", "Order");
+        let bookings = this.get("allOrders").filterBy("isAppointment", false);
+        let bookingIds = _.map(bookings, "id");
+        let bookingMessages = _.filter(
+          unreadMessages,
+          msg => bookingIds.indexOf(msg.get("messageableId")) >= 0
+        );
 
-      return bookingMessages.length;
+        return bookingMessages.length;
+      },
+      set(_, value) {
+        return value;
+      }
     }
   ),
 
@@ -153,6 +166,9 @@ export default Service.extend({
           message.set("state", "read");
         });
       this.set("unreadMessageCount", 0);
+      this.set("unreadSharedOffersMessagesCount", 0);
+      this.set("unreadBookingsMessagesCount", 0);
+      this.set("unreadOrdersMessagesCount", 0);
     });
   },
 
