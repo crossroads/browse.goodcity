@@ -65,10 +65,19 @@
     padding-left: 0.7rem;
     padding-top: 0.6rem;
   }
+
   .offer_instructor{
     margin-bottom: unset;
     padding-left:unset;
   }
+
+  .show_details_text{
+    color: $medium-blue;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
   .items{
     @media #{$small-only} {
       padding-left:0.7rem ;
@@ -125,4 +134,16 @@
     display: flex;
     flex-direction:column
   }
+
+  span{
+    margin-top: 0.8rem;
+    margin-left: 25%;
+    margin-right: 25%;
+  }
+}
+
+.disable {
+  background-color: #7c8391 !important;
+  pointer-events: none;
+  cursor: not-allowed !important;
 }

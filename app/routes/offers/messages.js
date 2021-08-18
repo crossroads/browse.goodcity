@@ -16,9 +16,10 @@ export default AuthorizeRoute.extend({
   async model(params) {
     this.set("offerId", params.offer_id);
     this.set("offerResponseId", "");
-    let offerShareable = await this.get("offerService").getDetailOffer(
-      params.uid
-    );
+    let offerShareable = await this.get("offerService")
+      .getDetailOffer(params.uid)
+      .catch(e => false);
+
     this.set("offerShareable", offerShareable);
     let offerResponse = await this.store.query("offerResponse", {
       offer_response: {
@@ -38,10 +39,10 @@ export default AuthorizeRoute.extend({
 
   setupController(controller, model) {
     this._super(controller, model);
-    let isChatVisible = true;
-    let expiresAt = this.get("offerShareable").expires_at;
-    if (!this.get("offerResponseId") && expiresAt) {
-      isChatVisible = moment(expiresAt) > moment();
+    let isChatVisible = false;
+    if (this.get("offerShareable")) {
+      let expiresAt = this.get("offerShareable").expires_at;
+      isChatVisible = expiresAt ? moment(expiresAt) > moment() : true;
     }
 
     this.controllerFor("application").set("cart.checkout", false);

@@ -13,9 +13,6 @@
     .unread_length{
       margin-top:unset;
     }
-    &.with-cart-icon{
-      // margin-top: 1.8rem;
-    }
 
     @media #{$small-only} {
       display: none;
@@ -24,6 +21,7 @@
   .order-cards {
     position: relative;
     margin-top: 1rem;
+    margin-bottom: 2.7rem;
     color: #ffffff;
     text-align: center;
 
@@ -37,9 +35,7 @@
         display: unset;;
        }
     }
-    @media #{$large-only} {
-      padding-right: 4rem;
-    }
+
     @media #{$medium-only} {
       padding-right: unset;
     }
@@ -226,17 +222,16 @@
       color: $white;
       margin-top: -2.8rem;
 
-      i{
-        position: absolute;
-        left: 45%;
-        top: 50%;
+      a{
+        text-decoration: underline;
       }
 
       .intro{
         position: absolute;
-        top:70%;
+        top:36%;
         left: 5%;
         right: 5%;
+        text-align: center;
         font-size: 18px;
       }
 
@@ -331,6 +326,11 @@
     }
   }
 }
+
 .tab-bar{
   background-color: unset;
+}
+
+.youtube-text{
+  margin-top: 1.5rem !important;
 }

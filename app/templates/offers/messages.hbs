@@ -53,6 +53,12 @@
       <div class="offer_view offer_instructor">
         <span style="color: white;">
           {{t "shareableOffers.offer_instruction"}} :
+          <div class="show_details_text">
+           {{#if (is-and (is-equal session.language "zh-tw") shareableoffer.public_notes_zh_tw)}}
+            {{shareableoffer.public_notes_zh_tw}}
+          {{else if shareableoffer.public_notes}}
+            {{shareableoffer.public_notes}}
+          {{/if}}</div>
         </span>
       </div>
     {{/if}}
@@ -62,7 +68,7 @@
 <div class="row my orders display_message_text">
   <div class="small-12 columns content messages">
     <i class="fa">{{fa-icon 'info-circle'}}</i>
-    <span style="margin-top: 0.8rem;">
+    <span>
       {{#if isChatVisible}}
         Please use the chat below to communicate with Goodcity's staff about your interest in this offer.
       {{else}}
@@ -78,7 +84,7 @@
       <div class="tab-content-messaging">
         <div class="messaging-tab">
           <hr>
-          {{#if (is-or isStaffMember (is-not isChatVisible))}}
+          {{#if isStaffMember}}
             <div class="row permission-error-container">
               <div class="small-1 columns warning-icon">
                 {{fa-icon "ban"}}
@@ -88,64 +94,60 @@
               </span>
             </div>
           {{else}}
-            {{#if isChatVisible}}
-              <section class="message-section">
-                <div class="row">
-                  <div class="small-12 columns">
-                    {{#each sortedMessages as |message|}}
-                      {{#if message.isMessage}}
-                        <div class="ellipsis {{message.state}} {{if message.myMessage 'my_message' 'received_message'}}"
-                          id={{message.id}}>
-                          <div class='message_details'>
-                            {{#if message.myMessage}}
-                            {{t 'messages.you'}}
-                            {{else}}
-                            <i class="fa user-icon">{{fa-icon 'user-circle' size="2x"}}</i>
-                            {{t "full_name" firstName=message.sender.firstName lastName=message.sender.lastName}}
-                            {{message.sender.roleInitials}}
-                            {{/if}}
-                            →
-                            {{display-datetime message.createdAt format="HH:mm"}}
-                          </div>
-
-                          {{{apply-line-break message.parsedBody}}}
+            <section class="message-section">
+              <div class="row">
+                <div class="small-12 columns">
+                  {{#each sortedMessages as |message|}}
+                    {{#if message.isMessage}}
+                      <div class="ellipsis {{message.state}} {{if message.myMessage 'my_message' 'received_message'}}"
+                        id={{message.id}}>
+                        <div class='message_details'>
+                          {{#if message.myMessage}}
+                          {{t 'messages.you'}}
+                          {{else}}
+                          <i class="fa user-icon">{{fa-icon 'user-circle' size="2x"}}</i>
+                          {{t "full_name" firstName=message.sender.firstName lastName=message.sender.lastName}}
+                          {{message.sender.roleInitials}}
+                          {{/if}}
+                          →
+                          {{display-datetime message.createdAt format="HH:mm"}}
                         </div>
-                      {{/if}}
-                    {{/each}}
-                  </div>
-                </div>
-              </section>
-              <div class="message-footer">
-                <div class="btm message-form">
-                  <div class="row message-textbar">
-                    {{#if displayChatNote}}
-                    <div class="row">
-                      <div class="small-12 columns chat_note">
-                        <i class="fa info-icon">{{fa-icon 'info-circle'}}</i>
-                        {{t 'messages.chat_note'}}
+
+                        {{{apply-line-break message.parsedBody}}}
                       </div>
-                    </div>
                     {{/if}}
-                    <div class="row message-base">
-                      <div class="small-12 columns">
-                        {{#validatable-form class="form-horizontal" onSubmit=(action 'sendMessage') as |form|}}
+                  {{/each}}
+                </div>
+              </div>
+            </section>
+            <div class="message-footer">
+              <div class="btm message-form">
+                <div class="row message-textbar">
+                  <div class="row message-base">
+                    <div class="small-12 columns">
+                      {{#validatable-form class="form-horizontal" onSubmit=(action 'sendMessage') as |form|}}
                         <div class="row ui">
                           <div class="small-9 large-10 medium-9 columns">
-                            {{variable-height-textarea value=body name="body" required="true"  parentDiv="message-section"}}
+                            {{variable-height-textarea disabled=(is-not isChatVisible) value=body name="body" required="true"  parentDiv="message-section"}}
                           </div>
                           <div class="small-3 large-2 medium-3 columns">
-                            {{#online-button classNames="button" onClick=(action "sendMessage") actionArgs=true}}
-                            {{t 'messages.send'}}
-                            {{/online-button}}
+                            {{#if isChatVisible}}
+                              {{#online-button class="button" onClick=(action "sendMessage") actionArgs=true }}
+                              {{t 'messages.send'}}
+                              {{/online-button}}
+                            {{else}}
+                              <button disabled>
+                                {{t 'messages.send'}}
+                              </button>
+                            {{/if}}
                           </div>
                         </div>
-                        {{/validatable-form}}
-                      </div>
+                      {{/validatable-form}}
                     </div>
                   </div>
                 </div>
               </div>
-            {{/if}}
+            </div>
           {{/if}}
         </div>
       </div>

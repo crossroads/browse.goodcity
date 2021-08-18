@@ -26,9 +26,9 @@
       <div class="row">
         <div class="small-12 columns show-for-medium-up video-box">
           <p>{{ t "home.introduction" }}</p>
-          <p style="margin-top: 1.5rem;">
-            {{#link-to "faq"}}{{ t "home.faq_text" }}{{/link-to}}
-            <a href={{youtubeVideo}}>{{ t "home.introduction_video" }}&nbsp;<i>{{fa-icon "play-circle" prefix="far"}}</i></a>
+          <p class="youtube-text">
+            {{#link-to "about"}}{{ t "home.faq_text" }}{{/link-to}}
+            <a href={{crossroadsCharityYoutubeVideo}}>{{ t "home.introduction_video" }}&nbsp;<i>{{fa-icon "play-circle" prefix="far"}}</i></a>
           </p>
         </div>
       </div>
@@ -44,17 +44,19 @@
         </div>
       </div>
       {{ logo-banner device="mobile" }}
+
     </div>
     {{ logo-banner device="desktop" }}
 
+
     <div class="row show-for-small video">
-      <a href={{youtubeVideo}}>
-        <i>{{fa-icon "play-circle" prefix="far" size="2x"}}</i>
-        <img src='assets/images/mobile-bg.jpg'alt="Picture" >
+       <img src='assets/images/mobile-bg.jpg'alt="Picture" >
         <div class="intro">
-          {{ t "home.mobile_introduction" }}
-        </div>
-      </a>
+       <p>{{ t "home.introduction" }}</p>
+          <p class="youtube-text">
+            {{#link-to "about"}}{{ t "home.faq_text" }}{{/link-to}}
+            <a href={{crossroadsCharityYoutubeVideo}}>{{ t "home.introduction_video" }}&nbsp;<i>{{fa-icon "play-circle" prefix="far"}}</i></a>
+          </p></div>
     </div>
   </div>
 </div>

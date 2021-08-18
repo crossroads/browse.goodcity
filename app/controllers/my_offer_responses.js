@@ -16,13 +16,11 @@ export default applicationController.extend({
 
   actions: {
     visitSharedOffer(offer) {
-      if (offer.get("openForResponses")) {
-        this.transitionToRoute("offers.detail", offer.get("publicUid"));
-      } else {
-        this.get("messageBox").alert(
-          this.get("i18n").t("my_dashboard.from_donors.closed_offer")
-        );
-      }
+      this.transitionToRoute("offers.messages", offer.id, {
+        queryParams: {
+          uid: offer.get("publicUid")
+        }
+      });
     }
   }
 });
