@@ -18,9 +18,8 @@ export default AuthorizeRoute.extend({
     this.set("offerResponseId", "");
     let offerShareable = await this.get("offerService")
       .getDetailOffer(params.uid)
-      .catch(e => {
-        return false;
-      });
+      .catch(e => false);
+
     this.set("offerShareable", offerShareable);
     let offerResponse = await this.store.query("offerResponse", {
       offer_response: {

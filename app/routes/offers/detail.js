@@ -11,9 +11,7 @@ export default PublicRoute.extend({
     this.set("offerNotPresent", false);
     let offerShareable = await this.get("offerService")
       .getDetailOffer(offer_id)
-      .catch(e => {
-        return false;
-      });
+      .catch(e => false);
 
     if (offerShareable && this.session.get("isLoggedIn")) {
       let offerResponse = await this.store.query("offerResponse", {
@@ -22,9 +20,7 @@ export default PublicRoute.extend({
           offer_id: offerShareable.id
         }
       });
-      if (offerResponse.content.length > 0) {
-        this.set("offerResponsePresent", true);
-      }
+      this.set("offerResponsePresent", Boolean(offerResponse.content.length));
     }
     return offerShareable ? offerShareable : this.set("offerNotPresent", true);
   },
@@ -32,9 +28,7 @@ export default PublicRoute.extend({
   setupController(controller, model) {
     let expiresAt = model && model.expires_at;
     if (expiresAt && moment(expiresAt) < moment()) {
-      this.get("offerResponsePresent")
-        ? this.set("offerNotPresent", false)
-        : this.set("offerNotPresent", true);
+      this.set("offerNotPresent", !this.get("offerResponsePresent"));
     }
     controller.set("model", model);
     controller.set("offerNotPresent", this.get("offerNotPresent"));
