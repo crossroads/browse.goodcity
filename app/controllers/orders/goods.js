@@ -52,7 +52,7 @@ export default detail.extend({
       "order.ordersPackages",
       []
     ).filter(
-      req => req.get("state") !== "cancelled " && req.get("quantity") > 0
+      req => req.get("state") !== "cancelled" && req.get("quantity") > 0
     );
     let res = [];
     let refs = {};
