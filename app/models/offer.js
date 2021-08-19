@@ -17,7 +17,7 @@ export default Model.extend({
     if (expiresAt) {
       return expiresAt > moment();
     } else {
-      return true;
+      return Boolean(this.get("publicUid"));
     }
   }),
 
