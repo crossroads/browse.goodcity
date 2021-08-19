@@ -130,15 +130,35 @@
   text-align: center;
   margin-top:2rem !important;
 
+  @media #{$small-only} {
+    margin-top: 1rem !important;
+  }
+
   .messages{
     display: flex;
-    flex-direction:column
+    flex-direction:column;
+
+    @media #{$small-only} {
+      font-size: 0.8rem;
+    }
+
+    i {
+      @media #{$small-only} {
+        font-size: 1rem;
+      }
+    }
   }
 
   span{
     margin-top: 0.8rem;
     margin-left: 25%;
     margin-right: 25%;
+
+    @media #{$small-only} {
+      margin-top: 0;
+      margin-left: 10%;
+      margin-right: 10%;
+    }
   }
 }
 
