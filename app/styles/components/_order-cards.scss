@@ -13,7 +13,7 @@
     height: 100px;
     margin-right: unset;
     margin-top: 1.2rem;
-    width: unset;
+    width: auto;
    }
 
    @media #{$medium-only} {
@@ -47,7 +47,7 @@
     font-size: 20px;
     @media #{$small-only} {
       font-size: 1rem;
-        margin-top: unset;
+        margin-top: auto;
         margin-bottom: 0.3rem;
     }
   }

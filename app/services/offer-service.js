@@ -4,6 +4,7 @@ import _ from "lodash";
 import cloudinaryImage from "../mixins/cloudinary_image";
 
 export default ApiService.extend(cloudinaryImage, {
+  i18n: service(),
   async getAllOffers() {
     const url = "/shared/offers";
 

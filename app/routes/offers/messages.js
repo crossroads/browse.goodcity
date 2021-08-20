@@ -52,5 +52,22 @@ export default AuthorizeRoute.extend({
     controller.set("offerResponseId", this.get("offerResponseId"));
     controller.set("model", { id: this.get("offerId") });
     controller.send("markRead");
+    this.controllerFor("application").set("hideHeaderBar", false);
+    this.controllerFor("application").set(
+      "pageTitle",
+      `${this.get("i18n").t("shareableOffers.respond_to_offer")} ${this.get(
+        "offerId"
+      )}`
+    );
+  },
+
+  resetController: function(controller, isExiting) {
+    this._super.apply(this, arguments);
+    if (isExiting) {
+      this.controllerFor("application").set(
+        "pageTitle",
+        this.get("i18n").t("browse.title")
+      );
+    }
   }
 });

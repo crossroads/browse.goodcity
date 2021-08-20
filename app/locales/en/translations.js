@@ -234,11 +234,12 @@ export default {
 
   shareableOffers: {
     list_of_items: "List of Items",
-    respond_to_offer: "Respond to Offer",
+    respond_to_offer: "Details of Offer",
     no_description_available: "No Description Available",
     offer_instruction: "Offer Instructions",
     offered: "Offered",
-    view_offer: "View/Respond to this offer"
+    view_offer: "View offer",
+    respond_offer: "Respond to this Offer"
   },
 
   page: {

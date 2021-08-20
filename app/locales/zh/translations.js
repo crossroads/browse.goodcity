@@ -223,11 +223,12 @@ export default {
 
   shareableOffers: {
     list_of_items: "物品清單",
-    respond_to_offer: "回覆捐贈",
+    respond_to_offer: "Details of Offer",
     no_description_available: "沒有物品詳細資料",
     offer_instruction: "捐贈教學",
     offered: "已捐贈",
-    view_offer: "檢視/回覆這個捐贈"
+    view_offer: "View Offer",
+    respond_offer: "Respond to this Offer"
   },
 
   page: {
