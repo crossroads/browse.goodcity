@@ -22,15 +22,42 @@ export default PublicRoute.extend({
       });
       this.set("offerResponsePresent", Boolean(offerResponse.content.length));
     }
+
     return offerShareable ? offerShareable : this.set("offerNotPresent", true);
   },
 
   setupController(controller, model) {
     let expiresAt = model && model.expires_at;
     if (expiresAt && moment(expiresAt) < moment()) {
-      this.set("offerNotPresent", !this.get("offerResponsePresent"));
+      if (this.get("offerResponsePresent")) {
+        this.transitionTo("offers.messages", model.id, {
+          queryParams: {
+            uid: model.public_uid
+          }
+        });
+      } else {
+        this.set("offerNotPresent", true);
+      }
     }
     controller.set("model", model);
     controller.set("offerNotPresent", this.get("offerNotPresent"));
+    this.controllerFor("application").set("hideHeaderBar", false);
+
+    this.controllerFor("application").set(
+      "pageTitle",
+      `${this.get("i18n").t("shareableOffers.offer_details")} ${
+        model.id ? model.id : ""
+      }`
+    );
+  },
+
+  resetController: function(controller, isExiting) {
+    this._super.apply(this, arguments);
+    if (isExiting) {
+      this.controllerFor("application").set(
+        "pageTitle",
+        this.get("i18n").t("browse.title")
+      );
+    }
   }
 });

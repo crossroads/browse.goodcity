@@ -5,7 +5,7 @@
     {{/back-link}}
   </section>
   <section class='main-section ui'>
-    <div align="center" class="title">{{t "shareableOffers.respond_to_offer"}} {{model.id}}</div>
+    <div align="center" class="title">{{t "shareableOffers.offer_details"}} {{model.id}}</div>
   </section>
 </nav>
 
@@ -43,7 +43,7 @@
         </span>
       </div>
       {{#link-to "offers.messages"model.id (query-params uid=uid) class="right underline-link view_offer view_message"}}
-        {{t "shareableOffers.view_offer"}}
+        {{t "shareableOffers.respond_offer"}}
       {{/link-to}}
     </div>
 

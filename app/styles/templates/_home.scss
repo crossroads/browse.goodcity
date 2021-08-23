@@ -32,7 +32,7 @@
       justify-content: space-around;
 
       @media #{$small-only} {
-        display: unset;;
+        display: block;;
        }
     }
 
@@ -40,7 +40,7 @@
       padding-right: unset;
     }
     @media #{$small-only} {
-     margin-top: 7.7rem;
+     margin-top: 9rem;
     }
   }
   .video-box{
@@ -228,7 +228,7 @@
 
       .intro{
         position: absolute;
-        top:36%;
+        top: 50%;
         left: 5%;
         right: 5%;
         text-align: center;
@@ -237,7 +237,7 @@
 
       img{
         height: 11.5rem;
-        width: 110rem;
+        width: 35rem;
         opacity: 0.5;
       }
     }
@@ -328,7 +328,7 @@
 }
 
 .tab-bar{
-  background-color: unset;
+  background-color: transparent;
 }
 
 .youtube-text{
