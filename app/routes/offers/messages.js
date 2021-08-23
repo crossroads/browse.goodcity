@@ -6,7 +6,10 @@ export default AuthorizeRoute.extend({
   beforeModel(transition) {
     this._super(...arguments);
 
-    if (!this.get("session").accountDetailsComplete()) {
+    if (
+      this.get("session").get("currentUser") &&
+      !this.get("session").accountDetailsComplete()
+    ) {
       transition.abort();
       this.controllerFor("login").set("attemptedTransition", transition);
       this.get("router").transitionTo("account_details");
