@@ -234,7 +234,7 @@ export default {
 
   shareableOffers: {
     list_of_items: "List of Items",
-    respond_to_offer: "Details of Offer",
+    offer_details: "Details of Offer",
     no_description_available: "No Description Available",
     offer_instruction: "Offer Instructions",
     offered: "Offered",

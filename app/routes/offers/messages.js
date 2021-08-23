@@ -55,7 +55,7 @@ export default AuthorizeRoute.extend({
     this.controllerFor("application").set("hideHeaderBar", false);
     this.controllerFor("application").set(
       "pageTitle",
-      `${this.get("i18n").t("shareableOffers.respond_to_offer")} ${this.get(
+      `${this.get("i18n").t("shareableOffers.offer_details")} ${this.get(
         "offerId"
       )}`
     );

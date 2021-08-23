@@ -29,13 +29,15 @@ export default PublicRoute.extend({
   setupController(controller, model) {
     let expiresAt = model && model.expires_at;
     if (expiresAt && moment(expiresAt) < moment()) {
-      this.get("offerResponsePresent")
-        ? this.transitionTo("offers.messages", model.id, {
-            queryParams: {
-              uid: model.public_uid
-            }
-          })
-        : this.set("offerNotPresent", true);
+      if (this.get("offerResponsePresent")) {
+        this.transitionTo("offers.messages", model.id, {
+          queryParams: {
+            uid: model.public_uid
+          }
+        });
+      } else {
+        this.set("offerNotPresent", true);
+      }
     }
     controller.set("model", model);
     controller.set("offerNotPresent", this.get("offerNotPresent"));
@@ -43,7 +45,7 @@ export default PublicRoute.extend({
 
     this.controllerFor("application").set(
       "pageTitle",
-      `${this.get("i18n").t("shareableOffers.respond_to_offer")} ${
+      `${this.get("i18n").t("shareableOffers.offer_details")} ${
         model.id ? model.id : ""
       }`
     );
