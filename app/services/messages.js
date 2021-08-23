@@ -20,7 +20,7 @@ export default Service.extend({
 
   unreadSharedOffersMessagesCount: Ember.computed(
     "allMessages.[]",
-    "allMessages.@each{state,messageableType}",
+    "allMessages.@each.state",
     {
       get() {
         return this.get("allMessages")
@@ -35,7 +35,7 @@ export default Service.extend({
 
   unreadBookingsMessagesCount: Ember.computed(
     "allMessages.[]",
-    "allMessages.@each{state,messageableType}",
+    "allMessages.@each.state",
     "allOrders.[]",
     "allOrders.@each{isAppointment}",
     {
@@ -60,7 +60,7 @@ export default Service.extend({
 
   unreadOrdersMessagesCount: Ember.computed(
     "allMessages.[]",
-    "allMessages.@each{state,messageableType}",
+    "allMessages.@each.state",
     "allOrders.[]",
     "allOrders.@each{isAppointment}",
     {
