@@ -239,7 +239,8 @@ export default {
     offer_instruction: "Offer Instructions",
     offered: "Offered",
     view_offer: "View offer",
-    respond_offer: "Respond to this Offer"
+    respond_offer: "Respond to this Offer",
+    disabled_chat: " Chat has now been disabled."
   },
 
   page: {

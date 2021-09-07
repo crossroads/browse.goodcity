@@ -228,7 +228,8 @@ export default {
     offer_instruction: "捐贈教學",
     offered: "已捐贈",
     view_offer: "View Offer",
-    respond_offer: "Respond to this Offer"
+    respond_offer: "Respond to this Offer",
+    disabled_chat: " Chat has now been disabled"
   },
 
   page: {

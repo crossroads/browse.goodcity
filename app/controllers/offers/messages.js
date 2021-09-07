@@ -6,7 +6,6 @@ export default Controller.extend({
   queryParams: ["uid"],
   sortProperties: ["createdAt: asc"],
   sortedMessages: sort("messages", "sortProperties"),
-  body: "",
   offerResponseId: "",
   shareableoffer: "",
   messagesUtil: service("messages"),
@@ -26,6 +25,17 @@ export default Controller.extend({
         });
     }
   },
+
+  body: Ember.computed("model.id", {
+    get() {
+      return this.get("isChatVisible")
+        ? ""
+        : this.get("i18n").t("shareableOffers.disabled_chat");
+    },
+    set(_, value) {
+      return value;
+    }
+  }),
 
   isStaffMember: Ember.computed("session.currentUser.userRoles.[]", function() {
     return this.get("session.currentUser")
