@@ -9,7 +9,7 @@
   </section>
 </nav>
 
-<div class="row offers my_orders offer_share_details">
+<div class="row offers my_orders offer_share_details {{unless shareableoffer "disabled"}}">
   <div class="small-12 columns content">
     {{#if showOfferShareDetails}}
       <div class="offer_details_button" {{action (mut showOfferShareDetails) false}}>
@@ -70,9 +70,9 @@
     <i class="fa">{{fa-icon 'info-circle'}}</i>
     <span>
       {{#if isChatVisible}}
-        Please use the chat below to communicate with Goodcity's staff about your interest in this offer.
+        {{t "shareableOffers.chat_message_for_offers"}}
       {{else}}
-        This offer is no longer accepting request. Check other available Offer
+        {{t "shareableOffers.chat_message_for_expired_offers"}}
       {{/if}}
     </span>
   </div>
