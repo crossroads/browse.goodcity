@@ -111,6 +111,10 @@
   background-color: #26446C;
   margin-top:1rem;
   padding:0.6rem;
+
+  &.disabled{
+    display: none;
+  }
 }
 
 .image-tab{

@@ -239,8 +239,12 @@ export default {
     offer_instruction: "Offer Instructions",
     offered: "Offered",
     view_offer: "View offer",
+    chat_message_for_expired_offers:
+      "This offer is no longer accepting requests. Please check other available offers.",
+    chat_message_for_offers:
+      "Please use the chat below to communicate with Goodcity's staff about your interest in this offer.",
     respond_offer: "Respond to this Offer",
-    disabled_chat: " Chat has now been disabled."
+    disabled_chat: "Chat has now been disabled."
   },
 
   page: {
