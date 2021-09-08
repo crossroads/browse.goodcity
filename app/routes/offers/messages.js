@@ -72,5 +72,6 @@ export default AuthorizeRoute.extend({
         this.get("i18n").t("browse.title")
       );
     }
+    controller.set("body", "");
   }
 });
