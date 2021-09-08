@@ -1,8 +1,10 @@
 import { inject as service } from "@ember/service";
 import ApiService from "./api-base-service";
 import _ from "lodash";
+import cloudinaryImage from "../mixins/cloudinary_image";
 
-export default ApiService.extend({
+export default ApiService.extend(cloudinaryImage, {
+  i18n: service(),
   async getAllOffers() {
     const url = "/shared/offers";
 
@@ -18,13 +20,32 @@ export default ApiService.extend({
     };
     const items = _.filter(offer.included, pkg => pkg.type == "package");
     items.map(item => {
+      let cloudinaryImage = "";
       item.images = _.filter(
         offer.included,
         image => image.attributes.imageable_id == item.id
       );
+      let favouriteImage =
+        item.images.find(e => e.id == item.attributes.favourite_image_id) ||
+        item.images[0];
+      cloudinaryImage =
+        favouriteImage && favouriteImage.attributes.cloudinary_id;
+      this.set("cloudinaryId", cloudinaryImage);
+      item.previewUrl = this.generateUrl(500, 500, true);
+      item.description = this.getDescription(item);
     });
     offerObj.items = items;
     return offerObj;
+  },
+
+  getDescription(item) {
+    let lang = this.get("i18n.locale");
+    let chineseDescription = (item.attributes.notes_zh_tw || "").trim();
+
+    if (lang === "zh-tw" && !!chineseDescription) {
+      return chineseDescription;
+    }
+    return item.attributes.notes;
   },
 
   normalizeResponse(response) {

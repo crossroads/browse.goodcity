@@ -4,9 +4,17 @@
     {{t "shareableOffers.offered"}}
     {{display-datetime validDate format="preset:timeago"}}
   </span>
-  {{#link-to "offers.detail" record.public_uid class="right underline-link view_offer"}}
-    {{t "shareableOffers.view_offer"}}
-  {{/link-to}}
+  <div class="right underline-link view_offer">
+    {{#if session.isLoggedIn}}
+      {{#link-to "offers.messages"record.id (query-params uid=record.public_uid ) }}
+        {{t "shareableOffers.respond_offer"}}
+      {{/link-to}}
+    {{else}}
+      {{#link-to "offers.detail" record.public_uid  }}
+        {{t "shareableOffers.view_offer"}}
+      {{/link-to}}
+    {{/if}}
+  </div>
 </div>
 <div class="large-block-grid-5 small-block-grid-2 medium-block-grid-3 list items_list xxlarge-block-grid-4">
   {{#each initialItems as |item|}}

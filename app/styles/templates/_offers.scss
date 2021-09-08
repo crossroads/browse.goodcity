@@ -19,6 +19,7 @@
     }
   }
 
+
   .no_image{
     line-height: 1.5rem;
     text-align: center;
@@ -27,11 +28,24 @@
 
   .view_offer {
     background: #ED4C4E;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding: 5px 20px;
     color: #F7C8C8;
-    padding-top: 5px;
-    padding-bottom: 5px;
+  }
+
+  .view_message{
+    position: fixed;
+    right: 0;
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+  }
+
+  .offer_details_button{
+    cursor: pointer;
+    background: #ED4C4E;
+    text-decoration: underline;
+    color: #F7C8C8;
+    display: table;
+    padding: 5px 10px;
   }
 
   .location {
@@ -39,28 +53,39 @@
     color:#A7ACB1;
   }
 
+  .offer_display{
+    display: flex;
+    border-bottom: 1px solid #334f75
+  }
+
   .offer_view{
     display:flex;
     flex-direction: column;
-    border-bottom: 1px solid #334f75;
     margin-bottom:1.2rem;
     padding-left: 0.7rem;
     padding-top: 0.6rem;
   }
 
+  .offer_instructor{
+    margin-bottom: unset;
+    padding-left:unset;
+  }
+
+  .show_details_text{
+    color: $medium-blue;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
   .items{
     @media #{$small-only} {
       padding-left:0.7rem ;
-      // margin-left: unset;
       font-size: 0.7rem;
     }
 
     @media #{$large-only} {
       font-size: 1rem;
-    }
-
-    .item-list{
-      padding: 1.2rem 0.8rem;
     }
 
     .item-details{
@@ -80,4 +105,69 @@
     border-radius: .25rem;
     height: 2rem;
   }
+}
+
+.offer_share_details{
+  background-color: #26446C;
+  margin-top:1rem;
+  padding:0.6rem;
+
+  &.disabled{
+    display: none;
+  }
+}
+
+.image-tab{
+  float: right;
+  margin-top: -2rem;
+  width: 9rem;
+  display:flex;
+
+  @media #{$small-only} {
+    width: 4rem;
+  }
+}
+
+.display_message_text{
+  padding-left:1rem;
+  padding-right:1rem;
+  text-align: center;
+  margin-top:2rem !important;
+
+  @media #{$small-only} {
+    margin-top: 1rem !important;
+  }
+
+  .messages{
+    display: flex;
+    flex-direction:column;
+
+    @media #{$small-only} {
+      font-size: 0.8rem;
+    }
+
+    i {
+      @media #{$small-only} {
+        font-size: 1rem;
+      }
+    }
+  }
+
+  span{
+    margin-top: 0.8rem;
+    margin-left: 25%;
+    margin-right: 25%;
+
+    @media #{$small-only} {
+      margin-top: 0;
+      margin-left: 10%;
+      margin-right: 10%;
+    }
+  }
+}
+
+.disable {
+  background-color: #7c8391 !important;
+  pointer-events: none;
+  cursor: not-allowed !important;
 }

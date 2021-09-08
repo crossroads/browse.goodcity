@@ -40,6 +40,7 @@ export default {
   morning: "Morning",
   afternoon: "Afternoon",
   full_name: "{{firstName}} {{lastName}}",
+  invalid_category_error: "The category you are looking for does not exist.",
 
   messages: {
     you: "You",
@@ -65,8 +66,9 @@ export default {
     loading: "Loading",
     sidebar: {
       home: "Home",
-      browse: "Browse",
-      myorders: "My Orders",
+      browse: "Browse Online",
+      appointments: "Visit Our Center",
+      offers: "Direct From Donors",
       faq: "Faq",
       about: "About",
       terms: "Terms",
@@ -106,24 +108,32 @@ export default {
   },
 
   home: {
-    introduction: "Quality donated goods for Hong Kong's social causes.",
-    introduction_video: "Introduction video",
-    faq_text: "Eligibility and frequently asked questions.",
+    introduction:
+      "Quality donated goods for Hong Kong charities and their beneficiaries.",
+    mobile_introduction: "Quality donated goods helping Hong Kong",
+    introduction_video: "Watch Intro",
+    faq_text: "Eligibility & details.",
+    access_goods: "Three ways to access goods",
     learn_more: "Learn more",
     order_goods: {
-      title: "Get immediate access to goods!",
+      title: "Browse our stock online",
       covid:
         "No self-pickup until after May 31st due to COVID-19. Delivery only.",
-      subtitle: "Instant access. Have items delivered.",
-      action: "Browse goods"
+      subtitle: "Order online from our Tuen Mun facility",
+      action: "Browse / Order Goods",
+      learn_how: "Learn how"
     },
     visit: {
-      title: "Visit our distribution center",
+      title: "Book to visit our center",
       covid:
         "Book now for appointments after May 31st. Temporary closure due to COVID-19.",
-      subtitle: "Choose goods in-person.",
+      subtitle: "Select goods at our Tuen Mun facility.",
       action: "Book appointment",
       new_appointment: "New Appointment"
+    },
+    offers: {
+      title: "Direct from donors",
+      subtitle: "Respond to offers located around HongKong."
     }
   },
 
@@ -224,11 +234,17 @@ export default {
 
   shareableOffers: {
     list_of_items: "List of Items",
-    respond_to_offer: "Respond to Offer",
+    offer_details: "Details of Offer",
     no_description_available: "No Description Available",
     offer_instruction: "Offer Instructions",
     offered: "Offered",
-    view_offer: "View/Respond to this offer"
+    view_offer: "View offer",
+    chat_message_for_expired_offers:
+      "This offer is no longer accepting requests. Please check other available offers.",
+    chat_message_for_offers:
+      "Please use the chat below to communicate with Goodcity's staff about your interest in this offer.",
+    respond_offer: "Respond to this Offer",
+    disabled_chat: "Chat has now been disabled."
   },
 
   page: {
@@ -309,6 +325,8 @@ export default {
   },
 
   _resend: {
+    try_again: "Try again in {{timer}} seconds",
+    please_wait: "Please wait {{timer}} seconds before requesting a pin again",
     no_sms: "Haven't received your pin code?",
     email_correct: "Is {{email}} correct?  ",
     phone_correct: "Is {{phone}} correct?  ",
@@ -370,11 +388,23 @@ export default {
   my_dashboard: {
     title: "My Dashboard",
     orders: "Orders",
+    bookings: "Bookings",
+    online_orders: "Online Orders",
+    create_new_booking: "Create New Booking",
     account: {
       account_text: "Account",
       name: "Name",
       your_details: "Your Details",
       verified_text: "verified"
+    },
+    from_donors: {
+      offer: "Offer",
+      open_for_response: "Open for responses",
+      closed_for_response: "Closed for new Responses",
+      respond_offers: "View / Respond to offers",
+      your_responses: "Your Responses to Donor Offers",
+      title: "Direct from Donors",
+      closed_offer: "The offer you are looking for is no longer available."
     }
   },
 

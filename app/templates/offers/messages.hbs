@@ -1,37 +1,99 @@
+<nav class="tab-bar category_page hide-for-small">
+  <section class='left-samll'style="float: left;padding-top:0.6rem;">
+    {{#back-link fallbackRoute="/" }}
+        {{fa-icon "angle-left"}} {{t "back"}}
+    {{/back-link}}
+  </section>
+  <section class='main-section ui'>
+    <div align="center" class="title">{{t "shareableOffers.offer_details"}} {{model.id}}</div>
+  </section>
+</nav>
+
+<div class="row offers my_orders offer_share_details {{unless shareableoffer "disabled"}}">
+  <div class="small-12 columns content">
+    {{#if showOfferShareDetails}}
+      <div class="offer_details_button" {{action (mut showOfferShareDetails) false}}>
+        Hide offer details
+      </div>
+      <div class="offer_view" >
+        <span style="color: white;">
+          {{t "shareableOffers.offer_instruction"}} :
+        </span>
+        <span>
+          {{#if (is-and (is-equal session.language "zh-tw") shareableoffer.public_notes_zh_tw)}}
+            {{apply-line-break shareableoffer.public_notes_zh_tw}}
+          {{else if shareableoffer.public_notes}}
+            {{apply-line-break shareableoffer.public_notes}}
+          {{else}}
+            {{t "shareableOffers.no_description_available"}}
+          {{/if}}
+        </span>
+      </div>
+      <section class="main-section category-items-list">
+        <ul>
+          {{#each shareableoffer.items as |item|}}
+            <div class="row items">
+              {{item-thumbnail-view item=item displayItemOverlay=true}}
+            </div>
+            <hr>
+          {{/each}}
+        </ul>
+      </section>
+    {{else}}
+      <div class="offer_details_button" {{action (mut showOfferShareDetails) true}}>
+        Show offer details
+      </div>
+      <div class="image-tab">
+        {{#each shareableoffer.items as |item index|}}
+          {{#if (is-or (is-equal index 1) (is-equal index 0))}}
+            <div style="margin-left:0.4rem ;">{{cloudinary-image-tag src=item.previewUrl}}</div>
+          {{/if}}
+        {{/each}}
+      </div>
+      <div class="offer_view offer_instructor">
+        <span style="color: white;">
+          {{t "shareableOffers.offer_instruction"}} :
+          <div class="show_details_text">
+           {{#if (is-and (is-equal session.language "zh-tw") shareableoffer.public_notes_zh_tw)}}
+            {{shareableoffer.public_notes_zh_tw}}
+          {{else if shareableoffer.public_notes}}
+            {{shareableoffer.public_notes}}
+          {{/if}}</div>
+        </span>
+      </div>
+    {{/if}}
+  </div>
+</div>
+
+<div class="row my orders display_message_text">
+  <div class="small-12 columns content messages">
+    <i class="fa">{{fa-icon 'info-circle'}}</i>
+    <span>
+      {{#if isChatVisible}}
+        {{t "shareableOffers.chat_message_for_offers"}}
+      {{else}}
+        {{t "shareableOffers.chat_message_for_expired_offers"}}
+      {{/if}}
+    </span>
+  </div>
+</div>
+
 <div class="row my_orders">
   <div class="small-12 columns content">
     <div class="order-summary">
-      <div class="row tabs tab-icons">
-        {{#link-to 'offers.detail' uid tagName="div" classNames="small-6 orders tab columns text-center"}}
-          <i class="fa dashboard-menu item-menu">{{fa-icon 'list'}}</i>
-        {{/link-to}}
-
-        {{#link-to 'offers.messages' model.id  (query-params uid=uid) tagName="div" classNames="small-6 account tab columns text-center"}}
-          <i class="fa dashboard-menu item-menu">{{fa-icon 'comments' }}</i>
-        {{/link-to}}
-      </div>
-      <div class="row tabs tab-name active-tab">
-        {{#link-to 'offers.detail' uid tagName="div" classNames="small-6 orders tab active-tab columns text-center item-menu"}}
-          {{t 'messages.offer_details'}}
-        {{/link-to}}
-
-        {{#link-to 'offers.messages' model.id (query-params uid=uid) tagName="div" classNames="small-6 account active-tab tab columns text-center item-menu"}}
-          {{t 'messages.your_response'}}
-        {{/link-to}}
-      </div>
-      
       <div class="tab-content-messaging">
         <div class="messaging-tab">
+          <hr>
           {{#if isStaffMember}}
             <div class="row permission-error-container">
               <div class="small-1 columns warning-icon">
-                {{fa-icon "ban"}} 
+                {{fa-icon "ban"}}
               </div>
               <span class="small-11 columns">
                 {{t 'messages.supervisor_warning'}}
               </span>
             </div>
-          {{else}}  
+          {{else}}
             <section class="message-section">
               <div class="row">
                 <div class="small-12 columns">
@@ -61,27 +123,25 @@
             <div class="message-footer">
               <div class="btm message-form">
                 <div class="row message-textbar">
-                  {{#if displayChatNote}}
-                  <div class="row">
-                    <div class="small-12 columns chat_note">
-                      <i class="fa info-icon">{{fa-icon 'info-circle'}}</i>
-                      {{t 'messages.chat_note'}}
-                    </div>
-                  </div>
-                  {{/if}}
                   <div class="row message-base">
                     <div class="small-12 columns">
                       {{#validatable-form class="form-horizontal" onSubmit=(action 'sendMessage') as |form|}}
-                      <div class="row ui">
-                        <div class="small-9 large-10 medium-9 columns">
-                          {{variable-height-textarea value=body name="body" required="true"  parentDiv="message-section"}}
+                        <div class="row ui">
+                          <div class="small-9 large-10 medium-9 columns">
+                            {{variable-height-textarea disabled=(is-not isChatVisible) value=body name="body" required="true" placeholder=(unless isChatVisible (t "shareableOffers.disabled_chat")) parentDiv="message-section"}}
+                          </div>
+                          <div class="small-3 large-2 medium-3 columns">
+                            {{#if isChatVisible}}
+                              {{#online-button class="button" onClick=(action "sendMessage") actionArgs=true }}
+                              {{t 'messages.send'}}
+                              {{/online-button}}
+                            {{else}}
+                              <button disabled>
+                                {{t 'messages.send'}}
+                              </button>
+                            {{/if}}
+                          </div>
                         </div>
-                        <div class="small-3 large-2 medium-3 columns">
-                          {{#online-button classNames="button" onClick=(action "sendMessage") actionArgs=true}}
-                          {{t 'messages.send'}}
-                          {{/online-button}}
-                        </div>
-                      </div>
                       {{/validatable-form}}
                     </div>
                   </div>

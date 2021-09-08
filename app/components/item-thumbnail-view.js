@@ -85,13 +85,14 @@ export default ImagePreview.extend(cloudinaryImage, safeGet, {
     }
   }),
 
-  itemImages: computed(function() {
+  itemImages: computed("item", function() {
     return _.reduce(
       this.get("item").images,
       (results, item) => {
         let cloudinaryId = item.attributes.cloudinary_id || "";
         this.set("cloudinaryId", cloudinaryId);
-        item.imageUrl = this.generateUrl(500, 500, true);
+        let url = this.generateUrl(500, 500, true);
+        _.set(item, "imageUrl", url);
         results.push(item);
         return results;
       },

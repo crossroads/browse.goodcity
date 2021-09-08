@@ -7,6 +7,7 @@ export default Controller.extend({
   i18n: service(),
   settings: service(),
   isMobileApp: config.cordova.enabled,
+  crossroadsCharityYoutubeVideo: config.APP.CROSSROADS_YOUTUBE_VIDEO,
 
   langShort: computed("i18n.locale", function() {
     const lang = this.get("i18n.locale");

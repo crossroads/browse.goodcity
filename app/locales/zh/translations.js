@@ -35,6 +35,8 @@ export default {
   discard_changes: "放棄修正",
   morning: "早上",
   afternoon: "下午",
+  invalid_category_error: "The category you are looking for does not exist.",
+
   messages: {
     you: "閣下",
     chat_note: "有關這個指示請跟我們的職員聯絡",
@@ -59,8 +61,9 @@ export default {
     loading: "正在加載...",
     sidebar: {
       home: "主頁",
-      browse: "瀏覽",
-      myorders: "我的訂單",
+      browse: "網上瀏覽",
+      appointments: "到訪我們的中心",
+      offers: "直接從捐贈者接收",
       faq: "常問問題",
       about: "關於我們",
       terms: "條款",
@@ -100,23 +103,30 @@ export default {
   },
 
   home: {
-    introduction: "優質的捐贈物品以支援社會需要。",
-    introduction_video: "簡介短片",
-    faq_text: "受惠資格及常見問題",
+    introduction: "供香港慈善機構及其服務使用者申請的高質素捐贈物品。",
+    mobile_introduction: "以高質素捐贈物品幫助香港社會",
+    introduction_video: "觀看簡介",
+    faq_text: "申請資格及詳情",
+    access_goods: "申領物資的三種方法",
     learn_more: "了解更多",
     order_goods: {
-      title: "隨時瀏覽選取優質物資",
+      title: "網上瀏覽我們的庫存",
       covid:
         "因應新冠病毒疫情，直至五月三十一日期間，未能安排自取物品。只限送貨。",
-      subtitle: "隨時瀏覽，安排運送。",
-      action: "瀏覽物資"
+      subtitle: "網上訂單會由我們屯門會址送出。",
+      action: "瀏覽物資",
+      learn_how: "Learn how"
     },
     visit: {
-      title: "親臨國際十字路會",
+      title: "預約到訪我們的中心",
       covid: "因應新冠病毒疫情，暫時關閉。立即登記五月三十一日後的預約。",
-      subtitle: "親臨本會挑選物資",
+      subtitle: "在我們屯門會址選取物資",
       action: "預約時間",
       new_appointment: "新的預約"
+    },
+    offers: {
+      title: "直接從捐贈者接收",
+      subtitle: "瀏覽及回應在香港各區的捐贈."
     }
   },
 
@@ -213,11 +223,17 @@ export default {
 
   shareableOffers: {
     list_of_items: "物品清單",
-    respond_to_offer: "回覆捐贈",
+    offer_details: "Details of Offer",
     no_description_available: "沒有物品詳細資料",
     offer_instruction: "捐贈教學",
     offered: "已捐贈",
-    view_offer: "檢視/回覆這個捐贈"
+    view_offer: "View Offer",
+    chat_message_for_expired_offers:
+      "This offer is no longer accepting requests. Please check other available offers.",
+    chat_message_for_offers:
+      "Please use the chat below to communicate with Goodcity's staff about your interest in this offer.",
+    respond_offer: "Respond to this Offer",
+    disabled_chat: "Chat has now been disabled."
   },
 
   page: {
@@ -293,6 +309,8 @@ export default {
   },
 
   _resend: {
+    try_again: "Try again in {{timer}} seconds",
+    please_wait: "Please wait {{timer}} seconds before requesting a pin again",
     no_sms: "收不到短訊？",
     email_correct: "{{email}} 是否正確? ",
     phone_correct: "{{phone}} 是否正確? ",
@@ -348,13 +366,25 @@ export default {
   },
 
   my_dashboard: {
-    title: "我的控制頁",
+    title: "控制頁",
     orders: "訂單",
+    bookings: "Bookings",
+    online_orders: "Online Orders",
+    create_new_booking: "Create New Booking",
     account: {
       account_text: "帳戶",
       name: "名稱",
       your_details: "你的資料",
       verified_text: "已認證"
+    },
+    from_donors: {
+      offer: "Offer",
+      open_for_response: "Open for responses",
+      closed_for_response: "Closed for new Responses",
+      respond_offers: "View / Respond to offers",
+      your_responses: "Your Responses to Donor Offers",
+      title: "Direct from Donors",
+      closed_offer: "The offer you are looking for is no longer available."
     }
   },
 

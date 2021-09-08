@@ -15,6 +15,13 @@ export default AuthorizeRoute.extend({
     });
   },
 
+  async afterModel(model) {
+    await this.store.query("message", {
+      messageable_type: "Order",
+      messageable_id: model.order.get("id")
+    });
+  },
+
   setupController(controller, model) {
     this._super(controller, model);
     var currentRoute = this.get("currentRouteName");

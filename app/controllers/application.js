@@ -47,6 +47,7 @@ export default Controller.extend(cancelOrderMixin, quantityUpdateMixin, {
 
   showNotificationIcon: computed("currentPath", function() {
     return (
+      this.get("session.isLoggedIn") &&
       [
         "my_notifications",
         "package_category",

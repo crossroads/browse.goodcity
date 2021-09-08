@@ -53,12 +53,36 @@
 
   .tabs.tab-icons {
     margin-top: 0.6rem;
+    border-bottom: 1px solid $light-blue;
+    z-index: 100;
+    color: $tabbar-menu-icon-color;
+    padding-bottom: .6rem;
+    font-size: 0.8rem;
 
     i {
       font-size: 1.5rem;
+      display: block;
     }
 
-    z-index: 100;
+    a {
+      color: $tabbar-menu-icon-color !important;
+    }
+
+    .tab.columns {
+      .active {
+        color: $white !important;
+
+        i {
+          color: $white !important;
+        }
+      }
+    }
+
+    span.tab-unread-count {
+      margin-right: -2.5rem;
+      position: absolute;
+      margin-left: -1rem;
+    }
   }
 
   .tabs.tab-name {
@@ -75,4 +99,53 @@
     margin: 0 auto;
   }
 
+  .donor-offers-heading {
+    padding: 1rem 0.5rem;
+    font-size: 0.8rem;
+  }
+
+  .shared-offers-list {
+    .order_body .field {
+      padding-left: 0.8rem;
+      opacity: 1;
+    }
+
+    img {
+      padding: 0 0 0.5rem;
+    }
+
+    .unread_message {
+      margin-top: 0.3rem;
+      margin-left: 1.5rem;
+    }
+
+    .order_body {
+      padding-bottom: 0;
+    }
+
+    .offer-header {
+      .response-status {
+        padding: 0;
+        text-align: right;
+
+        .response-text {
+          padding-right: 0.5rem;
+        }
+
+        .response-icon {
+          float: right;
+          width: 2.5rem;
+          text-align: center;
+
+          &.available {
+            background-color:#438BCA;
+          }
+
+          &.closed {
+            background-color: black;
+          }
+        }
+      }
+    }
+  }
 }

@@ -1,7 +1,7 @@
 {{#if session.isLoggedIn}}
   {{#link-to "my_notifications"}}
   <div class="notifications">
-    <i class="fa">{{fa-icon 'bell' }}</i>
+    <i class="fa">{{fa-icon 'bell' prefix="far" }}</i>
     {{#if hasMessages}}
       <span class="notifications unread">
         <div class="unread_length">{{unreadMessageCount}}</div>

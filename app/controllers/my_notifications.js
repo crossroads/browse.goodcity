@@ -82,13 +82,19 @@ export default Controller.extend({
     const props = ["id", "sender", "createdAt", "isPrivate"];
     const lastMessage = messages.sortBy("id").get("lastObject");
 
-    let order;
+    let order, offerResponse, offerId;
     let recordId = lastMessage.get("messageableId");
 
     if (lastMessage.get("isOrderMessage")) {
       order =
         this.get("store").peekRecord("order", recordId) ||
         this.get("store").findRecord("order", recordId);
+    }
+    if (lastMessage.get("isOfferResponseMessage")) {
+      offerResponse =
+        this.get("store").peekRecord("offerResponse", recordId) ||
+        this.get("store").findRecord("offerResponse", recordId);
+      offerId = offerResponse.get("offerId");
     }
 
     let notification = EmberObject.create(lastMessage.getProperties(props));
@@ -98,7 +104,7 @@ export default Controller.extend({
       isSingleMessage: computed.equal("unreadCount", 1),
       isThread: computed.not("isSingleMessage"),
       order: order,
-      offerId: recordId,
+      offerId: offerId,
       text: computed("messages.[]", function() {
         return this.get("messages")
           .sortBy("id")
@@ -151,7 +157,7 @@ export default Controller.extend({
 
   actions: {
     /**
-     * Loads a page of offers
+     * Loads a page of messages
      * Used by the infinite list
      *
      * @param {*} pageNo
@@ -175,9 +181,9 @@ export default Controller.extend({
         });
     },
 
-    view(messageId) {
-      var message = this.store.peekRecord("message", messageId);
-      var route = this.get("messagesUtil").getRoute(message);
+    view(notification) {
+      var message = this.store.peekRecord("message", notification.id);
+      var route = this.get("messagesUtil").getRoute(message, notification);
       this.transitionToRoute.apply(this, route);
     },
 
@@ -187,7 +193,7 @@ export default Controller.extend({
         this.get("messagesUtil").markRead(message);
         notification.set("unreadCount", 0);
       } else {
-        this.send("view", notification.id);
+        this.send("view", notification);
       }
     },
 

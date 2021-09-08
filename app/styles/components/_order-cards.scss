@@ -1,0 +1,68 @@
+.orders-card{
+  width: 200px;
+  margin-right: 1.2rem;
+  text-align: center;
+  color: white;
+  background-color: $coral-red;
+  height:320px;
+
+  @media #{$small-only} {
+    display: flex;
+    flex-flow: row;
+    text-align: center;
+    height: 100px;
+    margin-right: unset;
+    margin-top: 1.2rem;
+    width: auto;
+   }
+
+   @media #{$medium-only} {
+    height: 250px;
+    width: 150px;
+   }
+
+  .view{
+    @media #{$small-only} {
+      display: flex;
+      > *{
+        margin-right: 0.4rem;
+      }
+
+    }
+  }
+
+  #about{
+    font-size: 10px;
+  }
+
+  .tiles{
+    order: 2;
+    padding: 12.8px;
+    height: 9.05rem;
+  }
+
+  p{
+    margin-top: 0.3rem;
+    margin-bottom: 0.7rem;
+    font-size: 20px;
+    @media #{$small-only} {
+      font-size: 1rem;
+        margin-top: auto;
+        margin-bottom: 0.3rem;
+    }
+  }
+
+  img{
+    height: 49%;
+    width:100%;
+    @media #{$small-only} {
+      height: 100%;
+      width: 39%;
+      object-fit: fill;
+    }
+  }
+
+  a{
+    text-decoration: underline;
+  }
+}

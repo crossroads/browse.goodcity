@@ -1,14 +1,87 @@
 import Service, { inject as service } from "@ember/service";
 import { getOwner } from "@ember/application";
 import AjaxPromise from "browse/utils/ajax-promise";
+import _ from "lodash";
 
 export default Service.extend({
   logger: service(),
   session: service(),
   store: Ember.inject.service(),
   subscription: Ember.inject.service(),
-
   unreadMessageCount: 0,
+
+  allOrders: Ember.computed(function() {
+    return this.get("store").peekAll("order");
+  }),
+
+  allMessages: Ember.computed(function() {
+    return this.get("store").peekAll("message");
+  }),
+
+  unreadSharedOffersMessagesCount: Ember.computed(
+    "allMessages.[]",
+    "allMessages.@each.state",
+    {
+      get() {
+        return this.get("allMessages")
+          .filterBy("state", "unread")
+          .filterBy("messageableType", "OfferResponse").length;
+      },
+      set(_, value) {
+        return value;
+      }
+    }
+  ),
+
+  unreadBookingsMessagesCount: Ember.computed(
+    "allMessages.[]",
+    "allMessages.@each.state",
+    "allOrders.[]",
+    "allOrders.@each{isAppointment}",
+    {
+      get() {
+        let unreadMessages = this.get("allMessages")
+          .filterBy("state", "unread")
+          .filterBy("messageableType", "Order");
+        let bookings = this.get("allOrders").filterBy("isAppointment", true);
+        let bookingIds = _.map(bookings, "id");
+        let bookingMessages = _.filter(
+          unreadMessages,
+          msg => bookingIds.indexOf(msg.get("messageableId")) >= 0
+        );
+
+        return bookingMessages.length;
+      },
+      set(_, value) {
+        return value;
+      }
+    }
+  ),
+
+  unreadOrdersMessagesCount: Ember.computed(
+    "allMessages.[]",
+    "allMessages.@each.state",
+    "allOrders.[]",
+    "allOrders.@each{isAppointment}",
+    {
+      get() {
+        let unreadMessages = this.get("allMessages")
+          .filterBy("state", "unread")
+          .filterBy("messageableType", "Order");
+        let bookings = this.get("allOrders").filterBy("isAppointment", false);
+        let bookingIds = _.map(bookings, "id");
+        let bookingMessages = _.filter(
+          unreadMessages,
+          msg => bookingIds.indexOf(msg.get("messageableId")) >= 0
+        );
+
+        return bookingMessages.length;
+      },
+      set(_, value) {
+        return value;
+      }
+    }
+  ),
 
   init() {
     this._super(...arguments);
@@ -43,11 +116,12 @@ export default Service.extend({
     }
   },
 
-  fetchUnreadMessageCount() {
-    return this._queryMessages("unread", 1, 1)
+  async fetchUnreadMessages() {
+    await this._queryMessages("unread")
       .then(data => {
-        const count = data.meta && data.meta.total_count;
-        this.set("unreadMessageCount", count || 0);
+        this.get("store").pushPayload(data);
+        const count = (data.messages && data.messages.length) || 0;
+        this.set("unreadMessageCount", count);
       })
       .catch(e => this._onError(e));
   },
@@ -55,7 +129,7 @@ export default Service.extend({
   _queryMessages(state, page, perPage) {
     return new AjaxPromise("/messages", "GET", this.get("session.authToken"), {
       state: state,
-      scope: ["order", "offer"],
+      scope: ["order", "offer_response"],
       page: page,
       per_page: perPage
     });
@@ -65,7 +139,7 @@ export default Service.extend({
     const params = {
       page: page,
       state: state,
-      messageable_type: ["order", "offer"]
+      messageable_type: ["Order", "OfferResponse"]
     };
 
     return new AjaxPromise(
@@ -82,7 +156,7 @@ export default Service.extend({
       "PUT",
       this.get("session.authToken"),
       {
-        scope: ["order", "offer"]
+        scope: ["order", "offer_response"]
       }
     ).then(() => {
       this.get("store")
@@ -92,6 +166,9 @@ export default Service.extend({
           message.set("state", "read");
         });
       this.set("unreadMessageCount", 0);
+      this.set("unreadSharedOffersMessagesCount", 0);
+      this.set("unreadBookingsMessagesCount", 0);
+      this.set("unreadOrdersMessagesCount", 0);
     });
   },
 
@@ -99,21 +176,17 @@ export default Service.extend({
     this.get("logger").error(e);
   },
 
-  getRoute: function(message) {
-    let messageableId = message.get
-      ? message.get("messageableId")
-      : message.messageable_id;
-
-    if (message.get("isOfferMessage")) {
+  getRoute: function(message, notification) {
+    if (message.get("isOfferResponseMessage")) {
       return [
         "offers.messages",
-        messageableId,
+        notification.offerId,
         { queryParams: { uid: message.get("shareablePublicId") } }
       ];
     }
 
     if (message.get("isOrderMessage")) {
-      return ["orders.conversation", messageableId];
+      return ["orders.conversation", notification.order.id];
     }
   },
 

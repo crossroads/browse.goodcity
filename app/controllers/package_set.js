@@ -29,6 +29,14 @@ export default Controller.extend({
   canRedirectToStock: computed.alias("session.currentUser.canRedirectToStock"),
 
   presentInCart: computed("model", "cart.counter", function() {
+    if (this.get("model.isSet")) {
+      let partOfSetPresentInCart = this.get("model.packages")
+        .map(pkg => {
+          return this.get("cart").contains(pkg);
+        })
+        .some(value => value);
+      return !!partOfSetPresentInCart;
+    }
     return this.get("cart").contains(this.get("model"));
   }),
 
@@ -47,13 +55,17 @@ export default Controller.extend({
   ),
   packageUnavailableInSet: computed(
     "model",
+    "model.isSet",
+    "allPackages.@each.isAvailable",
     "allPackages.@each.availableQuantity",
     function() {
       if (!this.get("model")) {
         return true;
       }
       let quantity = this.get("allPackages").any(
-        pkg => pkg.get("availableQuantity") == 0
+        pkg =>
+          pkg.get("allowWebPublish") === false ||
+          pkg.get("availableQuantity") === 0
       );
       return !!quantity;
     }
