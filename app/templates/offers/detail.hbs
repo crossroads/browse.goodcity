@@ -49,21 +49,15 @@
       {{/link-to}}
     </div>
 
-    <div class="large-block-grid-5 small-block-grid-2 medium-block-grid-3 list items_list xxlarge-block-grid-4">
-    {{#each model.items as |item|}}
-      <li class="offer-item">
-        {{cloudinary-image-tag src=item.previewUrl}}
-        <div class="image-item-overlay image-tabs">
-          <div class="item_desc">
-            <li class="ellipsis two-line-ellipsis" style="color: white;">
-              <span class="item-notes">
-                {{item.description}}
-              </span>
-            </li>
+    <section class="main-section category-items-list">
+      <ul>
+        {{#each model.items as |item|}}
+          <div class="row items">
+            {{item-thumbnail-view item=item displayItemOverlay=true}}
           </div>
-        </div>
-      </li>
-    {{/each}}
-    </div>
+          <hr>
+        {{/each}}
+      </ul>
+    </section>
   </div>
 {{/if}}
