@@ -233,7 +233,9 @@ export default {
     chat_message_for_offers:
       "Please use the chat below to communicate with Goodcity's staff about your interest in this offer.",
     respond_offer: "回覆此捐贈",
-    disabled_chat: "Chat has now been disabled."
+    disabled_chat: "Chat has now been disabled.",
+    show_offer_details: "Show offer details",
+    hide_offer_details: "Hide offer details"
   },
 
   page: {
@@ -408,8 +410,7 @@ export default {
       unknown_transport: "其他"
     },
     details: {
-      note:
-        "注意：如你的訂單已獲確定，你必須聯絡我們團隊以更改訂單內的物品。",
+      note: "注意：如你的訂單已獲確定，你必須聯絡我們團隊以更改訂單內的物品。",
       link_to_browse: "瀏覽物資並將物資加入此訂單",
       update_message: "本訂單的內容已更新。",
       type: "輸入",

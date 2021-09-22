@@ -13,7 +13,7 @@
   <div class="small-12 columns content">
     {{#if showOfferShareDetails}}
       <div class="offer_details_button" {{action (mut showOfferShareDetails) false}}>
-        Hide offer details
+        {{t "shareableOffers.hide_offer_details"}}
       </div>
       <div class="offer_view" >
         <span style="color: white;">
@@ -41,7 +41,7 @@
       </section>
     {{else}}
       <div class="offer_details_button" {{action (mut showOfferShareDetails) true}}>
-        Show offer details
+        {{t "shareableOffers.show_offer_details"}}
       </div>
       <div class="image-tab">
         {{#each shareableoffer.items as |item index|}}
