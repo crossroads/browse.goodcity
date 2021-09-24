@@ -47,7 +47,6 @@
 
 							{{#each orderedGoods as |good|}}
 								<div class="row product-row">
-									{{#if good.record}}
 									{{#if good.record.isSet}}
 										<div class="row">
 									    <div class="small-6 columns cart-redirect-link set-header">
@@ -67,6 +66,7 @@
 											</div>
 										{{/each}}
 									{{else}}
+										{{#if good.record.package}}
 										<div class="columns small-4 image-container">
 											<img src={{good.record.package.previewImageUrl}}/>
 										</div>
@@ -75,7 +75,7 @@
 											<div class="notes">{{ good.record.package.notes }}</div>
 											<div class="notes">{{t 'order.goods_details.quantity_label'}} : {{ good.record.package.orderedQuantity}}</div>
 										</div>
-									{{/if}}
+										{{/if}}
 									{{/if}}
 								</div>
 							{{/each}}
