@@ -66,6 +66,7 @@
 											</div>
 										{{/each}}
 									{{else}}
+										{{#if good.record.package}}
 										<div class="columns small-4 image-container">
 											<img src={{good.record.package.previewImageUrl}}/>
 										</div>
@@ -74,6 +75,7 @@
 											<div class="notes">{{ good.record.package.notes }}</div>
 											<div class="notes">{{t 'order.goods_details.quantity_label'}} : {{ good.record.package.orderedQuantity}}</div>
 										</div>
+										{{/if}}
 									{{/if}}
 								</div>
 							{{/each}}
