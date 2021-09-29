@@ -6,11 +6,11 @@ export default {
   by: "了解",
   ok: "確定",
   unexpected_error: "出錯了",
-  not_allowed_error: "You are not allowed to perform this action.",
+  not_allowed_error: "你未獲授權進行此動作。",
   QuotaExceededError:
     "網站可能在瀏覽器的<b>私密瀏覽模式</b>下不能正常運作。請嘗試</br><ul><li><a href='http://www.apple.com/itunes/' style='color: black!important; background-color: #dee4eb !important;'>下載iOS 應用程式</a></li><li>使用瀏覽器的常規模式</li><li>使用Chrome 的私密瀏覽模式</li></ul>",
   okay: "確定",
-  go_to_top: "Go to top",
+  go_to_top: "到頁頂",
   show: "顯示",
   date: "日期",
   edit: "修改",
@@ -35,7 +35,7 @@ export default {
   discard_changes: "放棄修正",
   morning: "早上",
   afternoon: "下午",
-  invalid_category_error: "The category you are looking for does not exist.",
+  invalid_category_error: "你所搜尋的種類不存在。",
 
   messages: {
     you: "閣下",
@@ -82,14 +82,14 @@ export default {
   },
 
   submitted_orders: {
-    submit_order: "Submit Order",
-    select_option: "Please select from the Following Options",
-    create_new: "Create New Orders from these Items",
-    state: "State",
-    due_date: "Due Date",
-    client_name: "Client Name",
-    add_items: "Add these items to <b>{{code}}</b>",
-    not_confirmed: "not confirmed"
+    submit_order: "提交訂單",
+    select_option: "請揀選以下選項",
+    create_new: "為這些物品建立新訂單",
+    state: "狀態",
+    due_date: "到期日",
+    client_name: "服務使用者名稱",
+    add_items: "新增這些物品至 <b>{{code}}</b>",
+    not_confirmed: "未確定"
   },
 
   browse: {
@@ -99,7 +99,7 @@ export default {
     filter_results: "過濾這些結果 <span>&#x25be;</span>",
     intro_text: "歡迎已在港註冊的慈善及社福團體下單",
     faq: "資格",
-    item_unavailable: "Item is no longer available."
+    item_unavailable: "物品未能提供。"
   },
 
   home: {
@@ -115,7 +115,7 @@ export default {
         "因應新冠病毒疫情，直至五月三十一日期間，未能安排自取物品。只限送貨。",
       subtitle: "網上訂單會由我們屯門會址送出。",
       action: "瀏覽物資",
-      learn_how: "Learn how"
+      learn_how: "瀏覽教學"
     },
     visit: {
       title: "預約到訪我們的中心",
@@ -223,17 +223,19 @@ export default {
 
   shareableOffers: {
     list_of_items: "物品清單",
-    offer_details: "Details of Offer",
+    offer_details: "捐贈詳情",
     no_description_available: "沒有物品詳細資料",
     offer_instruction: "捐贈教學",
     offered: "已捐贈",
-    view_offer: "View Offer",
+    view_offer: "查看捐贈",
     chat_message_for_expired_offers:
       "This offer is no longer accepting requests. Please check other available offers.",
     chat_message_for_offers:
       "Please use the chat below to communicate with Goodcity's staff about your interest in this offer.",
-    respond_offer: "Respond to this Offer",
-    disabled_chat: "Chat has now been disabled."
+    respond_offer: "回覆此捐贈",
+    disabled_chat: "Chat has now been disabled.",
+    show_offer_details: "Show offer details",
+    hide_offer_details: "Hide offer details"
   },
 
   page: {
@@ -256,12 +258,12 @@ export default {
   },
 
   search_goods: {
-    contact_us: "Can't find required goods? Please contact us for assistance.",
-    placeholder: "Search Goods",
-    title: "Search Results",
-    done: "Done",
-    search_info: "You can search for goods. E.g.'table' or 'stroller'",
-    back: "< Back to search"
+    contact_us: "未能找到需要的物資？請聯絡我們以便進一步協助。",
+    placeholder: "搜尋物資",
+    title: "搜尋結果",
+    done: "完成",
+    search_info: "你可以搜尋物資，例如「書枱」或「嬰兒車」",
+    back: "＜ 返回搜尋"
   },
 
   account: {
@@ -293,8 +295,8 @@ export default {
     user_info: "用戶資料不齊",
     change_phone_number: {
       title: "變更電話號碼",
-      description: "Please enter the new phone number",
-      change_phone_number: "Please enter the pin which we sent to"
+      description: "請輸入新的電話號碼",
+      change_phone_number: "請輸入收到的驗證碼"
     },
     user_title: {
       mr: "先生",
@@ -309,8 +311,8 @@ export default {
   },
 
   _resend: {
-    try_again: "Try again in {{timer}} seconds",
-    please_wait: "Please wait {{timer}} seconds before requesting a pin again",
+    try_again: "請在 {{timer}} 秒後再試",
+    please_wait: "請等候 {{timer}} 秒以重新索取驗證碼",
     no_sms: "收不到短訊？",
     email_correct: "{{email}} 是否正確? ",
     phone_correct: "{{phone}} 是否正確? ",
@@ -369,8 +371,8 @@ export default {
     title: "控制頁",
     orders: "訂單",
     bookings: "Bookings",
-    online_orders: "Online Orders",
-    create_new_booking: "Create New Booking",
+    online_orders: "網上訂單",
+    create_new_booking: "建立新的預約",
     account: {
       account_text: "帳戶",
       name: "名稱",
@@ -379,12 +381,12 @@ export default {
     },
     from_donors: {
       offer: "Offer",
-      open_for_response: "Open for responses",
-      closed_for_response: "Closed for new Responses",
-      respond_offers: "View / Respond to offers",
-      your_responses: "Your Responses to Donor Offers",
-      title: "Direct from Donors",
-      closed_offer: "The offer you are looking for is no longer available."
+      open_for_response: "接受新的回覆",
+      closed_for_response: "不接受新的回覆",
+      respond_offers: "查看/回覆捐贈",
+      your_responses: "你對捐贈者的回應",
+      title: "直接從捐贈者接收",
+      closed_offer: "未能提供你所找尋的捐贈。"
     }
   },
 
@@ -408,10 +410,9 @@ export default {
       unknown_transport: "其他"
     },
     details: {
-      note:
-        "Note: Once the order is confirmed you must contact our team to modify the items requested.",
-      link_to_browse: "Browse items to add to this order",
-      update_message: "The content of this order has been updated.",
+      note: "注意：如你的訂單已獲確定，你必須聯絡我們團隊以更改訂單內的物品。",
+      link_to_browse: "瀏覽物資並將物資加入此訂單",
+      update_message: "本訂單的內容已更新。",
       type: "輸入",
       transport: "交通",
       appointment: "預約",
@@ -469,15 +470,15 @@ export default {
   },
 
   requested_package: {
-    max_quantity: `Quantity (max {{quantity}})`,
-    boundaries: `Quantity between 1 and {{max}}`,
-    single_quantity: `Only 1 item available`
+    max_quantity: `數量 (max {{quantity}})`,
+    boundaries: `數量由 1 至 {{max}}`,
+    single_quantity: `只能提供 1 件物品`
   },
 
   item: {
     request_item: "申請項目",
     remove_item: "刪除項目",
-    unavailable_item: "This item is no longer available in stock."
+    unavailable_item: "此物品已沒有存貨。"
   },
 
   cart_content: {
@@ -560,7 +561,7 @@ export default {
       name_instruction: "在身份證明文件中顯示",
       name_warning: "您必須在此輸入您的名稱。",
       phone_number: "服務對象的聯絡電話號碼",
-      mobile_warning: "Please enter a valid HK number.",
+      mobile_warning: "請輸入有效的香港流動電話號碼。",
       for_client: "此訂單是給予機構自用還是服務對象使用?",
       phone_number_instruction: "我們將會用此號碼確認行程和資料。",
       hk_id_instruction: {
@@ -599,7 +600,7 @@ export default {
       no_goods_error: "需要申請最少一件物品",
       no_time_slot_selected_error: "請選擇預約時間",
       validation_error: {
-        invalid_details: "Goods Type and Quantity cannot be blank"
+        invalid_details: "物資的種類及數量不能留空"
       }
     },
     request: {

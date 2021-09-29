@@ -180,13 +180,13 @@ export default Service.extend({
     if (message.get("isOfferResponseMessage")) {
       return [
         "offers.messages",
-        notification.offerId,
+        notification.offerResponse.get("offerId"),
         { queryParams: { uid: message.get("shareablePublicId") } }
       ];
     }
 
     if (message.get("isOrderMessage")) {
-      return ["orders.conversation", notification.order.id];
+      return ["orders.conversation", notification.order.get("id")];
     }
   },
 

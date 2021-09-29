@@ -13,7 +13,7 @@
   <div class="small-12 columns content">
     {{#if showOfferShareDetails}}
       <div class="offer_details_button" {{action (mut showOfferShareDetails) false}}>
-        Hide offer details
+        {{t "shareableOffers.hide_offer_details"}}
       </div>
       <div class="offer_view" >
         <span style="color: white;">
@@ -41,7 +41,7 @@
       </section>
     {{else}}
       <div class="offer_details_button" {{action (mut showOfferShareDetails) true}}>
-        Show offer details
+        {{t "shareableOffers.show_offer_details"}}
       </div>
       <div class="image-tab">
         {{#each shareableoffer.items as |item index|}}
@@ -128,10 +128,10 @@
                       {{#validatable-form class="form-horizontal" onSubmit=(action 'sendMessage') as |form|}}
                         <div class="row ui">
                           <div class="small-9 large-10 medium-9 columns">
-                            {{variable-height-textarea disabled=(is-not isChatVisible) value=body name="body" required="true" placeholder=(unless isChatVisible (t "shareableOffers.disabled_chat")) parentDiv="message-section"}}
+                            {{variable-height-textarea disabled=(is-not (is-or isChatVisible offerResponseId)) value=body name="body" required="true" placeholder=(unless (is-or isChatVisible offerResponseId) (t "shareableOffers.disabled_chat")) parentDiv="message-section"}}
                           </div>
                           <div class="small-3 large-2 medium-3 columns">
-                            {{#if isChatVisible}}
+                            {{#if (is-or isChatVisible offerResponseId)}}
                               {{#online-button class="button" onClick=(action "sendMessage") actionArgs=true }}
                               {{t 'messages.send'}}
                               {{/online-button}}

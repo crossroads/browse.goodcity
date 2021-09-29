@@ -244,7 +244,9 @@ export default {
     chat_message_for_offers:
       "Please use the chat below to communicate with Goodcity's staff about your interest in this offer.",
     respond_offer: "Respond to this Offer",
-    disabled_chat: "Chat has now been disabled."
+    disabled_chat: "Chat has now been disabled.",
+    show_offer_details: "Show offer details",
+    hide_offer_details: "Hide offer details"
   },
 
   page: {
