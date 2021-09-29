@@ -94,6 +94,7 @@ export default Controller.extend({
       offerResponse =
         this.get("store").peekRecord("offerResponse", recordId) ||
         this.get("store").findRecord("offerResponse", recordId);
+
       offerId = offerResponse.get("offerId");
     }
 
@@ -104,7 +105,7 @@ export default Controller.extend({
       isSingleMessage: computed.equal("unreadCount", 1),
       isThread: computed.not("isSingleMessage"),
       order: order,
-      offerId: offerId,
+      offerResponse: offerResponse,
       text: computed("messages.[]", function() {
         return this.get("messages")
           .sortBy("id")
