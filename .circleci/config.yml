@@ -169,7 +169,7 @@ jobs:
           command: echo 'export SOURCE_MAP=$(eval echo $SOURCE_MAP_WITH_VARIABLE_NAME | cut -c22-100)' >> $BASH_ENV
       - run:
           name: Setup Environment
-        command: echo 'export ENVIRONMENT=$(if [ "$CIRCLE_BRANCH" == "live" ]; then echo production; else echo staging; fi)' >> $BASH_ENV
+          command: echo 'export ENVIRONMENT=$(if [ "$CIRCLE_BRANCH" == "live" ]; then echo production; else echo staging; fi)' >> $BASH_ENV
       - azure-cli/install
       - azure-cli/login-with-service-principal
       - run: bundle exec cap $ENVIRONMENT deploy:upload  # Old capistrano deployment
