@@ -1,4 +1,5 @@
 require 'json'
+require_relative "./release_utils"
 
 update_fastlane
 
@@ -12,6 +13,18 @@ end
 
 def xsh(cmd)
   sh cmd, error_callback: -> (err) { UI.user_error!(err) }
+end
+
+platform :web do
+  before_all do
+    ReleaseUtils::Azure.assert_logged_in!
+  end
+
+  desc "Release web to stage"
+  lane :deploy do
+    stage = ReleaseUtils.get_env_var("STAGE")
+    ReleaseUtils::Web.upload(app: 'charities', stage: stage)
+  end
 end
 
 platform :ios do
