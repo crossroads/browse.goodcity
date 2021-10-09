@@ -2,7 +2,6 @@ require 'json'
 require 'colorize'
 require 'fastlane'
 require 'active_support/core_ext/numeric/time.rb'
-require 'byebug'
 
 module ReleaseUtils
   module_function
