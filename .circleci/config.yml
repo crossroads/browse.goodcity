@@ -172,12 +172,11 @@ jobs:
           command: echo 'export ENVIRONMENT=$(if [ "$CIRCLE_BRANCH" == "live" ]; then echo production; else echo staging; fi)' >> $BASH_ENV
       - azure-cli/install
       - azure-cli/login-with-service-principal
-      - run: STAGE=$ENVIRONMENT bundle exec fastlane web deploy  # New azure deployment
+      - run: STAGE=$ENVIRONMENT bundle exec fastlane web deploy
       - run:
           name: Upload Source Map to Rollbar
           command: |
             curl https://api.rollbar.com/api/1/sourcemap/download -F access_token="${ROLLBAR_KEY}" -F version="${APP_VERSION}" -F minified_url=$ASSET_HOST_URL/$SOURCE_MAP
-      - run: bundle exec cap $ENVIRONMENT deploy:upload  # Old capistrano deployment
 
   ember_cordova_build:
     <<: *defaults
