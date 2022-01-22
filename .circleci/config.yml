@@ -172,8 +172,7 @@ jobs:
           command: echo 'export ENVIRONMENT=$(if [ "$CIRCLE_BRANCH" == "live" ]; then echo production; else echo staging; fi)' >> $BASH_ENV
       - azure-cli/install
       - azure-cli/login-with-service-principal
-      - run: bundle exec cap $ENVIRONMENT deploy:upload  # Old capistrano deployment
-      - run: STAGE=$ENVIRONMENT bundle exec fastlane web deploy  # New azure deployment
+      - run: STAGE=$ENVIRONMENT bundle exec fastlane web deploy
       - run:
           name: Upload Source Map to Rollbar
           command: |
