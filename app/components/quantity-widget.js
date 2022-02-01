@@ -1,24 +1,22 @@
-import { computed } from "@ember/object";
+import { computed, observer } from "@ember/object";
 import Component from "@ember/component";
 
 export default Component.extend({
-  value: computed("package", {
-    get() {
-      if (this.get("__value")) {
-        return this.get("__value");
-      }
-
-      return this.get("package.requestedPackage")
-        ? this.get("package.requestedPackage.quantity")
-        : 1;
-    },
-    set(_, value) {
-      const max = this.get("package.computedMaxOrderQuantity");
-      const val = Number(value);
-      this.set("__value", val <= max ? val : max);
-      return this.get("__value");
-    }
+  value: computed("package", function() {
+    return this.get("package.requestedPackage")
+      ? this.get("package.requestedPackage.quantity")
+      : 1;
   }),
+
+  onValueChange: observer(
+    "value",
+    "package.computedMaxOrderQuantity",
+    function() {
+      if (this.get("value") > this.get("package.computedMaxOrderQuantity")) {
+        this.set("value", this.get("package.computedMaxOrderQuantity"));
+      }
+    }
+  ),
 
   performAction(value) {
     if (this.get("type") == "request") {
