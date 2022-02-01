@@ -6,7 +6,7 @@
     {{fa-icon 'minus'}}
   </span>
   <span class="qty">
-    {{numeric-input value=value name="requestedQuanity" type="number" id=(concat "qty" package.id) max="{{package.computedMaxOrderQuantity}}" maxlength="4" autocomplete="off" required='true' pattern="\d{1,8}" focusOut=(action 'focusOut' package)}}
+    {{numeric-input value=value name="requestedQuanity" type="number" id=(concat "qty" package.id) max=package.computedMaxOrderQuantity maxlength="4" autocomplete="off" required='true' pattern="\d{1,8}" focusOut=(action 'focusOut' package)}}
   </span>
   <span id='incrementOperator' {{action 'incrementQty' package.computedMaxOrderQuantity}}>
     {{fa-icon 'plus'}}
