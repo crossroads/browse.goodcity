@@ -2,10 +2,22 @@ import { computed } from "@ember/object";
 import Component from "@ember/component";
 
 export default Component.extend({
-  value: computed("package", function() {
-    return this.get("package.requestedPackage")
-      ? this.get("package.requestedPackage.quantity")
-      : 1;
+  value: computed("package", {
+    get() {
+      if (this.get("__value")) {
+        return this.get("__value");
+      }
+
+      return this.get("package.requestedPackage")
+        ? this.get("package.requestedPackage.quantity")
+        : 1;
+    },
+    set(_, value) {
+      const max = this.get("package.computedMaxOrderQuantity");
+      const val = Number(value);
+      this.set("__value", val <= max ? val : max);
+      return this.get("__value");
+    }
   }),
 
   performAction(value) {
@@ -18,7 +30,11 @@ export default Component.extend({
 
   validValueCheck(pkg) {
     let quantity = +this.get("value");
-    return quantity < 1 || quantity > pkg.get("availableQuantity") || !quantity;
+    return (
+      quantity < 1 ||
+      quantity > pkg.get("computedMaxOrderQuantity") ||
+      !quantity
+    );
   },
 
   setUpdatedValue(value, isValueValid) {
