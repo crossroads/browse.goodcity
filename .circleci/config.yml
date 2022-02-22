@@ -284,12 +284,12 @@ workflows:
       - package_dependencies:
           requires:
             - checkout_code
-      - test_cases:
-          requires:
-            - package_dependencies
+      # - test_cases:
+      #     requires:
+      #       - package_dependencies
       - www_build:
           requires:
-            - test_cases
+            - package_dependencies
           filters:
             branches:
               only: /^(master|live)$/
@@ -307,7 +307,6 @@ workflows:
               only: /^(master|live|GCW-3746-android-api-30)$/
       - android_build_and_deploy:
           requires:
-            - test_cases
             - ember_cordova_build
           filters:
             branches:
