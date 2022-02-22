@@ -268,7 +268,10 @@ export default {
       "We don't share your data. We only use it to complete your request(s). See our ",
     policy: "Privacy Policy.",
     mobile_email_warning:
-      "Please provide a valid email or a valid Hong Kong mobile number"
+      "Please provide a valid email or a valid Hong Kong mobile number",
+    explanation:
+      "If you represent a Hong Kong non-profit or social welfare organisation you can book an appointment for yourself or your client to select goods from our Tuen Mun distribution center.",
+    explanation_read_more_link: "Read more details about the process here."
   },
 
   search_goods: {

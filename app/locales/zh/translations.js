@@ -254,7 +254,10 @@ export default {
     continue: "繼續",
     privacy: "我們不會公開或分享您的資料。我們只會使用以完成您的申請。請看 ",
     policy: "隱私政策",
-    mobile_email_warning: "請提供正確的電郵或香港手機號碼"
+    mobile_email_warning: "請提供正確的電郵或香港手機號碼",
+    explanation:
+      "If you represent a Hong Kong non-profit or social welfare organisation you can book an appointment for yourself or your client to select goods from our Tuen Mun distribution center.",
+    explanation_read_more_link: "Read more details about the process here."
   },
 
   search_goods: {
