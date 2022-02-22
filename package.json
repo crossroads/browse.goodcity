@@ -1,7 +1,7 @@
 {
   "name": "browse",
-  "version": "0.10.3",
-  "description": "Small description for GoodCity Charity goes here",
+  "version": "0.11.0",
+  "description": "Request goods via GoodCity.HK platform",
   "license": "MIT",
   "author": "",
   "private": true,
@@ -14,11 +14,11 @@
     "private": true
   },
   "scripts": {
-    "start": "cross-env EMBER_CLI_CORDOVA=0 ember server --port 4202 --live-reload-port 35731",
-    "start:staging": "cross-env EMBER_CLI_CORDOVA=0 STAGING=true ember server --environment production --port 4202 --live-reload-port 35731",
-    "build": "cross-env EMBER_CLI_CORDOVA=0 ember build",
-    "test": "cross-env EMBER_CLI_CORDOVA=0 ember test --server",
-    "test:ci": "cross-env EMBER_CLI_CORDOVA=0 ember-pretty-test"
+    "start": "EMBER_CLI_CORDOVA=0 ember server --port 4202 --live-reload-port 35731",
+    "start:staging": "EMBER_CLI_CORDOVA=0 STAGING=true ember server --environment production --port 4202 --live-reload-port 35731",
+    "build": "EMBER_CLI_CORDOVA=0 ember build",
+    "test": "EMBER_CLI_CORDOVA=0 ember test --server",
+    "test:ci": "EMBER_CLI_CORDOVA=0 ember-pretty-test"
   },
   "husky": {
     "hooks": {
@@ -50,7 +50,6 @@
     "chalk": "^3.0.0",
     "connect-restreamer": "^1.0.3",
     "cors": "^2.8.5",
-    "cross-env": "^6.0.3",
     "ember-ajax": "^5.0.0",
     "ember-cli": "2.15.1",
     "ember-cli-app-version": "^3.2.0",
@@ -69,7 +68,7 @@
     "ember-cli-photoswipe": "1.1.0",
     "ember-cli-qunit": "2.2.6",
     "ember-cli-release": "^1.0.0-beta.2",
-    "ember-cli-sass": "5.5.2",
+    "ember-cli-sass": "6.0.0",
     "ember-cli-slick-carousel": "0.0.0",
     "ember-cli-sri": "^2.1.1",
     "ember-cli-test-loader": "2.2.0",
@@ -77,7 +76,7 @@
     "ember-data": "^3.1.0",
     "ember-disable-proxy-controllers": "^1.0.2",
     "ember-export-application-global": "^2.0.0",
-    "ember-form-validator": "1.0.5",
+    "ember-form-validator": "1.0.7",
     "ember-i18n": "~5.3.1",
     "ember-infinite-list": "^1.0.4",
     "ember-infinity": "^0.2.5",
@@ -99,16 +98,15 @@
     "liquid-fire": "~0.29.5",
     "loader.js": "^4.7.0",
     "morgan": "^1.9.1",
-    "node-sass": "^4.13.0",
+    "node-sass": "^5.0.0",
     "prettier": "1.19.1"
   },
   "dependencies": {
-    "azure-api": "git://github.com/crossroads/azure-api.git#master",
     "blueimp-file-upload": "^9.17.0",
     "bower": "^1.8.4",
     "cloudinary-jquery-file-upload": "^2.2.0",
     "codeclimate-test-reporter": "^0.5.1",
-    "cordova": "^6.5.0",
+    "cordova": "^10.0.0",
     "cordova-lib": "https://github.com/crossroads/goodcity-lib.git#master",
     "cordova-update-config": "^1.0.2",
     "jquery": "^3.2.0",

@@ -4,7 +4,7 @@ aliases:
 
   - defaults: &defaults
       docker:
-        - image: circleci/node:carbon
+        - image: cimg/node:10.24-browsers
       working_directory: ~/code
   - &restore-repo-cache
       key: v1-goodcity-charity-{{ .Environment.CIRCLE_SHA1 }}
@@ -58,7 +58,8 @@ aliases:
 # -----------------------------
 
 orbs:
-  azure-cli: circleci/azure-cli@1.1.0
+  azure-cli: circleci/azure-cli@1.2.0
+  browser-tools: circleci/browser-tools@1.2.3
 
 jobs:
   checkout_code:
@@ -83,17 +84,14 @@ jobs:
 
   test_cases:
     <<: *defaults
-    docker:
-      - image: circleci/node:6-browsers
     environment:
       JOBS: 1
     steps:
+      - browser-tools/install-chrome
+      - browser-tools/install-chromedriver
       - restore_cache: *restore-repo-cache
       - restore_cache: *restore-yarn-cache
       - restore_cache: *restore-bower-cache
-      - run:
-          name: rebuild node-sass
-          command: npm rebuild node-sass
       - run:
           name: Start Ember test server
           command: yarn run ember server --port 4202
@@ -108,19 +106,6 @@ jobs:
           root: .
           paths:
             - coverage*/lcov.info
-
-  upload-coverage:
-    <<: *defaults
-    steps:
-      - restore_cache: *restore-repo-cache
-      - restore_cache: *restore-yarn-cache
-      - restore_cache: *restore-bower-cache
-      - attach_workspace:
-          at: ~/code
-      - run:
-          name: Upload coverage results to Code Climate
-          command: |
-            yarn run codeclimate-test-reporter < coverage*/lcov.info
 
   www_build:
     <<: *defaults
@@ -147,53 +132,46 @@ jobs:
   www-deploy:
     <<: *defaults
     docker:
-      - image: circleci/ruby:2.5.1-node
+      - image: cimg/ruby:2.7.3
     steps:
       - restore_cache: *restore-repo-cache
       - restore_cache: *restore-bundle-cache
-      - run: bundle check --path=vendor/bundle || bundle install --deployment --jobs=4 --retry=3
+      - run: bundle config set --local deployment 'true' && (bundle check || bundle install --jobs=2 --retry=3)
       - save_cache: *save-bundle-cache
-      - run:
-          name: Setup Environment variables
-          command: |
-              echo 'export ASSET_HOST_URL=$(if [ "$CIRCLE_BRANCH" == "live" ]; then echo "https://browse.goodcity.hk/assets"; else echo "https://browse-staging.goodcity.hk/assets"; fi)' >> $BASH_ENV
-              echo 'export APP_VERSION=$(jq -r ".version" package.json)' >> $BASH_ENV
       - attach_workspace:
           at: ~/code
       - run: mv dist-www/ dist
-      - run:
-          name: Get source map url with grep
-          command: echo 'export SOURCE_MAP_WITH_VARIABLE_NAME=$(grep sourceMappingURL dist/assets/browse-*.js)' >> $BASH_ENV
-      - run:
-          name: Remove unnecessary characters form source map
-          command: echo 'export SOURCE_MAP=$(eval echo $SOURCE_MAP_WITH_VARIABLE_NAME | cut -c22-100)' >> $BASH_ENV
-      - run:
-          name: Setup Environment
-          command: echo 'export ENVIRONMENT=$(if [ "$CIRCLE_BRANCH" == "live" ]; then echo production; else echo staging; fi)' >> $BASH_ENV
       - azure-cli/install
       - azure-cli/login-with-service-principal
-      - run: STAGE=$ENVIRONMENT bundle exec fastlane web deploy
+      - run:
+          name: Upload to www server + azure
+          command: |
+            sudo ln -s /usr/local/bin/ruby /usr/local/bin/ruby2.7
+            STAGE=$(if [ "$CIRCLE_BRANCH" == "live" ]; then echo production; else echo staging; fi)
+            STAGE=$STAGE bundle exec fastlane web deploy
       - run:
           name: Upload Source Map to Rollbar
           command: |
+            APP_VERSION=$(jq -r ".version" package.json)
+            SOURCE_MAP_WITH_VARIABLE_NAME=$(grep sourceMappingURL dist/assets/browse-*.js)
+            SOURCE_MAP=$(eval echo $SOURCE_MAP_WITH_VARIABLE_NAME | cut -c22-100)
+            ASSET_HOST_URL=$(if [ "$CIRCLE_BRANCH" == "live" ]; then echo "https://charities.goodcity.hk/assets"; else echo "https://charities-staging.goodcity.hk/assets"; fi)
             curl https://api.rollbar.com/api/1/sourcemap/download -F access_token="${ROLLBAR_KEY}" -F version="${APP_VERSION}" -F minified_url=$ASSET_HOST_URL/$SOURCE_MAP
 
   ember_cordova_build:
     <<: *defaults
     environment:
-        EMBER_CLI_CORDOVA: "1"
+      JOBS: 1 # stops ember running out of memory when building
     steps:
       - restore_cache: *restore-repo-cache
       - restore_cache: *restore-yarn-cache
       - restore_cache: *restore-bower-cache
       - run:
-          name: Setup Environment variables
-          command: echo 'export STAGING=$(if [ "$CIRCLE_BRANCH" == "live" ]; then echo false; else echo true; fi)' >> $BASH_ENV
-      - run:
+          name: Ember build
           command: |
-              npm rebuild node-sass
-              echo "Building for staging (true/false): $STAGING"
-              yarn run ember build --environment=production
+            ENVIRONMENT=$(if [ "$CIRCLE_BRANCH" == "live" ]; then echo production; else echo staging; fi)
+            APP_SHA=$(echo $CIRCLE_SHA1 | cut -c1-7)
+            EMBER_CLI_CORDOVA=1 ENVIRONMENT=${ENVIRONMENT} APP_SHA=${APP_SHA} yarn run ember build --environment=production
       - run: mv dist/ cordova/www
       - persist_to_workspace:
           root: .
@@ -203,57 +181,48 @@ jobs:
   android_build_and_deploy:
     <<: *defaults
     docker:
-      - image: circleci/android:api-29-node@sha256:f57cbd442b1d90d01a672e87fa9c516a71312376641d70aee67736e78cb9645f
+      - image: cimg/android:2021.10.2-node
     environment:
       JVM_OPTS: -Xmx3200m
-      KEYSTORE: goodcity.keystore
-      CIRCLE_ARTIFACTS: /home/circleci/code/cordova/platforms/android/build/outputs/apk
-
+      CIRCLE_ARTIFACTS: /home/circleci/code/cordova/platforms/android/app/build/outputs/apk/release/
+      JAVA_HOME: /usr/lib/jvm/java-8-openjdk-amd64
     steps:
       - restore_cache: *restore-repo-cache
       - restore_cache: *restore-yarn-cache
       - restore_cache: *restore-bundle-cache
-      - run: bundle install --deployment --jobs=4 --retry=3
+      - run: bundle config set --local deployment 'true' && (bundle check || bundle install --jobs=2 --retry=3)
       - save_cache: *save-bundle-cache
       - attach_workspace:
           at: ~/code
-      - run:
+      - run: 
           name: Setup Environment variables
           command: |
-              echo 'export ENVIRONMENT=$(if [ "$CIRCLE_BRANCH" == "live" ]; then echo production; else echo staging; fi)' >> $BASH_ENV
-              echo 'export PATH=$PATH:`yarn bin`' >> $BASH_ENV
-              echo 'export PATH=$PATH:$ANDROID_HOME/tools/gradle/bin' >> $BASH_ENV
+            echo 'export ENVIRONMENT=$(if [ "$CIRCLE_BRANCH" == "live" ]; then echo production; else echo staging; fi)' >> $BASH_ENV
+            echo 'export PATH=$PATH:`yarn bin`' >> $BASH_ENV
       - run:
-          name: Install Gradle 4.10.3
+          name: Install dependencies
           command: |
-            wget -O /tmp/gradle.zip  https://services.gradle.org/distributions/gradle-4.10.3-all.zip
-            unzip -d $ANDROID_HOME/tools /tmp/gradle.zip
-            mv $ANDROID_HOME/tools/gradle-4.10.3 $ANDROID_HOME/tools/gradle
+              sudo apt-get update
+              sudo apt remove openjdk-11-*
+              sudo apt-get install -y apt-transport-https ca-certificates wget dirmngr gnupg software-properties-common openjdk-8-jdk
+              sudo npm install -g cordova@10
+      - azure-cli/install
+      - azure-cli/login-with-service-principal
+      - run: az storage blob download --account-name $GOODCITY_STORAGE -c ci-app-secrets -n browse-$ENVIRONMENT-google-services.json -f ~/code/cordova/google-services.json
+      - run: az storage blob download --account-name $GOODCITY_STORAGE -c ci-app-secrets -n goodcity.keystore -f ~/code/cordova/goodcity.keystore
+      - run: az storage blob download --account-name $GOODCITY_STORAGE -c ci-app-secrets -n google-play-key.json -f ~/code/fastlane/google-play-key.json
       - run:
-          name: Download Google-services file
+          name: Build android app
           command: |
-            yarn run azure-filestore download -d browse/$ENVIRONMENT -f google-services.json
-            mv ~/code/google-services.json ~/code/cordova
-          working_directory: ~/code
-      - run:
-          name: Download Keystore File
-          command: |
-            yarn run azure-filestore download -f $KEYSTORE
-            mv $KEYSTORE ~/code/cordova
-          working_directory: ~/code
-      - run: yes | sdkmanager --licenses || exit 0
-      - run: yes | sdkmanager --update || exit 0
-      - run:
-          name: Download Google Play Store Key file
-          command: |
-            yarn run azure-filestore download -d google-play -f $GOOGLE_PLAY_KEY_FILE
-            mv $GOOGLE_PLAY_KEY_FILE ~/code/fastlane
-          working_directory: ~/code
-      - run:
-          name: android build
-          command: |
-            sudo npm install -g cordova@latest
-            bundle exec rake ${ENVIRONMENT} android app:build
+            node rename_package.js
+            cordova platform add android
+            if [ "$ENVIRONMENT" == "production" ]; then
+              cordova build android --release -- \
+                --packageType=apk --keystore=goodcity.keystore --storePassword="${GOODCITY_KEYSTORE_PASSWORD}" \
+                --alias="${GOODCITY_KEYSTORE_ALIAS}" --password="${GOODCITY_KEYSTORE_PASSWORD}"
+            else
+              cordova build android --debug --device
+            fi
           working_directory: cordova
       - store_artifacts:
           path: cordova/platforms/android/app/build/outputs/apk/
@@ -264,135 +233,87 @@ jobs:
 
   ios_build_and_deploy:
     macos:
-      xcode: "10.1.0"
+      xcode: "13.2.1"
     working_directory: ~/code
     shell: /bin/bash --login -eo pipefail
     environment:
-        EMBER_CLI_CORDOVA: "1"
-        CIRCLE_ARTIFACTS: /Users/distiller/code/cordova/platforms/ios/build/device
-
+      CIRCLE_ARTIFACTS: /Users/distiller/code/cordova/platforms/ios/build/device
+      HOMEBREW_NO_AUTO_UPDATE: 1
     steps:
       - checkout
-      - restore_cache: *restore-ios-yarn-cache
-      - run: *yarn
-      - save_cache: *save-ios-yarn-cache
-      - restore_cache: *restore-ios-bower-cache
-      - run: yarn run bower install
-      - save_cache: *save-ios-bower-cache
-      - run:
-          name: Setup Environment variables
-          command: |
-            echo 'export STAGING=$(if [ "$CIRCLE_BRANCH" == "live" ]; then echo false; else echo true; fi)' >> $BASH_ENV
-            echo 'export ENVIRONMENT=$(if [ "$CIRCLE_BRANCH" == "live" ]; then echo production; else echo staging; fi)' >> $BASH_ENV
-            echo 'export PROVISIONING_PROFILE=$(if [ "$CIRCLE_BRANCH" == "live" ]; then echo 'GoodCityBrowse.mobileprovision'; else echo 'GoodCityBrowseStaging.mobileprovision'; fi)' >> $BASH_ENV
-            echo 'export CERTIFICATE=$(if [ "$CIRCLE_BRANCH" == "live" ]; then echo 'hk.goodcity.p12'; else echo 'hk.goodcity.dev.p12'; fi)' >> $BASH_ENV
-      - run:
-          command: |
-              npm rebuild node-sass
-              echo "Building for staging (true/false): $STAGING"
-              yarn run ember build --environment=production
-      - run: mv dist/ cordova/www
-      - persist_to_workspace:
-          root: .
-          paths:
-            - cordova/www
-      - restore_cache: *restore-ios-bundler-cache
-      - run: bundle install --deployment --jobs=4 --retry=3
-      - save_cache: *save-ios-bundler-cache
+      - run: brew install azure-cli
       - attach_workspace:
           at: ~/code
+      - run: echo 'export ENVIRONMENT=$(if [ "$CIRCLE_BRANCH" == "live" ]; then echo production; else echo staging; fi)' >> $BASH_ENV
+      - restore_cache: *restore-ios-bundler-cache
+      - run: bundle config set --local deployment 'true' && (bundle check || bundle install --jobs=2 --retry=3)
+      - save_cache: *save-ios-bundler-cache
+      - run: az login --service-principal --tenant ${AZURE_SP_TENANT} -u ${AZURE_SP} -p ${AZURE_SP_PASSWORD}
+      - run: mkdir -pv ~/Library/MobileDevice/Provisioning\ Profiles/
+      - run: az storage blob download --account-name $GOODCITY_STORAGE -c ci-app-secrets -n browse-${ENVIRONMENT}.mobileprovision -f ~/Library/MobileDevice/Provisioning\ Profiles/browse-${ENVIRONMENT}.mobileprovision
+      - run: az storage blob download --account-name $GOODCITY_STORAGE -c ci-app-secrets -n AuthKey_${APPSTORE_CONNECT_API_KEY_ID}.p8 -f ~/code/fastlane/AuthKey_${APPSTORE_CONNECT_API_KEY_ID}.p8
+      - run: az storage blob download --account-name $GOODCITY_STORAGE -c ci-app-secrets -n hk.goodcity.${ENVIRONMENT}.p12 -f ~/code/fastlane/hk.goodcity.${ENVIRONMENT}.p12
+      - run: npm install -g cordova@10.0.0
+      - run: bundle exec fastlane ios prepare_certificates cert:hk.goodcity.${ENVIRONMENT}.p12
       - run:
-          name: Download Provisioning Profile
+          name: Build iOS app
           command: |
-              mkdir -pv ~/Library/MobileDevice/Provisioning\ Profiles/
-              yarn run azure-filestore download -d browse/$ENVIRONMENT -f $PROVISIONING_PROFILE
-              mv $PROVISIONING_PROFILE ~/Library/MobileDevice/Provisioning\ Profiles
-          working_directory: ~/code
-      - run:
-          name: Download AppStore API KEY file
-          command: |
-            APPSTORE_CONNECT_API_KEY_FILENAME="AuthKey_${APPSTORE_CONNECT_API_KEY_ID}.p8"
-            yarn run azure-filestore download -d ios -f $APPSTORE_CONNECT_API_KEY_FILENAME
-            mv $APPSTORE_CONNECT_API_KEY_FILENAME ~/code/fastlane
-      - run:
-          name: Download P12 certificate
-          command: |
-              yarn run azure-filestore download -f $CERTIFICATE
-              mv $CERTIFICATE ~/code/fastlane
-          working_directory: ~/code
-      - run:
-          name: Install CocoaPods
-          command: |
-            curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
-            pod setup
-      - run:
-          name: Install cordova-update-config globally
-          command: npm i -g cordova-update-config
-      - run:
-          name: Install cordova globally
-          command: npm i -g cordova@7.1.0
-      - run:
-          name: Create keychain and import p12 certificate
-          command: bundle exec fastlane ios prepare_certificates cert:$CERTIFICATE
-          working_directory: ~/code
-      - run:
-          name: iOS build
-          command: bundle exec rake ${ENVIRONMENT} ios app:build
+            npm install cordova-common
+            node rename_package.js
+            cordova platform add ios
+            UUID=`openssl smime -inform der -verify -noverify -in "/Users/distiller/Library/MobileDevice/Provisioning Profiles/browse-${ENVIRONMENT}.mobileprovision" | grep -A 1 UUID | sed "s@.*<string>\(.*\)</string>.*@\1@" | tail -n 1`
+            PACKAGE_TYPE=$(if [ "$ENVIRONMENT" == "production" ]; then echo app-store; else echo development; fi)
+            CODE_SIGN_IDENTITY=$(if [ "$ENVIRONMENT" == "production" ]; then echo 'iPhone Distribution'; else echo 'iPhone Developer'; fi)
+            cordova build ios --release --device --codeSignIdentity="${CODE_SIGN_IDENTITY}" --developmentTeam="6B8FS8W94M" \
+               --packageType="${PACKAGE_TYPE}" --automaticProvisioning=true  --buildFlag="IPHONEOS_DEPLOYMENT_TARGET=11.0" \
+               --provisioningProfile="${UUID}"
           working_directory: cordova
       - store_artifacts:
           path: cordova/platforms/ios/build/device
       - run:
           name: Release ios build
           command: bundle exec fastlane ios ${ENVIRONMENT}
-          working_directory: ~/code
-
 
 workflows:
-    version: 2
-    build_and_bundle:
-      jobs:
-        - checkout_code
-        - package_dependencies:
-            requires:
-              - checkout_code
-        # - test_cases:
-        #     requires:
-        #       - package_dependencies
-        # - upload-coverage:
-        #     requires:
-        #       - package_dependencies
-        #       - test_cases
-        #     filters:
-        #       branches:
-        #         only: /^(master|live)$/
-        - www_build:
-            requires:
-              - package_dependencies
-              # - test_cases
-            filters:
-              branches:
-                only: /^(master|live)$/
-        - www-deploy:
-            requires:
-              - www_build
-            filters:
-              branches:
-                only: /^(master|live)$/
-        - ember_cordova_build:
-            requires:
-              - package_dependencies
-            filters:
-              branches:
-                only: /^(master|live)$/
-        - android_build_and_deploy:
-            requires:
-              - ember_cordova_build
-            filters:
-              branches:
-                only: /^(master|live)$/
-        # - ios_build_and_deploy:
-        #     requires:
-        #       - package_dependencies
-        #     filters:
-        #       branches:
-        #         only: /^(master|live)$/
+  version: 2
+  build_and_bundle:
+    jobs:
+      - checkout_code
+      - package_dependencies:
+          requires:
+            - checkout_code
+      - test_cases:
+          requires:
+            - package_dependencies
+      - www_build:
+          requires:
+            - test_cases
+          filters:
+            branches:
+              only: /^(master|live)$/
+      - www-deploy:
+          requires:
+            - www_build
+          filters:
+            branches:
+              only: /^(master|live)$/
+      - ember_cordova_build:
+          requires:
+            - package_dependencies
+          filters:
+            branches:
+              only: /^(master|live)$/
+      - android_build_and_deploy:
+          requires:
+            - test_cases
+            - ember_cordova_build
+          filters:
+            branches:
+              only: /^(master|live)$/
+      - ios_build_and_deploy:
+          requires:
+            - test_cases
+            - ember_cordova_build
+          filters:
+            branches:
+              only: /^(master|live)$/
