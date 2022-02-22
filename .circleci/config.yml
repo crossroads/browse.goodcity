@@ -73,6 +73,8 @@ jobs:
 
   package_dependencies:
     <<: *defaults
+    docker:
+      - image: circleci/node:10.22 # currently need python2 for node-sass build
     steps:
       - restore_cache: *restore-repo-cache
       - restore_cache: *restore-yarn-cache
