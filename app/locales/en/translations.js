@@ -102,8 +102,8 @@ export default {
     filter_results: "Filter these results <span>&#x25be;</span>",
     browse_title: "Browse Goods",
     intro_text:
-      "Registered charities & social welfare organisations in Hongkong are welcome to place an order.",
-    faq: "Eligibility",
+      "If you represent a Hong Kong non-profit organisation you can browse using the categories below or search using the icon above and request the goods you need.",
+    faq: "Read more details about the process here.",
     item_unavailable: "Item is no longer available."
   },
 

@@ -97,8 +97,9 @@ export default {
     browse_title: "瀏覧貨品",
     all_goods: "所有物資",
     filter_results: "過濾這些結果 <span>&#x25be;</span>",
-    intro_text: "歡迎已在港註冊的慈善及社福團體下單",
-    faq: "資格",
+    intro_text:
+      "If you represent a Hong Kong non-profit organisation you can browse using the categories below or search using the icon above and request the goods you need.",
+    faq: "Read more details about the process here.",
     item_unavailable: "物品未能提供。"
   },
 
