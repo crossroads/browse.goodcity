@@ -2,6 +2,7 @@
 const pkgJson = require("../package.json");
 
 module.exports = function(environment) {
+  environment = process.env.ENVIRONMENT || environment || "development";
   var ENV = {
     modulePrefix: "browse",
     environment: environment,
