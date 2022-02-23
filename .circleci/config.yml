@@ -111,20 +111,16 @@ jobs:
 
   www_build:
     <<: *defaults
-    environment:
-      EMBER_CLI_CORDOVA: "0"
     steps:
       - restore_cache: *restore-repo-cache
       - restore_cache: *restore-yarn-cache
       - restore_cache: *restore-bower-cache
       - run:
-          name: Setup Environment variables
-          command: echo 'export STAGING=$(if [ "$CIRCLE_BRANCH" == "live" ]; then echo false; else echo true; fi)' >> $BASH_ENV
-      - run:
+          name: Ember build
           command: |
-            npm rebuild node-sass
-            echo "Building for staging (true/false): $STAGING"
-            yarn run ember build --environment=production
+            ENVIRONMENT=$(if [ "$CIRCLE_BRANCH" == "live" ]; then echo "production"; else echo "staging"; fi)
+            APP_SHA=$(echo $CIRCLE_SHA1 | cut -c1-7)
+            EMBER_CLI_CORDOVA=0 ENVIRONMENT=${ENVIRONMENT} APP_SHA=${APP_SHA} yarn run ember build --environment=production
       - run: mv dist/ dist-www
       - persist_to_workspace:
           root: .
