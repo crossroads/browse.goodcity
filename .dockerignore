@@ -1,0 +1,14 @@
+.circleci/
+.github/
+bower_components/
+node_modules/
+tmp/*
+vendor/
+.byebug_history
+.codeclimate.yml
+.editorconfig
+.gitignore
+.hgtags
+.travis.yml
+Dockerfile
+README.md
