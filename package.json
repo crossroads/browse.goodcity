@@ -15,7 +15,7 @@
   },
   "scripts": {
     "start": "EMBER_CLI_CORDOVA=0 ember server --port 4202 --live-reload-port 35731",
-    "start:staging": "EMBER_CLI_CORDOVA=0 STAGING=true ember server --environment production --port 4202 --live-reload-port 35731",
+    "start:staging": "EMBER_CLI_CORDOVA=0 ENVIRONMENT=staging ember server --environment production --port 4202 --live-reload-port 35731",
     "build": "EMBER_CLI_CORDOVA=0 ember build",
     "test": "EMBER_CLI_CORDOVA=0 ember test --server",
     "test:ci": "EMBER_CLI_CORDOVA=0 ember-pretty-test"

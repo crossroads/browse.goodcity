@@ -94,18 +94,11 @@ module.exports = function(environment) {
   };
 
   if (environment === "development") {
-    // ENV.APP.LOG_RESOLVER = true;
-    // ENV.APP.LOG_ACTIVE_GENERATION = true;
-    // ENV.APP.LOG_TRANSITIONS = true;
-    // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
-    // ENV.APP.LOG_VIEW_LOOKUPS = true;
-
-    // RESTAdapter Settings
+    ENV.APP.ORIGIN = "localhost";
     ENV.APP.SOCKETIO_WEBSERVICE_URL = "http://localhost:1337/goodcity";
     ENV.APP.API_HOST_URL = "http://localhost:3000";
     ENV.APP.STOCK_APP_HOST_URL = "http://localhost:4203";
     ENV.APP.STOCK_ANDROID_APP_HOST_URL = "stock-staging.goodcity.hk"; //Added for localhost replacement
-
     ENV.contentSecurityPolicy["connect-src"] = [
       "http://localhost:4202",
       "http://localhost:3000",
@@ -136,6 +129,8 @@ module.exports = function(environment) {
   }
 
   if (environment === "production") {
+    if (!process.env.ENVIRONMENT)
+      throw "Please pass an appropriate ENVIRONMENT=(staging|production) param.";
     ENV.APP.API_HOST_URL = "https://api.goodcity.hk";
     ENV.APP.ORIGIN = "https://charities.goodcity.hk";
     ENV.APP.SOCKETIO_WEBSERVICE_URL = "https://socket.goodcity.hk:81/goodcity";
@@ -154,29 +149,28 @@ module.exports = function(environment) {
     ENV.googleAnalytics = {
       webPropertyId: "UA-62978462-6"
     };
+  }
 
-    if ((process.env.staging || process.env.STAGING) === "true") {
-      ENV.staging = true;
-      ENV.APP.ORIGIN = "charities-staging.goodcity.hk";
-      ENV.APP.API_HOST_URL = "https://api-staging.goodcity.hk";
-      ENV.APP.SOCKETIO_WEBSERVICE_URL =
-        "https://socket-staging.goodcity.hk/goodcity";
-      ENV.APP.STOCK_APP_HOST_URL = "https://stock-staging.goodcity.hk";
-      ENV.APP.STOCK_ANDROID_APP_HOST_URL = "stock-staging.goodcity.hk";
+  if (environment === "staging") {
+    ENV.APP.API_HOST_URL = "https://api-staging.goodcity.hk";
+    ENV.APP.ORIGIN = "charities-staging.goodcity.hk";
+    ENV.APP.SOCKETIO_WEBSERVICE_URL =
+      "https://socket-staging.goodcity.hk/goodcity";
+    ENV.APP.STOCK_APP_HOST_URL = "https://stock-staging.goodcity.hk";
+    ENV.APP.STOCK_ANDROID_APP_HOST_URL = "stock-staging.goodcity.hk";
 
-      ENV.contentSecurityPolicy["connect-src"] = [
-        "https://app-staging.goodcity.hk",
-        "https://api-staging.goodcity.hk",
-        "https://socket-staging.goodcity.hk",
-        "ws://socket-staging.goodcity.hk",
-        "wss://socket-staging.goodcity.hk",
-        "https://api.cloudinary.com"
-      ].join(" ");
+    ENV.contentSecurityPolicy["connect-src"] = [
+      "https://app-staging.goodcity.hk",
+      "https://api-staging.goodcity.hk",
+      "https://socket-staging.goodcity.hk",
+      "ws://socket-staging.goodcity.hk",
+      "wss://socket-staging.goodcity.hk",
+      "https://api.cloudinary.com"
+    ].join(" ");
 
-      ENV.googleAnalytics = {
-        webPropertyId: "UA-62978462-7"
-      };
-    }
+    ENV.googleAnalytics = {
+      webPropertyId: "UA-62978462-7"
+    };
   }
 
   ENV.APP.SERVER_PATH = ENV.APP.API_HOST_URL + "/" + ENV.APP.NAMESPACE;
