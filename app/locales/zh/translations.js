@@ -135,7 +135,8 @@ export default {
     title: "關於",
     introduction: {
       opening:
-        "好人好市令社福機構申領物資變得更容易。你需要在首次登記時，揀選你所屬的機構並進行登記。如你未能從清單上找到你所屬的機構，請<a href='mailto:contact@goodcity.hk'>聯絡我們</a>。符合資格的機構包括：",
+        "好人好市令社福機構申領物資變得更容易。你需要在首次登記時，揀選你所屬的機構並進行登記。如你未能從清單上找到你所屬的機構，請<a href='mailto:contact@goodcity.hk'>聯絡我們</a>。",
+      eligible_orgs: "符合資格的機構包括：",
       charities:
         "獲豁免繳稅的慈善團體 <a href='https://www.ird.gov.hk/chi/tax/ach_index.htm'>(詳列見此)</a>",
       social_welfare:
@@ -143,10 +144,18 @@ export default {
       educational:
         "教學團體及機構 <a href='https://applications.edb.gov.hk/schoolsearch/schoolsearch.aspx?langno=2'>(詳列見此)</a>",
       other_groups: "其他團體及機構將按個別服務性質處理及審批",
-      two_ways: "使用我們的服務有兩個方法．．．"
+      ways: "There are three ways to use our service...",
+      browse_online: "Browse / Order online:",
+      browse_online_desc: "Order online from our Tuen Mun facility",
+      book: "Book to visit our center:",
+      book_desc: "Select goods in person at our Tuen Mun facility",
+      direct: "Direct from donors:",
+      direct_desc: "Respond to offers located around Hong Kong",
+      faq: "See our frequently asked questions"
     },
     user_guide_title: "使用指南",
-    tap_button: "立即開始",
+    tap_button: "Tap the button below to get started or",
+    see_our_faqs: "see our frequently asked questions",
     coming_soon: "即將面世",
     transport_options: "運輸選項",
     collection_transport_description:
@@ -157,8 +166,8 @@ export default {
       "請注意，貨車租用費需由受惠人或受惠機構承擔。除特殊情況外，我們一般不能提供免費運送物資服務。",
 
     order_goods: {
-      title: "隨時瀏覽選取優質物資",
-      action: "瀏覽物資",
+      title: "Order online",
+      action: "Browse online",
       step_1: {
         desc: "於網上瀏覽一系列可供選取物資"
       },
@@ -181,7 +190,7 @@ export default {
     },
 
     visit: {
-      title: "親臨國際十字路會",
+      title: "",
       action: "預約時間",
       new_appointment: "新的預約",
       guide_intro: `
@@ -193,8 +202,25 @@ export default {
       guide_step_4: "我們同事將會致電確認您的預約",
       onsite_guide_intro: "當您(或您的服務使用者)於預約時間到達本會:",
       onsite_guide_step_1: "我們將會協助您於存貨中選擇適合您的物資",
-      onsite_guide_step_2: "如果您要求了租用貨車，我們會幫您安排車輛。",
+      onsite_guide_step_2:
+        "如果您要求了租用貨車，我們會幫您安排車輛。Note: you (or the client) pays for the truck",
       onsite_guide_step_3: "載貨然後將物資運送到收貨地點"
+    },
+
+    direct: {
+      title: "Direct from donors",
+      intro:
+        "We can put your charity in contact with the donor to receive goods directly from them.",
+      step_1: "View the offer you are interested in.",
+      step_2: "Click 'Respond to this Offer'",
+      step_3:
+        "Register (or log in) using your cell phone number (new users will be asked to provide some basic registration details after login.)",
+      step_4: "Describe your interest in the goods ",
+      step_4a:
+        "Use the chat tool at the bottom of the screen to tell our staff about your interest in the goods.",
+      step_4b:
+        "Our staff will coordinate with the donor. If the donor wishes to work with you we will put you in touch with them directly.",
+      action: "View offers"
     }
   },
 
