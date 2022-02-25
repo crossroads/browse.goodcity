@@ -9,6 +9,32 @@
   </nav>
 
   <section class="main-section category-items-list">
+    <div class="row">
+      {{#if offers.length}}
+      <div class="info_box">
+        {{t 'offers.available_offers'}}
+        {{#link-to 'faq'}}{{t 'offers.available_offers_read_more'}}{{/link-to}}
+      </div>
+      {{else}}
+      <div class="info_box">
+        {{t 'offers.no_offers_available'}}
+        <ul>
+          <li>{{#link-to 'browse'}}{{t 'offers.browse_online'}}{{/link-to}}{{t 'offers.or'}}</li>
+          <li>
+            <div class="inline-block">
+              {{#book-appointment as |appointment|}}
+                <a {{action appointment.clickItem}}>{{t "offers.book_to_visit"}}</a>
+              {{/book-appointment}}
+            </div>
+          </li>
+        </ul>
+        <div>
+          {{t 'offers.view_my_offers'}}
+          {{#link-to 'my_orders'}}{{t 'offers.go_to_dashboard'}}{{/link-to}}
+        </div>
+      </div>
+      {{/if}}
+    </div>
     <div class="row sort">
       <div class="small-2 medium-1 medium-offset-7 small-offset-5 columns large-1 large-offset-9 title" align="right">
         {{t "category.sort.title"}}
@@ -27,3 +53,6 @@
     </ul>
   </section>
 </div>
+
+
+{{#link-to 'faq'}}<p>{{ t "about.introduction.faq" }}</p>{{/link-to}}

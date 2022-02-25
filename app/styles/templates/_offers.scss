@@ -19,6 +19,20 @@
     }
   }
 
+  .info_box {
+    margin-bottom: 10px;
+    padding: 20px;
+    background-color: #334f75;
+    color: white;
+    a {
+      text-decoration: underline;
+    }
+    ul {
+      margin-left: 1.1rem;
+      font-size: 100%;
+    }
+
+  }
 
   .no_image{
     line-height: 1.5rem;

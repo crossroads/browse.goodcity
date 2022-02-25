@@ -97,7 +97,7 @@ export default {
   },
 
   browse: {
-    title: "Goodcity for charities",
+    title: "GoodCity.HK for Charities",
     all_goods: "All Goods",
     filter_results: "Filter these results <span>&#x25be;</span>",
     browse_title: "Browse Goods",
@@ -232,6 +232,19 @@ export default {
         "Our staff will coordinate with the donor. If the donor wishes to work with you we will put you in touch with them directly.",
       action: "View offers"
     }
+  },
+
+  offers: {
+    no_offers_available:
+      "There are currently no offers available directly from donors. You may wish to access the stock in our Tuen Mun Center: either",
+    browse_online: "browse stock online",
+    or: ", or",
+    book_to_visit: "book to visit.",
+    view_my_offers: "To view offers you have responded to in the past,",
+    go_to_dashboard: "go to your dashboard.",
+    available_offers:
+      "Offer(s) below are available directly from donors located around Hong Kong. Non-profit organizations can express their interest by responding to an offer.",
+    available_offers_read_more: "Read more details about the process here."
   },
 
   category: {

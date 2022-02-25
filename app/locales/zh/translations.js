@@ -224,6 +224,19 @@ export default {
     }
   },
 
+  offers: {
+    no_offers_available:
+      "There are currently no offers available directly from donors. You may wish to access the stock in our Tuen Mun Center: either",
+    browse_online: "browse stock online",
+    or: ", or",
+    book_to_visit: "book to visit.",
+    view_my_offers: "To view offers you have responded to in the past,",
+    go_to_dashboard: "go to your dashboard.",
+    available_offers:
+      "Offer(s) below are available directly from donors located around Hong Kong. Non-profit organizations can express their interest by responding to an offer.",
+    available_offers_read_more: "Read more details about the process here."
+  },
+
   category: {
     filter: "過濾項",
     all: "所有",
