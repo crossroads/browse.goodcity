@@ -3,7 +3,7 @@ require_relative "./release_utils"
 
 update_fastlane
 
-default_platform :ios
+default_platform :android
 
 class FastlaneCore::Shell
   def error(message)
@@ -49,7 +49,7 @@ platform :ios do
       password: ENV['KEYCHAIN_PWD']
     )
     import_certificate(
-      certificate_path: "fastlane/#{options[:cert]}",
+      certificate_path: "fastlane/hk.goodcity.#{ENV['ENVIRONMENT']}.p12",
       certificate_password: ENV['CERTIFICATE_PASSWORD'],
       keychain_name: "default_keychain",
       keychain_password: ENV['KEYCHAIN_PWD']
@@ -61,7 +61,7 @@ platform :ios do
   desc "Generate staging build (just upload to TestFairy)"
   lane :staging do
     raise_if_no_env_var(["FL_TESTFAIRY_API_KEY", "TESTFAIRY_IPA_PATH"])
-    testfairy
+    testfairy(auto_update: 'on')
   end
 
   desc "Upload to the AppStore"
@@ -77,8 +77,9 @@ platform :ios do
       skip_binary_upload: true,
       skip_screenshots: true,
       app_version: version_number,
-      api_key: APPSTORE_API_KEY,
       copyright: COPYRIGHT,
+      api_key: APPSTORE_API_KEY,
+      precheck_include_in_app_purchases:  false,
       force: true # to prevent fastlane from crashing waiting for user confirmation
     )
   end
@@ -98,15 +99,14 @@ platform :android do
 
   before_all do
     ENV["SUPPLY_APK"] = ENV["TESTFAIRY_IPA_PATH"] = Dir["#{ENV["APK_FILE_PATH"]}"].first
-    raise_if_no_env_var("GOOGLE_PLAY_KEY_FILE")
-    ENV["SUPPLY_JSON_KEY"] = File.join(Dir.pwd, ENV["GOOGLE_PLAY_KEY_FILE"])
+    ENV["SUPPLY_JSON_KEY"] = File.join(Dir.pwd, "google-play-key.json")
     raise "Google Play private key file not found! (#{ENV["SUPPLY_JSON_KEY"]})" unless File.exist?(ENV["SUPPLY_JSON_KEY"])
   end
 
   desc "Generate staging build (just upload to TestFairy)"
   lane :staging do
     raise_if_no_env_var(["FL_TESTFAIRY_API_KEY", "TESTFAIRY_IPA_PATH"])
-    testfairy
+    testfairy(auto_update: 'on')
   end
 
   desc "Upload to GooglePlay beta track"
