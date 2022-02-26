@@ -1,10 +1,10 @@
-<div class="header">
+<div>
   <span class="location">{{locationName}}</span>
   <span class="offers-time-ago">
     {{t "shareableOffers.offered"}}
     {{display-datetime validDate format="preset:timeago"}}
   </span>
-  <div class="right underline-link view_offer">
+  <div class="right view_offer">
     {{#if session.isLoggedIn}}
       {{#link-to "offers.messages"record.id (query-params uid=record.public_uid ) }}
         {{t "shareableOffers.respond_offer"}}
