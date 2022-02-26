@@ -17,14 +17,16 @@
         <div class="small-12 large-11 columns">
           <div class="mobile center_align">
 
+            {{#if bookAppointment}}
             <div class="row">
-              <div class="small-12 columns">
+              <div class="small-12 columns info_box">
                 <p>{{t "login.explanation"}}</p>
                 {{#link-to "about"}}
                   <p>{{t "login.explanation_read_more_link"}}</p>
                 {{/link-to}}
               </div>
             </div>
+            {{/if}}
 
             <div class="row">
               <div class="small-12 columns">
