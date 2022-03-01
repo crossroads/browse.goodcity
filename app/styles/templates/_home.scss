@@ -65,7 +65,7 @@
   }
   .cart-icon{
     text-align: left;
-    margin-top: -2rem;
+    margin-top: -1.1rem;
     @media #{$small-only} {
       display: none;
     }
@@ -74,7 +74,7 @@
     }
 
     @media #{$large-only} {
-      margin-top: -2rem;
+      margin-top: -2.5rem;
     }
 
     .fa {

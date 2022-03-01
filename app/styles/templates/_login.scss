@@ -10,6 +10,20 @@
   font-size: .7rem;
 }
 
+.warning_empty.login {
+  width: 100% !important;
+  margin-left: .28rem !important;
+
+  @media #{$small-only} {
+    margin-left: 0rem !important;
+  }
+
+  @media #{$medium-only} {
+    margin-left: 0 !important;
+    width: 100% !important;
+  }
+}
+
 .center_align_placeholder::placeholder {
   text-align: center;
 }
@@ -26,20 +40,6 @@ input:-webkit-autofill {
   background: #002352;
   color: white !important;
   border: 1px solid;
-}
-
-.warning_empty.login {
-  width: 100% !important;
-  margin-left: .28rem !important;
-
-  @media #{$small-only} {
-    margin-left: 0rem !important;
-  }
-
-  @media #{$medium-only} {
-    margin-left: 0 !important;
-    width: 100% !important;
-  }
 }
 
 .login-page {
@@ -84,87 +84,6 @@ input:-webkit-autofill {
     @media #{$small-only} {
       margin-top: 1rem;
     }
-  }
-}
-
-.purpose_section {
-  margin: 1rem 0;
-
-  @media #{$small-only} {
-    font-size: 0.8rem;
-  }
-
-  .title {
-    color: white;
-    margin-bottom: 0.5rem;
-  }
-
-  .checkbox {
-    padding: 0.5rem 0;
-    font-size: 0.75rem;
-
-    label {
-      margin-left: 0;
-
-      @media #{$small-only} {
-        font-size: 0.75rem;
-      }
-    }
-  }
-
-  textarea {
-    margin-top: 1rem;
-    width: 97%;
-    padding: 0.3rem 0.5rem;
-    border: 1px solid $tabbar-menu-icon-color;
-    padding-right: 1.5rem;
-
-    @media #{$small-only} {
-      font-size: 0.8rem;
-    }
-  }
-
-  .remove-text {
-    position: absolute;
-    right: 4%;
-    font-size: 1rem;
-    padding: 0.4rem 0.3rem;
-    cursor: pointer;
-    color: black;
-  }
-}
-
-.order_button {
-  width: 99% !important;
-
-  @media #{$small-only} {
-    font-size: 0.8rem
-  }
-
-  button {
-    @media #{$small-only} {
-      font-size: 0.8rem !important;
-    }
-  }
-
-  a {
-    line-height: 2.5rem;
-  }
-}
-
-.error-box {
-  padding: .3rem .3rem .3rem 1rem;
-  margin: 1rem 0;
-  background: #fddbdc !important;
-  color: black;
-  width: 90%;
-
-  @media #{$small-only} {
-    margin: .5rem 0;
-  }
-
-  i {
-    color: red;
   }
 }
 
