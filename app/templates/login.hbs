@@ -1,5 +1,5 @@
-<div class="row checkout_pages login_page">
-  <div class="small-12 medium-9 large-6 columns">
+<div class="row login_page">
+  <div class="small-12 medium-12 large-12 columns">
     <section class="main-section new-user-section ui login_page">
 
       <nav class="tab-bar">
@@ -14,12 +14,13 @@
 
       {{#validatable-form onSubmit=(action 'resendPin') as |form|}}
       <div class="row">
-        <div class="small-12 large-11 columns">
-          <div class="mobile center_align">
+        <div class="medium-2 large-3 columns">&nbsp;</div>
+        <div class="small-12 medium-8 large-6 columns">
+          <div class="mobile">
 
             {{#if bookAppointment}}
             <div class="row">
-              <div class="small-12 columns info_box">
+              <div class="info_box">
                 <p>{{t "login.explanation"}}</p>
                 {{#link-to "about"}}
                   <p>{{t "login.explanation_read_more_link"}}</p>
@@ -66,6 +67,7 @@
             </div>
           </div>
         </div>
+        <div class="medium-2 large-3 columns">&nbsp;</div>
       </div>
       {{/validatable-form}}
 
