@@ -86,7 +86,7 @@
     </li>
     {{else}}
     <li>
-      {{#link-to "login" class="menu-7 login"}}
+      {{#link-to "login" (query-params bookAppointment="false") class="menu-7 login"}}
       <i class="fa">{{fa-icon 'sign-in-alt'}}</i>
       <div>{{t "application.sidebar.login"}}</div>
       {{/link-to}}
