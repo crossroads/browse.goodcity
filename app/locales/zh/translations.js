@@ -98,8 +98,8 @@ export default {
     all_goods: "所有物資",
     filter_results: "過濾這些結果 <span>&#x25be;</span>",
     intro_text:
-      "If you represent a Hong Kong non-profit organisation you can browse using the categories below or search using the icon above and request the goods you need.",
-    faq: "Read more details about the process here.",
+      "如果你是香港非牟利機構的職員，你可以瀏覽下面的類別或使用上面的圖示搜索，並申請你需要的物品。",
+    faq: "請在此處閱讀有關申請過程及更多詳細資訊。",
     item_unavailable: "物品未能提供。"
   },
 
@@ -144,18 +144,18 @@ export default {
       educational:
         "教學團體及機構 <a href='https://applications.edb.gov.hk/schoolsearch/schoolsearch.aspx?langno=2'>(詳列見此)</a>",
       other_groups: "其他團體及機構將按個別服務性質處理及審批",
-      ways: "There are three ways to use our service...",
-      browse_online: "Browse / Order online:",
-      browse_online_desc: "Order online from our Tuen Mun facility",
-      book: "Book to visit our center:",
-      book_desc: "Select goods in person at our Tuen Mun facility",
-      direct: "Direct from donors:",
-      direct_desc: "Respond to offers located around Hong Kong",
-      faq: "See our frequently asked questions"
+      ways: "我們的服務有三種模式...",
+      browse_online: "網上瀏覽/申領：",
+      browse_online_desc: "網上訂單會由我們屯門會址送出",
+      book: "預約到訪我們的中心：",
+      book_desc: "親身在我們屯門會址選取物資",
+      direct: "直接從捐贈者接收：",
+      direct_desc: "瀏覽及回應在香港各區的捐贈",
+      faq: "查看我們的常見問題"
     },
     user_guide_title: "使用指南",
-    tap_button: "Tap the button below to get started or",
-    see_our_faqs: "see our frequently asked questions",
+    tap_button: "點擊下面的按鈕開始，或",
+    see_our_faqs: "查看我們的常見問題",
     coming_soon: "即將面世",
     transport_options: "運輸選項",
     collection_transport_description:
@@ -166,8 +166,8 @@ export default {
       "請注意，貨車租用費需由受惠人或受惠機構承擔。除特殊情況外，我們一般不能提供免費運送物資服務。",
 
     order_goods: {
-      title: "Order online",
-      action: "Browse online",
+      title: "網上申領",
+      action: "網上瀏覽",
       step_1: {
         desc: "於網上瀏覽一系列可供選取物資"
       },
@@ -203,24 +203,22 @@ export default {
       onsite_guide_intro: "當您(或您的服務使用者)於預約時間到達本會:",
       onsite_guide_step_1: "我們將會協助您於存貨中選擇適合您的物資",
       onsite_guide_step_2:
-        "如果您要求了租用貨車，我們會幫您安排車輛。Note: you (or the client) pays for the truck",
+        "如果您要求了租用貨車，我們會幫您安排車輛。注意: 你 (或你的服務使用者) 需支付運送費用",
       onsite_guide_step_3: "載貨然後將物資運送到收貨地點"
     },
 
     direct: {
-      title: "Direct from donors",
-      intro:
-        "We can put your charity in contact with the donor to receive goods directly from them.",
-      step_1: "View the offer you are interested in.",
-      step_2: "Click 'Respond to this Offer'",
+      title: "直接從捐贈者接收",
+      intro: "我們可以讓你的慈善機構與捐贈者聯繫，直接從他們那裏接收物品。",
+      step_1: "查看您感興趣的捐贈。",
+      step_2: "點擊“回應此捐贈”",
       step_3:
-        "Register (or log in) using your cell phone number (new users will be asked to provide some basic registration details after login.)",
-      step_4: "Describe your interest in the goods ",
-      step_4a:
-        "Use the chat tool at the bottom of the screen to tell our staff about your interest in the goods.",
+        "使用您的手機號碼註冊（或登錄）（新用戶登錄後將被要求提供一些基本的資料作註冊。）",
+      step_4: "描述你對這些物品感興趣的原因",
+      step_4a: "使用螢幕底部的聊天工具告訴我們的工作人員您感興趣的捐贈物品。",
       step_4b:
-        "Our staff will coordinate with the donor. If the donor wishes to work with you we will put you in touch with them directly.",
-      action: "View offers"
+        "我們的工作人員將與捐贈者協調。如果捐贈者希望與你聯絡，我們會將讓你們聯繫起來。",
+      action: "查看捐贈"
     }
   },
 
@@ -268,14 +266,13 @@ export default {
     offer_instruction: "捐贈教學",
     offered: "已捐贈",
     view_offer: "查看捐贈",
-    chat_message_for_expired_offers:
-      "This offer is no longer accepting requests. Please check other available offers.",
+    chat_message_for_expired_offers: "此捐贈不再接受申請。請查看其他捐贈。",
     chat_message_for_offers:
-      "Please use the chat below to communicate with Goodcity's staff about your interest in this offer.",
+      "請使用下面的聊天工具與Goodcity的工作人員溝通，以表示您對本捐贈的興趣。",
     respond_offer: "回覆此捐贈",
-    disabled_chat: "Chat has now been disabled.",
-    show_offer_details: "Show offer details",
-    hide_offer_details: "Hide offer details"
+    disabled_chat: "聊天工具已被停用。",
+    show_offer_details: "顯示捐贈詳情",
+    hide_offer_details: "隱藏捐贈詳情"
   },
 
   page: {
@@ -296,8 +293,8 @@ export default {
     policy: "隱私政策",
     mobile_email_warning: "請提供正確的電郵或香港手機號碼",
     explanation:
-      "If you represent a Hong Kong non-profit or social welfare organisation you can book an appointment for yourself or your client to select goods from our Tuen Mun distribution center.",
-    explanation_read_more_link: "Read more details about the process here."
+      "如果你是香港非牟利機構或社會福利組織的員工，你可以預約（可由員工親身或由你的服務使用者）在我們的屯門會址揀選物資。",
+    explanation_read_more_link: "請在此處閱讀有關申請過程及更多詳細資訊。"
   },
 
   search_goods: {
