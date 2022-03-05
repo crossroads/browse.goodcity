@@ -63,6 +63,7 @@ export default Controller.extend(cancelOrder, {
 
     return _.chain(available_dates)
       .get("appointment_calendar_dates", [])
+      .filter(({ slots = [] }) => slots.length > 0)
       .slice(this.get("bookingMargin"))
       .transform((results, entry) => {
         const { date, slots } = entry;
