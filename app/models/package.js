@@ -13,6 +13,21 @@ export default Model.extend(cloudinaryImage, {
   dispatchedQuantity: attr("number"),
   availableQuantity: attr("number"),
   quantity: alias("availableQuantity"), // Temporary fallback, do not use
+  maxOrderQuantity: attr("number"),
+
+  computedMaxOrderQuantity: computed(
+    "maxOrderQuantity",
+    "availableQuantity",
+    function() {
+      const available = this.get("availableQuantity");
+      const max = this.get("maxOrderQuantity");
+
+      if (typeof max === "number" && max >= 0 && max < available) {
+        return max;
+      }
+      return available;
+    }
+  ),
 
   length: attr("number"),
   width: attr("number"),

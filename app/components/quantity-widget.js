@@ -1,4 +1,5 @@
-import { computed } from "@ember/object";
+import { computed, observer } from "@ember/object";
+import { debounce } from "@ember/runloop";
 import Component from "@ember/component";
 
 export default Component.extend({
@@ -8,6 +9,14 @@ export default Component.extend({
       : 1;
   }),
 
+  onValueChange: observer(
+    "value",
+    "package.computedMaxOrderQuantity",
+    function() {
+      debounce(this, this.enforceValueMax, 1);
+    }
+  ),
+
   performAction(value) {
     if (this.get("type") == "request") {
       this.requestAction(value);
@@ -16,9 +25,22 @@ export default Component.extend({
     }
   },
 
+  enforceValueMax() {
+    const val = Number(this.get("value"));
+    const max = this.get("package.computedMaxOrderQuantity");
+    if (val > max) {
+      this.set("value", max);
+      this.notifyPropertyChange("value");
+    }
+  },
+
   validValueCheck(pkg) {
     let quantity = +this.get("value");
-    return quantity < 1 || quantity > pkg.get("availableQuantity") || !quantity;
+    return (
+      quantity < 1 ||
+      quantity > pkg.get("computedMaxOrderQuantity") ||
+      !quantity
+    );
   },
 
   setUpdatedValue(value, isValueValid) {

@@ -16,21 +16,27 @@
     <div class="row">
       <div class="columns intro_text">
         <p>{{t "about.introduction.opening" }}</p>
-        <ul>
+        <p>{{t "about.introduction.eligible_orgs" }}</p>
+        <ul class="small light">
           <li>{{ t "about.introduction.charities" }}</li>
           <li>{{ t "about.introduction.social_welfare" }}</li>
           <li>{{ t "about.introduction.educational" }}</li>
           <li>{{ t "about.introduction.other_groups" }}</li>
         </ul>
-        <p>{{ t "about.introduction.two_ways" }}</p>
+        <p>{{ t "about.introduction.ways" }}</p>
+        <ul class="small light fa-bullets">
+          <li><i class="fa">{{fa-icon 'shopping-cart'}}</i><b>{{ t "about.introduction.browse_online" }}</b> {{ t "about.introduction.browse_online_desc" }}</li>
+          <li><i class="fa">{{fa-icon 'calendar-alt'}}</i><b>{{ t "about.introduction.book" }}</b> {{ t "about.introduction.book_desc" }}</li>
+          <li><i class="fa">{{fa-icon 'hand-paper'}}</i><b>{{ t "about.introduction.direct" }}</b> {{ t "about.introduction.direct_desc" }}</li>
+        </ul>
+        {{#link-to 'faq'}}<p>{{ t "about.introduction.faq" }}</p>{{/link-to}}
       </div>
     </div>
 
-
     <div class="row">
-      <!-- How to browse -->
-      <div class="columns large-6">
-        <div class="section_text small">
+      <!-- Order online -->
+      <div class="small-12 columns">
+        <div class="section_text">
           <div class="section_subtitle">{{ t "about.order_goods.title" }}</div>
 
           {{#if onlineOrderWarning}}
@@ -43,29 +49,41 @@
             </div>
           {{/if}}
 
-          <div class="step"> 1) {{ t "about.order_goods.step_1.desc" }} </div>
-          <div class="step"> 2) {{ t "about.order_goods.step_2.desc" }} </div>
-          <div class="step">
-            <div> 3) {{ t "about.order_goods.step_3.desc" }} </div>
-            {{#each (range 1 4) as |num|}}
-            <div class="bullet"> - {{ t (concat "about.order_goods.step_3.bullet_" num )}} </div>
-            {{/each}}
-          </div>
-          <div class="step">
-            <div> 4) {{ t "about.order_goods.step_4.desc" }} </div>
-            {{#each (range 1 3) as |num|}}
-            <div class="bullet"> - {{ t (concat "about.order_goods.step_4.bullet_" num )}} </div>
-            {{/each}}
-          </div>
+          <ol class="small light">
+            <li>{{ t "about.order_goods.step_1.desc" }}</li>
+            <li>{{ t "about.order_goods.step_2.desc" }}</li>
+            <li>
+              {{ t "about.order_goods.step_3.desc" }}
+              <ul class="small">
+                <li>{{ t "about.order_goods.step_3.bullet_1"}}</li>
+                <li>{{ t "about.order_goods.step_3.bullet_2"}}</li>
+                <li>{{ t "about.order_goods.step_3.bullet_3"}}</li>
+                <li>{{ t "about.order_goods.step_3.bullet_4"}}</li>
+              </ul>
+            </li>
+            <li>
+              <div>{{ t "about.order_goods.step_4.desc" }}</div>
+              <ul class="small">
+                <li>{{ t "about.order_goods.step_4.bullet_1"}}</li>
+                <li>{{ t "about.order_goods.step_4.bullet_2"}}</li>
+                <li>{{ t "about.order_goods.step_4.bullet_3"}}</li>
+              </ul>
+            </li>
+          </ol>
         </div>
-        <div class="section_text small">
+
+        <div class="section_text">
           <div>{{ t "about.transport_options" }} </div>
-          <div class="step transport_option">a) {{ t "about.collection_transport_description" }} </div>
-          <div class="step transport_option">b) {{ t "about.van_transport_description" }} <br> {{ t
-                "about.van_transport_note" }} </div>
+          <ul class="small light list-alpha">
+            <li>{{ t "about.collection_transport_description" }}</li>
+            <li>{{ t "about.van_transport_description" }} <strong>{{ t "about.van_transport_note" }}</strong></li>
+          </ul>
         </div>
+
         <div>
-          <div class="small">{{ t "about.tap_button" }}</div>
+          <div class="small">
+            {{ t "about.tap_button" }} {{#link-to "faq"}}{{ t "about.see_our_faqs" }}{{/link-to}}
+          </div>
           {{#link-to "browse"}}
           <div class="button small action">
             <i class="fa">{{fa-icon 'shopping-cart'}}</i> {{ t "about.order_goods.action" }}
@@ -74,9 +92,9 @@
         </div>
       </div>
 
-      <!-- How to visit -->
-      <div class="columns large-6">
-        <div class="section_text small">
+      <!-- Visit our center -->
+      <div class="small-12 columns">
+        <div class="section_text">
           <div class="section_subtitle"> {{ t "about.visit.title" }} </div>
 
           {{#if appointmentWarning}}
@@ -89,24 +107,67 @@
             </div>
           {{/if}}
 
-          <div class="step light"> {{ t "about.visit.guide_intro" }} </div>
-          <div class="step light">
-            {{#each (range 1 4) as |num|}}
-            <div> {{ num }}) {{ t (concat "about.visit.guide_step_" num )}} </div>
-            {{/each}}
+          <div>
+            <p class="small light">{{ t "about.visit.guide_intro" }}</p>
           </div>
-          <div class="step light"> {{ t "about.visit.onsite_guide_intro" }} </div>
-          <div class="step light">
-            {{#each (range 1 3) as |num|}}
-            <div> {{ num }}) {{ t (concat "about.visit.onsite_guide_step_" num )}} </div>
-            {{/each}}
+          <div>
+            <ol class="small light">
+              <li>{{ t "about.visit.guide_step_1" }}</li>
+              <li>{{ t "about.visit.guide_step_2" }}</li>
+              <li>{{ t "about.visit.guide_step_3" }}</li>
+              <li>{{ t "about.visit.guide_step_3" }}</li>
+            </ol>
+          </div>
+          <div>
+            <p class="small light">{{ t "about.visit.onsite_guide_intro" }}</p>
+          </div>
+          <div>
+            <ol class="small light">
+              <li>{{ t "about.visit.onsite_guide_step_1" }}</li>
+              <li>{{ t "about.visit.onsite_guide_step_2" }}</li>
+              <li>{{ t "about.visit.onsite_guide_step_3" }}</li>
+            </ol>
           </div>
         </div>
         <div>
-          <div class="small">{{ t "about.tap_button" }}</div>
+          <div class="small">
+            {{ t "about.tap_button" }} {{#link-to "faq"}}{{ t "about.see_our_faqs" }}{{/link-to}}
+          </div>
           {{book-appointment prevPath="about"}}
         </div>
       </div>
+
+      <!-- Direct from donors -->
+      <div class="small-12 columns">
+        <div class="section_text">
+          <div class="section_subtitle"> {{ t "about.direct.title" }} </div>
+
+          <div class="small light"> {{ t "about.direct.intro" }} </div>
+          <div>
+            <ol class="small light">
+              <li>{{ t "about.direct.step_1" }}</li>
+              <li>{{ t "about.direct.step_2" }}</li>
+              <li>{{ t "about.direct.step_3" }}</li>
+              <li>{{ t "about.direct.step_4" }}
+                <ul class="small light">
+                  <li>{{ t "about.direct.step_4a" }}</li>
+                  <li>{{ t "about.direct.step_4b" }}</li>
+                </ul>
+              </li>
+            </ol>
+          </div>
+
+          <div>
+            <div class="small">{{ t "about.tap_button" }} {{#link-to "faq"}}{{ t "about.see_our_faqs" }}{{/link-to}}</div>
+            {{#link-to "offers"}}
+            <div class="button small action">
+              <i class="fa">{{fa-icon 'hand-paper'}}</i> {{ t "about.direct.action" }}
+            </div>
+            {{/link-to}}
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>

@@ -1,14 +1,14 @@
 <div class="max-quantity">
-  {{t "requested_package.max_quantity" quantity=package.quantity}}
+  {{t "requested_package.max_quantity" quantity=package.computedMaxOrderQuantity}}
 </div>
 <div class="quantity-widget">
   <span id='decrementOperator' {{action 'decrementQty'}}>
     {{fa-icon 'minus'}}
   </span>
   <span class="qty">
-    {{numeric-input value=value name="requestedQuanity" id=(concat "qty" package.id)  maxlength="4" autocomplete="off" required='true' pattern="\d{1,8}" focusOut=(action 'focusOut' package)}}
+    {{numeric-input value=value name="requestedQuanity" type="number" id=(concat "qty" package.id) max=package.computedMaxOrderQuantity maxlength="4" autocomplete="off" required='true' pattern="\d{1,8}" focusOut=(action 'focusOut' package)}}
   </span>
-  <span id='incrementOperator' {{action 'incrementQty' package.quantity}}>
+  <span id='incrementOperator' {{action 'incrementQty' package.computedMaxOrderQuantity}}>
     {{fa-icon 'plus'}}
   </span>
 </div>
@@ -17,7 +17,7 @@
     {{#if (is-equal package.quantity 1)}}
       {{t "requested_package.single_quantity"}}
     {{else}}
-      {{t "requested_package.boundaries" max=package.quantity}}
+      {{t "requested_package.boundaries" max=package.computedMaxOrderQuantity}}
     {{/if}}
   </div>
 {{/if}}

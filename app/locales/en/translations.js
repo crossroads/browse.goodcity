@@ -97,13 +97,13 @@ export default {
   },
 
   browse: {
-    title: "Goodcity for charities",
+    title: "GoodCity.HK for Charities",
     all_goods: "All Goods",
     filter_results: "Filter these results <span>&#x25be;</span>",
     browse_title: "Browse Goods",
     intro_text:
-      "Registered charities & social welfare organisations in Hongkong are welcome to place an order.",
-    faq: "Eligibility",
+      "If you represent a Hong Kong non-profit organisation you can browse using the categories below or search using the icon above and request the goods you need.",
+    faq: "Read more details about the process here.",
     item_unavailable: "Item is no longer available."
   },
 
@@ -141,7 +141,8 @@ export default {
     title: "About",
     introduction: {
       opening:
-        "GoodCity makes it easy to request goods for social causes. First time users will be asked to indicate which organisation they represent from a list of eligible groups. If your organisation is missing, please <a href='mailto:contact@goodcity.hk'>contact us</a> for assistance. Eligible organisations include:",
+        "GoodCity makes it easy to request goods for social causes. First time users will be asked to indicate which organisation they represent from a list of eligible groups. If your organisation is missing, please <a href='mailto:contact@goodcity.hk'>contact us</a> for assistance.",
+      eligible_orgs: "Eligible organisations include:",
       charities:
         "Tax-exempt charities in Hong Kong <a href='https://www.ird.gov.hk/eng/tax/ach_index.htm'>(listed here)</a>",
       social_welfare:
@@ -150,10 +151,18 @@ export default {
         "Educational facilities <a href='https://applications.edb.gov.hk/schoolsearch/schoolsearch.aspx?langno=1'>(listed here)</a>",
       other_groups:
         "Other groups with a social mission, on a case-by-case basis.",
-      two_ways: "There are two ways to use our service..."
+      ways: "There are three ways to use our service...",
+      browse_online: "Browse / Order online:",
+      browse_online_desc: "Order online from our Tuen Mun facility",
+      book: "Book to visit our center:",
+      book_desc: "Select goods in person at our Tuen Mun facility",
+      direct: "Direct from donors:",
+      direct_desc: "Respond to offers located around Hong Kong",
+      faq: "See our frequently asked questions"
     },
     user_guide_title: "How it works",
-    tap_button: "Tap the button below to get started",
+    tap_button: "Tap the button below to get started or",
+    see_our_faqs: "see our frequently asked questions",
     coming_soon: "coming soon",
     transport_options: "Transport options",
     collection_transport_description:
@@ -164,13 +173,13 @@ export default {
       "NOTE: driver is paid by you or the client. We sadly cannot offer free delivery under normal circumstances.",
 
     order_goods: {
-      title: "Get immediate access to goods!",
-      action: "Browse goods",
+      title: "Order online",
+      action: "Browse online",
       step_1: {
         desc: "Browse a selection of available goods online"
       },
       step_2: {
-        desc: 'Add needed items to your "cart" then checkout'
+        desc: 'Add needed items to your "cart" then check out'
       },
       step_3: {
         desc: "Fill in additional details:",
@@ -188,24 +197,54 @@ export default {
     },
 
     visit: {
-      title: "Visit our distribution center",
+      title: "Visit our center",
       action: "Book appointment",
       new_appointment: "New Appointment",
       guide_intro: `
-        If you represent a Hong Kong non-profit or social welfare or social welfare organisation
+        If you represent a Hong Kong non-profit or social welfare organisation
         you can book an appointment for yourself or your client to select goods from our Tuen Mun
         distribution center. Here's how it works:
       `,
       guide_step_1: "Register (or log in) using your cell phone number",
-      guide_step_2: "Describe the needs including specific types of good",
+      guide_step_2: "Describe the needs including specific types of goods",
       guide_step_3: "Choose an appointment time",
       guide_step_4: "Our staff will contact you to confirm",
       onsite_guide_intro:
         "When you (or your client) arrives for the appointment:",
       onsite_guide_step_1: "We will help you select items from available stock",
-      onsite_guide_step_2: "We will help book a truck if you've requested this",
+      onsite_guide_step_2:
+        "We will help book a truck if you've requested this. Note: you (or the client) pays for the truck",
       onsite_guide_step_3: "Load the goods and take them to your location"
+    },
+
+    direct: {
+      title: "Direct from donors",
+      intro:
+        "We can put your charity in contact with the donor to receive goods directly from them.",
+      step_1: "View the offer you are interested in.",
+      step_2: "Click 'Respond to this Offer'",
+      step_3:
+        "Register (or log in) using your cell phone number (new users will be asked to provide some basic registration details after login.)",
+      step_4: "Describe your interest in the goods ",
+      step_4a:
+        "Use the chat tool at the bottom of the screen to tell our staff about your interest in the goods.",
+      step_4b:
+        "Our staff will coordinate with the donor. If the donor wishes to work with you we will put you in touch with them directly.",
+      action: "View offers"
     }
+  },
+
+  offers: {
+    no_offers_available:
+      "There are currently no offers available directly from donors. You may wish to access the stock in our Tuen Mun Center: either",
+    browse_online: "browse stock online",
+    or: ", or",
+    book_to_visit: "book to visit.",
+    view_my_offers: "To view offers you have responded to in the past,",
+    go_to_dashboard: "go to your dashboard.",
+    available_offers:
+      "Offer(s) below are available directly from donors located around Hong Kong. Non-profit organizations can express their interest by responding to an offer.",
+    available_offers_read_more: "Read more details about the process here."
   },
 
   category: {
@@ -268,7 +307,10 @@ export default {
       "We don't share your data. We only use it to complete your request(s). See our ",
     policy: "Privacy Policy.",
     mobile_email_warning:
-      "Please provide a valid email or a valid Hong Kong mobile number"
+      "Please provide a valid email or a valid Hong Kong mobile number",
+    explanation:
+      "If you represent a Hong Kong non-profit or social welfare organisation you can book an appointment for yourself or your client to select goods from our Tuen Mun distribution center.",
+    explanation_read_more_link: "Read more details about the process here."
   },
 
   search_goods: {
