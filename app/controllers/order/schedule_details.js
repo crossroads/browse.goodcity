@@ -108,6 +108,10 @@ export default Controller.extend(cancelOrder, {
   },
 
   async saveOrderAddress() {
+    if (this.get("order.isAppointment")) {
+      return;
+    }
+
     const data = await new AjaxPromise(
       "/orders/" + this.get("order.id"),
       "PUT",
