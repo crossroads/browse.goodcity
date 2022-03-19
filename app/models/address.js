@@ -8,6 +8,7 @@ export default Model.extend({
   building: attr("string"),
   street: attr("string"),
   addressType: attr("string"),
+  notes: attr("string"),
 
   district: belongsTo("district", { async: false }),
 
