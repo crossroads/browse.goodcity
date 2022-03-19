@@ -715,7 +715,17 @@ export default {
       hire_vehicle:
         "Recipient would like the goods sent in a hired truck (Recipient pays the driver)",
       labor_info:
-        "Crossroads' volunteers will help load goods into the vehicle but <u>we cannot provide labour for unloading</u>. Our staff will contact you to discuss this an confirm any charges that may be involved if hired labour will be required for unloading."
+        "Crossroads' volunteers will help load goods into the vehicle but <u>we cannot provide labour for unloading</u>. Our staff will contact you to discuss this an confirm any charges that may be involved if hired labour will be required for unloading.",
+      delivery_address_short: "Delivery Address",
+      delivery_address_details: "Delivery Address Details",
+      delivery_address_subtitle:
+        "Provide address and any instructions for the driver",
+      address_fields: {
+        street: "Street",
+        flat: "Flat",
+        building: "Building",
+        notes: "Instructions"
+      }
     },
     booking_success: {
       success: "Success!",

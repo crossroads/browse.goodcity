@@ -82,6 +82,15 @@ export default Controller.extend(cancelOrder, {
       .value();
   }),
 
+  onControllerLoad() {
+    this.set("addressAttrs", {
+      street: this.getWithDefault("order.address.street", ""),
+      flat: this.getWithDefault("order.address.flat", ""),
+      building: this.getWithDefault("order.address.building", ""),
+      notes: this.getWithDefault("order.address.notes", "")
+    });
+  },
+
   orderTransportParams() {
     let orderTransportProperties = {};
     orderTransportProperties.scheduled_at = this.get("selectedTimeId");
@@ -96,6 +105,27 @@ export default Controller.extend(cancelOrder, {
 
   isToday(date) {
     return new Date(date).toDateString() === new Date().toDateString();
+  },
+
+  async saveOrderAddress() {
+    const data = await new AjaxPromise(
+      "/orders/" + this.get("order.id"),
+      "PUT",
+      this.get("session.authToken"),
+      {
+        order: {
+          address_attributes: {
+            address_type: "Delivery",
+            district_id: this.get("order.districtId"),
+            street: this.get("addressAttrs.street"),
+            flat: this.get("addressAttrs.flat"),
+            building: this.get("addressAttrs.building"),
+            notes: this.get("addressAttrs.notes")
+          }
+        }
+      }
+    );
+    this.get("store").pushPayload(data);
   },
 
   actions: {
@@ -153,6 +183,9 @@ export default Controller.extend(cancelOrder, {
       new AjaxPromise(url, actionType, this.get("session.authToken"), {
         order_transport: this.orderTransportParams()
       })
+        .then(data => {
+          return this.saveOrderAddress().then(() => data);
+        })
         .then(data => {
           this.get("store").pushPayload(data);
           loadingView.destroy();

@@ -19,6 +19,7 @@ export default Model.extend({
   orderTransport: belongsTo("order_transport", {
     async: false
   }),
+  addressId: attr("number"),
   address: belongsTo("address", {
     async: false
   }),

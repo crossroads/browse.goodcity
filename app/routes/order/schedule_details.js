@@ -186,11 +186,12 @@ export default AuthorizeRoute.extend({
     window.scrollTo(0, 0); //https://github.com/dollarshaveclub/ember-router-scroll. Read this link for nested route issue for not scrolling at top of the page
   },
 
-  setupController(controller, model) {
+  async setupController(controller, model) {
     this._super(...arguments);
     this.setUpFormData(model, controller);
     this.controllerFor("application").set("showSidebar", false);
     controller.set("showOrderSlotSelection", false);
+    await controller.onControllerLoad();
   },
 
   deactivate() {

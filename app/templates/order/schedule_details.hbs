@@ -127,9 +127,39 @@
             </div>
           </div>
           {{else}}
+
           <!--
-                    LIST OF UPCOMING DAYS FOR ORDERS
-                  -->
+            DELIVERY ADDRESS
+          -->
+          <div class="type-of-id-text">
+            {{t 'order.online_order.delivery_address_details'}}
+          </div>
+
+          <div class="id-confidential-text">
+            {{t 'order.online_order.delivery_address_subtitle'}}
+          </div>
+
+          <div class="row input-container">
+            <div>{{t 'order.online_order.address_fields.street'}}</div>
+            {{input type="text" value=addressAttrs.street classNames="center_align_placeholder" required=false}}
+          </div>
+          <div class="row input-container">
+            <div>{{t 'order.online_order.address_fields.building'}}</div>
+            {{input type="text" value=addressAttrs.building classNames="center_align_placeholder" required=false}}
+          </div>
+          <div class="row input-container">
+            <div>{{t 'order.online_order.address_fields.flat'}}</div>
+            {{input type="text" value=addressAttrs.flat classNames="center_align_placeholder" required=false}}
+          </div>
+          <div class="row input-container">
+            <div>{{t 'order.online_order.address_fields.notes'}}</div>
+            {{input type="text" value=addressAttrs.notes classNames="center_align_placeholder" required=false}}
+          </div>
+
+
+          <!--
+            LIST OF UPCOMING DAYS FOR ORDERS
+          -->
           <div class="small-12 columns type-of-id-text">
             {{t 'order.online_order.preferred_date'}}
           </div>

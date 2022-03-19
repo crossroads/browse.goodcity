@@ -49,6 +49,20 @@
       }
     }
 
+    .input-container {
+      text-align: left;
+      padding: .4rem;
+      padding-right: 1rem;
+      font-size: .8rem;
+
+      input {
+        margin: 0;
+        background-color: transparent;
+        border: 1px solid rgb(163, 170, 182);
+        color: rgb(163, 170, 182);
+      }
+    }
+
     .time_inputs {
       .online-order-time-selection {
         border: 1px solid;

@@ -40,4 +40,29 @@
       {{/if}}
     </div>
   </div>
+
+  {{#unless order.isAppointment}}
+    <div class="row info">
+      <div class="small-4 columns">
+        {{t "order.online_order.delivery_address_short"}}
+      </div>
+      <div class="small-8 detail columns">
+        <div>{{order.address.street}}</div>
+        <div>{{order.address.building}}</div>
+        <div>{{order.address.flat}}</div>
+        <div>{{order.address.district.name}}</div>
+      </div>
+    </div>
+
+    {{#if order.address.notes}}
+      <div class="row info">
+        <div class="small-4 columns">
+          {{t "order.online_order.address_fields.notes"}}
+        </div>
+        <div class="small-8 detail columns">
+          {{order.address.notes}}
+        </div>
+      </div>
+    {{/if}}
+  {{/unless}}
 </section>
