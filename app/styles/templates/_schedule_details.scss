@@ -55,6 +55,10 @@
       padding-right: 1rem;
       font-size: .8rem;
 
+      .column:first-child {
+        padding-left: 0;
+      }
+
       input, select {
         margin: 0;
         background-color: transparent;
