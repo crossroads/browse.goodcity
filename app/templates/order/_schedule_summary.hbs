@@ -41,7 +41,7 @@
     </div>
   </div>
 
-  {{#unless order.isAppointment}}
+  {{#if (is-and order.isOnlineOrder order.orderTransport.isDelivery)}}
     <div class="row info">
       <div class="small-4 columns">
         {{t "order.online_order.delivery_address_short"}}
@@ -64,5 +64,5 @@
         </div>
       </div>
     {{/if}}
-  {{/unless}}
+  {{/if}}
 </section>

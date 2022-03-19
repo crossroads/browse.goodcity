@@ -44,6 +44,10 @@ export default Model.extend({
     }
   }),
 
+  isDelivery: computed("transportType", function() {
+    return this.get("transportType") === "ggv";
+  }),
+
   isAppointment: computed("bookingType", function() {
     const bookingType = this.get("bookingType");
     if (!bookingType) {

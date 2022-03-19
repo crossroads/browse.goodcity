@@ -42,11 +42,11 @@
             <div class=" custom_radio_buttons small-12 columns purpose col-width-appointment" for="For HKID">
               <div class="columns small-1 radio-button">
                 {{radio-button
-                      name="selectReason"
-                      id="self"
-                      value="self"
-                      selection=selectedId
-                      required='true'}}
+                    name="selectReason"
+                    id="self"
+                    value="self"
+                    selection=transportType
+                    required='true'}}
               </div>
               <div class="columns small-11">
                 <label class="radio-button-text align-text self_vehicle" for="self">
@@ -65,7 +65,7 @@
                       name="selectReason"
                       id="ggv"
                       value="ggv"
-                      selection=selectedId
+                      selection=transportType
                       required='true'}}
               </div>
               <div class="columns small-11">
@@ -126,7 +126,7 @@
               <i class="fa calender_icon">{{fa-icon 'calender'}}</i>
             </div>
           </div>
-          {{else}}
+          {{else if isDelivery}}
 
           <!--
             DELIVERY ADDRESS
@@ -139,6 +139,17 @@
             {{t 'order.online_order.delivery_address_subtitle'}}
           </div>
 
+          <div class="row input-container">
+            {{select-list
+              content=districts
+              on-change=(action (mut addressAttrs.district))
+              selectedValue=addressAttrs.district
+              value=addressAttrs.district
+              selectArrow=true
+              required=false
+              classNames='district-selector'
+              idNames='district-select-dropdown'}}
+          </div>
           <div class="row input-container">
             <div>{{t 'order.online_order.address_fields.street'}}</div>
             {{input type="text" value=addressAttrs.street classNames="center_align_placeholder" required=false}}

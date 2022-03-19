@@ -51,7 +51,7 @@
             </div>
 
             {{!-- DELIVERY ADDRESS --}}
-            {{#unless order.isAppointment}}
+            {{#if (is-and order.isOnlineOrder order.orderTransport.isDelivery)}}
               <div class="detail-row row">
                 <div class="data-type">{{ t "order.online_order.delivery_address_short" }}</div>
                 <div class="data">
@@ -69,7 +69,7 @@
                   </div>
                 </div>
               {{/if}}
-            {{/unless}}
+            {{/if}}
 
             {{!-- ORDER STATE --}}
             <div class="row state-description">
