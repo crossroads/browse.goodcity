@@ -18,7 +18,7 @@ export default Controller.extend(cancelOrder, {
   orderTransport: alias("model.orderTransport"),
   myOrders: controller(),
   settings: service(),
-  selectedId: null,
+  transportType: null,
   selectedTimeId: null,
   selectedDate: null,
   timeSlotNotSelected: false,
@@ -45,6 +45,14 @@ export default Controller.extend(cancelOrder, {
       )[0].slots;
       return timeSlots;
     }
+  }),
+
+  isDelivery: computed("transportType", function() {
+    return this.get("transportType") === "ggv";
+  }),
+
+  districts: computed(function() {
+    return this.get("store").peekAll("district");
   }),
 
   onlineOrderPickupSlots: computed("available_dates", function() {
@@ -82,6 +90,19 @@ export default Controller.extend(cancelOrder, {
       .value();
   }),
 
+  onControllerLoad() {
+    this.set("addressAttrs", {
+      district: this.getWithDefault(
+        "order.address.district",
+        this.get("order.district")
+      ),
+      street: this.getWithDefault("order.address.street", ""),
+      flat: this.getWithDefault("order.address.flat", ""),
+      building: this.getWithDefault("order.address.building", ""),
+      notes: this.getWithDefault("order.address.notes", "")
+    });
+  },
+
   orderTransportParams() {
     let orderTransportProperties = {};
     orderTransportProperties.scheduled_at = this.get("selectedTimeId");
@@ -89,13 +110,48 @@ export default Controller.extend(cancelOrder, {
       11,
       5
     );
-    orderTransportProperties.transport_type = this.get("selectedId");
+    orderTransportProperties.transport_type = this.get("transportType");
     orderTransportProperties.order_id = this.get("order.id");
     return orderTransportProperties;
   },
 
   isToday(date) {
     return new Date(date).toDateString() === new Date().toDateString();
+  },
+
+  async saveOrderAddress() {
+    if (this.get("order.isAppointment") || !this.get("isDelivery")) {
+      return;
+    }
+
+    const updateParams = this.get("order.addressId")
+      ? {
+          id: this.get("order.addressId")
+        }
+      : {};
+
+    const data = await new AjaxPromise(
+      "/orders/" + this.get("order.id"),
+      "PUT",
+      this.get("session.authToken"),
+      {
+        order: {
+          address_attributes: {
+            ...updateParams,
+            address_type: "Delivery",
+            district_id: this.getWithDefault(
+              "addressAttrs.district.id",
+              this.get("order.districtId")
+            ),
+            street: this.get("addressAttrs.street"),
+            flat: this.get("addressAttrs.flat"),
+            building: this.get("addressAttrs.building"),
+            notes: this.get("addressAttrs.notes")
+          }
+        }
+      }
+    );
+    this.get("store").pushPayload(data);
   },
 
   actions: {
@@ -153,6 +209,9 @@ export default Controller.extend(cancelOrder, {
       new AjaxPromise(url, actionType, this.get("session.authToken"), {
         order_transport: this.orderTransportParams()
       })
+        .then(data => {
+          return this.saveOrderAddress().then(() => data);
+        })
         .then(data => {
           this.get("store").pushPayload(data);
           loadingView.destroy();

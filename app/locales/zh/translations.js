@@ -668,7 +668,17 @@ export default {
       self_vehicle: "接收者會從國際十字路會接收",
       hire_vehicle: "接收者會僱用貨車運貨（接收者會付款給貨車司機）",
       labor_info:
-        "國際十字路會義工會幫忙上貨於車輛內,但不會幫忙落貨.我們的職員將會接觸閣下去討論及確定有關僱用工人去處理落貨的費用事宜."
+        "國際十字路會義工會幫忙上貨於車輛內,但不會幫忙落貨.我們的職員將會接觸閣下去討論及確定有關僱用工人去處理落貨的費用事宜.",
+      delivery_address_short: "Delivery Address",
+      delivery_address_details: "Delivery Address Details",
+      delivery_address_subtitle:
+        "Provide address and any instructions for the driver",
+      address_fields: {
+        street: "Street",
+        flat: "Flat",
+        building: "Building",
+        notes: "Instructions"
+      }
     },
     booking_success: {
       success: "成功！",

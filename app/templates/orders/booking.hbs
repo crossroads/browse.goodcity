@@ -50,6 +50,27 @@
               </div>
             </div>
 
+            {{!-- DELIVERY ADDRESS --}}
+            {{#if (is-and order.isOnlineOrder order.orderTransport.isDelivery)}}
+              <div class="detail-row row">
+                <div class="data-type">{{ t "order.online_order.delivery_address_short" }}</div>
+                <div class="data">
+                  <div>{{order.address.street}}</div>
+                  <div>{{order.address.building}}</div>
+                  <div>{{order.address.flat}}</div>
+                  <div>{{order.address.district.name}}</div>
+                </div>
+              </div>
+              {{#if order.address.notes}}
+                <div class="detail-row row">
+                  <div class="data-type">{{t "order.online_order.address_fields.notes"}}</div>
+                  <div class="data">
+                    {{order.address.notes}}
+                  </div>
+                </div>
+              {{/if}}
+            {{/if}}
+
             {{!-- ORDER STATE --}}
             <div class="row state-description">
               <div class="state-container">

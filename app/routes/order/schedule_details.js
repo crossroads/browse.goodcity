@@ -136,7 +136,7 @@ export default AuthorizeRoute.extend({
   },
 
   setUpFormData(model, controller) {
-    var selectedId = "self";
+    var transportType = "self";
     var selectedTime = "11:00am";
     let selectedDate = null;
     let selectedSlot = null;
@@ -146,7 +146,7 @@ export default AuthorizeRoute.extend({
     let order = model.order;
     controller.set("isEditing", false);
     if (orderTransport) {
-      selectedId = orderTransport.get("transportType");
+      transportType = orderTransport.get("transportType");
       selectedTime = orderTransport.get("timeslot");
       selectedDate = moment.tz(
         orderTransport.get("scheduledAt"),
@@ -173,7 +173,7 @@ export default AuthorizeRoute.extend({
       }
       controller.set("isEditing", !order.get("isDraft"));
     }
-    controller.set("selectedId", selectedId);
+    controller.set("transportType", transportType);
     controller.set("selectedTimeId", selectedDate && selectedDate.format());
     controller.set("available_dates", availableDatesAndTime);
     controller.set("selectedDate", selectedDate);
@@ -186,11 +186,12 @@ export default AuthorizeRoute.extend({
     window.scrollTo(0, 0); //https://github.com/dollarshaveclub/ember-router-scroll. Read this link for nested route issue for not scrolling at top of the page
   },
 
-  setupController(controller, model) {
+  async setupController(controller, model) {
     this._super(...arguments);
     this.setUpFormData(model, controller);
     this.controllerFor("application").set("showSidebar", false);
     controller.set("showOrderSlotSelection", false);
+    await controller.onControllerLoad();
   },
 
   deactivate() {
