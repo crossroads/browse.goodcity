@@ -168,35 +168,37 @@
             <div>{{t 'order.online_order.address_fields.notes'}}</div>
             {{input type="text" value=addressAttrs.notes classNames="center_align_placeholder" required=false}}
           </div>
-
-
-          <!--
-            LIST OF UPCOMING DAYS FOR ORDERS
-          -->
-          <div class="small-12 columns type-of-id-text">
-            {{t 'order.online_order.preferred_date'}}
-          </div>
-
-          <div class="small-12 columns id-confidential-text">
-            {{t 'order.online_order.goods_limit'}} <br>
-            {{t 'order.online_order.order_confirmation'}}
-          </div>
-
-          <div class="row time_inputs" {{ action 'showOrderSlotSelectionOverlay' }}>
-            <div class="small-12 columns online-order-time-selection">
-              <label class="align-text">
-                <span>
-                  {{#if selectedTimeId}}
-                  {{display-time selectedTimeId "dddd MMMM Do"}}
-                  {{else}}
-                  {{t 'order.online_order.choose_date'}}
-                  {{/if}}
-                </span>
-                <div class="fa icon">{{fa-icon "calendar"}}</div>
-              </label>
-            </div>
-          </div>
           {{/if}}
+
+          {{#unless order.isAppointment}}
+            <!--
+              LIST OF UPCOMING DAYS FOR ORDERS
+            -->
+            <div class="small-12 columns type-of-id-text">
+              {{t 'order.online_order.preferred_date'}}
+            </div>
+
+            <div class="small-12 columns id-confidential-text">
+              {{t 'order.online_order.goods_limit'}} <br>
+              {{t 'order.online_order.order_confirmation'}}
+            </div>
+
+            <div class="row time_inputs" {{ action 'showOrderSlotSelectionOverlay' }}>
+              <div class="small-12 columns online-order-time-selection">
+                <label class="align-text">
+                  <span>
+                    {{#if selectedTimeId}}
+                    {{display-time selectedTimeId "dddd MMMM Do"}}
+                    {{else}}
+                    {{t 'order.online_order.choose_date'}}
+                    {{/if}}
+                  </span>
+                  <div class="fa icon">{{fa-icon "calendar"}}</div>
+                </label>
+              </div>
+            </div>
+          {{/unless}}
+
 
           <br>
           {{#if order.isAppointment}}
