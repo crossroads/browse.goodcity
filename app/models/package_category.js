@@ -93,8 +93,8 @@ export default Model.extend({
       var images = {
         "8": "1436965082/browse/browse_image_2.png",
         "1": "1436965083/browse/browse_image_3.png",
-        "19": "1436965082/browse/browse_image_4.png",
-        "25": "1436965083/browse/browse_image_5.png",
+        "19": "1660276066/browse/cutlery.png",
+        "25": "1660276066/browse/handmade.png",
         "36": "1436965083/browse/browse_image_6.png"
       };
       var id = images[this.get("id")];
