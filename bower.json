@@ -16,15 +16,10 @@
     "slick-carousel": "1.5.9",
     "socket.io-client": "~1.4.6",
     "moment-timezone": "^0.5.27",
-    "pickadate": "https://github.com/crossroads/pickadate.js"
+    "pickadate": "crossroads/pickadate.js#^3.6.4"
   },
   "devDependencies": {
     "ember-qunit-notifications": "0.1.0",
-    "jquery-mockjax": [
-      "Upgrading jquery-mockjax will fail with error as it uses latest jquery version",
-      "which will throw error in foundation as foundation is using older version",
-      "Error can be fixed by forking foundation and replacing window.load with window.on('load')"
-    ],
     "jquery-mockjax": "~2.0.1",
     "localforage": "^1.7.3"
   },
