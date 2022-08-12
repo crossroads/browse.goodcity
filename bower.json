@@ -16,7 +16,7 @@
     "slick-carousel": "1.5.9",
     "socket.io-client": "~1.4.6",
     "moment-timezone": "^0.5.27",
-    "pickadate": "git://github.com/crossroads/pickadate.js#master"
+    "pickadate": "https://github.com/crossroads/pickadate.js"
   },
   "devDependencies": {
     "ember-qunit-notifications": "0.1.0",
