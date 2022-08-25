@@ -12,6 +12,7 @@ export default Controller.extend({
   subscription: service(),
   queryParams: ["orderCancelled"],
   triggerFlashMessage: false,
+  origin_url: config.APP.ORIGIN,
 
   orderCancelled: false,
 
