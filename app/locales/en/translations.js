@@ -103,6 +103,9 @@ export default {
     browse_title: "Browse Goods",
     intro_text:
       "If you represent a Hong Kong non-profit organisation you can browse using the categories below or search using the icon above and request the goods you need.",
+    ngo_offer: "Special Offer:",
+    ngo_offer_description:
+      "Click here to learn more about how you can apply for free transportation on online orders.",
     faq: "Read more details about the process here.",
     item_unavailable: "Item is no longer available."
   },
