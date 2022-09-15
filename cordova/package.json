@@ -4,7 +4,7 @@
   "displayName": "S. GoodCity.HK for Charities",
   "dependencies": {},
   "devDependencies": {
-    "cordova-android": "^10.1.1",
+    "cordova-android": "^10.1.2",
     "cordova-plugin-inappbrowser": "^5.0.0",
     "cordova-plugin-splashscreen": "^6.0.0",
     "cordova-plugin-statusbar": "^3.0.0"
