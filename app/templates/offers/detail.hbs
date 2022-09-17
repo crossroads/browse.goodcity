@@ -32,6 +32,9 @@
     <div class="offer_display">
       <div class="offer_view">
         <span style="color: white;">
+          District : {{offerDistrict}}
+        </span>
+        <span style="color: white;">
           Notes :
         </span>
         <span>
@@ -53,7 +56,7 @@
       <ul>
         {{#each model.items as |item|}}
           <div class="row items">
-            {{item-thumbnail-view item=item displayItemOverlay=true}}
+            {{item-thumbnail-view item=item displayItemOverlay=true noResize=true}}
           </div>
           <hr>
         {{/each}}

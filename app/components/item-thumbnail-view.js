@@ -91,7 +91,9 @@ export default ImagePreview.extend(cloudinaryImage, safeGet, {
       (results, item) => {
         let cloudinaryId = item.attributes.cloudinary_id || "";
         this.set("cloudinaryId", cloudinaryId);
-        let url = this.generateUrl(500, 500, true);
+        let url = this.get("noResize")
+          ? this.generateUrl()
+          : this.generateUrl(500, 500, true);
         _.set(item, "imageUrl", url);
         results.push(item);
         return results;
