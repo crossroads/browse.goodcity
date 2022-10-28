@@ -1,4 +1,4 @@
-<section class="main-section privacy faq_list">
+<section class="main-section privacy">
   <nav class="tab-bar">
     <section class="left-large">
       {{#back-link fallbackRoute="/" }}
@@ -11,80 +11,544 @@
     </section>
   </nav>
 
-  <div class="row faq_list">
-    <div class="small-12 columns">
+  <div class="row">
+    <div class="small-12 columns faq-page">
       <p>{{t "faq.description"}}</p>
-      <ul class="question_list">
-        {{#each questionLinks as |question|}}
-          {{faq-questions id=question.id text=question.text}}
-        {{/each}}
-      </ul>
-      <p id="question1"><b>{{t "faq.questions.question1"}}</b></p>
 
-      <p>{{t "faq.answers.answer1.good_condition"}}</p>
+      <div class="faq-questions">
+        <ul>
+          <li class="faq-question-title">General Questions</li>
+          <ul>
+            <li><a href="faq#q1">Who can receive goods?</a></li>
+            <li><a href="faq#q2">What is the relationship between Crossroads Foundation and GoodCity?</a></li>
+            <li><a href="faq#q3">Can I request items for my charity to use?</a></li>
+            <li><a href="faq#q4">I am an individual in need. Can I order goods?</a></li>
+            <li><a href="faq#q5">What type of items are available?</a></li>
+            <li><a href="faq#q6">Are the goods of high quality?</a></li>
+            <li><a href="faq#q7">What should I do if an item is broken?</a></li>
+            <li><a href="faq#q8">How do I get to Crossroads?</a></li>
+            <li><a href="faq#q9">What are your opening hours?</a></li>
+            <li><a href="faq#q10">How do I contact your organisation if my questions are not covered in this FAQ?</a></li>
+            <li><a href="faq#q11">What is the Computer Reuse Program?</a></li>
+          </ul>
+          <li class="faq-question-title">Using our GoodCity Apps / website</li>
+          <ul>
+            <li><a href="faq#q12">Can I use my personal email to sign up on your app / website?</a></li>
+            <li><a href="faq#q13">This account was passed onto me from another person who previously held my post. How should I change the account details?</a></li>
+            <li><a href="faq#q14">I cannot login to my account. What should I do?</a></li>
+            <li><a href="faq#q15">I cannot submit an order. What should I do?</a></li>
+          </ul>
+          <li class="faq-question-title">Transportation</li>
+          <ul>
+            <li><a href="faq#q16">Who will pay for transportation?</a></li>
+            <li><a href="faq#q17">Who will arrange the transportation?</a></li>
+            <li><a href="faq#q18">How would your staff arrange transportation?</a></li>
+            <li><a href="faq#q19">How much is transportation?</a></li>
+            <li><a href="faq#q20">Will the driver help the client unload items and carry them into the client’s apartment?</a></li>
+            <li><a href="faq#q21">Transportation: Appointments	</a></li>
+          </ul>
+          <li class="faq-question-title">Online orders</li>
+          <ul>
+            <li><a href="faq#q22">How many items can we put in one order? How many times can one client apply for goods?</a></li>
+            <li><a href="faq#q23">Why can’t I find a particular item online anymore?</a></li>
+            <li><a href="faq#q24">How long can you reserve an item I am interested in?</a></li>
+            <li><a href="faq#q25">Can I choose the items online and then the client picks them up in person?</a></li>
+            <li><a href="faq#q26">What happens if a specific item I ordered cannot be found in your warehouse?</a></li>
+            <li><a href="faq#q27">I’ve arranged some help to move the furniture to the client’s apartment. Can I request a specific time for the goods to arrive?</a></li>
+            <li><a href="faq#q28">What is the difference between “needs hired vehicle” and “private vehicle”?</a></li>
+          </ul>
+          <li class="faq-question-title">Appointment</li>
+          <ul>
+            <li><a href="faq#q29">What can my client expect when they come to your warehouse?</a></li>
+            <li><a href="faq#q30">How long is the appointment?</a></li>
+            <li><a href="faq#q31">What should my client bring on the day of the appointment?</a></li>
+            <li><a href="faq#q32">Can a client have two active orders (appointment/online order) at the same time?</a></li>
+            <li><a href="faq#q33">What is the request list?</a></li>
+            <li><a href="faq#q34">Can my client browse the goods in your physical warehouse, and then pick it up later?</a></li>
+            <li><a href="faq#q35">Does Crossroads have all items in stock?</a></li>
+          </ul>
+          <li class="faq-question-title">Making changes to an order / appointment</li>
+          <ul>
+            <li><a href="faq#q36">Can I add additional items to the online order?</a></li>
+            <li><a href="faq#q37">Can I add additional items to the request list for appointments?</a></li>
+            <li><a href="faq#q38">How can I reschedule an order?</a></li>
+            <li><a href="faq#q39">How many times can I reschedule a delivery/pickup date?</a></li>
+            <li><a href="faq#q40">My client has found resources somewhere else. How can I cancel the appointment/online order?</a></li>
+            <li><a href="faq#q41">Can you please summarise how your services work?</a></li>
+          </ul>
+        </ul>
+      </div>
 
-      <p>{{t "faq.answers.answer1.useful"}}</p>
+      <div class="faq-answers">
+        <div class="faq-answer-section">
+          <div class="faq-answer-section-title">General Questions</div>
 
-      <p id="question2"><b>{{t "faq.questions.question2"}}</b></p>
+          <ul>
+            <li id="q1">
+              <div class="faq-answer-title">Who can receive goods?</div>
+              <div class="faq-answer-text">
+                Eligible organisations can request goods for their clients or their own operations:  
+                <ul>
+                  <li>Tax-exempt charities in Hong Kong (<a href="https://www.ird.gov.hk/eng/tax/ach_index.htm">listed here</a>)</li>
+                  <li>Social Welfare Service Units (<a href="https://www.swd.gov.hk/en/index/site_download/page_listofserv/">listed here</a>)</li>
+                  <li>Educational facilities (<a href="https://applications.edb.gov.hk/schoolsearch/schoolsearch.aspx?langno=1">listed here</a>)</li>
+                  <li>Other groups with a social mission, on a case-by-case basis.</li>
+                </ul>
+              </div>
+            </li>
 
-      <p>{{t "faq.answers.answer2.review"}}</p>
+            <li id="q2">
+              <div class="faq-answer-title">What is the relationship between Crossroads Foundation and GoodCity?</div>
+              <div class="faq-answer-text">
+                GoodCity is a technology-based service made up of apps and websites that help connect quality donated goods with community needs in Hong Kong.
+                GoodCity is fully owned and operated by Crossroads Foundation. Crossroads Foundation is a Hong Kong based, non-profit organisation serving global need.
+                Please <a href="https://www.crossroads.org.hk/">visit Crossroads Foundation’s website</a> to learn about all the services we provide in Hong Kong and beyond.
+              </div>
+            </li>
 
-      <p>{{t "faq.answers.answer2.messaging"}}</p>
+            <li id="q3">
+              <div class="faq-answer-title">Can I request items for my charity to use?</div>
+              <div class="faq-answer-text">
+                Yes. We are happy to provide goods for eligible organisations to use. When applying, please select “order for organisation's own program” and we will
+                proceed accordingly.
+              </div>
+            </li>
 
-      <p>{{t "faq.answers.answer2.supervisors"}}</p>
+            <li id="q4">
+              <div class="faq-answer-title">I am an individual in need. Can I order goods?</div>
+              <div class="faq-answer-text">
+                It is possible for us to distribute items to individuals, but we do so through registered organisations.
+                Please contact a registered charity that knows of your needs and ask them to submit a request on your behalf.
+                This ensures that goods are fully utilised and properly handled. 
+              </div>
+            </li>
 
-      <p id="question3"><b>{{t "faq.questions.question3"}}</b></p>
+            <li id="q5">
+              <div class="faq-answer-title">What type of items are available?</div>
+              <div class="faq-answer-text">
+                This is what is normally in the warehouse:
+                <ul>
+                  <li>Furniture: several types of beds, tables, chairs, sofas, shelves, and drawers</li>
+                  <li>Electrical items: fans, heaters, various kitchen appliances (kettles, toasters, rice cookers etc.) and audio-visual equipment (Dependent on stock: microwaves, TVs, washing machines and fridges)</li>
+                  <li>Household items: kitchen utensils, baby items</li>
+                  <li>Toys: musical instruments, bikes, battery operated toys and children’s toys</li>
+                  <li>Miscellaneous: a small selection of clothes, books and personal care items are displayed at our warehouse</li>
+                </ul>
+                Note: we generally do not have gas stoves, gas water heaters or air conditioners available.
+              </div>
+            </li>
 
-      <ul>
-        <li>{{t "faq.answers.answer3.gogovan"}}</li>
-        <li>{{t "faq.answers.answer3.drop_off"}}</li>
-      </ul>
+            <li id="q6">
+              <div class="faq-answer-title">Are the goods of high quality?</div>
+              <div class="faq-answer-text">
+                Most of our goods are second-hand donated items from generous business and individual donors.
+                We test all electrical products, but unlike a shop selling new items, Crossroads cannot issue
+                guarantees or be held liable for any faults in these donated items.
+              </div>
+            </li>
 
-      <p id="question4"><b>{{t "faq.questions.question4"}}</b></p>
+            <li id="q7">
+              <div class="faq-answer-title">What should I do if an item is broken?</div>
+              <div class="faq-answer-text">
+                Please email <a href="mailto:local@crossroads.org.hk">local@crossroads.org.hk</a> and indicate the condition of the broken item.
+                When possible, we will schedule to exchange the item for your organisation/client. 
+                Due to the high demand for electrical donations, to be eligible to apply for the same item again,
+                we request that any faulty electrical items should be returned to us for testing. 
+              </div>
+            </li>
 
-      <p>{{t "faq.answers.answer4"}}</p>
+            <li id="q8">
+              <div class="faq-answer-title">How do I get to Crossroads?</div>
+              <div class="faq-answer-text">
+                The Hong Kong Distribution warehouse is in Building 30 at our Tuen Mun site.
+                <p>Our address is:</p>
 
-      <p id="question5"><b>{{t "faq.questions.question5"}}</b></p>
+                <blockquote>
+                  Crossroads Village<br />
+                  2 Castle Peak Road<br />
+                  Gold Coast, Tuen Mun<br />
+                  HONG KONG
+                </blockquote>
+                
+                <ul>
+                  <li><a href="https://goo.gl/maps/289VKkRFR7TCpfBV9">https://goo.gl/maps/289VKkRFR7TCpfBV9</a></li>
+                  <li><a href="https://www.crossroads.org.hk/wp-content/uploads/2019/07/direction_map_2019.pdf">https://www.crossroads.org.hk/wp-content/uploads/2019/07/direction_map_2019.pdf</a></li>
+                  <li><a href="https://www.crossroads.org.hk/directions/">Directions to Crossroads Foundation Hong Kong</a></li>
+                </ul>
 
-      <p>{{t "faq.answers.answer5.title"}}</p>
+                <p>
+                  Public transport: alight at “Golden Beach” bus stop and walk a further 50m to our site.
+                  If you are coming from Kowloon, Crossroads Foundation is on the opposite side of the road.
+                </p>
 
-      <ul>
-        <li>{{t "faq.answers.answer5.community"}}</li>
-        <li>{{t "faq.answers.answer5.drug"}}</li>
-        <li>{{t "faq.answers.answer5.education"}}</li>
-        <li>{{t "faq.answers.answer5.elderly"}}</li>
-        <li>{{t "faq.answers.answer5.environmental"}}</li>
-        <li>{{t "faq.answers.answer5.families"}}</li>
-        <li>{{t "faq.answers.answer5.medical_n_hospitals"}}</li>
-        <li>{{t "faq.answers.answer5.orphanages"}}</li>
-        <li>{{t "faq.answers.answer5.special_needs"}}</li>
-        <li>{{t "faq.answers.answer5.risk"}}</li>
-        <li>{{t "faq.answers.answer5.rehabilitation"}}</li>
-        <li>{{t "faq.answers.answer5.service_orgs"}}</li>
-        <li>{{t "faq.answers.answer5.social_enterprise"}}</li>
-        <li>{{t "faq.answers.answer5.sports"}}</li>
-        <li>{{t "faq.answers.answer5.suicide_prevention"}}</li>
-        <li>{{t "faq.answers.answer5.domestic_workers"}}</li>
-        <li>{{t "faq.answers.answer5.new_arrivals"}}</li>
-        <li>{{t "faq.answers.answer5.women"}}</li>
-        <li>{{t "faq.answers.answer5.vocational_training"}}</li>
-        <li>{{t "faq.answers.answer5.animals_welfare"}}</li>
-      </ul>
+                <ul>
+                  <li>Minibus: 140M, 43, 43B, 43S</li>
+                  <li>Bus: 962B, 61M, 52x, 53, A33, K51, K53</li>
+                </ul>
 
-      <p id="question6"><b>{{t "faq.questions.question6"}}</b></p>
+              </div>
+            </li>
 
-      <p>
-        {{t "faq.answers.answer6"}}
-        <a target="_blank" href="http://www.globalhand.org/">
-          {{t "faq.answers.global_hand"}}
-        </a>
-      </p>
+            <li id="q9">
+              <div class="faq-answer-title">What are your opening hours?</div>
+              <div class="faq-answer-text">
+                If you would like to visit our warehouse, please make an appointment on this website.
+                Unfortunately, we can’t accommodate walk-ins.
+                Crossroads Foundation’s opening hours are from Tuesday-Saturday 10:00am to 1:00pm and 2:00pm to 5:00pm.
+                We are closed on public holidays and during stocktakes. 
+              </div>
+            </li>
 
-      <p id="question7"><b>{{t "faq.questions.question7"}}</b></p>
+            <li id="q10">
+              <div class="faq-answer-title">How do I contact your organisation if my questions are not covered in this FAQ?</div>
+              <div class="faq-answer-text">
+                Email: <a href="mailto:local@crossroads.org.hk">local@crossroads.org.hk</a>
+                Phone: +852 2272 9343 (direct line to Hong Kong Distribution) 
+                If your enquiry concerns a specific application, please indicate the GoodCity reference number (GC-XXXXX) on all correspondence.
+                You can also use the “chat” function in our GoodCity app/website.
+              </div>
+            </li>
 
-      <p>{{t "faq.answers.answer7.hk"}}</p>
+            <li id="q11">
+              <div class="faq-answer-title">What is the Computer Reuse Program?</div>
+              <div class="faq-answer-text">
+                The Computer Reuse Program allows eligible organisation to obtain computers for their internal use.
+                Find more details of the computer reuse program here. 
+                If you would like to request computers for individuals in need, please contact our staff via <a href="mailto:local@crossroads.org.hk">local@crossroads.org.hk</a>.
+              </div>
+            </li>
 
-      <p>{{t "faq.answers.answer7.crossroads"}}</p>
+          </ul>
+        </div>
+
+        <div class="faq-answer-section">
+          <div class="faq-answer-section-title">Using our GoodCity Apps / website</div>
+          <ul>
+            <li id="q12">
+              <div class="faq-answer-title">Can I use my personal email to sign up on your app / website?</div>
+              <div class="faq-answer-text">
+                No, please use your organisational email. This helps us confirm that you are an official
+                representative of an eligible organisation. If your organisation does not have an official
+                email, please contact <a href="mailto:local@crossroads.org.hk">local@crossroads.org.hk</a>
+                with your organisation’s registration number and proof that you are working there.
+              </div>
+            </li>
+            <li id="q13">
+              <div class="faq-answer-title">This account was passed onto me from another person who previously held my post. How should I change the account details?</div>
+              <div class="faq-answer-text">
+                Please email <a href="mailto:local@crossroads.org.hk">local@crossroads.org.hk</a> and include
+                the organisation and details regarding changes in name, phone number and email addresses.
+                Our staff will get back to you as soon as possible. 
+              </div>
+            </li>
+            <li id="q14">
+              <div class="faq-answer-title">I cannot login to my account. What should I do?</div>
+              <div class="faq-answer-text">
+                We are sorry you are having difficulty. Please email <a href="mailto:local@crossroads.org.hk">local@crossroads.org.hk</a> and let us know: 
+                <ul>
+                  <li>The phone number or email address you are using to log in</li>
+                  <li>What happens when you try to log in</li>
+                </ul>
+                Our team will seek to resolve the problem for you as quickly as possible.
+              </div>
+            </li>
+            <li id="q15">
+              <div class="faq-answer-title">I cannot submit an order. What should I do?</div>
+              <div class="faq-answer-text">
+                We are sorry you are having technical difficulty. Please email <a href="mailto:local@crossroads.org.hk">local@crossroads.org.hk</a> and let us know:
+                <ul>
+                  <li>The phone number or email address you are using to log in</li>
+                  <li>What happens when you try to submit an order</li>
+                </ul>
+                Our team will seek to resolve the problem for you as quickly as possible.
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="faq-answer-section">
+          <div class="faq-answer-section-title">Transportation</div>
+          <ul>
+            <li id="q16">
+              <div class="faq-answer-title">Who will pay for transportation?</div>
+              <div class="faq-answer-text">
+                The recipient of the goods is responsible for the cost of transport.
+                Note: special schemes to partially or fully sponsor transport costs for
+                certain clients occasionally become available. However, these depend on a
+                donor contributing money explicitly to help clients with transport costs.
+                We will advertise these whenever they occur.
+              </div>
+            </li>
+            <li id="q17">
+              <div class="faq-answer-title">Who will arrange the transportation?</div>
+              <div class="faq-answer-text">
+                When placing an online order, you can choose either:
+                <ul>
+                  <li>Recipient will collect from Crossroads
+                    <ul>
+                      <li>This means that you will make your own arrangements for transport (e.g., use your own vehicle or hire on using your preferred methods) when you come to collect.</li>
+                    </ul>
+                  </li>
+                  <li>Recipient would like the goods sent in a hired truck (Recipient pays the driver)
+                    <ul>
+                      <li>This means that Crossroads’ staff will help book a van/truck for you. We will load the goods in and send them to your location. You will be responsible to unload the goods and pay the driver.</li>
+                    </ul>
+                  </li>
+                </ul>
+
+                When making an appointment to select goods from Crossroads’ warehouse you can choose either:
+                <ul>
+                  <li>Client will bring private vehicle
+                    <ul><li>This could be their personal vehicle or one they have arranged hire of themselves.</li></ul>
+                  </li>
+                  <li>Client needs information about hiring vehicle
+                    <ul><li>In this case our team will help hire a vehicle. The client will need to pay the driver.</li></ul>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <li id="q18">
+              <div class="faq-answer-title">How would your staff arrange transportation?</div>
+              <div class="faq-answer-text">
+                When we are asked to make the transport arrangements, we typically use companies
+                such as Lalamove or Gogovan. Items are transported with either a van or a 5.5-ton truck.
+                The recipient of the goods needs to pay the driver for the associated transport costs.
+              </div>
+            </li>
+            <li id="q19">
+              <div class="faq-answer-title">How much is transportation?</div>
+              <div class="faq-answer-text">
+                <p>Transportation costs depend on the type of vehicle, location, time of day and various factors.
+                For reference, please see <a href="https://www.gogox.com/pricing/">GoGoVan’s pricing information page</a>.</p>
+                <p>Our staff will confirm the exact costs on the day of delivery and ask your client to prepare cash for the driver.
+                  Additional costs that may incur include borrowing trolley, additional weight time, tunnel fee etc.</p>
+
+              </div>
+            </li>
+            <li id="q20">
+              <div class="faq-answer-title">Will the driver help the client unload items and carry them into the client’s apartment? </div>
+              <div class="faq-answer-text">
+                No, the driver will not be involved with moving the items. We recommend asking for family or friends for an extra hand,
+                but if that is not possible, the driver can help with moving the items with an additional fee upon their quotation,
+                which the driver will provide on the day. 
+              </div>
+            </li>
+            <li id="q21">
+              <div class="faq-answer-title">Transportation: Appointments</div>
+              <div class="faq-answer-text">
+                <p>Can the client arrange their own transportation?</p>
+                <p>Yes. Note that drivers charge extra for waiting time. We do not recommend clients hire an on-demand driver for
+                   a return journey (both to and from Crossroads’ warehouse) because paying the driver to wait while goods are selected
+                   and prepared is costly. It is usually better to come to Crossroads via public transport and then hire a vehicle when
+                   the goods are ready to load.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="faq-answer-section">
+          <div class="faq-answer-section-title">Online orders</div> 
+          <ul>
+            <li id="q22">
+              <div class="faq-answer-title">How many items can we put in one order? How many times can one client apply for goods?</div>
+              <div class="faq-answer-text">
+                We rely on social workers/charity staff to assess the needs of our clients and pick out items that are suitable.
+                We do not have a specific rule regarding how many items can be in an order if it is within reason. However, we do
+                check a client’s past order history and reserve the right to deny a request. If we are concerned that the goods
+                requested are not reasonable, we will contact you directly and inquire about it.
+              </div>
+            </li>
+            <li id="q23">
+              <div class="faq-answer-title">Why can’t I find a particular item online anymore?</div>
+              <div class="faq-answer-text">
+                It may have already been selected by another caseworker/NGO representative.
+              </div>
+            </li>
+            <li id="q24">
+              <div class="faq-answer-title">How long can you reserve an item I am interested in?</div>
+              <div class="faq-answer-text">
+                If you place an online order, you will be required to select a pickup/delivery date.
+                The available dates will vary (based on holidays and how overbooked we are) but are
+                typically within two weeks of order placement. To conserve limited warehouse space,
+                we do not reserve items beyond the agreed pickup/deliver date.
+              </div>
+            </li>
+            <li id="q25">
+              <div class="faq-answer-title">Can I choose the items online and then the client picks them up in person?</div>
+              <div class="faq-answer-text">
+                Yes. On the Transport Details page, pick “Recipients will collect from Crossroads”. Please inform your client
+                that he/she will not be able to browse our warehouse or make additional requests to the order. Please bring
+                along the confirmation letter and proof of identification.
+              </div>
+            </li>
+            <li id="q26">
+              <div class="faq-answer-title">What happens if a specific item I ordered cannot be found in your warehouse?</div>
+              <div class="faq-answer-text">
+                We will contact you and try to suggest similar item(s) as a replacement. If that’s not possible, we will have
+                to cancel that item. Please let your client know about the changes.
+              </div>
+            </li>
+            <li id="q27">
+              <div class="faq-answer-title">I’ve arranged some help to move the furniture to the client’s apartment. Can I request a specific time for the goods to arrive?</div>
+              <div class="faq-answer-text">
+                Depending on our manpower availability, we can try to arrange to load the vehicle within a specific time-range.
+                However, we cannot guarantee an exact arrival time since that depends on the quantity of goods, traffic and other
+                factors that we cannot control.
+              </div>
+            </li>
+            <li id="q28">
+              <div class="faq-answer-title">What is the difference between “needs hired vehicle” and “private vehicle”?</div>
+              <div class="faq-answer-text">
+                We will hire a driver for your client if you choose “needs hired vehicle”, please provide the relevant address
+                (the client will be required to pay the hire charge to the driver). As for “private vehicle”, we will expect
+                your client to arrive at our warehouse to pick up the items, making their own arrangements for the necessary vehicle.
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="faq-answer-section">
+          <div class="faq-answer-section-title">Appointment</div>
+          <ul>
+            <li id="q29">
+              <div class="faq-answer-title">What can my client expect when they come to your warehouse?</div>
+              <div class="faq-answer-text">
+                The appointment process is normally as follows:
+                <ol>
+                  <li>When the client arrives at our distribution centre, a volunteer will ask for the clients’ appointment letter and identification documents (HKID or Asylum Seeker Recognizance Form). The appointment letter can be a digital version.</li>
+                  <li>Our volunteers will confirm the list of requested items submitted to us.</li>
+                  <li>Only the immediate family members of the listed client can browse our warehouse and they will be accompanied by our volunteers.</li>
+                  <li>After a client selects an item, our volunteer will confirm that the item is available and assist in moving the items to our loading bay.</li>
+                  <li>When everything is moved and ready to go, our volunteers will confirm all the items.</li>
+                  <li>After that, we will assist in arranging transportation. We usually use delivery services such as Lalamove or Gogovan, hiring either a van or a 5.5-ton truck.</li>
+                  <li>Your client will sit in the passenger seat of the vehicle.</li>
+                  <li>The driver will not assist with unloading the items. Please ensure your client has an extra hand to help.</li>
+                </ol>
+              </div>
+            </li>
+            <li id="q30">
+              <div class="faq-answer-title">How long is the appointment?</div>
+              <div class="faq-answer-text">
+                Normally we allocate 60-90 minutes for each client to browse our warehouse.
+              </div>
+            </li>
+            <li id="q31">
+              <div class="faq-answer-title">What should my client bring on the day of the appointment?</div>
+              <div class="faq-answer-text">
+                Please bring along the appointment letter, the identification documents and cash for hiring a van/truck.
+              </div>
+            </li>
+            <li id="q32">
+              <div class="faq-answer-title">Can a client have two active orders (appointment/online order) at the same time?</div>
+              <div class="faq-answer-text">
+                No. Please submit only one order for each client/family unit.
+              </div>
+            </li>
+            <li id="q33">
+              <div class="faq-answer-title">What is the request list?</div>
+              <div class="faq-answer-text">
+                <p>This is the list of items that your client will be allowed to receive, it is set up this way because social workers
+                  know their clients’ actual needs, but our team does not. Please only request what is needed so we can help as many
+                  people as possible with the goods available. We also check the history of your client in case they have requested
+                  similar goods in the past.</p>
+                <p>We normally do not allow clients to request additional items, but if an emergent need arises, please either email us
+                  or message us via the GoodCity app/website.</p>
+                <p>Since we work on a first-come, first-served basis, we sadly cannot guarantee that everything on the request list
+                  would be available at the time of the appointment.</p>
+              </div>
+            </li>
+            <li id="q34">
+              <div class="faq-answer-title">Can my client browse the goods in your physical warehouse, and then pick it up later?</div>
+              <div class="faq-answer-text">
+                No, although we would love to be as accommodating as possible, this creates warehouse storage problems. Please reschedule
+                the appointment if your client is unable to receive those goods at the time.
+              </div>
+            </li>
+            <li id="q35">
+              <div class="faq-answer-title">Does Crossroads have all items in stock?</div>
+              <div class="faq-answer-text">
+                We love to help wherever possible. However, as we rely on donations from the public, we cannot guarantee the availability
+                of all requested items at the time of your client’s appointment. Please communicate these expectations to your client.
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="faq-answer-section">
+          <div class="faq-answer-section-title">Making changes to an order / appointment</div>
+          <ul>
+            <li id="q36">
+              <div class="faq-answer-title">Can I add additional items to the online order?</div>
+              <div class="faq-answer-text">
+                We only accept changes to an order 3 days before the delivery day and it should be within reason.
+                Please include a screenshot of the item photo, details, and your GoodCity reference number, and
+                send it to <a href="mailto:local@crossroads.org.hk">local@crossroads.org.hk</a>.
+              </div>
+            </li>
+            <li id="q37">
+              <div class="faq-answer-title">Can I add additional items to the request list for appointments?</div>
+              <div class="faq-answer-text">
+                Yes. You can contact us via the chat function on the GoodCity app or website.
+              </div>
+            </li>
+            <li id="q38">
+              <div class="faq-answer-title">How can I reschedule an order?</div>
+              <div class="faq-answer-text">
+                On your dashboard in the GoodCity App or website, you can choose a specific order,
+                click on “Booking” then “Edit” and browse the available slots.
+              </div>
+            </li>
+            <li id="q39">
+              <div class="faq-answer-title">How many times can I reschedule a delivery/pickup date?</div>
+              <div class="faq-answer-text">
+                <p>You can only reschedule for your client twice with one order.</p>
+                <p>We do reserve the right to cancel an order rather than accept a rescheduling request. This might happen if
+                  our storage is under pressure and/or other people in need are asking to take the items from us immediately.</p>
+              </div>
+            </li>
+            <li id="q40">
+              <div class="faq-answer-title">My client has found resources somewhere else. How can I cancel the appointment/online order?</div>
+              <div class="faq-answer-text">
+                On your order dashboard in the GoodCity App or website, you can select the order, click on “booking” and then click the button to “cancel” this order.
+              </div>
+            </li>
+            <li id="q41">
+              <div class="faq-answer-title">Can you please summarise how your services work?</div>
+              <div class="faq-answer-text">
+                For beneficiaries to request goods from Crossroads Foundation using the GoodCity Platform:
+                <ol>
+                  <li>Please kindly contact your caseworker/social worker or charity staff (referred to as "your contact") to apply on your behalf via website <a href="https://charities.goodcity.hk">charities.goodcity.hk</a></li>
+                  <li>On <a href="https://charities.goodcity.hk">charities.goodcity.hk</a>, you can browse our virtual warehouse by clicking "Browse our stock online". Communicate with your contact about your needs.
+                    <ul>
+                      <li>Dimensions are listed each item, please make sure they suit your need</li>
+                      <li>After your contact places the order, our team will gather the goods to ensure they are all available (if changes are needed, they will message your contact.)</li>
+                      <li>On the day of the delivery, our team will call you to make sure someone is home to receive the goods</li>
+                      <li>Important: drivers from hired companies do not normally help our clients move items to their apartment. Please arrange an extra hand to help if needed.</li>
+                      <li>You (the recipient) will be responsible for the transportation costs.
+                        <ul>
+                          <li>To get an idea of these costs you can refer to <a href="https://www.gogox.com/pricing/">GoGoVan’s pricing information page</a>.</li>
+                          <li>Depending on distance, prices range from $70 to $200 for a van or $180 to $450 for a 5.5 tone truck.</li>
+                          <li>Be aware that there may be additional charges for tunnel fees, parking, waiting, borrowing trolleys etc.</li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                  <li>If you would like to visit our warehouse in Tuen Mun, please ask your contact (social worker or charity representative) to make an appointment for you by clicking on "book to visit our centre". They will be asked to list the items you would need:
+                    <ul>
+                      <li>Location: <a href="https://goo.gl/maps/289VKkRFR7TCpfBV9">Building 30, 2 Castle Peak Road, Tuen Mun (Opposite Gold Coast Phase 1)</a></li>
+                      <li>Please keep in mind that we cannot guarantee the availability of all requested goods (especially electrical items).</li>
+                      <li>Our staff can assist in arranging transportation. However, you will be responsible for the transportation costs and for labour to move items into your apartment. If possible, please arrange an extra hand to help with moving items.</li>
+                    </ul>
+                  </li>
+                  <li>For issues regarding reschedules and additional requests, please kindly let your contact communicate directly with us.</li>
+                </ol>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
 
     </div>
   </div>
