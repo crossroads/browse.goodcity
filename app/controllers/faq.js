@@ -15,5 +15,9 @@ export default Controller.extend({
       });
     });
     return questions;
+  }),
+  isEnglish: computed("i18n.locale", function() {
+    const lang = this.get("i18n.locale");
+    return /zh/.test(lang) ? false : true;
   })
 });
