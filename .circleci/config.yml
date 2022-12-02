@@ -204,7 +204,7 @@ jobs:
       - run:
           name: Build android app
           command: |
-            sudo npm install -g cordova@11
+            sudo npm install -g cordova@11.0.0 cordova-common
             node rename_package.js
             cordova platform add android
             if [ "$ENVIRONMENT" == "production" ]; then
@@ -244,12 +244,11 @@ jobs:
       - run: az storage blob download --account-name $GOODCITY_STORAGE -c ci-app-secrets -n browse-${ENVIRONMENT}.mobileprovision -f ~/Library/MobileDevice/Provisioning\ Profiles/browse-${ENVIRONMENT}.mobileprovision
       - run: az storage blob download --account-name $GOODCITY_STORAGE -c ci-app-secrets -n AuthKey_${APPSTORE_CONNECT_API_KEY_ID}.p8 -f ~/code/fastlane/AuthKey_${APPSTORE_CONNECT_API_KEY_ID}.p8
       - run: az storage blob download --account-name $GOODCITY_STORAGE -c ci-app-secrets -n hk.goodcity.${ENVIRONMENT}.p12 -f ~/code/fastlane/hk.goodcity.${ENVIRONMENT}.p12
-      - run: npm install -g cordova@10.0.0
       - run: bundle exec fastlane ios prepare_certificates cert:hk.goodcity.${ENVIRONMENT}.p12
       - run:
           name: Build iOS app
           command: |
-            npm install cordova-common
+            sudo npm install -g cordova@11.0.0 cordova-common
             node rename_package.js
             cordova platform add ios
             UUID=`openssl smime -inform der -verify -noverify -in "/Users/distiller/Library/MobileDevice/Provisioning Profiles/browse-${ENVIRONMENT}.mobileprovision" | grep -A 1 UUID | sed "s@.*<string>\(.*\)</string>.*@\1@" | tail -n 1`
@@ -293,13 +292,13 @@ workflows:
             - package_dependencies
           filters:
             branches:
-              only: /^(master|live|GCW-3746-android-api-30)$/
+              only: /^(master|live)$/
       - android_build_and_deploy:
           requires:
             - ember_cordova_build
-          filters:
-            branches:
-              only: /^(master|live|GCW-3746-android-api-30)$/
+          # filters:
+          #   branches:
+          #     only: /^(master|live)$/
       # - ios_build_and_deploy:
       #     requires:
       #       - test_cases
