@@ -1,16 +1,11 @@
-FROM cimg/android:2021.10.2-node
+FROM cimg/android:2022.04-browsers
 
 WORKDIR /home/circleci/project
 USER circleci
 
-RUN sudo apt-get update \
-  && sudo apt remove openjdk-11-* \
-  && sudo apt-get install -y apt-transport-https ca-certificates wget dirmngr gnupg software-properties-common openjdk-8-jdk python \
-  && npm install cordova@10
+RUN npm install cordova@11
 ENV PATH=$PATH:/home/circleci/project/node_modules/cordova/bin/
-ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 ENV ENVIRONMENT=staging
-
 RUN cordova telemetry off
 COPY --chown=circleci . /home/circleci/project/
 RUN node --version \
@@ -25,7 +20,9 @@ RUN node --version \
 # ADVANCED USAGE KEEPS IMAGE RUNNING TO MAINTAIN GRADLE CACHE
 # ENVIRONMENT=staging EMBER_CLI_CORDOVA=1 yarn run ember build
 # cd cordova
+# ln -s ../dist www
 # cordova platform add android
+# cd ..
 # docker run -i -v `pwd`/dist/:/home/circleci/project/dist/ -v `pwd`/cordova:/home/circleci/project/cordova/ -w /home/circleci/project/cordova/ -u root -t browse.goodcity.hk:latest /bin/bash
 #   cordova build android --debug --device
 # App located in `pwd`/cordova/platforms/android/app/build/outputs/apk/debug/app-debug.apk

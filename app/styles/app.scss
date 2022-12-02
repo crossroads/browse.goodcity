@@ -1,4 +1,10 @@
 @import "mixins/alignment";
+/* viewport fix for iOS devices with button overlays
+   https://cordova.apache.org/docs/en/latest/core/features/splashscreen/index.html?#ios-specific-information
+*/
+body {
+  padding: env(safe-area-inset-top, 0px);
+}
 @import "settings";
 @import "colors";
 @import "fonts";

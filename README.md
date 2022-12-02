@@ -98,7 +98,7 @@ ln -s `pwd`/dist `pwd`/cordova/www
 cd cordova
 # can help to start with a clean env, if android build issues
 rm -rf platforms/ plugins/ node_modules/
-cordova platform add android@10.1.2
+cordova platform add android@11
 # now open Android Studio and build or run gradle in the docker env
 ```
 
@@ -106,7 +106,7 @@ cordova platform add android@10.1.2
 
 If you want to run the app on a debug mobile device, you can use Android Studio to run the gradle builds and push to your development phone.
 
-- After running `cordova platform add android@10.1.2` above, open Android Studio with the project folder located at <project root>/cordova/platforms/android
+- After running `cordova platform add android@11` above, open Android Studio with the project folder located at <project root>/cordova/platforms/android
 - Connect your mobile phone and turn on debug mode
 - Run the usual gradle refresh and build processes
 - Once the app is launched on the phone, you will have useful logs (great for Push Notification debugging) inside Android Studio and you can also open Browser Inspector to view the usual processes: `edge://inspect/#devices`

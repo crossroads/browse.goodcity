@@ -179,11 +179,10 @@ jobs:
   android_build_and_deploy:
     <<: *defaults
     docker:
-      - image: cimg/android:2021.10.2-node
+      - image: cimg/android:2022.04-browsers
     environment:
       JVM_OPTS: -Xmx3200m
       CIRCLE_ARTIFACTS: /home/circleci/code/cordova/platforms/android/app/build/outputs/apk/release/
-      JAVA_HOME: /usr/lib/jvm/java-8-openjdk-amd64
     steps:
       - restore_cache: *restore-repo-cache
       - restore_cache: *restore-yarn-cache
@@ -197,13 +196,6 @@ jobs:
           command: |
             echo 'export ENVIRONMENT=$(if [ "$CIRCLE_BRANCH" == "live" ]; then echo production; else echo staging; fi)' >> $BASH_ENV
             echo 'export PATH=$PATH:`yarn bin`' >> $BASH_ENV
-      - run:
-          name: Install dependencies
-          command: |
-              sudo apt-get update
-              sudo apt remove openjdk-11-*
-              sudo apt-get install -y apt-transport-https ca-certificates wget dirmngr gnupg software-properties-common openjdk-8-jdk
-              sudo npm install -g cordova@10
       - azure-cli/install
       - azure-cli/login-with-service-principal
       - run: az storage blob download --account-name $GOODCITY_STORAGE -c ci-app-secrets -n browse-$ENVIRONMENT-google-services.json -f ~/code/cordova/google-services.json
@@ -212,6 +204,7 @@ jobs:
       - run:
           name: Build android app
           command: |
+            sudo npm install -g cordova@11
             node rename_package.js
             cordova platform add android
             if [ "$ENVIRONMENT" == "production" ]; then
