@@ -204,7 +204,7 @@ jobs:
       - run:
           name: Build android app
           command: |
-            sudo npm install -g cordova@11.0.0 cordova-common
+            npm install cordova@11.0.0
             node rename_package.js
             cordova platform add android
             if [ "$ENVIRONMENT" == "production" ]; then
@@ -235,7 +235,11 @@ jobs:
       - run: brew install azure-cli
       - attach_workspace:
           at: ~/code
-      - run: echo 'export ENVIRONMENT=$(if [ "$CIRCLE_BRANCH" == "live" ]; then echo production; else echo staging; fi)' >> $BASH_ENV
+      - run:
+          name: Setup Environment variables
+          command: |
+              echo 'export ENVIRONMENT=$(if [ "$CIRCLE_BRANCH" == "live" ]; then echo production; else echo staging; fi)' >> $BASH_ENV
+              echo 'export PATH=$PATH:`npm bin`' >> $BASH_ENV
       - restore_cache: *restore-ios-bundler-cache
       - run: bundle config set --local deployment 'true' && (bundle check || bundle install --jobs=2 --retry=3)
       - save_cache: *save-ios-bundler-cache
@@ -248,7 +252,7 @@ jobs:
       - run:
           name: Build iOS app
           command: |
-            sudo npm install -g cordova@11.0.0 cordova-common
+            npm install cordova@11.0.0
             node rename_package.js
             cordova platform add ios
             UUID=`openssl smime -inform der -verify -noverify -in "/Users/distiller/Library/MobileDevice/Provisioning Profiles/browse-${ENVIRONMENT}.mobileprovision" | grep -A 1 UUID | sed "s@.*<string>\(.*\)</string>.*@\1@" | tail -n 1`
