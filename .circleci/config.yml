@@ -179,11 +179,10 @@ jobs:
   android_build_and_deploy:
     <<: *defaults
     docker:
-      - image: cimg/android:2021.10.2-node
+      - image: cimg/android:2022.04-browsers
     environment:
       JVM_OPTS: -Xmx3200m
       CIRCLE_ARTIFACTS: /home/circleci/code/cordova/platforms/android/app/build/outputs/apk/release/
-      JAVA_HOME: /usr/lib/jvm/java-8-openjdk-amd64
     steps:
       - restore_cache: *restore-repo-cache
       - restore_cache: *restore-yarn-cache
@@ -197,13 +196,6 @@ jobs:
           command: |
             echo 'export ENVIRONMENT=$(if [ "$CIRCLE_BRANCH" == "live" ]; then echo production; else echo staging; fi)' >> $BASH_ENV
             echo 'export PATH=$PATH:`yarn bin`' >> $BASH_ENV
-      - run:
-          name: Install dependencies
-          command: |
-              sudo apt-get update
-              sudo apt remove openjdk-11-*
-              sudo apt-get install -y apt-transport-https ca-certificates wget dirmngr gnupg software-properties-common openjdk-8-jdk
-              sudo npm install -g cordova@10
       - azure-cli/install
       - azure-cli/login-with-service-principal
       - run: az storage blob download --account-name $GOODCITY_STORAGE -c ci-app-secrets -n browse-$ENVIRONMENT-google-services.json -f ~/code/cordova/google-services.json
@@ -212,6 +204,7 @@ jobs:
       - run:
           name: Build android app
           command: |
+            npm install cordova@11.0.0
             node rename_package.js
             cordova platform add android
             if [ "$ENVIRONMENT" == "production" ]; then
@@ -242,7 +235,11 @@ jobs:
       - run: brew install azure-cli
       - attach_workspace:
           at: ~/code
-      - run: echo 'export ENVIRONMENT=$(if [ "$CIRCLE_BRANCH" == "live" ]; then echo production; else echo staging; fi)' >> $BASH_ENV
+      - run:
+          name: Setup Environment variables
+          command: |
+              echo 'export ENVIRONMENT=$(if [ "$CIRCLE_BRANCH" == "live" ]; then echo production; else echo staging; fi)' >> $BASH_ENV
+              echo 'export PATH=$PATH:`npm bin`' >> $BASH_ENV
       - restore_cache: *restore-ios-bundler-cache
       - run: bundle config set --local deployment 'true' && (bundle check || bundle install --jobs=2 --retry=3)
       - save_cache: *save-ios-bundler-cache
@@ -251,12 +248,11 @@ jobs:
       - run: az storage blob download --account-name $GOODCITY_STORAGE -c ci-app-secrets -n browse-${ENVIRONMENT}.mobileprovision -f ~/Library/MobileDevice/Provisioning\ Profiles/browse-${ENVIRONMENT}.mobileprovision
       - run: az storage blob download --account-name $GOODCITY_STORAGE -c ci-app-secrets -n AuthKey_${APPSTORE_CONNECT_API_KEY_ID}.p8 -f ~/code/fastlane/AuthKey_${APPSTORE_CONNECT_API_KEY_ID}.p8
       - run: az storage blob download --account-name $GOODCITY_STORAGE -c ci-app-secrets -n hk.goodcity.${ENVIRONMENT}.p12 -f ~/code/fastlane/hk.goodcity.${ENVIRONMENT}.p12
-      - run: npm install -g cordova@10.0.0
       - run: bundle exec fastlane ios prepare_certificates cert:hk.goodcity.${ENVIRONMENT}.p12
       - run:
           name: Build iOS app
           command: |
-            npm install cordova-common
+            npm install cordova@11.0.0
             node rename_package.js
             cordova platform add ios
             UUID=`openssl smime -inform der -verify -noverify -in "/Users/distiller/Library/MobileDevice/Provisioning Profiles/browse-${ENVIRONMENT}.mobileprovision" | grep -A 1 UUID | sed "s@.*<string>\(.*\)</string>.*@\1@" | tail -n 1`
@@ -300,13 +296,13 @@ workflows:
             - package_dependencies
           filters:
             branches:
-              only: /^(master|live|GCW-3746-android-api-30)$/
+              only: /^(master|live)$/
       - android_build_and_deploy:
           requires:
             - ember_cordova_build
           filters:
             branches:
-              only: /^(master|live|GCW-3746-android-api-30)$/
+              only: /^(master|live)$/
       # - ios_build_and_deploy:
       #     requires:
       #       - test_cases

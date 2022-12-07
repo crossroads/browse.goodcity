@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget android-versionCode="80001" id="hk.goodcity.browsestaging" ios-CFBundleVersion="1" version="0.11.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget android-versionCode="80001" id="hk.goodcity.browsestaging" ios-CFBundleVersion="1" version="0.21.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>S. GoodCity.HK for Charities</name>
     <description>
       Hong Kong NGOs can request goods via the GoodCity.HK platform
@@ -18,21 +18,18 @@
         <resource-file src="google-services.json" target="/app/google-services.json" />
         <resource-file src="res/android/notification.png" target="app/src/main/res/drawable/notification.png" />
         <preference name="LoadUrlTimeoutValue" value="120000" />
-        <preference name="SplashScreen" value="screen" />
-        <preference name="SplashScreenDelay" value="5000" />
+        <preference name="SplashScreenDelay" value="-1" />
         <preference name="Orientation" value="portrait" />
+        <preference name="AndroidXEnabled" value="true" />
+        <preference name="AndroidWindowSplashScreenBackground" value="#002352" />
+        <preference name="AndroidWindowSplashScreenIconBackgroundColor" value="#002352" />
+        <preference name="AndroidWindowSplashScreenAnimatedIcon" value="res/android/splashscreen-icon.png" />
         <icon density="ldpi" src="res/android/drawable-ldpi/icon.png" />
         <icon density="mdpi" src="res/android/drawable-mdpi/icon.png" />
         <icon density="hdpi" src="res/android/drawable-hdpi/icon.png" />
         <icon density="xhdpi" src="res/android/drawable-xhdpi/icon.png" />
         <icon density="xxhdpi" src="res/android/drawable-xxhdpi/icon.png" />
         <icon density="xxxhdpi" src="res/android/drawable-xxxhdpi/icon.png" />
-        <splash density="port-ldpi" src="res/android/drawable-ldpi/screen.png" />
-        <splash density="port-mdpi" src="res/android/drawable-mdpi/screen.png" />
-        <splash density="port-hdpi" src="res/android/drawable-hdpi/screen.png" />
-        <splash density="port-xhdpi" src="res/android/drawable-xhdpi/screen.png" />
-        <splash density="port-xxhdpi" src="res/android/drawable-xxhdpi/screen.png" />
-        <splash density="port-xxxhdpi" src="res/android/drawable-xxxhdpi/screen.png" />
     </platform>
     <platform name="ios">
         <preference name="SwiftVersion" value="5" />
@@ -68,7 +65,7 @@
         <icon height="88" src="res/ios/Icon-App-44x44@2x.png" width="88" />
         <icon height="196" src="res/ios/Icon-App-98x98@2x.png" width="196" />
         <icon height="1024" src="res/ios/Icon-App-1024.png" width="1024" />
-        <splash src="res/screen/ios/Default@2x~universal~anyany.png" />
+        <splash src="res/ios/splash-screen@2x~universal~anyany.png" />
         <edit-config file="*-Info.plist" mode="merge" target="ITSAppUsesNonExemptEncryption">
             <false />
         </edit-config>
