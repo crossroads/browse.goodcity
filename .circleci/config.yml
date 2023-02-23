@@ -196,6 +196,7 @@ jobs:
           command: |
             echo 'export ENVIRONMENT=$(if [ "$CIRCLE_BRANCH" == "live" ]; then echo production; else echo staging; fi)' >> $BASH_ENV
             echo 'export PATH=$PATH:`yarn bin`' >> $BASH_ENV
+      - run: curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
       - azure-cli/install
       - azure-cli/login-with-service-principal
       - run: az storage blob download --account-name $GOODCITY_STORAGE -c ci-app-secrets -n browse-$ENVIRONMENT-google-services.json -f ~/code/cordova/google-services.json
