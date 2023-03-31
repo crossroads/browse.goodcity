@@ -226,6 +226,7 @@ jobs:
   ios_build_and_deploy:
     macos:
       xcode: "13.2.1"
+    resource_class: macos.x86.medium.gen2
     working_directory: ~/code
     shell: /bin/bash --login -eo pipefail
     environment:
