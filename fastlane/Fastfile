@@ -69,7 +69,6 @@ platform :ios do
     raise_if_no_env_var(["PILOT_USERNAME", "PILOT_IPA", "PILOT_TESTER_EMAIL", "ITUNESCONNECT_PASSWORD"])
     package_json = File.open(File.join(File.expand_path('../../',  __FILE__), 'package.json'), 'r').read
     version_number = JSON.parse(package_json)['version']
-    xsh %{ source ~/.circlerc; bundle exec fastlane fastlane-credentials add --username $PILOT_USERNAME --password $ITUNESCONNECT_PASSWORD }
     latest_testflight_build_number(api_key: APPSTORE_API_KEY, version: version_number)
     pilot
     deliver(
@@ -86,7 +85,7 @@ platform :ios do
 
   after_all do
     # remove credentials from keychain
-    xsh %{ source ~/.circlerc; bundle exec fastlane fastlane-credentials remove --username $PILOT_USERNAME }
+    xsh %{ bundle exec fastlane fastlane-credentials remove --username $PILOT_USERNAME }
   end
 
   error do |lane, exception|
