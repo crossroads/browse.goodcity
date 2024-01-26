@@ -9,6 +9,10 @@ export default Controller.extend({
       this.get("accountService").setOverlayVisibility(true);
     },
 
+    gotoDeleteAccount() {
+      this.transitionToRoute("delete_account");
+    },
+
     //Fix: Too deeply nested component(3 levels) failing randomly(Known issue with Ember)
     //Remove when Ember is upgraded to >= 3.0
     updateErrorMessage() {
