@@ -1,4 +1,8 @@
-# Charoties App
+# Charities App
+
+## v0.14.0
+
+- Added delete account feature
 
 ## v0.13.0
 

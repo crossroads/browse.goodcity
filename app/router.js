@@ -42,6 +42,7 @@ Router.map(function() {
   this.route("my_account");
   this.route("my_bookings");
   this.route("my_offer_responses");
+  this.route("delete_account");
 
   this.route("orders", function() {
     this.route("detail", {

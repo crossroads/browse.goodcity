@@ -346,7 +346,25 @@ export default {
       mrs: "太太",
       miss: "小姐",
       ms: "女士"
-    }
+    },
+    delete: "刪除賬戶"
+  },
+
+  delete_account: {
+    title: "刪除賬戶",
+    crf_privacy_policy: "國際十字路會私隱政策",
+    section1: "刪除你的賬戶後，你將無法再登入GoodCity.HK",
+    section2: "如若將來你想再使用服務，歡迎你重新建立新賬戶。",
+    section3: "請注意你的部分資料可能會被保留，以符合的合規和審計要求。",
+    section4: "所有資料將按照我們的政策處理。",
+    section5: "如若按下面的按鈕，你將會立即登出GoodCity.HK的服務。",
+    yes_delete: "是的，請刪除我的賬戶！",
+    cancel: "取消",
+    goback: "返回",
+    view_orders: "瀏覽訂單",
+    sorry1: "抱歉！在選訂過程中，你恕未能刪除你的賬戶。",
+    sorry2: "你可以取消訂單，又或待收妥物資後，你的申領申請就會自動完成。",
+    sorry3: "如需更多幫助，請在選訂過程中聯絡我們。"
   },
 
   logout: {

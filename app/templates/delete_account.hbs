@@ -1,0 +1,60 @@
+<div class="my_dashboard row">
+  {{partial 'my_dashboard/my_dashboard_tabs'}}
+
+  <div class="row">
+  <div class="small-12 columns">
+    <div class="row delete_account content">
+      <section class="details">
+        <div class="row">
+          <div class="small-12 large-10 large-offset-1 medium-10 medium-offset-1 columns">
+            <div class="mobile">
+              <div class="row">
+                <div class="small-12 medium-12 large-12 columns">
+                  <h3>{{t 'delete_account.title'}}</h3>
+                </div>
+              </div>
+              <div class="detail-row row">
+                <div class="small-12 columns">
+                  {{#if canDeleteAccount}}
+                    <p>{{t "delete_account.section1"}}</p>
+                    <p>{{t "delete_account.section2"}}</p>
+                    <p>{{t "delete_account.section3"}}</p>
+                    <p>{{t "delete_account.section4"}}
+                      {{#link-to 'terms'}}{{t "application.sidebar.terms"}}{{/link-to}},
+                      {{#link-to 'privacy'}}{{t "application.sidebar.privacy_policy"}}{{/link-to}},
+                      <a target="_blank" href = "https://www.crossroads.org.hk/home/contact/privacy/">
+                        {{t "delete_account.crf_privacy_policy"}} {{fa-icon 'external-link-alt'}}.
+                      </a>
+                    </p>
+                    <p>{{t "delete_account.section5"}}</p>
+                    <div class="detail-row row">
+                      <div class="small-6 columns data-type">
+                        <button {{action "confirmDeleteAccount" }}>{{t "delete_account.yes_delete"}}</button>
+                      </div>
+                      <div class="small-6 columns data-type">
+                        <button {{action "cancelAccountDeletion" }} class="secondary right">{{t "delete_account.cancel"}}</button>
+                      </div>
+                    </div>
+                  {{else}}
+                    <p>{{t "delete_account.sorry1"}}</p>
+                    <p>{{t "delete_account.sorry2"}}</p>
+                    <p>{{t "delete_account.sorry3"}}</p>
+                    <div class="detail-row row">
+                      <div class="small-6 columns data-type">
+                        <button {{action "viewOrders" }}>{{t "delete_account.view_orders"}}</button>
+                      </div>
+                      <div class="small-6 columns data-type">
+                        <button {{action "cancelAccountDeletion" }} class="secondary right">{{t "delete_account.cancel"}}</button>
+                      </div>
+                    </div>
+                  {{/if}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+  </div>
+</div>

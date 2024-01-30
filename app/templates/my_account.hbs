@@ -82,8 +82,11 @@
                 </div>
               </div>
               <div class="detail-row row">
-                <div class="small-10 columns data-type">
+                <div class="small-6 columns data-type">
                   <button {{action 'showPhoneOverlay'}}>{{t 'account.change_phone_number.title'}}</button>
+                </div>
+                <div class="small-6 columns data-type">
+                  <button {{action 'gotoDeleteAccount'}} class="secondary">{{t 'account.delete'}}</button>
                 </div>
               </div>
             </div>
