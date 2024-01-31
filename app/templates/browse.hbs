@@ -17,8 +17,15 @@
     <div class="small-12 columns info_box">
       <p>{{t 'browse.intro_text'}}
          {{#link-to "about" classNames="underline-link"}} {{ t "browse.faq" }} {{/link-to}}</p>
-      <p>{{ t 'browse.ngo_offer' }}
-         <a href="{{origin_url}}/transportation-funding-ngo-ver-en.pdf" class="underline-link">{{ t 'browse.ngo_offer_description' }} </a></p>
+      {{#if (is-and freeDeliveryEnabled freeDeliveryQuantityAvailable)}}
+      <p>
+        <i class="fa">{{fa-icon 'exclamation-triangle'}}</i>
+        {{ t 'browse.ngo_offer' }}
+        {{#link-to 'package' freeDeliveryPackageId}}
+          {{ t 'browse.ngo_offer_description' }}
+        {{/link-to}}
+      </p>
+      {{/if}}
     </div>
   </div>
   <div class="row">

@@ -30,6 +30,16 @@
             {{#link-to "about"}}{{ t "home.faq_text" }}{{/link-to}}
             <a href={{crossroadsCharityYoutubeVideo}}>{{ t "home.introduction_video" }}&nbsp;<i>{{fa-icon "play-circle" prefix="far"}}</i></a>
           </p>
+          {{#if (is-and freeDeliveryEnabled freeDeliveryQuantityAvailable)}}
+            <p>
+              <i class="fa">{{fa-icon 'exclamation-triangle'}}</i>
+              {{ t 'browse.ngo_offer' }}
+              {{#link-to 'package' freeDeliveryPackageId}}
+                {{ t 'browse.ngo_offer_description' }}
+              {{/link-to}}
+            </p>
+          {{/if}}
+          <p></p>
         </div>
       </div>
 
@@ -52,11 +62,21 @@
     <div class="row show-for-small video">
        <img src='assets/images/mobile-bg.jpg'alt="Picture" >
         <div class="intro">
-       <p>{{ t "home.introduction" }}</p>
+          <p>{{ t "home.introduction" }}</p>
           <p class="youtube-text">
             {{#link-to "about"}}{{ t "home.faq_text" }}{{/link-to}}
             <a href={{crossroadsCharityYoutubeVideo}}>{{ t "home.introduction_video" }}&nbsp;<i>{{fa-icon "play-circle" prefix="far"}}</i></a>
-          </p></div>
+          </p>
+          {{#if (is-and freeDeliveryEnabled freeDeliveryQuantityAvailable)}}
+            <p>
+              <i class="fa">{{fa-icon 'exclamation-triangle'}}</i>
+              {{ t 'browse.ngo_offer' }}
+              {{#link-to 'package' freeDeliveryPackageId}}
+                {{ t 'browse.ngo_offer_description' }}
+              {{/link-to}}
+            </p>
+          {{/if}}
+        </div>
     </div>
   </div>
 </div>

@@ -24,5 +24,19 @@ export default Controller.extend({
     return this.get("settings").readString(
       `browse.online_order_warning_${this.get("langShort")}`
     );
+  }),
+
+  freeDeliveryEnabled: computed(function() {
+    return this.get("settings").readBoolean("browse.free_delivery_enabled");
+  }),
+
+  freeDeliveryPackageId: computed(function() {
+    return this.get("settings").readString("browse.free_delivery_package_id");
+  }),
+
+  freeDeliveryQuantityAvailable: computed(function() {
+    const packageId = this.get("freeDeliveryPackageId");
+    const pkg = this.store.peekRecord("package", packageId);
+    return pkg && pkg.get("availableQuantity") > 0;
   })
 });

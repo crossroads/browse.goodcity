@@ -91,6 +91,13 @@
           <div class="item_details">
             {{t "itemdetail.condition"}}: {{package.donorCondition.name}}
           </div>
+          {{#if (is-and freeDeliveryEnabled freeDeliveryQuantityAvailable)}}
+            {{#if (is-equal package.id freeDeliveryPackageId)}}
+              <div class="item_details underline-link">
+                <a target="_blank" href="{{origin_url}}/transportation-funding-ngo-ver-en.pdf">{{t 'browse.ngo_offer_more_details'}} {{fa-icon 'external-link-alt'}}</a>
+              </div>
+            {{/if}}
+          {{/if}}
         </p>
         {{/each}}
         {{#if packageUnavailableInSet}}

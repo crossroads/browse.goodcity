@@ -10,11 +10,26 @@ export default Controller.extend({
   packageCategoryReloaded: false,
   flashMessage: service(),
   subscription: service(),
+  settings: service(),
   queryParams: ["orderCancelled"],
   triggerFlashMessage: false,
   origin_url: config.APP.ORIGIN,
 
   orderCancelled: false,
+
+  freeDeliveryEnabled: computed(function() {
+    return this.get("settings").readBoolean("browse.free_delivery_enabled");
+  }),
+
+  freeDeliveryPackageId: computed(function() {
+    return this.get("settings").readString("browse.free_delivery_package_id");
+  }),
+
+  freeDeliveryQuantityAvailable: computed(function() {
+    const packageId = this.get("freeDeliveryPackageId");
+    const pkg = this.store.peekRecord("package", packageId);
+    return pkg && pkg.get("availableQuantity") > 0;
+  }),
 
   on() {
     this.get("subscription").on("change:package", this, this.onPackageChange);

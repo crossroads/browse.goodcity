@@ -174,7 +174,7 @@
       width: 50%;
     }
     h1 {
-      @media #{$small-only}{
+      @media #{$small-only} {
         margin: 1em 0;
         font-size: 1em;
       }
@@ -230,13 +230,18 @@
 
       .intro{
         position: absolute;
-        top: 50%;
+        top: 30%;
         left: 5%;
         right: 5%;
         text-align: center;
         font-size: 18px;
+        p {
+          @media #{$small-only} {
+            font-size: 0.8rem!important;
+            margin-bottom: 10px;
+          }
+        }
       }
-
       img{
         height: 11.5rem;
         width: 35rem;
@@ -331,6 +336,10 @@
 
 .tab-bar{
   background-color: transparent;
+}
+
+.home-page nav.tab-bar {
+  border: 0px;
 }
 
 .youtube-text{

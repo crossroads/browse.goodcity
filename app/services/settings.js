@@ -40,7 +40,9 @@ export default Service.extend({
     "browse.appointment_warning_zh_tw": "",
     "browse.online_order_warning_en": "",
     "browse.online_order_warning_zh_tw": "",
-    "browse.allow_appointments": true
+    "browse.allow_appointments": true,
+    "browse.free_delivery_enabled": false,
+    "browse.free_delivery_package_id": 0
   },
 
   // ---- Access methods
