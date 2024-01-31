@@ -15,6 +15,7 @@ export default Controller.extend({
   packageUnavailableInSet: false,
   categoryId: null,
   cart: service(),
+  settings: service(),
   sortBy: "createdAt",
   noNextItem: empty("nextItem"),
   noPreviousItem: empty("previousItem"),
@@ -23,6 +24,20 @@ export default Controller.extend({
   itemNotAvailableShown: false,
   hasCartItems: alias("application.hasCartItems"),
   isMobileApp: config.cordova.enabled,
+
+  freeDeliveryEnabled: computed(function() {
+    return this.get("settings").readBoolean("browse.free_delivery_enabled");
+  }),
+
+  freeDeliveryPackageId: computed(function() {
+    return this.get("settings").readString("browse.free_delivery_package_id");
+  }),
+
+  freeDeliveryQuantityAvailable: computed(function() {
+    const packageId = this.get("freeDeliveryPackageId");
+    const pkg = this.store.peekRecord("package", packageId);
+    return pkg && pkg.get("availableQuantity") > 0;
+  }),
 
   direction: null,
 
