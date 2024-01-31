@@ -1,5 +1,9 @@
 # Charities App
 
+## v0.14.1
+
+- Added free delivery special offer
+
 ## v0.14.0
 
 - Added delete account feature
