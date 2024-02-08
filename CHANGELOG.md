@@ -1,5 +1,9 @@
 # Charities App
 
+## v0.14.2
+
+- Added ability to load images from Azure Storage rather than Cloudinary
+
 ## v0.14.1
 
 - Added free delivery special offer

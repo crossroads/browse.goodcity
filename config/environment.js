@@ -34,7 +34,8 @@ module.exports = function(environment) {
     },
 
     contentSecurityPolicy: {
-      "img-src": "'self' data: https://res.cloudinary.com",
+      "img-src":
+        "'self' data: https://res.cloudinary.com https://goodcityimages.blob.core.windows.net",
       "script-src": "'self' 'unsafe-inline' 'unsafe-eval'",
       "style-src": "'self' 'unsafe-inline' https://maxcdn.bootstrapcdn.com",
       "font-src": "'self' data: https://maxcdn.bootstrapcdn.com",
@@ -174,6 +175,9 @@ module.exports = function(environment) {
   }
 
   ENV.APP.SERVER_PATH = ENV.APP.API_HOST_URL + "/" + ENV.APP.NAMESPACE;
+  ENV.APP.LONG_TERM_IMAGE_STORAGE_ID_PREFIX = "azure-";
+  ENV.APP.LONG_TERM_IMAGE_STORAGE_BASE_URL =
+    "https://goodcityimages.blob.core.windows.net/images-" + environment + "/";
 
   return ENV;
 };
