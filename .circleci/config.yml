@@ -286,30 +286,30 @@ workflows:
       # - test_cases:
       #     requires:
       #       - package_dependencies
-      - www_build:
-          requires:
-            - package_dependencies
-          filters:
-            branches:
-              only: /^(master|live)$/
-      - www-deploy:
-          requires:
-            - www_build
-          filters:
-            branches:
-              only: /^(master|live)$/
+      # - www_build:
+      #     requires:
+      #       - package_dependencies
+      #     filters:
+      #       branches:
+      #         only: /^(master|live)$/
+      # - www-deploy:
+      #     requires:
+      #       - www_build
+      #     filters:
+      #       branches:
+      #         only: /^(master|live)$/
       - ember_cordova_build:
           requires:
             - package_dependencies
           filters:
             branches:
-              only: /^(master|live)$/
+              only: /^(master|live|cordova-update)$/
       - android_build_and_deploy:
           requires:
             - ember_cordova_build
           filters:
             branches:
-              only: /^(master|live)$/
+              only: /^(master|live|cordova-update)$/
 
 
       #################### NOT CURRENTLY BUILDING IOS 
