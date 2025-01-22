@@ -1,6 +1,6 @@
 {
   "name": "browse",
-  "version": "0.14.2",
+  "version": "0.14.3",
   "description": "Request goods via GoodCity.HK platform",
   "license": "MIT",
   "author": "",
@@ -103,7 +103,7 @@
   },
   "dependencies": {
     "blueimp-file-upload": "^9.17.0",
-    "bower": "^1.8.4",
+    "bower": "^1.8.14",
     "cloudinary-jquery-file-upload": "^2.2.0",
     "codeclimate-test-reporter": "^0.5.1",
     "cordova-lib": "https://github.com/crossroads/goodcity-lib.git#master",
