@@ -98,7 +98,7 @@ ln -s `pwd`/dist `pwd`/cordova/www
 cd cordova
 # can help to start with a clean env, if android build issues
 rm -rf platforms/ plugins/ node_modules/
-cordova platform add android@13
+cordova platform add android@14
 # now open Android Studio and build or run gradle in the docker env
 ```
 
@@ -113,7 +113,7 @@ rm -rf node_modules/ platforms/ plugins/
 yarn
 npm install cordova@12
 cordova platform remove android
-cordova platform add android@13
+cordova platform add android@14
 cordova platform remove ios
 cordova platform add ios@7
 
