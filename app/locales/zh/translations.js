@@ -99,7 +99,7 @@ export default {
     filter_results: "過濾這些結果 <span>&#x25be;</span>",
     intro_text:
       "如果你是香港非牟利機構的職員，你可以瀏覽下面的類別或使用上面的圖示搜索，並申請你需要的物品。",
-    ngo_offer: "特別優惠:",
+    ngo_offer: "支援大埔居民物資運送安排:",
     ngo_offer_description: "點擊申請免費送貨（僅限網上訂單）。",
     ngo_offer_more_details: "請在此處閱讀有關申請過程及更多詳細資訊。",
     faq: "請在此處閱讀有關申請過程及更多詳細資訊。",

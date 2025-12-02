@@ -1,11 +1,15 @@
 # Charities App
 
-## v0.15
+## v0.15.2
+
+- Added translations for activating special delivery offer for those affected by fire in Tai Po
+
+## v0.15.1
 
 - Update Cordova Android to 14, Kotlin 1.8.22
 - Ruby 3.4.3
 
-## v0.15
+## v0.15.0
 
 - Update Cordova to 12, Android to 13 
 
