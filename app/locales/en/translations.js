@@ -103,7 +103,7 @@ export default {
     browse_title: "Browse Goods",
     intro_text:
       "If you represent a Hong Kong non-profit organisation you can browse using the categories below or search using the icon above and request the goods you need.",
-    ngo_offer: "Special Offer:",
+    ngo_offer: "Special arrangement for Tai Po Fire Relief:",
     ngo_offer_description:
       "Click to request free delivery (online orders only).",
     ngo_offer_more_details: "Click for more details",
