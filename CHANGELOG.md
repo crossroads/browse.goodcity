@@ -1,5 +1,9 @@
 # Charities App
 
+## v0.15.3
+
+- Change text and translation of "Login" to "Login / Register"
+
 ## v0.15.2
 
 - Added translations for activating special delivery offer for those affected by fire in Tai Po
@@ -11,7 +15,7 @@
 
 ## v0.15.0
 
-- Update Cordova to 12, Android to 13 
+- Update Cordova to 12, Android to 13
 
 ## v0.14.2
 

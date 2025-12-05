@@ -74,7 +74,7 @@ export default {
       terms: "Terms",
       privacy_policy: "Privacy Policy",
       version: "Version",
-      login: "Login"
+      login: "Login / Register"
     }
   },
 

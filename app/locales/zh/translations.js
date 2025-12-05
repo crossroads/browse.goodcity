@@ -69,7 +69,7 @@ export default {
       terms: "條款",
       privacy_policy: "私隱政策",
       version: "版本",
-      login: "登入"
+      login: "登入 / 註冊"
     }
   },
 
