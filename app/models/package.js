@@ -48,6 +48,7 @@ export default Model.extend(cloudinaryImage, {
   packageSet: belongsTo("packageSet", {
     async: false
   }),
+  packageCategoryOverride: belongsTo("package_category", { async: false }),
   packageSetId: attr("number"),
   ordersPackage: belongsTo("orders_package", { async: false }),
   requestedPackage: belongsTo("requested_package", { async: false }),

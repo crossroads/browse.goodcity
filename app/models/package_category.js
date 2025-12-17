@@ -51,21 +51,51 @@ export default Model.extend({
     return this.store.peekAll("package_category");
   }),
 
+  // list of packages and package sets belonging to this package type
+  // if package.packageCategoryOverride is set, the package will be moved to the matching packageCategory
   packagesAndSets: computed(
     "reloadPackageCategory",
     "packageTypeCodes",
     "packageTypes.@each.packagesAndSets",
-    "childCategories.@each.content.[]",
+    "childCategories",
     function() {
-      const children = this.get("isParent")
-        ? this.get("childCategories")
-        : this.get("packageTypes");
-
-      return (children || [])
-        .reduce((res, child) => {
-          return [...res, ...(child.get("packagesAndSets") || []).toArray()];
-        }, [])
-        .uniq();
+      var children;
+      if (this.get("isParent")) {
+        return (this.get("childCategories") || [])
+          .reduce((res, child) => {
+            return [...res, ...(child.get("packagesAndSets") || [])];
+          }, [])
+          .uniq();
+      } else {
+        children = this.get("packageTypes") || [];
+        var _this = this;
+        return (
+          (children || [])
+            .reduce((res, child) => {
+              return [...res, ...(child.get("packagesAndSets") || [])];
+            }, [])
+            // remove any packages that have packageCategoryOverride set to a different package_category
+            .filter(pkg => {
+              const overrideId =
+                parseInt(pkg.get("packageCategoryOverride.id")) || 0;
+              const currentId = parseInt(_this.get("id")) || 0;
+              return (
+                overrideId === 0 || (overrideId > 0 && overrideId === currentId)
+              );
+            })
+            // add packages that have packageCategoryOverride set to this package_category
+            .concat(
+              this.store
+                .peekAll("package")
+                .filter(
+                  pkg =>
+                    parseInt(pkg.get("packageCategoryOverride.id")) ===
+                    parseInt(_this.get("id"))
+                )
+            )
+            .uniq()
+        );
+      }
     }
   ),
 
@@ -95,7 +125,8 @@ export default Model.extend({
         "1": "1436965083/browse/browse_image_3.png",
         "19": "1660276066/browse/cutlery.png",
         "25": "1660276066/browse/handmade.png",
-        "36": "1436965083/browse/browse_image_6.png"
+        "36": "1436965083/browse/browse_image_6.png",
+        "42": "1765936348/browse/wfc.jpg"
       };
       var id = images[this.get("id")];
       if (id) {
