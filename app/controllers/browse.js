@@ -58,7 +58,9 @@ export default Controller.extend({
     model.forEach(packageCategory => {
       packageCategory.toggleProperty("reloadPackageCategory");
     });
-    return this.get("model").filterBy("parentId", null);
+    return this.get("model")
+      .filterBy("parentId", null)
+      .filterBy("visibleInBrowse", true);
   }),
   actions: {
     setChildCategory(childCategory) {
