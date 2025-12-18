@@ -1,5 +1,10 @@
 # Charities App
 
+## v0.16.0
+
+- Added packageCategoryOverride to move inventory items to different categories as required.
+- Added ability to selectively hide packageCategories
+
 ## v0.15.3
 
 - Change text and translation of "Login" to "Login / Register"

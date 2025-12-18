@@ -15,6 +15,7 @@ export default Model.extend({
     "_packages.@each.packageType",
     "packages.@each.hasSiblingPackages",
     "packages.@each.isAvailable",
+    "packages.@each.packageCategoryOverride",
     function() {
       var packages = this.get("packages").filterBy("isAvailable");
       var records = [];

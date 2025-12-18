@@ -8,6 +8,8 @@ export default Model.extend({
   parentId: attr("number"),
   name: attr("string"),
   packageTypeCodes: attr("string"),
+  iconUrl: attr("string"),
+  visibleInBrowse: attr("boolean", { defaultValue: true }),
 
   isParent: equal("parentId", null),
   isChild: notEmpty("parentId"),
@@ -48,24 +50,56 @@ export default Model.extend({
   ),
 
   _packageCategories: computed(function() {
-    return this.store.peekAll("package_category");
+    return this.store
+      .peekAll("package_category")
+      .filterBy("visibleInBrowse", true);
   }),
 
+  // list of packages and package sets belonging to this package type
+  // if package.packageCategoryOverride is set, the package will be moved to the matching packageCategory
   packagesAndSets: computed(
     "reloadPackageCategory",
     "packageTypeCodes",
     "packageTypes.@each.packagesAndSets",
-    "childCategories.@each.content.[]",
+    "childCategories",
     function() {
-      const children = this.get("isParent")
-        ? this.get("childCategories")
-        : this.get("packageTypes");
-
-      return (children || [])
-        .reduce((res, child) => {
-          return [...res, ...(child.get("packagesAndSets") || []).toArray()];
-        }, [])
-        .uniq();
+      var children;
+      if (this.get("isParent")) {
+        return (this.get("childCategories") || [])
+          .reduce((res, child) => {
+            return [...res, ...(child.get("packagesAndSets") || [])];
+          }, [])
+          .uniq();
+      } else {
+        children = this.get("packageTypes") || [];
+        var _this = this;
+        return (
+          (children || [])
+            .reduce((res, child) => {
+              return [...res, ...(child.get("packagesAndSets") || [])];
+            }, [])
+            // remove any packages that have packageCategoryOverride set to a different package_category
+            .filter(pkg => {
+              const overrideId =
+                parseInt(pkg.get("packageCategoryOverride.id")) || 0;
+              const currentId = parseInt(_this.get("id")) || 0;
+              return (
+                overrideId === 0 || (overrideId > 0 && overrideId === currentId)
+              );
+            })
+            // add packages that have packageCategoryOverride set to this package_category
+            .concat(
+              this.store
+                .peekAll("package")
+                .filter(
+                  pkg =>
+                    parseInt(pkg.get("packageCategoryOverride.id")) ===
+                    parseInt(_this.get("id"))
+                )
+            )
+            .uniq()
+        );
+      }
     }
   ),
 
@@ -90,14 +124,7 @@ export default Model.extend({
 
   imageUrl: computed(function() {
     if (this.get("isParent")) {
-      var images = {
-        "8": "1436965082/browse/browse_image_2.png",
-        "1": "1436965083/browse/browse_image_3.png",
-        "19": "1660276066/browse/cutlery.png",
-        "25": "1660276066/browse/handmade.png",
-        "36": "1436965083/browse/browse_image_6.png"
-      };
-      var id = images[this.get("id")];
+      var id = this.get("iconUrl");
       if (id) {
         var version = id.split("/")[0];
         var filename = id.substring(id.indexOf("/") + 1);
